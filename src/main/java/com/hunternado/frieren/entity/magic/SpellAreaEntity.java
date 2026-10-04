@@ -143,7 +143,7 @@ public class SpellAreaEntity extends Entity {
                         push = new Vec3(-pull.x, 0.0D, -pull.z).normalize().scale(0.8D).add(0.0D, 0.9D, 0.0D);
                     }
                     target.setDeltaMovement(target.getDeltaMovement().add(push));
-                    target.hurtMarked = true;
+                    target.needsSync = true;
                     target.fallDistance = 0.0F;
                     if (age % 10 == 0) {
                         SpellDamage.hurt(level, this, attacker, target, damage, ModDamageTypes.SPELL, 1.0F, false, null);
