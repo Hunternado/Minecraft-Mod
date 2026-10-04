@@ -12,7 +12,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
 
@@ -31,14 +31,39 @@ jobs:
       - name: Build
         run: ./gradlew build --no-daemon --stacktrace --warning-mode all
 
-      - name: Probe Minecraft API signatures
-        if: always()
-        run: tools/ci_probe.sh
-
       - name: Upload mod jar
-        if: success()
         uses: actions/upload-artifact@v4
         with:
           name: frieren-mod-jar
           path: build/libs/*.jar
           if-no-files-found: error
+
+      - name: Probe Minecraft API signatures
+        if: always()
+        run: tools/ci_probe.sh
+
+      # Boots a dedicated game-test server: loads the mod, every registry and every datapack file, then exits.
+      - name: Server smoke test
+        shell: bash
+        run: |
+          set -o pipefail
+          timeout 900 ./gradlew runGameTestServer --no-daemon --console=plain 2>&1 | tee gametest.log
+
+      - name: Server smoke test report
+        if: always()
+        shell: bash
+        run: tools/ci_log_report.sh gametest.log
+
+      # Boots the client under a virtual display until the title screen, then stops it. Catches model, texture,
+      # blockstate, lang and renderer problems. Informational: a timeout stop is the expected outcome.
+      - name: Client smoke test
+        continue-on-error: true
+        shell: bash
+        env:
+          LIBGL_ALWAYS_SOFTWARE: '1'
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq xvfb libgl1-mesa-dri mesa-utils > /dev/null
+          set +e
+          xvfb-run -a -s "-screen 0 1280x720x24" timeout 480 ./gradlew runClient --no-daemon --console=plain > client.log 2>&1
+          echo "runClient exit code: $? (124 = stopped by the timeout after loading, which is expected)"
+          tools/ci_log_report.sh client.log

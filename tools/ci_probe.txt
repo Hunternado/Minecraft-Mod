@@ -2,3 +2,4 @@
 net.minecraft.client.Options|hide|gui
 net.minecraft.client.gui.Gui|hide|hidden
 net.minecraft.server.level.ServerLevel|structure
+net.minecraft.client.Minecraft|hide|gui
