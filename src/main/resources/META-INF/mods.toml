@@ -1,5 +1,5 @@
 # Forge mod metadata for Frieren: Mage's Journey.
-# Values in ${...} are expanded from gradle.properties by the processResources task.
+# Placeholders (dollar-brace property names) are expanded from gradle.properties by processResources.
 
 modLoader="javafml"
 loaderVersion="[${forge_spec_version},)"
