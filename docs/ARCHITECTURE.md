@@ -43,7 +43,7 @@ src/main/java/com/hunternado/frieren/
     ├── ClientHooks.java            Screen openers called from item use on the client side
     ├── KeyBindings.java            KeyMapping definitions + per-tick key handling
     ├── gui/                        ManaHudLayer, SpellbookScreen, JourneyScreen, ExaminerScreen, TradeScreen
-    └── render/                     Models (own LayerDefinitions), render states, renderers
+    └── render/                     Models (own LayerDefinitions), render states, renderers, ModRenderers
 
 src/main/resources/
 ├── META-INF/mods.toml · pack.mcmeta
@@ -56,7 +56,10 @@ tools/                              Python generators for every resource file + 
 ├── gen_data.py · gen_assets.py · gen_lang.py · gen_structures.py · pixelart.py
 ├── validate_resources.py           Self-contained resource ↔ code consistency check
 ├── check_imports.py                Import audit against reference sources (no Minecraft jars needed)
-└── javac_parse.sh                  Parses every Java file with JDK 25 (syntax gate without Minecraft jars)
+├── javac_parse.sh                  Parses every Java file with JDK 25 (syntax gate without Minecraft jars)
+└── ci_probe.sh · ci_log_report.sh  CI helpers: javap API probe, filtered run-log report
+
+.github/workflows/build.yml         CI: resource check, Gradle build (jar artifact), API probe, server + client boot
 ```
 
 ## Registration

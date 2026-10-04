@@ -14,6 +14,7 @@ import net.minecraftforge.client.event.AddGuiOverlayLayersEvent;
 import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
+import net.minecraftforge.client.gui.overlay.ForgeLayeredDraw;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.listener.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -44,9 +45,10 @@ public final class ClientSetup {
         ModRenderers.register(event);
     }
 
+    /** Added inside vanilla's pre-sleep HUD stack, so it hides with F1 like the hotbar does. */
     @SubscribeEvent
     public static void onAddGuiLayers(AddGuiOverlayLayersEvent event) {
-        event.getLayeredDraw().add(FrierenIds.id("mana_hud"), new ManaHudLayer());
+        event.getLayeredDraw().add(ForgeLayeredDraw.PRE_SLEEP_STACK, FrierenIds.id("mana_hud"), new ManaHudLayer());
     }
 
     @SubscribeEvent

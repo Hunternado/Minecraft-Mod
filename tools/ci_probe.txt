@@ -1,5 +1,4 @@
-# class|regex  — members of `class` whose javap signature matches `regex` are printed in the CI log
-net.minecraft.client.Options|hide|gui
-net.minecraft.client.gui.Gui|hide|hidden
-net.minecraft.server.level.ServerLevel|structure
-net.minecraft.client.Minecraft|hide|gui
+# class|regex  — members of `class` whose javap signature matches `regex` are printed in the CI log.
+# Add a line when an API name needs checking against the real 26.2 classes.
+net.minecraft.client.gui.Hud|isHidden
+net.minecraft.server.level.ServerLevel|findNearestMapStructure

@@ -52,3 +52,20 @@ Mitigation used while writing the code:
 
 Anything that could not be verified this way is listed in `docs/KNOWN_RISKS.md` so a compile error can be
 fixed in minutes rather than hunted for.
+
+## Resolution: building on GitHub Actions
+
+The network limitation was worked around by running the real build on GitHub's runners, which have
+unrestricted internet access. `.github/workflows/build.yml` runs these steps on every push:
+
+1. `tools/validate_resources.py`.
+2. `./gradlew build`, with javac set to report every error in one pass. The mod jar is uploaded as the
+   `frieren-mod-jar` artifact.
+3. `tools/ci_probe.sh`, which prints `javap` signatures from the real 26.2 classes for any API listed in
+   `tools/ci_probe.txt`.
+4. `runGameTestServer`, a dedicated-server boot that loads all registries and datapacks.
+5. `runClient` under xvfb, which boots the client to the title screen and fails on any crash report.
+
+Open-source mods with 26.2 branches (JEI, Jade, Sodium, Lithium, Iris, Mekanism, Curios, Waystones,
+Biomes O' Plenty, SmartBrainLib, GeckoLib) were also used as an API reference corpus.
+

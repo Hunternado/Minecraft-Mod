@@ -11,10 +11,16 @@ system built around Zoltraak, Continental Magic Association exams, deceptive dem
 | Java | **25** |
 | Side | Client + server (required on both) |
 
-> **Status:** written and audited offline; **not yet compiled against Minecraft** because the development
-> environment could not download Minecraft. Read `docs/KNOWN_RISKS.md` before your first build.
+> **Status:** builds against Minecraft 26.2 / Forge 65.1.0, and boots cleanly as a dedicated server and as a
+> client. GitHub Actions checks all three on every push. Gameplay itself has not been playtested yet; see
+> `docs/KNOWN_RISKS.md`.
 
-## Building the jar
+## Getting the jar
+
+**Without building:** open the repository's **Actions** tab and pick the latest green **Build** run. Download the
+**frieren-mod-jar** artifact (a zip containing `frieren-1.0.0.jar`). Artifacts expire after 90 days.
+
+## Building the jar yourself
 
 Requirements: JDK 25 (`java -version` must say 25) and internet access to `maven.minecraftforge.net`,
 `piston-meta.mojang.com`, `piston-data.mojang.com`, `libraries.minecraft.net` and the Gradle plugin portal.
