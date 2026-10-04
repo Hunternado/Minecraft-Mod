@@ -1,0 +1,4 @@
+# class|regex  — members of `class` whose javap signature matches `regex` are printed in the CI log
+net.minecraft.client.Options|hide|gui
+net.minecraft.client.gui.Gui|hide|hidden
+net.minecraft.server.level.ServerLevel|structure

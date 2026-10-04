@@ -62,6 +62,8 @@ dependencies {
 tasks.withType(JavaCompile).configureEach {
     // Use the UTF-8 charset for Java compilation
     options.encoding = 'UTF-8'
+    // Report every compile error in one pass instead of stopping at the first failing class.
+    options.compilerArgs.addAll(['-Xmaxerrs', '1000', '-XDshould-stop.ifError=FLOW'])
 }
 
 // Expand mod metadata from gradle.properties into mods.toml so versions live in one place.

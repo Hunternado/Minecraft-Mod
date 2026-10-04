@@ -25,7 +25,7 @@ public final class ManaHudLayer implements ForgeLayer {
     @Override
     public void extract(GuiGraphicsExtractor graphics, DeltaTracker deltaTracker) {
         Minecraft minecraft = Minecraft.getInstance();
-        if (minecraft.player == null || minecraft.options.hideGui || !FrierenClientConfig.showHud()) {
+        if (minecraft.player == null || !FrierenClientConfig.showHud()) {
             return;
         }
         MagicData data = ClientMagicCache.data();
