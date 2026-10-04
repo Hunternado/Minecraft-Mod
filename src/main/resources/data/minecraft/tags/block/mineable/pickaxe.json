@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "frieren:mana_crystal_ore",
+    "frieren:deepslate_mana_crystal_ore",
+    "frieren:mana_crystal_block",
+    "frieren:summoning_altar",
+    "frieren:cursed_gold_block"
+  ]
+}

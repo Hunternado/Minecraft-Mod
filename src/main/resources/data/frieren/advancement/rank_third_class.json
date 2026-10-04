@@ -1,0 +1,27 @@
+{
+  "criteria": {
+    "m": {
+      "trigger": "frieren:milestone",
+      "conditions": {
+        "milestone": "rank_third_class"
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "frieren:mage_hat"
+    },
+    "title": {
+      "translate": "advancements.frieren.rank_third_class.title"
+    },
+    "description": {
+      "translate": "advancements.frieren.rank_third_class.description"
+    }
+  },
+  "requirements": [
+    [
+      "m"
+    ]
+  ],
+  "parent": "frieren:rank_fourth_class"
+}

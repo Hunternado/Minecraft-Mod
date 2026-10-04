@@ -1,0 +1,29 @@
+{
+  "criteria": {
+    "m": {
+      "trigger": "frieren:milestone",
+      "conditions": {
+        "milestone": "aura_obeyed"
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "frieren:guillotine_blade"
+    },
+    "title": {
+      "translate": "advancements.frieren.aura_obeyed.title"
+    },
+    "description": {
+      "translate": "advancements.frieren.aura_obeyed.description"
+    },
+    "frame": "challenge",
+    "hidden": true
+  },
+  "requirements": [
+    [
+      "m"
+    ]
+  ],
+  "parent": "frieren:slay_demon"
+}

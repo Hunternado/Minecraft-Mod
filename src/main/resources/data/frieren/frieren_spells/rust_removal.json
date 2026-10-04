@@ -1,0 +1,12 @@
+{
+  "behavior": "frieren:rust_removal",
+  "school": "utility",
+  "rarity": "common",
+  "mana_cost": 8,
+  "cooldown": 40,
+  "color": "#E0A060",
+  "params": {
+    "range": 6.0,
+    "radius": 2.0
+  }
+}

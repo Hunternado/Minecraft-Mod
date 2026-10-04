@@ -1,0 +1,27 @@
+{
+  "criteria": {
+    "m": {
+      "trigger": "frieren:milestone",
+      "conditions": {
+        "milestone": "rank_fifth_class"
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "frieren:apprentice_staff"
+    },
+    "title": {
+      "translate": "advancements.frieren.rank_fifth_class.title"
+    },
+    "description": {
+      "translate": "advancements.frieren.rank_fifth_class.description"
+    }
+  },
+  "requirements": [
+    [
+      "m"
+    ]
+  ],
+  "parent": "frieren:first_spell"
+}

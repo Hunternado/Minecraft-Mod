@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "frieren:mana_crystal_block"
+  ],
+  "result": {
+    "id": "frieren:mana_crystal",
+    "count": 9
+  }
+}

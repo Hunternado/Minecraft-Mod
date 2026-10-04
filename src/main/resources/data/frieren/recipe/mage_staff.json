@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": "frieren:mana_crystal_block",
+    "S": "minecraft:stick",
+    "G": "minecraft:gold_ingot"
+  },
+  "pattern": [
+    " GC",
+    " SG",
+    "S  "
+  ],
+  "result": {
+    "id": "frieren:mage_staff"
+  }
+}

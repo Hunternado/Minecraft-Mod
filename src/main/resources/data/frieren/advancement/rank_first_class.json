@@ -1,0 +1,28 @@
+{
+  "criteria": {
+    "m": {
+      "trigger": "frieren:milestone",
+      "conditions": {
+        "milestone": "rank_first_class"
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "frieren:legendary_grimoire"
+    },
+    "title": {
+      "translate": "advancements.frieren.rank_first_class.title"
+    },
+    "description": {
+      "translate": "advancements.frieren.rank_first_class.description"
+    },
+    "frame": "challenge"
+  },
+  "requirements": [
+    [
+      "m"
+    ]
+  ],
+  "parent": "frieren:rank_second_class"
+}

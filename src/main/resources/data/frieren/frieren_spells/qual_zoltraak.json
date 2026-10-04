@@ -1,0 +1,16 @@
+{
+  "behavior": "frieren:beam",
+  "school": "offensive",
+  "rarity": "demon",
+  "mana_cost": 22,
+  "cooldown": 40,
+  "cast_time": 8,
+  "color": "#9B2D6F",
+  "params": {
+    "damage": 11.0,
+    "range": 40.0,
+    "pierce": 1,
+    "barrier_cost": 0.33,
+    "demon_magic": 1
+  }
+}

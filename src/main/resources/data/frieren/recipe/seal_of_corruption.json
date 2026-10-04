@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "H": "frieren:demon_horn",
+    "C": "frieren:demonic_mana_core",
+    "E": "minecraft:ender_eye"
+  },
+  "pattern": [
+    "HCH",
+    "CEC",
+    "HCH"
+  ],
+  "result": {
+    "id": "frieren:seal_of_corruption"
+  }
+}

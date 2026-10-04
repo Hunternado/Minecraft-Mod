@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "frieren:mage_tower",
+    "frieren:forgotten_library",
+    "frieren:demon_camp",
+    "frieren:association_outpost",
+    "frieren:heros_statue",
+    "frieren:sealed_shrine",
+    "frieren:kings_tomb",
+    "frieren:aura_fortress"
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "criteria": {
+    "m": {
+      "trigger": "frieren:milestone",
+      "conditions": {
+        "milestone": "learned_demon"
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "frieren:demon_grimoire"
+    },
+    "title": {
+      "translate": "advancements.frieren.learned_demon.title"
+    },
+    "description": {
+      "translate": "advancements.frieren.learned_demon.description"
+    },
+    "frame": "goal"
+  },
+  "requirements": [
+    [
+      "m"
+    ]
+  ],
+  "parent": "frieren:first_spell"
+}

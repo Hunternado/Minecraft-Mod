@@ -1,0 +1,14 @@
+{
+  "behavior": "frieren:obedience",
+  "school": "special",
+  "rarity": "demon",
+  "mana_cost": 50,
+  "cooldown": 1200,
+  "cast_time": 20,
+  "color": "#D4AF37",
+  "params": {
+    "range": 16.0,
+    "duration": 1200,
+    "ratio": 6.0
+  }
+}

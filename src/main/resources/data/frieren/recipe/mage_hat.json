@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "W": "#minecraft:wool",
+    "C": "frieren:mana_crystal"
+  },
+  "pattern": [
+    " W ",
+    "WCW"
+  ],
+  "result": {
+    "id": "frieren:mage_hat"
+  }
+}

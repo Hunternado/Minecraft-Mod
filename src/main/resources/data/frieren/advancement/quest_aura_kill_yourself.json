@@ -1,0 +1,28 @@
+{
+  "criteria": {
+    "m": {
+      "trigger": "frieren:milestone",
+      "conditions": {
+        "milestone": "quest_aura_kill_yourself"
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "frieren:sigil_of_the_guillotine"
+    },
+    "title": {
+      "translate": "advancements.frieren.quest_aura_kill_yourself.title"
+    },
+    "description": {
+      "translate": "advancements.frieren.quest_aura_kill_yourself.description"
+    },
+    "frame": "challenge"
+  },
+  "requirements": [
+    [
+      "m"
+    ]
+  ],
+  "parent": "frieren:slay_demon"
+}

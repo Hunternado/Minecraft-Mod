@@ -1,0 +1,29 @@
+{
+  "criteria": {
+    "m": {
+      "trigger": "frieren:milestone",
+      "conditions": {
+        "milestone": "learned_forbidden"
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "frieren:forbidden_grimoire"
+    },
+    "title": {
+      "translate": "advancements.frieren.learned_forbidden.title"
+    },
+    "description": {
+      "translate": "advancements.frieren.learned_forbidden.description"
+    },
+    "frame": "challenge",
+    "hidden": true
+  },
+  "requirements": [
+    [
+      "m"
+    ]
+  ],
+  "parent": "frieren:learned_demon"
+}

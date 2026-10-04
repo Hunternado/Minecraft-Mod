@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "S": "minecraft:string",
+    "A": "minecraft:amethyst_shard",
+    "C": "frieren:mana_crystal_block"
+  },
+  "pattern": [
+    "SAS",
+    "ACA",
+    "SAS"
+  ],
+  "result": {
+    "id": "frieren:concealment_charm"
+  }
+}

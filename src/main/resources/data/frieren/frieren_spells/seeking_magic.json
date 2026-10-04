@@ -1,0 +1,12 @@
+{
+  "behavior": "frieren:seek",
+  "school": "utility",
+  "rarity": "uncommon",
+  "mana_cost": 15,
+  "cooldown": 600,
+  "cast_time": 20,
+  "color": "#A8FFB0",
+  "params": {
+    "search_radius": 64.0
+  }
+}

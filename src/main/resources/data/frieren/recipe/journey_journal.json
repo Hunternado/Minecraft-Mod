@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:book",
+    "frieren:mana_crystal"
+  ],
+  "result": {
+    "id": "frieren:journey_journal"
+  }
+}

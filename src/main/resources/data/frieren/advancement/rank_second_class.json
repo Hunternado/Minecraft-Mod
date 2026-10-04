@@ -1,0 +1,28 @@
+{
+  "criteria": {
+    "m": {
+      "trigger": "frieren:milestone",
+      "conditions": {
+        "milestone": "rank_second_class"
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "frieren:sages_staff"
+    },
+    "title": {
+      "translate": "advancements.frieren.rank_second_class.title"
+    },
+    "description": {
+      "translate": "advancements.frieren.rank_second_class.description"
+    },
+    "frame": "goal"
+  },
+  "requirements": [
+    [
+      "m"
+    ]
+  ],
+  "parent": "frieren:rank_third_class"
+}

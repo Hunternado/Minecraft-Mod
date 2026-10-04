@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "frieren:apprentice_staff",
+    "frieren:mage_staff",
+    "frieren:sages_staff",
+    "frieren:guillotine_staff"
+  ]
+}

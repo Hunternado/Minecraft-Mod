@@ -1,0 +1,13 @@
+{
+  "behavior": "frieren:barrier",
+  "school": "defensive",
+  "rarity": "common",
+  "mana_cost": 6,
+  "cooldown": 20,
+  "color": "#9FD8FF",
+  "params": {
+    "upkeep": 0.6,
+    "efficiency": 1.5,
+    "melee_block": 0.7
+  }
+}

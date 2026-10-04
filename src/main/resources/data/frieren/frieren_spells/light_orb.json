@@ -1,0 +1,11 @@
+{
+  "behavior": "frieren:light_orb",
+  "school": "utility",
+  "rarity": "common",
+  "mana_cost": 4,
+  "cooldown": 20,
+  "color": "#FFF6C8",
+  "params": {
+    "range": 16.0
+  }
+}

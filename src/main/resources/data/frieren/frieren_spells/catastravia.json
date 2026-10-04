@@ -1,0 +1,15 @@
+{
+  "behavior": "frieren:arrow_rain",
+  "school": "offensive",
+  "rarity": "ancient",
+  "mana_cost": 60,
+  "cooldown": 400,
+  "cast_time": 20,
+  "color": "#FFFBE0",
+  "params": {
+    "damage": 4.0,
+    "range": 40.0,
+    "radius": 6.0,
+    "duration": 60
+  }
+}

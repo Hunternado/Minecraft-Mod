@@ -1,0 +1,13 @@
+{
+  "behavior": "frieren:dome",
+  "school": "defensive",
+  "rarity": "uncommon",
+  "mana_cost": 35,
+  "cooldown": 400,
+  "cast_time": 10,
+  "color": "#7FD4FF",
+  "params": {
+    "radius": 5.0,
+    "duration": 160
+  }
+}

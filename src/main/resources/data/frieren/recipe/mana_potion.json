@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:glass_bottle",
+    "frieren:mana_crystal",
+    "frieren:mana_crystal",
+    "minecraft:sweet_berries"
+  ],
+  "result": {
+    "id": "frieren:mana_potion"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 33440912,
+    "separation": 16,
+    "spacing": 50
+  },
+  "structures": [
+    {
+      "structure": "frieren:sealed_shrine",
+      "weight": 1
+    }
+  ]
+}

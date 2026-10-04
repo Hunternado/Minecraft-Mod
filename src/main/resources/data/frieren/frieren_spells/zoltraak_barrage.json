@@ -1,0 +1,16 @@
+{
+  "behavior": "frieren:barrage",
+  "school": "offensive",
+  "rarity": "rare",
+  "mana_cost": 8,
+  "cooldown": 60,
+  "channel": 40,
+  "color": "#A0D4FF",
+  "params": {
+    "damage": 4.5,
+    "range": 28.0,
+    "interval": 4,
+    "pulse_cost": 4.0,
+    "spread": 5.0
+  }
+}

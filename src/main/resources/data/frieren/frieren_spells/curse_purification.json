@@ -1,0 +1,12 @@
+{
+  "behavior": "frieren:purify",
+  "school": "defensive",
+  "rarity": "uncommon",
+  "mana_cost": 20,
+  "cooldown": 200,
+  "cast_time": 10,
+  "color": "#F6F2FF",
+  "params": {
+    "radius": 6.0
+  }
+}

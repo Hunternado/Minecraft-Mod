@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": "frieren:demonic_mana_core",
+    "S": "frieren:mage_staff",
+    "D": "minecraft:diamond"
+  },
+  "pattern": [
+    " DC",
+    " SD",
+    "S  "
+  ],
+  "result": {
+    "id": "frieren:sages_staff"
+  }
+}

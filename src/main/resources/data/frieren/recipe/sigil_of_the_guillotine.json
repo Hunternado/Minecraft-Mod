@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "H": "frieren:demon_horn",
+    "C": "frieren:demonic_mana_core",
+    "G": "minecraft:gold_block"
+  },
+  "pattern": [
+    "HCH",
+    "CGC",
+    "HCH"
+  ],
+  "result": {
+    "id": "frieren:sigil_of_the_guillotine"
+  }
+}

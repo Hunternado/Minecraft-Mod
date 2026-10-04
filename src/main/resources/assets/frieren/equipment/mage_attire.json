@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "frieren:mage_attire"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "frieren:mage_attire"
+      }
+    ]
+  }
+}

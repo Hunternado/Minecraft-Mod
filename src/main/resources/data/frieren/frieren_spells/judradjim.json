@@ -1,0 +1,14 @@
+{
+  "behavior": "frieren:lightning",
+  "school": "offensive",
+  "rarity": "rare",
+  "mana_cost": 28,
+  "cooldown": 100,
+  "cast_time": 10,
+  "color": "#FFF2A0",
+  "params": {
+    "damage": 11.0,
+    "range": 40.0,
+    "radius": 3.0
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 55102938,
+    "separation": 10,
+    "spacing": 32
+  },
+  "structures": [
+    {
+      "structure": "frieren:demon_camp",
+      "weight": 1
+    }
+  ]
+}

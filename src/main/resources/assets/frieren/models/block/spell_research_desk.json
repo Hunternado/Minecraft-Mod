@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "frieren:block/spell_research_desk_top",
+    "side": "frieren:block/spell_research_desk_side",
+    "bottom": "frieren:block/spell_research_desk_bottom"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "behavior": "frieren:heal",
+  "school": "defensive",
+  "rarity": "uncommon",
+  "mana_cost": 18,
+  "cooldown": 60,
+  "cast_time": 10,
+  "color": "#FFE9A8",
+  "params": {
+    "heal": 6.0,
+    "range": 12.0
+  }
+}

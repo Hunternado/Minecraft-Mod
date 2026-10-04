@@ -1,0 +1,27 @@
+{
+  "criteria": {
+    "m": {
+      "trigger": "frieren:milestone",
+      "conditions": {
+        "milestone": "rank_fourth_class"
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "frieren:mage_staff"
+    },
+    "title": {
+      "translate": "advancements.frieren.rank_fourth_class.title"
+    },
+    "description": {
+      "translate": "advancements.frieren.rank_fourth_class.description"
+    }
+  },
+  "requirements": [
+    [
+      "m"
+    ]
+  ],
+  "parent": "frieren:rank_fifth_class"
+}

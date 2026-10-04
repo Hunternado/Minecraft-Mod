@@ -1,0 +1,28 @@
+{
+  "criteria": {
+    "m": {
+      "trigger": "frieren:milestone",
+      "conditions": {
+        "milestone": "quest_the_heros_statue"
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "frieren:mirror_lotus_ring"
+    },
+    "title": {
+      "translate": "advancements.frieren.quest_the_heros_statue.title"
+    },
+    "description": {
+      "translate": "advancements.frieren.quest_the_heros_statue.description"
+    },
+    "frame": "goal"
+  },
+  "requirements": [
+    [
+      "m"
+    ]
+  ],
+  "parent": "frieren:first_spell"
+}

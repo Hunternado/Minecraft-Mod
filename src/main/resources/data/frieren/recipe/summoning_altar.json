@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "O": "minecraft:crying_obsidian",
+    "C": "frieren:demonic_mana_core",
+    "D": "minecraft:diamond"
+  },
+  "pattern": [
+    "OCO",
+    "ODO",
+    "OOO"
+  ],
+  "result": {
+    "id": "frieren:summoning_altar"
+  }
+}

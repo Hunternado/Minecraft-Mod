@@ -1,0 +1,12 @@
+{
+  "behavior": "frieren:decoy",
+  "school": "special",
+  "rarity": "rare",
+  "mana_cost": 25,
+  "cooldown": 400,
+  "color": "#9FD8FF",
+  "params": {
+    "duration": 200,
+    "radius": 16.0
+  }
+}

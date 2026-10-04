@@ -1,0 +1,16 @@
+{
+  "behavior": "frieren:gold_curse",
+  "school": "offensive",
+  "rarity": "forbidden",
+  "mana_cost": 80,
+  "health_cost": 4,
+  "cooldown": 600,
+  "cast_time": 20,
+  "color": "#FFD24A",
+  "params": {
+    "range": 16.0,
+    "duration": 120,
+    "boss_duration": 20,
+    "damage": 4.0
+  }
+}

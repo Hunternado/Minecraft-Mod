@@ -1,0 +1,15 @@
+{
+  "behavior": "frieren:flame_wave",
+  "school": "offensive",
+  "rarity": "rare",
+  "mana_cost": 24,
+  "cooldown": 80,
+  "cast_time": 6,
+  "color": "#FF7A2A",
+  "params": {
+    "damage": 8.0,
+    "range": 8.0,
+    "angle": 35.0,
+    "burn_seconds": 5.0
+  }
+}

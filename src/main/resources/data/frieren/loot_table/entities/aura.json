@@ -1,0 +1,64 @@
+{
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "frieren:guillotine_blade"
+        }
+      ],
+      "bonus_rolls": 0.0
+    },
+    {
+      "rolls": 1.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "frieren:demon_grimoire",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "frieren:grimoire_spell": "frieren:azeryuze"
+              }
+            }
+          ]
+        }
+      ],
+      "bonus_rolls": 0.0
+    },
+    {
+      "rolls": 1.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "frieren:legendary_grimoire"
+        }
+      ],
+      "bonus_rolls": 0.0
+    },
+    {
+      "rolls": 1.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "frieren:demonic_mana_core",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 3.0,
+                "max": 5.0
+              }
+            }
+          ]
+        }
+      ],
+      "bonus_rolls": 0.0
+    }
+  ],
+  "random_sequence": "frieren:entities/aura"
+}

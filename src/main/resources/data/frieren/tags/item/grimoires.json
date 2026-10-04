@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "frieren:common_grimoire",
+    "frieren:uncommon_grimoire",
+    "frieren:rare_grimoire",
+    "frieren:ancient_grimoire",
+    "frieren:legendary_grimoire",
+    "frieren:demon_grimoire",
+    "frieren:forbidden_grimoire",
+    "frieren:sealed_demon_grimoire"
+  ]
+}

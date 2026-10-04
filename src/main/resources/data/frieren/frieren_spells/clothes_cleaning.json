@@ -1,0 +1,11 @@
+{
+  "behavior": "frieren:mend",
+  "school": "utility",
+  "rarity": "uncommon",
+  "mana_cost": 20,
+  "cooldown": 600,
+  "color": "#C8FFF4",
+  "params": {
+    "repair": 25.0
+  }
+}

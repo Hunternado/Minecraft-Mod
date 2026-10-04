@@ -1,0 +1,11 @@
+{
+  "behavior": "frieren:mimic_detection",
+  "school": "utility",
+  "rarity": "common",
+  "mana_cost": 6,
+  "cooldown": 100,
+  "color": "#D9B8FF",
+  "params": {
+    "radius": 20.0
+  }
+}

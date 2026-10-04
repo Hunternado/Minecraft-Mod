@@ -1,0 +1,27 @@
+{
+  "criteria": {
+    "m": {
+      "trigger": "frieren:milestone",
+      "conditions": {
+        "milestone": "quest_a_field_of_flowers"
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "frieren:blue_moon_weed"
+    },
+    "title": {
+      "translate": "advancements.frieren.quest_a_field_of_flowers.title"
+    },
+    "description": {
+      "translate": "advancements.frieren.quest_a_field_of_flowers.description"
+    }
+  },
+  "requirements": [
+    [
+      "m"
+    ]
+  ],
+  "parent": "frieren:first_spell"
+}

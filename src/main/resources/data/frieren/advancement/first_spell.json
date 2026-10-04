@@ -1,0 +1,27 @@
+{
+  "criteria": {
+    "m": {
+      "trigger": "frieren:milestone",
+      "conditions": {
+        "milestone": "first_spell"
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "frieren:common_grimoire"
+    },
+    "title": {
+      "translate": "advancements.frieren.first_spell.title"
+    },
+    "description": {
+      "translate": "advancements.frieren.first_spell.description"
+    }
+  },
+  "requirements": [
+    [
+      "m"
+    ]
+  ],
+  "parent": "frieren:root"
+}

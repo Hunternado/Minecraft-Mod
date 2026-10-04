@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 88231904,
+    "separation": 20,
+    "spacing": 56
+  },
+  "structures": [
+    {
+      "structure": "frieren:kings_tomb",
+      "weight": 1
+    }
+  ]
+}

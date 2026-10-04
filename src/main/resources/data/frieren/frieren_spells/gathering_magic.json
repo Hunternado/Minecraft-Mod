@@ -1,0 +1,11 @@
+{
+  "behavior": "frieren:gather",
+  "school": "utility",
+  "rarity": "common",
+  "mana_cost": 5,
+  "cooldown": 60,
+  "color": "#CDE8FF",
+  "params": {
+    "radius": 10.0
+  }
+}

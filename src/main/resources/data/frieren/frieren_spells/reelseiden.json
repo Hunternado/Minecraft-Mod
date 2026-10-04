@@ -1,0 +1,14 @@
+{
+  "behavior": "frieren:slash",
+  "school": "offensive",
+  "rarity": "rare",
+  "mana_cost": 18,
+  "cooldown": 40,
+  "color": "#E8E8FF",
+  "params": {
+    "damage": 9.0,
+    "range": 5.0,
+    "angle": 45.0,
+    "barrier_cost": 3.0
+  }
+}

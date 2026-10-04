@@ -1,0 +1,236 @@
+{
+  "spell.cast": {
+    "sounds": [
+      {
+        "name": "minecraft:entity.evoker.prepare_attack",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.frieren.spell.cast"
+  },
+  "spell.fail": {
+    "sounds": [
+      {
+        "name": "minecraft:block.fire.extinguish",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.frieren.spell.fail"
+  },
+  "spell.zoltraak": {
+    "sounds": [
+      {
+        "name": "minecraft:entity.illusioner.cast_spell",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.frieren.spell.zoltraak"
+  },
+  "spell.barrier_hit": {
+    "sounds": [
+      {
+        "name": "minecraft:item.shield.block",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.frieren.spell.barrier_hit"
+  },
+  "spell.barrier_break": {
+    "sounds": [
+      {
+        "name": "minecraft:block.glass.break",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.frieren.spell.barrier_break"
+  },
+  "spell.heal": {
+    "sounds": [
+      {
+        "name": "minecraft:block.amethyst_block.chime",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.frieren.spell.heal"
+  },
+  "spell.flower_bloom": {
+    "sounds": [
+      {
+        "name": "minecraft:item.bone_meal.use",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.frieren.spell.flower_bloom"
+  },
+  "mana.conceal": {
+    "sounds": [
+      {
+        "name": "minecraft:block.beacon.deactivate",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.frieren.mana.conceal"
+  },
+  "mana.release": {
+    "sounds": [
+      {
+        "name": "minecraft:block.beacon.activate",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.frieren.mana.release"
+  },
+  "mana.detect": {
+    "sounds": [
+      {
+        "name": "minecraft:block.amethyst_block.resonate",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.frieren.mana.detect"
+  },
+  "grimoire.learn": {
+    "sounds": [
+      {
+        "name": "minecraft:block.enchantment_table.use",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.frieren.grimoire.learn"
+  },
+  "rank.up": {
+    "sounds": [
+      {
+        "name": "minecraft:ui.toast.challenge_complete",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.frieren.rank.up"
+  },
+  "demon.speak": {
+    "sounds": [
+      {
+        "name": "minecraft:entity.evoker.ambient",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.frieren.demon.speak"
+  },
+  "aura.scales": {
+    "sounds": [
+      {
+        "name": "minecraft:block.bell.resonate",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.frieren.aura.scales"
+  },
+  "mimic.chomp": {
+    "sounds": [
+      {
+        "name": "minecraft:entity.evoker_fangs.attack",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.frieren.mimic.chomp"
+  },
+  "magic.teleport": {
+    "sounds": [
+      {
+        "name": "minecraft:entity.enderman.teleport",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.frieren.magic.teleport"
+  },
+  "spell.hellfire": {
+    "sounds": [
+      {
+        "name": "minecraft:entity.blaze.shoot",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.frieren.spell.hellfire"
+  },
+  "spell.wind": {
+    "sounds": [
+      {
+        "name": "minecraft:entity.breeze.wind_burst",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.frieren.spell.wind"
+  },
+  "spell.light_rain": {
+    "sounds": [
+      {
+        "name": "minecraft:block.beacon.activate",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.frieren.spell.light_rain"
+  },
+  "spell.slash": {
+    "sounds": [
+      {
+        "name": "minecraft:entity.player.attack.sweep",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.frieren.spell.slash"
+  },
+  "spell.curse": {
+    "sounds": [
+      {
+        "name": "minecraft:entity.elder_guardian.curse",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.frieren.spell.curse"
+  },
+  "spell.barrier_up": {
+    "sounds": [
+      {
+        "name": "minecraft:block.respawn_anchor.charge",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.frieren.spell.barrier_up"
+  },
+  "spell.flight": {
+    "sounds": [
+      {
+        "name": "minecraft:entity.phantom.flap",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.frieren.spell.flight"
+  },
+  "spell.utility": {
+    "sounds": [
+      {
+        "name": "minecraft:block.amethyst_block.chime",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.frieren.spell.utility"
+  },
+  "demon.bolt": {
+    "sounds": [
+      {
+        "name": "minecraft:entity.shulker.shoot",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.frieren.demon.bolt"
+  },
+  "boss.roar": {
+    "sounds": [
+      {
+        "name": "minecraft:entity.ravager.roar",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.frieren.boss.roar"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 91827364,
+    "separation": 14,
+    "spacing": 42
+  },
+  "structures": [
+    {
+      "structure": "frieren:forgotten_library",
+      "weight": 1
+    }
+  ]
+}

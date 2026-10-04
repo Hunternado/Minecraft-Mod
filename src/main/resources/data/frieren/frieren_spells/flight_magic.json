@@ -1,0 +1,11 @@
+{
+  "behavior": "frieren:flight",
+  "school": "utility",
+  "rarity": "uncommon",
+  "mana_cost": 10,
+  "cooldown": 40,
+  "color": "#E8F6FF",
+  "params": {
+    "drain_per_second": 2.0
+  }
+}

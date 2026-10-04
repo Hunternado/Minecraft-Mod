@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "B": "minecraft:book",
+    "C": "frieren:mana_crystal",
+    "P": "#minecraft:planks"
+  },
+  "pattern": [
+    "BCB",
+    "PPP",
+    "P P"
+  ],
+  "result": {
+    "id": "frieren:spell_research_desk"
+  }
+}

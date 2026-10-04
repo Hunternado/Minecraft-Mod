@@ -1,0 +1,15 @@
+{
+  "behavior": "frieren:vortex",
+  "school": "offensive",
+  "rarity": "rare",
+  "mana_cost": 32,
+  "cooldown": 200,
+  "cast_time": 10,
+  "color": "#C8F0E0",
+  "params": {
+    "damage": 2.0,
+    "range": 24.0,
+    "radius": 4.5,
+    "duration": 80
+  }
+}

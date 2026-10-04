@@ -1,0 +1,27 @@
+{
+  "criteria": {
+    "m": {
+      "trigger": "frieren:milestone",
+      "conditions": {
+        "milestone": "quest_mimic_hunter"
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "frieren:mimic_spawn_egg"
+    },
+    "title": {
+      "translate": "advancements.frieren.quest_mimic_hunter.title"
+    },
+    "description": {
+      "translate": "advancements.frieren.quest_mimic_hunter.description"
+    }
+  },
+  "requirements": [
+    [
+      "m"
+    ]
+  ],
+  "parent": "frieren:first_spell"
+}
