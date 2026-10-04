@@ -54,10 +54,9 @@ jobs:
         shell: bash
         run: tools/ci_log_report.sh gametest.log
 
-      # Boots the client under a virtual display until the title screen, then stops it. Catches model, texture,
-      # blockstate, lang and renderer problems. Informational: a timeout stop is the expected outcome.
+      # Boots the client under a virtual display until the title screen, then stops it. Catches client mod loading,
+      # model, texture, blockstate and renderer problems. A timeout stop is the expected outcome; a crash fails.
       - name: Client smoke test
-        continue-on-error: true
         shell: bash
         env:
           LIBGL_ALWAYS_SOFTWARE: '1'
@@ -67,3 +66,7 @@ jobs:
           xvfb-run -a -s "-screen 0 1280x720x24" timeout 480 ./gradlew runClient --no-daemon --console=plain > client.log 2>&1
           echo "runClient exit code: $? (124 = stopped by the timeout after loading, which is expected)"
           tools/ci_log_report.sh client.log
+          if grep -qE 'Mod Loading has failed|Crash report saved|Failed to complete lifecycle event' client.log; then
+            echo "::error::client crashed during startup (see report above)"
+            exit 1
+          fi
