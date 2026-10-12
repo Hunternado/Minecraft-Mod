@@ -1,0 +1,200 @@
+Compiled from "EntityAttributeCreationEvent.java"
+public final class net.minecraftforge.event.entity.EntityAttributeCreationEvent extends net.minecraftforge.eventbus.api.event.MutableEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.entity.EntityAttributeCreationEvent> BUS;
+  public net.minecraftforge.event.entity.EntityAttributeCreationEvent(java.util.Map<net.minecraft.world.entity.EntityType<? extends net.minecraft.world.entity.LivingEntity>, net.minecraft.world.entity.ai.attributes.AttributeSupplier>);
+  public void put(net.minecraft.world.entity.EntityType<? extends net.minecraft.world.entity.LivingEntity>, net.minecraft.world.entity.ai.attributes.AttributeSupplier);
+}
+Compiled from "EntityAttributeModificationEvent.java"
+public final class net.minecraftforge.event.entity.EntityAttributeModificationEvent extends net.minecraftforge.eventbus.api.event.MutableEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.entity.EntityAttributeModificationEvent> BUS;
+  public net.minecraftforge.event.entity.EntityAttributeModificationEvent(java.util.Map<net.minecraft.world.entity.EntityType<? extends net.minecraft.world.entity.LivingEntity>, net.minecraft.world.entity.ai.attributes.AttributeSupplier$Builder>);
+  public void add(net.minecraft.world.entity.EntityType<? extends net.minecraft.world.entity.LivingEntity>, net.minecraft.core.Holder<net.minecraft.world.entity.ai.attributes.Attribute>, double);
+  public void add(net.minecraft.world.entity.EntityType<? extends net.minecraft.world.entity.LivingEntity>, net.minecraft.core.Holder<net.minecraft.world.entity.ai.attributes.Attribute>);
+  public boolean has(net.minecraft.world.entity.EntityType<? extends net.minecraft.world.entity.LivingEntity>, net.minecraft.core.Holder<net.minecraft.world.entity.ai.attributes.Attribute>);
+  public java.util.List<net.minecraft.world.entity.EntityType<? extends net.minecraft.world.entity.LivingEntity>> getTypes();
+}
+Compiled from "EntityEvent.java"
+public interface net.minecraftforge.event.entity.EntityEvent {
+  public abstract net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "EntityEvent.java"
+public final class net.minecraftforge.event.entity.EntityEvent$EnteringSection extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent,net.minecraftforge.event.entity.EntityEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.entity.EntityEvent$EnteringSection> BUS;
+  public net.minecraftforge.event.entity.EntityEvent$EnteringSection(net.minecraft.world.entity.Entity, long, long);
+  public long getPackedOldPos();
+  public long getPackedNewPos();
+  public net.minecraft.core.SectionPos getOldPos();
+  public net.minecraft.core.SectionPos getNewPos();
+  public boolean didChunkChange();
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "EntityEvent.java"
+public final class net.minecraftforge.event.entity.EntityEvent$EntityConstructing extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent,net.minecraftforge.event.entity.EntityEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.entity.EntityEvent$EntityConstructing> BUS;
+  public net.minecraftforge.event.entity.EntityEvent$EntityConstructing(net.minecraft.world.entity.Entity);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "EntityJoinLevelEvent.java"
+public final class net.minecraftforge.event.entity.EntityJoinLevelEvent extends java.lang.Record implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.event.entity.EntityEvent,net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.event.entity.EntityJoinLevelEvent> BUS;
+  public net.minecraftforge.event.entity.EntityJoinLevelEvent(net.minecraft.world.entity.Entity, net.minecraft.world.level.Level);
+  public net.minecraftforge.event.entity.EntityJoinLevelEvent(net.minecraft.world.entity.Entity, net.minecraft.world.level.Level, boolean);
+  public net.minecraft.world.level.Level getLevel();
+  public boolean loadedFromDisk();
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "EntityLeaveLevelEvent.java"
+public final class net.minecraftforge.event.entity.EntityLeaveLevelEvent extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent,net.minecraftforge.event.entity.EntityEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.entity.EntityLeaveLevelEvent> BUS;
+  public net.minecraftforge.event.entity.EntityLeaveLevelEvent(net.minecraft.world.entity.Entity, net.minecraft.world.level.Level);
+  public net.minecraft.world.level.Level getLevel();
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "EntityMobGriefingEvent.java"
+public final class net.minecraftforge.event.entity.EntityMobGriefingEvent extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.event.entity.EntityEvent,net.minecraftforge.common.util.HasResult {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.entity.EntityMobGriefingEvent> BUS;
+  public net.minecraftforge.event.entity.EntityMobGriefingEvent(net.minecraft.world.entity.Entity);
+  public net.minecraft.world.entity.Entity getEntity();
+  public net.minecraftforge.common.util.Result getResult();
+  public void setResult(net.minecraftforge.common.util.Result);
+}
+Compiled from "EntityMountEvent.java"
+public final class net.minecraftforge.event.entity.EntityMountEvent extends java.lang.Record implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.event.entity.EntityEvent,net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.event.entity.EntityMountEvent> BUS;
+  public net.minecraftforge.event.entity.EntityMountEvent(net.minecraft.world.entity.Entity, net.minecraft.world.entity.Entity, net.minecraft.world.level.Level, boolean);
+  public net.minecraft.world.entity.Entity getEntity();
+  public boolean isDismounting();
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.world.entity.Entity getEntityMounting();
+  public net.minecraft.world.entity.Entity getEntityBeingMounted();
+  public net.minecraft.world.level.Level getLevel();
+  public boolean isMounting();
+}
+Compiled from "EntityStruckByLightningEvent.java"
+public final class net.minecraftforge.event.entity.EntityStruckByLightningEvent extends java.lang.Record implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.event.entity.EntityEvent,net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.event.entity.EntityStruckByLightningEvent> BUS;
+  public net.minecraftforge.event.entity.EntityStruckByLightningEvent(net.minecraft.world.entity.Entity, net.minecraft.world.entity.LightningBolt);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.world.entity.Entity getEntity();
+  public net.minecraft.world.entity.LightningBolt getLightning();
+}
+Compiled from "EntityTeleportEvent.java"
+public abstract class net.minecraftforge.event.entity.EntityTeleportEvent implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.event.entity.EntityEvent,net.minecraftforge.eventbus.api.event.InheritableEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.event.entity.EntityTeleportEvent> BUS;
+  protected double targetX;
+  protected double targetY;
+  protected double targetZ;
+  protected net.minecraftforge.event.entity.EntityTeleportEvent(net.minecraft.world.entity.Entity, double, double, double);
+  public net.minecraft.world.entity.Entity getEntity();
+  public double getTargetX();
+  public void setTargetX(double);
+  public double getTargetY();
+  public void setTargetY(double);
+  public double getTargetZ();
+  public void setTargetZ(double);
+  public net.minecraft.world.phys.Vec3 getTarget();
+  public double getPrevX();
+  public double getPrevY();
+  public double getPrevZ();
+  public net.minecraft.world.phys.Vec3 getPrev();
+}
+Compiled from "EntityTeleportEvent.java"
+public final class net.minecraftforge.event.entity.EntityTeleportEvent$ChorusFruit extends net.minecraftforge.event.entity.EntityTeleportEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.event.entity.EntityTeleportEvent$ChorusFruit> BUS;
+  public net.minecraftforge.event.entity.EntityTeleportEvent$ChorusFruit(net.minecraft.world.entity.LivingEntity, double, double, double);
+  public net.minecraft.world.entity.LivingEntity getEntityLiving();
+}
+Compiled from "EntityTeleportEvent.java"
+public final class net.minecraftforge.event.entity.EntityTeleportEvent$EnderEntity extends net.minecraftforge.event.entity.EntityTeleportEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.event.entity.EntityTeleportEvent$EnderEntity> BUS;
+  public net.minecraftforge.event.entity.EntityTeleportEvent$EnderEntity(net.minecraft.world.entity.LivingEntity, double, double, double);
+  public net.minecraft.world.entity.LivingEntity getEntityLiving();
+}
+Compiled from "EntityTeleportEvent.java"
+public final class net.minecraftforge.event.entity.EntityTeleportEvent$EnderPearl extends net.minecraftforge.event.entity.EntityTeleportEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.event.entity.EntityTeleportEvent$EnderPearl> BUS;
+  public net.minecraftforge.event.entity.EntityTeleportEvent$EnderPearl(net.minecraft.server.level.ServerPlayer, double, double, double, net.minecraft.world.entity.projectile.throwableitemprojectile.ThrownEnderpearl, float, net.minecraft.world.phys.HitResult);
+  public net.minecraft.world.entity.projectile.throwableitemprojectile.ThrownEnderpearl getPearlEntity();
+  public net.minecraft.server.level.ServerPlayer getPlayer();
+  public net.minecraft.world.phys.HitResult getHitResult();
+  public float getAttackDamage();
+  public void setAttackDamage(float);
+}
+Compiled from "EntityTeleportEvent.java"
+public final class net.minecraftforge.event.entity.EntityTeleportEvent$SpreadPlayersCommand extends net.minecraftforge.event.entity.EntityTeleportEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.event.entity.EntityTeleportEvent$SpreadPlayersCommand> BUS;
+  public net.minecraftforge.event.entity.EntityTeleportEvent$SpreadPlayersCommand(net.minecraft.world.entity.Entity, double, double, double);
+}
+Compiled from "EntityTeleportEvent.java"
+public final class net.minecraftforge.event.entity.EntityTeleportEvent$TeleportCommand extends net.minecraftforge.event.entity.EntityTeleportEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.event.entity.EntityTeleportEvent$TeleportCommand> BUS;
+  public net.minecraftforge.event.entity.EntityTeleportEvent$TeleportCommand(net.minecraft.world.entity.Entity, double, double, double);
+}
+Compiled from "EntityTravelToDimensionEvent.java"
+public final class net.minecraftforge.event.entity.EntityTravelToDimensionEvent extends java.lang.Record implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.event.entity.EntityEvent,net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.event.entity.EntityTravelToDimensionEvent> BUS;
+  public net.minecraftforge.event.entity.EntityTravelToDimensionEvent(net.minecraft.world.entity.Entity, net.minecraft.resources.ResourceKey<net.minecraft.world.level.Level>);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.world.entity.Entity getEntity();
+  public net.minecraft.resources.ResourceKey<net.minecraft.world.level.Level> getDimension();
+}
+Compiled from "ProjectileImpactEvent.java"
+public final class net.minecraftforge.event.entity.ProjectileImpactEvent extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.event.entity.EntityEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.entity.ProjectileImpactEvent> BUS;
+  public net.minecraftforge.event.entity.ProjectileImpactEvent(net.minecraft.world.entity.projectile.Projectile, net.minecraft.world.phys.HitResult);
+  public net.minecraft.world.entity.Entity getEntity();
+  public net.minecraft.world.phys.HitResult getRayTraceResult();
+  public net.minecraft.world.entity.projectile.Projectile getProjectile();
+  public void setImpactResult(net.minecraftforge.event.entity.ProjectileImpactEvent$ImpactResult);
+  public net.minecraftforge.event.entity.ProjectileImpactEvent$ImpactResult getImpactResult();
+}
+Compiled from "ProjectileImpactEvent.java"
+public final class net.minecraftforge.event.entity.ProjectileImpactEvent$ImpactResult extends java.lang.Enum<net.minecraftforge.event.entity.ProjectileImpactEvent$ImpactResult> {
+  public static final net.minecraftforge.event.entity.ProjectileImpactEvent$ImpactResult DEFAULT;
+  public static final net.minecraftforge.event.entity.ProjectileImpactEvent$ImpactResult SKIP_ENTITY;
+  public static final net.minecraftforge.event.entity.ProjectileImpactEvent$ImpactResult STOP_AT_CURRENT;
+  public static final net.minecraftforge.event.entity.ProjectileImpactEvent$ImpactResult STOP_AT_CURRENT_NO_DAMAGE;
+  public static net.minecraftforge.event.entity.ProjectileImpactEvent$ImpactResult[] values();
+  public static net.minecraftforge.event.entity.ProjectileImpactEvent$ImpactResult valueOf(java.lang.String);
+}
+Compiled from "SpawnPlacementRegisterEvent.java"
+public final class net.minecraftforge.event.entity.SpawnPlacementRegisterEvent extends net.minecraftforge.eventbus.api.event.MutableEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.entity.SpawnPlacementRegisterEvent> BUS;
+  public net.minecraftforge.event.entity.SpawnPlacementRegisterEvent(java.util.Map<net.minecraft.world.entity.EntityType<?>, net.minecraftforge.event.entity.SpawnPlacementRegisterEvent$MergedSpawnPredicate<?>>);
+  public <T extends net.minecraft.world.entity.Entity> void register(net.minecraft.world.entity.EntityType<T>, net.minecraft.world.entity.SpawnPlacements$SpawnPredicate<T>);
+  public <T extends net.minecraft.world.entity.Entity> void register(net.minecraft.world.entity.EntityType<T>, net.minecraft.world.entity.SpawnPlacements$SpawnPredicate<T>, net.minecraftforge.event.entity.SpawnPlacementRegisterEvent$Operation);
+  public <T extends net.minecraft.world.entity.Entity> void register(net.minecraft.world.entity.EntityType<T>, net.minecraft.world.entity.SpawnPlacementType, net.minecraft.world.level.levelgen.Heightmap$Types, net.minecraft.world.entity.SpawnPlacements$SpawnPredicate<T>, net.minecraftforge.event.entity.SpawnPlacementRegisterEvent$Operation);
+}
+Compiled from "SpawnPlacementRegisterEvent.java"
+public class net.minecraftforge.event.entity.SpawnPlacementRegisterEvent$MergedSpawnPredicate<T extends net.minecraft.world.entity.Entity> {
+  public net.minecraftforge.event.entity.SpawnPlacementRegisterEvent$MergedSpawnPredicate(net.minecraft.world.entity.SpawnPlacements$SpawnPredicate<T>, net.minecraft.world.entity.SpawnPlacementType, net.minecraft.world.level.levelgen.Heightmap$Types);
+  public net.minecraft.world.entity.SpawnPlacementType getSpawnType();
+  public net.minecraft.world.level.levelgen.Heightmap$Types getHeightmapType();
+  public final net.minecraft.world.entity.SpawnPlacements$SpawnPredicate<T> build();
+}
+Compiled from "SpawnPlacementRegisterEvent.java"
+public final class net.minecraftforge.event.entity.SpawnPlacementRegisterEvent$Operation extends java.lang.Enum<net.minecraftforge.event.entity.SpawnPlacementRegisterEvent$Operation> {
+  public static final net.minecraftforge.event.entity.SpawnPlacementRegisterEvent$Operation AND;
+  public static final net.minecraftforge.event.entity.SpawnPlacementRegisterEvent$Operation OR;
+  public static final net.minecraftforge.event.entity.SpawnPlacementRegisterEvent$Operation REPLACE;
+  public static net.minecraftforge.event.entity.SpawnPlacementRegisterEvent$Operation[] values();
+  public static net.minecraftforge.event.entity.SpawnPlacementRegisterEvent$Operation valueOf(java.lang.String);
+}

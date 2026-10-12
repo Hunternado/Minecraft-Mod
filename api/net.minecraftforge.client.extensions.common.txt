@@ -1,0 +1,60 @@
+Compiled from "IClientBlockExtensions.java"
+public interface net.minecraftforge.client.extensions.common.IClientBlockExtensions {
+  public static final net.minecraftforge.client.extensions.common.IClientBlockExtensions DEFAULT;
+  public static net.minecraftforge.client.extensions.common.IClientBlockExtensions of(net.minecraft.world.level.block.state.BlockState);
+  public static net.minecraftforge.client.extensions.common.IClientBlockExtensions of(net.minecraft.world.level.block.Block);
+  public default boolean addHitEffects(net.minecraft.world.level.block.state.BlockState, net.minecraft.world.level.Level, net.minecraft.world.phys.HitResult, net.minecraft.client.particle.ParticleEngine);
+  public default boolean addDestroyEffects(net.minecraft.world.level.block.state.BlockState, net.minecraft.world.level.Level, net.minecraft.core.BlockPos, net.minecraft.client.particle.ParticleEngine);
+  public default org.joml.Vector3d getFogColor(net.minecraft.world.level.block.state.BlockState, net.minecraft.world.level.LevelReader, net.minecraft.core.BlockPos, net.minecraft.world.entity.Entity, org.joml.Vector3d, float);
+  public default boolean areBreakingParticlesTinted(net.minecraft.world.level.block.state.BlockState, net.minecraft.client.multiplayer.ClientLevel, net.minecraft.core.BlockPos);
+}
+Compiled from "IClientFluidTypeExtensions.java"
+public interface net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions {
+  public static final net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions DEFAULT;
+  public static net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions of(net.minecraft.world.level.material.FluidState);
+  public static net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions of(net.minecraft.world.level.material.Fluid);
+  public static net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions of(net.minecraftforge.fluids.FluidType);
+  public default int getTintColor();
+  public default net.minecraft.resources.Identifier getStillTexture();
+  public default net.minecraft.resources.Identifier getFlowingTexture();
+  public default net.minecraft.resources.Identifier getOverlayTexture();
+  public default net.minecraft.resources.Identifier getRenderOverlayTexture(net.minecraft.client.Minecraft);
+  public default void renderOverlay(net.minecraft.client.Minecraft, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.SubmitNodeCollector);
+  public default org.joml.Vector3f modifyFogColor(net.minecraft.client.Camera, float, net.minecraft.client.multiplayer.ClientLevel, int, float, org.joml.Vector3f);
+  public default void modifyFogRender(net.minecraft.client.Camera, net.minecraft.world.level.material.FogType, float, net.minecraft.client.renderer.fog.FogData, org.joml.Vector4f);
+  public default net.minecraft.client.renderer.block.FluidModel getModel(net.minecraft.world.level.material.FluidState, net.minecraft.client.renderer.block.BlockAndTintGetter, net.minecraft.core.BlockPos, net.minecraft.client.renderer.block.FluidModel);
+  public default int getTintColor(net.minecraftforge.fluids.FluidStack);
+  public default net.minecraft.resources.Identifier getStillTexture(net.minecraftforge.fluids.FluidStack);
+  public default net.minecraft.resources.Identifier getFlowingTexture(net.minecraftforge.fluids.FluidStack);
+  public default net.minecraft.resources.Identifier getOverlayTexture(net.minecraftforge.fluids.FluidStack);
+}
+Compiled from "IClientItemExtensions.java"
+public interface net.minecraftforge.client.extensions.common.IClientItemExtensions {
+  public static final net.minecraftforge.client.extensions.common.IClientItemExtensions DEFAULT;
+  public static net.minecraftforge.client.extensions.common.IClientItemExtensions of(net.minecraft.world.item.ItemStack);
+  public static net.minecraftforge.client.extensions.common.IClientItemExtensions of(net.minecraft.world.item.Item);
+  public default net.minecraft.client.gui.Font getFont(net.minecraft.world.item.ItemStack, net.minecraftforge.client.extensions.common.IClientItemExtensions$FontContext);
+  public default net.minecraft.client.model.HumanoidModel$ArmPose getArmPose(net.minecraft.world.entity.LivingEntity, net.minecraft.world.InteractionHand, net.minecraft.world.item.ItemStack);
+  public default boolean applyForgeHandTransform(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.player.LocalPlayer, net.minecraft.world.entity.HumanoidArm, net.minecraft.world.item.ItemStack, float, float, float);
+  public default net.minecraft.client.model.HumanoidModel<?> getHumanoidArmorModel(net.minecraft.client.renderer.entity.state.LivingEntityRenderState, net.minecraft.world.item.ItemStack, net.minecraft.world.entity.EquipmentSlot, net.minecraft.client.model.HumanoidModel<?>);
+  public default net.minecraft.client.model.Model getGenericArmorModel(net.minecraft.client.renderer.entity.state.HumanoidRenderState, net.minecraft.world.item.ItemStack, net.minecraft.world.entity.EquipmentSlot, net.minecraft.client.model.HumanoidModel<?>);
+  public default void renderHelmetOverlay(net.minecraft.world.item.ItemStack, net.minecraft.world.entity.player.Player, int, int, float);
+}
+Compiled from "IClientItemExtensions.java"
+public final class net.minecraftforge.client.extensions.common.IClientItemExtensions$FontContext extends java.lang.Enum<net.minecraftforge.client.extensions.common.IClientItemExtensions$FontContext> {
+  public static final net.minecraftforge.client.extensions.common.IClientItemExtensions$FontContext ITEM_COUNT;
+  public static final net.minecraftforge.client.extensions.common.IClientItemExtensions$FontContext TOOLTIP;
+  public static final net.minecraftforge.client.extensions.common.IClientItemExtensions$FontContext SELECTED_ITEM_NAME;
+  public static net.minecraftforge.client.extensions.common.IClientItemExtensions$FontContext[] values();
+  public static net.minecraftforge.client.extensions.common.IClientItemExtensions$FontContext valueOf(java.lang.String);
+}
+Compiled from "IClientMobEffectExtensions.java"
+public interface net.minecraftforge.client.extensions.common.IClientMobEffectExtensions {
+  public static final net.minecraftforge.client.extensions.common.IClientMobEffectExtensions DEFAULT;
+  public static net.minecraftforge.client.extensions.common.IClientMobEffectExtensions of(net.minecraft.world.effect.MobEffectInstance);
+  public static net.minecraftforge.client.extensions.common.IClientMobEffectExtensions of(net.minecraft.world.effect.MobEffect);
+  public default boolean isVisibleInInventory(net.minecraft.world.effect.MobEffectInstance);
+  public default boolean isVisibleInGui(net.minecraft.world.effect.MobEffectInstance);
+  public default boolean extractInventory(net.minecraft.world.effect.MobEffectInstance, net.minecraft.client.gui.screens.inventory.EffectsInInventory, net.minecraft.client.gui.GuiGraphicsExtractor, int, int, int);
+  public default boolean extractGuiIcon(net.minecraft.world.effect.MobEffectInstance, net.minecraft.client.gui.Hud, net.minecraft.client.gui.GuiGraphicsExtractor, int, int, float, float);
+}

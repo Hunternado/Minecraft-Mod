@@ -1,0 +1,13 @@
+Compiled from "EnchantmentLevelSetEvent.java"
+public final class net.minecraftforge.event.enchanting.EnchantmentLevelSetEvent extends net.minecraftforge.eventbus.api.event.MutableEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.enchanting.EnchantmentLevelSetEvent> BUS;
+  public net.minecraftforge.event.enchanting.EnchantmentLevelSetEvent(net.minecraft.world.level.Level, net.minecraft.core.BlockPos, int, int, net.minecraft.world.item.ItemStack, int);
+  public net.minecraft.world.level.Level getLevel();
+  public net.minecraft.core.BlockPos getPos();
+  public int getEnchantRow();
+  public int getPower();
+  public net.minecraft.world.item.ItemStack getItem();
+  public int getOriginalLevel();
+  public int getEnchantLevel();
+  public void setEnchantLevel(int);
+}

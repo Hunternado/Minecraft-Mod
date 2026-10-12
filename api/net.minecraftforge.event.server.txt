@@ -1,0 +1,53 @@
+Compiled from "ServerAboutToStartEvent.java"
+public final class net.minecraftforge.event.server.ServerAboutToStartEvent extends java.lang.Record implements net.minecraftforge.event.server.ServerLifecycleEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.server.ServerAboutToStartEvent> BUS;
+  public net.minecraftforge.event.server.ServerAboutToStartEvent(net.minecraft.server.MinecraftServer);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.server.MinecraftServer getServer();
+}
+Compiled from "ServerLifecycleEvent.java"
+public interface net.minecraftforge.event.server.ServerLifecycleEvent extends net.minecraftforge.eventbus.api.event.InheritableEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.server.ServerLifecycleEvent> BUS;
+  public abstract net.minecraft.server.MinecraftServer getServer();
+}
+Compiled from "ServerStartedEvent.java"
+public final class net.minecraftforge.event.server.ServerStartedEvent extends java.lang.Record implements net.minecraftforge.event.server.ServerLifecycleEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.server.ServerStartedEvent> BUS;
+  public net.minecraftforge.event.server.ServerStartedEvent(net.minecraft.server.MinecraftServer);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.server.MinecraftServer getServer();
+}
+Compiled from "ServerStartingEvent.java"
+public final class net.minecraftforge.event.server.ServerStartingEvent extends java.lang.Record implements net.minecraftforge.event.server.ServerLifecycleEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.server.ServerStartingEvent> BUS;
+  public net.minecraftforge.event.server.ServerStartingEvent(net.minecraft.server.MinecraftServer);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.server.MinecraftServer getServer();
+}
+Compiled from "ServerStoppedEvent.java"
+public final class net.minecraftforge.event.server.ServerStoppedEvent extends java.lang.Record implements net.minecraftforge.event.server.ServerLifecycleEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.server.ServerStoppedEvent> BUS;
+  public net.minecraftforge.event.server.ServerStoppedEvent(net.minecraft.server.MinecraftServer);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.server.MinecraftServer getServer();
+}
+Compiled from "ServerStoppingEvent.java"
+public final class net.minecraftforge.event.server.ServerStoppingEvent extends java.lang.Record implements net.minecraftforge.event.server.ServerLifecycleEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.server.ServerStoppingEvent> BUS;
+  public net.minecraftforge.event.server.ServerStoppingEvent(net.minecraft.server.MinecraftServer);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.server.MinecraftServer getServer();
+}
+Compiled from "package-info.java"
+interface net.minecraftforge.event.server.package-info {
+}

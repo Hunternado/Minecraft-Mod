@@ -1,0 +1,13 @@
+Compiled from "SimpleHandlerFlow.java"
+public interface net.minecraftforge.network.simple.handler.SimpleHandlerFlow<BUF extends net.minecraft.network.FriendlyByteBuf, BASE> extends net.minecraftforge.network.simple.handler.SimpleHandlerProtocol<BUF, BASE>, net.minecraftforge.network.simple.SimpleBuildable {
+  public abstract <MSG extends BASE> net.minecraftforge.network.simple.handler.SimpleHandlerFlow<BUF, BASE> add(java.lang.Class<MSG>, net.minecraft.network.codec.StreamCodec<BUF, MSG>);
+  public abstract <MSG extends BASE> net.minecraftforge.network.simple.handler.SimpleHandlerFlow<BUF, BASE> addMain(java.lang.Class<MSG>, net.minecraft.network.codec.StreamCodec<BUF, MSG>);
+  public abstract <MSG extends BASE> net.minecraftforge.network.simple.handler.SimpleHandlerFlow<BUF, BASE> add(java.lang.Class<MSG>, net.minecraft.network.codec.StreamCodec<BUF, MSG>, java.util.function.BiConsumer<MSG, net.minecraftforge.event.network.CustomPayloadEvent$Context>);
+}
+Compiled from "SimpleHandlerProtocol.java"
+public interface net.minecraftforge.network.simple.handler.SimpleHandlerProtocol<BUF extends net.minecraft.network.FriendlyByteBuf, BASE> extends net.minecraftforge.network.simple.BaseProtocol<net.minecraftforge.network.simple.handler.SimpleHandlerFlow<BUF, BASE>, net.minecraftforge.network.simple.handler.SimpleHandlerProtocol<BUF, BASE>>, net.minecraftforge.network.simple.SimpleConnection<BASE> {
+}
+Compiled from "SimplePacket.java"
+public interface net.minecraftforge.network.simple.handler.SimplePacket<C> {
+  public abstract boolean handle(C, net.minecraftforge.event.network.CustomPayloadEvent$Context);
+}

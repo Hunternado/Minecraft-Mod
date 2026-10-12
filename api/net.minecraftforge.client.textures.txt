@@ -1,0 +1,29 @@
+Compiled from "ForgeTextureMetadata.java"
+public final class net.minecraftforge.client.textures.ForgeTextureMetadata extends java.lang.Record {
+  public static final net.minecraftforge.client.textures.ForgeTextureMetadata EMPTY;
+  public static final net.minecraft.server.packs.metadata.MetadataSectionType<net.minecraftforge.client.textures.ForgeTextureMetadata> TYPE;
+  public net.minecraftforge.client.textures.ForgeTextureMetadata(net.minecraftforge.client.textures.ITextureAtlasSpriteLoader);
+  public static net.minecraftforge.client.textures.ForgeTextureMetadata forResource(net.minecraft.server.packs.resources.Resource) throws java.io.IOException;
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraftforge.client.textures.ITextureAtlasSpriteLoader loader();
+}
+Compiled from "ITextureAtlasSpriteLoader.java"
+public interface net.minecraftforge.client.textures.ITextureAtlasSpriteLoader {
+  public abstract net.minecraft.client.renderer.texture.SpriteContents loadContents(net.minecraft.resources.Identifier, net.minecraft.server.packs.resources.Resource, net.minecraft.client.resources.metadata.animation.FrameSize, com.mojang.blaze3d.platform.NativeImage, java.util.List<net.minecraft.server.packs.metadata.MetadataSectionType$WithValue<?>>);
+  public abstract net.minecraft.client.renderer.texture.TextureAtlasSprite makeSprite(net.minecraft.resources.Identifier, net.minecraft.client.renderer.texture.SpriteContents, int, int, int, int, int, int);
+}
+Compiled from "TextureAtlasSpriteLoaderManager.java"
+public final class net.minecraftforge.client.textures.TextureAtlasSpriteLoaderManager {
+  public static net.minecraftforge.client.textures.ITextureAtlasSpriteLoader get(net.minecraft.resources.Identifier);
+  public static net.minecraft.resources.Identifier getKey(net.minecraftforge.client.textures.ITextureAtlasSpriteLoader);
+  public static void init();
+}
+Compiled from "UnitTextureAtlasSprite.java"
+public class net.minecraftforge.client.textures.UnitTextureAtlasSprite extends net.minecraft.client.renderer.texture.TextureAtlasSprite {
+  public static final net.minecraft.resources.Identifier LOCATION;
+  public static final net.minecraftforge.client.textures.UnitTextureAtlasSprite INSTANCE;
+  public float getU(float);
+  public float getV(float);
+}

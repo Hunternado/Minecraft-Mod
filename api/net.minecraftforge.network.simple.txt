@@ -1,0 +1,48 @@
+Compiled from "BaseProtocol.java"
+public interface net.minecraftforge.network.simple.BaseProtocol<FLOW, PROTOCOL extends net.minecraftforge.network.simple.BaseProtocol<FLOW, PROTOCOL>> {
+  public abstract FLOW flow(net.minecraft.network.protocol.PacketFlow);
+  public default PROTOCOL flow(net.minecraft.network.protocol.PacketFlow, java.util.function.Consumer<FLOW>);
+  public default FLOW clientbound();
+  public default PROTOCOL clientbound(java.util.function.Consumer<FLOW>);
+  public default FLOW serverbound();
+  public default PROTOCOL serverbound(java.util.function.Consumer<FLOW>);
+  public default FLOW bidirectional();
+  public default PROTOCOL bidirectional(java.util.function.Consumer<FLOW>);
+  public default PROTOCOL flow(java.util.function.Consumer<FLOW>);
+}
+Compiled from "SimpleBuildable.java"
+public interface net.minecraftforge.network.simple.SimpleBuildable extends net.minecraftforge.network.ChannelBuildable<java.lang.Object> {
+  public abstract net.minecraftforge.network.SimpleChannel build();
+  public default net.minecraftforge.network.Channel build();
+}
+Compiled from "SimpleConnection.java"
+public interface net.minecraftforge.network.simple.SimpleConnection<BASE> {
+  public abstract <NEWBUF extends net.minecraft.network.FriendlyByteBuf, NEWBASE> net.minecraftforge.network.simple.SimpleProtocol<NEWBUF, NEWBASE> protocol(net.minecraftforge.network.NetworkProtocol<NEWBUF>);
+  public abstract <NEWBUF extends net.minecraft.network.FriendlyByteBuf, CTX, NEWBASE extends net.minecraftforge.network.simple.handler.SimplePacket<CTX>> net.minecraftforge.network.simple.handler.SimpleHandlerProtocol<NEWBUF, NEWBASE> protocol(io.netty.util.AttributeKey<CTX>, net.minecraftforge.network.NetworkProtocol<NEWBUF>);
+  public default <BUF extends net.minecraft.network.FriendlyByteBuf> net.minecraftforge.network.simple.SimpleConnection<BASE> protocol(net.minecraftforge.network.NetworkProtocol<BUF>, java.util.function.Consumer<net.minecraftforge.network.simple.SimpleProtocol<BUF, BASE>>);
+  public default <BUF extends net.minecraft.network.FriendlyByteBuf, CTX, NEWBASE extends net.minecraftforge.network.simple.handler.SimplePacket<CTX>> net.minecraftforge.network.simple.SimpleConnection<BASE> protocol(io.netty.util.AttributeKey<CTX>, net.minecraftforge.network.NetworkProtocol<BUF>, java.util.function.Consumer<net.minecraftforge.network.simple.handler.SimpleHandlerProtocol<BUF, NEWBASE>>);
+  public default net.minecraftforge.network.simple.SimpleProtocol<net.minecraft.network.FriendlyByteBuf, BASE> configuration();
+  public default <CTX, NEWBASE extends net.minecraftforge.network.simple.handler.SimplePacket<CTX>> net.minecraftforge.network.simple.handler.SimpleHandlerProtocol<net.minecraft.network.FriendlyByteBuf, NEWBASE> configuration(io.netty.util.AttributeKey<CTX>);
+  public default net.minecraftforge.network.simple.SimpleConnection<BASE> configuration(java.util.function.Consumer<net.minecraftforge.network.simple.SimpleProtocol<net.minecraft.network.FriendlyByteBuf, BASE>>);
+  public default <CTX, NEWBASE extends net.minecraftforge.network.simple.handler.SimplePacket<CTX>> net.minecraftforge.network.simple.SimpleConnection<BASE> configuration(io.netty.util.AttributeKey<CTX>, java.util.function.Consumer<net.minecraftforge.network.simple.handler.SimpleHandlerProtocol<net.minecraft.network.FriendlyByteBuf, NEWBASE>>);
+  public default net.minecraftforge.network.simple.SimpleProtocol<net.minecraft.network.FriendlyByteBuf, BASE> login();
+  public default <CTX, NEWBASE extends net.minecraftforge.network.simple.handler.SimplePacket<CTX>> net.minecraftforge.network.simple.handler.SimpleHandlerProtocol<net.minecraft.network.FriendlyByteBuf, NEWBASE> login(io.netty.util.AttributeKey<CTX>);
+  public default net.minecraftforge.network.simple.SimpleConnection<BASE> login(java.util.function.Consumer<net.minecraftforge.network.simple.SimpleProtocol<net.minecraft.network.FriendlyByteBuf, BASE>>);
+  public default <CTX, NEWBASE extends net.minecraftforge.network.simple.handler.SimplePacket<CTX>> net.minecraftforge.network.simple.SimpleConnection<BASE> login(io.netty.util.AttributeKey<CTX>, java.util.function.Consumer<net.minecraftforge.network.simple.handler.SimpleHandlerProtocol<net.minecraft.network.FriendlyByteBuf, NEWBASE>>);
+  public default net.minecraftforge.network.simple.SimpleProtocol<net.minecraft.network.RegistryFriendlyByteBuf, BASE> play();
+  public default <CTX, NEWBASE extends net.minecraftforge.network.simple.handler.SimplePacket<CTX>> net.minecraftforge.network.simple.handler.SimpleHandlerProtocol<net.minecraft.network.RegistryFriendlyByteBuf, NEWBASE> play(io.netty.util.AttributeKey<CTX>);
+  public default net.minecraftforge.network.simple.SimpleConnection<BASE> play(java.util.function.Consumer<net.minecraftforge.network.simple.SimpleProtocol<net.minecraft.network.RegistryFriendlyByteBuf, BASE>>);
+  public default <CTX, NEWBASE extends net.minecraftforge.network.simple.handler.SimplePacket<CTX>> net.minecraftforge.network.simple.SimpleConnection<BASE> play(io.netty.util.AttributeKey<CTX>, java.util.function.Consumer<net.minecraftforge.network.simple.handler.SimpleHandlerProtocol<net.minecraft.network.RegistryFriendlyByteBuf, NEWBASE>>);
+  public default net.minecraftforge.network.simple.SimpleProtocol<net.minecraft.network.FriendlyByteBuf, BASE> any();
+  public default <CTX, NEWBASE extends net.minecraftforge.network.simple.handler.SimplePacket<CTX>> net.minecraftforge.network.simple.handler.SimpleHandlerProtocol<net.minecraft.network.FriendlyByteBuf, NEWBASE> any(io.netty.util.AttributeKey<CTX>);
+  public default net.minecraftforge.network.simple.SimpleConnection<BASE> any(java.util.function.Consumer<net.minecraftforge.network.simple.SimpleProtocol<net.minecraft.network.FriendlyByteBuf, BASE>>);
+  public default <CTX, NEWBASE extends net.minecraftforge.network.simple.handler.SimplePacket<CTX>> net.minecraftforge.network.simple.SimpleConnection<BASE> any(io.netty.util.AttributeKey<CTX>, java.util.function.Consumer<net.minecraftforge.network.simple.handler.SimpleHandlerProtocol<net.minecraft.network.FriendlyByteBuf, NEWBASE>>);
+}
+Compiled from "SimpleFlow.java"
+public interface net.minecraftforge.network.simple.SimpleFlow<BUF extends net.minecraft.network.FriendlyByteBuf, BASE> extends net.minecraftforge.network.simple.SimpleProtocol<BUF, BASE>, net.minecraftforge.network.simple.SimpleBuildable {
+  public abstract <MSG extends BASE> net.minecraftforge.network.simple.SimpleFlow<BUF, BASE> add(java.lang.Class<MSG>, net.minecraft.network.codec.StreamCodec<BUF, MSG>, java.util.function.BiConsumer<MSG, net.minecraftforge.event.network.CustomPayloadEvent$Context>);
+  public default <MSG extends BASE> net.minecraftforge.network.simple.SimpleFlow<BUF, BASE> addMain(java.lang.Class<MSG>, net.minecraft.network.codec.StreamCodec<BUF, MSG>, java.util.function.BiConsumer<MSG, net.minecraftforge.event.network.CustomPayloadEvent$Context>);
+}
+Compiled from "SimpleProtocol.java"
+public interface net.minecraftforge.network.simple.SimpleProtocol<BUF extends net.minecraft.network.FriendlyByteBuf, BASE> extends net.minecraftforge.network.simple.BaseProtocol<net.minecraftforge.network.simple.SimpleFlow<BUF, BASE>, net.minecraftforge.network.simple.SimpleProtocol<BUF, BASE>>, net.minecraftforge.network.simple.SimpleConnection<BASE> {
+}

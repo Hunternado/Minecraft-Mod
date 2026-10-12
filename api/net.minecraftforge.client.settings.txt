@@ -1,0 +1,37 @@
+Compiled from "IKeyConflictContext.java"
+public interface net.minecraftforge.client.settings.IKeyConflictContext {
+  public abstract boolean isActive();
+  public abstract boolean conflicts(net.minecraftforge.client.settings.IKeyConflictContext);
+}
+Compiled from "KeyConflictContext.java"
+public abstract class net.minecraftforge.client.settings.KeyConflictContext extends java.lang.Enum<net.minecraftforge.client.settings.KeyConflictContext> implements net.minecraftforge.client.settings.IKeyConflictContext {
+  public static final net.minecraftforge.client.settings.KeyConflictContext UNIVERSAL;
+  public static final net.minecraftforge.client.settings.KeyConflictContext GUI;
+  public static final net.minecraftforge.client.settings.KeyConflictContext IN_GAME;
+  public static net.minecraftforge.client.settings.KeyConflictContext[] values();
+  public static net.minecraftforge.client.settings.KeyConflictContext valueOf(java.lang.String);
+}
+Compiled from "KeyMappingLookup.java"
+public class net.minecraftforge.client.settings.KeyMappingLookup {
+  public net.minecraftforge.client.settings.KeyMappingLookup();
+  public java.util.List<net.minecraft.client.KeyMapping> getAll(com.mojang.blaze3d.platform.InputConstants$Key);
+  public void put(com.mojang.blaze3d.platform.InputConstants$Key, net.minecraft.client.KeyMapping);
+  public void remove(net.minecraft.client.KeyMapping);
+  public void clear();
+}
+Compiled from "KeyModifier.java"
+public abstract class net.minecraftforge.client.settings.KeyModifier extends java.lang.Enum<net.minecraftforge.client.settings.KeyModifier> {
+  public static final net.minecraftforge.client.settings.KeyModifier CONTROL;
+  public static final net.minecraftforge.client.settings.KeyModifier SHIFT;
+  public static final net.minecraftforge.client.settings.KeyModifier ALT;
+  public static final net.minecraftforge.client.settings.KeyModifier NONE;
+  public static net.minecraftforge.client.settings.KeyModifier[] values();
+  public static net.minecraftforge.client.settings.KeyModifier valueOf(java.lang.String);
+  public static final java.util.List<net.minecraftforge.client.settings.KeyModifier> getValues(boolean);
+  public static net.minecraftforge.client.settings.KeyModifier getModifier(com.mojang.blaze3d.platform.InputConstants$Key);
+  public static boolean isKeyCodeModifier(com.mojang.blaze3d.platform.InputConstants$Key);
+  public static net.minecraftforge.client.settings.KeyModifier valueFromString(java.lang.String);
+  public abstract boolean matches(com.mojang.blaze3d.platform.InputConstants$Key);
+  public abstract boolean isActive(net.minecraftforge.client.settings.IKeyConflictContext);
+  public abstract net.minecraft.network.chat.Component getCombinedName(com.mojang.blaze3d.platform.InputConstants$Key, java.util.function.Supplier<net.minecraft.network.chat.Component>);
+}

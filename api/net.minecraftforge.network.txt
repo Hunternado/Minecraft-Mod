@@ -1,0 +1,507 @@
+Compiled from "Channel.java"
+public abstract class net.minecraftforge.network.Channel<MSG> {
+  protected final net.minecraftforge.network.NetworkInstance instance;
+  protected net.minecraftforge.network.Channel(net.minecraftforge.network.NetworkInstance);
+  public net.minecraft.resources.Identifier getName();
+  public int getProtocolVersion();
+  public boolean isRemotePresent(net.minecraft.network.Connection);
+  public abstract void encode(net.minecraft.network.FriendlyByteBuf, MSG);
+  protected net.minecraft.network.protocol.Packet<?> toVanillaPacket(net.minecraft.network.Connection, MSG);
+  public void send(MSG, net.minecraft.network.Connection);
+  public void send(MSG, net.minecraftforge.network.PacketDistributor$PacketTarget);
+  public void reply(MSG, net.minecraftforge.event.network.CustomPayloadEvent$Context);
+  protected void validate(java.lang.Object, net.minecraft.network.Connection, net.minecraftforge.network.NetworkProtocol<?>, net.minecraft.network.protocol.PacketFlow, boolean);
+}
+Compiled from "Channel.java"
+public interface net.minecraftforge.network.Channel$VersionTest {
+  public static final net.minecraftforge.network.Channel$VersionTest ACCEPT_MISSING;
+  public static final net.minecraftforge.network.Channel$VersionTest ACCEPT_VANILLA;
+  public static net.minecraftforge.network.Channel$VersionTest exact(int);
+  public abstract boolean accepts(net.minecraftforge.network.Channel$VersionTest$Status, int);
+  public default net.minecraftforge.network.Channel$VersionTest negate();
+  public default net.minecraftforge.network.Channel$VersionTest and(net.minecraftforge.network.Channel$VersionTest);
+  public default net.minecraftforge.network.Channel$VersionTest or(net.minecraftforge.network.Channel$VersionTest);
+}
+Compiled from "Channel.java"
+public final class net.minecraftforge.network.Channel$VersionTest$Status extends java.lang.Enum<net.minecraftforge.network.Channel$VersionTest$Status> {
+  public static final net.minecraftforge.network.Channel$VersionTest$Status VANILLA;
+  public static final net.minecraftforge.network.Channel$VersionTest$Status MISSING;
+  public static final net.minecraftforge.network.Channel$VersionTest$Status PRESENT;
+  public static net.minecraftforge.network.Channel$VersionTest$Status[] values();
+  public static net.minecraftforge.network.Channel$VersionTest$Status valueOf(java.lang.String);
+}
+Compiled from "ChannelBuildable.java"
+public interface net.minecraftforge.network.ChannelBuildable<T> {
+  public abstract net.minecraftforge.network.Channel<T> build();
+}
+Compiled from "ChannelBuilder.java"
+public class net.minecraftforge.network.ChannelBuilder {
+  public static net.minecraftforge.network.ChannelBuilder named(java.lang.String);
+  public static net.minecraftforge.network.ChannelBuilder named(net.minecraft.resources.Identifier);
+  public net.minecraftforge.network.ChannelBuilder networkProtocolVersion(int);
+  public net.minecraftforge.network.ChannelBuilder acceptedVersions(net.minecraftforge.network.Channel$VersionTest);
+  public net.minecraftforge.network.ChannelBuilder clientAcceptedVersions(net.minecraftforge.network.Channel$VersionTest);
+  public net.minecraftforge.network.ChannelBuilder serverAcceptedVersions(net.minecraftforge.network.Channel$VersionTest);
+  public net.minecraftforge.network.ChannelBuilder optional();
+  public net.minecraftforge.network.ChannelBuilder optionalServer();
+  public net.minecraftforge.network.ChannelBuilder optionalClient();
+  public <T> net.minecraftforge.network.ChannelBuilder attribute(io.netty.util.AttributeKey<T>, java.util.function.Supplier<T>);
+  public <T> net.minecraftforge.network.ChannelBuilder attribute(io.netty.util.AttributeKey<T>, java.util.function.Function<net.minecraft.network.Connection, T>);
+  public net.minecraftforge.network.ChannelBuilder connectionHandler(java.util.function.Consumer<net.minecraft.network.Connection>);
+  public net.minecraftforge.network.SimpleChannel simpleChannel();
+  public net.minecraftforge.network.EventNetworkChannel eventNetworkChannel();
+  public net.minecraftforge.network.payload.PayloadConnection<net.minecraft.network.protocol.common.custom.CustomPacketPayload> payloadChannel();
+  public <C> C channel(java.util.function.Function<net.minecraftforge.network.NetworkInstance, C>);
+}
+Compiled from "ChannelListManager.java"
+public class net.minecraftforge.network.ChannelListManager {
+  public static final net.minecraft.resources.Identifier NAME;
+  public net.minecraftforge.network.ChannelListManager();
+  public static void addChannels(net.minecraft.network.Connection);
+  public static void addChannels(net.minecraft.network.Connection, net.minecraft.resources.Identifier...);
+  public static void addChannels(net.minecraft.network.Connection, java.util.Collection<net.minecraft.resources.Identifier>);
+  public static void removeChannels(net.minecraft.network.Connection, net.minecraft.resources.Identifier...);
+  public static void removeChannels(net.minecraft.network.Connection, java.util.Collection<net.minecraft.resources.Identifier>);
+}
+Compiled from "ChannelListManager.java"
+final class net.minecraftforge.network.ChannelListManager$Register extends java.lang.Record implements net.minecraft.network.protocol.common.custom.CustomPacketPayload {
+  public net.minecraft.network.protocol.common.custom.CustomPacketPayload$Type<net.minecraftforge.network.ChannelListManager$Register> type();
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public java.util.List<java.lang.String> channels();
+}
+Compiled from "ChannelListManager.java"
+final class net.minecraftforge.network.ChannelListManager$Unregister extends java.lang.Record implements net.minecraft.network.protocol.common.custom.CustomPacketPayload {
+  public net.minecraft.network.protocol.common.custom.CustomPacketPayload$Type<net.minecraftforge.network.ChannelListManager$Unregister> type();
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public java.util.List<java.lang.String> channels();
+}
+Compiled from "ConnectionType.java"
+public final class net.minecraftforge.network.ConnectionType extends java.lang.Enum<net.minecraftforge.network.ConnectionType> {
+  public static final net.minecraftforge.network.ConnectionType MODDED;
+  public static final net.minecraftforge.network.ConnectionType VANILLA;
+  public static net.minecraftforge.network.ConnectionType[] values();
+  public static net.minecraftforge.network.ConnectionType valueOf(java.lang.String);
+}
+Compiled from "DualStackUtils.java"
+public class net.minecraftforge.network.DualStackUtils {
+  public net.minecraftforge.network.DualStackUtils();
+  public static void initialise();
+  public static boolean checkIPv6(java.lang.String);
+  public static boolean checkIPv6(java.net.InetAddress);
+  public static java.net.InetAddress getLocalAddress();
+  public static java.lang.String getMulticastGroup();
+  public static void logInitialPreferences();
+  public static java.lang.String getAddressString(java.net.SocketAddress);
+}
+Compiled from "EventNetworkChannel.java"
+public class net.minecraftforge.network.EventNetworkChannel extends net.minecraftforge.network.Channel<net.minecraft.network.FriendlyByteBuf> {
+  public net.minecraftforge.network.EventNetworkChannel addListener(java.util.function.Consumer<net.minecraftforge.event.network.CustomPayloadEvent>);
+  public void encode(net.minecraft.network.FriendlyByteBuf, net.minecraft.network.FriendlyByteBuf);
+  public void encode(net.minecraft.network.FriendlyByteBuf, java.lang.Object);
+}
+Compiled from "ForgePacketHandler.java"
+public class net.minecraftforge.network.ForgePacketHandler {
+  public int expectAck(java.util.function.BiConsumer<net.minecraftforge.network.packets.Acknowledge, net.minecraftforge.event.network.CustomPayloadEvent$Context>);
+}
+Compiled from "ForgePayload.java"
+public final class net.minecraftforge.network.ForgePayload extends java.lang.Record implements net.minecraft.network.protocol.common.custom.CustomPacketPayload,net.minecraft.network.protocol.login.custom.CustomQueryPayload,net.minecraft.network.protocol.login.custom.CustomQueryAnswerPayload {
+  public net.minecraftforge.network.ForgePayload(net.minecraft.resources.Identifier, net.minecraft.network.FriendlyByteBuf, java.util.function.Consumer<net.minecraft.network.FriendlyByteBuf>);
+  public static net.minecraftforge.network.ForgePayload create(net.minecraft.resources.Identifier, net.minecraft.network.FriendlyByteBuf);
+  public static net.minecraftforge.network.ForgePayload create(net.minecraft.resources.Identifier, java.util.function.Consumer<net.minecraft.network.FriendlyByteBuf>);
+  public void write(net.minecraft.network.FriendlyByteBuf);
+  public net.minecraft.network.protocol.common.custom.CustomPacketPayload$Type<? extends net.minecraft.network.protocol.common.custom.CustomPacketPayload> type();
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.resources.Identifier id();
+  public net.minecraft.network.FriendlyByteBuf data();
+  public java.util.function.Consumer<net.minecraft.network.FriendlyByteBuf> encoder();
+}
+Compiled from "IContainerFactory.java"
+public interface net.minecraftforge.network.IContainerFactory<T extends net.minecraft.world.inventory.AbstractContainerMenu> extends net.minecraft.world.inventory.MenuType$MenuSupplier<T> {
+  public abstract T create(int, net.minecraft.world.entity.player.Inventory, net.minecraft.network.FriendlyByteBuf);
+  public default T create(int, net.minecraft.world.entity.player.Inventory);
+}
+Compiled from "NetworkContext.java"
+public class net.minecraftforge.network.NetworkContext {
+  public static final int NET_VERSION;
+  public static net.minecraftforge.network.NetworkContext get(net.minecraft.network.Connection);
+  public net.minecraftforge.network.ConnectionType getType();
+  public int getNetVersion();
+  public java.util.Set<net.minecraft.resources.Identifier> getRemoteChannels();
+  public java.util.Map<java.lang.String, net.minecraftforge.network.packets.ModVersions$Info> getModList();
+  public static java.lang.String enhanceHostName(java.lang.String);
+  public void processIntention(java.lang.String);
+  public void finishTask(net.minecraft.server.network.ConfigurationTask$Type);
+  public net.minecraftforge.network.NetworkContext$NetworkMismatchData getMismatchs();
+}
+Compiled from "NetworkContext.java"
+public final class net.minecraftforge.network.NetworkContext$NetworkMismatchData extends java.lang.Record {
+  public net.minecraftforge.network.NetworkContext$NetworkMismatchData(java.util.Map<net.minecraft.resources.Identifier, net.minecraftforge.network.NetworkContext$NetworkMismatchData$Version>, java.util.Set<net.minecraft.resources.Identifier>, boolean, java.util.Map<java.lang.String, net.minecraftforge.network.packets.ModVersions$Info>);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public java.util.Map<net.minecraft.resources.Identifier, net.minecraftforge.network.NetworkContext$NetworkMismatchData$Version> mismatched();
+  public java.util.Set<net.minecraft.resources.Identifier> missing();
+  public boolean fromServer();
+  public java.util.Map<java.lang.String, net.minecraftforge.network.packets.ModVersions$Info> mods();
+}
+Compiled from "NetworkContext.java"
+public final class net.minecraftforge.network.NetworkContext$NetworkMismatchData$Version extends java.lang.Record {
+  public net.minecraftforge.network.NetworkContext$NetworkMismatchData$Version(java.lang.String, java.lang.String);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public java.lang.String received();
+  public java.lang.String had();
+}
+Compiled from "NetworkDirection.java"
+public final class net.minecraftforge.network.NetworkDirection<B extends net.minecraft.network.FriendlyByteBuf> extends java.lang.Record {
+  public static final net.minecraftforge.network.NetworkDirection<net.minecraft.network.RegistryFriendlyByteBuf> PLAY_TO_CLIENT;
+  public static final net.minecraftforge.network.NetworkDirection<net.minecraft.network.RegistryFriendlyByteBuf> PLAY_TO_SERVER;
+  public static final net.minecraftforge.network.NetworkDirection<net.minecraft.network.FriendlyByteBuf> LOGIN_TO_CLIENT;
+  public static final net.minecraftforge.network.NetworkDirection<net.minecraft.network.FriendlyByteBuf> LOGIN_TO_SERVER;
+  public static final net.minecraftforge.network.NetworkDirection<net.minecraft.network.FriendlyByteBuf> CONFIGURATION_TO_CLIENT;
+  public static final net.minecraftforge.network.NetworkDirection<net.minecraft.network.FriendlyByteBuf> CONFIGURATION_TO_SERVER;
+  public net.minecraftforge.network.NetworkDirection(net.minecraftforge.network.NetworkProtocol<B>, net.minecraft.network.protocol.PacketFlow);
+  public <T extends net.minecraft.network.PacketListener, MSG> net.minecraft.network.protocol.Packet<T> buildPacket(net.minecraftforge.network.Channel<MSG>, MSG);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraftforge.network.NetworkProtocol<B> protocol();
+  public net.minecraft.network.protocol.PacketFlow direction();
+}
+Compiled from "NetworkInitialization.java"
+public final class net.minecraftforge.network.NetworkInitialization {
+  public static final net.minecraft.resources.Identifier LOGIN_NAME;
+  public static final io.netty.util.AttributeKey<net.minecraftforge.network.ForgePacketHandler> CONTEXT;
+  public static final net.minecraftforge.network.SimpleChannel LOGIN;
+  public static final net.minecraftforge.network.SimpleChannel CONFIG;
+  public static final net.minecraftforge.network.SimpleChannel PLAY;
+  public net.minecraftforge.network.NetworkInitialization();
+  public static void init();
+  public static int getVersion();
+}
+Compiled from "NetworkInitialization.java"
+interface net.minecraftforge.network.NetworkInitialization$Handler<MSG> {
+  public abstract void handle(net.minecraftforge.network.ForgePacketHandler, MSG, net.minecraftforge.event.network.CustomPayloadEvent$Context);
+}
+Compiled from "NetworkInstance.java"
+public final class net.minecraftforge.network.NetworkInstance {
+  public void addListener(java.util.function.Consumer<net.minecraftforge.event.network.CustomPayloadEvent>);
+  public boolean dispatch(net.minecraftforge.event.network.CustomPayloadEvent);
+  public net.minecraftforge.network.NetworkInstance addChild(net.minecraft.resources.Identifier);
+}
+Compiled from "NetworkProtocol.java"
+public class net.minecraftforge.network.NetworkProtocol<B extends net.minecraft.network.FriendlyByteBuf> {
+  public static final net.minecraftforge.network.NetworkProtocol<net.minecraft.network.RegistryFriendlyByteBuf> PLAY;
+  public static final net.minecraftforge.network.NetworkProtocol<net.minecraft.network.FriendlyByteBuf> LOGIN;
+  public static final net.minecraftforge.network.NetworkProtocol<net.minecraft.network.FriendlyByteBuf> CONFIGURATION;
+  public java.lang.String toString();
+  public net.minecraft.network.ConnectionProtocol toVanilla();
+  public <T extends net.minecraft.network.PacketListener, MSG> net.minecraft.network.protocol.Packet<T> buildPacket(net.minecraft.network.protocol.PacketFlow, net.minecraftforge.network.Channel<MSG>, MSG);
+  public <T extends net.minecraft.network.PacketListener> net.minecraft.network.protocol.Packet<T> buildPacket(net.minecraft.network.protocol.PacketFlow, net.minecraft.resources.Identifier, java.util.function.Consumer<B>);
+}
+Compiled from "NetworkRegistry.java"
+public class net.minecraftforge.network.NetworkRegistry {
+  public net.minecraftforge.network.NetworkRegistry();
+  public static boolean acceptsVanillaClientConnections();
+  public static boolean canConnectToVanillaServer();
+  public static net.minecraftforge.network.NetworkInstance findTarget(net.minecraft.resources.Identifier);
+  public static net.minecraftforge.network.NetworkContext$NetworkMismatchData validateChannels(java.util.Map<net.minecraft.resources.Identifier, java.lang.Integer>, boolean);
+  public static boolean checkListPingCompatibilityForClient(java.util.Map<net.minecraft.resources.Identifier, net.minecraftforge.network.ServerStatusPing$ChannelData>);
+  public static void lock();
+  public static void onConnectionStart(net.minecraft.network.Connection);
+  public static java.util.Map<net.minecraft.resources.Identifier, java.lang.Integer> buildChannelVersions();
+}
+Compiled from "PacketDistributor.java"
+public final class net.minecraftforge.network.PacketDistributor<T> extends java.lang.Record {
+  public static final net.minecraftforge.network.PacketDistributor<net.minecraft.server.level.ServerPlayer> PLAYER;
+  public static final net.minecraftforge.network.PacketDistributor<net.minecraft.resources.ResourceKey<net.minecraft.world.level.Level>> DIMENSION;
+  public static final net.minecraftforge.network.PacketDistributor<net.minecraftforge.network.PacketDistributor$TargetPoint> NEAR;
+  public static final net.minecraftforge.network.PacketDistributor<java.lang.Void> ALL;
+  public static final net.minecraftforge.network.PacketDistributor<java.lang.Void> SERVER;
+  public static final net.minecraftforge.network.PacketDistributor<net.minecraft.world.entity.Entity> TRACKING_ENTITY;
+  public static final net.minecraftforge.network.PacketDistributor<net.minecraft.world.entity.Entity> TRACKING_ENTITY_AND_SELF;
+  public static final net.minecraftforge.network.PacketDistributor<net.minecraft.world.level.chunk.LevelChunk> TRACKING_CHUNK;
+  public static final net.minecraftforge.network.PacketDistributor<java.util.List<net.minecraft.network.Connection>> NMLIST;
+  public net.minecraftforge.network.PacketDistributor(java.util.function.BiFunction<net.minecraftforge.network.PacketDistributor<T>, T, java.util.function.Consumer<net.minecraft.network.protocol.Packet<?>>>);
+  public net.minecraftforge.network.PacketDistributor(java.util.function.BiFunction<net.minecraftforge.network.PacketDistributor<T>, T, java.util.function.Consumer<net.minecraft.network.protocol.Packet<?>>>, net.minecraftforge.network.NetworkDirection<?>);
+  public net.minecraftforge.network.PacketDistributor$PacketTarget with(T);
+  public net.minecraftforge.network.PacketDistributor$PacketTarget noArg();
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public java.util.function.BiFunction<net.minecraftforge.network.PacketDistributor<T>, T, java.util.function.Consumer<net.minecraft.network.protocol.Packet<?>>> functor();
+  public net.minecraftforge.network.NetworkDirection<?> direction();
+}
+Compiled from "PacketDistributor.java"
+public final class net.minecraftforge.network.PacketDistributor$PacketTarget extends java.lang.Record {
+  public net.minecraftforge.network.PacketDistributor$PacketTarget(java.util.function.Consumer<net.minecraft.network.protocol.Packet<?>>, net.minecraftforge.network.NetworkDirection<?>);
+  public void send(net.minecraft.network.protocol.Packet<?>);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public java.util.function.Consumer<net.minecraft.network.protocol.Packet<?>> packetConsumer();
+  public net.minecraftforge.network.NetworkDirection<?> direction();
+}
+Compiled from "PacketDistributor.java"
+public final class net.minecraftforge.network.PacketDistributor$TargetPoint extends java.lang.Record {
+  public net.minecraftforge.network.PacketDistributor$TargetPoint(double, double, double, double, net.minecraft.resources.ResourceKey<net.minecraft.world.level.Level>);
+  public net.minecraftforge.network.PacketDistributor$TargetPoint(net.minecraft.server.level.ServerPlayer, double, double, double, double, net.minecraft.resources.ResourceKey<net.minecraft.world.level.Level>);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.server.level.ServerPlayer excluded();
+  public double x();
+  public double y();
+  public double z();
+  public double r2();
+  public net.minecraft.resources.ResourceKey<net.minecraft.world.level.Level> dim();
+}
+Compiled from "PayloadChannel.java"
+final class net.minecraftforge.network.PayloadChannel extends net.minecraftforge.network.Channel<net.minecraft.network.protocol.common.custom.CustomPacketPayload> {
+  protected net.minecraft.network.protocol.Packet<?> toVanillaPacket(net.minecraft.network.Connection, net.minecraft.network.protocol.common.custom.CustomPacketPayload);
+  public void encode(net.minecraft.network.FriendlyByteBuf, net.minecraft.network.protocol.common.custom.CustomPacketPayload);
+  protected net.minecraft.network.protocol.Packet toVanillaPacket(net.minecraft.network.Connection, java.lang.Object);
+  public void encode(net.minecraft.network.FriendlyByteBuf, java.lang.Object);
+}
+Compiled from "PayloadChannel.java"
+final class net.minecraftforge.network.PayloadChannel$Builder implements net.minecraftforge.network.payload.PayloadConnection<net.minecraft.network.protocol.common.custom.CustomPacketPayload> {
+  public <NEWBUF extends net.minecraft.network.FriendlyByteBuf, NEWBASE extends net.minecraft.network.protocol.common.custom.CustomPacketPayload> net.minecraftforge.network.payload.PayloadProtocol<NEWBUF, NEWBASE> protocol(net.minecraftforge.network.NetworkProtocol<NEWBUF>);
+  public <NEWBUF extends net.minecraft.network.FriendlyByteBuf, CTX, NEWBASE extends net.minecraft.network.protocol.common.custom.CustomPacketPayload & net.minecraftforge.network.simple.handler.SimplePacket<CTX>> net.minecraftforge.network.payload.handler.PayloadHandlerProtocol<NEWBUF, NEWBASE> protocol(io.netty.util.AttributeKey<CTX>, net.minecraftforge.network.NetworkProtocol<NEWBUF>);
+  public net.minecraftforge.network.PayloadChannel build();
+}
+Compiled from "PayloadChannel.java"
+final class net.minecraftforge.network.PayloadChannel$Builder$BuilderContext<BUF extends net.minecraft.network.FriendlyByteBuf, BASE> extends java.lang.Record {
+  public net.minecraftforge.network.PayloadChannel$Builder$BuilderContext(net.minecraftforge.network.PayloadChannel$Builder);
+  public <NEWBUF extends net.minecraft.network.FriendlyByteBuf> net.minecraftforge.network.PayloadChannel$Builder$BuilderContext<NEWBUF, BASE> protocol(net.minecraftforge.network.NetworkProtocol<NEWBUF>);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraftforge.network.PayloadChannel$Builder builder();
+  public net.minecraftforge.network.NetworkProtocol<BUF> protocol();
+  public net.minecraft.network.protocol.PacketFlow flow();
+}
+Compiled from "PayloadChannel.java"
+final class net.minecraftforge.network.PayloadChannel$Builder$Flow<BUF extends net.minecraft.network.FriendlyByteBuf, BASE extends net.minecraft.network.protocol.common.custom.CustomPacketPayload> extends java.lang.Record implements net.minecraftforge.network.PayloadChannel$Builder$ProtocolFactory<BUF, BASE>, net.minecraftforge.network.payload.PayloadFlow<BUF, BASE> {
+  public <MSG extends BASE> net.minecraftforge.network.PayloadChannel$Builder$Flow<BUF, BASE> add(net.minecraft.network.protocol.common.custom.CustomPacketPayload$Type<MSG>, net.minecraft.network.codec.StreamCodec<BUF, MSG>, java.util.function.BiConsumer<MSG, net.minecraftforge.event.network.CustomPayloadEvent$Context>);
+  public net.minecraftforge.network.payload.PayloadFlow<BUF, BASE> flow(net.minecraft.network.protocol.PacketFlow);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraftforge.network.PayloadChannel$Builder$BuilderContext<BUF, BASE> ctx();
+  public net.minecraftforge.network.payload.PayloadFlow add(net.minecraft.network.protocol.common.custom.CustomPacketPayload$Type, net.minecraft.network.codec.StreamCodec, java.util.function.BiConsumer);
+  public java.lang.Object flow(net.minecraft.network.protocol.PacketFlow);
+}
+Compiled from "PayloadChannel.java"
+final class net.minecraftforge.network.PayloadChannel$Builder$HandlerFlow<BUF extends net.minecraft.network.FriendlyByteBuf, CTX, BASE extends net.minecraft.network.protocol.common.custom.CustomPacketPayload & net.minecraftforge.network.simple.handler.SimplePacket<CTX>> extends java.lang.Record implements net.minecraftforge.network.PayloadChannel$Builder$ProtocolFactory<BUF, BASE>, net.minecraftforge.network.payload.handler.PayloadHandlerFlow<BUF, BASE> {
+  public <MSG extends BASE> net.minecraftforge.network.payload.handler.PayloadHandlerFlow<BUF, BASE> add(net.minecraft.network.protocol.common.custom.CustomPacketPayload$Type<MSG>, net.minecraft.network.codec.StreamCodec<BUF, MSG>);
+  public <MSG extends BASE> net.minecraftforge.network.payload.handler.PayloadHandlerFlow<BUF, BASE> addMain(net.minecraft.network.protocol.common.custom.CustomPacketPayload$Type<MSG>, net.minecraft.network.codec.StreamCodec<BUF, MSG>);
+  public <MSG extends BASE> net.minecraftforge.network.payload.handler.PayloadHandlerFlow<BUF, BASE> add(net.minecraft.network.protocol.common.custom.CustomPacketPayload$Type<MSG>, net.minecraft.network.codec.StreamCodec<BUF, MSG>, java.util.function.BiConsumer<MSG, net.minecraftforge.event.network.CustomPayloadEvent$Context>);
+  public net.minecraftforge.network.payload.handler.PayloadHandlerFlow<BUF, BASE> flow(net.minecraft.network.protocol.PacketFlow);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public io.netty.util.AttributeKey<CTX> key();
+  public net.minecraftforge.network.PayloadChannel$Builder$BuilderContext<BUF, BASE> ctx();
+  public java.lang.Object flow(net.minecraft.network.protocol.PacketFlow);
+}
+Compiled from "PayloadChannel.java"
+final class net.minecraftforge.network.PayloadChannel$Builder$HandlerProtocol<BUF extends net.minecraft.network.FriendlyByteBuf, CTX, BASE extends net.minecraft.network.protocol.common.custom.CustomPacketPayload & net.minecraftforge.network.simple.handler.SimplePacket<CTX>> extends java.lang.Record implements net.minecraftforge.network.PayloadChannel$Builder$ProtocolFactory<BUF, BASE>, net.minecraftforge.network.payload.handler.PayloadHandlerProtocol<BUF, BASE> {
+  public net.minecraftforge.network.payload.handler.PayloadHandlerFlow<BUF, BASE> flow(net.minecraft.network.protocol.PacketFlow);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public io.netty.util.AttributeKey<CTX> key();
+  public net.minecraftforge.network.PayloadChannel$Builder$BuilderContext<BUF, BASE> ctx();
+  public java.lang.Object flow(net.minecraft.network.protocol.PacketFlow);
+}
+Compiled from "PayloadChannel.java"
+final class net.minecraftforge.network.PayloadChannel$Builder$Protocol<BUF extends net.minecraft.network.FriendlyByteBuf, BASE extends net.minecraft.network.protocol.common.custom.CustomPacketPayload> extends java.lang.Record implements net.minecraftforge.network.PayloadChannel$Builder$ProtocolFactory<BUF, BASE>, net.minecraftforge.network.payload.PayloadProtocol<BUF, BASE> {
+  public net.minecraftforge.network.payload.PayloadFlow<BUF, BASE> flow(net.minecraft.network.protocol.PacketFlow);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraftforge.network.PayloadChannel$Builder$BuilderContext<BUF, BASE> ctx();
+  public java.lang.Object flow(net.minecraft.network.protocol.PacketFlow);
+}
+Compiled from "PayloadChannel.java"
+interface net.minecraftforge.network.PayloadChannel$Builder$ProtocolFactory<BUF extends net.minecraft.network.FriendlyByteBuf, BASE extends net.minecraft.network.protocol.common.custom.CustomPacketPayload> extends net.minecraftforge.network.payload.PayloadConnection<BASE>, net.minecraftforge.network.ChannelBuildable<net.minecraft.network.protocol.common.custom.CustomPacketPayload> {
+  public abstract net.minecraftforge.network.PayloadChannel$Builder$BuilderContext<BUF, BASE> ctx();
+  public default <NEWBUF extends net.minecraft.network.FriendlyByteBuf, NEWBASE extends net.minecraft.network.protocol.common.custom.CustomPacketPayload> net.minecraftforge.network.payload.PayloadProtocol<NEWBUF, NEWBASE> protocol(net.minecraftforge.network.NetworkProtocol<NEWBUF>);
+  public default <NEWBUF extends net.minecraft.network.FriendlyByteBuf, CTX, NEWBASE extends net.minecraftforge.network.simple.handler.SimplePacket<CTX> & net.minecraft.network.protocol.common.custom.CustomPacketPayload> net.minecraftforge.network.payload.handler.PayloadHandlerProtocol<NEWBUF, NEWBASE> protocol(io.netty.util.AttributeKey<CTX>, net.minecraftforge.network.NetworkProtocol<NEWBUF>);
+  public default net.minecraftforge.network.Channel<net.minecraft.network.protocol.common.custom.CustomPacketPayload> build();
+}
+Compiled from "PayloadChannel.java"
+final class net.minecraftforge.network.PayloadChannel$Message<MSG extends net.minecraft.network.protocol.common.custom.CustomPacketPayload, BUF extends net.minecraft.network.FriendlyByteBuf> extends java.lang.Record {
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.network.protocol.common.custom.CustomPacketPayload$Type<MSG> type();
+  public net.minecraftforge.network.NetworkProtocol<BUF> protocol();
+  public net.minecraft.network.protocol.PacketFlow direction();
+  public net.minecraft.network.codec.StreamCodec<BUF, MSG> codec();
+  public java.util.function.BiConsumer<MSG, net.minecraftforge.event.network.CustomPayloadEvent$Context> consumer();
+}
+Compiled from "ServerStatusPing.java"
+public final class net.minecraftforge.network.ServerStatusPing extends java.lang.Record {
+  public static final com.mojang.serialization.Codec<net.minecraftforge.network.ServerStatusPing> CODEC;
+  public net.minecraftforge.network.ServerStatusPing();
+  public net.minecraftforge.network.ServerStatusPing(java.util.Map<net.minecraft.resources.Identifier, net.minecraftforge.network.ServerStatusPing$ChannelData>, java.util.Map<java.lang.String, java.lang.String>, int, boolean);
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public io.netty.buffer.ByteBuf toBuf();
+  public java.util.Map<net.minecraft.resources.Identifier, net.minecraftforge.network.ServerStatusPing$ChannelData> getRemoteChannels();
+  public java.util.Map<java.lang.String, java.lang.String> getRemoteModData();
+  public int getFMLNetworkVersion();
+  public boolean isTruncated();
+  public final java.lang.String toString();
+  public java.util.Map<net.minecraft.resources.Identifier, net.minecraftforge.network.ServerStatusPing$ChannelData> channels();
+  public java.util.Map<java.lang.String, java.lang.String> mods();
+  public int fmlNetworkVer();
+  public boolean truncated();
+}
+Compiled from "ServerStatusPing.java"
+public final class net.minecraftforge.network.ServerStatusPing$ChannelData extends java.lang.Record {
+  public static final com.mojang.serialization.Codec<net.minecraftforge.network.ServerStatusPing$ChannelData> CODEC;
+  public net.minecraftforge.network.ServerStatusPing$ChannelData(net.minecraft.resources.Identifier, int, boolean);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.resources.Identifier res();
+  public int version();
+  public boolean required();
+}
+Compiled from "ServerStatusPing.java"
+public final class net.minecraftforge.network.ServerStatusPing$ModInfo extends java.lang.Record {
+  public static final com.mojang.serialization.Codec<net.minecraftforge.network.ServerStatusPing$ModInfo> CODEC;
+  public net.minecraftforge.network.ServerStatusPing$ModInfo(java.lang.String, java.lang.String);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public java.lang.String modId();
+  public java.lang.String modmarker();
+}
+Compiled from "SimpleChannel.java"
+public class net.minecraftforge.network.SimpleChannel extends net.minecraftforge.network.Channel<java.lang.Object> implements net.minecraftforge.network.simple.SimpleConnection<java.lang.Object> {
+  protected int lastIndex;
+  protected it.unimi.dsi.fastutil.ints.Int2ObjectMap<net.minecraftforge.network.SimpleChannel$Message<?, ?>> byId;
+  protected it.unimi.dsi.fastutil.objects.Object2ObjectMap<java.lang.Class<?>, net.minecraftforge.network.SimpleChannel$Message<?, ?>> byType;
+  public <NEWBUF extends net.minecraft.network.FriendlyByteBuf, NEWBASE> net.minecraftforge.network.simple.SimpleProtocol<NEWBUF, NEWBASE> protocol(net.minecraftforge.network.NetworkProtocol<NEWBUF>);
+  public <NEWBUF extends net.minecraft.network.FriendlyByteBuf, CTX, NEWBASE extends net.minecraftforge.network.simple.handler.SimplePacket<CTX>> net.minecraftforge.network.simple.handler.SimpleHandlerProtocol<NEWBUF, NEWBASE> protocol(io.netty.util.AttributeKey<CTX>, net.minecraftforge.network.NetworkProtocol<NEWBUF>);
+  public <M> net.minecraftforge.network.SimpleChannel$MessageBuilder<M, net.minecraft.network.FriendlyByteBuf> messageBuilder(java.lang.Class<M>);
+  public <M> net.minecraftforge.network.SimpleChannel$MessageBuilder<M, net.minecraft.network.FriendlyByteBuf> messageBuilder(java.lang.Class<M>, int);
+  public <M, B extends net.minecraft.network.FriendlyByteBuf> net.minecraftforge.network.SimpleChannel$MessageBuilder<M, B> messageBuilder(java.lang.Class<M>, net.minecraftforge.network.NetworkProtocol<B>);
+  public <M, B extends net.minecraft.network.FriendlyByteBuf> net.minecraftforge.network.SimpleChannel$MessageBuilder<M, B> messageBuilder(java.lang.Class<M>, net.minecraftforge.network.NetworkDirection<B>);
+  public <M, B extends net.minecraft.network.FriendlyByteBuf> net.minecraftforge.network.SimpleChannel$MessageBuilder<M, B> messageBuilder(java.lang.Class<M>, int, net.minecraftforge.network.NetworkProtocol<B>);
+  public <M, B extends net.minecraft.network.FriendlyByteBuf> net.minecraftforge.network.SimpleChannel$MessageBuilder<M, B> messageBuilder(java.lang.Class<M>, int, net.minecraftforge.network.NetworkDirection<B>);
+  public net.minecraftforge.network.SimpleChannel build();
+  protected void checkBuilt();
+  protected int nextIndex();
+  protected net.minecraft.network.protocol.Packet<?> toVanillaPacket(net.minecraft.network.Connection, java.lang.Object);
+  public void encode(net.minecraft.network.FriendlyByteBuf, java.lang.Object);
+}
+Compiled from "SimpleChannel.java"
+final class net.minecraftforge.network.SimpleChannel$Flow<BUF extends net.minecraft.network.FriendlyByteBuf, BASE> extends java.lang.Record implements net.minecraftforge.network.SimpleChannel$ProtocolFactory<BUF, BASE>, net.minecraftforge.network.simple.SimpleFlow<BUF, BASE> {
+  public <MSG extends BASE> net.minecraftforge.network.SimpleChannel$Flow<BUF, BASE> add(java.lang.Class<MSG>, net.minecraft.network.codec.StreamCodec<BUF, MSG>, java.util.function.BiConsumer<MSG, net.minecraftforge.event.network.CustomPayloadEvent$Context>);
+  public net.minecraftforge.network.simple.SimpleFlow<BUF, BASE> flow(net.minecraft.network.protocol.PacketFlow);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraftforge.network.SimpleChannel$SimpleContext<BUF, BASE> ctx();
+  public net.minecraftforge.network.simple.SimpleFlow add(java.lang.Class, net.minecraft.network.codec.StreamCodec, java.util.function.BiConsumer);
+  public java.lang.Object flow(net.minecraft.network.protocol.PacketFlow);
+}
+Compiled from "SimpleChannel.java"
+final class net.minecraftforge.network.SimpleChannel$HandlerFlow<BUF extends net.minecraft.network.FriendlyByteBuf, CTX, BASE extends net.minecraftforge.network.simple.handler.SimplePacket<CTX>> extends java.lang.Record implements net.minecraftforge.network.SimpleChannel$ProtocolFactory<BUF, BASE>, net.minecraftforge.network.simple.handler.SimpleHandlerFlow<BUF, BASE> {
+  public <MSG extends BASE> net.minecraftforge.network.simple.handler.SimpleHandlerFlow<BUF, BASE> add(java.lang.Class<MSG>, net.minecraft.network.codec.StreamCodec<BUF, MSG>);
+  public <MSG extends BASE> net.minecraftforge.network.simple.handler.SimpleHandlerFlow<BUF, BASE> addMain(java.lang.Class<MSG>, net.minecraft.network.codec.StreamCodec<BUF, MSG>);
+  public <MSG extends BASE> net.minecraftforge.network.simple.handler.SimpleHandlerFlow<BUF, BASE> add(java.lang.Class<MSG>, net.minecraft.network.codec.StreamCodec<BUF, MSG>, java.util.function.BiConsumer<MSG, net.minecraftforge.event.network.CustomPayloadEvent$Context>);
+  public net.minecraftforge.network.simple.handler.SimpleHandlerFlow<BUF, BASE> flow(net.minecraft.network.protocol.PacketFlow);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public io.netty.util.AttributeKey<CTX> key();
+  public net.minecraftforge.network.SimpleChannel$SimpleContext<BUF, BASE> ctx();
+  public java.lang.Object flow(net.minecraft.network.protocol.PacketFlow);
+}
+Compiled from "SimpleChannel.java"
+final class net.minecraftforge.network.SimpleChannel$HandlerProtocol<BUF extends net.minecraft.network.FriendlyByteBuf, CTX, BASE extends net.minecraftforge.network.simple.handler.SimplePacket<CTX>> extends java.lang.Record implements net.minecraftforge.network.SimpleChannel$ProtocolFactory<BUF, BASE>, net.minecraftforge.network.simple.handler.SimpleHandlerProtocol<BUF, BASE> {
+  public net.minecraftforge.network.simple.handler.SimpleHandlerFlow<BUF, BASE> flow(net.minecraft.network.protocol.PacketFlow);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public io.netty.util.AttributeKey<CTX> key();
+  public net.minecraftforge.network.SimpleChannel$SimpleContext<BUF, BASE> ctx();
+  public java.lang.Object flow(net.minecraft.network.protocol.PacketFlow);
+}
+Compiled from "SimpleChannel.java"
+public final class net.minecraftforge.network.SimpleChannel$Message<MSG, BUF extends net.minecraft.network.FriendlyByteBuf> extends java.lang.Record {
+  protected net.minecraftforge.network.SimpleChannel$Message(int, java.lang.Class<MSG>, net.minecraftforge.network.NetworkProtocol<BUF>, net.minecraft.network.protocol.PacketFlow, java.util.function.BiConsumer<MSG, BUF>, java.util.function.Function<BUF, MSG>, java.util.function.BiConsumer<MSG, net.minecraftforge.event.network.CustomPayloadEvent$Context>);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public int index();
+  public java.lang.Class<MSG> type();
+  public net.minecraftforge.network.NetworkProtocol<BUF> protocol();
+  public net.minecraft.network.protocol.PacketFlow direction();
+  public java.util.function.BiConsumer<MSG, BUF> encoder();
+  public java.util.function.Function<BUF, MSG> decoder();
+  public java.util.function.BiConsumer<MSG, net.minecraftforge.event.network.CustomPayloadEvent$Context> consumer();
+}
+Compiled from "SimpleChannel.java"
+public class net.minecraftforge.network.SimpleChannel$MessageBuilder<MSG, BUF extends net.minecraft.network.FriendlyByteBuf> {
+  public net.minecraftforge.network.SimpleChannel$MessageBuilder<MSG, BUF> direction(net.minecraft.network.protocol.PacketFlow);
+  public net.minecraftforge.network.SimpleChannel$MessageBuilder<MSG, BUF> encoder(java.util.function.BiConsumer<MSG, BUF>);
+  public net.minecraftforge.network.SimpleChannel$MessageBuilder<MSG, BUF> decoder(java.util.function.Function<BUF, MSG>);
+  public net.minecraftforge.network.SimpleChannel$MessageBuilder<MSG, BUF> codec(net.minecraft.network.codec.StreamCodec<BUF, MSG>);
+  public net.minecraftforge.network.SimpleChannel$MessageBuilder<MSG, BUF> consumer(java.util.function.BiConsumer<MSG, net.minecraftforge.event.network.CustomPayloadEvent$Context>);
+  public net.minecraftforge.network.SimpleChannel$MessageBuilder<MSG, BUF> consumerNetworkThread(java.util.function.BiConsumer<MSG, net.minecraftforge.event.network.CustomPayloadEvent$Context>);
+  public <C> net.minecraftforge.network.SimpleChannel$MessageBuilder<MSG, BUF> consumerNetworkThread(io.netty.util.AttributeKey<C>, org.apache.commons.lang3.function.TriConsumer<C, MSG, net.minecraftforge.event.network.CustomPayloadEvent$Context>);
+  public net.minecraftforge.network.SimpleChannel$MessageBuilder<MSG, BUF> consumerNetworkThread(net.minecraftforge.network.SimpleChannel$MessageBuilder$ToBooleanBiFunction<MSG, net.minecraftforge.event.network.CustomPayloadEvent$Context>);
+  public <C> net.minecraftforge.network.SimpleChannel$MessageBuilder<MSG, BUF> consumerNetworkThread(io.netty.util.AttributeKey<C>, net.minecraftforge.network.SimpleChannel$MessageBuilder$ToBooleanTriFunction<C, MSG, net.minecraftforge.event.network.CustomPayloadEvent$Context>);
+  public net.minecraftforge.network.SimpleChannel$MessageBuilder<MSG, BUF> consumerMainThread(java.util.function.BiConsumer<MSG, net.minecraftforge.event.network.CustomPayloadEvent$Context>);
+  public <C> net.minecraftforge.network.SimpleChannel$MessageBuilder<MSG, BUF> consumerMainThread(io.netty.util.AttributeKey<C>, org.apache.commons.lang3.function.TriConsumer<C, MSG, net.minecraftforge.event.network.CustomPayloadEvent$Context>);
+  public net.minecraftforge.network.SimpleChannel add();
+}
+Compiled from "SimpleChannel.java"
+public interface net.minecraftforge.network.SimpleChannel$MessageBuilder$ToBooleanBiFunction<T, U> {
+  public abstract boolean applyAsBool(T, U);
+}
+Compiled from "SimpleChannel.java"
+public interface net.minecraftforge.network.SimpleChannel$MessageBuilder$ToBooleanTriFunction<T, U, V> {
+  public abstract boolean applyAsBool(T, U, V);
+}
+Compiled from "SimpleChannel.java"
+final class net.minecraftforge.network.SimpleChannel$Protocol<BUF extends net.minecraft.network.FriendlyByteBuf, BASE> extends java.lang.Record implements net.minecraftforge.network.SimpleChannel$ProtocolFactory<BUF, BASE>, net.minecraftforge.network.simple.SimpleProtocol<BUF, BASE> {
+  public net.minecraftforge.network.simple.SimpleFlow<BUF, BASE> flow(net.minecraft.network.protocol.PacketFlow);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraftforge.network.SimpleChannel$SimpleContext<BUF, BASE> ctx();
+  public java.lang.Object flow(net.minecraft.network.protocol.PacketFlow);
+}
+Compiled from "SimpleChannel.java"
+interface net.minecraftforge.network.SimpleChannel$ProtocolFactory<BUF extends net.minecraft.network.FriendlyByteBuf, BASE> extends net.minecraftforge.network.simple.SimpleConnection<BASE>, net.minecraftforge.network.simple.SimpleBuildable {
+  public abstract net.minecraftforge.network.SimpleChannel$SimpleContext<BUF, BASE> ctx();
+  public default <NEWBUF extends net.minecraft.network.FriendlyByteBuf, NEWBASE> net.minecraftforge.network.simple.SimpleProtocol<NEWBUF, NEWBASE> protocol(net.minecraftforge.network.NetworkProtocol<NEWBUF>);
+  public default <NEWBUF extends net.minecraft.network.FriendlyByteBuf, CTX, NEWBASE extends net.minecraftforge.network.simple.handler.SimplePacket<CTX>> net.minecraftforge.network.simple.handler.SimpleHandlerProtocol<NEWBUF, NEWBASE> protocol(io.netty.util.AttributeKey<CTX>, net.minecraftforge.network.NetworkProtocol<NEWBUF>);
+  public default net.minecraftforge.network.SimpleChannel build();
+  public default net.minecraftforge.network.Channel build();
+}
+Compiled from "SimpleChannel.java"
+final class net.minecraftforge.network.SimpleChannel$SimpleContext<BUF extends net.minecraft.network.FriendlyByteBuf, BASE> extends java.lang.Record {
+  public net.minecraftforge.network.SimpleChannel$SimpleContext(net.minecraftforge.network.SimpleChannel);
+  public <NEWBUF extends net.minecraft.network.FriendlyByteBuf> net.minecraftforge.network.SimpleChannel$SimpleContext<NEWBUF, BASE> protocol(net.minecraftforge.network.NetworkProtocol<NEWBUF>);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraftforge.network.SimpleChannel channel();
+  public net.minecraftforge.network.NetworkProtocol<BUF> protocol();
+  public net.minecraft.network.protocol.PacketFlow flow();
+}

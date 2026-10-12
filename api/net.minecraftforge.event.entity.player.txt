@@ -1,0 +1,642 @@
+Compiled from "AdvancementEvent.java"
+public interface net.minecraftforge.event.entity.player.AdvancementEvent extends net.minecraftforge.event.entity.player.PlayerEvent {
+  public abstract net.minecraft.advancements.AdvancementHolder getAdvancement();
+}
+Compiled from "AdvancementEvent.java"
+public final class net.minecraftforge.event.entity.player.AdvancementEvent$AdvancementEarnEvent extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent,net.minecraftforge.event.entity.player.AdvancementEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.entity.player.AdvancementEvent$AdvancementEarnEvent> BUS;
+  public net.minecraftforge.event.entity.player.AdvancementEvent$AdvancementEarnEvent(net.minecraft.world.entity.player.Player, net.minecraft.advancements.AdvancementHolder);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.world.entity.player.Player getEntity();
+  public net.minecraft.advancements.AdvancementHolder getAdvancement();
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "AdvancementEvent.java"
+public final class net.minecraftforge.event.entity.player.AdvancementEvent$AdvancementProgressEvent extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent,net.minecraftforge.event.entity.player.AdvancementEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.entity.player.AdvancementEvent$AdvancementProgressEvent> BUS;
+  public net.minecraftforge.event.entity.player.AdvancementEvent$AdvancementProgressEvent(net.minecraft.world.entity.player.Player, net.minecraft.advancements.AdvancementHolder, net.minecraft.advancements.AdvancementProgress, java.lang.String, net.minecraftforge.event.entity.player.AdvancementEvent$AdvancementProgressEvent$ProgressType);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.world.entity.player.Player getEntity();
+  public net.minecraft.advancements.AdvancementHolder getAdvancement();
+  public net.minecraft.advancements.AdvancementProgress getAdvancementProgress();
+  public java.lang.String getCriterionName();
+  public net.minecraftforge.event.entity.player.AdvancementEvent$AdvancementProgressEvent$ProgressType getProgressType();
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "AdvancementEvent.java"
+public final class net.minecraftforge.event.entity.player.AdvancementEvent$AdvancementProgressEvent$ProgressType extends java.lang.Enum<net.minecraftforge.event.entity.player.AdvancementEvent$AdvancementProgressEvent$ProgressType> {
+  public static final net.minecraftforge.event.entity.player.AdvancementEvent$AdvancementProgressEvent$ProgressType GRANT;
+  public static final net.minecraftforge.event.entity.player.AdvancementEvent$AdvancementProgressEvent$ProgressType REVOKE;
+  public static net.minecraftforge.event.entity.player.AdvancementEvent$AdvancementProgressEvent$ProgressType[] values();
+  public static net.minecraftforge.event.entity.player.AdvancementEvent$AdvancementProgressEvent$ProgressType valueOf(java.lang.String);
+}
+Compiled from "AnvilRepairEvent.java"
+public final class net.minecraftforge.event.entity.player.AnvilRepairEvent extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.event.entity.player.PlayerEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.entity.player.AnvilRepairEvent> BUS;
+  public net.minecraftforge.event.entity.player.AnvilRepairEvent(net.minecraft.world.entity.player.Player, net.minecraft.world.item.ItemStack, net.minecraft.world.item.ItemStack, net.minecraft.world.item.ItemStack);
+  public net.minecraft.world.entity.player.Player getEntity();
+  public net.minecraft.world.item.ItemStack getOutput();
+  public net.minecraft.world.item.ItemStack getLeft();
+  public net.minecraft.world.item.ItemStack getRight();
+  public float getBreakChance();
+  public void setBreakChance(float);
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "ArrowLooseEvent.java"
+public final class net.minecraftforge.event.entity.player.ArrowLooseEvent extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.event.entity.player.PlayerEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.event.entity.player.ArrowLooseEvent> BUS;
+  public net.minecraftforge.event.entity.player.ArrowLooseEvent(net.minecraft.world.entity.player.Player, net.minecraft.world.item.ItemStack, net.minecraft.world.level.Level, int, boolean);
+  public net.minecraft.world.entity.player.Player getEntity();
+  public net.minecraft.world.item.ItemStack getBow();
+  public net.minecraft.world.level.Level getLevel();
+  public boolean hasAmmo();
+  public int getCharge();
+  public void setCharge(int);
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "ArrowNockEvent.java"
+public final class net.minecraftforge.event.entity.player.ArrowNockEvent extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.event.entity.player.PlayerEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.entity.player.ArrowNockEvent> BUS;
+  public net.minecraftforge.event.entity.player.ArrowNockEvent(net.minecraft.world.entity.player.Player, net.minecraft.world.item.ItemStack, net.minecraft.world.InteractionHand, net.minecraft.world.level.Level, boolean);
+  public net.minecraft.world.entity.player.Player getEntity();
+  public net.minecraft.world.item.ItemStack getBow();
+  public net.minecraft.world.level.Level getLevel();
+  public net.minecraft.world.InteractionHand getHand();
+  public boolean hasAmmo();
+  public net.minecraft.world.InteractionResult getAction();
+  public void setAction(net.minecraft.world.InteractionResult);
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "AttackEntityEvent.java"
+public final class net.minecraftforge.event.entity.player.AttackEntityEvent extends java.lang.Record implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.event.entity.player.PlayerEvent,net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.event.entity.player.AttackEntityEvent> BUS;
+  public net.minecraftforge.event.entity.player.AttackEntityEvent(net.minecraft.world.entity.player.Player, net.minecraft.world.entity.Entity);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.world.entity.player.Player getEntity();
+  public net.minecraft.world.entity.Entity getTarget();
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "BonemealEvent.java"
+public final class net.minecraftforge.event.entity.player.BonemealEvent extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.event.entity.player.PlayerEvent,net.minecraftforge.common.util.HasResult {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.event.entity.player.BonemealEvent> BUS;
+  public net.minecraftforge.event.entity.player.BonemealEvent(net.minecraft.world.entity.player.Player, net.minecraft.world.level.Level, net.minecraft.core.BlockPos, net.minecraft.world.level.block.state.BlockState, net.minecraft.world.item.ItemStack);
+  public net.minecraft.world.entity.player.Player getEntity();
+  public net.minecraft.world.level.Level getLevel();
+  public net.minecraft.core.BlockPos getPos();
+  public net.minecraft.world.level.block.state.BlockState getBlock();
+  public net.minecraft.world.item.ItemStack getStack();
+  public net.minecraftforge.common.util.Result getResult();
+  public void setResult(net.minecraftforge.common.util.Result);
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "CriticalHitEvent.java"
+public final class net.minecraftforge.event.entity.player.CriticalHitEvent extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.event.entity.player.PlayerEvent,net.minecraftforge.common.util.HasResult {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.entity.player.CriticalHitEvent> BUS;
+  public net.minecraftforge.event.entity.player.CriticalHitEvent(net.minecraft.world.entity.player.Player, net.minecraft.world.entity.Entity, float, boolean);
+  public net.minecraft.world.entity.player.Player getEntity();
+  public net.minecraft.world.entity.Entity getTarget();
+  public void setDamageModifier(float);
+  public float getDamageModifier();
+  public float getOldDamageModifier();
+  public boolean isVanillaCritical();
+  public net.minecraftforge.common.util.Result getResult();
+  public void setResult(net.minecraftforge.common.util.Result);
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "EntityItemPickupEvent.java"
+public final class net.minecraftforge.event.entity.player.EntityItemPickupEvent extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.event.entity.player.PlayerEvent,net.minecraftforge.common.util.HasResult {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.event.entity.player.EntityItemPickupEvent> BUS;
+  public net.minecraftforge.event.entity.player.EntityItemPickupEvent(net.minecraft.world.entity.player.Player, net.minecraft.world.entity.item.ItemEntity);
+  public net.minecraft.world.entity.player.Player getEntity();
+  public net.minecraft.world.entity.item.ItemEntity getItem();
+  public net.minecraftforge.common.util.Result getResult();
+  public void setResult(net.minecraftforge.common.util.Result);
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "FillBucketEvent.java"
+public final class net.minecraftforge.event.entity.player.FillBucketEvent extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.event.entity.player.PlayerEvent,net.minecraftforge.common.util.HasResult {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.event.entity.player.FillBucketEvent> BUS;
+  public net.minecraftforge.event.entity.player.FillBucketEvent(net.minecraft.world.entity.player.Player, net.minecraft.world.item.ItemStack, net.minecraft.world.level.Level, net.minecraft.world.phys.HitResult);
+  public net.minecraft.world.entity.player.Player getEntity();
+  public net.minecraft.world.item.ItemStack getEmptyBucket();
+  public net.minecraft.world.level.Level getLevel();
+  public net.minecraft.world.phys.HitResult getTarget();
+  public net.minecraft.world.item.ItemStack getFilledBucket();
+  public void setFilledBucket(net.minecraft.world.item.ItemStack);
+  public net.minecraftforge.common.util.Result getResult();
+  public void setResult(net.minecraftforge.common.util.Result);
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "ItemFishedEvent.java"
+public final class net.minecraftforge.event.entity.player.ItemFishedEvent extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.event.entity.player.PlayerEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.event.entity.player.ItemFishedEvent> BUS;
+  public net.minecraftforge.event.entity.player.ItemFishedEvent(java.util.List<net.minecraft.world.item.ItemStack>, int, net.minecraft.world.entity.projectile.FishingHook);
+  public net.minecraft.world.entity.player.Player getEntity();
+  public int getRodDamage();
+  public void damageRodBy(int);
+  public net.minecraft.core.NonNullList<net.minecraft.world.item.ItemStack> getDrops();
+  public net.minecraft.world.entity.projectile.FishingHook getHookEntity();
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "ItemTooltipEvent.java"
+public final class net.minecraftforge.event.entity.player.ItemTooltipEvent extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.event.entity.player.PlayerEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.entity.player.ItemTooltipEvent> BUS;
+  public net.minecraftforge.event.entity.player.ItemTooltipEvent(net.minecraft.world.item.ItemStack, net.minecraft.world.entity.player.Player, java.util.List<net.minecraft.network.chat.Component>, net.minecraft.world.item.TooltipFlag);
+  public net.minecraft.world.item.TooltipFlag getFlags();
+  public net.minecraft.world.item.ItemStack getItemStack();
+  public java.util.List<net.minecraft.network.chat.Component> getToolTip();
+  public net.minecraft.world.entity.player.Player getEntity();
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "PermissionsChangedEvent.java"
+public final class net.minecraftforge.event.entity.player.PermissionsChangedEvent extends java.lang.Record implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.event.entity.player.PlayerEvent,net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.event.entity.player.PermissionsChangedEvent> BUS;
+  public net.minecraftforge.event.entity.player.PermissionsChangedEvent(net.minecraft.server.level.ServerPlayer, net.minecraft.server.permissions.LevelBasedPermissionSet, net.minecraft.server.permissions.LevelBasedPermissionSet);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.server.level.ServerPlayer getEntity();
+  public net.minecraft.server.permissions.LevelBasedPermissionSet getNewLevel();
+  public net.minecraft.server.permissions.LevelBasedPermissionSet getOldLevel();
+  public net.minecraft.world.entity.player.Player getEntity();
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "PlayerContainerEvent.java"
+public interface net.minecraftforge.event.entity.player.PlayerContainerEvent extends net.minecraftforge.event.entity.player.PlayerEvent,net.minecraftforge.eventbus.api.event.InheritableEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.entity.player.PlayerContainerEvent> BUS;
+  public abstract net.minecraft.world.inventory.AbstractContainerMenu getContainer();
+}
+Compiled from "PlayerContainerEvent.java"
+public final class net.minecraftforge.event.entity.player.PlayerContainerEvent$Close extends java.lang.Record implements net.minecraftforge.event.entity.player.PlayerContainerEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.entity.player.PlayerContainerEvent$Close> BUS;
+  public net.minecraftforge.event.entity.player.PlayerContainerEvent$Close(net.minecraft.world.entity.player.Player, net.minecraft.world.inventory.AbstractContainerMenu);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.world.entity.player.Player getEntity();
+  public net.minecraft.world.inventory.AbstractContainerMenu getContainer();
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "PlayerContainerEvent.java"
+public final class net.minecraftforge.event.entity.player.PlayerContainerEvent$Open extends java.lang.Record implements net.minecraftforge.event.entity.player.PlayerContainerEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.entity.player.PlayerContainerEvent$Open> BUS;
+  public net.minecraftforge.event.entity.player.PlayerContainerEvent$Open(net.minecraft.world.entity.player.Player, net.minecraft.world.inventory.AbstractContainerMenu);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.world.entity.player.Player getEntity();
+  public net.minecraft.world.inventory.AbstractContainerMenu getContainer();
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "PlayerDestroyItemEvent.java"
+public final class net.minecraftforge.event.entity.player.PlayerDestroyItemEvent extends java.lang.Record implements net.minecraftforge.event.entity.player.PlayerEvent,net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.entity.player.PlayerDestroyItemEvent> BUS;
+  public net.minecraftforge.event.entity.player.PlayerDestroyItemEvent(net.minecraft.world.entity.player.Player, net.minecraft.world.item.ItemStack, net.minecraft.world.entity.EquipmentSlot);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.world.entity.player.Player getEntity();
+  public net.minecraft.world.item.ItemStack getOriginal();
+  public net.minecraft.world.entity.EquipmentSlot getSlot();
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "PlayerEvent.java"
+public interface net.minecraftforge.event.entity.player.PlayerEvent extends net.minecraftforge.event.entity.living.LivingEvent {
+  public abstract net.minecraft.world.entity.player.Player getEntity();
+  public default net.minecraft.world.entity.LivingEntity getEntity();
+  public default net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "PlayerEvent.java"
+public final class net.minecraftforge.event.entity.player.PlayerEvent$BreakSpeed extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.event.entity.player.PlayerEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.event.entity.player.PlayerEvent$BreakSpeed> BUS;
+  public net.minecraftforge.event.entity.player.PlayerEvent$BreakSpeed(net.minecraft.world.entity.player.Player, net.minecraft.world.level.block.state.BlockState, float, net.minecraft.core.BlockPos);
+  public net.minecraft.world.entity.player.Player getEntity();
+  public net.minecraft.world.level.block.state.BlockState getState();
+  public float getOriginalSpeed();
+  public float getNewSpeed();
+  public void setNewSpeed(float);
+  public java.util.Optional<net.minecraft.core.BlockPos> getPosition();
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "PlayerEvent.java"
+public final class net.minecraftforge.event.entity.player.PlayerEvent$Clone extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent,net.minecraftforge.event.entity.player.PlayerEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.entity.player.PlayerEvent$Clone> BUS;
+  public net.minecraftforge.event.entity.player.PlayerEvent$Clone(net.minecraft.world.entity.player.Player, net.minecraft.world.entity.player.Player, boolean);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.world.entity.player.Player getEntity();
+  public net.minecraft.world.entity.player.Player getOriginal();
+  public boolean isWasDeath();
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "PlayerEvent.java"
+public final class net.minecraftforge.event.entity.player.PlayerEvent$HarvestCheck extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.event.entity.player.PlayerEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.entity.player.PlayerEvent$HarvestCheck> BUS;
+  public net.minecraftforge.event.entity.player.PlayerEvent$HarvestCheck(net.minecraft.world.entity.player.Player, net.minecraft.world.level.block.state.BlockState, boolean);
+  public net.minecraft.world.entity.player.Player getEntity();
+  public net.minecraft.world.level.block.state.BlockState getTargetBlock();
+  public boolean canHarvest();
+  public void setCanHarvest(boolean);
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "PlayerEvent.java"
+public final class net.minecraftforge.event.entity.player.PlayerEvent$ItemCraftedEvent extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent,net.minecraftforge.event.entity.player.PlayerEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.entity.player.PlayerEvent$ItemCraftedEvent> BUS;
+  public net.minecraftforge.event.entity.player.PlayerEvent$ItemCraftedEvent(net.minecraft.world.entity.player.Player, net.minecraft.world.item.ItemStack, net.minecraft.world.Container);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.world.entity.player.Player getEntity();
+  public net.minecraft.world.item.ItemStack getCrafting();
+  public net.minecraft.world.Container getContainer();
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "PlayerEvent.java"
+public final class net.minecraftforge.event.entity.player.PlayerEvent$ItemPickupEvent extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent,net.minecraftforge.event.entity.player.PlayerEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.entity.player.PlayerEvent$ItemPickupEvent> BUS;
+  public net.minecraftforge.event.entity.player.PlayerEvent$ItemPickupEvent(net.minecraft.world.entity.player.Player, net.minecraft.world.entity.item.ItemEntity, net.minecraft.world.item.ItemStack);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.world.entity.player.Player getEntity();
+  public net.minecraft.world.entity.item.ItemEntity getOriginalEntity();
+  public net.minecraft.world.item.ItemStack getStack();
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "PlayerEvent.java"
+public final class net.minecraftforge.event.entity.player.PlayerEvent$ItemSmeltedEvent extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent,net.minecraftforge.event.entity.player.PlayerEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.entity.player.PlayerEvent$ItemSmeltedEvent> BUS;
+  public net.minecraftforge.event.entity.player.PlayerEvent$ItemSmeltedEvent(net.minecraft.world.entity.player.Player, net.minecraft.world.item.ItemStack);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.world.entity.player.Player getEntity();
+  public net.minecraft.world.item.ItemStack getSmelting();
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "PlayerEvent.java"
+public final class net.minecraftforge.event.entity.player.PlayerEvent$LoadFromFile extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent,net.minecraftforge.event.entity.player.PlayerEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.entity.player.PlayerEvent$LoadFromFile> BUS;
+  public net.minecraftforge.event.entity.player.PlayerEvent$LoadFromFile(net.minecraft.world.entity.player.Player, java.io.File, java.lang.String);
+  public java.io.File getPlayerFile(java.lang.String);
+  public java.io.File getPlayerDirectory();
+  public java.lang.String getPlayerUUID();
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.world.entity.player.Player getEntity();
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "PlayerEvent.java"
+public final class net.minecraftforge.event.entity.player.PlayerEvent$NameFormat extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.event.entity.player.PlayerEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.entity.player.PlayerEvent$NameFormat> BUS;
+  public net.minecraftforge.event.entity.player.PlayerEvent$NameFormat(net.minecraft.world.entity.player.Player, net.minecraft.network.chat.Component);
+  public net.minecraft.world.entity.player.Player getEntity();
+  public net.minecraft.network.chat.Component getUsername();
+  public net.minecraft.network.chat.Component getDisplayname();
+  public void setDisplayname(net.minecraft.network.chat.Component);
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "PlayerEvent.java"
+public final class net.minecraftforge.event.entity.player.PlayerEvent$PlayerChangeGameModeEvent extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.event.entity.player.PlayerEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.event.entity.player.PlayerEvent$PlayerChangeGameModeEvent> BUS;
+  public net.minecraftforge.event.entity.player.PlayerEvent$PlayerChangeGameModeEvent(net.minecraft.world.entity.player.Player, net.minecraft.world.level.GameType, net.minecraft.world.level.GameType);
+  public net.minecraft.world.entity.player.Player getEntity();
+  public net.minecraft.world.level.GameType getCurrentGameMode();
+  public net.minecraft.world.level.GameType getNewGameMode();
+  public void setNewGameMode(net.minecraft.world.level.GameType);
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "PlayerEvent.java"
+public final class net.minecraftforge.event.entity.player.PlayerEvent$PlayerChangedDimensionEvent extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent,net.minecraftforge.event.entity.player.PlayerEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.entity.player.PlayerEvent$PlayerChangedDimensionEvent> BUS;
+  public net.minecraftforge.event.entity.player.PlayerEvent$PlayerChangedDimensionEvent(net.minecraft.world.entity.player.Player, net.minecraft.resources.ResourceKey<net.minecraft.world.level.Level>, net.minecraft.resources.ResourceKey<net.minecraft.world.level.Level>);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.world.entity.player.Player getEntity();
+  public net.minecraft.resources.ResourceKey<net.minecraft.world.level.Level> getFrom();
+  public net.minecraft.resources.ResourceKey<net.minecraft.world.level.Level> getTo();
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "PlayerEvent.java"
+public final class net.minecraftforge.event.entity.player.PlayerEvent$PlayerLoggedInEvent extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent,net.minecraftforge.event.entity.player.PlayerEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.entity.player.PlayerEvent$PlayerLoggedInEvent> BUS;
+  public net.minecraftforge.event.entity.player.PlayerEvent$PlayerLoggedInEvent(net.minecraft.world.entity.player.Player);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.world.entity.player.Player getEntity();
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "PlayerEvent.java"
+public final class net.minecraftforge.event.entity.player.PlayerEvent$PlayerLoggedOutEvent extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent,net.minecraftforge.event.entity.player.PlayerEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.entity.player.PlayerEvent$PlayerLoggedOutEvent> BUS;
+  public net.minecraftforge.event.entity.player.PlayerEvent$PlayerLoggedOutEvent(net.minecraft.world.entity.player.Player);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.world.entity.player.Player getEntity();
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "PlayerEvent.java"
+public final class net.minecraftforge.event.entity.player.PlayerEvent$PlayerRespawnEvent extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent,net.minecraftforge.event.entity.player.PlayerEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.entity.player.PlayerEvent$PlayerRespawnEvent> BUS;
+  public net.minecraftforge.event.entity.player.PlayerEvent$PlayerRespawnEvent(net.minecraft.world.entity.player.Player, boolean);
+  public boolean isEndConquered();
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.world.entity.player.Player getEntity();
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "PlayerEvent.java"
+public final class net.minecraftforge.event.entity.player.PlayerEvent$SaveToFile extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent,net.minecraftforge.event.entity.player.PlayerEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.entity.player.PlayerEvent$SaveToFile> BUS;
+  public net.minecraftforge.event.entity.player.PlayerEvent$SaveToFile(net.minecraft.world.entity.player.Player, java.io.File, java.lang.String);
+  public java.io.File getPlayerFile(java.lang.String);
+  public java.io.File getPlayerDirectory();
+  public java.lang.String getPlayerUUID();
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.world.entity.player.Player getEntity();
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "PlayerEvent.java"
+public final class net.minecraftforge.event.entity.player.PlayerEvent$StartTracking extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent,net.minecraftforge.event.entity.player.PlayerEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.entity.player.PlayerEvent$StartTracking> BUS;
+  public net.minecraftforge.event.entity.player.PlayerEvent$StartTracking(net.minecraft.world.entity.player.Player, net.minecraft.world.entity.Entity);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.world.entity.player.Player getEntity();
+  public net.minecraft.world.entity.Entity getTarget();
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "PlayerEvent.java"
+public final class net.minecraftforge.event.entity.player.PlayerEvent$StopTracking extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent,net.minecraftforge.event.entity.player.PlayerEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.entity.player.PlayerEvent$StopTracking> BUS;
+  public net.minecraftforge.event.entity.player.PlayerEvent$StopTracking(net.minecraft.world.entity.player.Player, net.minecraft.world.entity.Entity);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.world.entity.player.Player getEntity();
+  public net.minecraft.world.entity.Entity getTarget();
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "PlayerEvent.java"
+public final class net.minecraftforge.event.entity.player.PlayerEvent$TabListNameFormat extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.event.entity.player.PlayerEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.entity.player.PlayerEvent$TabListNameFormat> BUS;
+  public net.minecraftforge.event.entity.player.PlayerEvent$TabListNameFormat(net.minecraft.world.entity.player.Player);
+  public net.minecraft.world.entity.player.Player getEntity();
+  public net.minecraft.network.chat.Component getDisplayName();
+  public void setDisplayName(net.minecraft.network.chat.Component);
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "PlayerFlyableFallEvent.java"
+public final class net.minecraftforge.event.entity.player.PlayerFlyableFallEvent extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.event.entity.player.PlayerEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.entity.player.PlayerFlyableFallEvent> BUS;
+  public net.minecraftforge.event.entity.player.PlayerFlyableFallEvent(net.minecraft.world.entity.player.Player, double, float);
+  public net.minecraft.world.entity.player.Player getEntity();
+  public double getDistance();
+  public void setDistance(float);
+  public float getMultiplier();
+  public void setMultiplier(float);
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "PlayerInteractEvent.java"
+public abstract class net.minecraftforge.event.entity.player.PlayerInteractEvent implements net.minecraftforge.event.entity.player.PlayerEvent,net.minecraftforge.eventbus.api.event.InheritableEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.entity.player.PlayerInteractEvent> BUS;
+  public net.minecraft.world.entity.player.Player getEntity();
+  public net.minecraft.world.InteractionHand getHand();
+  public net.minecraft.world.item.ItemStack getItemStack();
+  public net.minecraft.core.BlockPos getPos();
+  public net.minecraft.core.Direction getFace();
+  public net.minecraft.world.level.Level getLevel();
+  public net.minecraftforge.fml.LogicalSide getSide();
+  public net.minecraft.world.InteractionResult getCancellationResult();
+  public void setCancellationResult(net.minecraft.world.InteractionResult);
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "PlayerInteractEvent.java"
+public final class net.minecraftforge.event.entity.player.PlayerInteractEvent$EntityInteractSpecific extends net.minecraftforge.event.entity.player.PlayerInteractEvent implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.event.entity.player.PlayerInteractEvent$EntityInteractSpecific> BUS;
+  public net.minecraftforge.event.entity.player.PlayerInteractEvent$EntityInteractSpecific(net.minecraft.world.entity.player.Player, net.minecraft.world.InteractionHand, net.minecraft.world.entity.Entity, net.minecraft.world.phys.Vec3);
+  public net.minecraft.world.phys.Vec3 getLocalPos();
+  public net.minecraft.world.entity.Entity getTarget();
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "PlayerInteractEvent.java"
+public final class net.minecraftforge.event.entity.player.PlayerInteractEvent$LeftClickBlock extends net.minecraftforge.event.entity.player.PlayerInteractEvent implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.event.entity.player.PlayerInteractEvent$LeftClickBlock> BUS;
+  public net.minecraftforge.event.entity.player.PlayerInteractEvent$LeftClickBlock(net.minecraft.world.entity.player.Player, net.minecraft.core.BlockPos, net.minecraft.core.Direction, net.minecraftforge.event.entity.player.PlayerInteractEvent$LeftClickBlock$Action);
+  public net.minecraftforge.common.util.Result getUseBlock();
+  public net.minecraftforge.common.util.Result getUseItem();
+  public net.minecraftforge.event.entity.player.PlayerInteractEvent$LeftClickBlock$Action getAction();
+  public void setUseBlock(net.minecraftforge.common.util.Result);
+  public void setUseItem(net.minecraftforge.common.util.Result);
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "PlayerInteractEvent.java"
+public final class net.minecraftforge.event.entity.player.PlayerInteractEvent$LeftClickBlock$Action extends java.lang.Enum<net.minecraftforge.event.entity.player.PlayerInteractEvent$LeftClickBlock$Action> {
+  public static final net.minecraftforge.event.entity.player.PlayerInteractEvent$LeftClickBlock$Action START;
+  public static final net.minecraftforge.event.entity.player.PlayerInteractEvent$LeftClickBlock$Action STOP;
+  public static final net.minecraftforge.event.entity.player.PlayerInteractEvent$LeftClickBlock$Action ABORT;
+  public static final net.minecraftforge.event.entity.player.PlayerInteractEvent$LeftClickBlock$Action CLIENT_HOLD;
+  public static net.minecraftforge.event.entity.player.PlayerInteractEvent$LeftClickBlock$Action[] values();
+  public static net.minecraftforge.event.entity.player.PlayerInteractEvent$LeftClickBlock$Action valueOf(java.lang.String);
+  public static net.minecraftforge.event.entity.player.PlayerInteractEvent$LeftClickBlock$Action convert(net.minecraft.network.protocol.game.ServerboundPlayerActionPacket$Action);
+}
+Compiled from "PlayerInteractEvent.java"
+public final class net.minecraftforge.event.entity.player.PlayerInteractEvent$LeftClickEmpty extends net.minecraftforge.event.entity.player.PlayerInteractEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.entity.player.PlayerInteractEvent$LeftClickEmpty> BUS;
+  public net.minecraftforge.event.entity.player.PlayerInteractEvent$LeftClickEmpty(net.minecraft.world.entity.player.Player);
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "PlayerInteractEvent.java"
+public final class net.minecraftforge.event.entity.player.PlayerInteractEvent$RightClickBlock extends net.minecraftforge.event.entity.player.PlayerInteractEvent implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.event.entity.player.PlayerInteractEvent$RightClickBlock> BUS;
+  public net.minecraftforge.event.entity.player.PlayerInteractEvent$RightClickBlock(net.minecraft.world.entity.player.Player, net.minecraft.world.InteractionHand, net.minecraft.core.BlockPos, net.minecraft.world.phys.BlockHitResult);
+  public net.minecraftforge.common.util.Result getUseBlock();
+  public net.minecraftforge.common.util.Result getUseItem();
+  public net.minecraft.world.phys.BlockHitResult getHitVec();
+  public void setUseBlock(net.minecraftforge.common.util.Result);
+  public void setUseItem(net.minecraftforge.common.util.Result);
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "PlayerInteractEvent.java"
+public final class net.minecraftforge.event.entity.player.PlayerInteractEvent$RightClickEmpty extends net.minecraftforge.event.entity.player.PlayerInteractEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.entity.player.PlayerInteractEvent$RightClickEmpty> BUS;
+  public net.minecraftforge.event.entity.player.PlayerInteractEvent$RightClickEmpty(net.minecraft.world.entity.player.Player, net.minecraft.world.InteractionHand);
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "PlayerInteractEvent.java"
+public final class net.minecraftforge.event.entity.player.PlayerInteractEvent$RightClickItem extends net.minecraftforge.event.entity.player.PlayerInteractEvent implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.event.entity.player.PlayerInteractEvent$RightClickItem> BUS;
+  public net.minecraftforge.event.entity.player.PlayerInteractEvent$RightClickItem(net.minecraft.world.entity.player.Player, net.minecraft.world.InteractionHand);
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "PlayerSetSpawnEvent.java"
+public final class net.minecraftforge.event.entity.player.PlayerSetSpawnEvent extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.event.entity.player.PlayerEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.event.entity.player.PlayerSetSpawnEvent> BUS;
+  public net.minecraftforge.event.entity.player.PlayerSetSpawnEvent(net.minecraft.server.level.ServerPlayer, net.minecraft.server.level.ServerPlayer$RespawnConfig);
+  public net.minecraft.world.entity.player.Player getEntity();
+  public net.minecraft.server.level.ServerPlayer$RespawnConfig getConfig();
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "PlayerSleepInBedEvent.java"
+public final class net.minecraftforge.event.entity.player.PlayerSleepInBedEvent extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.event.entity.player.PlayerEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.entity.player.PlayerSleepInBedEvent> BUS;
+  public net.minecraftforge.event.entity.player.PlayerSleepInBedEvent(net.minecraft.world.entity.player.Player, java.util.Optional<net.minecraft.core.BlockPos>);
+  public net.minecraft.world.entity.player.Player getEntity();
+  public net.minecraft.world.entity.player.Player$BedSleepingProblem getResultStatus();
+  public void setResult(net.minecraft.world.entity.player.Player$BedSleepingProblem);
+  public net.minecraft.core.BlockPos getPos();
+  public java.util.Optional<net.minecraft.core.BlockPos> getOptionalPos();
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "PlayerSpawnPhantomsEvent.java"
+public final class net.minecraftforge.event.entity.player.PlayerSpawnPhantomsEvent extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.event.entity.player.PlayerEvent,net.minecraftforge.common.util.HasResult {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.entity.player.PlayerSpawnPhantomsEvent> BUS;
+  public net.minecraftforge.event.entity.player.PlayerSpawnPhantomsEvent(net.minecraft.world.entity.player.Player, int);
+  public net.minecraft.world.entity.player.Player getEntity();
+  public int getPhantomsToSpawn();
+  public void setPhantomsToSpawn(int);
+  public net.minecraftforge.common.util.Result getResult();
+  public void setResult(net.minecraftforge.common.util.Result);
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "PlayerWakeUpEvent.java"
+public final class net.minecraftforge.event.entity.player.PlayerWakeUpEvent extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent,net.minecraftforge.event.entity.player.PlayerEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.entity.player.PlayerWakeUpEvent> BUS;
+  public net.minecraftforge.event.entity.player.PlayerWakeUpEvent(net.minecraft.world.entity.player.Player, boolean, boolean);
+  public boolean wakeImmediately();
+  public boolean updateLevel();
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.world.entity.player.Player getEntity();
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "PlayerXpEvent.java"
+public interface net.minecraftforge.event.entity.player.PlayerXpEvent extends net.minecraftforge.event.entity.player.PlayerEvent {
+}
+Compiled from "PlayerXpEvent.java"
+public final class net.minecraftforge.event.entity.player.PlayerXpEvent$LevelChange extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.event.entity.player.PlayerXpEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.event.entity.player.PlayerXpEvent$LevelChange> BUS;
+  public net.minecraftforge.event.entity.player.PlayerXpEvent$LevelChange(net.minecraft.world.entity.player.Player, int);
+  public net.minecraft.world.entity.player.Player getEntity();
+  public int getLevels();
+  public void setLevels(int);
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "PlayerXpEvent.java"
+public final class net.minecraftforge.event.entity.player.PlayerXpEvent$PickupXp extends java.lang.Record implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.event.entity.player.PlayerXpEvent,net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.event.entity.player.PlayerXpEvent$PickupXp> BUS;
+  public net.minecraftforge.event.entity.player.PlayerXpEvent$PickupXp(net.minecraft.world.entity.player.Player, net.minecraft.world.entity.ExperienceOrb);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.world.entity.player.Player getEntity();
+  public net.minecraft.world.entity.ExperienceOrb getOrb();
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "PlayerXpEvent.java"
+public final class net.minecraftforge.event.entity.player.PlayerXpEvent$XpChange extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.event.entity.player.PlayerXpEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.event.entity.player.PlayerXpEvent$XpChange> BUS;
+  public net.minecraftforge.event.entity.player.PlayerXpEvent$XpChange(net.minecraft.world.entity.player.Player, int);
+  public net.minecraft.world.entity.player.Player getEntity();
+  public int getAmount();
+  public void setAmount(int);
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "SleepingLocationCheckEvent.java"
+public final class net.minecraftforge.event.entity.player.SleepingLocationCheckEvent extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.event.entity.living.LivingEvent,net.minecraftforge.common.util.HasResult {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.entity.player.SleepingLocationCheckEvent> BUS;
+  public net.minecraftforge.event.entity.player.SleepingLocationCheckEvent(net.minecraft.world.entity.LivingEntity, net.minecraft.core.BlockPos);
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.core.BlockPos getSleepingLocation();
+  public net.minecraftforge.common.util.Result getResult();
+  public void setResult(net.minecraftforge.common.util.Result);
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "SleepingTimeCheckEvent.java"
+public final class net.minecraftforge.event.entity.player.SleepingTimeCheckEvent extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.event.entity.player.PlayerEvent,net.minecraftforge.common.util.HasResult {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.entity.player.SleepingTimeCheckEvent> BUS;
+  public net.minecraftforge.event.entity.player.SleepingTimeCheckEvent(net.minecraft.world.entity.player.Player, java.util.Optional<net.minecraft.core.BlockPos>);
+  public net.minecraft.world.entity.player.Player getEntity();
+  public java.util.Optional<net.minecraft.core.BlockPos> getSleepingLocation();
+  public net.minecraftforge.common.util.Result getResult();
+  public void setResult(net.minecraftforge.common.util.Result);
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "TradeWithVillagerEvent.java"
+public final class net.minecraftforge.event.entity.player.TradeWithVillagerEvent extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent,net.minecraftforge.event.entity.player.PlayerEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.entity.player.TradeWithVillagerEvent> BUS;
+  public net.minecraftforge.event.entity.player.TradeWithVillagerEvent(net.minecraft.world.entity.player.Player, net.minecraft.world.item.trading.MerchantOffer, net.minecraft.world.entity.npc.villager.AbstractVillager);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.world.entity.player.Player getEntity();
+  public net.minecraft.world.item.trading.MerchantOffer getMerchantOffer();
+  public net.minecraft.world.entity.npc.villager.AbstractVillager getAbstractVillager();
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}

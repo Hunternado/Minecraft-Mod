@@ -1,0 +1,252 @@
+Compiled from "ClientCommandHandler.java"
+public class net.minecraftforge.client.ClientCommandHandler {
+  public net.minecraftforge.client.ClientCommandHandler();
+  public static void init();
+  public static <T extends net.minecraft.commands.SharedSuggestionProvider> com.mojang.brigadier.CommandDispatcher<T> mergeServerCommands(com.mojang.brigadier.CommandDispatcher<T>, net.minecraft.commands.CommandBuildContext);
+  public static com.mojang.brigadier.CommandDispatcher<net.minecraft.commands.CommandSourceStack> getDispatcher();
+  public static net.minecraftforge.client.ClientCommandSourceStack getSource();
+  public static boolean runCommand(java.lang.String);
+}
+Compiled from "ClientCommandSourceStack.java"
+public class net.minecraftforge.client.ClientCommandSourceStack extends net.minecraft.commands.CommandSourceStack {
+  public net.minecraftforge.client.ClientCommandSourceStack(net.minecraft.commands.CommandSource, net.minecraft.world.phys.Vec3, net.minecraft.world.phys.Vec2, net.minecraft.server.permissions.PermissionSet, java.lang.String, net.minecraft.network.chat.Component, net.minecraft.world.entity.Entity);
+  public void sendSuccess(java.util.function.Supplier<net.minecraft.network.chat.Component>, boolean);
+  public java.util.Collection<java.lang.String> getAllTeams();
+  public java.util.Collection<java.lang.String> getOnlinePlayerNames();
+  public java.util.Set<net.minecraft.resources.ResourceKey<net.minecraft.world.level.Level>> levels();
+  public net.minecraft.core.RegistryAccess registryAccess();
+  public net.minecraft.world.scores.Scoreboard getScoreboard();
+  public net.minecraft.advancements.AdvancementHolder getAdvancement(net.minecraft.resources.Identifier);
+  public net.minecraft.world.level.Level getUnsidedLevel();
+  public net.minecraft.server.MinecraftServer getServer();
+  public net.minecraft.server.level.ServerLevel getLevel();
+}
+Compiled from "ClientForgeMod.java"
+public class net.minecraftforge.client.ClientForgeMod {
+  public net.minecraftforge.client.ClientForgeMod();
+  public static void onRegisterGeometryLoaders(net.minecraftforge.client.event.ModelEvent$RegisterGeometryLoaders);
+  public static void onRegisterReloadListeners(net.minecraftforge.client.event.RegisterClientReloadListenersEvent);
+  public static void onRegisterNamedRenderTypes(net.minecraftforge.client.event.RegisterNamedRenderTypesEvent);
+}
+Compiled from "ColorResolverManager.java"
+public final class net.minecraftforge.client.ColorResolverManager {
+  public static void init();
+  public static void registerBlockTintCaches(net.minecraft.client.multiplayer.ClientLevel, java.util.Map<net.minecraft.world.level.ColorResolver, net.minecraft.client.color.block.BlockTintCache>);
+}
+Compiled from "ConfigScreenHandler.java"
+public class net.minecraftforge.client.ConfigScreenHandler {
+  public net.minecraftforge.client.ConfigScreenHandler();
+  public static java.util.Optional<java.util.function.BiFunction<net.minecraft.client.Minecraft, net.minecraft.client.gui.screens.Screen, net.minecraft.client.gui.screens.Screen>> getScreenFactoryFor(net.minecraftforge.forgespi.language.IModInfo);
+}
+Compiled from "ConfigScreenHandler.java"
+public final class net.minecraftforge.client.ConfigScreenHandler$ConfigScreenFactory extends java.lang.Record implements net.minecraftforge.fml.IExtensionPoint<net.minecraftforge.client.ConfigScreenHandler$ConfigScreenFactory> {
+  public net.minecraftforge.client.ConfigScreenHandler$ConfigScreenFactory(java.util.function.Function<net.minecraft.client.gui.screens.Screen, net.minecraft.client.gui.screens.Screen>);
+  public net.minecraftforge.client.ConfigScreenHandler$ConfigScreenFactory(java.util.function.BiFunction<net.minecraft.client.Minecraft, net.minecraft.client.gui.screens.Screen, net.minecraft.client.gui.screens.Screen>);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public java.util.function.BiFunction<net.minecraft.client.Minecraft, net.minecraft.client.gui.screens.Screen, net.minecraft.client.gui.screens.Screen> screenFunction();
+}
+Compiled from "CreativeModeTabSearchRegistry.java"
+public class net.minecraftforge.client.CreativeModeTabSearchRegistry {
+  public net.minecraftforge.client.CreativeModeTabSearchRegistry();
+  public static java.util.Map<net.minecraft.world.item.CreativeModeTab, net.minecraft.client.multiplayer.SessionSearchTrees$Key> getNameSearchKeys();
+  public static java.util.Map<net.minecraft.world.item.CreativeModeTab, net.minecraft.client.multiplayer.SessionSearchTrees$Key> getTagSearchKeys();
+  public static net.minecraft.client.multiplayer.SessionSearchTrees$Key getNameSearchKey(net.minecraft.world.item.CreativeModeTab);
+  public static net.minecraft.client.multiplayer.SessionSearchTrees$Key getTagSearchKey(net.minecraft.world.item.CreativeModeTab);
+}
+Compiled from "EntitySpectatorShaderManager.java"
+public final class net.minecraftforge.client.EntitySpectatorShaderManager {
+  public static net.minecraft.resources.Identifier get(net.minecraft.world.entity.EntityType<?>);
+  public static void init();
+}
+Compiled from "ExtendedServerListData.java"
+public final class net.minecraftforge.client.ExtendedServerListData extends java.lang.Record {
+  public net.minecraftforge.client.ExtendedServerListData(java.lang.String, boolean, int, java.lang.String);
+  public net.minecraftforge.client.ExtendedServerListData(java.lang.String, boolean, int, java.lang.String, boolean);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public java.lang.String type();
+  public boolean isCompatible();
+  public int numberOfMods();
+  public java.lang.String extraReason();
+  public boolean truncated();
+}
+Compiled from "FireworkShapeFactoryRegistry.java"
+public class net.minecraftforge.client.FireworkShapeFactoryRegistry {
+  public net.minecraftforge.client.FireworkShapeFactoryRegistry();
+  public static void register(net.minecraft.world.item.component.FireworkExplosion$Shape, net.minecraftforge.client.FireworkShapeFactoryRegistry$Factory);
+  public static net.minecraftforge.client.FireworkShapeFactoryRegistry$Factory get(net.minecraft.world.item.component.FireworkExplosion$Shape);
+}
+Compiled from "FireworkShapeFactoryRegistry.java"
+public interface net.minecraftforge.client.FireworkShapeFactoryRegistry$Factory {
+  public abstract void build(net.minecraft.client.particle.FireworkParticles$Starter, boolean, boolean, int[], int[]);
+}
+Compiled from "ForgeAtlasProvider.java"
+public class net.minecraftforge.client.ForgeAtlasProvider extends net.minecraft.client.data.AtlasProvider {
+  public net.minecraftforge.client.ForgeAtlasProvider(net.minecraft.data.PackOutput);
+  public java.util.concurrent.CompletableFuture<?> run(net.minecraft.data.CachedOutput);
+}
+Compiled from "ForgeHooksClient.java"
+public class net.minecraftforge.client.ForgeHooksClient {
+  public static java.lang.String forgeStatusLine;
+  public net.minecraftforge.client.ForgeHooksClient();
+  public static boolean onClientPauseChangePre(boolean);
+  public static void onClientPauseChangePost(boolean);
+  public static net.minecraftforge.client.event.RenderHighlightEvent$Callback onExtractBlockOutline(net.minecraft.client.renderer.extract.LevelExtractor, net.minecraft.client.Camera, net.minecraft.client.renderer.state.level.LevelRenderState, net.minecraft.world.phys.HitResult);
+  public static boolean renderSpecificFirstPersonHand(net.minecraft.world.InteractionHand, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.SubmitNodeCollector, int, float, float, float, float, net.minecraft.world.item.ItemStack);
+  public static void onTextureStitchedPost(net.minecraft.client.renderer.texture.TextureAtlas);
+  public static void onBlockColorsInit(net.minecraft.client.color.block.BlockColors);
+  public static net.minecraft.client.model.Model getArmorModel(net.minecraft.client.renderer.entity.state.HumanoidRenderState, net.minecraft.world.item.ItemStack, net.minecraft.world.entity.EquipmentSlot, net.minecraft.client.model.HumanoidModel<?>);
+  public static java.lang.String fixDomain(java.lang.String, java.lang.String);
+  public static net.minecraft.client.resources.sounds.SoundInstance playSound(net.minecraft.client.sounds.SoundEngine, net.minecraft.client.resources.sounds.SoundInstance);
+  public static org.joml.Vector3f getFogColor(net.minecraft.client.Camera, float, net.minecraft.client.multiplayer.ClientLevel, int, float, float, float, float);
+  public static org.joml.Vector4f setupFog(net.minecraft.world.level.material.FogType, net.minecraft.client.Camera, net.minecraft.client.DeltaTracker, net.minecraft.client.renderer.fog.FogData, org.joml.Vector4f);
+  public static void onModifyBakingResult(net.minecraft.client.resources.model.ModelBakery, net.minecraft.client.resources.model.ModelBakery$BakingResult);
+  public static void onModelBake(net.minecraft.client.resources.model.ModelManager, net.minecraft.client.resources.model.ModelBakery);
+  public static java.util.Map<net.minecraft.world.level.material.Fluid, net.minecraft.client.renderer.block.FluidModel> onFluidModelBake(net.minecraft.client.resources.model.ModelBakery, net.minecraft.client.resources.model.sprite.MaterialBaker, java.util.Map<net.minecraft.world.level.material.Fluid, net.minecraft.client.renderer.block.FluidModel>);
+  public static boolean shouldCauseReequipAnimation(net.minecraft.world.item.ItemStack, net.minecraft.world.item.ItemStack, int);
+  public static net.minecraftforge.client.event.CustomizeGuiOverlayEvent$BossEventProgress onCustomizeBossEventProgress(net.minecraft.client.gui.GuiGraphicsExtractor, com.mojang.blaze3d.platform.Window, net.minecraft.client.gui.components.LerpingBossEvent, int, int, int);
+  public static void onCustomizeChatEvent(net.minecraft.client.gui.GuiGraphicsExtractor, net.minecraft.client.gui.components.ChatComponent, com.mojang.blaze3d.platform.Window, int, int, int, net.minecraft.client.gui.Font);
+  public static void onCustomizeDebugEvent(net.minecraft.client.gui.GuiGraphicsExtractor, com.mojang.blaze3d.platform.Window, float, java.util.List<java.lang.String>, boolean);
+  public static void onClientChangeGameType(net.minecraft.client.multiplayer.PlayerInfo, net.minecraft.world.level.GameType, net.minecraft.world.level.GameType);
+  public static void onMovementInputUpdate(net.minecraft.world.entity.player.Player, net.minecraft.client.player.ClientInput);
+  public static boolean onScreenKeyPressed(net.minecraft.client.gui.screens.Screen, net.minecraft.client.input.KeyEvent);
+  public static boolean onScreenKeyReleased(net.minecraft.client.gui.screens.Screen, net.minecraft.client.input.KeyEvent);
+  public static boolean onScreenCharTyped(net.minecraft.client.gui.screens.Screen, net.minecraft.client.input.CharacterEvent);
+  public static void onKeyInput(net.minecraft.client.input.KeyEvent, int);
+  public static boolean isNameplateInRenderDistance(net.minecraft.world.entity.Entity, double, double);
+  public static boolean shouldRenderEffect(net.minecraft.world.effect.MobEffectInstance);
+  public static java.util.Set<net.minecraft.server.packs.metadata.MetadataSectionType<?>> getAtlastMetadataSections(net.minecraft.resources.Identifier, java.util.Set<net.minecraft.server.packs.metadata.MetadataSectionType<?>>);
+  public static net.minecraft.client.renderer.texture.SpriteContents loadSpriteContents(net.minecraft.resources.Identifier, net.minecraft.server.packs.resources.Resource, net.minecraft.client.resources.metadata.animation.FrameSize, com.mojang.blaze3d.platform.NativeImage, java.util.List<net.minecraft.server.packs.metadata.MetadataSectionType$WithValue<?>>);
+  public static net.minecraft.client.renderer.texture.TextureAtlasSprite loadTextureAtlasSprite(net.minecraft.resources.Identifier, net.minecraft.client.renderer.texture.SpriteContents, int, int, int, int, int);
+  public static void registerLayerDefinition(net.minecraft.client.model.geom.ModelLayerLocation, java.util.function.Supplier<net.minecraft.client.model.geom.builders.LayerDefinition>);
+  public static void loadLayerDefinitions(com.google.common.collect.ImmutableMap$Builder<net.minecraft.client.model.geom.ModelLayerLocation, net.minecraft.client.model.geom.builders.LayerDefinition>);
+  public static void processForgeListPingData(net.minecraft.network.protocol.status.ServerStatus, net.minecraft.client.multiplayer.ServerData);
+  public static void drawForgePingInfo(net.minecraft.client.gui.screens.multiplayer.JoinMultiplayerScreen, net.minecraft.client.multiplayer.ServerData, net.minecraft.client.gui.GuiGraphicsExtractor, int, int, int, int, int);
+  public static void handleClientLevelClosing(net.minecraft.client.multiplayer.ClientLevel);
+  public static void onRegisterParticleProviders(net.minecraft.client.particle.ParticleResources);
+  public static void onRegisterKeyMappings(net.minecraft.client.Options);
+  public static void onRegisterPictureInPictureRenderers(java.util.List<net.minecraft.client.gui.render.pip.PictureInPictureRenderer<?>>, com.google.common.collect.ImmutableMap$Builder<java.lang.Class<? extends net.minecraft.client.renderer.state.gui.pip.PictureInPictureRenderState>, net.minecraft.client.gui.render.pip.PictureInPictureRenderer<?>>);
+  public static net.minecraft.network.chat.Component onClientChat(net.minecraft.network.chat.ChatType$Bound, net.minecraft.network.chat.Component, java.util.UUID);
+  public static net.minecraft.network.chat.Component onClientPlayerChat(net.minecraft.network.chat.ChatType$Bound, net.minecraft.network.chat.Component, net.minecraft.network.chat.PlayerChatMessage, java.util.UUID);
+  public static net.minecraft.network.chat.Component onClientSystemMessage(net.minecraft.network.chat.Component, boolean);
+  public static java.lang.String onClientSendMessage(java.lang.String);
+  public static net.minecraft.client.gui.Font getTooltipFont(net.minecraft.world.item.ItemStack, net.minecraft.client.gui.Font);
+  public static net.minecraftforge.client.event.RenderTooltipEvent$Pre onRenderTooltipPre(net.minecraft.world.item.ItemStack, net.minecraft.client.gui.GuiGraphicsExtractor, int, int, int, int, java.util.List<net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent>, net.minecraft.client.gui.Font, net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipPositioner, net.minecraft.resources.Identifier);
+  public static java.util.List<net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent> gatherTooltipComponents(net.minecraft.world.item.ItemStack, java.util.List<? extends net.minecraft.network.chat.FormattedText>, int, int, int, net.minecraft.client.gui.Font);
+  public static java.util.List<net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent> gatherTooltipComponents(net.minecraft.world.item.ItemStack, java.util.List<? extends net.minecraft.network.chat.FormattedText>, java.util.Optional<net.minecraft.world.inventory.tooltip.TooltipComponent>, int, int, int, net.minecraft.client.gui.Font);
+  public static java.util.List<net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent> gatherTooltipComponentsFromElements(net.minecraft.world.item.ItemStack, java.util.List<com.mojang.datafixers.util.Either<net.minecraft.network.chat.FormattedText, net.minecraft.world.inventory.tooltip.TooltipComponent>>, int, int, int, net.minecraft.client.gui.Font);
+  public static boolean renderFireOverlay(net.minecraft.world.entity.player.Player, com.mojang.blaze3d.vertex.PoseStack);
+  public static boolean renderWaterOverlay(net.minecraft.world.entity.player.Player, com.mojang.blaze3d.vertex.PoseStack);
+  public static boolean renderBlockOverlay(net.minecraft.world.entity.player.Player, com.mojang.blaze3d.vertex.PoseStack, net.minecraftforge.client.event.RenderBlockScreenEffectEvent$OverlayType, net.minecraft.world.level.block.state.BlockState, net.minecraft.core.BlockPos);
+  public static int getMaxMipmapLevel(int, int);
+  public static net.minecraft.resources.Identifier getShaderImportLocation(java.lang.String, boolean, java.lang.String);
+  public static void initClientHooks(net.minecraft.client.Minecraft, net.minecraft.server.packs.resources.ReloadableResourceManager);
+  public static boolean onClientDisconnect(net.minecraft.network.Connection, net.minecraft.client.Minecraft, net.minecraft.client.gui.screens.Screen, net.minecraft.network.chat.Component);
+  public static boolean onScreenMouseDrag(net.minecraft.client.gui.screens.Screen, net.minecraft.client.input.MouseButtonEvent, double, double);
+  public static net.minecraft.client.resources.model.geometry.UnbakedGeometry deserializeBlockModelGeometry(com.google.gson.JsonObject, com.google.gson.JsonDeserializationContext);
+  public static net.minecraftforge.client.model.ForgeBlockModelData deserializeBlockModel(com.google.gson.JsonObject, com.google.gson.JsonDeserializationContext);
+  public static void addFramePass(net.minecraft.resources.Identifier, net.minecraftforge.client.FramePassManager$PassDefinition);
+}
+Compiled from "ForgeRenderTypes.java"
+public final class net.minecraftforge.client.ForgeRenderTypes extends java.lang.Enum<net.minecraftforge.client.ForgeRenderTypes> {
+  public static final net.minecraftforge.client.ForgeRenderTypes ITEM_LAYERED_SOLID;
+  public static final net.minecraftforge.client.ForgeRenderTypes ITEM_LAYERED_CUTOUT;
+  public static final net.minecraftforge.client.ForgeRenderTypes ITEM_UNSORTED_TRANSLUCENT;
+  public static final net.minecraftforge.client.ForgeRenderTypes ITEM_UNLIT_TRANSLUCENT;
+  public static final net.minecraftforge.client.ForgeRenderTypes ITEM_UNSORTED_UNLIT_TRANSLUCENT;
+  public static boolean enableTextTextureLinearFiltering;
+  public static net.minecraftforge.client.ForgeRenderTypes[] values();
+  public static net.minecraftforge.client.ForgeRenderTypes valueOf(java.lang.String);
+  public static net.minecraft.client.renderer.rendertype.RenderType getItemLayeredSolid(net.minecraft.resources.Identifier);
+  public static net.minecraft.client.renderer.rendertype.RenderType getItemLayeredCutout(net.minecraft.resources.Identifier);
+  public static net.minecraft.client.renderer.rendertype.RenderType getUnsortedTranslucent(net.minecraft.resources.Identifier);
+  public static net.minecraft.client.renderer.rendertype.RenderType getUnlitTranslucent(net.minecraft.resources.Identifier);
+  public static net.minecraft.client.renderer.rendertype.RenderType getUnlitTranslucent(net.minecraft.resources.Identifier, boolean);
+  public static net.minecraft.client.renderer.rendertype.RenderType getText(net.minecraft.resources.Identifier);
+  public static net.minecraft.client.renderer.rendertype.RenderType getTextGrayscale(net.minecraft.resources.Identifier);
+  public static net.minecraft.client.renderer.rendertype.RenderType getTextPolygonOffset(net.minecraft.resources.Identifier);
+  public static net.minecraft.client.renderer.rendertype.RenderType getTextGrayscalePolygonOffset(net.minecraft.resources.Identifier);
+  public static net.minecraft.client.renderer.rendertype.RenderType getTextSeeThrough(net.minecraft.resources.Identifier);
+  public static net.minecraft.client.renderer.rendertype.RenderType getTextGrayscaleSeeThrough(net.minecraft.resources.Identifier);
+  public static net.minecraft.client.renderer.rendertype.RenderType getLoadingOverlay(net.minecraftforge.fml.earlydisplay.DisplayWindow);
+  public net.minecraft.client.renderer.rendertype.RenderType get();
+}
+Compiled from "ForgeRenderTypes.java"
+abstract class net.minecraftforge.client.ForgeRenderTypes$Internal {
+  public static java.util.function.Function<net.minecraft.resources.Identifier, net.minecraft.client.renderer.rendertype.RenderType> UNSORTED_TRANSLUCENT;
+  public static java.util.function.Function<net.minecraft.resources.Identifier, net.minecraft.client.renderer.rendertype.RenderType> UNLIT_TRANSLUCENT_SORTED;
+  public static java.util.function.Function<net.minecraft.resources.Identifier, net.minecraft.client.renderer.rendertype.RenderType> UNLIT_TRANSLUCENT_UNSORTED;
+  public static java.util.function.Function<net.minecraft.resources.Identifier, net.minecraft.client.renderer.rendertype.RenderType> LAYERED_ITEM_SOLID;
+  public static java.util.function.Function<net.minecraft.resources.Identifier, net.minecraft.client.renderer.rendertype.RenderType> LAYERED_ITEM_CUTOUT;
+  public static java.util.function.Function<net.minecraft.resources.Identifier, net.minecraft.client.renderer.rendertype.RenderType> TEXT;
+  public static java.util.function.Function<net.minecraft.resources.Identifier, net.minecraft.client.renderer.rendertype.RenderType> TEXT_GRAYSCALE;
+  public static java.util.function.Function<net.minecraft.resources.Identifier, net.minecraft.client.renderer.rendertype.RenderType> TEXT_POLYGON_OFFSET;
+  public static java.util.function.Function<net.minecraft.resources.Identifier, net.minecraft.client.renderer.rendertype.RenderType> TEXT_GRAYSCALE_POLYGON_OFFSET;
+  public static java.util.function.Function<net.minecraft.resources.Identifier, net.minecraft.client.renderer.rendertype.RenderType> TEXT_SEE_THROUGH;
+  public static java.util.function.Function<net.minecraft.resources.Identifier, net.minecraft.client.renderer.rendertype.RenderType> TEXT_GRAYSCALE_SEE_THROUGH;
+  public static net.minecraft.client.renderer.rendertype.RenderType getLoadingOverlay(net.minecraftforge.fml.earlydisplay.DisplayWindow);
+}
+Compiled from "FramePassManager.java"
+public class net.minecraftforge.client.FramePassManager {
+  public net.minecraftforge.client.FramePassManager();
+  protected static void addPass(net.minecraft.resources.Identifier, net.minecraftforge.client.FramePassManager$PassDefinition);
+  public static void insertForgePasses(com.mojang.blaze3d.framegraph.FrameGraphBuilder, net.minecraft.client.renderer.LevelTargetBundle, net.minecraft.client.renderer.state.level.LevelRenderState, net.minecraft.client.DeltaTracker);
+}
+Compiled from "FramePassManager.java"
+public interface net.minecraftforge.client.FramePassManager$PassDefinition {
+  public default void extracts(net.minecraft.client.renderer.LevelTargetBundle, com.mojang.blaze3d.framegraph.FramePass);
+  public default void extracts(net.minecraft.client.renderer.LevelTargetBundle, com.mojang.blaze3d.framegraph.FramePass, net.minecraft.client.DeltaTracker);
+  public abstract void executes(net.minecraft.client.renderer.state.level.LevelRenderState);
+}
+Compiled from "FramePassManager.java"
+final class net.minecraftforge.client.FramePassManager$PassInfo extends java.lang.Record {
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public java.lang.String name();
+  public net.minecraftforge.client.FramePassManager$PassDefinition pass();
+}
+Compiled from "IArmPoseTransformer.java"
+public interface net.minecraftforge.client.IArmPoseTransformer {
+  public abstract void applyTransform(net.minecraft.client.model.HumanoidModel<? extends net.minecraft.client.renderer.entity.state.HumanoidRenderState>, net.minecraft.client.renderer.entity.state.HumanoidRenderState, net.minecraft.world.entity.HumanoidArm);
+}
+Compiled from "IItemDecorator.java"
+public interface net.minecraftforge.client.IItemDecorator {
+  public abstract boolean render(net.minecraft.client.gui.GuiGraphicsExtractor, net.minecraft.client.gui.Font, net.minecraft.world.item.ItemStack, int, int);
+}
+Compiled from "ItemDecoratorHandler.java"
+public final class net.minecraftforge.client.ItemDecoratorHandler {
+  public static void init();
+  public static net.minecraftforge.client.ItemDecoratorHandler of(net.minecraft.world.item.ItemStack);
+  public void render(net.minecraft.client.gui.GuiGraphicsExtractor, net.minecraft.client.gui.Font, net.minecraft.world.item.ItemStack, int, int);
+}
+Compiled from "NamedRenderTypeManager.java"
+public final class net.minecraftforge.client.NamedRenderTypeManager {
+  public static net.minecraftforge.client.RenderTypeGroup get(net.minecraft.resources.Identifier);
+  public static void init();
+}
+Compiled from "PresetEditorManager.java"
+public final class net.minecraftforge.client.PresetEditorManager {
+  public static net.minecraft.client.gui.screens.worldselection.PresetEditor get(net.minecraft.resources.ResourceKey<net.minecraft.world.level.levelgen.presets.WorldPreset>);
+}
+Compiled from "RenderTypeGroup.java"
+public final class net.minecraftforge.client.RenderTypeGroup extends java.lang.Record {
+  public static final net.minecraftforge.client.RenderTypeGroup EMPTY;
+  public net.minecraftforge.client.RenderTypeGroup(net.minecraft.client.renderer.chunk.ChunkSectionLayer, net.minecraft.client.renderer.rendertype.RenderType, net.minecraft.client.renderer.rendertype.RenderType);
+  public net.minecraftforge.client.RenderTypeGroup(net.minecraft.client.renderer.chunk.ChunkSectionLayer, net.minecraft.client.renderer.rendertype.RenderType);
+  public boolean isEmpty();
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.client.renderer.chunk.ChunkSectionLayer block();
+  public net.minecraft.client.renderer.rendertype.RenderType entity();
+  public net.minecraft.client.renderer.rendertype.RenderType entityFabulous();
+}
+Compiled from "StencilManager.java"
+public final class net.minecraftforge.client.StencilManager {
+  public static int reserveBit();
+  public static void releaseBit(int);
+}

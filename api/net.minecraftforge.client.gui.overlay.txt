@@ -1,0 +1,77 @@
+Compiled from "ForgeLayer.java"
+public interface net.minecraftforge.client.gui.overlay.ForgeLayer {
+  public abstract void extract(net.minecraft.client.gui.GuiGraphicsExtractor, net.minecraft.client.DeltaTracker);
+}
+Compiled from "ForgeLayerInstance.java"
+public abstract class net.minecraftforge.client.gui.overlay.ForgeLayerInstance {
+  public void pushLayer(net.minecraft.client.gui.screens.Screen);
+  public void popLayer();
+  protected net.minecraftforge.client.gui.overlay.ForgeLayerInstance(net.minecraft.client.Minecraft);
+  protected abstract net.minecraft.client.gui.screens.Screen screen();
+  protected abstract void setScreenInternal(net.minecraft.client.gui.screens.Screen);
+  public void resizeLayers(int, int);
+  protected void clearLayers();
+  protected void drawScreen(net.minecraft.client.gui.GuiGraphicsExtractor, int, int, float);
+}
+Compiled from "ForgeLayeredDraw.java"
+public final class net.minecraftforge.client.gui.overlay.ForgeLayeredDraw implements net.minecraftforge.client.gui.overlay.ForgeLayer {
+  public static final net.minecraft.resources.Identifier PRE_SLEEP_STACK;
+  public static final net.minecraft.resources.Identifier CAMERA_OVERLAY;
+  public static final net.minecraft.resources.Identifier CROSSHAIR;
+  public static final net.minecraft.resources.Identifier CHANGE_STRATUM;
+  public static final net.minecraft.resources.Identifier HOTBAR_AND_DECOS;
+  public static final net.minecraft.resources.Identifier ITEM_HOTBAR;
+  public static final net.minecraft.resources.Identifier SPECTATOR_HOTBAR;
+  public static final net.minecraft.resources.Identifier HEALTH_BAR;
+  public static final net.minecraft.resources.Identifier VEHICLE_HEALTH;
+  public static final net.minecraft.resources.Identifier BACKGROUND;
+  public static final net.minecraft.resources.Identifier EXPERIENCE_LEVEL;
+  public static final net.minecraft.resources.Identifier CONTEXTUAL_INFO;
+  public static final net.minecraft.resources.Identifier SELECTED_ITEM_NAME;
+  public static final net.minecraft.resources.Identifier SPECTATOR_ACTION;
+  public static final net.minecraft.resources.Identifier POTION_EFFECTS;
+  public static final net.minecraft.resources.Identifier BOSS_OVERLAY;
+  public static final net.minecraft.resources.Identifier POST_SLEEP_STACK;
+  public static final net.minecraft.resources.Identifier DEMO_OVERLAY;
+  public static final net.minecraft.resources.Identifier DEBUG_OVERLAY;
+  public static final net.minecraft.resources.Identifier SCOREBOARD;
+  public static final net.minecraft.resources.Identifier HOTBAR_MESSAGE;
+  public static final net.minecraft.resources.Identifier TITLE_OVERLAY;
+  public static final net.minecraft.resources.Identifier CHAT_OVERLAY;
+  public static final net.minecraft.resources.Identifier TAB_LIST;
+  public static final net.minecraft.resources.Identifier SUBTITLE_OVERLAY;
+  public static final net.minecraft.resources.Identifier VANILLA_ROOT;
+  public static final net.minecraft.resources.Identifier SLEEP_OVERLAY;
+  public net.minecraftforge.client.gui.overlay.ForgeLayeredDraw(net.minecraft.resources.Identifier);
+  public net.minecraftforge.client.gui.overlay.ForgeLayeredDraw add(net.minecraft.resources.Identifier, net.minecraftforge.client.gui.overlay.ForgeLayeredDraw, java.util.function.BooleanSupplier);
+  public net.minecraftforge.client.gui.overlay.ForgeLayeredDraw add(net.minecraft.resources.Identifier, net.minecraftforge.client.gui.overlay.ForgeLayeredDraw);
+  public net.minecraftforge.client.gui.overlay.ForgeLayeredDraw add(net.minecraft.resources.Identifier, net.minecraft.resources.Identifier, net.minecraftforge.client.gui.overlay.ForgeLayer);
+  public net.minecraftforge.client.gui.overlay.ForgeLayeredDraw add(net.minecraft.resources.Identifier, net.minecraftforge.client.gui.overlay.ForgeLayer);
+  public net.minecraftforge.client.gui.overlay.ForgeLayeredDraw putAbove(net.minecraft.resources.Identifier, net.minecraft.resources.Identifier, net.minecraft.resources.Identifier);
+  public net.minecraftforge.client.gui.overlay.ForgeLayeredDraw putBelow(net.minecraft.resources.Identifier, net.minecraft.resources.Identifier, net.minecraft.resources.Identifier);
+  public net.minecraftforge.client.gui.overlay.ForgeLayeredDraw move(net.minecraft.resources.Identifier, net.minecraft.resources.Identifier, net.minecraftforge.client.gui.overlay.ForgeLayeredDraw$LayerOffset);
+  public net.minecraftforge.client.gui.overlay.ForgeLayeredDraw addAbove(net.minecraft.resources.Identifier, net.minecraft.resources.Identifier, net.minecraft.resources.Identifier, net.minecraftforge.client.gui.overlay.ForgeLayer);
+  public net.minecraftforge.client.gui.overlay.ForgeLayeredDraw addAbove(net.minecraft.resources.Identifier, net.minecraft.resources.Identifier, net.minecraftforge.client.gui.overlay.ForgeLayer);
+  public net.minecraftforge.client.gui.overlay.ForgeLayeredDraw addBelow(net.minecraft.resources.Identifier, net.minecraft.resources.Identifier, net.minecraft.resources.Identifier, net.minecraftforge.client.gui.overlay.ForgeLayer);
+  public net.minecraftforge.client.gui.overlay.ForgeLayeredDraw addBelow(net.minecraft.resources.Identifier, net.minecraft.resources.Identifier, net.minecraftforge.client.gui.overlay.ForgeLayer);
+  public net.minecraftforge.client.gui.overlay.ForgeLayeredDraw addWithCondition(net.minecraft.resources.Identifier, net.minecraft.resources.Identifier, net.minecraftforge.client.gui.overlay.ForgeLayer, java.util.function.BooleanSupplier);
+  public net.minecraftforge.client.gui.overlay.ForgeLayeredDraw addWithCondition(net.minecraft.resources.Identifier, net.minecraftforge.client.gui.overlay.ForgeLayer, java.util.function.BooleanSupplier);
+  public net.minecraftforge.client.gui.overlay.ForgeLayeredDraw addConditionTo(net.minecraft.resources.Identifier, net.minecraft.resources.Identifier, java.util.function.BooleanSupplier);
+  public net.minecraftforge.client.gui.overlay.ForgeLayeredDraw addConditionTo(net.minecraft.resources.Identifier, java.util.function.BooleanSupplier);
+  public net.minecraftforge.client.gui.overlay.ForgeLayeredDraw replace(net.minecraft.resources.Identifier, net.minecraft.resources.Identifier, net.minecraftforge.client.gui.overlay.ForgeLayer);
+  public net.minecraftforge.client.gui.overlay.ForgeLayeredDraw resolveLayers();
+  public java.util.Optional<net.minecraftforge.client.gui.overlay.ForgeLayeredDraw> locateStack(net.minecraft.resources.Identifier);
+  public net.minecraftforge.client.gui.overlay.ForgeLayeredDraw getChild(net.minecraft.resources.Identifier);
+  public net.minecraftforge.client.gui.overlay.ForgeLayer getLayer(net.minecraft.resources.Identifier);
+  public net.minecraft.resources.Identifier getName();
+  public static void extractRenderState(net.minecraft.client.gui.GuiGraphicsExtractor, net.minecraft.client.DeltaTracker);
+  public void extract(net.minecraft.client.gui.GuiGraphicsExtractor, net.minecraft.client.DeltaTracker);
+  public static void init(net.minecraft.client.gui.Hud, net.minecraft.client.Minecraft);
+}
+Compiled from "ForgeLayeredDraw.java"
+public final class net.minecraftforge.client.gui.overlay.ForgeLayeredDraw$LayerOffset extends java.lang.Enum<net.minecraftforge.client.gui.overlay.ForgeLayeredDraw$LayerOffset> {
+  public static final net.minecraftforge.client.gui.overlay.ForgeLayeredDraw$LayerOffset ABOVE;
+  public static final net.minecraftforge.client.gui.overlay.ForgeLayeredDraw$LayerOffset BELOW;
+  public static net.minecraftforge.client.gui.overlay.ForgeLayeredDraw$LayerOffset[] values();
+  public static net.minecraftforge.client.gui.overlay.ForgeLayeredDraw$LayerOffset valueOf(java.lang.String);
+}

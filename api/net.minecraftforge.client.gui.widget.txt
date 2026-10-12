@@ -1,0 +1,79 @@
+Compiled from "ExtendedButton.java"
+public class net.minecraftforge.client.gui.widget.ExtendedButton extends net.minecraft.client.gui.components.Button {
+  public net.minecraftforge.client.gui.widget.ExtendedButton(int, int, int, int, net.minecraft.network.chat.Component, net.minecraft.client.gui.components.Button$OnPress);
+  public net.minecraftforge.client.gui.widget.ExtendedButton(int, int, int, int, net.minecraft.network.chat.Component, net.minecraft.client.gui.components.Button$OnPress, net.minecraft.client.gui.components.Button$CreateNarration);
+  public net.minecraftforge.client.gui.widget.ExtendedButton(net.minecraft.client.gui.components.Button$Builder);
+  public void extractContents(net.minecraft.client.gui.GuiGraphicsExtractor, int, int, float);
+}
+Compiled from "ForgeSlider.java"
+public class net.minecraftforge.client.gui.widget.ForgeSlider extends net.minecraft.client.gui.components.AbstractSliderButton {
+  protected net.minecraft.network.chat.Component prefix;
+  protected net.minecraft.network.chat.Component suffix;
+  protected double minValue;
+  protected double maxValue;
+  protected double stepSize;
+  protected boolean drawString;
+  public net.minecraftforge.client.gui.widget.ForgeSlider(int, int, int, int, net.minecraft.network.chat.Component, net.minecraft.network.chat.Component, double, double, double, double, int, boolean);
+  public net.minecraftforge.client.gui.widget.ForgeSlider(int, int, int, int, net.minecraft.network.chat.Component, net.minecraft.network.chat.Component, double, double, double, boolean);
+  public double getValue();
+  public long getValueLong();
+  public int getValueInt();
+  public void setValue(double);
+  public java.lang.String getValueString();
+  public void onClick(net.minecraft.client.input.MouseButtonEvent, boolean);
+  protected void onDrag(net.minecraft.client.input.MouseButtonEvent, double, double);
+  public boolean keyPressed(net.minecraft.client.input.KeyEvent);
+  protected void updateMessage();
+  protected void applyValue();
+  public void extractWidgetRenderState(net.minecraft.client.gui.GuiGraphicsExtractor, int, int, float);
+}
+Compiled from "ModListWidget.java"
+public class net.minecraftforge.client.gui.widget.ModListWidget extends net.minecraft.client.gui.components.ObjectSelectionList<net.minecraftforge.client.gui.widget.ModListWidget$ModEntry> {
+  public net.minecraftforge.client.gui.widget.ModListWidget(net.minecraftforge.client.gui.ModListScreen, int, int, int);
+  public int getRowWidth();
+  protected int scrollBarX();
+  protected void extractSelection(net.minecraft.client.gui.GuiGraphicsExtractor, net.minecraftforge.client.gui.widget.ModListWidget$ModEntry, int);
+  public void refreshList();
+  public void setSelected(net.minecraftforge.client.gui.widget.ModListWidget$ModEntry);
+  protected void extractSelection(net.minecraft.client.gui.GuiGraphicsExtractor, net.minecraft.client.gui.components.AbstractSelectionList$Entry, int);
+  public void setSelected(net.minecraft.client.gui.components.AbstractSelectionList$Entry);
+}
+Compiled from "ModListWidget.java"
+public class net.minecraftforge.client.gui.widget.ModListWidget$ModEntry extends net.minecraft.client.gui.components.ObjectSelectionList$Entry<net.minecraftforge.client.gui.widget.ModListWidget$ModEntry> {
+  public net.minecraft.network.chat.Component getNarration();
+  public void extractContent(net.minecraft.client.gui.GuiGraphicsExtractor, int, int, boolean, float);
+  public boolean mouseClicked(net.minecraft.client.input.MouseButtonEvent, boolean);
+  public net.minecraftforge.forgespi.language.IModInfo getInfo();
+}
+Compiled from "ScrollPanel.java"
+public abstract class net.minecraftforge.client.gui.widget.ScrollPanel extends net.minecraft.client.gui.components.events.AbstractContainerEventHandler implements net.minecraft.client.gui.components.Renderable,net.minecraft.client.gui.narration.NarratableEntry {
+  protected final net.minecraft.client.Minecraft client;
+  protected final int width;
+  protected final int height;
+  protected final int top;
+  protected final int bottom;
+  protected final int right;
+  protected final int left;
+  protected float scrollDistance;
+  protected boolean captureMouse;
+  protected final int border;
+  public net.minecraftforge.client.gui.widget.ScrollPanel(net.minecraft.client.Minecraft, int, int, int, int);
+  public net.minecraftforge.client.gui.widget.ScrollPanel(net.minecraft.client.Minecraft, int, int, int, int, int);
+  public net.minecraftforge.client.gui.widget.ScrollPanel(net.minecraft.client.Minecraft, int, int, int, int, int, int);
+  public net.minecraftforge.client.gui.widget.ScrollPanel(net.minecraft.client.Minecraft, int, int, int, int, int, int, int);
+  public net.minecraftforge.client.gui.widget.ScrollPanel(net.minecraft.client.Minecraft, int, int, int, int, int, int, int, int);
+  public net.minecraftforge.client.gui.widget.ScrollPanel(net.minecraft.client.Minecraft, int, int, int, int, int, int, int, int, int, int, int);
+  protected abstract int getContentHeight();
+  protected void drawBackground(net.minecraft.client.gui.GuiGraphicsExtractor, float);
+  protected abstract void drawPanel(net.minecraft.client.gui.GuiGraphicsExtractor, int, int, int, int);
+  protected boolean clickPanel(double, double, int);
+  public boolean mouseScrolled(double, double, double, double);
+  protected int getScrollAmount();
+  public boolean isMouseOver(double, double);
+  public boolean mouseClicked(net.minecraft.client.input.MouseButtonEvent, boolean);
+  public boolean mouseReleased(net.minecraft.client.input.MouseButtonEvent);
+  public boolean mouseDragged(net.minecraft.client.input.MouseButtonEvent, double, double);
+  public void extractRenderState(net.minecraft.client.gui.GuiGraphicsExtractor, int, int, float);
+  protected void drawGradientRect(net.minecraft.client.gui.GuiGraphicsExtractor, int, int, int, int, int, int);
+  public java.util.List<? extends net.minecraft.client.gui.components.events.GuiEventListener> children();
+}

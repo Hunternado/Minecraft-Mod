@@ -1,0 +1,12 @@
+Compiled from "VillageSiegeEvent.java"
+public final class net.minecraftforge.event.village.VillageSiegeEvent extends java.lang.Record implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.event.village.VillageSiegeEvent> BUS;
+  public net.minecraftforge.event.village.VillageSiegeEvent(net.minecraft.world.entity.ai.village.VillageSiege, net.minecraft.world.level.Level, net.minecraft.world.entity.player.Player, net.minecraft.world.phys.Vec3);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.world.entity.ai.village.VillageSiege getSiege();
+  public net.minecraft.world.level.Level getLevel();
+  public net.minecraft.world.entity.player.Player getPlayer();
+  public net.minecraft.world.phys.Vec3 getAttemptedSpawnPos();
+}

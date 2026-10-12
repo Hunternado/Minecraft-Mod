@@ -1,0 +1,78 @@
+Compiled from "GeometryLoaderManager.java"
+public final class net.minecraftforge.client.model.geometry.GeometryLoaderManager {
+  public static net.minecraftforge.client.model.geometry.IGeometryLoader get(net.minecraft.resources.Identifier);
+  public static java.lang.String getLoaderList();
+  public static void init();
+}
+Compiled from "IGeometryBakingContext.java"
+public interface net.minecraftforge.client.model.geometry.IGeometryBakingContext {
+  public abstract boolean isGui3d();
+  public abstract boolean useBlockLight();
+  public abstract boolean useAmbientOcclusion();
+  public abstract net.minecraft.client.resources.model.cuboid.ItemTransforms getTransforms();
+  public abstract com.mojang.math.Transformation getRootTransform();
+  public abstract net.minecraft.resources.Identifier getRenderTypeHint();
+  public default net.minecraft.resources.Identifier getRenderTypeFastHint();
+  public abstract boolean isComponentVisible(java.lang.String, boolean);
+  public default net.minecraftforge.client.RenderTypeGroup getRenderType(net.minecraft.resources.Identifier);
+  public default net.minecraftforge.client.RenderTypeGroup getRenderType();
+  public default net.minecraftforge.client.RenderTypeGroup getRenderTypeFast();
+}
+Compiled from "IGeometryLoader.java"
+public interface net.minecraftforge.client.model.geometry.IGeometryLoader {
+  public abstract net.minecraft.client.resources.model.geometry.UnbakedGeometry read(com.google.gson.JsonObject, com.google.gson.JsonDeserializationContext) throws com.google.gson.JsonParseException;
+}
+Compiled from "ModelContext.java"
+public final class net.minecraftforge.client.model.geometry.ModelContext extends java.lang.Record implements net.minecraftforge.client.model.geometry.IGeometryBakingContext {
+  public net.minecraftforge.client.model.geometry.ModelContext(net.minecraft.client.resources.model.ResolvedModel);
+  public net.minecraftforge.client.model.geometry.ModelContext(net.minecraft.client.resources.model.ResolvedModel, net.minecraft.client.resources.model.ResolvedModel, net.minecraftforge.client.model.ForgeBlockModelData, boolean);
+  public boolean isGui3d();
+  public net.minecraftforge.client.model.geometry.ModelContext withGui3d(boolean);
+  public boolean useBlockLight();
+  public boolean useAmbientOcclusion();
+  public net.minecraft.client.resources.model.cuboid.ItemTransforms getTransforms();
+  public com.mojang.math.Transformation getRootTransform();
+  public net.minecraft.resources.Identifier getRenderTypeHint();
+  public boolean isComponentVisible(java.lang.String, boolean);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.client.resources.model.ResolvedModel self();
+  public net.minecraft.client.resources.model.ResolvedModel parent();
+  public net.minecraftforge.client.model.ForgeBlockModelData data();
+  public boolean gui3d();
+}
+Compiled from "StandaloneGeometryBakingContext.java"
+public class net.minecraftforge.client.model.geometry.StandaloneGeometryBakingContext implements net.minecraftforge.client.model.geometry.IGeometryBakingContext {
+  public static final net.minecraft.resources.Identifier LOCATION;
+  public static final net.minecraftforge.client.model.geometry.StandaloneGeometryBakingContext INSTANCE;
+  public boolean isGui3d();
+  public boolean useBlockLight();
+  public boolean useAmbientOcclusion();
+  public net.minecraft.client.resources.model.cuboid.ItemTransforms getTransforms();
+  public com.mojang.math.Transformation getRootTransform();
+  public net.minecraft.resources.Identifier getRenderTypeHint();
+  public net.minecraft.resources.Identifier getRenderTypeFastHint();
+  public boolean isComponentVisible(java.lang.String, boolean);
+  public static net.minecraftforge.client.model.geometry.StandaloneGeometryBakingContext$Builder builder();
+  public static net.minecraftforge.client.model.geometry.StandaloneGeometryBakingContext$Builder builder(net.minecraftforge.client.model.geometry.IGeometryBakingContext);
+}
+Compiled from "StandaloneGeometryBakingContext.java"
+public final class net.minecraftforge.client.model.geometry.StandaloneGeometryBakingContext$Builder {
+  public net.minecraftforge.client.model.geometry.StandaloneGeometryBakingContext$Builder withGui3d(boolean);
+  public net.minecraftforge.client.model.geometry.StandaloneGeometryBakingContext$Builder withUseBlockLight(boolean);
+  public net.minecraftforge.client.model.geometry.StandaloneGeometryBakingContext$Builder withUseAmbientOcclusion(boolean);
+  public net.minecraftforge.client.model.geometry.StandaloneGeometryBakingContext$Builder withTransforms(net.minecraft.client.resources.model.cuboid.ItemTransforms);
+  public net.minecraftforge.client.model.geometry.StandaloneGeometryBakingContext$Builder withRootTransform(com.mojang.math.Transformation);
+  public net.minecraftforge.client.model.geometry.StandaloneGeometryBakingContext$Builder withRenderTypeHint(net.minecraft.resources.Identifier);
+  public net.minecraftforge.client.model.geometry.StandaloneGeometryBakingContext$Builder withRenderTypeHint(net.minecraft.resources.Identifier, net.minecraft.resources.Identifier);
+  public net.minecraftforge.client.model.geometry.StandaloneGeometryBakingContext$Builder withVisibleComponents(it.unimi.dsi.fastutil.objects.Object2BooleanMap<java.lang.String>);
+  public net.minecraftforge.client.model.geometry.StandaloneGeometryBakingContext build();
+}
+Compiled from "UnbakedGeometryHelper.java"
+public class net.minecraftforge.client.model.geometry.UnbakedGeometryHelper {
+  public net.minecraftforge.client.model.geometry.UnbakedGeometryHelper();
+  public static net.minecraft.client.resources.model.sprite.Material resolveDirtyMaterial(java.lang.String, net.minecraft.client.resources.model.sprite.TextureSlots);
+  public static void bakeMaskedSprite(net.minecraft.client.resources.model.geometry.QuadCollection$Builder, net.minecraft.client.resources.model.ModelBaker$Interner, net.minecraft.client.renderer.block.dispatch.ModelState, net.minecraft.client.resources.model.geometry.BakedQuad$MaterialInfo, net.minecraft.client.resources.model.geometry.BakedQuad$MaterialInfo);
+  public static net.minecraft.client.renderer.block.dispatch.ModelState composeRootTransformIntoModelState(net.minecraft.client.renderer.block.dispatch.ModelState, com.mojang.math.Transformation);
+}

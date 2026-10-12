@@ -1,0 +1,22 @@
+Compiled from "ClientModLoader.java"
+public final class net.minecraftforge.client.loading.ClientModLoader {
+  public net.minecraftforge.client.loading.ClientModLoader();
+  public static void begin(net.minecraft.client.Minecraft, net.minecraft.server.packs.repository.PackRepository, net.minecraft.server.packs.resources.ReloadableResourceManager);
+  public static net.minecraftforge.fml.VersionChecker$Status checkForUpdates();
+  public static boolean completeModLoading();
+  public static boolean isLoading();
+}
+Compiled from "ForgeLoadingOverlay.java"
+public class net.minecraftforge.client.loading.ForgeLoadingOverlay extends net.minecraft.client.gui.screens.LoadingOverlay {
+  public net.minecraftforge.client.loading.ForgeLoadingOverlay(net.minecraft.client.Minecraft, net.minecraft.server.packs.resources.ReloadInstance, java.util.function.Consumer<java.util.Optional<java.lang.Throwable>>, net.minecraftforge.fml.earlydisplay.DisplayWindow);
+  public static java.util.function.Supplier<net.minecraft.client.gui.screens.LoadingOverlay> newInstance(java.util.function.Supplier<net.minecraft.client.Minecraft>, java.util.function.Supplier<net.minecraft.server.packs.resources.ReloadInstance>, java.util.function.Consumer<java.util.Optional<java.lang.Throwable>>, net.minecraftforge.fml.earlydisplay.DisplayWindow);
+  protected boolean extractContentRenderState(net.minecraft.client.gui.GuiGraphicsExtractor, float);
+}
+Compiled from "NoVizFallback.java"
+public final class net.minecraftforge.client.loading.NoVizFallback {
+  public net.minecraftforge.client.loading.NoVizFallback();
+  public static java.util.function.LongSupplier windowHandoff(int, int, java.lang.String, long, java.util.function.Supplier<java.lang.Object>);
+  public static java.util.function.Supplier<net.minecraft.client.gui.screens.LoadingOverlay> loadingOverlay(java.util.function.Supplier<net.minecraft.client.Minecraft>, java.util.function.Supplier<net.minecraft.server.packs.resources.ReloadInstance>, java.util.function.Consumer<java.util.Optional<java.lang.Throwable>>, boolean);
+  public static java.lang.Boolean windowPositioning(java.util.Optional<com.mojang.blaze3d.platform.Monitor>, java.util.function.IntConsumer, java.util.function.IntConsumer, java.util.function.IntConsumer, java.util.function.IntConsumer);
+  public static java.lang.String glVersion();
+}

@@ -1,0 +1,42 @@
+Compiled from "CompositeRenderable.java"
+public class net.minecraftforge.client.model.renderable.CompositeRenderable implements net.minecraftforge.client.model.renderable.IRenderable<net.minecraftforge.client.model.renderable.CompositeRenderable$Transforms> {
+  public void render(com.mojang.blaze3d.vertex.PoseStack, net.minecraftforge.client.model.renderable.ITextureRenderTypeLookup, int, int, float, net.minecraftforge.client.model.renderable.CompositeRenderable$Transforms);
+  public static net.minecraftforge.client.model.renderable.CompositeRenderable$Builder builder();
+  public void render(com.mojang.blaze3d.vertex.PoseStack, net.minecraftforge.client.model.renderable.ITextureRenderTypeLookup, int, int, float, java.lang.Object);
+}
+Compiled from "CompositeRenderable.java"
+public class net.minecraftforge.client.model.renderable.CompositeRenderable$Builder {
+  public net.minecraftforge.client.model.renderable.CompositeRenderable$PartBuilder<net.minecraftforge.client.model.renderable.CompositeRenderable$Builder> child(java.lang.String);
+  public net.minecraftforge.client.model.renderable.CompositeRenderable get();
+}
+Compiled from "CompositeRenderable.java"
+class net.minecraftforge.client.model.renderable.CompositeRenderable$Component {
+  public net.minecraftforge.client.model.renderable.CompositeRenderable$Component(java.lang.String);
+  public void render(com.mojang.blaze3d.vertex.PoseStack, net.minecraftforge.client.model.renderable.ITextureRenderTypeLookup, int, int, net.minecraftforge.client.model.renderable.CompositeRenderable$Transforms);
+}
+Compiled from "CompositeRenderable.java"
+class net.minecraftforge.client.model.renderable.CompositeRenderable$Mesh {
+  public net.minecraftforge.client.model.renderable.CompositeRenderable$Mesh(net.minecraft.resources.Identifier);
+  public void render(com.mojang.blaze3d.vertex.PoseStack, net.minecraftforge.client.model.renderable.ITextureRenderTypeLookup, int, int);
+}
+Compiled from "CompositeRenderable.java"
+public class net.minecraftforge.client.model.renderable.CompositeRenderable$PartBuilder<T> {
+  public net.minecraftforge.client.model.renderable.CompositeRenderable$PartBuilder<net.minecraftforge.client.model.renderable.CompositeRenderable$PartBuilder<T>> child(java.lang.String);
+  public net.minecraftforge.client.model.renderable.CompositeRenderable$PartBuilder<T> addMesh(net.minecraft.resources.Identifier, java.util.List<net.minecraft.client.resources.model.geometry.BakedQuad>);
+  public T end();
+}
+Compiled from "CompositeRenderable.java"
+public class net.minecraftforge.client.model.renderable.CompositeRenderable$Transforms {
+  public static final net.minecraftforge.client.model.renderable.CompositeRenderable$Transforms EMPTY;
+  public static net.minecraftforge.client.model.renderable.CompositeRenderable$Transforms of(com.google.common.collect.ImmutableMap<java.lang.String, org.joml.Matrix4f>);
+  public org.joml.Matrix4f getTransform(java.lang.String);
+}
+Compiled from "IRenderable.java"
+public interface net.minecraftforge.client.model.renderable.IRenderable<T> {
+  public abstract void render(com.mojang.blaze3d.vertex.PoseStack, net.minecraftforge.client.model.renderable.ITextureRenderTypeLookup, int, int, float, T);
+  public default net.minecraftforge.client.model.renderable.IRenderable<net.minecraft.util.Unit> withContext(T);
+}
+Compiled from "ITextureRenderTypeLookup.java"
+public interface net.minecraftforge.client.model.renderable.ITextureRenderTypeLookup {
+  public abstract net.minecraft.client.renderer.rendertype.RenderType get(net.minecraft.resources.Identifier);
+}

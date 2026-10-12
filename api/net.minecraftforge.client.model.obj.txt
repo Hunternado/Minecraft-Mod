@@ -1,0 +1,97 @@
+Compiled from "ObjLoader.java"
+public class net.minecraftforge.client.model.obj.ObjLoader implements net.minecraftforge.client.model.geometry.IGeometryLoader,net.minecraft.server.packs.resources.ResourceManagerReloadListener {
+  public static net.minecraftforge.client.model.obj.ObjLoader INSTANCE;
+  public net.minecraftforge.client.model.obj.ObjLoader();
+  public void onResourceManagerReload(net.minecraft.server.packs.resources.ResourceManager);
+  public net.minecraft.client.resources.model.geometry.UnbakedGeometry read(com.google.gson.JsonObject, com.google.gson.JsonDeserializationContext);
+  public net.minecraftforge.client.model.obj.ObjModel loadModel(net.minecraftforge.client.model.obj.ObjModel$ModelSettings);
+  public net.minecraftforge.client.model.obj.ObjMaterialLibrary loadMaterialLibrary(net.minecraft.resources.Identifier);
+}
+Compiled from "ObjLoader.java"
+class net.minecraftforge.client.model.obj.ObjLoader$ObjGeometry implements net.minecraft.client.resources.model.geometry.UnbakedGeometry {
+  public net.minecraftforge.client.model.obj.ObjLoader$ObjGeometry(net.minecraftforge.client.model.obj.ObjModel);
+  public net.minecraft.client.resources.model.geometry.QuadCollection bake(net.minecraft.client.resources.model.sprite.TextureSlots, net.minecraft.client.resources.model.ModelBaker, net.minecraft.client.renderer.block.dispatch.ModelState, net.minecraft.client.resources.model.ModelDebugName);
+  public net.minecraft.client.resources.model.geometry.QuadCollection bake(net.minecraft.client.resources.model.sprite.TextureSlots, net.minecraft.client.resources.model.ModelBaker, net.minecraft.client.renderer.block.dispatch.ModelState, net.minecraft.client.resources.model.ModelDebugName, net.minecraftforge.client.model.geometry.IGeometryBakingContext);
+}
+Compiled from "ObjMaterialLibrary.java"
+public class net.minecraftforge.client.model.obj.ObjMaterialLibrary {
+  public static final net.minecraftforge.client.model.obj.ObjMaterialLibrary EMPTY;
+  public net.minecraftforge.client.model.obj.ObjMaterialLibrary(net.minecraftforge.client.model.obj.ObjTokenizer) throws java.io.IOException;
+  public net.minecraftforge.client.model.obj.ObjMaterialLibrary$Material getMaterial(java.lang.String);
+}
+Compiled from "ObjMaterialLibrary.java"
+public class net.minecraftforge.client.model.obj.ObjMaterialLibrary$Material {
+  public final java.lang.String name;
+  public org.joml.Vector4f ambientColor;
+  public java.lang.String ambientColorMap;
+  public org.joml.Vector4f diffuseColor;
+  public java.lang.String diffuseColorMap;
+  public org.joml.Vector4f specularColor;
+  public float specularHighlight;
+  public java.lang.String specularColorMap;
+  public float dissolve;
+  public float transparency;
+  public int diffuseTintIndex;
+  public net.minecraftforge.client.model.obj.ObjMaterialLibrary$Material(java.lang.String);
+}
+Compiled from "ObjModel.java"
+public class net.minecraftforge.client.model.obj.ObjModel {
+  public final boolean automaticCulling;
+  public final boolean shadeQuads;
+  public final boolean flipV;
+  public final boolean emissiveAmbient;
+  public final java.lang.String mtlOverride;
+  public final net.minecraft.resources.Identifier modelLocation;
+  public java.util.Map<java.lang.String, net.minecraftforge.client.model.obj.ObjModel$ModelGroup> getParts();
+  public static net.minecraftforge.client.model.obj.ObjModel parse(net.minecraftforge.client.model.obj.ObjTokenizer, net.minecraftforge.client.model.obj.ObjModel$ModelSettings) throws java.io.IOException;
+  public java.util.Set<java.lang.String> getRootComponentNames();
+  public java.util.Set<java.lang.String> getConfigurableComponentNames();
+  public net.minecraftforge.client.model.renderable.CompositeRenderable bakeRenderable(net.minecraft.client.resources.model.sprite.TextureSlots);
+}
+Compiled from "ObjModel.java"
+public class net.minecraftforge.client.model.obj.ObjModel$ModelGroup extends net.minecraftforge.client.model.obj.ObjModel$ModelObject {
+  public void bake(net.minecraft.client.resources.model.sprite.TextureSlots, net.minecraft.client.resources.model.ModelBaker, net.minecraft.client.renderer.block.dispatch.ModelState, net.minecraft.client.resources.model.ModelDebugName, net.minecraftforge.client.model.geometry.IGeometryBakingContext, net.minecraft.client.resources.model.geometry.QuadCollection$Builder);
+  public void bake(net.minecraftforge.client.model.renderable.CompositeRenderable$PartBuilder<?>, net.minecraft.client.resources.model.sprite.TextureSlots);
+  public java.util.Collection<net.minecraft.client.resources.model.sprite.Material> getTextures(net.minecraftforge.client.model.geometry.IGeometryBakingContext, net.minecraft.client.resources.model.sprite.TextureSlots, java.util.Set<com.mojang.datafixers.util.Pair<java.lang.String, java.lang.String>>);
+  protected void addNamesRecursively(java.util.Set<java.lang.String>);
+}
+Compiled from "ObjModel.java"
+class net.minecraftforge.client.model.obj.ObjModel$ModelMesh {
+  public net.minecraftforge.client.model.obj.ObjMaterialLibrary$Material mat;
+  public java.lang.String smoothingGroup;
+  public final java.util.List<int[][]> faces;
+  public net.minecraftforge.client.model.obj.ObjModel$ModelMesh(net.minecraftforge.client.model.obj.ObjModel, net.minecraftforge.client.model.obj.ObjMaterialLibrary$Material, java.lang.String);
+  protected void bake(net.minecraft.client.resources.model.sprite.TextureSlots, net.minecraft.client.resources.model.ModelBaker, net.minecraft.client.renderer.block.dispatch.ModelState, net.minecraft.client.resources.model.ModelDebugName, net.minecraftforge.client.model.geometry.IGeometryBakingContext, net.minecraft.client.resources.model.geometry.QuadCollection$Builder);
+  public void bake(net.minecraftforge.client.model.renderable.CompositeRenderable$PartBuilder<?>, net.minecraft.client.resources.model.sprite.TextureSlots);
+}
+Compiled from "ObjModel.java"
+public class net.minecraftforge.client.model.obj.ObjModel$ModelObject {
+  public final java.lang.String name;
+  public java.lang.String name();
+  public void bake(net.minecraft.client.resources.model.sprite.TextureSlots, net.minecraft.client.resources.model.ModelBaker, net.minecraft.client.renderer.block.dispatch.ModelState, net.minecraft.client.resources.model.ModelDebugName, net.minecraftforge.client.model.geometry.IGeometryBakingContext, net.minecraft.client.resources.model.geometry.QuadCollection$Builder);
+  protected void bake(net.minecraftforge.client.model.renderable.CompositeRenderable$PartBuilder<?>, net.minecraft.client.resources.model.sprite.TextureSlots);
+  protected java.util.Collection<net.minecraft.client.resources.model.sprite.Material> getTextures(net.minecraftforge.client.model.geometry.IGeometryBakingContext, net.minecraft.client.resources.model.sprite.TextureSlots, java.util.Set<com.mojang.datafixers.util.Pair<java.lang.String, java.lang.String>>);
+  protected void addNamesRecursively(java.util.Set<java.lang.String>);
+}
+Compiled from "ObjModel.java"
+public final class net.minecraftforge.client.model.obj.ObjModel$ModelSettings extends java.lang.Record {
+  public net.minecraftforge.client.model.obj.ObjModel$ModelSettings(net.minecraft.resources.Identifier, boolean, boolean, boolean, boolean, java.lang.String);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.resources.Identifier modelLocation();
+  public boolean automaticCulling();
+  public boolean shadeQuads();
+  public boolean flipV();
+  public boolean emissiveAmbient();
+  public java.lang.String mtlOverride();
+}
+Compiled from "ObjTokenizer.java"
+public class net.minecraftforge.client.model.obj.ObjTokenizer implements java.lang.AutoCloseable {
+  public net.minecraftforge.client.model.obj.ObjTokenizer(java.io.InputStream);
+  public java.lang.String[] readAndSplitLine(boolean) throws java.io.IOException;
+  public void close() throws java.io.IOException;
+}
+Compiled from "package-info.java"
+interface net.minecraftforge.client.model.obj.package-info {
+}

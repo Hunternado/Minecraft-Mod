@@ -1,0 +1,623 @@
+Compiled from "AddPackFindersEvent.java"
+public final class net.minecraftforge.event.AddPackFindersEvent extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.AddPackFindersEvent> BUS;
+  public net.minecraftforge.event.AddPackFindersEvent(net.minecraft.server.packs.PackType, java.util.function.Consumer<net.minecraft.server.packs.repository.RepositorySource>);
+  public void addRepositorySource(net.minecraft.server.packs.repository.RepositorySource);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.server.packs.PackType getPackType();
+  public java.util.function.Consumer<net.minecraft.server.packs.repository.RepositorySource> sourceAdder();
+}
+Compiled from "AddReloadListenerEvent.java"
+public final class net.minecraftforge.event.AddReloadListenerEvent extends net.minecraftforge.eventbus.api.event.MutableEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.AddReloadListenerEvent> BUS;
+  public net.minecraftforge.event.AddReloadListenerEvent(net.minecraft.server.ReloadableServerResources, net.minecraft.core.HolderLookup$Provider);
+  public void addListener(net.minecraft.server.packs.resources.PreparableReloadListener);
+  public java.util.List<net.minecraft.server.packs.resources.PreparableReloadListener> getListeners();
+  public net.minecraft.server.ReloadableServerResources getServerResources();
+  public net.minecraftforge.common.crafting.conditions.ICondition$IContext getConditionContext();
+  public net.minecraft.core.HolderLookup$Provider getRegistries();
+}
+Compiled from "AddReloadListenerEvent.java"
+final class net.minecraftforge.event.AddReloadListenerEvent$WrappedStateAwareListener extends java.lang.Record implements net.minecraft.server.packs.resources.PreparableReloadListener {
+  public java.util.concurrent.CompletableFuture<java.lang.Void> reload(net.minecraft.server.packs.resources.PreparableReloadListener$SharedState, java.util.concurrent.Executor, net.minecraft.server.packs.resources.PreparableReloadListener$PreparationBarrier, java.util.concurrent.Executor);
+  public java.lang.String getName();
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.server.packs.resources.PreparableReloadListener wrapped();
+}
+Compiled from "AnvilUpdateEvent.java"
+public final class net.minecraftforge.event.AnvilUpdateEvent extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.event.AnvilUpdateEvent> BUS;
+  public net.minecraftforge.event.AnvilUpdateEvent(net.minecraft.world.item.ItemStack, net.minecraft.world.item.ItemStack, java.lang.String, long, net.minecraft.world.entity.player.Player);
+  public net.minecraft.world.item.ItemStack getLeft();
+  public net.minecraft.world.item.ItemStack getRight();
+  public java.lang.String getName();
+  public net.minecraft.world.item.ItemStack getOutput();
+  public void setOutput(net.minecraft.world.item.ItemStack);
+  public long getCost();
+  public void setCost(long);
+  public int getMaterialCost();
+  public void setMaterialCost(int);
+  public net.minecraft.world.entity.player.Player getPlayer();
+}
+Compiled from "AttachCapabilitiesEvent.java"
+public abstract class net.minecraftforge.event.AttachCapabilitiesEvent extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.eventbus.api.event.InheritableEvent {
+  protected net.minecraftforge.event.AttachCapabilitiesEvent(java.lang.Object);
+  public java.lang.Object getObject();
+  public void addCapability(net.minecraft.resources.Identifier, net.minecraftforge.common.capabilities.ICapabilityProvider);
+  public java.util.Map<net.minecraft.resources.Identifier, net.minecraftforge.common.capabilities.ICapabilityProvider> getCapabilities();
+  public void addListener(java.lang.Runnable);
+  public java.util.List<java.lang.Runnable> getListeners();
+}
+Compiled from "AttachCapabilitiesEvent.java"
+public class net.minecraftforge.event.AttachCapabilitiesEvent$BlockEntities extends net.minecraftforge.event.AttachCapabilitiesEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.AttachCapabilitiesEvent$BlockEntities> BUS;
+  public net.minecraftforge.event.AttachCapabilitiesEvent$BlockEntities(net.minecraft.world.level.block.entity.BlockEntity);
+  public net.minecraft.world.level.block.entity.BlockEntity getObject();
+  public java.lang.Object getObject();
+}
+Compiled from "AttachCapabilitiesEvent.java"
+public class net.minecraftforge.event.AttachCapabilitiesEvent$Entities extends net.minecraftforge.event.AttachCapabilitiesEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.AttachCapabilitiesEvent$Entities> BUS;
+  public net.minecraftforge.event.AttachCapabilitiesEvent$Entities(net.minecraft.world.entity.Entity);
+  public net.minecraft.world.entity.Entity getObject();
+  public java.lang.Object getObject();
+}
+Compiled from "AttachCapabilitiesEvent.java"
+public class net.minecraftforge.event.AttachCapabilitiesEvent$ItemStacks extends net.minecraftforge.event.AttachCapabilitiesEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.AttachCapabilitiesEvent$ItemStacks> BUS;
+  public net.minecraftforge.event.AttachCapabilitiesEvent$ItemStacks(net.minecraft.world.item.ItemStack);
+  public net.minecraft.world.item.ItemStack getObject();
+  public java.lang.Object getObject();
+}
+Compiled from "AttachCapabilitiesEvent.java"
+public class net.minecraftforge.event.AttachCapabilitiesEvent$LevelChunks extends net.minecraftforge.event.AttachCapabilitiesEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.AttachCapabilitiesEvent$LevelChunks> BUS;
+  public net.minecraftforge.event.AttachCapabilitiesEvent$LevelChunks(net.minecraft.world.level.chunk.LevelChunk);
+  public net.minecraft.world.level.chunk.LevelChunk getObject();
+  public java.lang.Object getObject();
+}
+Compiled from "AttachCapabilitiesEvent.java"
+public class net.minecraftforge.event.AttachCapabilitiesEvent$Levels extends net.minecraftforge.event.AttachCapabilitiesEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.AttachCapabilitiesEvent$Levels> BUS;
+  public net.minecraftforge.event.AttachCapabilitiesEvent$Levels(net.minecraft.world.level.Level);
+  public net.minecraft.world.level.Level getObject();
+  public java.lang.Object getObject();
+}
+Compiled from "BuildCreativeModeTabContentsEvent.java"
+public final class net.minecraftforge.event.BuildCreativeModeTabContentsEvent extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent,net.minecraft.world.item.CreativeModeTab$Output {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.BuildCreativeModeTabContentsEvent> BUS;
+  public net.minecraftforge.event.BuildCreativeModeTabContentsEvent(net.minecraft.world.item.CreativeModeTab, net.minecraft.resources.ResourceKey<net.minecraft.world.item.CreativeModeTab>, net.minecraft.world.item.CreativeModeTab$ItemDisplayParameters, net.minecraftforge.common.util.MutableHashedLinkedMap<net.minecraft.world.item.ItemStack, net.minecraft.world.item.CreativeModeTab$TabVisibility>);
+  public net.minecraft.world.flag.FeatureFlagSet getFlags();
+  public boolean hasPermissions();
+  public void accept(net.minecraft.world.item.ItemStack, net.minecraft.world.item.CreativeModeTab$TabVisibility);
+  public void accept(java.util.function.Supplier<? extends net.minecraft.world.level.ItemLike>, net.minecraft.world.item.CreativeModeTab$TabVisibility);
+  public void accept(java.util.function.Supplier<? extends net.minecraft.world.level.ItemLike>);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.world.item.CreativeModeTab getTab();
+  public net.minecraft.resources.ResourceKey<net.minecraft.world.item.CreativeModeTab> getTabKey();
+  public net.minecraft.world.item.CreativeModeTab$ItemDisplayParameters getParameters();
+  public net.minecraftforge.common.util.MutableHashedLinkedMap<net.minecraft.world.item.ItemStack, net.minecraft.world.item.CreativeModeTab$TabVisibility> getEntries();
+}
+Compiled from "CommandEvent.java"
+public final class net.minecraftforge.event.CommandEvent extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.event.CommandEvent> BUS;
+  public net.minecraftforge.event.CommandEvent(com.mojang.brigadier.ParseResults<net.minecraft.commands.CommandSourceStack>);
+  public com.mojang.brigadier.ParseResults<net.minecraft.commands.CommandSourceStack> getParseResults();
+  public void setParseResults(com.mojang.brigadier.ParseResults<net.minecraft.commands.CommandSourceStack>);
+  public java.lang.Throwable getException();
+  public void setException(java.lang.Throwable);
+}
+Compiled from "DifficultyChangeEvent.java"
+public final class net.minecraftforge.event.DifficultyChangeEvent extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.DifficultyChangeEvent> BUS;
+  public net.minecraftforge.event.DifficultyChangeEvent(net.minecraft.world.Difficulty, net.minecraft.world.Difficulty);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.world.Difficulty getDifficulty();
+  public net.minecraft.world.Difficulty getOldDifficulty();
+}
+Compiled from "ForgeEventFactory.java"
+public final class net.minecraftforge.event.ForgeEventFactory {
+  public static boolean onMultiBlockPlace(net.minecraft.world.entity.Entity, java.util.List<net.minecraftforge.common.util.BlockSnapshot>, net.minecraft.core.Direction);
+  public static boolean onBlockPlace(net.minecraft.world.entity.Entity, net.minecraftforge.common.util.BlockSnapshot, net.minecraft.core.Direction);
+  public static boolean onNeighborNotify(net.minecraft.world.level.Level, net.minecraft.core.BlockPos, net.minecraft.world.level.block.state.BlockState, java.util.EnumSet<net.minecraft.core.Direction>, boolean);
+  public static boolean doPlayerHarvestCheck(net.minecraft.world.entity.player.Player, net.minecraft.world.level.block.state.BlockState, boolean);
+  public static float getBreakSpeed(net.minecraft.world.entity.player.Player, net.minecraft.world.level.block.state.BlockState, float, net.minecraft.core.BlockPos);
+  public static void onPlayerDestroyItem(net.minecraft.world.entity.player.Player, net.minecraft.world.item.ItemStack, net.minecraft.world.InteractionHand);
+  public static void onPlayerDestroyItem(net.minecraft.world.entity.player.Player, net.minecraft.world.item.ItemStack, net.minecraft.world.entity.EquipmentSlot);
+  public static boolean checkSpawnPlacements(net.minecraft.world.entity.EntityType<?>, net.minecraft.world.level.ServerLevelAccessor, net.minecraft.world.entity.EntitySpawnReason, net.minecraft.core.BlockPos, net.minecraft.util.RandomSource, boolean);
+  public static boolean checkSpawnPosition(net.minecraft.world.entity.Mob, net.minecraft.world.level.ServerLevelAccessor, net.minecraft.world.entity.EntitySpawnReason);
+  public static boolean checkSpawnPositionSpawner(net.minecraft.world.entity.Mob, net.minecraft.world.level.ServerLevelAccessor, net.minecraft.world.entity.EntitySpawnReason, net.minecraft.world.level.SpawnData, net.minecraft.world.level.BaseSpawner);
+  public static net.minecraft.world.entity.SpawnGroupData onFinalizeSpawn(net.minecraft.world.entity.Mob, net.minecraft.world.level.ServerLevelAccessor, net.minecraft.world.DifficultyInstance, net.minecraft.world.entity.EntitySpawnReason, net.minecraft.world.entity.SpawnGroupData);
+  public static net.minecraftforge.event.entity.living.MobSpawnEvent$FinalizeSpawn onFinalizeSpawnSpawner(net.minecraft.world.entity.Mob, net.minecraft.world.level.ServerLevelAccessor, net.minecraft.world.DifficultyInstance, net.minecraft.world.entity.SpawnGroupData, net.minecraft.world.level.storage.ValueInput, net.minecraft.world.level.BaseSpawner);
+  public static net.minecraftforge.common.util.Result canEntityDespawn(net.minecraft.world.entity.Mob, net.minecraft.world.level.ServerLevelAccessor);
+  public static int getItemBurnTime(net.minecraft.world.item.ItemStack, int, net.minecraft.world.item.crafting.RecipeType<?>);
+  public static int getExperienceDrop(net.minecraft.world.entity.LivingEntity, net.minecraft.world.entity.player.Player, int);
+  public static int getMaxSpawnPackSize(net.minecraft.world.entity.Mob);
+  public static net.minecraft.network.chat.Component getPlayerDisplayName(net.minecraft.world.entity.player.Player, net.minecraft.network.chat.Component);
+  public static net.minecraft.network.chat.Component getPlayerTabListDisplayName(net.minecraft.world.entity.player.Player);
+  public static net.minecraft.world.level.block.state.BlockState fireFluidPlaceBlockEvent(net.minecraft.world.level.LevelAccessor, net.minecraft.core.BlockPos, net.minecraft.core.BlockPos, net.minecraft.world.level.block.state.BlockState);
+  public static net.minecraftforge.event.entity.player.ItemTooltipEvent onItemTooltip(net.minecraft.world.item.ItemStack, net.minecraft.world.entity.player.Player, java.util.List<net.minecraft.network.chat.Component>, net.minecraft.world.item.TooltipFlag);
+  public static net.minecraftforge.event.entity.living.ZombieEvent$SummonAidEvent fireZombieSummonAid(net.minecraft.world.entity.monster.zombie.Zombie, net.minecraft.world.level.Level, int, int, int, net.minecraft.world.entity.LivingEntity, double);
+  public static boolean onEntityStruckByLightning(net.minecraft.world.entity.Entity, net.minecraft.world.entity.LightningBolt);
+  public static int onItemUseStart(net.minecraft.world.entity.LivingEntity, net.minecraft.world.item.ItemStack, int);
+  public static int onItemUseTick(net.minecraft.world.entity.LivingEntity, net.minecraft.world.item.ItemStack, int);
+  public static boolean onUseItemStop(net.minecraft.world.entity.LivingEntity, net.minecraft.world.item.ItemStack, int);
+  public static net.minecraft.world.item.ItemStack onItemUseFinish(net.minecraft.world.entity.LivingEntity, net.minecraft.world.item.ItemStack, int, net.minecraft.world.item.ItemStack);
+  public static void onStartEntityTracking(net.minecraft.world.entity.Entity, net.minecraft.world.entity.player.Player);
+  public static void onStopEntityTracking(net.minecraft.world.entity.Entity, net.minecraft.world.entity.player.Player);
+  public static void firePlayerLoadingEvent(net.minecraft.world.entity.player.Player, java.io.File, java.lang.String);
+  public static void firePlayerSavingEvent(net.minecraft.world.entity.player.Player, java.io.File, java.lang.String);
+  public static net.minecraft.world.level.block.state.BlockState onToolUse(net.minecraft.world.level.block.state.BlockState, net.minecraft.world.item.context.UseOnContext, net.minecraftforge.common.ToolAction, boolean);
+  public static int onApplyBonemeal(net.minecraft.world.entity.player.Player, net.minecraft.world.level.Level, net.minecraft.core.BlockPos, net.minecraft.world.level.block.state.BlockState, net.minecraft.world.item.ItemStack);
+  public static net.minecraft.world.InteractionResult onBucketUse(net.minecraft.world.entity.player.Player, net.minecraft.world.level.Level, net.minecraft.world.item.ItemStack, net.minecraft.world.phys.HitResult);
+  public static net.minecraftforge.event.PlayLevelSoundEvent$AtEntity onPlaySoundAtEntity(net.minecraft.world.level.Level, net.minecraft.world.entity.Entity, net.minecraft.core.Holder<net.minecraft.sounds.SoundEvent>, net.minecraft.sounds.SoundSource, float, float);
+  public static net.minecraftforge.event.PlayLevelSoundEvent$AtPosition onPlaySoundAtPosition(net.minecraft.world.level.Level, double, double, double, net.minecraft.core.Holder<net.minecraft.sounds.SoundEvent>, net.minecraft.sounds.SoundSource, float, float);
+  public static int onItemExpire(net.minecraft.world.entity.item.ItemEntity, net.minecraft.world.item.ItemStack);
+  public static int onItemPickup(net.minecraft.world.entity.item.ItemEntity, net.minecraft.world.entity.player.Player);
+  public static boolean canMountEntity(net.minecraft.world.entity.Entity, net.minecraft.world.entity.Entity, boolean);
+  public static boolean onAnimalTame(net.minecraft.world.entity.animal.Animal, net.minecraft.world.entity.player.Player);
+  public static boolean onPlayerPickupXp(net.minecraft.world.entity.player.Player, net.minecraft.world.entity.ExperienceOrb);
+  public static net.minecraft.world.entity.player.Player$BedSleepingProblem onPlayerSleepInBed(net.minecraft.world.entity.player.Player, java.util.Optional<net.minecraft.core.BlockPos>);
+  public static void onPlayerWakeup(net.minecraft.world.entity.player.Player, boolean, boolean);
+  public static void onPlayerFall(net.minecraft.world.entity.player.Player, double, float);
+  public static boolean onPlayerSpawnSet(net.minecraft.server.level.ServerPlayer, net.minecraft.server.level.ServerPlayer$RespawnConfig);
+  public static net.minecraftforge.event.entity.player.PlayerSpawnPhantomsEvent onPlayerSpawnPhantom(net.minecraft.world.entity.player.Player, int);
+  public static void onPlayerClone(net.minecraft.world.entity.player.Player, net.minecraft.world.entity.player.Player, boolean);
+  public static boolean onExplosionStart(net.minecraft.world.level.Level, net.minecraft.world.level.Explosion);
+  public static void onExplosionDetonate(net.minecraft.world.level.Level, net.minecraft.world.level.Explosion, java.util.List<net.minecraft.core.BlockPos>, java.util.List<net.minecraft.world.entity.Entity>, double);
+  public static boolean onCreateWorldSpawn(net.minecraft.world.level.Level, net.minecraft.world.level.storage.ServerLevelData);
+  public static float onLivingHeal(net.minecraft.world.entity.LivingEntity, float);
+  public static boolean onPotionAttemptBrew(net.minecraft.core.NonNullList<net.minecraft.world.item.ItemStack>);
+  public static void onPotionBrewed(net.minecraft.core.NonNullList<net.minecraft.world.item.ItemStack>);
+  public static void onPlayerBrewedPotion(net.minecraft.world.entity.player.Player, net.minecraft.world.item.ItemStack);
+  public static net.minecraftforge.common.capabilities.CapabilityDispatcher gatherCapabilities(net.minecraftforge.event.AttachCapabilitiesEvent, net.minecraftforge.common.capabilities.ICapabilityProvider);
+  public static boolean fireSleepingLocationCheck(net.minecraft.world.entity.LivingEntity, net.minecraft.core.BlockPos);
+  public static boolean onSleepingTimeCheck(net.minecraft.world.entity.player.Player, java.util.Optional<net.minecraft.core.BlockPos>, net.minecraft.world.attribute.BedRule);
+  public static net.minecraft.world.InteractionResult onArrowNock(net.minecraft.world.item.ItemStack, net.minecraft.world.level.Level, net.minecraft.world.entity.player.Player, net.minecraft.world.InteractionHand, boolean);
+  public static int onArrowLoose(net.minecraft.world.item.ItemStack, net.minecraft.world.level.Level, net.minecraft.world.entity.player.Player, int, boolean);
+  public static net.minecraftforge.event.entity.ProjectileImpactEvent$ImpactResult onProjectileImpactResult(net.minecraft.world.entity.projectile.Projectile, net.minecraft.world.phys.HitResult);
+  public static boolean onProjectileImpact(net.minecraft.world.entity.projectile.Projectile, net.minecraft.world.phys.HitResult);
+  public static net.minecraft.world.level.storage.loot.LootTable onLoadLootTable(net.minecraft.resources.Identifier, net.minecraft.world.level.storage.loot.LootTable);
+  public static boolean canCreateFluidSource(net.minecraft.world.level.Level, net.minecraft.core.BlockPos, net.minecraft.world.level.block.state.BlockState, boolean);
+  public static java.util.Optional<net.minecraft.world.level.portal.PortalShape> onTrySpawnPortal(net.minecraft.world.level.LevelAccessor, net.minecraft.core.BlockPos, java.util.Optional<net.minecraft.world.level.portal.PortalShape>);
+  public static int onEnchantmentLevelSet(net.minecraft.world.level.Level, net.minecraft.core.BlockPos, int, int, net.minecraft.world.item.ItemStack, int);
+  public static boolean onEntityDestroyBlock(net.minecraft.world.entity.LivingEntity, net.minecraft.core.BlockPos, net.minecraft.world.level.block.state.BlockState);
+  public static boolean getMobGriefingEvent(net.minecraft.server.level.ServerLevel, net.minecraft.world.entity.Entity);
+  public static net.minecraftforge.event.level.BlockFeatureGrowEvent blockGrowFeature(net.minecraft.world.level.LevelAccessor, net.minecraft.util.RandomSource, net.minecraft.core.BlockPos, net.minecraft.core.Holder<net.minecraft.world.level.levelgen.feature.ConfiguredFeature<?, ?>>);
+  public static net.minecraft.world.level.block.state.BlockState alterGround(net.minecraft.world.level.LevelSimulatedReader, net.minecraft.util.RandomSource, net.minecraft.core.BlockPos, net.minecraft.world.level.block.state.BlockState);
+  public static void fireChunkTicketLevelUpdated(net.minecraft.server.level.ServerLevel, long, int, int, net.minecraft.server.level.ChunkHolder);
+  public static void fireChunkWatch(net.minecraft.server.level.ServerPlayer, net.minecraft.world.level.chunk.LevelChunk, net.minecraft.server.level.ServerLevel);
+  public static void fireChunkUnWatch(net.minecraft.server.level.ServerPlayer, net.minecraft.world.level.ChunkPos, net.minecraft.server.level.ServerLevel);
+  public static boolean onPistonMovePre(net.minecraft.world.level.Level, net.minecraft.core.BlockPos, net.minecraft.core.Direction, boolean);
+  public static boolean onPistonMovePost(net.minecraft.world.level.Level, net.minecraft.core.BlockPos, net.minecraft.core.Direction, boolean);
+  public static long onSleepFinished(net.minecraft.server.level.ServerLevel, long, long);
+  public static java.util.List<net.minecraft.server.packs.resources.PreparableReloadListener> onResourceReload(net.minecraft.server.ReloadableServerResources, net.minecraft.core.HolderLookup$Provider, java.util.List<net.minecraft.server.packs.resources.PreparableReloadListener>);
+  public static void onCommandRegister(com.mojang.brigadier.CommandDispatcher<net.minecraft.commands.CommandSourceStack>, net.minecraft.commands.Commands$CommandSelection, net.minecraft.commands.CommandBuildContext);
+  public static boolean canLivingConvert(net.minecraft.world.entity.LivingEntity, net.minecraft.world.entity.EntityType<? extends net.minecraft.world.entity.LivingEntity>, java.util.function.IntConsumer);
+  public static void onLivingConvert(net.minecraft.world.entity.LivingEntity, net.minecraft.world.entity.LivingEntity);
+  public static net.minecraftforge.event.entity.EntityTeleportEvent$TeleportCommand onEntityTeleportCommand(net.minecraft.world.entity.Entity, double, double, double);
+  public static net.minecraftforge.event.entity.EntityTeleportEvent$SpreadPlayersCommand onEntityTeleportSpreadPlayersCommand(net.minecraft.world.entity.Entity, double, double, double);
+  public static net.minecraftforge.event.entity.EntityTeleportEvent$EnderEntity onEnderManTeleport(net.minecraft.world.entity.LivingEntity, double, double, double);
+  public static net.minecraftforge.event.entity.EntityTeleportEvent$EnderPearl onEnderPearlLand(net.minecraft.server.level.ServerPlayer, double, double, double, net.minecraft.world.entity.projectile.throwableitemprojectile.ThrownEnderpearl, float, net.minecraft.world.phys.HitResult);
+  public static net.minecraftforge.event.entity.EntityTeleportEvent$ChorusFruit onChorusFruitTeleport(net.minecraft.world.entity.LivingEntity, double, double, double);
+  public static boolean onPermissionChanged(net.minecraft.server.players.NameAndId, net.minecraft.server.permissions.LevelBasedPermissionSet, net.minecraft.server.players.PlayerList);
+  public static void onPlayerChangedDimension(net.minecraft.world.entity.player.Player, net.minecraft.resources.ResourceKey<net.minecraft.world.level.Level>, net.minecraft.resources.ResourceKey<net.minecraft.world.level.Level>);
+  public static void firePlayerLoggedIn(net.minecraft.world.entity.player.Player);
+  public static void firePlayerLoggedOut(net.minecraft.world.entity.player.Player);
+  public static void firePlayerRespawnEvent(net.minecraft.world.entity.player.Player, boolean);
+  public static void firePlayerItemPickupEvent(net.minecraft.world.entity.player.Player, net.minecraft.world.entity.item.ItemEntity, net.minecraft.world.item.ItemStack);
+  public static void firePlayerCraftingEvent(net.minecraft.world.entity.player.Player, net.minecraft.world.item.ItemStack, net.minecraft.world.Container);
+  public static void firePlayerSmeltedEvent(net.minecraft.world.entity.player.Player, net.minecraft.world.item.ItemStack);
+  public static void onPlayerPreTick(net.minecraft.world.entity.player.Player);
+  public static void onPlayerPostTick(net.minecraft.world.entity.player.Player);
+  public static void onPreLevelTick(net.minecraft.world.level.Level, java.util.function.BooleanSupplier);
+  public static void onPostLevelTick(net.minecraft.world.level.Level, java.util.function.BooleanSupplier);
+  public static void onPreClientTick();
+  public static void onPostClientTick();
+  public static void onPreServerTick(java.util.function.BooleanSupplier, net.minecraft.server.MinecraftServer);
+  public static void onPostServerTick(java.util.function.BooleanSupplier, net.minecraft.server.MinecraftServer);
+  public static net.minecraft.util.random.WeightedList<net.minecraft.world.level.biome.MobSpawnSettings$SpawnerData> getPotentialSpawns(net.minecraft.world.level.LevelAccessor, net.minecraft.world.entity.MobCategory, net.minecraft.core.BlockPos, net.minecraft.util.random.WeightedList<net.minecraft.world.level.biome.MobSpawnSettings$SpawnerData>);
+  public static void onAdvancementEarned(net.minecraft.world.entity.player.Player, net.minecraft.advancements.AdvancementHolder);
+  public static void onAdvancementGrant(net.minecraft.world.entity.player.Player, net.minecraft.advancements.AdvancementHolder, net.minecraft.advancements.AdvancementProgress, java.lang.String);
+  public static void onAdvancementRevoke(net.minecraft.world.entity.player.Player, net.minecraft.advancements.AdvancementHolder, net.minecraft.advancements.AdvancementProgress, java.lang.String);
+  public static void onEntityConstructing(net.minecraft.world.entity.Entity);
+  public static void onPlayerOpenContainer(net.minecraft.server.level.ServerPlayer, net.minecraft.world.inventory.AbstractContainerMenu);
+  public static void onPlayerCloseContainer(net.minecraft.server.level.ServerPlayer, net.minecraft.world.inventory.AbstractContainerMenu);
+  public static boolean onTravelToDimension(net.minecraft.world.entity.Entity, net.minecraft.resources.ResourceKey<net.minecraft.world.level.Level>);
+  public static void onChunkUnload(net.minecraft.world.level.chunk.ChunkAccess);
+  public static void onChunkLoad(net.minecraft.world.level.chunk.ChunkAccess, boolean);
+  public static void onLevelUnload(net.minecraft.world.level.Level);
+  public static void onLevelLoad(net.minecraft.world.level.Level);
+  public static void onLevelSave(net.minecraft.world.level.Level);
+  public static void onChunkDataSave(net.minecraft.world.level.chunk.ChunkAccess, net.minecraft.world.level.LevelAccessor, net.minecraft.world.level.chunk.storage.SerializableChunkData);
+  public static void onChunkDataLoad(net.minecraft.world.level.chunk.ChunkAccess, net.minecraft.world.level.chunk.storage.SerializableChunkData, net.minecraft.world.level.chunk.status.ChunkType);
+  public static void onGameShuttingDown();
+  public static void gatherLoginConfigTasks(net.minecraft.network.Connection, java.util.function.Consumer<net.minecraft.server.network.ConfigurationTask>);
+  public static void onConnectionStart(net.minecraft.network.Connection);
+  public static void onChannelRegistrationChange(net.minecraft.network.Connection, net.minecraftforge.event.network.ChannelRegistrationChangeEvent$Type, java.util.HashSet<net.minecraft.resources.Identifier>);
+  public static net.minecraftforge.event.entity.living.LivingSwapItemsEvent$Hands onLivingSwapHandItems(net.minecraft.world.entity.LivingEntity);
+  public static net.minecraftforge.event.entity.living.ShieldBlockEvent onShieldBlock(net.minecraft.world.entity.LivingEntity, net.minecraft.world.damagesource.DamageSource, float, net.minecraft.world.item.ItemStack);
+  public static void onEntityEnterSection(net.minecraft.world.entity.Entity, long, long);
+  public static boolean onLivingTick(net.minecraft.world.entity.LivingEntity);
+  public static net.minecraftforge.event.entity.living.LivingFallEvent onLivingFall(net.minecraft.world.entity.LivingEntity, double, float);
+  public static net.minecraftforge.event.entity.living.LivingBreatheEvent onLivingBreathe(net.minecraft.world.entity.LivingEntity, boolean, int, int, boolean);
+  public static net.minecraftforge.event.entity.living.LivingDrownEvent onLivingDrown(net.minecraft.world.entity.LivingEntity, boolean, float, int);
+  public static net.minecraftforge.event.entity.living.LivingKnockBackEvent onLivingKnockBack(net.minecraft.world.entity.LivingEntity, float, double, double);
+  public static boolean onLivingDeath(net.minecraft.world.entity.LivingEntity, net.minecraft.world.damagesource.DamageSource);
+  public static boolean onLivingDrops(net.minecraft.world.entity.LivingEntity, net.minecraft.world.damagesource.DamageSource, java.util.Collection<net.minecraft.world.entity.item.ItemEntity>, boolean);
+  public static void onLeftClickEmpty(net.minecraft.world.entity.player.Player);
+  public static net.minecraftforge.event.entity.player.PlayerInteractEvent$LeftClickBlock onLeftClickBlock(net.minecraft.world.entity.player.Player, net.minecraft.core.BlockPos, net.minecraft.core.Direction, net.minecraft.network.protocol.game.ServerboundPlayerActionPacket$Action);
+  public static boolean isLeftClickBlockCancelled(net.minecraft.world.entity.player.Player, net.minecraft.core.BlockPos, net.minecraft.core.Direction, net.minecraft.network.protocol.game.ServerboundPlayerActionPacket$Action);
+  public static net.minecraftforge.event.entity.player.PlayerInteractEvent$LeftClickBlock onLeftClickBlockHold(net.minecraft.world.entity.player.Player, net.minecraft.core.BlockPos, net.minecraft.core.Direction);
+  public static void onRightClickEmpty(net.minecraft.world.entity.player.Player, net.minecraft.world.InteractionHand);
+  public static void addPackFindersServer(java.util.function.Consumer<net.minecraft.server.packs.repository.RepositorySource>);
+  public static boolean onEntityJoinLevel(net.minecraft.world.entity.Entity, net.minecraft.world.level.Level);
+  public static boolean onEntityJoinLevel(net.minecraft.world.entity.Entity, net.minecraft.world.level.Level, boolean);
+  public static boolean onEntityLeaveLevel(net.minecraft.world.entity.Entity, net.minecraft.world.level.Level);
+  public static void onDifficultyChange(net.minecraft.world.Difficulty, net.minecraft.world.Difficulty);
+  public static void onTagsUpdated(net.minecraft.core.RegistryAccess, boolean, boolean);
+  public static boolean onLivingAttackEntity(net.minecraft.world.entity.LivingEntity, net.minecraft.world.damagesource.DamageSource, float);
+  public static boolean onVanillaGameEvent(net.minecraft.world.level.Level, net.minecraft.core.Holder<net.minecraft.world.level.gameevent.GameEvent>, net.minecraft.world.phys.Vec3, net.minecraft.world.level.gameevent.GameEvent$Context);
+  public static boolean onLivingEffectExpire(net.minecraft.world.entity.LivingEntity, net.minecraft.world.effect.MobEffectInstance);
+  public static boolean onLivingEffectAdd(net.minecraft.world.entity.LivingEntity, net.minecraft.world.effect.MobEffectInstance, net.minecraft.world.effect.MobEffectInstance, net.minecraft.world.entity.Entity);
+  public static boolean onLivingEffectRemove(net.minecraft.world.entity.LivingEntity, net.minecraft.world.effect.MobEffect);
+  public static boolean onLivingEffectRemove(net.minecraft.world.entity.LivingEntity, net.minecraft.world.effect.MobEffectInstance);
+  public static net.minecraftforge.event.entity.living.MobEffectEvent$Applicable onLivingEffectCanApply(net.minecraft.world.entity.LivingEntity, net.minecraft.world.effect.MobEffectInstance);
+  public static void onLivingEquipmentChange(net.minecraft.world.entity.LivingEntity, net.minecraft.world.entity.EquipmentSlot, net.minecraft.world.item.ItemStack, net.minecraft.world.item.ItemStack);
+  public static net.minecraftforge.event.entity.living.LivingChangeTargetEvent onLivingChangeTargetMob(net.minecraft.world.entity.LivingEntity, net.minecraft.world.entity.LivingEntity);
+  public static net.minecraftforge.event.entity.living.LivingChangeTargetEvent onLivingChangeTargetBehavior(net.minecraft.world.entity.LivingEntity, net.minecraft.world.entity.LivingEntity);
+  public static net.minecraftforge.event.entity.player.PlayerXpEvent$XpChange onPlayerXpChange(net.minecraft.world.entity.player.Player, int);
+  public static net.minecraftforge.event.entity.player.PlayerXpEvent$LevelChange onPlayerLevelChange(net.minecraft.world.entity.player.Player, int);
+  public static net.minecraftforge.event.GrindstoneEvent$OnPlaceItem onGrindstoneChange(net.minecraft.world.item.ItemStack, net.minecraft.world.item.ItemStack, net.minecraft.world.Container, int);
+  public static void onBrewingRecipeRegister(net.minecraft.world.item.alchemy.PotionBrewing$Builder, net.minecraft.world.flag.FeatureFlagSet);
+  public static boolean onItemStackedOn(net.minecraft.world.item.ItemStack, net.minecraft.world.item.ItemStack, net.minecraft.world.inventory.Slot, net.minecraft.world.inventory.ClickAction, net.minecraft.world.entity.player.Player, net.minecraft.world.entity.SlotAccess);
+  public static net.minecraftforge.event.level.NoteBlockEvent$Play onNotePlay(net.minecraft.world.level.Level, net.minecraft.core.BlockPos, net.minecraft.world.level.block.state.BlockState, int, net.minecraft.world.level.block.state.properties.NoteBlockInstrument);
+  public static net.minecraftforge.event.entity.player.AnvilRepairEvent onAnvilRepair(net.minecraft.world.entity.player.Player, net.minecraft.world.item.ItemStack, net.minecraft.world.item.ItemStack, net.minecraft.world.item.ItemStack);
+  public static void onPlayerTradeWithVillager(net.minecraft.world.entity.player.Player, net.minecraft.world.item.trading.MerchantOffer, net.minecraft.world.entity.npc.villager.AbstractVillager);
+  public static net.minecraftforge.event.GatherComponentsEvent$Item gatherItemComponentsEvent(net.minecraft.world.item.Item, net.minecraft.core.component.DataComponentMap);
+  public static net.minecraftforge.event.entity.living.LootingLevelEvent fireLootingLevel(net.minecraft.world.entity.LivingEntity, net.minecraft.world.damagesource.DamageSource, int);
+  public static boolean fireFarmlandTrampleEvent(net.minecraft.server.level.ServerLevel, net.minecraft.core.BlockPos, net.minecraft.world.level.block.state.BlockState, double, net.minecraft.world.entity.Entity);
+}
+Compiled from "GameShuttingDownEvent.java"
+public final class net.minecraftforge.event.GameShuttingDownEvent extends java.lang.Record implements net.minecraftforge.eventbus.api.event.characteristic.SelfDestructing,net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.GameShuttingDownEvent> BUS;
+  public net.minecraftforge.event.GameShuttingDownEvent();
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+}
+Compiled from "GatherComponentsEvent.java"
+public abstract class net.minecraftforge.event.GatherComponentsEvent extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.eventbus.api.event.InheritableEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.GatherComponentsEvent> BUS;
+  protected net.minecraftforge.event.GatherComponentsEvent(java.lang.Object, net.minecraft.core.component.DataComponentMap);
+  public <T> void register(net.minecraft.core.component.DataComponentType<T>, T);
+  public net.minecraft.core.component.DataComponentMap getDataComponentMap();
+  public net.minecraft.core.component.DataComponentMap getOriginalComponentMap();
+  public java.lang.Object getOwner();
+}
+Compiled from "GatherComponentsEvent.java"
+public final class net.minecraftforge.event.GatherComponentsEvent$Item extends net.minecraftforge.event.GatherComponentsEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.GatherComponentsEvent$Item> BUS;
+  public net.minecraftforge.event.GatherComponentsEvent$Item(net.minecraft.world.item.Item, net.minecraft.core.component.DataComponentMap);
+  public net.minecraft.world.item.Item getOwner();
+  public java.lang.Object getOwner();
+}
+Compiled from "GrindstoneEvent.java"
+public abstract class net.minecraftforge.event.GrindstoneEvent extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.eventbus.api.event.InheritableEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.GrindstoneEvent> BUS;
+  protected net.minecraftforge.event.GrindstoneEvent(net.minecraft.world.item.ItemStack, net.minecraft.world.item.ItemStack, int);
+  public net.minecraft.world.item.ItemStack getTopItem();
+  public net.minecraft.world.item.ItemStack getBottomItem();
+  public int getXp();
+  public void setXp(int);
+}
+Compiled from "GrindstoneEvent.java"
+public final class net.minecraftforge.event.GrindstoneEvent$OnPlaceItem extends net.minecraftforge.event.GrindstoneEvent implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.event.GrindstoneEvent$OnPlaceItem> BUS;
+  public net.minecraftforge.event.GrindstoneEvent$OnPlaceItem(net.minecraft.world.item.ItemStack, net.minecraft.world.item.ItemStack, int);
+  public net.minecraft.world.item.ItemStack getOutput();
+  public void setOutput(net.minecraft.world.item.ItemStack);
+}
+Compiled from "GrindstoneEvent.java"
+public final class net.minecraftforge.event.GrindstoneEvent$OnTakeItem extends net.minecraftforge.event.GrindstoneEvent implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.event.GrindstoneEvent$OnTakeItem> BUS;
+  public net.minecraftforge.event.GrindstoneEvent$OnTakeItem(net.minecraft.world.item.ItemStack, net.minecraft.world.item.ItemStack, int);
+  public net.minecraft.world.item.ItemStack getNewTopItem();
+  public net.minecraft.world.item.ItemStack getNewBottomItem();
+  public void setNewTopItem(net.minecraft.world.item.ItemStack);
+  public void setNewBottomItem(net.minecraft.world.item.ItemStack);
+  public int getXp();
+}
+Compiled from "ItemStackedOnOtherEvent.java"
+public final class net.minecraftforge.event.ItemStackedOnOtherEvent extends java.lang.Record implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.event.ItemStackedOnOtherEvent> BUS;
+  public net.minecraftforge.event.ItemStackedOnOtherEvent(net.minecraft.world.item.ItemStack, net.minecraft.world.item.ItemStack, net.minecraft.world.inventory.Slot, net.minecraft.world.inventory.ClickAction, net.minecraft.world.entity.player.Player, net.minecraft.world.entity.SlotAccess);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.world.item.ItemStack getCarriedItem();
+  public net.minecraft.world.item.ItemStack getStackedOnItem();
+  public net.minecraft.world.inventory.Slot getSlot();
+  public net.minecraft.world.inventory.ClickAction getClickAction();
+  public net.minecraft.world.entity.player.Player getPlayer();
+  public net.minecraft.world.entity.SlotAccess getCarriedSlotAccess();
+}
+Compiled from "LootTableLoadEvent.java"
+public final class net.minecraftforge.event.LootTableLoadEvent extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.event.LootTableLoadEvent> BUS;
+  public net.minecraftforge.event.LootTableLoadEvent(net.minecraft.resources.Identifier, net.minecraft.world.level.storage.loot.LootTable);
+  public net.minecraft.resources.Identifier getName();
+  public net.minecraft.world.level.storage.loot.LootTable getTable();
+  public void setTable(net.minecraft.world.level.storage.loot.LootTable);
+}
+Compiled from "ModMismatchEvent.java"
+public final class net.minecraftforge.event.ModMismatchEvent implements net.minecraftforge.fml.event.IModBusEvent {
+  public static net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.ModMismatchEvent> getBus(net.minecraftforge.eventbus.api.bus.BusGroup);
+  public net.minecraftforge.event.ModMismatchEvent(net.minecraft.world.level.storage.LevelStorageSource$LevelDirectory, java.util.Map<java.lang.String, org.apache.maven.artifact.versioning.ArtifactVersion>, java.util.Map<java.lang.String, org.apache.maven.artifact.versioning.ArtifactVersion>);
+  public net.minecraft.world.level.storage.LevelStorageSource$LevelDirectory getLevelDirectory();
+  public org.apache.maven.artifact.versioning.ArtifactVersion getPreviousVersion(java.lang.String);
+  public org.apache.maven.artifact.versioning.ArtifactVersion getCurrentVersion(java.lang.String);
+  public void markResolved(java.lang.String);
+  public boolean wasResolved(java.lang.String);
+  public java.util.Optional<net.minecraftforge.event.ModMismatchEvent$MismatchedVersionInfo> getVersionDifference(java.lang.String);
+  public java.util.Optional<net.minecraftforge.fml.ModContainer> getResolver(java.lang.String);
+  public boolean anyUnresolved();
+  public java.util.stream.Stream<net.minecraftforge.event.ModMismatchEvent$MismatchResolutionResult> getUnresolved();
+  public boolean anyResolved();
+  public java.util.stream.Stream<net.minecraftforge.event.ModMismatchEvent$MismatchResolutionResult> getResolved();
+}
+Compiled from "ModMismatchEvent.java"
+public final class net.minecraftforge.event.ModMismatchEvent$MismatchResolutionResult extends java.lang.Record {
+  public net.minecraftforge.event.ModMismatchEvent$MismatchResolutionResult(java.lang.String, net.minecraftforge.event.ModMismatchEvent$MismatchedVersionInfo, net.minecraftforge.fml.ModContainer);
+  public boolean wasSelfResolved();
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public java.lang.String modid();
+  public net.minecraftforge.event.ModMismatchEvent$MismatchedVersionInfo versionDifference();
+  public net.minecraftforge.fml.ModContainer resolver();
+}
+Compiled from "ModMismatchEvent.java"
+public final class net.minecraftforge.event.ModMismatchEvent$MismatchedVersionInfo extends java.lang.Record {
+  public net.minecraftforge.event.ModMismatchEvent$MismatchedVersionInfo(org.apache.maven.artifact.versioning.ArtifactVersion, org.apache.maven.artifact.versioning.ArtifactVersion);
+  public boolean isMissing();
+  public boolean wasUpgrade();
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public org.apache.maven.artifact.versioning.ArtifactVersion oldVersion();
+  public org.apache.maven.artifact.versioning.ArtifactVersion newVersion();
+}
+Compiled from "OnDatapackSyncEvent.java"
+public final class net.minecraftforge.event.OnDatapackSyncEvent extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.OnDatapackSyncEvent> BUS;
+  public net.minecraftforge.event.OnDatapackSyncEvent(net.minecraft.server.players.PlayerList, net.minecraft.server.level.ServerPlayer);
+  public java.util.List<net.minecraft.server.level.ServerPlayer> getPlayers();
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.server.players.PlayerList getPlayerList();
+  public net.minecraft.server.level.ServerPlayer getPlayer();
+}
+Compiled from "PlayLevelSoundEvent.java"
+public class net.minecraftforge.event.PlayLevelSoundEvent extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.eventbus.api.event.InheritableEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.event.PlayLevelSoundEvent> BUS;
+  public net.minecraftforge.event.PlayLevelSoundEvent(net.minecraft.world.level.Level, net.minecraft.core.Holder<net.minecraft.sounds.SoundEvent>, net.minecraft.sounds.SoundSource, float, float);
+  public net.minecraft.world.level.Level getLevel();
+  public net.minecraft.core.Holder<net.minecraft.sounds.SoundEvent> getSound();
+  public void setSound(net.minecraft.core.Holder<net.minecraft.sounds.SoundEvent>);
+  public net.minecraft.sounds.SoundSource getSource();
+  public void setSource(net.minecraft.sounds.SoundSource);
+  public float getOriginalVolume();
+  public float getOriginalPitch();
+  public float getNewVolume();
+  public void setNewVolume(float);
+  public float getNewPitch();
+  public void setNewPitch(float);
+}
+Compiled from "PlayLevelSoundEvent.java"
+public final class net.minecraftforge.event.PlayLevelSoundEvent$AtEntity extends net.minecraftforge.event.PlayLevelSoundEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.PlayLevelSoundEvent$AtEntity> BUS;
+  public net.minecraftforge.event.PlayLevelSoundEvent$AtEntity(net.minecraft.world.level.Level, net.minecraft.world.entity.Entity, net.minecraft.core.Holder<net.minecraft.sounds.SoundEvent>, net.minecraft.sounds.SoundSource, float, float);
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "PlayLevelSoundEvent.java"
+public final class net.minecraftforge.event.PlayLevelSoundEvent$AtPosition extends net.minecraftforge.event.PlayLevelSoundEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.PlayLevelSoundEvent$AtPosition> BUS;
+  public net.minecraftforge.event.PlayLevelSoundEvent$AtPosition(net.minecraft.world.level.Level, net.minecraft.world.phys.Vec3, net.minecraft.core.Holder<net.minecraft.sounds.SoundEvent>, net.minecraft.sounds.SoundSource, float, float);
+  public net.minecraft.world.phys.Vec3 getPosition();
+}
+Compiled from "RegisterCommandsEvent.java"
+public final class net.minecraftforge.event.RegisterCommandsEvent extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.RegisterCommandsEvent> BUS;
+  public net.minecraftforge.event.RegisterCommandsEvent(com.mojang.brigadier.CommandDispatcher<net.minecraft.commands.CommandSourceStack>, net.minecraft.commands.Commands$CommandSelection, net.minecraft.commands.CommandBuildContext);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public com.mojang.brigadier.CommandDispatcher<net.minecraft.commands.CommandSourceStack> getDispatcher();
+  public net.minecraft.commands.Commands$CommandSelection getCommandSelection();
+  public net.minecraft.commands.CommandBuildContext getBuildContext();
+}
+Compiled from "RegisterStructureConversionsEvent.java"
+public final class net.minecraftforge.event.RegisterStructureConversionsEvent extends net.minecraftforge.eventbus.api.event.MutableEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.RegisterStructureConversionsEvent> BUS;
+  public net.minecraftforge.event.RegisterStructureConversionsEvent(java.util.Map<java.lang.String, net.minecraft.util.datafix.fixes.StructuresBecomeConfiguredFix$Conversion>);
+  public void register(java.lang.String, net.minecraft.util.datafix.fixes.StructuresBecomeConfiguredFix$Conversion);
+}
+Compiled from "ServerChatEvent.java"
+public final class net.minecraftforge.event.ServerChatEvent extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.event.ServerChatEvent> BUS;
+  public net.minecraftforge.event.ServerChatEvent(net.minecraft.server.level.ServerPlayer, java.lang.String, net.minecraft.network.chat.Component);
+  public net.minecraft.server.level.ServerPlayer getPlayer();
+  public java.lang.String getUsername();
+  public java.lang.String getRawText();
+  public void setMessage(net.minecraft.network.chat.Component);
+  public net.minecraft.network.chat.Component getMessage();
+}
+Compiled from "TagsUpdatedEvent.java"
+public final class net.minecraftforge.event.TagsUpdatedEvent extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.TagsUpdatedEvent> BUS;
+  public net.minecraftforge.event.TagsUpdatedEvent(net.minecraft.core.RegistryAccess, boolean, boolean);
+  public net.minecraftforge.event.TagsUpdatedEvent(net.minecraft.core.RegistryAccess, net.minecraftforge.event.TagsUpdatedEvent$UpdateCause, boolean);
+  public boolean shouldUpdateStaticData();
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.core.RegistryAccess getRegistryAccess();
+  public net.minecraftforge.event.TagsUpdatedEvent$UpdateCause getUpdateCause();
+  public boolean isIntegratedServer();
+}
+Compiled from "TagsUpdatedEvent.java"
+public final class net.minecraftforge.event.TagsUpdatedEvent$UpdateCause extends java.lang.Enum<net.minecraftforge.event.TagsUpdatedEvent$UpdateCause> {
+  public static final net.minecraftforge.event.TagsUpdatedEvent$UpdateCause SERVER_DATA_LOAD;
+  public static final net.minecraftforge.event.TagsUpdatedEvent$UpdateCause CLIENT_PACKET_RECEIVED;
+  public static net.minecraftforge.event.TagsUpdatedEvent$UpdateCause[] values();
+  public static net.minecraftforge.event.TagsUpdatedEvent$UpdateCause valueOf(java.lang.String);
+}
+Compiled from "TickEvent.java"
+public interface net.minecraftforge.event.TickEvent {
+}
+Compiled from "TickEvent.java"
+public interface net.minecraftforge.event.TickEvent$ClientTickEvent extends net.minecraftforge.event.TickEvent {
+}
+Compiled from "TickEvent.java"
+public final class net.minecraftforge.event.TickEvent$ClientTickEvent$Post extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent,net.minecraftforge.event.TickEvent$ClientTickEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.TickEvent$ClientTickEvent$Post> BUS;
+  public static final net.minecraftforge.event.TickEvent$ClientTickEvent$Post INSTANCE;
+  public net.minecraftforge.event.TickEvent$ClientTickEvent$Post();
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+}
+Compiled from "TickEvent.java"
+public final class net.minecraftforge.event.TickEvent$ClientTickEvent$Pre extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent,net.minecraftforge.event.TickEvent$ClientTickEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.TickEvent$ClientTickEvent$Pre> BUS;
+  public static final net.minecraftforge.event.TickEvent$ClientTickEvent$Pre INSTANCE;
+  public net.minecraftforge.event.TickEvent$ClientTickEvent$Pre();
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+}
+Compiled from "TickEvent.java"
+public interface net.minecraftforge.event.TickEvent$LevelTickEvent extends net.minecraftforge.event.TickEvent {
+  public abstract net.minecraftforge.fml.LogicalSide side();
+  public abstract net.minecraft.world.level.Level level();
+  public abstract java.util.function.BooleanSupplier haveTimeSupplier();
+  public default boolean haveTime();
+}
+Compiled from "TickEvent.java"
+public final class net.minecraftforge.event.TickEvent$LevelTickEvent$Post extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent,net.minecraftforge.event.TickEvent$LevelTickEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.TickEvent$LevelTickEvent$Post> BUS;
+  public net.minecraftforge.event.TickEvent$LevelTickEvent$Post(net.minecraftforge.fml.LogicalSide, net.minecraft.world.level.Level, java.util.function.BooleanSupplier);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraftforge.fml.LogicalSide side();
+  public net.minecraft.world.level.Level level();
+  public java.util.function.BooleanSupplier haveTimeSupplier();
+}
+Compiled from "TickEvent.java"
+public final class net.minecraftforge.event.TickEvent$LevelTickEvent$Pre extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent,net.minecraftforge.event.TickEvent$LevelTickEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.TickEvent$LevelTickEvent$Pre> BUS;
+  public net.minecraftforge.event.TickEvent$LevelTickEvent$Pre(net.minecraftforge.fml.LogicalSide, net.minecraft.world.level.Level, java.util.function.BooleanSupplier);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraftforge.fml.LogicalSide side();
+  public net.minecraft.world.level.Level level();
+  public java.util.function.BooleanSupplier haveTimeSupplier();
+}
+Compiled from "TickEvent.java"
+public interface net.minecraftforge.event.TickEvent$PlayerTickEvent extends net.minecraftforge.event.TickEvent {
+  public abstract net.minecraftforge.fml.LogicalSide side();
+}
+Compiled from "TickEvent.java"
+public final class net.minecraftforge.event.TickEvent$PlayerTickEvent$Post extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent,net.minecraftforge.event.TickEvent$PlayerTickEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.TickEvent$PlayerTickEvent$Post> BUS;
+  public net.minecraftforge.event.TickEvent$PlayerTickEvent$Post(net.minecraft.world.entity.player.Player);
+  public net.minecraftforge.event.TickEvent$PlayerTickEvent$Post(net.minecraft.world.entity.player.Player, net.minecraftforge.fml.LogicalSide);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.world.entity.player.Player player();
+  public net.minecraftforge.fml.LogicalSide side();
+}
+Compiled from "TickEvent.java"
+public final class net.minecraftforge.event.TickEvent$PlayerTickEvent$Pre extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent,net.minecraftforge.event.TickEvent$PlayerTickEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.TickEvent$PlayerTickEvent$Pre> BUS;
+  public net.minecraftforge.event.TickEvent$PlayerTickEvent$Pre(net.minecraft.world.entity.player.Player);
+  public net.minecraftforge.event.TickEvent$PlayerTickEvent$Pre(net.minecraft.world.entity.player.Player, net.minecraftforge.fml.LogicalSide);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.world.entity.player.Player player();
+  public net.minecraftforge.fml.LogicalSide side();
+}
+Compiled from "TickEvent.java"
+public interface net.minecraftforge.event.TickEvent$RenderTickEvent extends net.minecraftforge.event.TickEvent {
+}
+Compiled from "TickEvent.java"
+public final class net.minecraftforge.event.TickEvent$RenderTickEvent$Post extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent,net.minecraftforge.event.TickEvent$RenderTickEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.TickEvent$RenderTickEvent$Post> BUS;
+  public net.minecraftforge.event.TickEvent$RenderTickEvent$Post(net.minecraft.client.DeltaTracker);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.client.DeltaTracker timer();
+}
+Compiled from "TickEvent.java"
+public final class net.minecraftforge.event.TickEvent$RenderTickEvent$Pre extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent,net.minecraftforge.event.TickEvent$RenderTickEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.TickEvent$RenderTickEvent$Pre> BUS;
+  public net.minecraftforge.event.TickEvent$RenderTickEvent$Pre(net.minecraft.client.DeltaTracker);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.client.DeltaTracker timer();
+}
+Compiled from "TickEvent.java"
+public interface net.minecraftforge.event.TickEvent$ServerTickEvent extends net.minecraftforge.event.TickEvent {
+  public abstract java.util.function.BooleanSupplier haveTimeSupplier();
+  public default boolean haveTime();
+  public abstract net.minecraft.server.MinecraftServer server();
+}
+Compiled from "TickEvent.java"
+public final class net.minecraftforge.event.TickEvent$ServerTickEvent$Post extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent,net.minecraftforge.event.TickEvent$ServerTickEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.TickEvent$ServerTickEvent$Post> BUS;
+  public net.minecraftforge.event.TickEvent$ServerTickEvent$Post(java.util.function.BooleanSupplier, net.minecraft.server.MinecraftServer);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public java.util.function.BooleanSupplier haveTimeSupplier();
+  public net.minecraft.server.MinecraftServer server();
+}
+Compiled from "TickEvent.java"
+public final class net.minecraftforge.event.TickEvent$ServerTickEvent$Pre extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent,net.minecraftforge.event.TickEvent$ServerTickEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.TickEvent$ServerTickEvent$Pre> BUS;
+  public net.minecraftforge.event.TickEvent$ServerTickEvent$Pre(java.util.function.BooleanSupplier, net.minecraft.server.MinecraftServer);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public java.util.function.BooleanSupplier haveTimeSupplier();
+  public net.minecraft.server.MinecraftServer server();
+}
+Compiled from "VanillaGameEvent.java"
+public final class net.minecraftforge.event.VanillaGameEvent extends java.lang.Record implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.event.VanillaGameEvent> BUS;
+  public net.minecraftforge.event.VanillaGameEvent(net.minecraft.world.level.Level, net.minecraft.world.level.gameevent.GameEvent, net.minecraft.world.phys.Vec3, net.minecraft.world.level.gameevent.GameEvent$Context);
+  public net.minecraft.world.entity.Entity getCause();
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.world.level.Level getLevel();
+  public net.minecraft.world.level.gameevent.GameEvent getVanillaEvent();
+  public net.minecraft.world.phys.Vec3 getEventPosition();
+  public net.minecraft.world.level.gameevent.GameEvent$Context getContext();
+}

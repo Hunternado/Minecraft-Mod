@@ -1,0 +1,42 @@
+Compiled from "BrewingRecipeRegisterEvent.java"
+public final class net.minecraftforge.event.brewing.BrewingRecipeRegisterEvent extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.brewing.BrewingRecipeRegisterEvent> BUS;
+  public net.minecraftforge.event.brewing.BrewingRecipeRegisterEvent(net.minecraft.world.item.alchemy.PotionBrewing$Builder, net.minecraft.world.flag.FeatureFlagSet);
+  public void addRecipe(net.minecraft.world.item.crafting.Ingredient, net.minecraft.world.item.crafting.Ingredient, net.minecraft.world.item.ItemStack);
+  public void addRecipe(net.minecraftforge.common.brewing.IBrewingRecipe);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.world.item.alchemy.PotionBrewing$Builder getBuilder();
+  public net.minecraft.world.flag.FeatureFlagSet getFeatures();
+}
+Compiled from "PlayerBrewedPotionEvent.java"
+public final class net.minecraftforge.event.brewing.PlayerBrewedPotionEvent extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent,net.minecraftforge.event.entity.player.PlayerEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.brewing.PlayerBrewedPotionEvent> BUS;
+  public net.minecraftforge.event.brewing.PlayerBrewedPotionEvent(net.minecraft.world.entity.player.Player, net.minecraft.world.item.ItemStack);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.world.entity.player.Player getEntity();
+  public net.minecraft.world.item.ItemStack getStack();
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "PotionBrewEvent.java"
+public abstract class net.minecraftforge.event.brewing.PotionBrewEvent extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.eventbus.api.event.InheritableEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.brewing.PotionBrewEvent> BUS;
+  protected net.minecraftforge.event.brewing.PotionBrewEvent(net.minecraft.core.NonNullList<net.minecraft.world.item.ItemStack>);
+  public net.minecraft.world.item.ItemStack getItem(int);
+  public void setItem(int, net.minecraft.world.item.ItemStack);
+  public int getLength();
+}
+Compiled from "PotionBrewEvent.java"
+public final class net.minecraftforge.event.brewing.PotionBrewEvent$Post extends net.minecraftforge.event.brewing.PotionBrewEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.brewing.PotionBrewEvent$Post> BUS;
+  public net.minecraftforge.event.brewing.PotionBrewEvent$Post(net.minecraft.core.NonNullList<net.minecraft.world.item.ItemStack>);
+}
+Compiled from "PotionBrewEvent.java"
+public final class net.minecraftforge.event.brewing.PotionBrewEvent$Pre extends net.minecraftforge.event.brewing.PotionBrewEvent implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.event.brewing.PotionBrewEvent$Pre> BUS;
+  public net.minecraftforge.event.brewing.PotionBrewEvent$Pre(net.minecraft.core.NonNullList<net.minecraft.world.item.ItemStack>);
+}

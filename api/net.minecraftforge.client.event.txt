@@ -1,0 +1,1164 @@
+Compiled from "AddFramePassEvent.java"
+public final class net.minecraftforge.client.event.AddFramePassEvent extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.AddFramePassEvent> BUS;
+  public net.minecraftforge.client.event.AddFramePassEvent();
+  public void addPass(net.minecraft.resources.Identifier, net.minecraftforge.client.FramePassManager$PassDefinition);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+}
+Compiled from "AddGuiOverlayLayersEvent.java"
+public final class net.minecraftforge.client.event.AddGuiOverlayLayersEvent extends java.lang.Record implements net.minecraftforge.eventbus.api.event.characteristic.SelfDestructing,net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.AddGuiOverlayLayersEvent> BUS;
+  public net.minecraftforge.client.event.AddGuiOverlayLayersEvent(net.minecraftforge.client.gui.overlay.ForgeLayeredDraw);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraftforge.client.gui.overlay.ForgeLayeredDraw getLayeredDraw();
+}
+Compiled from "ClientChatEvent.java"
+public final class net.minecraftforge.client.event.ClientChatEvent extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.client.event.ClientChatEvent> BUS;
+  public net.minecraftforge.client.event.ClientChatEvent(java.lang.String);
+  public java.lang.String getMessage();
+  public void setMessage(java.lang.String);
+  public java.lang.String getOriginalMessage();
+}
+Compiled from "ClientChatReceivedEvent.java"
+public class net.minecraftforge.client.event.ClientChatReceivedEvent extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.eventbus.api.event.InheritableEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.client.event.ClientChatReceivedEvent> BUS;
+  public net.minecraftforge.client.event.ClientChatReceivedEvent(net.minecraft.network.chat.ChatType$Bound, net.minecraft.network.chat.Component, java.util.UUID);
+  public net.minecraft.network.chat.Component getMessage();
+  public void setMessage(net.minecraft.network.chat.Component);
+  public net.minecraft.network.chat.ChatType$Bound getBoundChatType();
+  public java.util.UUID getSender();
+}
+Compiled from "ClientChatReceivedEvent.java"
+public final class net.minecraftforge.client.event.ClientChatReceivedEvent$Player extends net.minecraftforge.client.event.ClientChatReceivedEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.client.event.ClientChatReceivedEvent$Player> BUS;
+  public net.minecraftforge.client.event.ClientChatReceivedEvent$Player(net.minecraft.network.chat.ChatType$Bound, net.minecraft.network.chat.Component, net.minecraft.network.chat.PlayerChatMessage, java.util.UUID);
+  public net.minecraft.network.chat.PlayerChatMessage getPlayerChatMessage();
+}
+Compiled from "ClientPauseChangeEvent.java"
+public interface net.minecraftforge.client.event.ClientPauseChangeEvent extends net.minecraftforge.eventbus.api.event.InheritableEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.ClientPauseChangeEvent> BUS;
+  public abstract boolean isPaused();
+}
+Compiled from "ClientPauseChangeEvent.java"
+public final class net.minecraftforge.client.event.ClientPauseChangeEvent$Post extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent,net.minecraftforge.client.event.ClientPauseChangeEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.ClientPauseChangeEvent$Post> BUS;
+  public net.minecraftforge.client.event.ClientPauseChangeEvent$Post(boolean);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public boolean isPaused();
+}
+Compiled from "ClientPauseChangeEvent.java"
+public final class net.minecraftforge.client.event.ClientPauseChangeEvent$Pre extends java.lang.Record implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.eventbus.api.event.RecordEvent,net.minecraftforge.client.event.ClientPauseChangeEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.client.event.ClientPauseChangeEvent$Pre> BUS;
+  public net.minecraftforge.client.event.ClientPauseChangeEvent$Pre(boolean);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public boolean isPaused();
+}
+Compiled from "ClientPlayerChangeGameTypeEvent.java"
+public final class net.minecraftforge.client.event.ClientPlayerChangeGameTypeEvent extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.ClientPlayerChangeGameTypeEvent> BUS;
+  public net.minecraftforge.client.event.ClientPlayerChangeGameTypeEvent(net.minecraft.client.multiplayer.PlayerInfo, net.minecraft.world.level.GameType, net.minecraft.world.level.GameType);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.client.multiplayer.PlayerInfo getInfo();
+  public net.minecraft.world.level.GameType getCurrentGameType();
+  public net.minecraft.world.level.GameType getNewGameType();
+}
+Compiled from "ClientPlayerNetworkEvent.java"
+public interface net.minecraftforge.client.event.ClientPlayerNetworkEvent extends net.minecraftforge.eventbus.api.event.InheritableEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.ClientPlayerNetworkEvent> BUS;
+  public abstract net.minecraft.client.multiplayer.MultiPlayerGameMode getMultiPlayerGameMode();
+  public abstract net.minecraft.client.player.LocalPlayer getPlayer();
+  public abstract net.minecraft.network.Connection getConnection();
+}
+Compiled from "ClientPlayerNetworkEvent.java"
+public final class net.minecraftforge.client.event.ClientPlayerNetworkEvent$Clone extends java.lang.Record implements net.minecraftforge.client.event.ClientPlayerNetworkEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.ClientPlayerNetworkEvent$Clone> BUS;
+  public net.minecraftforge.client.event.ClientPlayerNetworkEvent$Clone(net.minecraft.client.multiplayer.MultiPlayerGameMode, net.minecraft.client.player.LocalPlayer, net.minecraft.client.player.LocalPlayer, net.minecraft.network.Connection);
+  public net.minecraft.client.player.LocalPlayer getPlayer();
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.client.multiplayer.MultiPlayerGameMode getMultiPlayerGameMode();
+  public net.minecraft.client.player.LocalPlayer getOldPlayer();
+  public net.minecraft.client.player.LocalPlayer getNewPlayer();
+  public net.minecraft.network.Connection getConnection();
+}
+Compiled from "ClientPlayerNetworkEvent.java"
+public final class net.minecraftforge.client.event.ClientPlayerNetworkEvent$LoggingIn extends java.lang.Record implements net.minecraftforge.client.event.ClientPlayerNetworkEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.ClientPlayerNetworkEvent$LoggingIn> BUS;
+  public net.minecraftforge.client.event.ClientPlayerNetworkEvent$LoggingIn(net.minecraft.client.multiplayer.MultiPlayerGameMode, net.minecraft.client.player.LocalPlayer, net.minecraft.network.Connection);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.client.multiplayer.MultiPlayerGameMode getMultiPlayerGameMode();
+  public net.minecraft.client.player.LocalPlayer getPlayer();
+  public net.minecraft.network.Connection getConnection();
+}
+Compiled from "ClientPlayerNetworkEvent.java"
+public final class net.minecraftforge.client.event.ClientPlayerNetworkEvent$LoggingOut extends java.lang.Record implements net.minecraftforge.client.event.ClientPlayerNetworkEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.ClientPlayerNetworkEvent$LoggingOut> BUS;
+  public net.minecraftforge.client.event.ClientPlayerNetworkEvent$LoggingOut(net.minecraft.client.multiplayer.MultiPlayerGameMode, net.minecraft.client.player.LocalPlayer, net.minecraft.network.Connection);
+  public net.minecraft.client.multiplayer.MultiPlayerGameMode getMultiPlayerGameMode();
+  public net.minecraft.client.player.LocalPlayer getPlayer();
+  public net.minecraft.network.Connection getConnection();
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+}
+Compiled from "ComputeFovModifierEvent.java"
+public final class net.minecraftforge.client.event.ComputeFovModifierEvent extends net.minecraftforge.eventbus.api.event.MutableEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.ComputeFovModifierEvent> BUS;
+  public net.minecraftforge.client.event.ComputeFovModifierEvent(net.minecraft.world.entity.player.Player, float, float);
+  public net.minecraft.world.entity.player.Player getPlayer();
+  public float getFovModifier();
+  public float getScale();
+  public float getNewFovModifier();
+  public void setNewFovModifier(float);
+}
+Compiled from "ContainerScreenEvent.java"
+public interface net.minecraftforge.client.event.ContainerScreenEvent {
+  public abstract net.minecraft.client.gui.screens.inventory.AbstractContainerScreen<?> getContainerScreen();
+}
+Compiled from "ContainerScreenEvent.java"
+public interface net.minecraftforge.client.event.ContainerScreenEvent$Render extends net.minecraftforge.client.event.ContainerScreenEvent {
+  public abstract net.minecraft.client.gui.GuiGraphicsExtractor getGuiGraphics();
+  public abstract int getMouseX();
+  public abstract int getMouseY();
+}
+Compiled from "ContainerScreenEvent.java"
+public final class net.minecraftforge.client.event.ContainerScreenEvent$Render$Background extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent,net.minecraftforge.client.event.ContainerScreenEvent$Render {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.ContainerScreenEvent$Render$Background> BUS;
+  public net.minecraftforge.client.event.ContainerScreenEvent$Render$Background(net.minecraft.client.gui.screens.inventory.AbstractContainerScreen<?>, net.minecraft.client.gui.GuiGraphicsExtractor, int, int);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.client.gui.screens.inventory.AbstractContainerScreen<?> getContainerScreen();
+  public net.minecraft.client.gui.GuiGraphicsExtractor getGuiGraphics();
+  public int getMouseX();
+  public int getMouseY();
+}
+Compiled from "ContainerScreenEvent.java"
+public final class net.minecraftforge.client.event.ContainerScreenEvent$Render$Foreground extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent,net.minecraftforge.client.event.ContainerScreenEvent$Render {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.ContainerScreenEvent$Render$Foreground> BUS;
+  public net.minecraftforge.client.event.ContainerScreenEvent$Render$Foreground(net.minecraft.client.gui.screens.inventory.AbstractContainerScreen<?>, net.minecraft.client.gui.GuiGraphicsExtractor, int, int);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.client.gui.screens.inventory.AbstractContainerScreen<?> getContainerScreen();
+  public net.minecraft.client.gui.GuiGraphicsExtractor getGuiGraphics();
+  public int getMouseX();
+  public int getMouseY();
+}
+Compiled from "CustomizeGuiOverlayEvent.java"
+public interface net.minecraftforge.client.event.CustomizeGuiOverlayEvent {
+  public abstract com.mojang.blaze3d.platform.Window getWindow();
+  public abstract net.minecraft.client.gui.GuiGraphicsExtractor getGuiGraphics();
+  public abstract float getPartialTick();
+}
+Compiled from "CustomizeGuiOverlayEvent.java"
+public final class net.minecraftforge.client.event.CustomizeGuiOverlayEvent$BossEventProgress extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.client.event.CustomizeGuiOverlayEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.client.event.CustomizeGuiOverlayEvent$BossEventProgress> BUS;
+  public net.minecraftforge.client.event.CustomizeGuiOverlayEvent$BossEventProgress(com.mojang.blaze3d.platform.Window, net.minecraft.client.gui.GuiGraphicsExtractor, float, net.minecraft.client.gui.components.LerpingBossEvent, int, int, int);
+  public com.mojang.blaze3d.platform.Window getWindow();
+  public net.minecraft.client.gui.GuiGraphicsExtractor getGuiGraphics();
+  public float getPartialTick();
+  public net.minecraft.client.gui.components.LerpingBossEvent getBossEvent();
+  public int getX();
+  public int getY();
+  public int getIncrement();
+  public void setIncrement(int);
+}
+Compiled from "CustomizeGuiOverlayEvent.java"
+public final class net.minecraftforge.client.event.CustomizeGuiOverlayEvent$Chat extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.client.event.CustomizeGuiOverlayEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.CustomizeGuiOverlayEvent$Chat> BUS;
+  public net.minecraftforge.client.event.CustomizeGuiOverlayEvent$Chat(com.mojang.blaze3d.platform.Window, net.minecraft.client.gui.GuiGraphicsExtractor, float, int, int);
+  public com.mojang.blaze3d.platform.Window getWindow();
+  public net.minecraft.client.gui.GuiGraphicsExtractor getGuiGraphics();
+  public float getPartialTick();
+  public int getPosX();
+  public void setPosX(int);
+  public int getPosY();
+  public void setPosY(int);
+}
+Compiled from "CustomizeGuiOverlayEvent.java"
+public final class net.minecraftforge.client.event.CustomizeGuiOverlayEvent$DebugText extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent,net.minecraftforge.client.event.CustomizeGuiOverlayEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.CustomizeGuiOverlayEvent$DebugText> BUS;
+  public net.minecraftforge.client.event.CustomizeGuiOverlayEvent$DebugText(com.mojang.blaze3d.platform.Window, net.minecraft.client.gui.GuiGraphicsExtractor, float, java.util.List<java.lang.String>, net.minecraftforge.client.event.CustomizeGuiOverlayEvent$DebugText$Side);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public com.mojang.blaze3d.platform.Window getWindow();
+  public net.minecraft.client.gui.GuiGraphicsExtractor getGuiGraphics();
+  public float getPartialTick();
+  public java.util.List<java.lang.String> getText();
+  public net.minecraftforge.client.event.CustomizeGuiOverlayEvent$DebugText$Side getSide();
+}
+Compiled from "CustomizeGuiOverlayEvent.java"
+public final class net.minecraftforge.client.event.CustomizeGuiOverlayEvent$DebugText$Side extends java.lang.Enum<net.minecraftforge.client.event.CustomizeGuiOverlayEvent$DebugText$Side> {
+  public static final net.minecraftforge.client.event.CustomizeGuiOverlayEvent$DebugText$Side Left;
+  public static final net.minecraftforge.client.event.CustomizeGuiOverlayEvent$DebugText$Side Right;
+  public static net.minecraftforge.client.event.CustomizeGuiOverlayEvent$DebugText$Side[] values();
+  public static net.minecraftforge.client.event.CustomizeGuiOverlayEvent$DebugText$Side valueOf(java.lang.String);
+}
+Compiled from "EntityRenderersEvent.java"
+public interface net.minecraftforge.client.event.EntityRenderersEvent {
+}
+Compiled from "EntityRenderersEvent.java"
+public final class net.minecraftforge.client.event.EntityRenderersEvent$AddLayers extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.client.event.EntityRenderersEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.EntityRenderersEvent$AddLayers> BUS;
+  public net.minecraftforge.client.event.EntityRenderersEvent$AddLayers(java.util.Map<net.minecraft.world.entity.EntityType<?>, net.minecraft.client.renderer.entity.EntityRenderer<?, ?>>, java.util.Map<net.minecraft.world.entity.player.PlayerModelType, net.minecraft.client.renderer.entity.player.AvatarRenderer<net.minecraft.client.player.AbstractClientPlayer>>, java.util.Map<net.minecraft.world.entity.player.PlayerModelType, net.minecraft.client.renderer.entity.player.AvatarRenderer<net.minecraft.client.entity.ClientMannequin>>, net.minecraft.client.renderer.entity.EntityRendererProvider$Context);
+  public java.util.Set<net.minecraft.world.entity.player.PlayerModelType> getModelTypes();
+  public <R extends net.minecraft.client.renderer.entity.EntityRenderer<? extends net.minecraft.world.entity.player.Player, ?>> R getPlayerRenderer(net.minecraft.world.entity.player.PlayerModelType);
+  public <R extends net.minecraft.client.renderer.entity.EntityRenderer<? extends net.minecraft.client.entity.ClientMannequin, ?>> R getMannequinRenderer(net.minecraft.world.entity.player.PlayerModelType);
+  public <T extends net.minecraft.world.entity.LivingEntity, S extends net.minecraft.client.renderer.entity.state.EntityRenderState, R extends net.minecraft.client.renderer.entity.EntityRenderer<T, S>> R getEntityRenderer(net.minecraft.world.entity.EntityType<? extends T>);
+  public net.minecraft.client.model.geom.EntityModelSet getEntityModels();
+  public net.minecraft.client.renderer.entity.EntityRendererProvider$Context getContext();
+}
+Compiled from "EntityRenderersEvent.java"
+public final class net.minecraftforge.client.event.EntityRenderersEvent$CreateSkullModels extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.client.event.EntityRenderersEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.EntityRenderersEvent$CreateSkullModels> BUS;
+  public net.minecraftforge.client.event.EntityRenderersEvent$CreateSkullModels(com.google.common.collect.ImmutableMap$Builder<net.minecraft.world.level.block.SkullBlock$Type, java.util.function.Function<net.minecraft.client.model.geom.EntityModelSet, net.minecraft.client.model.object.skull.SkullModelBase>>);
+  public void registerSkullModel(net.minecraft.world.level.block.SkullBlock$Type, java.util.function.Function<net.minecraft.client.model.geom.EntityModelSet, net.minecraft.client.model.object.skull.SkullModelBase>);
+}
+Compiled from "EntityRenderersEvent.java"
+public final class net.minecraftforge.client.event.EntityRenderersEvent$RegisterLayerDefinitions extends java.lang.Record implements net.minecraftforge.eventbus.api.event.characteristic.SelfDestructing,net.minecraftforge.eventbus.api.event.RecordEvent,net.minecraftforge.client.event.EntityRenderersEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.EntityRenderersEvent$RegisterLayerDefinitions> BUS;
+  public net.minecraftforge.client.event.EntityRenderersEvent$RegisterLayerDefinitions();
+  public void registerLayerDefinition(net.minecraft.client.model.geom.ModelLayerLocation, java.util.function.Supplier<net.minecraft.client.model.geom.builders.LayerDefinition>);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+}
+Compiled from "EntityRenderersEvent.java"
+public final class net.minecraftforge.client.event.EntityRenderersEvent$RegisterRenderers extends java.lang.Record implements net.minecraftforge.eventbus.api.event.characteristic.SelfDestructing,net.minecraftforge.eventbus.api.event.RecordEvent,net.minecraftforge.client.event.EntityRenderersEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.EntityRenderersEvent$RegisterRenderers> BUS;
+  public net.minecraftforge.client.event.EntityRenderersEvent$RegisterRenderers();
+  public <T extends net.minecraft.world.entity.Entity> void registerEntityRenderer(net.minecraft.world.entity.EntityType<? extends T>, net.minecraft.client.renderer.entity.EntityRendererProvider<T>);
+  public <T extends net.minecraft.world.level.block.entity.BlockEntity, S extends net.minecraft.client.renderer.blockentity.state.BlockEntityRenderState> void registerBlockEntityRenderer(net.minecraft.world.level.block.entity.BlockEntityType<? extends T>, net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider<T, S>);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+}
+Compiled from "ForgeEventFactoryClient.java"
+public final class net.minecraftforge.client.event.ForgeEventFactoryClient {
+  public static void onGatherLayers(java.util.Map<net.minecraft.world.entity.EntityType<?>, net.minecraft.client.renderer.entity.EntityRenderer<?, ?>>, java.util.Map<net.minecraft.world.entity.player.PlayerModelType, net.minecraft.client.renderer.entity.player.AvatarRenderer<net.minecraft.client.player.AbstractClientPlayer>>, java.util.Map<net.minecraft.world.entity.player.PlayerModelType, net.minecraft.client.renderer.entity.player.AvatarRenderer<net.minecraft.client.entity.ClientMannequin>>, net.minecraft.client.renderer.entity.EntityRendererProvider$Context);
+  public static boolean onScreenMouseReleased(net.minecraft.client.gui.screens.Screen, double, double, net.minecraft.client.input.MouseButtonEvent);
+  public static boolean onScreenMouseClicked(net.minecraft.client.gui.screens.Screen, double, double, net.minecraft.client.input.MouseButtonEvent, boolean);
+  public static boolean onMouseButtonPre(net.minecraft.client.input.MouseButtonInfo, int);
+  public static void onMouseButtonPost(net.minecraft.client.input.MouseButtonInfo, int);
+  public static boolean onScreenMouseScrollPre(net.minecraft.client.gui.screens.Screen, double, double, double, double);
+  public static void onScreenMouseScrollPost(net.minecraft.client.gui.screens.Screen, double, double, double, double);
+  public static boolean onMouseScroll(net.minecraft.client.MouseHandler, double, double);
+  public static boolean onScreenMouseDragPre(net.minecraft.client.gui.screens.Screen, double, double, int, double, double);
+  public static boolean onScreenMouseDragPost(net.minecraft.client.gui.screens.Screen, double, double, int, double, double);
+  public static net.minecraft.client.gui.screens.Screen onScreenOpening(net.minecraft.client.gui.screens.Screen, net.minecraft.client.gui.screens.Screen);
+  public static void onScreenClose(net.minecraft.client.gui.screens.Screen);
+  public static void onPlaySoundSource(net.minecraft.client.sounds.SoundEngine, net.minecraft.client.resources.sounds.SoundInstance, com.mojang.blaze3d.audio.Channel);
+  public static void onPlayStreamingSource(net.minecraft.client.sounds.SoundEngine, net.minecraft.client.resources.sounds.SoundInstance, com.mojang.blaze3d.audio.Channel);
+  public static boolean onScreenKeyPressedPre(net.minecraft.client.gui.screens.Screen, net.minecraft.client.input.KeyEvent);
+  public static boolean onScreenKeyPressedPost(net.minecraft.client.gui.screens.Screen, net.minecraft.client.input.KeyEvent);
+  public static boolean onScreenKeyReleasedPre(net.minecraft.client.gui.screens.Screen, net.minecraft.client.input.KeyEvent);
+  public static boolean onScreenKeyReleasedPost(net.minecraft.client.gui.screens.Screen, net.minecraft.client.input.KeyEvent);
+  public static boolean onScreenCharTypedPre(net.minecraft.client.gui.screens.Screen, net.minecraft.client.input.CharacterEvent);
+  public static boolean onScreenCharTypedPost(net.minecraft.client.gui.screens.Screen, net.minecraft.client.input.CharacterEvent);
+  public static boolean onClickInputPickBlock(net.minecraft.client.KeyMapping);
+  public static void onContainerRenderBackground(net.minecraft.client.gui.screens.inventory.AbstractContainerScreen<?>, net.minecraft.client.gui.GuiGraphicsExtractor, int, int);
+  public static void onContainerRenderForeground(net.minecraft.client.gui.screens.inventory.AbstractContainerScreen<?>, net.minecraft.client.gui.GuiGraphicsExtractor, int, int);
+  public static void firePlayerLogin(net.minecraft.client.multiplayer.MultiPlayerGameMode, net.minecraft.client.player.LocalPlayer, net.minecraft.network.Connection);
+  public static void firePlayerLogout(net.minecraft.client.multiplayer.MultiPlayerGameMode, net.minecraft.client.player.LocalPlayer);
+  public static void firePlayerRespawn(net.minecraft.client.multiplayer.MultiPlayerGameMode, net.minecraft.client.player.LocalPlayer, net.minecraft.client.player.LocalPlayer, net.minecraft.network.Connection);
+  public static net.minecraftforge.client.event.ViewportEvent$ComputeFov fireComputeFov(net.minecraft.client.renderer.GameRenderer, net.minecraft.client.Camera, float, float, boolean);
+  public static net.minecraftforge.client.event.ViewportEvent$ComputeCameraAngles fireComputeCameraAngles(net.minecraft.client.renderer.GameRenderer, net.minecraft.client.Camera, float);
+  public static <T extends net.minecraft.world.entity.LivingEntity, S extends net.minecraft.client.renderer.entity.state.LivingEntityRenderState, M extends net.minecraft.client.model.EntityModel<? super S>> boolean onRenderLivingPre(S, net.minecraft.client.renderer.entity.LivingEntityRenderer<T, S, M>, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.SubmitNodeCollector, net.minecraft.client.renderer.state.level.CameraRenderState);
+  public static <T extends net.minecraft.world.entity.LivingEntity, S extends net.minecraft.client.renderer.entity.state.LivingEntityRenderState, M extends net.minecraft.client.model.EntityModel<? super S>> boolean onRenderLivingPost(S, net.minecraft.client.renderer.entity.LivingEntityRenderer<T, S, M>, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.SubmitNodeCollector, net.minecraft.client.renderer.state.level.CameraRenderState);
+  public static <AvatarlikeEntity extends net.minecraft.world.entity.Avatar & net.minecraft.client.entity.ClientAvatarEntity> boolean onRenderAvatarPre(net.minecraft.client.renderer.entity.state.AvatarRenderState, net.minecraft.client.renderer.entity.player.AvatarRenderer<AvatarlikeEntity>, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.SubmitNodeCollector, net.minecraft.client.renderer.state.level.CameraRenderState);
+  public static <AvatarlikeEntity extends net.minecraft.world.entity.Avatar & net.minecraft.client.entity.ClientAvatarEntity> boolean onRenderAvatarPost(net.minecraft.client.renderer.entity.state.AvatarRenderState, net.minecraft.client.renderer.entity.player.AvatarRenderer<AvatarlikeEntity>, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.SubmitNodeCollector, net.minecraft.client.renderer.state.level.CameraRenderState);
+  public static boolean onRenderArm(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.SubmitNodeCollector, int, net.minecraft.world.entity.HumanoidArm);
+  public static boolean onRenderItemInFrame(net.minecraft.client.renderer.entity.state.ItemFrameRenderState, net.minecraft.client.renderer.entity.ItemFrameRenderer<?>, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.SubmitNodeCollector, int);
+  public static net.minecraftforge.client.event.RenderNameTagEvent fireRenderNameTagEvent(net.minecraft.client.renderer.entity.state.EntityRenderState, net.minecraft.client.renderer.entity.EntityRenderer<?, ?>, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.SubmitNodeCollector, net.minecraft.client.renderer.state.level.CameraRenderState);
+  public static void onRenderScreenBackground(net.minecraft.client.gui.screens.Screen, net.minecraft.client.gui.GuiGraphicsExtractor);
+  public static void onRenderTickStart(net.minecraft.client.DeltaTracker);
+  public static void onRenderTickEnd(net.minecraft.client.DeltaTracker);
+  public static boolean onToastAdd(net.minecraft.client.gui.components.toasts.Toast);
+  public static net.minecraftforge.client.event.ScreenEvent$RenderInventoryMobEffects onScreenEffectSize(net.minecraft.client.gui.screens.Screen, int, boolean, int);
+  public static void onRecipesUpdated(net.minecraft.client.ClientRecipeBook);
+  public static net.minecraftforge.client.event.ComputeFovModifierEvent fireFovModifierEvent(net.minecraft.world.entity.player.Player, float, float);
+  public static java.util.Map<net.minecraft.world.level.block.SkullBlock$Type, java.util.function.Function<net.minecraft.client.model.geom.EntityModelSet, net.minecraft.client.model.object.skull.SkullModelBase>> onCreateSkullModels();
+  public static net.minecraftforge.client.event.ModelEvent$RegisterModelStateDefinitions onRegisterModeStateDefinitions();
+  public static void onInitLevelRenderer();
+  public static void onComputeLayerOrder(net.minecraftforge.client.gui.overlay.ForgeLayeredDraw);
+}
+Compiled from "GatherAtlasMetadataSectionsEvent.java"
+public final class net.minecraftforge.client.event.GatherAtlasMetadataSectionsEvent extends net.minecraftforge.eventbus.api.event.MutableEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.GatherAtlasMetadataSectionsEvent> BUS;
+  public net.minecraftforge.client.event.GatherAtlasMetadataSectionsEvent(java.util.Set<net.minecraft.server.packs.metadata.MetadataSectionType<?>>);
+  public void addType(net.minecraft.server.packs.metadata.MetadataSectionType<?>);
+}
+Compiled from "InputEvent.java"
+public interface net.minecraftforge.client.event.InputEvent {
+}
+Compiled from "InputEvent.java"
+public final class net.minecraftforge.client.event.InputEvent$InteractionKeyMappingTriggered extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.client.event.InputEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.client.event.InputEvent$InteractionKeyMappingTriggered> BUS;
+  public net.minecraftforge.client.event.InputEvent$InteractionKeyMappingTriggered(int, net.minecraft.client.KeyMapping, net.minecraft.world.InteractionHand);
+  public void setSwingHand(boolean);
+  public boolean shouldSwingHand();
+  public net.minecraft.world.InteractionHand getHand();
+  public boolean isAttack();
+  public boolean isUseItem();
+  public boolean isPickBlock();
+  public net.minecraft.client.KeyMapping getKeyMapping();
+}
+Compiled from "InputEvent.java"
+public final class net.minecraftforge.client.event.InputEvent$Key extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent,net.minecraftforge.client.event.InputEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.InputEvent$Key> BUS;
+  public net.minecraftforge.client.event.InputEvent$Key(net.minecraft.client.input.KeyEvent, int);
+  public net.minecraft.client.input.KeyEvent getInfo();
+  public int getKey();
+  public int getScanCode();
+  public int getAction();
+  public int getModifiers();
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+}
+Compiled from "InputEvent.java"
+public interface net.minecraftforge.client.event.InputEvent$MouseButton extends net.minecraftforge.client.event.InputEvent {
+  public abstract net.minecraft.client.input.MouseButtonInfo getInfo();
+  public default int getButton();
+  public abstract int getAction();
+  public default int getModifiers();
+}
+Compiled from "InputEvent.java"
+public final class net.minecraftforge.client.event.InputEvent$MouseButton$Post extends java.lang.Record implements net.minecraftforge.client.event.InputEvent$MouseButton,net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.InputEvent$MouseButton$Post> BUS;
+  public net.minecraftforge.client.event.InputEvent$MouseButton$Post(net.minecraft.client.input.MouseButtonInfo, int);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.client.input.MouseButtonInfo getInfo();
+  public int getAction();
+}
+Compiled from "InputEvent.java"
+public final class net.minecraftforge.client.event.InputEvent$MouseButton$Pre extends java.lang.Record implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.client.event.InputEvent$MouseButton,net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.client.event.InputEvent$MouseButton$Pre> BUS;
+  public net.minecraftforge.client.event.InputEvent$MouseButton$Pre(net.minecraft.client.input.MouseButtonInfo, int);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.client.input.MouseButtonInfo getInfo();
+  public int getAction();
+}
+Compiled from "InputEvent.java"
+public final class net.minecraftforge.client.event.InputEvent$MouseScrollingEvent extends java.lang.Record implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.client.event.InputEvent,net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.client.event.InputEvent$MouseScrollingEvent> BUS;
+  public net.minecraftforge.client.event.InputEvent$MouseScrollingEvent(double, double, boolean, boolean, boolean, double, double);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public double getDeltaX();
+  public double getDeltaY();
+  public boolean isLeftDown();
+  public boolean isMiddleDown();
+  public boolean isRightDown();
+  public double getMouseX();
+  public double getMouseY();
+}
+Compiled from "ModelEvent.java"
+public interface net.minecraftforge.client.event.ModelEvent {
+}
+Compiled from "ModelEvent.java"
+public final class net.minecraftforge.client.event.ModelEvent$BakeFluidModels extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.client.event.ModelEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.ModelEvent$BakeFluidModels> BUS;
+  public net.minecraftforge.client.event.ModelEvent$BakeFluidModels(net.minecraft.client.resources.model.ModelBakery, net.minecraft.client.resources.model.sprite.MaterialBaker, java.util.Map<net.minecraft.world.level.material.Fluid, net.minecraft.client.renderer.block.FluidModel>);
+  public net.minecraft.client.resources.model.ModelBakery bakery();
+  public net.minecraft.client.resources.model.sprite.MaterialBaker materials();
+  public void register(net.minecraft.world.level.material.Fluid, net.minecraft.client.renderer.block.FluidModel);
+}
+Compiled from "ModelEvent.java"
+public final class net.minecraftforge.client.event.ModelEvent$BakingCompleted extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent,net.minecraftforge.client.event.ModelEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.ModelEvent$BakingCompleted> BUS;
+  public net.minecraftforge.client.event.ModelEvent$BakingCompleted(net.minecraft.client.resources.model.ModelManager, net.minecraft.client.resources.model.ModelBakery);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.client.resources.model.ModelManager getModelManager();
+  public net.minecraft.client.resources.model.ModelBakery getModelBakery();
+}
+Compiled from "ModelEvent.java"
+public final class net.minecraftforge.client.event.ModelEvent$ModifyBakingResult extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent,net.minecraftforge.client.event.ModelEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.ModelEvent$ModifyBakingResult> BUS;
+  public net.minecraftforge.client.event.ModelEvent$ModifyBakingResult(net.minecraft.client.resources.model.ModelBakery, net.minecraft.client.resources.model.ModelBakery$BakingResult);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.client.resources.model.ModelBakery getModelBakery();
+  public net.minecraft.client.resources.model.ModelBakery$BakingResult getResults();
+}
+Compiled from "ModelEvent.java"
+public final class net.minecraftforge.client.event.ModelEvent$RegisterGeometryLoaders extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.client.event.ModelEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.ModelEvent$RegisterGeometryLoaders> BUS;
+  public net.minecraftforge.client.event.ModelEvent$RegisterGeometryLoaders(java.util.Map<net.minecraft.resources.Identifier, net.minecraftforge.client.model.geometry.IGeometryLoader>);
+  public void register(net.minecraft.resources.Identifier, net.minecraftforge.client.model.geometry.IGeometryLoader);
+}
+Compiled from "ModelEvent.java"
+public final class net.minecraftforge.client.event.ModelEvent$RegisterModelStateDefinitions extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.client.event.ModelEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.ModelEvent$RegisterModelStateDefinitions> BUS;
+  public net.minecraftforge.client.event.ModelEvent$RegisterModelStateDefinitions();
+  public java.util.Map<net.minecraft.resources.Identifier, net.minecraft.world.level.block.state.StateDefinition<net.minecraft.world.level.block.Block, net.minecraft.world.level.block.state.BlockState>> getStates();
+  public void register(net.minecraft.resources.Identifier, net.minecraft.world.level.block.state.StateDefinition<net.minecraft.world.level.block.Block, net.minecraft.world.level.block.state.BlockState>);
+}
+Compiled from "MovementInputUpdateEvent.java"
+public final class net.minecraftforge.client.event.MovementInputUpdateEvent extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent,net.minecraftforge.event.entity.player.PlayerEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.MovementInputUpdateEvent> BUS;
+  public net.minecraftforge.client.event.MovementInputUpdateEvent(net.minecraft.world.entity.player.Player, net.minecraft.client.player.ClientInput);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.world.entity.player.Player getEntity();
+  public net.minecraft.client.player.ClientInput getInput();
+  public net.minecraft.world.entity.LivingEntity getEntity();
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "RecipesUpdatedEvent.java"
+public final class net.minecraftforge.client.event.RecipesUpdatedEvent extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.RecipesUpdatedEvent> BUS;
+  public net.minecraftforge.client.event.RecipesUpdatedEvent(net.minecraft.client.ClientRecipeBook);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.client.ClientRecipeBook getRecipeBook();
+}
+Compiled from "RegisterClientCommandsEvent.java"
+public final class net.minecraftforge.client.event.RegisterClientCommandsEvent extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.RegisterClientCommandsEvent> BUS;
+  public net.minecraftforge.client.event.RegisterClientCommandsEvent(com.mojang.brigadier.CommandDispatcher<net.minecraft.commands.CommandSourceStack>, net.minecraft.commands.CommandBuildContext);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public com.mojang.brigadier.CommandDispatcher<net.minecraft.commands.CommandSourceStack> getDispatcher();
+  public net.minecraft.commands.CommandBuildContext getBuildContext();
+}
+Compiled from "RegisterClientReloadListenersEvent.java"
+public final class net.minecraftforge.client.event.RegisterClientReloadListenersEvent extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.eventbus.api.event.characteristic.SelfDestructing {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.RegisterClientReloadListenersEvent> BUS;
+  public net.minecraftforge.client.event.RegisterClientReloadListenersEvent(net.minecraft.server.packs.resources.ReloadableResourceManager);
+  public void registerReloadListener(net.minecraft.server.packs.resources.PreparableReloadListener);
+}
+Compiled from "RegisterClientTooltipComponentFactoriesEvent.java"
+public final class net.minecraftforge.client.event.RegisterClientTooltipComponentFactoriesEvent extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.eventbus.api.event.characteristic.SelfDestructing {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.RegisterClientTooltipComponentFactoriesEvent> BUS;
+  public net.minecraftforge.client.event.RegisterClientTooltipComponentFactoriesEvent(java.util.Map<java.lang.Class<? extends net.minecraft.world.inventory.tooltip.TooltipComponent>, java.util.function.Function<net.minecraft.world.inventory.tooltip.TooltipComponent, net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent>>);
+  public <T extends net.minecraft.world.inventory.tooltip.TooltipComponent> void register(java.lang.Class<T>, java.util.function.Function<? super T, ? extends net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent>);
+}
+Compiled from "RegisterColorHandlersEvent.java"
+public interface net.minecraftforge.client.event.RegisterColorHandlersEvent {
+}
+Compiled from "RegisterColorHandlersEvent.java"
+public final class net.minecraftforge.client.event.RegisterColorHandlersEvent$Block extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent,net.minecraftforge.client.event.RegisterColorHandlersEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.RegisterColorHandlersEvent$Block> BUS;
+  public net.minecraftforge.client.event.RegisterColorHandlersEvent$Block(net.minecraft.client.color.block.BlockColors);
+  public net.minecraft.client.color.block.BlockColors getBlockColors();
+  public void register(java.util.List<net.minecraft.client.color.block.BlockTintSource>, net.minecraft.world.level.block.Block...);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+}
+Compiled from "RegisterColorHandlersEvent.java"
+public final class net.minecraftforge.client.event.RegisterColorHandlersEvent$ColorResolvers extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.eventbus.api.event.characteristic.SelfDestructing,net.minecraftforge.client.event.RegisterColorHandlersEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.RegisterColorHandlersEvent$ColorResolvers> BUS;
+  public net.minecraftforge.client.event.RegisterColorHandlersEvent$ColorResolvers(java.util.ArrayList<net.minecraft.world.level.ColorResolver>);
+  public void register(net.minecraft.world.level.ColorResolver);
+}
+Compiled from "RegisterEntitySpectatorShadersEvent.java"
+public final class net.minecraftforge.client.event.RegisterEntitySpectatorShadersEvent extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.eventbus.api.event.characteristic.SelfDestructing {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.RegisterEntitySpectatorShadersEvent> BUS;
+  public net.minecraftforge.client.event.RegisterEntitySpectatorShadersEvent(java.util.Map<net.minecraft.world.entity.EntityType<?>, net.minecraft.resources.Identifier>);
+  public void register(net.minecraft.world.entity.EntityType<?>, net.minecraft.resources.Identifier);
+}
+Compiled from "RegisterItemDecorationsEvent.java"
+public final class net.minecraftforge.client.event.RegisterItemDecorationsEvent extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.eventbus.api.event.characteristic.SelfDestructing {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.RegisterItemDecorationsEvent> BUS;
+  public net.minecraftforge.client.event.RegisterItemDecorationsEvent(java.util.Map<net.minecraft.world.item.Item, java.util.List<net.minecraftforge.client.IItemDecorator>>);
+  public void register(net.minecraft.world.level.ItemLike, net.minecraftforge.client.IItemDecorator);
+}
+Compiled from "RegisterKeyMappingsEvent.java"
+public final class net.minecraftforge.client.event.RegisterKeyMappingsEvent extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.eventbus.api.event.characteristic.SelfDestructing {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.RegisterKeyMappingsEvent> BUS;
+  public net.minecraftforge.client.event.RegisterKeyMappingsEvent(net.minecraft.client.Options);
+  public void register(net.minecraft.client.KeyMapping);
+}
+Compiled from "RegisterNamedRenderTypesEvent.java"
+public final class net.minecraftforge.client.event.RegisterNamedRenderTypesEvent extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.eventbus.api.event.characteristic.SelfDestructing {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.RegisterNamedRenderTypesEvent> BUS;
+  public net.minecraftforge.client.event.RegisterNamedRenderTypesEvent(java.util.Map<net.minecraft.resources.Identifier, net.minecraftforge.client.RenderTypeGroup>);
+  public void register(net.minecraft.resources.Identifier, net.minecraft.client.renderer.chunk.ChunkSectionLayer, net.minecraft.client.renderer.rendertype.RenderType);
+  public void register(net.minecraft.resources.Identifier, net.minecraft.client.renderer.chunk.ChunkSectionLayer, net.minecraft.client.renderer.rendertype.RenderType, net.minecraft.client.renderer.rendertype.RenderType);
+}
+Compiled from "RegisterParticleProvidersEvent.java"
+public final class net.minecraftforge.client.event.RegisterParticleProvidersEvent extends net.minecraftforge.eventbus.api.event.MutableEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.RegisterParticleProvidersEvent> BUS;
+  public net.minecraftforge.client.event.RegisterParticleProvidersEvent(net.minecraft.client.particle.ParticleResources);
+  public <T extends net.minecraft.core.particles.ParticleOptions> void registerSpecial(net.minecraft.core.particles.ParticleType<T>, net.minecraft.client.particle.ParticleProvider<T>);
+  public <T extends net.minecraft.core.particles.ParticleOptions> void registerSpriteSet(net.minecraft.core.particles.ParticleType<T>, net.minecraft.client.particle.ParticleResources$SpriteParticleRegistration<T>);
+}
+Compiled from "RegisterPictureInPictureRendererEvent.java"
+public final class net.minecraftforge.client.event.RegisterPictureInPictureRendererEvent extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.eventbus.api.event.characteristic.SelfDestructing {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.RegisterPictureInPictureRendererEvent> BUS;
+  public net.minecraftforge.client.event.RegisterPictureInPictureRendererEvent(java.util.List<net.minecraft.client.gui.render.pip.PictureInPictureRenderer<?>>, com.google.common.collect.ImmutableMap$Builder<java.lang.Class<? extends net.minecraft.client.renderer.state.gui.pip.PictureInPictureRenderState>, net.minecraft.client.gui.render.pip.PictureInPictureRenderer<?>>);
+  public void register(net.minecraft.client.gui.render.pip.PictureInPictureRenderer<?>);
+}
+Compiled from "RegisterPresetEditorsEvent.java"
+public final class net.minecraftforge.client.event.RegisterPresetEditorsEvent implements net.minecraftforge.eventbus.api.event.characteristic.SelfDestructing,net.minecraftforge.fml.event.IModBusEvent {
+  public static net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.RegisterPresetEditorsEvent> getBus(net.minecraftforge.eventbus.api.bus.BusGroup);
+  public net.minecraftforge.client.event.RegisterPresetEditorsEvent(java.util.Map<net.minecraft.resources.ResourceKey<net.minecraft.world.level.levelgen.presets.WorldPreset>, net.minecraft.client.gui.screens.worldselection.PresetEditor>);
+  public void register(net.minecraft.resources.ResourceKey<net.minecraft.world.level.levelgen.presets.WorldPreset>, net.minecraft.client.gui.screens.worldselection.PresetEditor);
+}
+Compiled from "RegisterTextureAtlasSpriteLoadersEvent.java"
+public final class net.minecraftforge.client.event.RegisterTextureAtlasSpriteLoadersEvent extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.eventbus.api.event.characteristic.SelfDestructing {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.RegisterTextureAtlasSpriteLoadersEvent> BUS;
+  public net.minecraftforge.client.event.RegisterTextureAtlasSpriteLoadersEvent(com.google.common.collect.BiMap<net.minecraft.resources.Identifier, net.minecraftforge.client.textures.ITextureAtlasSpriteLoader>);
+  public void register(net.minecraft.resources.Identifier, net.minecraftforge.client.textures.ITextureAtlasSpriteLoader);
+}
+Compiled from "RenderArmEvent.java"
+public final class net.minecraftforge.client.event.RenderArmEvent extends java.lang.Record implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.client.event.RenderArmEvent> BUS;
+  public net.minecraftforge.client.event.RenderArmEvent(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.SubmitNodeCollector, int, net.minecraft.world.entity.HumanoidArm);
+  public int getPackedLight();
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public com.mojang.blaze3d.vertex.PoseStack getPoseStack();
+  public net.minecraft.client.renderer.SubmitNodeCollector getNodeCollector();
+  public net.minecraft.world.entity.HumanoidArm getArm();
+}
+Compiled from "RenderAvatarEvent.java"
+public interface net.minecraftforge.client.event.RenderAvatarEvent {
+  public abstract net.minecraft.client.renderer.entity.state.AvatarRenderState getState();
+  public abstract net.minecraft.client.renderer.entity.player.AvatarRenderer<?> getRenderer();
+  public default <AvatarlikeEntity extends net.minecraft.world.entity.Avatar & net.minecraft.client.entity.ClientAvatarEntity> net.minecraft.client.renderer.entity.player.AvatarRenderer<AvatarlikeEntity> getRendererTyped();
+  public abstract com.mojang.blaze3d.vertex.PoseStack getPoseStack();
+  public abstract net.minecraft.client.renderer.SubmitNodeCollector getNodeCollector();
+  public abstract net.minecraft.client.renderer.state.level.CameraRenderState getCameraState();
+}
+Compiled from "RenderAvatarEvent.java"
+public final class net.minecraftforge.client.event.RenderAvatarEvent$Post extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent,net.minecraftforge.client.event.RenderAvatarEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.RenderAvatarEvent$Post> BUS;
+  public net.minecraftforge.client.event.RenderAvatarEvent$Post(net.minecraft.client.renderer.entity.state.AvatarRenderState, net.minecraft.client.renderer.entity.player.AvatarRenderer<?>, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.SubmitNodeCollector, net.minecraft.client.renderer.state.level.CameraRenderState);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.client.renderer.entity.state.AvatarRenderState getState();
+  public net.minecraft.client.renderer.entity.player.AvatarRenderer<?> getRenderer();
+  public com.mojang.blaze3d.vertex.PoseStack getPoseStack();
+  public net.minecraft.client.renderer.SubmitNodeCollector getNodeCollector();
+  public net.minecraft.client.renderer.state.level.CameraRenderState getCameraState();
+}
+Compiled from "RenderAvatarEvent.java"
+public final class net.minecraftforge.client.event.RenderAvatarEvent$Pre extends java.lang.Record implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.eventbus.api.event.RecordEvent,net.minecraftforge.client.event.RenderAvatarEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.client.event.RenderAvatarEvent$Pre> BUS;
+  public net.minecraftforge.client.event.RenderAvatarEvent$Pre(net.minecraft.client.renderer.entity.state.AvatarRenderState, net.minecraft.client.renderer.entity.player.AvatarRenderer<?>, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.SubmitNodeCollector, net.minecraft.client.renderer.state.level.CameraRenderState);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.client.renderer.entity.state.AvatarRenderState getState();
+  public net.minecraft.client.renderer.entity.player.AvatarRenderer<?> getRenderer();
+  public com.mojang.blaze3d.vertex.PoseStack getPoseStack();
+  public net.minecraft.client.renderer.SubmitNodeCollector getNodeCollector();
+  public net.minecraft.client.renderer.state.level.CameraRenderState getCameraState();
+}
+Compiled from "RenderBlockScreenEffectEvent.java"
+public final class net.minecraftforge.client.event.RenderBlockScreenEffectEvent extends java.lang.Record implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.client.event.RenderBlockScreenEffectEvent> BUS;
+  public net.minecraftforge.client.event.RenderBlockScreenEffectEvent(net.minecraft.world.entity.player.Player, com.mojang.blaze3d.vertex.PoseStack, net.minecraftforge.client.event.RenderBlockScreenEffectEvent$OverlayType, net.minecraft.world.level.block.state.BlockState, net.minecraft.core.BlockPos);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.world.entity.player.Player getPlayer();
+  public com.mojang.blaze3d.vertex.PoseStack getPoseStack();
+  public net.minecraftforge.client.event.RenderBlockScreenEffectEvent$OverlayType getOverlayType();
+  public net.minecraft.world.level.block.state.BlockState getBlockState();
+  public net.minecraft.core.BlockPos getBlockPos();
+}
+Compiled from "RenderBlockScreenEffectEvent.java"
+public final class net.minecraftforge.client.event.RenderBlockScreenEffectEvent$OverlayType extends java.lang.Enum<net.minecraftforge.client.event.RenderBlockScreenEffectEvent$OverlayType> {
+  public static final net.minecraftforge.client.event.RenderBlockScreenEffectEvent$OverlayType FIRE;
+  public static final net.minecraftforge.client.event.RenderBlockScreenEffectEvent$OverlayType BLOCK;
+  public static final net.minecraftforge.client.event.RenderBlockScreenEffectEvent$OverlayType WATER;
+  public static net.minecraftforge.client.event.RenderBlockScreenEffectEvent$OverlayType[] values();
+  public static net.minecraftforge.client.event.RenderBlockScreenEffectEvent$OverlayType valueOf(java.lang.String);
+}
+Compiled from "RenderHandEvent.java"
+public final class net.minecraftforge.client.event.RenderHandEvent extends java.lang.Record implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.client.event.RenderHandEvent> BUS;
+  public net.minecraftforge.client.event.RenderHandEvent(net.minecraft.world.InteractionHand, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.SubmitNodeCollector, int, float, float, float, float, net.minecraft.world.item.ItemStack);
+  public int getPackedLight();
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.world.InteractionHand getHand();
+  public com.mojang.blaze3d.vertex.PoseStack getPoseStack();
+  public net.minecraft.client.renderer.SubmitNodeCollector getNodeCollector();
+  public float getPartialTick();
+  public float getInterpolatedPitch();
+  public float getSwingProgress();
+  public float getEquipProgress();
+  public net.minecraft.world.item.ItemStack getItemStack();
+}
+Compiled from "RenderHighlightEvent.java"
+public abstract class net.minecraftforge.client.event.RenderHighlightEvent extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.eventbus.api.event.InheritableEvent {
+  public net.minecraft.client.renderer.extract.LevelExtractor getLevelExtractor();
+  public net.minecraft.client.renderer.state.level.LevelRenderState getLevelRenderState();
+  public net.minecraft.client.Camera getCamera();
+  public net.minecraftforge.client.event.RenderHighlightEvent$Callback getCustomRenderer();
+  public void setCustomRenderer(net.minecraftforge.client.event.RenderHighlightEvent$Callback);
+}
+Compiled from "RenderHighlightEvent.java"
+public final class net.minecraftforge.client.event.RenderHighlightEvent$Block extends net.minecraftforge.client.event.RenderHighlightEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.client.event.RenderHighlightEvent$Block> BUS;
+  public net.minecraftforge.client.event.RenderHighlightEvent$Block(net.minecraft.client.renderer.extract.LevelExtractor, net.minecraft.client.Camera, net.minecraft.client.renderer.state.level.LevelRenderState, net.minecraft.world.phys.BlockHitResult);
+  public net.minecraft.world.phys.BlockHitResult getTarget();
+  public net.minecraft.world.phys.HitResult getTarget();
+}
+Compiled from "RenderHighlightEvent.java"
+public interface net.minecraftforge.client.event.RenderHighlightEvent$Callback {
+  public abstract void render(net.minecraft.client.renderer.SubmitNodeCollector, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.state.level.LevelRenderState);
+}
+Compiled from "RenderHighlightEvent.java"
+public final class net.minecraftforge.client.event.RenderHighlightEvent$Entity extends net.minecraftforge.client.event.RenderHighlightEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.client.event.RenderHighlightEvent$Entity> BUS;
+  public net.minecraftforge.client.event.RenderHighlightEvent$Entity(net.minecraft.client.renderer.extract.LevelExtractor, net.minecraft.client.Camera, net.minecraft.client.renderer.state.level.LevelRenderState, net.minecraft.world.phys.EntityHitResult);
+  public net.minecraft.world.phys.EntityHitResult getTarget();
+  public net.minecraft.world.phys.HitResult getTarget();
+}
+Compiled from "RenderItemInFrameEvent.java"
+public final class net.minecraftforge.client.event.RenderItemInFrameEvent extends java.lang.Record implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.client.event.RenderItemInFrameEvent> BUS;
+  public net.minecraftforge.client.event.RenderItemInFrameEvent(net.minecraft.client.renderer.entity.state.ItemFrameRenderState, net.minecraft.client.renderer.entity.ItemFrameRenderer<?>, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.SubmitNodeCollector, int);
+  public int getPackedLight();
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.client.renderer.entity.state.ItemFrameRenderState getItemFrameState();
+  public net.minecraft.client.renderer.entity.ItemFrameRenderer<?> getRenderer();
+  public com.mojang.blaze3d.vertex.PoseStack getPoseStack();
+  public net.minecraft.client.renderer.SubmitNodeCollector getNodeCollector();
+}
+Compiled from "RenderLivingEvent.java"
+public interface net.minecraftforge.client.event.RenderLivingEvent<T extends net.minecraft.world.entity.LivingEntity, S extends net.minecraft.client.renderer.entity.state.LivingEntityRenderState, M extends net.minecraft.client.model.EntityModel<? super S>> {
+  public abstract S getState();
+  public abstract net.minecraft.client.renderer.entity.LivingEntityRenderer<T, S, M> getRenderer();
+  public abstract com.mojang.blaze3d.vertex.PoseStack getPoseStack();
+  public abstract net.minecraft.client.renderer.SubmitNodeCollector getNodeCollector();
+  public abstract net.minecraft.client.renderer.state.level.CameraRenderState getCameraState();
+}
+Compiled from "RenderLivingEvent.java"
+public final class net.minecraftforge.client.event.RenderLivingEvent$Post<T extends net.minecraft.world.entity.LivingEntity, S extends net.minecraft.client.renderer.entity.state.LivingEntityRenderState, M extends net.minecraft.client.model.EntityModel<? super S>> extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent, net.minecraftforge.client.event.RenderLivingEvent<T, S, M> {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.RenderLivingEvent$Post> BUS;
+  public net.minecraftforge.client.event.RenderLivingEvent$Post(S, net.minecraft.client.renderer.entity.LivingEntityRenderer<T, S, M>, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.SubmitNodeCollector, net.minecraft.client.renderer.state.level.CameraRenderState);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public S getState();
+  public net.minecraft.client.renderer.entity.LivingEntityRenderer<T, S, M> getRenderer();
+  public com.mojang.blaze3d.vertex.PoseStack getPoseStack();
+  public net.minecraft.client.renderer.SubmitNodeCollector getNodeCollector();
+  public net.minecraft.client.renderer.state.level.CameraRenderState getCameraState();
+}
+Compiled from "RenderLivingEvent.java"
+public final class net.minecraftforge.client.event.RenderLivingEvent$Pre<T extends net.minecraft.world.entity.LivingEntity, S extends net.minecraft.client.renderer.entity.state.LivingEntityRenderState, M extends net.minecraft.client.model.EntityModel<? super S>> extends java.lang.Record implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable, net.minecraftforge.client.event.RenderLivingEvent<T, S, M>, net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.client.event.RenderLivingEvent$Pre> BUS;
+  public net.minecraftforge.client.event.RenderLivingEvent$Pre(S, net.minecraft.client.renderer.entity.LivingEntityRenderer<T, S, M>, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.SubmitNodeCollector, net.minecraft.client.renderer.state.level.CameraRenderState);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public S getState();
+  public net.minecraft.client.renderer.entity.LivingEntityRenderer<T, S, M> getRenderer();
+  public com.mojang.blaze3d.vertex.PoseStack getPoseStack();
+  public net.minecraft.client.renderer.SubmitNodeCollector getNodeCollector();
+  public net.minecraft.client.renderer.state.level.CameraRenderState getCameraState();
+}
+Compiled from "RenderNameTagEvent.java"
+public final class net.minecraftforge.client.event.RenderNameTagEvent extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.RenderNameTagEvent> BUS;
+  public net.minecraftforge.client.event.RenderNameTagEvent(net.minecraft.client.renderer.entity.state.EntityRenderState, net.minecraft.client.renderer.entity.EntityRenderer<?, ?>, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.SubmitNodeCollector, net.minecraft.client.renderer.state.level.CameraRenderState);
+  public <T extends net.minecraft.client.renderer.entity.state.EntityRenderState> T getState();
+  public void setContent(net.minecraft.network.chat.Component);
+  public net.minecraft.network.chat.Component getContent();
+  public void setScoreContent(net.minecraft.network.chat.Component);
+  public net.minecraft.network.chat.Component getScoreContent();
+  public net.minecraft.network.chat.Component getOriginalContent();
+  public net.minecraft.network.chat.Component getOriginalScore();
+  public net.minecraft.client.renderer.entity.EntityRenderer<?, ?> getEntityRenderer();
+  public com.mojang.blaze3d.vertex.PoseStack getPoseStack();
+  public net.minecraft.client.renderer.SubmitNodeCollector getNodeCollector();
+  public net.minecraft.client.renderer.state.level.CameraRenderState getCameraState();
+}
+Compiled from "RenderTooltipEvent.java"
+public abstract class net.minecraftforge.client.event.RenderTooltipEvent extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.eventbus.api.event.InheritableEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.RenderTooltipEvent> BUS;
+  protected final net.minecraft.world.item.ItemStack itemStack;
+  protected final net.minecraft.client.gui.GuiGraphicsExtractor graphics;
+  protected int x;
+  protected int y;
+  protected net.minecraft.client.gui.Font font;
+  protected final java.util.List<net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent> components;
+  protected net.minecraftforge.client.event.RenderTooltipEvent(net.minecraft.world.item.ItemStack, net.minecraft.client.gui.GuiGraphicsExtractor, int, int, net.minecraft.client.gui.Font, java.util.List<net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent>);
+  public net.minecraft.world.item.ItemStack getItemStack();
+  public net.minecraft.client.gui.GuiGraphicsExtractor getGraphics();
+  public java.util.List<net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent> getComponents();
+  public int getX();
+  public int getY();
+  public net.minecraft.client.gui.Font getFont();
+}
+Compiled from "RenderTooltipEvent.java"
+public final class net.minecraftforge.client.event.RenderTooltipEvent$GatherComponents extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.client.event.RenderTooltipEvent$GatherComponents> BUS;
+  public net.minecraftforge.client.event.RenderTooltipEvent$GatherComponents(net.minecraft.world.item.ItemStack, int, int, java.util.List<com.mojang.datafixers.util.Either<net.minecraft.network.chat.FormattedText, net.minecraft.world.inventory.tooltip.TooltipComponent>>, int);
+  public net.minecraft.world.item.ItemStack getItemStack();
+  public int getScreenWidth();
+  public int getScreenHeight();
+  public java.util.List<com.mojang.datafixers.util.Either<net.minecraft.network.chat.FormattedText, net.minecraft.world.inventory.tooltip.TooltipComponent>> getTooltipElements();
+  public int getMaxWidth();
+  public void setMaxWidth(int);
+}
+Compiled from "RenderTooltipEvent.java"
+public final class net.minecraftforge.client.event.RenderTooltipEvent$Pre extends net.minecraftforge.client.event.RenderTooltipEvent implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.client.event.RenderTooltipEvent$Pre> BUS;
+  public net.minecraftforge.client.event.RenderTooltipEvent$Pre(net.minecraft.world.item.ItemStack, net.minecraft.client.gui.GuiGraphicsExtractor, int, int, int, int, net.minecraft.client.gui.Font, java.util.List<net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent>, net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipPositioner, net.minecraft.resources.Identifier);
+  public int getScreenWidth();
+  public int getScreenHeight();
+  public net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipPositioner getTooltipPositioner();
+  public void setFont(net.minecraft.client.gui.Font);
+  public void setX(int);
+  public void setY(int);
+  public void setBackground(net.minecraft.resources.Identifier);
+  public net.minecraft.resources.Identifier getBackground();
+  public net.minecraft.resources.Identifier getOriginalBackground();
+}
+Compiled from "ScreenEvent.java"
+public interface net.minecraftforge.client.event.ScreenEvent {
+  public abstract net.minecraft.client.gui.screens.Screen getScreen();
+}
+Compiled from "ScreenEvent.java"
+public final class net.minecraftforge.client.event.ScreenEvent$BackgroundRendered extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent,net.minecraftforge.client.event.ScreenEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.ScreenEvent$BackgroundRendered> BUS;
+  public net.minecraftforge.client.event.ScreenEvent$BackgroundRendered(net.minecraft.client.gui.screens.Screen, net.minecraft.client.gui.GuiGraphicsExtractor);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.client.gui.screens.Screen getScreen();
+  public net.minecraft.client.gui.GuiGraphicsExtractor getGuiGraphics();
+}
+Compiled from "ScreenEvent.java"
+public interface net.minecraftforge.client.event.ScreenEvent$CharacterTyped extends net.minecraftforge.client.event.ScreenEvent {
+  public abstract net.minecraft.client.input.CharacterEvent getInfo();
+  public default char getCodePoint();
+}
+Compiled from "ScreenEvent.java"
+public final class net.minecraftforge.client.event.ScreenEvent$CharacterTyped$Post extends java.lang.Record implements net.minecraftforge.client.event.ScreenEvent$CharacterTyped,net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.ScreenEvent$CharacterTyped$Post> BUS;
+  public net.minecraftforge.client.event.ScreenEvent$CharacterTyped$Post(net.minecraft.client.gui.screens.Screen, net.minecraft.client.input.CharacterEvent);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.client.gui.screens.Screen getScreen();
+  public net.minecraft.client.input.CharacterEvent getInfo();
+}
+Compiled from "ScreenEvent.java"
+public final class net.minecraftforge.client.event.ScreenEvent$CharacterTyped$Pre extends java.lang.Record implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.client.event.ScreenEvent$CharacterTyped,net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.client.event.ScreenEvent$CharacterTyped$Pre> BUS;
+  public net.minecraftforge.client.event.ScreenEvent$CharacterTyped$Pre(net.minecraft.client.gui.screens.Screen, net.minecraft.client.input.CharacterEvent);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.client.gui.screens.Screen getScreen();
+  public net.minecraft.client.input.CharacterEvent getInfo();
+}
+Compiled from "ScreenEvent.java"
+public final class net.minecraftforge.client.event.ScreenEvent$Closing extends java.lang.Record implements net.minecraftforge.client.event.ScreenEvent,net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.ScreenEvent$Closing> BUS;
+  public net.minecraftforge.client.event.ScreenEvent$Closing(net.minecraft.client.gui.screens.Screen);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.client.gui.screens.Screen getScreen();
+}
+Compiled from "ScreenEvent.java"
+public abstract class net.minecraftforge.client.event.ScreenEvent$Init extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.client.event.ScreenEvent {
+  protected net.minecraftforge.client.event.ScreenEvent$Init(net.minecraft.client.gui.screens.Screen, java.util.List<net.minecraft.client.gui.components.events.GuiEventListener>, java.util.function.Consumer<net.minecraft.client.gui.components.events.GuiEventListener>, java.util.function.Consumer<net.minecraft.client.gui.components.events.GuiEventListener>);
+  public net.minecraft.client.gui.screens.Screen getScreen();
+  public java.util.List<net.minecraft.client.gui.components.events.GuiEventListener> getListenersList();
+  public void addListener(net.minecraft.client.gui.components.events.GuiEventListener);
+  public void removeListener(net.minecraft.client.gui.components.events.GuiEventListener);
+}
+Compiled from "ScreenEvent.java"
+public final class net.minecraftforge.client.event.ScreenEvent$Init$Post extends net.minecraftforge.client.event.ScreenEvent$Init {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.ScreenEvent$Init$Post> BUS;
+  public net.minecraftforge.client.event.ScreenEvent$Init$Post(net.minecraft.client.gui.screens.Screen, java.util.List<net.minecraft.client.gui.components.events.GuiEventListener>, java.util.function.Consumer<net.minecraft.client.gui.components.events.GuiEventListener>, java.util.function.Consumer<net.minecraft.client.gui.components.events.GuiEventListener>);
+}
+Compiled from "ScreenEvent.java"
+public final class net.minecraftforge.client.event.ScreenEvent$Init$Pre extends net.minecraftforge.client.event.ScreenEvent$Init implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.client.event.ScreenEvent$Init$Pre> BUS;
+  public net.minecraftforge.client.event.ScreenEvent$Init$Pre(net.minecraft.client.gui.screens.Screen, java.util.List<net.minecraft.client.gui.components.events.GuiEventListener>, java.util.function.Consumer<net.minecraft.client.gui.components.events.GuiEventListener>, java.util.function.Consumer<net.minecraft.client.gui.components.events.GuiEventListener>);
+}
+Compiled from "ScreenEvent.java"
+public interface net.minecraftforge.client.event.ScreenEvent$KeyInput extends net.minecraftforge.client.event.ScreenEvent {
+  public abstract net.minecraft.client.input.KeyEvent getInfo();
+  public default int getKeyCode();
+  public default int getScanCode();
+  public default int getModifiers();
+}
+Compiled from "ScreenEvent.java"
+public interface net.minecraftforge.client.event.ScreenEvent$KeyPressed extends net.minecraftforge.client.event.ScreenEvent$KeyInput {
+}
+Compiled from "ScreenEvent.java"
+public final class net.minecraftforge.client.event.ScreenEvent$KeyPressed$Post extends java.lang.Record implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.client.event.ScreenEvent$KeyPressed,net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.client.event.ScreenEvent$KeyPressed$Post> BUS;
+  public net.minecraftforge.client.event.ScreenEvent$KeyPressed$Post(net.minecraft.client.gui.screens.Screen, net.minecraft.client.input.KeyEvent);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.client.gui.screens.Screen getScreen();
+  public net.minecraft.client.input.KeyEvent getInfo();
+}
+Compiled from "ScreenEvent.java"
+public final class net.minecraftforge.client.event.ScreenEvent$KeyPressed$Pre extends java.lang.Record implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.client.event.ScreenEvent$KeyPressed,net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.client.event.ScreenEvent$KeyPressed$Pre> BUS;
+  public net.minecraftforge.client.event.ScreenEvent$KeyPressed$Pre(net.minecraft.client.gui.screens.Screen, net.minecraft.client.input.KeyEvent);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.client.gui.screens.Screen getScreen();
+  public net.minecraft.client.input.KeyEvent getInfo();
+}
+Compiled from "ScreenEvent.java"
+public interface net.minecraftforge.client.event.ScreenEvent$KeyReleased extends net.minecraftforge.client.event.ScreenEvent$KeyInput {
+}
+Compiled from "ScreenEvent.java"
+public final class net.minecraftforge.client.event.ScreenEvent$KeyReleased$Post extends java.lang.Record implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.client.event.ScreenEvent$KeyReleased,net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.client.event.ScreenEvent$KeyReleased$Post> BUS;
+  public net.minecraftforge.client.event.ScreenEvent$KeyReleased$Post(net.minecraft.client.gui.screens.Screen, net.minecraft.client.input.KeyEvent);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.client.gui.screens.Screen getScreen();
+  public net.minecraft.client.input.KeyEvent getInfo();
+}
+Compiled from "ScreenEvent.java"
+public final class net.minecraftforge.client.event.ScreenEvent$KeyReleased$Pre extends java.lang.Record implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.client.event.ScreenEvent$KeyReleased,net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.client.event.ScreenEvent$KeyReleased$Pre> BUS;
+  public net.minecraftforge.client.event.ScreenEvent$KeyReleased$Pre(net.minecraft.client.gui.screens.Screen, net.minecraft.client.input.KeyEvent);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.client.gui.screens.Screen getScreen();
+  public net.minecraft.client.input.KeyEvent getInfo();
+}
+Compiled from "ScreenEvent.java"
+public interface net.minecraftforge.client.event.ScreenEvent$MouseButtonPressed extends net.minecraftforge.client.event.ScreenEvent$MouseInput {
+  public abstract net.minecraft.client.input.MouseButtonEvent getInfo();
+  public default int getButton();
+}
+Compiled from "ScreenEvent.java"
+public final class net.minecraftforge.client.event.ScreenEvent$MouseButtonPressed$Post extends java.lang.Record implements net.minecraftforge.common.util.HasResult$Record,net.minecraftforge.client.event.ScreenEvent$MouseButtonPressed,net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.ScreenEvent$MouseButtonPressed$Post> BUS;
+  public net.minecraftforge.client.event.ScreenEvent$MouseButtonPressed$Post(net.minecraft.client.gui.screens.Screen, double, double, net.minecraft.client.input.MouseButtonEvent, boolean, net.minecraftforge.common.util.Result$Holder);
+  public boolean wasHandled();
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.client.gui.screens.Screen getScreen();
+  public double getMouseX();
+  public double getMouseY();
+  public net.minecraft.client.input.MouseButtonEvent getInfo();
+  public net.minecraftforge.common.util.Result$Holder resultHolder();
+}
+Compiled from "ScreenEvent.java"
+public final class net.minecraftforge.client.event.ScreenEvent$MouseButtonPressed$Pre extends java.lang.Record implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.client.event.ScreenEvent$MouseButtonPressed,net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.client.event.ScreenEvent$MouseButtonPressed$Pre> BUS;
+  public net.minecraftforge.client.event.ScreenEvent$MouseButtonPressed$Pre(net.minecraft.client.gui.screens.Screen, double, double, net.minecraft.client.input.MouseButtonEvent);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.client.gui.screens.Screen getScreen();
+  public double getMouseX();
+  public double getMouseY();
+  public net.minecraft.client.input.MouseButtonEvent getInfo();
+}
+Compiled from "ScreenEvent.java"
+public interface net.minecraftforge.client.event.ScreenEvent$MouseButtonReleased extends net.minecraftforge.client.event.ScreenEvent$MouseInput {
+  public abstract int getButton();
+}
+Compiled from "ScreenEvent.java"
+public final class net.minecraftforge.client.event.ScreenEvent$MouseButtonReleased$Post extends java.lang.Record implements net.minecraftforge.client.event.ScreenEvent$MouseButtonReleased,net.minecraftforge.eventbus.api.event.RecordEvent,net.minecraftforge.common.util.HasResult$Record {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.ScreenEvent$MouseButtonReleased$Post> BUS;
+  public net.minecraftforge.client.event.ScreenEvent$MouseButtonReleased$Post(net.minecraft.client.gui.screens.Screen, double, double, int, boolean);
+  public net.minecraftforge.client.event.ScreenEvent$MouseButtonReleased$Post(net.minecraft.client.gui.screens.Screen, double, double, int, boolean, net.minecraftforge.common.util.Result$Holder);
+  public boolean wasHandled();
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.client.gui.screens.Screen getScreen();
+  public double getMouseX();
+  public double getMouseY();
+  public int getButton();
+  public net.minecraftforge.common.util.Result$Holder resultHolder();
+}
+Compiled from "ScreenEvent.java"
+public final class net.minecraftforge.client.event.ScreenEvent$MouseButtonReleased$Pre extends java.lang.Record implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.client.event.ScreenEvent$MouseButtonReleased,net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.client.event.ScreenEvent$MouseButtonReleased$Pre> BUS;
+  public net.minecraftforge.client.event.ScreenEvent$MouseButtonReleased$Pre(net.minecraft.client.gui.screens.Screen, double, double, int);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.client.gui.screens.Screen getScreen();
+  public double getMouseX();
+  public double getMouseY();
+  public int getButton();
+}
+Compiled from "ScreenEvent.java"
+public interface net.minecraftforge.client.event.ScreenEvent$MouseDragged extends net.minecraftforge.client.event.ScreenEvent$MouseInput {
+  public abstract int getMouseButton();
+  public abstract double getDragX();
+  public abstract double getDragY();
+}
+Compiled from "ScreenEvent.java"
+public final class net.minecraftforge.client.event.ScreenEvent$MouseDragged$Post extends java.lang.Record implements net.minecraftforge.client.event.ScreenEvent$MouseDragged,net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.ScreenEvent$MouseDragged$Post> BUS;
+  public net.minecraftforge.client.event.ScreenEvent$MouseDragged$Post(net.minecraft.client.gui.screens.Screen, double, double, int, double, double);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.client.gui.screens.Screen getScreen();
+  public double getMouseX();
+  public double getMouseY();
+  public int getMouseButton();
+  public double getDragX();
+  public double getDragY();
+}
+Compiled from "ScreenEvent.java"
+public final class net.minecraftforge.client.event.ScreenEvent$MouseDragged$Pre extends java.lang.Record implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.client.event.ScreenEvent$MouseDragged,net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.client.event.ScreenEvent$MouseDragged$Pre> BUS;
+  public net.minecraftforge.client.event.ScreenEvent$MouseDragged$Pre(net.minecraft.client.gui.screens.Screen, double, double, int, double, double);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.client.gui.screens.Screen getScreen();
+  public double getMouseX();
+  public double getMouseY();
+  public int getMouseButton();
+  public double getDragX();
+  public double getDragY();
+}
+Compiled from "ScreenEvent.java"
+public interface net.minecraftforge.client.event.ScreenEvent$MouseInput extends net.minecraftforge.client.event.ScreenEvent {
+  public abstract double getMouseX();
+  public abstract double getMouseY();
+}
+Compiled from "ScreenEvent.java"
+public interface net.minecraftforge.client.event.ScreenEvent$MouseScrolled extends net.minecraftforge.client.event.ScreenEvent$MouseInput {
+  public abstract double getDeltaX();
+  public abstract double getDeltaY();
+}
+Compiled from "ScreenEvent.java"
+public final class net.minecraftforge.client.event.ScreenEvent$MouseScrolled$Post extends java.lang.Record implements net.minecraftforge.client.event.ScreenEvent$MouseScrolled,net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.ScreenEvent$MouseScrolled$Post> BUS;
+  public net.minecraftforge.client.event.ScreenEvent$MouseScrolled$Post(net.minecraft.client.gui.screens.Screen, double, double, double, double);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.client.gui.screens.Screen getScreen();
+  public double getMouseX();
+  public double getMouseY();
+  public double getDeltaX();
+  public double getDeltaY();
+}
+Compiled from "ScreenEvent.java"
+public final class net.minecraftforge.client.event.ScreenEvent$MouseScrolled$Pre extends java.lang.Record implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.client.event.ScreenEvent$MouseScrolled,net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.client.event.ScreenEvent$MouseScrolled$Pre> BUS;
+  public net.minecraftforge.client.event.ScreenEvent$MouseScrolled$Pre(net.minecraft.client.gui.screens.Screen, double, double, double, double);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.client.gui.screens.Screen getScreen();
+  public double getMouseX();
+  public double getMouseY();
+  public double getDeltaX();
+  public double getDeltaY();
+}
+Compiled from "ScreenEvent.java"
+public final class net.minecraftforge.client.event.ScreenEvent$Opening extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.client.event.ScreenEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.client.event.ScreenEvent$Opening> BUS;
+  public net.minecraftforge.client.event.ScreenEvent$Opening(net.minecraft.client.gui.screens.Screen, net.minecraft.client.gui.screens.Screen);
+  public net.minecraft.client.gui.screens.Screen getScreen();
+  public net.minecraft.client.gui.screens.Screen getCurrentScreen();
+  public net.minecraft.client.gui.screens.Screen getNewScreen();
+  public void setNewScreen(net.minecraft.client.gui.screens.Screen);
+}
+Compiled from "ScreenEvent.java"
+public interface net.minecraftforge.client.event.ScreenEvent$Render extends net.minecraftforge.client.event.ScreenEvent {
+  public abstract net.minecraft.client.gui.GuiGraphicsExtractor getGuiGraphics();
+  public abstract int getMouseX();
+  public abstract int getMouseY();
+  public abstract float getPartialTick();
+}
+Compiled from "ScreenEvent.java"
+public final class net.minecraftforge.client.event.ScreenEvent$Render$Post extends java.lang.Record implements net.minecraftforge.client.event.ScreenEvent$Render,net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.ScreenEvent$Render$Post> BUS;
+  public net.minecraftforge.client.event.ScreenEvent$Render$Post(net.minecraft.client.gui.screens.Screen, net.minecraft.client.gui.GuiGraphicsExtractor, int, int, float);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.client.gui.screens.Screen getScreen();
+  public net.minecraft.client.gui.GuiGraphicsExtractor getGuiGraphics();
+  public int getMouseX();
+  public int getMouseY();
+  public float getPartialTick();
+}
+Compiled from "ScreenEvent.java"
+public final class net.minecraftforge.client.event.ScreenEvent$Render$Pre extends java.lang.Record implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.client.event.ScreenEvent$Render,net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.client.event.ScreenEvent$Render$Pre> BUS;
+  public net.minecraftforge.client.event.ScreenEvent$Render$Pre(net.minecraft.client.gui.screens.Screen, net.minecraft.client.gui.GuiGraphicsExtractor, int, int, float);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.client.gui.screens.Screen getScreen();
+  public net.minecraft.client.gui.GuiGraphicsExtractor getGuiGraphics();
+  public int getMouseX();
+  public int getMouseY();
+  public float getPartialTick();
+}
+Compiled from "ScreenEvent.java"
+public final class net.minecraftforge.client.event.ScreenEvent$RenderInventoryMobEffects extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.client.event.ScreenEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.client.event.ScreenEvent$RenderInventoryMobEffects> BUS;
+  public net.minecraftforge.client.event.ScreenEvent$RenderInventoryMobEffects(net.minecraft.client.gui.screens.Screen, int, boolean, int);
+  public net.minecraft.client.gui.screens.Screen getScreen();
+  public int getAvailableSpace();
+  public boolean isCompact();
+  public int getHorizontalOffset();
+  public void setHorizontalOffset(int);
+  public void addHorizontalOffset(int);
+  public void setCompact(boolean);
+}
+Compiled from "ScreenshotEvent.java"
+public final class net.minecraftforge.client.event.ScreenshotEvent extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.client.event.ScreenshotEvent> BUS;
+  public static final net.minecraft.network.chat.Component DEFAULT_CANCEL_REASON;
+  public net.minecraftforge.client.event.ScreenshotEvent(com.mojang.blaze3d.platform.NativeImage, java.io.File);
+  public com.mojang.blaze3d.platform.NativeImage getImage();
+  public java.io.File getScreenshotFile();
+  public void setScreenshotFile(java.io.File);
+  public net.minecraft.network.chat.Component getResultMessage();
+  public void setResultMessage(net.minecraft.network.chat.Component);
+  public net.minecraft.network.chat.Component getCancelMessage();
+}
+Compiled from "SystemMessageReceivedEvent.java"
+public final class net.minecraftforge.client.event.SystemMessageReceivedEvent extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.client.event.SystemMessageReceivedEvent> BUS;
+  public net.minecraftforge.client.event.SystemMessageReceivedEvent(net.minecraft.network.chat.Component, boolean);
+  public boolean isOverlay();
+  public net.minecraft.network.chat.Component getMessage();
+  public void setMessage(net.minecraft.network.chat.Component);
+}
+Compiled from "TextureStitchEvent.java"
+public interface net.minecraftforge.client.event.TextureStitchEvent {
+  public abstract net.minecraft.client.renderer.texture.TextureAtlas getAtlas();
+}
+Compiled from "TextureStitchEvent.java"
+public final class net.minecraftforge.client.event.TextureStitchEvent$Post extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent,net.minecraftforge.client.event.TextureStitchEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.TextureStitchEvent$Post> BUS;
+  public net.minecraftforge.client.event.TextureStitchEvent$Post(net.minecraft.client.renderer.texture.TextureAtlas);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.client.renderer.texture.TextureAtlas getAtlas();
+}
+Compiled from "ToastAddEvent.java"
+public final class net.minecraftforge.client.event.ToastAddEvent extends java.lang.Record implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.client.event.ToastAddEvent> BUS;
+  public net.minecraftforge.client.event.ToastAddEvent(net.minecraft.client.gui.components.toasts.Toast);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.client.gui.components.toasts.Toast getToast();
+}
+Compiled from "ViewportEvent.java"
+public interface net.minecraftforge.client.event.ViewportEvent {
+  public abstract net.minecraft.client.renderer.GameRenderer getRenderer();
+  public abstract net.minecraft.client.Camera getCamera();
+  public abstract float getPartialTick();
+}
+Compiled from "ViewportEvent.java"
+public final class net.minecraftforge.client.event.ViewportEvent$ComputeCameraAngles extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.client.event.ViewportEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.ViewportEvent$ComputeCameraAngles> BUS;
+  public net.minecraftforge.client.event.ViewportEvent$ComputeCameraAngles(net.minecraft.client.renderer.GameRenderer, net.minecraft.client.Camera, float, float, float, float);
+  public net.minecraft.client.renderer.GameRenderer getRenderer();
+  public net.minecraft.client.Camera getCamera();
+  public float getPartialTick();
+  public float getYaw();
+  public void setYaw(float);
+  public float getPitch();
+  public void setPitch(float);
+  public float getRoll();
+  public void setRoll(float);
+}
+Compiled from "ViewportEvent.java"
+public final class net.minecraftforge.client.event.ViewportEvent$ComputeFogColor extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.client.event.ViewportEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.ViewportEvent$ComputeFogColor> BUS;
+  public net.minecraftforge.client.event.ViewportEvent$ComputeFogColor(net.minecraft.client.Camera, float, float, float, float);
+  public net.minecraft.client.renderer.GameRenderer getRenderer();
+  public net.minecraft.client.Camera getCamera();
+  public float getPartialTick();
+  public float getRed();
+  public void setRed(float);
+  public float getGreen();
+  public void setGreen(float);
+  public float getBlue();
+  public void setBlue(float);
+}
+Compiled from "ViewportEvent.java"
+public final class net.minecraftforge.client.event.ViewportEvent$ComputeFov extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.client.event.ViewportEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.ViewportEvent$ComputeFov> BUS;
+  public net.minecraftforge.client.event.ViewportEvent$ComputeFov(net.minecraft.client.renderer.GameRenderer, net.minecraft.client.Camera, float, float, boolean);
+  public net.minecraft.client.renderer.GameRenderer getRenderer();
+  public net.minecraft.client.Camera getCamera();
+  public float getPartialTick();
+  public float getFOV();
+  public void setFOV(float);
+  public boolean usedConfiguredFov();
+}
+Compiled from "ViewportEvent.java"
+public final class net.minecraftforge.client.event.ViewportEvent$RenderFog extends java.lang.Record implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.client.event.ViewportEvent,net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.client.event.ViewportEvent$RenderFog> BUS;
+  public net.minecraftforge.client.event.ViewportEvent$RenderFog(net.minecraft.world.level.material.FogType, net.minecraft.client.Camera, float, net.minecraft.client.renderer.fog.FogData, org.joml.Vector4f);
+  public net.minecraftforge.client.event.ViewportEvent$RenderFog(net.minecraft.client.renderer.GameRenderer, net.minecraft.client.Camera, float, net.minecraft.world.level.material.FogType, net.minecraft.client.renderer.fog.FogData, org.joml.Vector4f);
+  public net.minecraft.world.level.material.FogType getType();
+  public float getFarPlaneDistance();
+  public float getNearPlaneDistance();
+  public void setFarPlaneDistance(float);
+  public void setNearPlaneDistance(float);
+  public void scaleFarPlaneDistance(float);
+  public void scaleNearPlaneDistance(float);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.client.renderer.GameRenderer getRenderer();
+  public net.minecraft.client.Camera getCamera();
+  public float getPartialTick();
+  public net.minecraft.client.renderer.fog.FogData getData();
+  public org.joml.Vector4f getColor();
+}
+Compiled from "package-info.java"
+interface net.minecraftforge.client.event.package-info {
+}

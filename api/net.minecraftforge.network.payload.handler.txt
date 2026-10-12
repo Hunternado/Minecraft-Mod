@@ -1,0 +1,9 @@
+Compiled from "PayloadHandlerFlow.java"
+public interface net.minecraftforge.network.payload.handler.PayloadHandlerFlow<BUF extends net.minecraft.network.FriendlyByteBuf, BASE extends net.minecraft.network.protocol.common.custom.CustomPacketPayload> extends net.minecraftforge.network.payload.handler.PayloadHandlerProtocol<BUF, BASE>, net.minecraftforge.network.ChannelBuildable<net.minecraft.network.protocol.common.custom.CustomPacketPayload> {
+  public abstract <MSG extends BASE> net.minecraftforge.network.payload.handler.PayloadHandlerFlow<BUF, BASE> add(net.minecraft.network.protocol.common.custom.CustomPacketPayload$Type<MSG>, net.minecraft.network.codec.StreamCodec<BUF, MSG>);
+  public abstract <MSG extends BASE> net.minecraftforge.network.payload.handler.PayloadHandlerFlow<BUF, BASE> addMain(net.minecraft.network.protocol.common.custom.CustomPacketPayload$Type<MSG>, net.minecraft.network.codec.StreamCodec<BUF, MSG>);
+  public abstract <MSG extends BASE> net.minecraftforge.network.payload.handler.PayloadHandlerFlow<BUF, BASE> add(net.minecraft.network.protocol.common.custom.CustomPacketPayload$Type<MSG>, net.minecraft.network.codec.StreamCodec<BUF, MSG>, java.util.function.BiConsumer<MSG, net.minecraftforge.event.network.CustomPayloadEvent$Context>);
+}
+Compiled from "PayloadHandlerProtocol.java"
+public interface net.minecraftforge.network.payload.handler.PayloadHandlerProtocol<BUF extends net.minecraft.network.FriendlyByteBuf, BASE extends net.minecraft.network.protocol.common.custom.CustomPacketPayload> extends net.minecraftforge.network.simple.BaseProtocol<net.minecraftforge.network.payload.handler.PayloadHandlerFlow<BUF, BASE>, net.minecraftforge.network.payload.handler.PayloadHandlerProtocol<BUF, BASE>>, net.minecraftforge.network.payload.PayloadConnection<BASE> {
+}

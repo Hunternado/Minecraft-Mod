@@ -1,0 +1,15 @@
+Compiled from "ConfigurationTaskContext.java"
+public class net.minecraftforge.network.config.ConfigurationTaskContext {
+  public net.minecraftforge.network.config.ConfigurationTaskContext(net.minecraft.network.Connection, java.util.function.Consumer<net.minecraft.network.protocol.Packet<?>>, java.util.function.Consumer<net.minecraft.server.network.ConfigurationTask$Type>);
+  public net.minecraft.network.Connection getConnection();
+  public void send(net.minecraft.network.protocol.Packet<?>);
+  public void finish(net.minecraft.server.network.ConfigurationTask$Type);
+}
+Compiled from "SimpleConfigurationTask.java"
+public class net.minecraftforge.network.config.SimpleConfigurationTask implements net.minecraft.server.network.ConfigurationTask {
+  public net.minecraftforge.network.config.SimpleConfigurationTask(net.minecraft.server.network.ConfigurationTask$Type, java.util.function.Consumer<net.minecraftforge.network.config.ConfigurationTaskContext>);
+  public net.minecraftforge.network.config.SimpleConfigurationTask(net.minecraft.server.network.ConfigurationTask$Type, java.lang.Runnable);
+  public void start(net.minecraftforge.network.config.ConfigurationTaskContext);
+  public void start(java.util.function.Consumer<net.minecraft.network.protocol.Packet<?>>);
+  public net.minecraft.server.network.ConfigurationTask$Type type();
+}

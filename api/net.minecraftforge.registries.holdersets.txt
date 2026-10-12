@@ -1,0 +1,86 @@
+Compiled from "AndHolderSet.java"
+public class net.minecraftforge.registries.holdersets.AndHolderSet<T> extends net.minecraftforge.registries.holdersets.CompositeHolderSet<T> {
+  public static <T> com.mojang.serialization.MapCodec<? extends net.minecraftforge.registries.holdersets.ICustomHolderSet<T>> codec(net.minecraft.resources.ResourceKey<? extends net.minecraft.core.Registry<T>>, com.mojang.serialization.Codec<net.minecraft.core.Holder<T>>, boolean);
+  public net.minecraftforge.registries.holdersets.AndHolderSet(java.util.List<net.minecraft.core.HolderSet<T>>);
+  public net.minecraftforge.registries.holdersets.HolderSetType type();
+  protected java.util.Set<net.minecraft.core.Holder<T>> createSet();
+  public java.lang.String toString();
+}
+Compiled from "AnyHolderSet.java"
+public final class net.minecraftforge.registries.holdersets.AnyHolderSet<T> extends java.lang.Record implements net.minecraftforge.registries.holdersets.ICustomHolderSet<T> {
+  public net.minecraftforge.registries.holdersets.AnyHolderSet(net.minecraft.core.HolderLookup$RegistryLookup<T>);
+  public static <T> com.mojang.serialization.MapCodec<? extends net.minecraftforge.registries.holdersets.ICustomHolderSet<T>> codec(net.minecraft.resources.ResourceKey<? extends net.minecraft.core.Registry<T>>, com.mojang.serialization.Codec<net.minecraft.core.Holder<T>>, boolean);
+  public net.minecraftforge.registries.holdersets.HolderSetType type();
+  public java.util.Iterator<net.minecraft.core.Holder<T>> iterator();
+  public java.util.stream.Stream<net.minecraft.core.Holder<T>> stream();
+  public int size();
+  public com.mojang.datafixers.util.Either<net.minecraft.tags.TagKey<T>, java.util.List<net.minecraft.core.Holder<T>>> unwrap();
+  public java.util.Optional<net.minecraft.core.Holder<T>> getRandomElement(net.minecraft.util.RandomSource);
+  public net.minecraft.core.Holder<T> get(int);
+  public boolean contains(net.minecraft.core.Holder<T>);
+  public boolean canSerializeIn(net.minecraft.core.HolderOwner<T>);
+  public java.util.Optional<net.minecraft.tags.TagKey<T>> unwrapKey();
+  public java.lang.String toString();
+  public boolean isBound();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.core.HolderLookup$RegistryLookup<T> registryLookup();
+}
+Compiled from "CompositeHolderSet.java"
+public abstract class net.minecraftforge.registries.holdersets.CompositeHolderSet<T> implements net.minecraftforge.registries.holdersets.ICustomHolderSet<T> {
+  public net.minecraftforge.registries.holdersets.CompositeHolderSet(java.util.List<net.minecraft.core.HolderSet<T>>);
+  protected abstract java.util.Set<net.minecraft.core.Holder<T>> createSet();
+  public java.util.List<net.minecraft.core.HolderSet<T>> getComponents();
+  public java.util.Set<net.minecraft.core.Holder<T>> getSet();
+  public java.util.List<net.minecraft.core.Holder<T>> getList();
+  public void addInvalidationListener(java.lang.Runnable);
+  public java.util.stream.Stream<net.minecraft.core.Holder<T>> stream();
+  public int size();
+  public com.mojang.datafixers.util.Either<net.minecraft.tags.TagKey<T>, java.util.List<net.minecraft.core.Holder<T>>> unwrap();
+  public java.util.Optional<net.minecraft.core.Holder<T>> getRandomElement(net.minecraft.util.RandomSource);
+  public net.minecraft.core.Holder<T> get(int);
+  public boolean contains(net.minecraft.core.Holder<T>);
+  public boolean canSerializeIn(net.minecraft.core.HolderOwner<T>);
+  public boolean isBound();
+  public java.util.Optional<net.minecraft.tags.TagKey<T>> unwrapKey();
+  public java.util.Iterator<net.minecraft.core.Holder<T>> iterator();
+  public java.util.List<net.minecraft.core.HolderSet<T>> homogenize();
+  public boolean isHomogenous();
+}
+Compiled from "HolderSetType.java"
+public interface net.minecraftforge.registries.holdersets.HolderSetType {
+  public abstract <T> com.mojang.serialization.MapCodec<? extends net.minecraftforge.registries.holdersets.ICustomHolderSet<T>> makeCodec(net.minecraft.resources.ResourceKey<? extends net.minecraft.core.Registry<T>>, com.mojang.serialization.Codec<net.minecraft.core.Holder<T>>, boolean);
+}
+Compiled from "ICustomHolderSet.java"
+public interface net.minecraftforge.registries.holdersets.ICustomHolderSet<T> extends net.minecraft.core.HolderSet<T> {
+  public abstract net.minecraftforge.registries.holdersets.HolderSetType type();
+  public default net.minecraftforge.common.extensions.IForgeHolderSet$SerializationType serializationType();
+}
+Compiled from "NotHolderSet.java"
+public class net.minecraftforge.registries.holdersets.NotHolderSet<T> implements net.minecraftforge.registries.holdersets.ICustomHolderSet<T> {
+  public static <T> com.mojang.serialization.MapCodec<? extends net.minecraftforge.registries.holdersets.ICustomHolderSet<T>> codec(net.minecraft.resources.ResourceKey<? extends net.minecraft.core.Registry<T>>, com.mojang.serialization.Codec<net.minecraft.core.Holder<T>>, boolean);
+  public net.minecraftforge.registries.holdersets.NotHolderSet(net.minecraft.core.HolderLookup$RegistryLookup<T>, net.minecraft.core.HolderSet<T>);
+  public net.minecraft.core.HolderLookup$RegistryLookup<T> registryLookup();
+  public net.minecraft.core.HolderSet<T> value();
+  public net.minecraftforge.registries.holdersets.HolderSetType type();
+  public void addInvalidationListener(java.lang.Runnable);
+  public java.util.Iterator<net.minecraft.core.Holder<T>> iterator();
+  public java.util.stream.Stream<net.minecraft.core.Holder<T>> stream();
+  public int size();
+  public com.mojang.datafixers.util.Either<net.minecraft.tags.TagKey<T>, java.util.List<net.minecraft.core.Holder<T>>> unwrap();
+  public java.util.Optional<net.minecraft.core.Holder<T>> getRandomElement(net.minecraft.util.RandomSource);
+  public net.minecraft.core.Holder<T> get(int);
+  public boolean contains(net.minecraft.core.Holder<T>);
+  public boolean canSerializeIn(net.minecraft.core.HolderOwner<T>);
+  public java.util.Optional<net.minecraft.tags.TagKey<T>> unwrapKey();
+  public java.lang.String toString();
+  public boolean isBound();
+}
+Compiled from "OrHolderSet.java"
+public class net.minecraftforge.registries.holdersets.OrHolderSet<T> extends net.minecraftforge.registries.holdersets.CompositeHolderSet<T> {
+  public static <T> com.mojang.serialization.MapCodec<? extends net.minecraftforge.registries.holdersets.ICustomHolderSet<T>> codec(net.minecraft.resources.ResourceKey<? extends net.minecraft.core.Registry<T>>, com.mojang.serialization.Codec<net.minecraft.core.Holder<T>>, boolean);
+  public net.minecraftforge.registries.holdersets.OrHolderSet(java.util.List<net.minecraft.core.HolderSet<T>>);
+  public net.minecraftforge.registries.holdersets.HolderSetType type();
+  protected java.util.Set<net.minecraft.core.Holder<T>> createSet();
+  public java.lang.String toString();
+}

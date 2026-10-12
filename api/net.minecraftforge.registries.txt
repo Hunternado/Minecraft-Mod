@@ -1,0 +1,649 @@
+Compiled from "DataPackRegistriesHooks.java"
+public final class net.minecraftforge.registries.DataPackRegistriesHooks {
+  public static java.util.List<net.minecraft.resources.RegistryDataLoader$RegistryData<?>> grabSynchronizedRegistries(net.minecraft.resources.RegistryDataLoader$RegistryData<?>...);
+  public static java.util.List<net.minecraft.resources.RegistryDataLoader$RegistryData<?>> grabWorldgenRegistries(net.minecraft.resources.RegistryDataLoader$RegistryData<?>...);
+  public static java.util.Set<net.minecraft.resources.ResourceKey<? extends net.minecraft.core.Registry<?>>> grabNetworkableRegistries(java.util.function.Supplier<java.util.Set<net.minecraft.resources.ResourceKey<? extends net.minecraft.core.Registry<?>>>>);
+  public static java.util.Set<net.minecraft.resources.ResourceKey<? extends net.minecraft.core.Registry<?>>> getSyncedCustomRegistries();
+}
+Compiled from "DataPackRegistryEvent.java"
+public interface net.minecraftforge.registries.DataPackRegistryEvent {
+}
+Compiled from "DataPackRegistryEvent.java"
+public final class net.minecraftforge.registries.DataPackRegistryEvent$DataPackRegistryData<T> extends java.lang.Record {
+  public net.minecraftforge.registries.DataPackRegistryEvent$DataPackRegistryData(net.minecraft.resources.RegistryDataLoader$RegistryData<T>, com.mojang.serialization.Codec<T>);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.resources.RegistryDataLoader$RegistryData<T> loaderData();
+  public com.mojang.serialization.Codec<T> networkCodec();
+}
+Compiled from "DataPackRegistryEvent.java"
+public final class net.minecraftforge.registries.DataPackRegistryEvent$NewRegistry extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.registries.DataPackRegistryEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.registries.DataPackRegistryEvent$NewRegistry> BUS;
+  public net.minecraftforge.registries.DataPackRegistryEvent$NewRegistry();
+  public <T> void dataPackRegistry(net.minecraft.resources.ResourceKey<net.minecraft.core.Registry<T>>, com.mojang.serialization.Codec<T>);
+  public <T> void dataPackRegistry(net.minecraft.resources.ResourceKey<? extends net.minecraft.core.Registry<T>>, com.mojang.serialization.Codec<T>, com.mojang.serialization.Codec<T>);
+}
+Compiled from "DeferredRegister.java"
+public class net.minecraftforge.registries.DeferredRegister<T> {
+  public static <B> net.minecraftforge.registries.DeferredRegister<B> create(net.minecraftforge.registries.IForgeRegistry<B>, java.lang.String);
+  public static <B> net.minecraftforge.registries.DeferredRegister<B> create(net.minecraftforge.registries.DeferredRegister$RegistryHolder<B>, java.lang.String);
+  public static <B> net.minecraftforge.registries.DeferredRegister<B> create(net.minecraft.resources.ResourceKey<? extends net.minecraft.core.Registry<B>>, java.lang.String);
+  public static <B> net.minecraftforge.registries.DeferredRegister<B> createOptional(net.minecraft.resources.ResourceKey<? extends net.minecraft.core.Registry<B>>, java.lang.String);
+  public static <B> net.minecraftforge.registries.DeferredRegister<B> create(net.minecraft.resources.Identifier, java.lang.String);
+  public static <B> net.minecraftforge.registries.DeferredRegister<B> createOptional(net.minecraft.resources.Identifier, java.lang.String);
+  public <I extends T> net.minecraftforge.registries.RegistryObject<I> register(java.lang.String, java.util.function.Supplier<? extends I>);
+  public net.minecraftforge.registries.DeferredRegister$RegistryHolder<T> makeRegistry(java.util.function.Supplier<net.minecraftforge.registries.RegistryBuilder<T>>);
+  public net.minecraft.resources.ResourceKey<T> key(java.lang.String);
+  public net.minecraft.resources.ResourceKey<T> key(net.minecraft.resources.Identifier);
+  public net.minecraft.tags.TagKey<T> createTagKey(java.lang.String);
+  public net.minecraft.tags.TagKey<T> createTagKey(net.minecraft.resources.Identifier);
+  public net.minecraft.tags.TagKey<T> createOptionalTagKey(java.lang.String, java.util.Set<? extends java.util.function.Supplier<T>>);
+  public net.minecraft.tags.TagKey<T> createOptionalTagKey(net.minecraft.resources.Identifier, java.util.Set<? extends java.util.function.Supplier<T>>);
+  public void addOptionalTagDefaults(net.minecraft.tags.TagKey<T>, java.util.Set<? extends java.util.function.Supplier<T>>);
+  public void register(net.minecraftforge.eventbus.api.bus.BusGroup);
+  public java.util.Collection<net.minecraftforge.registries.RegistryObject<T>> getEntries();
+  public net.minecraft.resources.ResourceKey<? extends net.minecraft.core.Registry<T>> getRegistryKey();
+  public net.minecraft.resources.Identifier getRegistryName();
+}
+Compiled from "DeferredRegister.java"
+final class net.minecraftforge.registries.DeferredRegister$EventDispatcher {
+  public void handleEvent(net.minecraftforge.registries.RegisterEvent);
+  public void createRegistry(net.minecraftforge.registries.NewRegistryEvent);
+}
+Compiled from "DeferredRegister.java"
+public final class net.minecraftforge.registries.DeferredRegister$RegistryHolder<V> implements java.util.function.Supplier<net.minecraftforge.registries.IForgeRegistry<V>> {
+  public net.minecraft.resources.ResourceKey<? extends net.minecraft.core.Registry<V>> getKey();
+  public net.minecraftforge.registries.IForgeRegistry<V> get();
+  public java.lang.Object get();
+}
+Compiled from "DeferredRegisterData.java"
+public class net.minecraftforge.registries.DeferredRegisterData<T> implements net.minecraft.core.RegistrySetBuilder$RegistryBootstrap<T> {
+  public static <B> net.minecraftforge.registries.DeferredRegisterData$Builder<B> builder(net.minecraft.resources.ResourceKey<? extends net.minecraft.core.Registry<B>>, java.lang.String);
+  public static <B> net.minecraftforge.registries.DeferredRegisterData<B> create(net.minecraft.resources.ResourceKey<? extends net.minecraft.core.Registry<B>>, java.lang.String);
+  public <I extends T> net.minecraftforge.registries.RegistryObject<I> register(java.lang.String);
+  public <I extends T> net.minecraftforge.registries.RegistryObject<I> register(java.lang.String, java.util.function.Supplier<? extends I>);
+  public <I extends T> net.minecraftforge.registries.RegistryObject<I> register(java.lang.String, java.util.function.Function<net.minecraft.data.worldgen.BootstrapContext<T>, ? extends I>);
+  public net.minecraft.resources.ResourceKey<T> key(java.lang.String);
+  public net.minecraft.resources.ResourceKey<T> key(net.minecraft.resources.Identifier);
+  public net.minecraft.tags.TagKey<T> createTagKey(java.lang.String);
+  public net.minecraft.tags.TagKey<T> createTagKey(net.minecraft.resources.Identifier);
+  public com.mojang.serialization.Lifecycle getLifecycle();
+  public java.util.Collection<net.minecraftforge.registries.RegistryObject<T>> getEntries();
+  public net.minecraft.resources.ResourceKey<? extends net.minecraft.core.Registry<T>> getRegistryKey();
+  public net.minecraft.resources.Identifier getRegistryName();
+  public boolean isDeclared(net.minecraft.resources.ResourceKey<T>);
+  public void run(net.minecraft.data.worldgen.BootstrapContext<T>);
+}
+Compiled from "DeferredRegisterData.java"
+public class net.minecraftforge.registries.DeferredRegisterData$Builder<T> {
+  public net.minecraftforge.registries.DeferredRegisterData$Builder<T> lifecycle(com.mojang.serialization.Lifecycle);
+  public net.minecraftforge.registries.DeferredRegisterData<T> build();
+}
+Compiled from "ForgeDeferredRegistriesSetup.java"
+public class net.minecraftforge.registries.ForgeDeferredRegistriesSetup {
+  public net.minecraftforge.registries.ForgeDeferredRegistriesSetup();
+  public static void setup(net.minecraftforge.eventbus.api.bus.BusGroup);
+}
+Compiled from "ForgeRegistries.java"
+public class net.minecraftforge.registries.ForgeRegistries {
+  public static final net.minecraftforge.registries.IForgeRegistry<net.minecraft.world.level.block.Block> BLOCKS;
+  public static final net.minecraftforge.registries.IForgeRegistry<net.minecraft.world.level.material.Fluid> FLUIDS;
+  public static final net.minecraftforge.registries.IForgeRegistry<net.minecraft.world.item.Item> ITEMS;
+  public static final net.minecraftforge.registries.IForgeRegistry<net.minecraft.world.effect.MobEffect> MOB_EFFECTS;
+  public static final net.minecraftforge.registries.IForgeRegistry<net.minecraft.sounds.SoundEvent> SOUND_EVENTS;
+  public static final net.minecraftforge.registries.IForgeRegistry<net.minecraft.world.item.alchemy.Potion> POTIONS;
+  public static final net.minecraftforge.registries.IForgeRegistry<net.minecraft.world.entity.EntityType<?>> ENTITY_TYPES;
+  public static final net.minecraftforge.registries.IForgeRegistry<net.minecraft.world.level.block.entity.BlockEntityType<?>> BLOCK_ENTITY_TYPES;
+  public static final net.minecraftforge.registries.IForgeRegistry<net.minecraft.core.particles.ParticleType<?>> PARTICLE_TYPES;
+  public static final net.minecraftforge.registries.IForgeRegistry<net.minecraft.world.inventory.MenuType<?>> MENU_TYPES;
+  public static final net.minecraftforge.registries.IForgeRegistry<net.minecraft.world.entity.decoration.painting.PaintingVariant> PAINTING_VARIANTS;
+  public static final net.minecraftforge.registries.IForgeRegistry<net.minecraft.world.item.crafting.RecipeType<?>> RECIPE_TYPES;
+  public static final net.minecraftforge.registries.IForgeRegistry<net.minecraft.world.item.crafting.RecipeSerializer<?>> RECIPE_SERIALIZERS;
+  public static final net.minecraftforge.registries.IForgeRegistry<net.minecraft.world.entity.ai.attributes.Attribute> ATTRIBUTES;
+  public static final net.minecraftforge.registries.IForgeRegistry<net.minecraft.stats.StatType<?>> STAT_TYPES;
+  public static final net.minecraftforge.registries.IForgeRegistry<net.minecraft.commands.synchronization.ArgumentTypeInfo<?, ?>> COMMAND_ARGUMENT_TYPES;
+  public static final net.minecraftforge.registries.IForgeRegistry<net.minecraft.world.entity.npc.villager.VillagerProfession> VILLAGER_PROFESSIONS;
+  public static final net.minecraftforge.registries.IForgeRegistry<net.minecraft.world.entity.ai.village.poi.PoiType> POI_TYPES;
+  public static final net.minecraftforge.registries.IForgeRegistry<net.minecraft.world.entity.ai.memory.MemoryModuleType<?>> MEMORY_MODULE_TYPES;
+  public static final net.minecraftforge.registries.IForgeRegistry<net.minecraft.world.entity.ai.sensing.SensorType<?>> SENSOR_TYPES;
+  public static final net.minecraftforge.registries.IForgeRegistry<net.minecraft.world.entity.schedule.Activity> ACTIVITIES;
+  public static final net.minecraftforge.registries.IForgeRegistry<net.minecraft.world.level.levelgen.carver.WorldCarver<?>> WORLD_CARVERS;
+  public static final net.minecraftforge.registries.IForgeRegistry<net.minecraft.world.level.levelgen.feature.Feature<?>> FEATURES;
+  public static final net.minecraftforge.registries.IForgeRegistry<net.minecraft.world.level.chunk.status.ChunkStatus> CHUNK_STATUS;
+  public static final net.minecraftforge.registries.IForgeRegistry<net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProviderType<?>> BLOCK_STATE_PROVIDER_TYPES;
+  public static final net.minecraftforge.registries.IForgeRegistry<net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType<?>> FOLIAGE_PLACER_TYPES;
+  public static final net.minecraftforge.registries.IForgeRegistry<net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType<?>> TREE_DECORATOR_TYPES;
+  public static final net.minecraftforge.registries.IForgeRegistry<net.minecraft.world.level.biome.Biome> BIOMES;
+  public static final net.minecraftforge.registries.DeferredRegister$RegistryHolder<net.minecraft.network.syncher.EntityDataSerializer<?>> ENTITY_DATA_SERIALIZERS;
+  public static final net.minecraftforge.registries.DeferredRegister$RegistryHolder<com.mojang.serialization.MapCodec<? extends net.minecraftforge.common.loot.IGlobalLootModifier>> GLOBAL_LOOT_MODIFIER_SERIALIZERS;
+  public static final net.minecraftforge.registries.DeferredRegister$RegistryHolder<com.mojang.serialization.MapCodec<? extends net.minecraftforge.common.world.BiomeModifier>> BIOME_MODIFIER_SERIALIZERS;
+  public static final net.minecraftforge.registries.DeferredRegister$RegistryHolder<com.mojang.serialization.MapCodec<? extends net.minecraftforge.common.world.StructureModifier>> STRUCTURE_MODIFIER_SERIALIZERS;
+  public static final net.minecraftforge.registries.DeferredRegister$RegistryHolder<net.minecraftforge.fluids.FluidType> FLUID_TYPES;
+  public static final net.minecraftforge.registries.DeferredRegister$RegistryHolder<net.minecraftforge.registries.holdersets.HolderSetType> HOLDER_SET_TYPES;
+  public static final net.minecraftforge.registries.DeferredRegister$RegistryHolder<net.minecraft.world.item.ItemDisplayContext> DISPLAY_CONTEXTS;
+  public static final net.minecraftforge.registries.DeferredRegister$RegistryHolder<com.mojang.serialization.MapCodec<? extends net.minecraftforge.common.crafting.conditions.ICondition>> CONDITION_SERIALIZERS;
+  public static final net.minecraftforge.registries.DeferredRegister$RegistryHolder<net.minecraftforge.common.crafting.ingredients.IIngredientSerializer<?>> INGREDIENT_SERIALIZERS;
+  public net.minecraftforge.registries.ForgeRegistries();
+}
+Compiled from "ForgeRegistries.java"
+public final class net.minecraftforge.registries.ForgeRegistries$Keys {
+  public static final net.minecraft.resources.ResourceKey<net.minecraft.core.Registry<net.minecraft.world.level.block.Block>> BLOCKS;
+  public static final net.minecraft.resources.ResourceKey<net.minecraft.core.Registry<net.minecraft.world.level.material.Fluid>> FLUIDS;
+  public static final net.minecraft.resources.ResourceKey<net.minecraft.core.Registry<net.minecraft.world.item.Item>> ITEMS;
+  public static final net.minecraft.resources.ResourceKey<net.minecraft.core.Registry<net.minecraft.world.effect.MobEffect>> MOB_EFFECTS;
+  public static final net.minecraft.resources.ResourceKey<net.minecraft.core.Registry<net.minecraft.world.item.alchemy.Potion>> POTIONS;
+  public static final net.minecraft.resources.ResourceKey<net.minecraft.core.Registry<net.minecraft.world.entity.ai.attributes.Attribute>> ATTRIBUTES;
+  public static final net.minecraft.resources.ResourceKey<net.minecraft.core.Registry<net.minecraft.stats.StatType<?>>> STAT_TYPES;
+  public static final net.minecraft.resources.ResourceKey<net.minecraft.core.Registry<net.minecraft.commands.synchronization.ArgumentTypeInfo<?, ?>>> COMMAND_ARGUMENT_TYPES;
+  public static final net.minecraft.resources.ResourceKey<net.minecraft.core.Registry<net.minecraft.sounds.SoundEvent>> SOUND_EVENTS;
+  public static final net.minecraft.resources.ResourceKey<net.minecraft.core.Registry<net.minecraft.world.entity.EntityType<?>>> ENTITY_TYPES;
+  public static final net.minecraft.resources.ResourceKey<net.minecraft.core.Registry<net.minecraft.world.entity.decoration.painting.PaintingVariant>> PAINTING_VARIANTS;
+  public static final net.minecraft.resources.ResourceKey<net.minecraft.core.Registry<net.minecraft.core.particles.ParticleType<?>>> PARTICLE_TYPES;
+  public static final net.minecraft.resources.ResourceKey<net.minecraft.core.Registry<net.minecraft.world.inventory.MenuType<?>>> MENU_TYPES;
+  public static final net.minecraft.resources.ResourceKey<net.minecraft.core.Registry<net.minecraft.world.level.block.entity.BlockEntityType<?>>> BLOCK_ENTITY_TYPES;
+  public static final net.minecraft.resources.ResourceKey<net.minecraft.core.Registry<net.minecraft.world.item.crafting.RecipeType<?>>> RECIPE_TYPES;
+  public static final net.minecraft.resources.ResourceKey<net.minecraft.core.Registry<net.minecraft.world.item.crafting.RecipeSerializer<?>>> RECIPE_SERIALIZERS;
+  public static final net.minecraft.resources.ResourceKey<net.minecraft.core.Registry<net.minecraft.world.entity.npc.villager.VillagerProfession>> VILLAGER_PROFESSIONS;
+  public static final net.minecraft.resources.ResourceKey<net.minecraft.core.Registry<net.minecraft.world.entity.ai.village.poi.PoiType>> POI_TYPES;
+  public static final net.minecraft.resources.ResourceKey<net.minecraft.core.Registry<net.minecraft.world.entity.ai.memory.MemoryModuleType<?>>> MEMORY_MODULE_TYPES;
+  public static final net.minecraft.resources.ResourceKey<net.minecraft.core.Registry<net.minecraft.world.entity.ai.sensing.SensorType<?>>> SENSOR_TYPES;
+  public static final net.minecraft.resources.ResourceKey<net.minecraft.core.Registry<net.minecraft.world.entity.schedule.Activity>> ACTIVITIES;
+  public static final net.minecraft.resources.ResourceKey<net.minecraft.core.Registry<net.minecraft.world.level.levelgen.carver.WorldCarver<?>>> WORLD_CARVERS;
+  public static final net.minecraft.resources.ResourceKey<net.minecraft.core.Registry<net.minecraft.world.level.levelgen.feature.Feature<?>>> FEATURES;
+  public static final net.minecraft.resources.ResourceKey<net.minecraft.core.Registry<net.minecraft.world.level.chunk.status.ChunkStatus>> CHUNK_STATUS;
+  public static final net.minecraft.resources.ResourceKey<net.minecraft.core.Registry<net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProviderType<?>>> BLOCK_STATE_PROVIDER_TYPES;
+  public static final net.minecraft.resources.ResourceKey<net.minecraft.core.Registry<net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType<?>>> FOLIAGE_PLACER_TYPES;
+  public static final net.minecraft.resources.ResourceKey<net.minecraft.core.Registry<net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType<?>>> TREE_DECORATOR_TYPES;
+  public static final net.minecraft.resources.ResourceKey<net.minecraft.core.Registry<net.minecraft.world.level.biome.Biome>> BIOMES;
+  public static final net.minecraft.resources.ResourceKey<net.minecraft.core.Registry<net.minecraft.network.syncher.EntityDataSerializer<?>>> ENTITY_DATA_SERIALIZERS;
+  public static final net.minecraft.resources.ResourceKey<net.minecraft.core.Registry<com.mojang.serialization.MapCodec<? extends net.minecraftforge.common.loot.IGlobalLootModifier>>> GLOBAL_LOOT_MODIFIER_SERIALIZERS;
+  public static final net.minecraft.resources.ResourceKey<net.minecraft.core.Registry<com.mojang.serialization.MapCodec<? extends net.minecraftforge.common.world.BiomeModifier>>> BIOME_MODIFIER_SERIALIZERS;
+  public static final net.minecraft.resources.ResourceKey<net.minecraft.core.Registry<com.mojang.serialization.MapCodec<? extends net.minecraftforge.common.world.StructureModifier>>> STRUCTURE_MODIFIER_SERIALIZERS;
+  public static final net.minecraft.resources.ResourceKey<net.minecraft.core.Registry<net.minecraftforge.fluids.FluidType>> FLUID_TYPES;
+  public static final net.minecraft.resources.ResourceKey<net.minecraft.core.Registry<net.minecraftforge.registries.holdersets.HolderSetType>> HOLDER_SET_TYPES;
+  public static final net.minecraft.resources.ResourceKey<net.minecraft.core.Registry<net.minecraft.world.item.ItemDisplayContext>> DISPLAY_CONTEXTS;
+  public static final net.minecraft.resources.ResourceKey<net.minecraft.core.Registry<com.mojang.serialization.MapCodec<? extends net.minecraftforge.common.crafting.conditions.ICondition>>> CONDITION_SERIALIZERS;
+  public static final net.minecraft.resources.ResourceKey<net.minecraft.core.Registry<net.minecraftforge.common.crafting.ingredients.IIngredientSerializer<?>>> INGREDIENT_SERIALIZERS;
+  public static final net.minecraft.resources.ResourceKey<net.minecraft.core.Registry<net.minecraftforge.common.world.BiomeModifier>> BIOME_MODIFIERS;
+  public static final net.minecraft.resources.ResourceKey<net.minecraft.core.Registry<net.minecraftforge.common.world.StructureModifier>> STRUCTURE_MODIFIERS;
+  public net.minecraftforge.registries.ForgeRegistries$Keys();
+}
+Compiled from "ForgeRegistry.java"
+public class net.minecraftforge.registries.ForgeRegistry<V> implements net.minecraftforge.registries.IForgeRegistryInternal<V>, net.minecraftforge.registries.IForgeRegistryModifiable<V> {
+  public static final org.apache.logging.log4j.Marker REGISTRIES;
+  public void register(java.lang.String, V);
+  public void register(net.minecraft.resources.Identifier, V);
+  public java.util.Iterator<V> iterator();
+  public net.minecraft.resources.Identifier getRegistryName();
+  public net.minecraft.resources.ResourceKey<net.minecraft.core.Registry<V>> getRegistryKey();
+  public com.mojang.serialization.Codec<V> getCodec();
+  public boolean containsKey(net.minecraft.resources.Identifier);
+  public boolean containsValue(V);
+  public boolean isEmpty();
+  public V getValue(net.minecraft.resources.Identifier);
+  public net.minecraft.resources.Identifier getKey(V);
+  public java.util.Optional<net.minecraft.resources.ResourceKey<V>> getResourceKey(V);
+  public java.util.Optional<net.minecraft.core.Holder<V>> getHolder(net.minecraft.resources.ResourceKey<V>);
+  public java.util.Optional<net.minecraft.core.Holder<V>> getHolder(net.minecraft.resources.Identifier);
+  public java.util.Optional<net.minecraft.core.Holder<V>> getHolder(V);
+  public net.minecraftforge.registries.tags.ITagManager<V> tags();
+  public java.util.Set<net.minecraft.resources.Identifier> getKeys();
+  public java.util.Collection<V> getValues();
+  public java.util.Set<java.util.Map$Entry<net.minecraft.resources.ResourceKey<V>, V>> getEntries();
+  public <T> T getSlaveMap(net.minecraftforge.registries.IForgeRegistry$SlaveKey<T>);
+  public <T> void setSlaveMap(net.minecraftforge.registries.IForgeRegistry$SlaveKey<T>, T);
+  public int getID(V);
+  public int getID(net.minecraft.resources.Identifier);
+  public V getValue(int);
+  public net.minecraft.resources.ResourceKey<V> getKey(int);
+  public net.minecraft.resources.Identifier getDefaultKey();
+  public void register(int, net.minecraft.resources.Identifier, V);
+  public V getRaw(net.minecraft.resources.Identifier);
+  public void addAlias(net.minecraft.resources.Identifier, net.minecraft.resources.Identifier);
+  public java.util.Optional<net.minecraft.core.Holder$Reference<V>> getDelegate(net.minecraft.resources.ResourceKey<V>);
+  public net.minecraft.core.Holder$Reference<V> getDelegateOrThrow(net.minecraft.resources.ResourceKey<V>);
+  public java.util.Optional<net.minecraft.core.Holder$Reference<V>> getDelegate(net.minecraft.resources.Identifier);
+  public net.minecraft.core.Holder$Reference<V> getDelegateOrThrow(net.minecraft.resources.Identifier);
+  public java.util.Optional<net.minecraft.core.Holder$Reference<V>> getDelegate(V);
+  public net.minecraft.core.Holder$Reference<V> getDelegateOrThrow(V);
+  public void bake();
+  public void clear();
+  public V remove(net.minecraft.resources.Identifier);
+  public boolean isLocked();
+  public void freeze();
+  public void unfreeze();
+  public void loadIds(it.unimi.dsi.fastutil.objects.Object2IntMap<net.minecraft.resources.Identifier>, java.util.Map<net.minecraft.resources.Identifier, java.lang.String>, it.unimi.dsi.fastutil.objects.Object2IntMap<net.minecraft.resources.Identifier>, java.util.Map<net.minecraft.resources.Identifier, net.minecraftforge.registries.IdMappingEvent$IdRemapping>, net.minecraftforge.registries.ForgeRegistry<V>, net.minecraft.resources.Identifier);
+  public net.minecraftforge.registries.ForgeRegistry$Snapshot makeSnapshot();
+  public net.minecraftforge.registries.MissingMappingsEvent getMissingEvent(net.minecraft.resources.Identifier, it.unimi.dsi.fastutil.objects.Object2IntMap<net.minecraft.resources.Identifier>);
+}
+Compiled from "ForgeRegistry.java"
+final class net.minecraftforge.registries.ForgeRegistry$DumpRow extends java.lang.Record {
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public java.lang.String id();
+  public java.lang.String key();
+  public java.lang.String value();
+}
+Compiled from "ForgeRegistry.java"
+final class net.minecraftforge.registries.ForgeRegistry$OverrideOwner<V> extends java.lang.Record {
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public java.lang.String owner();
+  public net.minecraft.resources.ResourceKey<V> key();
+}
+Compiled from "ForgeRegistry.java"
+class net.minecraftforge.registries.ForgeRegistry$RegistryCodec implements com.mojang.serialization.Codec<V> {
+  public <T> com.mojang.serialization.DataResult<com.mojang.datafixers.util.Pair<V, T>> decode(com.mojang.serialization.DynamicOps<T>, T);
+  public <T> com.mojang.serialization.DataResult<T> encode(V, com.mojang.serialization.DynamicOps<T>, T);
+}
+Compiled from "ForgeRegistry.java"
+public class net.minecraftforge.registries.ForgeRegistry$Snapshot {
+  public final it.unimi.dsi.fastutil.objects.Object2IntMap<net.minecraft.resources.Identifier> ids;
+  public final java.util.Map<net.minecraft.resources.Identifier, net.minecraft.resources.Identifier> aliases;
+  public final it.unimi.dsi.fastutil.ints.IntSet blocked;
+  public final java.util.Map<net.minecraft.resources.Identifier, java.lang.String> overrides;
+  public net.minecraftforge.registries.ForgeRegistry$Snapshot();
+  public net.minecraft.nbt.CompoundTag write();
+  public static net.minecraftforge.registries.ForgeRegistry$Snapshot read(net.minecraft.nbt.CompoundTag);
+  public synchronized net.minecraft.network.FriendlyByteBuf getPacketData();
+  public static net.minecraftforge.registries.ForgeRegistry$Snapshot read(net.minecraft.network.FriendlyByteBuf);
+}
+Compiled from "ForgeRegistryTag.java"
+class net.minecraftforge.registries.ForgeRegistryTag<V> implements net.minecraftforge.registries.tags.ITag<V> {
+  public net.minecraft.tags.TagKey<V> getKey();
+  public java.util.Iterator<V> iterator();
+  public java.util.Spliterator<V> spliterator();
+  public boolean isEmpty();
+  public int size();
+  public java.util.stream.Stream<V> stream();
+  public boolean contains(V);
+  public java.util.Optional<V> getRandomElement(net.minecraft.util.RandomSource);
+  public boolean isBound();
+  public java.lang.String toString();
+}
+Compiled from "ForgeRegistryTagManager.java"
+class net.minecraftforge.registries.ForgeRegistryTagManager<V> implements net.minecraftforge.registries.tags.ITagManager<V> {
+  public net.minecraftforge.registries.tags.ITag<V> getTag(net.minecraft.tags.TagKey<V>);
+  public java.util.Optional<net.minecraftforge.registries.tags.IReverseTag<V>> getReverseTag(V);
+  public boolean isKnownTagName(net.minecraft.tags.TagKey<V>);
+  public java.util.Iterator<net.minecraftforge.registries.tags.ITag<V>> iterator();
+  public java.util.stream.Stream<net.minecraftforge.registries.tags.ITag<V>> stream();
+  public java.util.stream.Stream<net.minecraft.tags.TagKey<V>> getTagNames();
+  public net.minecraft.tags.TagKey<V> createTagKey(net.minecraft.resources.Identifier);
+  public net.minecraft.tags.TagKey<V> createOptionalTagKey(net.minecraft.resources.Identifier, java.util.Set<? extends java.util.function.Supplier<V>>);
+  public void addOptionalTagDefaults(net.minecraft.tags.TagKey<V>, java.util.Set<? extends java.util.function.Supplier<V>>);
+}
+Compiled from "GameData.java"
+public class net.minecraftforge.registries.GameData {
+  public net.minecraftforge.registries.GameData();
+  public static void init();
+  public static <T, R extends net.minecraft.core.WritableRegistry<T>> R getWrapper(net.minecraft.resources.ResourceKey<? extends net.minecraft.core.Registry<T>>, R);
+  public static void vanillaSnapshot();
+  public static void unfreezeData();
+  public static void freezeData();
+  public static void revertToFrozen();
+  public static void revertTo(net.minecraftforge.registries.RegistryManager, boolean);
+  public static void revert(net.minecraftforge.registries.RegistryManager, net.minecraft.resources.Identifier, boolean);
+  public static void postRegisterEvents();
+  public static com.google.common.collect.Multimap<net.minecraft.resources.Identifier, net.minecraft.resources.Identifier> injectSnapshot(java.util.Map<net.minecraft.resources.Identifier, net.minecraftforge.registries.ForgeRegistry$Snapshot>, boolean, boolean);
+  public static net.minecraft.resources.Identifier checkPrefix(java.lang.String, boolean);
+}
+Compiled from "GameData.java"
+class net.minecraftforge.registries.GameData$AttributeCallbacks implements net.minecraftforge.registries.IForgeRegistry$ValidateCallback<net.minecraft.world.entity.ai.attributes.Attribute> {
+  public void onValidate(net.minecraftforge.registries.IForgeRegistryInternal<net.minecraft.world.entity.ai.attributes.Attribute>, net.minecraftforge.registries.RegistryManager, int, net.minecraft.resources.Identifier, net.minecraft.world.entity.ai.attributes.Attribute);
+  public void onValidate(net.minecraftforge.registries.IForgeRegistryInternal, net.minecraftforge.registries.RegistryManager, int, net.minecraft.resources.Identifier, java.lang.Object);
+}
+Compiled from "GameData.java"
+public class net.minecraftforge.registries.GameData$BlockCallbacks implements net.minecraftforge.registries.IForgeRegistry$AddCallback<net.minecraft.world.level.block.Block>, net.minecraftforge.registries.IForgeRegistry$ClearCallback<net.minecraft.world.level.block.Block>, net.minecraftforge.registries.IForgeRegistry$BakeCallback<net.minecraft.world.level.block.Block>, net.minecraftforge.registries.IForgeRegistry$CreateCallback<net.minecraft.world.level.block.Block> {
+  public net.minecraftforge.registries.GameData$BlockCallbacks();
+  public static net.minecraft.core.IdMapper<net.minecraft.world.level.block.state.BlockState> getBlockStateIDMap();
+  public void onAdd(net.minecraftforge.registries.IForgeRegistryInternal<net.minecraft.world.level.block.Block>, net.minecraftforge.registries.RegistryManager, int, net.minecraft.resources.ResourceKey<net.minecraft.world.level.block.Block>, net.minecraft.world.level.block.Block, net.minecraft.world.level.block.Block);
+  public void onClear(net.minecraftforge.registries.IForgeRegistryInternal<net.minecraft.world.level.block.Block>, net.minecraftforge.registries.RegistryManager);
+  public void onCreate(net.minecraftforge.registries.IForgeRegistryInternal<net.minecraft.world.level.block.Block>, net.minecraftforge.registries.RegistryManager);
+  public void onBake(net.minecraftforge.registries.IForgeRegistryInternal<net.minecraft.world.level.block.Block>, net.minecraftforge.registries.RegistryManager);
+  public void onAdd(net.minecraftforge.registries.IForgeRegistryInternal, net.minecraftforge.registries.RegistryManager, int, net.minecraft.resources.ResourceKey, java.lang.Object, java.lang.Object);
+}
+Compiled from "GameData.java"
+class net.minecraftforge.registries.GameData$ClearableObjectIntIdentityMap<I> extends net.minecraft.core.IdMapper<I> {
+}
+Compiled from "GameData.java"
+public class net.minecraftforge.registries.GameData$ItemCallbacks implements net.minecraftforge.registries.IForgeRegistry$AddCallback<net.minecraft.world.item.Item>, net.minecraftforge.registries.IForgeRegistry$ClearCallback<net.minecraft.world.item.Item>, net.minecraftforge.registries.IForgeRegistry$CreateCallback<net.minecraft.world.item.Item> {
+  public net.minecraftforge.registries.GameData$ItemCallbacks();
+  public static java.util.Map<net.minecraft.world.level.block.Block, net.minecraft.world.item.Item> getBlockItemMap();
+  public void onAdd(net.minecraftforge.registries.IForgeRegistryInternal<net.minecraft.world.item.Item>, net.minecraftforge.registries.RegistryManager, int, net.minecraft.resources.ResourceKey<net.minecraft.world.item.Item>, net.minecraft.world.item.Item, net.minecraft.world.item.Item);
+  public void onClear(net.minecraftforge.registries.IForgeRegistryInternal<net.minecraft.world.item.Item>, net.minecraftforge.registries.RegistryManager);
+  public void onCreate(net.minecraftforge.registries.IForgeRegistryInternal<net.minecraft.world.item.Item>, net.minecraftforge.registries.RegistryManager);
+  public void onAdd(net.minecraftforge.registries.IForgeRegistryInternal, net.minecraftforge.registries.RegistryManager, int, net.minecraft.resources.ResourceKey, java.lang.Object, java.lang.Object);
+}
+Compiled from "GameData.java"
+public class net.minecraftforge.registries.GameData$PoiTypeCallbacks implements net.minecraftforge.registries.IForgeRegistry$AddCallback<net.minecraft.world.entity.ai.village.poi.PoiType>, net.minecraftforge.registries.IForgeRegistry$ClearCallback<net.minecraft.world.entity.ai.village.poi.PoiType>, net.minecraftforge.registries.IForgeRegistry$CreateCallback<net.minecraft.world.entity.ai.village.poi.PoiType> {
+  public net.minecraftforge.registries.GameData$PoiTypeCallbacks();
+  public static java.util.Map<net.minecraft.world.level.block.state.BlockState, net.minecraft.core.Holder<net.minecraft.world.entity.ai.village.poi.PoiType>> getStateToPoi();
+  public void onAdd(net.minecraftforge.registries.IForgeRegistryInternal<net.minecraft.world.entity.ai.village.poi.PoiType>, net.minecraftforge.registries.RegistryManager, int, net.minecraft.resources.ResourceKey<net.minecraft.world.entity.ai.village.poi.PoiType>, net.minecraft.world.entity.ai.village.poi.PoiType, net.minecraft.world.entity.ai.village.poi.PoiType);
+  public void onClear(net.minecraftforge.registries.IForgeRegistryInternal<net.minecraft.world.entity.ai.village.poi.PoiType>, net.minecraftforge.registries.RegistryManager);
+  public void onCreate(net.minecraftforge.registries.IForgeRegistryInternal<net.minecraft.world.entity.ai.village.poi.PoiType>, net.minecraftforge.registries.RegistryManager);
+  public void onAdd(net.minecraftforge.registries.IForgeRegistryInternal, net.minecraftforge.registries.RegistryManager, int, net.minecraft.resources.ResourceKey, java.lang.Object, java.lang.Object);
+}
+Compiled from "GameData.java"
+final class net.minecraftforge.registries.GameData$WrapperFactory<V> extends java.lang.Record implements net.minecraftforge.registries.IForgeRegistry$CreateCallback<V>, net.minecraftforge.registries.IForgeRegistry$AddCallback<V> {
+  public void onCreate(net.minecraftforge.registries.IForgeRegistryInternal<V>, net.minecraftforge.registries.RegistryManager);
+  public void onAdd(net.minecraftforge.registries.IForgeRegistryInternal<V>, net.minecraftforge.registries.RegistryManager, int, net.minecraft.resources.ResourceKey<V>, V, V);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public java.util.function.BiFunction<net.minecraftforge.registries.ForgeRegistry<V>, net.minecraftforge.registries.RegistryManager, net.minecraft.core.WritableRegistry<V>> factory();
+}
+Compiled from "IForgeRegistry.java"
+public interface net.minecraftforge.registries.IForgeRegistry<V> extends java.lang.Iterable<V> {
+  public abstract net.minecraft.resources.ResourceKey<net.minecraft.core.Registry<V>> getRegistryKey();
+  public abstract net.minecraft.resources.Identifier getRegistryName();
+  public abstract void register(java.lang.String, V);
+  public abstract void register(net.minecraft.resources.Identifier, V);
+  public abstract boolean containsKey(net.minecraft.resources.Identifier);
+  public abstract boolean containsValue(V);
+  public abstract boolean isEmpty();
+  public abstract V getValue(net.minecraft.resources.Identifier);
+  public abstract net.minecraft.resources.Identifier getKey(V);
+  public abstract net.minecraft.resources.Identifier getDefaultKey();
+  public abstract java.util.Optional<net.minecraft.resources.ResourceKey<V>> getResourceKey(V);
+  public abstract java.util.Set<net.minecraft.resources.Identifier> getKeys();
+  public abstract java.util.Collection<V> getValues();
+  public abstract java.util.Set<java.util.Map$Entry<net.minecraft.resources.ResourceKey<V>, V>> getEntries();
+  public abstract com.mojang.serialization.Codec<V> getCodec();
+  public abstract java.util.Optional<net.minecraft.core.Holder<V>> getHolder(net.minecraft.resources.ResourceKey<V>);
+  public abstract java.util.Optional<net.minecraft.core.Holder<V>> getHolder(net.minecraft.resources.Identifier);
+  public abstract java.util.Optional<net.minecraft.core.Holder<V>> getHolder(V);
+  public abstract net.minecraftforge.registries.tags.ITagManager<V> tags();
+  public abstract java.util.Optional<net.minecraft.core.Holder$Reference<V>> getDelegate(net.minecraft.resources.ResourceKey<V>);
+  public abstract net.minecraft.core.Holder$Reference<V> getDelegateOrThrow(net.minecraft.resources.ResourceKey<V>);
+  public abstract java.util.Optional<net.minecraft.core.Holder$Reference<V>> getDelegate(net.minecraft.resources.Identifier);
+  public abstract net.minecraft.core.Holder$Reference<V> getDelegateOrThrow(net.minecraft.resources.Identifier);
+  public abstract java.util.Optional<net.minecraft.core.Holder$Reference<V>> getDelegate(V);
+  public abstract net.minecraft.core.Holder$Reference<V> getDelegateOrThrow(V);
+  public abstract <T> T getSlaveMap(net.minecraftforge.registries.IForgeRegistry$SlaveKey<T>);
+}
+Compiled from "IForgeRegistry.java"
+public interface net.minecraftforge.registries.IForgeRegistry$AddCallback<V> {
+  public abstract void onAdd(net.minecraftforge.registries.IForgeRegistryInternal<V>, net.minecraftforge.registries.RegistryManager, int, net.minecraft.resources.ResourceKey<V>, V, V);
+}
+Compiled from "IForgeRegistry.java"
+public interface net.minecraftforge.registries.IForgeRegistry$BakeCallback<V> {
+  public abstract void onBake(net.minecraftforge.registries.IForgeRegistryInternal<V>, net.minecraftforge.registries.RegistryManager);
+}
+Compiled from "IForgeRegistry.java"
+public interface net.minecraftforge.registries.IForgeRegistry$ClearCallback<V> {
+  public abstract void onClear(net.minecraftforge.registries.IForgeRegistryInternal<V>, net.minecraftforge.registries.RegistryManager);
+}
+Compiled from "IForgeRegistry.java"
+public interface net.minecraftforge.registries.IForgeRegistry$CreateCallback<V> {
+  public abstract void onCreate(net.minecraftforge.registries.IForgeRegistryInternal<V>, net.minecraftforge.registries.RegistryManager);
+}
+Compiled from "IForgeRegistry.java"
+public interface net.minecraftforge.registries.IForgeRegistry$MissingFactory<V> {
+  public abstract V createMissing(net.minecraft.resources.Identifier, boolean);
+}
+Compiled from "IForgeRegistry.java"
+public final class net.minecraftforge.registries.IForgeRegistry$SlaveKey<T> extends java.lang.Record {
+  public net.minecraftforge.registries.IForgeRegistry$SlaveKey(net.minecraft.resources.Identifier);
+  public static <X> net.minecraftforge.registries.IForgeRegistry$SlaveKey<X> create(java.lang.String);
+  public static <X> net.minecraftforge.registries.IForgeRegistry$SlaveKey<X> create(net.minecraft.resources.Identifier);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.resources.Identifier name();
+}
+Compiled from "IForgeRegistry.java"
+public interface net.minecraftforge.registries.IForgeRegistry$ValidateCallback<V> {
+  public abstract void onValidate(net.minecraftforge.registries.IForgeRegistryInternal<V>, net.minecraftforge.registries.RegistryManager, int, net.minecraft.resources.Identifier, V);
+}
+Compiled from "IForgeRegistryInternal.java"
+public interface net.minecraftforge.registries.IForgeRegistryInternal<V> extends net.minecraftforge.registries.IForgeRegistry<V> {
+  public abstract <T> void setSlaveMap(net.minecraftforge.registries.IForgeRegistry$SlaveKey<T>, T);
+  public abstract void register(int, net.minecraft.resources.Identifier, V);
+  public abstract V getValue(int);
+}
+Compiled from "IForgeRegistryModifiable.java"
+public interface net.minecraftforge.registries.IForgeRegistryModifiable<V> extends net.minecraftforge.registries.IForgeRegistry<V> {
+  public abstract void clear();
+  public abstract V remove(net.minecraft.resources.Identifier);
+  public abstract boolean isLocked();
+}
+Compiled from "ILockableRegistry.java"
+public interface net.minecraftforge.registries.ILockableRegistry {
+  public abstract void lock();
+}
+Compiled from "IdMappingEvent.java"
+public final class net.minecraftforge.registries.IdMappingEvent extends net.minecraftforge.eventbus.api.event.MutableEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.registries.IdMappingEvent> BUS;
+  public net.minecraftforge.registries.IdMappingEvent(java.util.Map<net.minecraft.resources.Identifier, java.util.Map<net.minecraft.resources.Identifier, net.minecraftforge.registries.IdMappingEvent$IdRemapping>>, boolean);
+  public com.google.common.collect.ImmutableSet<net.minecraft.resources.Identifier> getRegistries();
+  public com.google.common.collect.ImmutableList<net.minecraftforge.registries.IdMappingEvent$ModRemapping> getRemaps(net.minecraft.resources.Identifier);
+  public boolean isFrozen();
+}
+Compiled from "IdMappingEvent.java"
+public final class net.minecraftforge.registries.IdMappingEvent$IdRemapping extends java.lang.Record {
+  public net.minecraftforge.registries.IdMappingEvent$IdRemapping(int, int);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public int currId();
+  public int newId();
+}
+Compiled from "IdMappingEvent.java"
+public final class net.minecraftforge.registries.IdMappingEvent$ModRemapping {
+  public final net.minecraft.resources.Identifier registry;
+  public final net.minecraft.resources.Identifier key;
+  public final int oldId;
+  public final int newId;
+}
+Compiled from "MissingMappingsEvent.java"
+public final class net.minecraftforge.registries.MissingMappingsEvent extends net.minecraftforge.eventbus.api.event.MutableEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.registries.MissingMappingsEvent> BUS;
+  public net.minecraftforge.registries.MissingMappingsEvent(net.minecraft.resources.ResourceKey<? extends net.minecraft.core.Registry<?>>, net.minecraftforge.registries.IForgeRegistry<?>, java.util.Collection<net.minecraftforge.registries.MissingMappingsEvent$Mapping<?>>);
+  public net.minecraft.resources.ResourceKey<? extends net.minecraft.core.Registry<?>> getKey();
+  public net.minecraftforge.registries.IForgeRegistry<?> getRegistry();
+  public <T> java.util.List<net.minecraftforge.registries.MissingMappingsEvent$Mapping<T>> getMappings(net.minecraft.resources.ResourceKey<? extends net.minecraft.core.Registry<T>>, java.lang.String);
+  public <T> java.util.List<net.minecraftforge.registries.MissingMappingsEvent$Mapping<T>> getAllMappings(net.minecraft.resources.ResourceKey<? extends net.minecraft.core.Registry<T>>);
+}
+Compiled from "MissingMappingsEvent.java"
+public final class net.minecraftforge.registries.MissingMappingsEvent$Action extends java.lang.Enum<net.minecraftforge.registries.MissingMappingsEvent$Action> {
+  public static final net.minecraftforge.registries.MissingMappingsEvent$Action DEFAULT;
+  public static final net.minecraftforge.registries.MissingMappingsEvent$Action IGNORE;
+  public static final net.minecraftforge.registries.MissingMappingsEvent$Action WARN;
+  public static final net.minecraftforge.registries.MissingMappingsEvent$Action FAIL;
+  public static final net.minecraftforge.registries.MissingMappingsEvent$Action REMAP;
+  public static net.minecraftforge.registries.MissingMappingsEvent$Action[] values();
+  public static net.minecraftforge.registries.MissingMappingsEvent$Action valueOf(java.lang.String);
+}
+Compiled from "MissingMappingsEvent.java"
+public class net.minecraftforge.registries.MissingMappingsEvent$Mapping<T> implements java.lang.Comparable<net.minecraftforge.registries.MissingMappingsEvent$Mapping<T>> {
+  public net.minecraftforge.registries.MissingMappingsEvent$Mapping(net.minecraftforge.registries.IForgeRegistry<T>, net.minecraftforge.registries.IForgeRegistry<T>, net.minecraft.resources.Identifier, int);
+  public void ignore();
+  public void warn();
+  public void fail();
+  public void remap(T);
+  public net.minecraftforge.registries.IForgeRegistry<T> getRegistry();
+  public net.minecraft.resources.Identifier getKey();
+  public int getId();
+  public int compareTo(net.minecraftforge.registries.MissingMappingsEvent$Mapping<T>);
+  public int compareTo(java.lang.Object);
+}
+Compiled from "NamespacedDefaultedWrapper.java"
+class net.minecraftforge.registries.NamespacedDefaultedWrapper<T> extends net.minecraftforge.registries.NamespacedWrapper<T> implements net.minecraft.core.DefaultedRegistry<T> {
+  public T getValue(net.minecraft.resources.Identifier);
+  public java.util.Optional<net.minecraft.core.Holder$Reference<T>> getRandom(net.minecraft.util.RandomSource);
+  public net.minecraft.resources.Identifier getDefaultKey();
+}
+Compiled from "NamespacedWrapper.java"
+class net.minecraftforge.registries.NamespacedWrapper<T> extends net.minecraft.core.MappedRegistry<T> implements net.minecraftforge.registries.ILockableRegistry {
+  public net.minecraft.core.Holder$Reference<T> register(net.minecraft.resources.ResourceKey<T>, T, net.minecraft.core.RegistrationInfo);
+  public T getValue(net.minecraft.resources.Identifier);
+  public java.util.Optional<T> getOptional(net.minecraft.resources.Identifier);
+  public T getValue(net.minecraft.resources.ResourceKey<T>);
+  public net.minecraft.resources.Identifier getKey(T);
+  public java.util.Optional<net.minecraft.resources.ResourceKey<T>> getResourceKey(T);
+  public boolean containsKey(net.minecraft.resources.Identifier);
+  public boolean containsKey(net.minecraft.resources.ResourceKey<T>);
+  public int getId(T);
+  public T byId(int);
+  public com.mojang.serialization.Lifecycle registryLifecycle();
+  public java.util.Iterator<T> iterator();
+  public java.util.Set<net.minecraft.resources.Identifier> keySet();
+  public java.util.Set<net.minecraft.resources.ResourceKey<T>> registryKeySet();
+  public java.util.Set<java.util.Map$Entry<net.minecraft.resources.ResourceKey<T>, T>> entrySet();
+  public boolean isEmpty();
+  public int size();
+  public void lock();
+  public java.util.Optional<net.minecraft.core.Holder$Reference<T>> get(int);
+  public java.util.Optional<net.minecraft.core.Holder$Reference<T>> get(net.minecraft.resources.ResourceKey<T>);
+  public java.util.Optional<net.minecraft.core.Holder$Reference<T>> get(net.minecraft.resources.Identifier);
+  public net.minecraft.core.Holder<T> wrapAsHolder(T);
+  public java.util.Optional<net.minecraft.core.RegistrationInfo> registrationInfo(net.minecraft.resources.ResourceKey<T>);
+  public java.util.Optional<net.minecraft.core.Holder$Reference<T>> getHolder(net.minecraft.resources.Identifier);
+  public net.minecraft.core.HolderGetter<T> createRegistrationLookup();
+  protected net.minecraft.core.Holder$Reference<T> getOrCreateHolderOrThrow(net.minecraft.resources.ResourceKey<T>);
+  public java.util.Optional<net.minecraft.core.Holder$Reference<T>> getRandom(net.minecraft.util.RandomSource);
+  public java.util.stream.Stream<net.minecraft.core.Holder$Reference<T>> listElements();
+  public java.util.stream.Stream<net.minecraft.core.HolderSet$Named<T>> getTags();
+  public net.minecraft.core.HolderSet$Named<T> getOrCreateTagForRegistration(net.minecraft.tags.TagKey<T>);
+  public net.minecraft.core.Registry<T> freeze();
+  public net.minecraft.core.Holder$Reference<T> createIntrusiveHolder(T);
+  public java.util.Optional<net.minecraft.core.HolderSet$Named<T>> get(net.minecraft.tags.TagKey<T>);
+  public void bindTags(java.util.Map<net.minecraft.tags.TagKey<T>, java.util.List<net.minecraft.core.Holder<T>>>);
+  public void bindAllTagsToEmpty();
+  public net.minecraft.core.Registry$PendingTags<T> prepareTagReload(net.minecraft.tags.TagLoader$LoadResult<T>);
+  public void unfreeze();
+  public boolean isIntrusive();
+}
+Compiled from "NewRegistryEvent.java"
+public final class net.minecraftforge.registries.NewRegistryEvent extends net.minecraftforge.eventbus.api.event.MutableEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.registries.NewRegistryEvent> BUS;
+  public net.minecraftforge.registries.NewRegistryEvent();
+  public <V> java.util.function.Supplier<net.minecraftforge.registries.IForgeRegistry<V>> create(net.minecraftforge.registries.RegistryBuilder<V>);
+  public <V> java.util.function.Supplier<net.minecraftforge.registries.IForgeRegistry<V>> create(net.minecraftforge.registries.RegistryBuilder<V>, java.util.function.Consumer<net.minecraftforge.registries.IForgeRegistry<V>>);
+  public java.lang.String toString();
+}
+Compiled from "NewRegistryEvent.java"
+final class net.minecraftforge.registries.NewRegistryEvent$RegistryData<V> extends java.lang.Record {
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraftforge.registries.RegistryBuilder<V> builder();
+  public net.minecraftforge.registries.NewRegistryEvent$RegistryHolder<V> registryHolder();
+  public java.util.function.Consumer<net.minecraftforge.registries.IForgeRegistry<V>> onFill();
+}
+Compiled from "NewRegistryEvent.java"
+final class net.minecraftforge.registries.NewRegistryEvent$RegistryHolder<V> implements java.util.function.Supplier<net.minecraftforge.registries.IForgeRegistry<V>> {
+  public net.minecraftforge.registries.IForgeRegistry<V> get();
+  public java.lang.Object get();
+}
+Compiled from "ObjectHolderRegistry.java"
+class net.minecraftforge.registries.ObjectHolderRegistry {
+}
+Compiled from "RegisterEvent.java"
+public class net.minecraftforge.registries.RegisterEvent implements net.minecraftforge.fml.event.IModBusEvent {
+  public static net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.registries.RegisterEvent> getBus(net.minecraftforge.eventbus.api.bus.BusGroup);
+  public <T> void register(net.minecraft.resources.ResourceKey<? extends net.minecraft.core.Registry<T>>, net.minecraft.resources.Identifier, java.util.function.Supplier<T>);
+  public <T> void register(net.minecraft.resources.ResourceKey<? extends net.minecraft.core.Registry<T>>, java.util.function.Consumer<net.minecraftforge.registries.RegisterEvent$RegisterHelper<T>>);
+  public net.minecraft.resources.ResourceKey<? extends net.minecraft.core.Registry<?>> getRegistryKey();
+  public <T> net.minecraftforge.registries.IForgeRegistry<T> getForgeRegistry();
+  public <T> net.minecraft.core.Registry<T> getVanillaRegistry();
+  public java.lang.String toString();
+}
+Compiled from "RegisterEvent.java"
+public interface net.minecraftforge.registries.RegisterEvent$RegisterHelper<T> {
+  public default void register(java.lang.String, T);
+  public default void register(net.minecraft.resources.ResourceKey<T>, T);
+  public abstract void register(net.minecraft.resources.Identifier, T);
+}
+Compiled from "RegistryBuilder.java"
+public class net.minecraftforge.registries.RegistryBuilder<T> {
+  public net.minecraftforge.registries.RegistryBuilder();
+  public static <T> net.minecraftforge.registries.RegistryBuilder<T> of();
+  public static <T> net.minecraftforge.registries.RegistryBuilder<T> of(java.lang.String);
+  public static <T> net.minecraftforge.registries.RegistryBuilder<T> of(net.minecraft.resources.Identifier);
+  public net.minecraftforge.registries.RegistryBuilder<T> setName(net.minecraft.resources.Identifier);
+  public net.minecraftforge.registries.RegistryBuilder<T> setIDRange(int, int);
+  public net.minecraftforge.registries.RegistryBuilder<T> setMaxID(int);
+  public net.minecraftforge.registries.RegistryBuilder<T> setDefaultKey(net.minecraft.resources.Identifier);
+  public net.minecraftforge.registries.RegistryBuilder<T> addCallback(java.lang.Object);
+  public net.minecraftforge.registries.RegistryBuilder<T> add(net.minecraftforge.registries.IForgeRegistry$AddCallback<T>);
+  public net.minecraftforge.registries.RegistryBuilder<T> onAdd(net.minecraftforge.registries.IForgeRegistry$AddCallback<T>);
+  public net.minecraftforge.registries.RegistryBuilder<T> add(net.minecraftforge.registries.IForgeRegistry$ClearCallback<T>);
+  public net.minecraftforge.registries.RegistryBuilder<T> onClear(net.minecraftforge.registries.IForgeRegistry$ClearCallback<T>);
+  public net.minecraftforge.registries.RegistryBuilder<T> add(net.minecraftforge.registries.IForgeRegistry$CreateCallback<T>);
+  public net.minecraftforge.registries.RegistryBuilder<T> onCreate(net.minecraftforge.registries.IForgeRegistry$CreateCallback<T>);
+  public net.minecraftforge.registries.RegistryBuilder<T> add(net.minecraftforge.registries.IForgeRegistry$ValidateCallback<T>);
+  public net.minecraftforge.registries.RegistryBuilder<T> onValidate(net.minecraftforge.registries.IForgeRegistry$ValidateCallback<T>);
+  public net.minecraftforge.registries.RegistryBuilder<T> add(net.minecraftforge.registries.IForgeRegistry$BakeCallback<T>);
+  public net.minecraftforge.registries.RegistryBuilder<T> onBake(net.minecraftforge.registries.IForgeRegistry$BakeCallback<T>);
+  public net.minecraftforge.registries.RegistryBuilder<T> set(net.minecraftforge.registries.IForgeRegistry$MissingFactory<T>);
+  public net.minecraftforge.registries.RegistryBuilder<T> missing(net.minecraftforge.registries.IForgeRegistry$MissingFactory<T>);
+  public net.minecraftforge.registries.RegistryBuilder<T> disableSaving();
+  public net.minecraftforge.registries.RegistryBuilder<T> disableSync();
+  public net.minecraftforge.registries.RegistryBuilder<T> disableOverrides();
+  public net.minecraftforge.registries.RegistryBuilder<T> allowModification();
+  public net.minecraftforge.registries.RegistryBuilder<T> legacyName(java.lang.String);
+  public net.minecraftforge.registries.RegistryBuilder<T> legacyName(net.minecraft.resources.Identifier);
+  public net.minecraftforge.registries.RegistryBuilder<T> hasTags();
+  public net.minecraftforge.registries.IForgeRegistry$AddCallback<T> getAdd();
+  public net.minecraftforge.registries.IForgeRegistry$ClearCallback<T> getClear();
+  public net.minecraftforge.registries.IForgeRegistry$CreateCallback<T> getCreate();
+  public net.minecraftforge.registries.IForgeRegistry$ValidateCallback<T> getValidate();
+  public net.minecraftforge.registries.IForgeRegistry$BakeCallback<T> getBake();
+  public net.minecraft.resources.Identifier getDefault();
+  public int getMinId();
+  public int getMaxId();
+  public boolean getAllowOverrides();
+  public boolean getAllowModifications();
+  public net.minecraftforge.registries.IForgeRegistry$MissingFactory<T> getMissingFactory();
+  public boolean getSaveToDisc();
+  public boolean getSync();
+  public java.util.Set<net.minecraft.resources.Identifier> getLegacyNames();
+}
+Compiled from "RegistryManager.java"
+public class net.minecraftforge.registries.RegistryManager {
+  public static final net.minecraftforge.registries.RegistryManager ACTIVE;
+  public static final net.minecraftforge.registries.RegistryManager VANILLA;
+  public static final net.minecraftforge.registries.RegistryManager FROZEN;
+  public net.minecraftforge.registries.RegistryManager(java.lang.String);
+  public java.lang.String getName();
+  public <V> net.minecraftforge.registries.ForgeRegistry<V> getRegistry(net.minecraft.resources.Identifier);
+  public <V> net.minecraftforge.registries.ForgeRegistry<V> getRegistry(net.minecraft.resources.ResourceKey<? extends net.minecraft.core.Registry<V>>);
+  public <V> net.minecraft.resources.Identifier getName(net.minecraftforge.registries.IForgeRegistry<V>);
+  public java.util.Map<net.minecraft.resources.Identifier, ? extends net.minecraftforge.registries.IForgeRegistry<?>> getRegistries();
+  public static java.util.Set<net.minecraft.resources.Identifier> getVanillaRegistryKeys();
+  public <V> net.minecraft.resources.Identifier updateLegacyName(net.minecraft.resources.Identifier);
+  public <V> net.minecraftforge.registries.ForgeRegistry<V> getRegistry(net.minecraft.resources.Identifier, net.minecraftforge.registries.RegistryManager);
+  public static void postNewRegistryEvent();
+  public java.util.Map<net.minecraft.resources.Identifier, net.minecraftforge.registries.ForgeRegistry$Snapshot> takeSnapshot(boolean);
+  public void clean();
+  public static java.util.List<net.minecraft.resources.Identifier> getRegistryNamesForSyncToClient();
+}
+Compiled from "RegistryObject.java"
+public final class net.minecraftforge.registries.RegistryObject<T> implements java.util.function.Supplier<T> {
+  public static <T, U extends T> net.minecraftforge.registries.RegistryObject<U> create(net.minecraft.resources.Identifier, net.minecraftforge.registries.IForgeRegistry<T>);
+  public static <T, U extends T> net.minecraftforge.registries.RegistryObject<U> create(net.minecraft.resources.Identifier, net.minecraft.resources.ResourceKey<? extends net.minecraft.core.Registry<T>>, java.lang.String);
+  public static <T, U extends T> net.minecraftforge.registries.RegistryObject<U> createOptional(net.minecraft.resources.Identifier, net.minecraft.resources.ResourceKey<? extends net.minecraft.core.Registry<T>>, java.lang.String);
+  public static <T, U extends T> net.minecraftforge.registries.RegistryObject<U> create(net.minecraft.resources.Identifier, net.minecraft.resources.Identifier, java.lang.String);
+  public static <T, U extends T> net.minecraftforge.registries.RegistryObject<U> createOptional(net.minecraft.resources.Identifier, net.minecraft.resources.Identifier, java.lang.String);
+  public T get();
+  public net.minecraft.resources.Identifier getId();
+  public net.minecraft.resources.ResourceKey<T> getKey();
+  public java.util.stream.Stream<T> stream();
+  public boolean isPresent();
+  public void ifPresent(java.util.function.Consumer<? super T>);
+  public net.minecraftforge.registries.RegistryObject<T> filter(java.util.function.Predicate<? super T>);
+  public <U> java.util.Optional<U> map(java.util.function.Function<? super T, ? extends U>);
+  public <U> java.util.Optional<U> flatMap(java.util.function.Function<? super T, java.util.Optional<U>>);
+  public <U> java.util.function.Supplier<U> lazyMap(java.util.function.Function<? super T, ? extends U>);
+  public T orElse(T);
+  public T orElseGet(java.util.function.Supplier<? extends T>);
+  public <X extends java.lang.Throwable> T orElseThrow(java.util.function.Supplier<? extends X>) throws X;
+  public java.util.Optional<net.minecraft.core.Holder<T>> getHolder();
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+}

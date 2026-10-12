@@ -1,0 +1,37 @@
+Compiled from "ChannelVersionsTask.java"
+public class net.minecraftforge.network.tasks.ChannelVersionsTask implements net.minecraft.server.network.ConfigurationTask {
+  public static final net.minecraft.server.network.ConfigurationTask$Type TYPE;
+  public net.minecraftforge.network.tasks.ChannelVersionsTask();
+  public void start(net.minecraftforge.network.config.ConfigurationTaskContext);
+  public void start(java.util.function.Consumer<net.minecraft.network.protocol.Packet<?>>);
+  public net.minecraft.server.network.ConfigurationTask$Type type();
+}
+Compiled from "ForgeNetworkConfigurationHandler.java"
+public final class net.minecraftforge.network.tasks.ForgeNetworkConfigurationHandler {
+  public static void gatherInit(net.minecraftforge.event.network.GatherLoginConfigurationTasksEvent);
+}
+Compiled from "ModVersionsTask.java"
+public class net.minecraftforge.network.tasks.ModVersionsTask implements net.minecraft.server.network.ConfigurationTask {
+  public static final net.minecraft.server.network.ConfigurationTask$Type TYPE;
+  public net.minecraftforge.network.tasks.ModVersionsTask();
+  public void start(net.minecraftforge.network.config.ConfigurationTaskContext);
+  public void start(java.util.function.Consumer<net.minecraft.network.protocol.Packet<?>>);
+  public net.minecraft.server.network.ConfigurationTask$Type type();
+}
+Compiled from "RegisterChannelsTask.java"
+class net.minecraftforge.network.tasks.RegisterChannelsTask implements net.minecraft.server.network.ConfigurationTask {
+  public void start(net.minecraftforge.network.config.ConfigurationTaskContext);
+  public void start(java.util.function.Consumer<net.minecraft.network.protocol.Packet<?>>);
+  public net.minecraft.server.network.ConfigurationTask$Type type();
+}
+Compiled from "SyncConfigTask.java"
+class net.minecraftforge.network.tasks.SyncConfigTask extends net.minecraftforge.network.config.SimpleConfigurationTask {
+}
+Compiled from "SyncRegistriesTask.java"
+public class net.minecraftforge.network.tasks.SyncRegistriesTask implements net.minecraft.server.network.ConfigurationTask {
+  public static final net.minecraft.server.network.ConfigurationTask$Type TYPE;
+  public net.minecraftforge.network.tasks.SyncRegistriesTask();
+  public void start(net.minecraftforge.network.config.ConfigurationTaskContext);
+  public void start(java.util.function.Consumer<net.minecraft.network.protocol.Packet<?>>);
+  public net.minecraft.server.network.ConfigurationTask$Type type();
+}

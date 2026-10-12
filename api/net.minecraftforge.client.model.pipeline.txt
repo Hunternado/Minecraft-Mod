@@ -1,0 +1,45 @@
+Compiled from "BakedQuadBuilder.java"
+public class net.minecraftforge.client.model.pipeline.BakedQuadBuilder implements com.mojang.blaze3d.vertex.VertexConsumer {
+  public net.minecraftforge.client.model.pipeline.BakedQuadBuilder(java.util.function.Consumer<net.minecraft.client.resources.model.geometry.BakedQuad>);
+  public com.mojang.blaze3d.vertex.VertexConsumer addVertex(float, float, float);
+  public com.mojang.blaze3d.vertex.VertexConsumer setUv(float, float);
+  public com.mojang.blaze3d.vertex.VertexConsumer setNormal(float, float, float);
+  public com.mojang.blaze3d.vertex.VertexConsumer setColor(int, int, int, int);
+  public com.mojang.blaze3d.vertex.VertexConsumer setColor(int);
+  public com.mojang.blaze3d.vertex.VertexConsumer setLineWidth(float);
+  public com.mojang.blaze3d.vertex.VertexConsumer setUv1(int, int);
+  public com.mojang.blaze3d.vertex.VertexConsumer setUv2(int, int);
+  public net.minecraft.client.resources.model.geometry.BakedQuad build();
+  public void setTintIndex(int);
+  public void setDirection(net.minecraft.core.Direction);
+  public void setSprite(net.minecraft.client.renderer.texture.TextureAtlasSprite);
+  public void setShade(boolean);
+  public void setLightEmission(int);
+}
+Compiled from "BakedQuadBuilder.java"
+public class net.minecraftforge.client.model.pipeline.BakedQuadBuilder$Single extends net.minecraftforge.client.model.pipeline.BakedQuadBuilder {
+  public net.minecraftforge.client.model.pipeline.BakedQuadBuilder$Single();
+  public net.minecraft.client.resources.model.geometry.BakedQuad getQuad();
+}
+Compiled from "TransformingVertexPipeline.java"
+public class net.minecraftforge.client.model.pipeline.TransformingVertexPipeline extends net.minecraftforge.client.model.pipeline.VertexConsumerWrapper {
+  public net.minecraftforge.client.model.pipeline.TransformingVertexPipeline(com.mojang.blaze3d.vertex.VertexConsumer, com.mojang.math.Transformation);
+  public com.mojang.blaze3d.vertex.VertexConsumer addVertex(float, float, float);
+  public com.mojang.blaze3d.vertex.VertexConsumer setNormal(float, float, float);
+}
+Compiled from "VertexConsumerWrapper.java"
+public class net.minecraftforge.client.model.pipeline.VertexConsumerWrapper implements com.mojang.blaze3d.vertex.VertexConsumer {
+  protected final com.mojang.blaze3d.vertex.VertexConsumer parent;
+  public net.minecraftforge.client.model.pipeline.VertexConsumerWrapper(com.mojang.blaze3d.vertex.VertexConsumer);
+  public com.mojang.blaze3d.vertex.VertexConsumer addVertex(float, float, float);
+  public com.mojang.blaze3d.vertex.VertexConsumer setColor(int);
+  public com.mojang.blaze3d.vertex.VertexConsumer setColor(int, int, int, int);
+  public com.mojang.blaze3d.vertex.VertexConsumer setUv(float, float);
+  public com.mojang.blaze3d.vertex.VertexConsumer setUv1(int, int);
+  public com.mojang.blaze3d.vertex.VertexConsumer setUv2(int, int);
+  public com.mojang.blaze3d.vertex.VertexConsumer setNormal(float, float, float);
+  public com.mojang.blaze3d.vertex.VertexConsumer setLineWidth(float);
+}
+Compiled from "package-info.java"
+interface net.minecraftforge.client.model.pipeline.package-info {
+}

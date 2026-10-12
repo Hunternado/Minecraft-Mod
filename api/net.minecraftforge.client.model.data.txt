@@ -1,0 +1,44 @@
+Compiled from "ModelData.java"
+public final class net.minecraftforge.client.model.data.ModelData {
+  public static final net.minecraftforge.client.model.data.ModelData EMPTY;
+  public java.util.Set<net.minecraftforge.client.model.data.ModelProperty<?>> getProperties();
+  public boolean has(net.minecraftforge.client.model.data.ModelProperty<?>);
+  public <T> T get(net.minecraftforge.client.model.data.ModelProperty<T>);
+  public net.minecraftforge.client.model.data.ModelData$Builder derive();
+  public static net.minecraftforge.client.model.data.ModelData$Builder builder();
+}
+Compiled from "ModelData.java"
+public final class net.minecraftforge.client.model.data.ModelData$Builder {
+  public <T> net.minecraftforge.client.model.data.ModelData$Builder with(net.minecraftforge.client.model.data.ModelProperty<T>, T);
+  public net.minecraftforge.client.model.data.ModelData build();
+}
+Compiled from "ModelDataManager.java"
+public class net.minecraftforge.client.model.data.ModelDataManager {
+  public net.minecraftforge.client.model.data.ModelDataManager(net.minecraft.world.level.Level);
+  public void requestRefresh(net.minecraft.world.level.block.entity.BlockEntity);
+  public net.minecraftforge.client.model.data.ModelData getAt(net.minecraft.core.BlockPos);
+  public net.minecraftforge.client.model.data.ModelData getAtOrEmpty(double, double, double);
+  public net.minecraftforge.client.model.data.ModelData getAtOrEmpty(net.minecraft.core.BlockPos);
+  public java.util.Map<net.minecraft.core.BlockPos, net.minecraftforge.client.model.data.ModelData> getAt(net.minecraft.core.SectionPos);
+  public java.util.Map<net.minecraft.core.BlockPos, net.minecraftforge.client.model.data.ModelData> getAt(net.minecraft.world.level.ChunkPos);
+  public static void onChunkUnload(net.minecraftforge.event.level.ChunkEvent$Unload);
+}
+Compiled from "ModelProperty.java"
+public class net.minecraftforge.client.model.data.ModelProperty<T> implements java.util.function.Predicate<T> {
+  public net.minecraftforge.client.model.data.ModelProperty();
+  public net.minecraftforge.client.model.data.ModelProperty(java.util.function.Predicate<T>);
+  public boolean test(T);
+}
+Compiled from "MultipartModelData.java"
+public class net.minecraftforge.client.model.data.MultipartModelData {
+  public static final net.minecraftforge.client.model.data.ModelProperty<net.minecraftforge.client.model.data.MultipartModelData> PROPERTY;
+  public net.minecraftforge.client.model.data.ModelData get(net.minecraft.client.renderer.block.dispatch.BlockStateModelPart);
+  public static net.minecraftforge.client.model.data.ModelData resolve(net.minecraftforge.client.model.data.ModelData, net.minecraft.client.renderer.block.dispatch.BlockStateModelPart);
+  public static net.minecraftforge.client.model.data.MultipartModelData$Builder builder();
+}
+Compiled from "MultipartModelData.java"
+public final class net.minecraftforge.client.model.data.MultipartModelData$Builder {
+  public net.minecraftforge.client.model.data.MultipartModelData$Builder();
+  public net.minecraftforge.client.model.data.MultipartModelData$Builder with(net.minecraft.client.renderer.block.dispatch.BlockStateModelPart, net.minecraftforge.client.model.data.ModelData);
+  public net.minecraftforge.client.model.data.MultipartModelData build();
+}

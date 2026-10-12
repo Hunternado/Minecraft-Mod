@@ -1,0 +1,65 @@
+Compiled from "ChannelRegistrationChangeEvent.java"
+public final class net.minecraftforge.event.network.ChannelRegistrationChangeEvent extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.network.ChannelRegistrationChangeEvent> BUS;
+  public net.minecraftforge.event.network.ChannelRegistrationChangeEvent(net.minecraft.network.Connection, net.minecraftforge.event.network.ChannelRegistrationChangeEvent$Type, java.util.Set<net.minecraft.resources.Identifier>);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.network.Connection getSource();
+  public net.minecraftforge.event.network.ChannelRegistrationChangeEvent$Type getType();
+  public java.util.Set<net.minecraft.resources.Identifier> getChannels();
+}
+Compiled from "ChannelRegistrationChangeEvent.java"
+public final class net.minecraftforge.event.network.ChannelRegistrationChangeEvent$Type extends java.lang.Enum<net.minecraftforge.event.network.ChannelRegistrationChangeEvent$Type> {
+  public static final net.minecraftforge.event.network.ChannelRegistrationChangeEvent$Type REGISTER;
+  public static final net.minecraftforge.event.network.ChannelRegistrationChangeEvent$Type UNREGISTER;
+  public static net.minecraftforge.event.network.ChannelRegistrationChangeEvent$Type[] values();
+  public static net.minecraftforge.event.network.ChannelRegistrationChangeEvent$Type valueOf(java.lang.String);
+}
+Compiled from "ConnectionStartEvent.java"
+public final class net.minecraftforge.event.network.ConnectionStartEvent extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.network.ConnectionStartEvent> BUS;
+  public net.minecraftforge.event.network.ConnectionStartEvent(net.minecraft.network.Connection);
+  public boolean isClient();
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.network.Connection getConnection();
+}
+Compiled from "CustomPayloadEvent.java"
+public final class net.minecraftforge.event.network.CustomPayloadEvent extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.network.CustomPayloadEvent> BUS;
+  public net.minecraftforge.event.network.CustomPayloadEvent(net.minecraft.resources.Identifier, java.lang.Object, net.minecraftforge.event.network.CustomPayloadEvent$Context, int);
+  public net.minecraftforge.event.network.CustomPayloadEvent(net.minecraft.resources.Identifier, java.lang.Object, net.minecraft.network.FriendlyByteBuf, net.minecraftforge.event.network.CustomPayloadEvent$Context, int);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.resources.Identifier getChannel();
+  public java.lang.Object getPayloadObject();
+  public net.minecraft.network.FriendlyByteBuf getPayload();
+  public net.minecraftforge.event.network.CustomPayloadEvent$Context getSource();
+  public int getLoginIndex();
+}
+Compiled from "CustomPayloadEvent.java"
+public class net.minecraftforge.event.network.CustomPayloadEvent$Context {
+  public net.minecraftforge.event.network.CustomPayloadEvent$Context(net.minecraft.network.Connection);
+  public boolean isClientSide();
+  public boolean isServerSide();
+  public net.minecraft.network.Connection getConnection();
+  public <T> io.netty.util.Attribute<T> attr(io.netty.util.AttributeKey<T>);
+  public void setPacketHandled(boolean);
+  public boolean getPacketHandled();
+  public java.util.concurrent.CompletableFuture<java.lang.Void> enqueueWork(java.lang.Runnable);
+  public net.minecraft.server.level.ServerPlayer getSender();
+}
+Compiled from "GatherLoginConfigurationTasksEvent.java"
+public final class net.minecraftforge.event.network.GatherLoginConfigurationTasksEvent extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.event.network.GatherLoginConfigurationTasksEvent> BUS;
+  public net.minecraftforge.event.network.GatherLoginConfigurationTasksEvent(net.minecraft.network.Connection, java.util.function.Consumer<net.minecraft.server.network.ConfigurationTask>);
+  public void addTask(net.minecraft.server.network.ConfigurationTask);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.network.Connection getConnection();
+  public java.util.function.Consumer<net.minecraft.server.network.ConfigurationTask> taskAdder();
+}

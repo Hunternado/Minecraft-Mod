@@ -1,0 +1,94 @@
+Compiled from "ClientTooltipComponentManager.java"
+public final class net.minecraftforge.client.gui.ClientTooltipComponentManager {
+  public static net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent createClientTooltipComponent(net.minecraft.world.inventory.tooltip.TooltipComponent);
+  public static void init();
+}
+Compiled from "CreativeTabsScreenPage.java"
+public final class net.minecraftforge.client.gui.CreativeTabsScreenPage {
+  public net.minecraftforge.client.gui.CreativeTabsScreenPage(java.util.List<net.minecraft.world.item.CreativeModeTab>);
+  public java.util.List<net.minecraft.world.item.CreativeModeTab> getVisibleTabs();
+  public boolean isTop(net.minecraft.world.item.CreativeModeTab);
+  public int getColumn(net.minecraft.world.item.CreativeModeTab);
+  public net.minecraft.world.item.CreativeModeTab getDefaultTab();
+}
+Compiled from "LoadingErrorScreen.java"
+public class net.minecraftforge.client.gui.LoadingErrorScreen extends net.minecraft.client.gui.screens.ErrorScreen {
+  public net.minecraftforge.client.gui.LoadingErrorScreen(net.minecraftforge.fml.LoadingFailedException, java.util.List<net.minecraftforge.fml.ModLoadingWarning>, java.io.File);
+  public void init();
+  public void extractRenderState(net.minecraft.client.gui.GuiGraphicsExtractor, int, int, float);
+}
+Compiled from "LoadingErrorScreen.java"
+public class net.minecraftforge.client.gui.LoadingErrorScreen$LoadingEntryList extends net.minecraft.client.gui.components.ObjectSelectionList<net.minecraftforge.client.gui.LoadingErrorScreen$LoadingEntryList$LoadingMessageEntry> {
+  public int getRowWidth();
+}
+Compiled from "LoadingErrorScreen.java"
+public class net.minecraftforge.client.gui.LoadingErrorScreen$LoadingEntryList$LoadingMessageEntry extends net.minecraft.client.gui.components.ObjectSelectionList$Entry<net.minecraftforge.client.gui.LoadingErrorScreen$LoadingEntryList$LoadingMessageEntry> {
+  public net.minecraft.network.chat.Component getNarration();
+  public void extractContent(net.minecraft.client.gui.GuiGraphicsExtractor, int, int, boolean, float);
+}
+Compiled from "ModListScreen.java"
+public class net.minecraftforge.client.gui.ModListScreen extends net.minecraft.client.gui.screens.Screen {
+  public net.minecraftforge.client.gui.ModListScreen(net.minecraft.client.gui.screens.Screen);
+  public void init();
+  public void tick();
+  public <T extends net.minecraft.client.gui.components.ObjectSelectionList$Entry<T>> void buildModList(java.util.function.Consumer<T>, java.util.function.Function<net.minecraftforge.forgespi.language.IModInfo, T>);
+  public void extractRenderState(net.minecraft.client.gui.GuiGraphicsExtractor, int, int, float);
+  public net.minecraft.client.Minecraft getMinecraftInstance();
+  public net.minecraft.client.gui.Font getFontRenderer();
+  public void setSelected(net.minecraftforge.client.gui.widget.ModListWidget$ModEntry);
+  public net.minecraftforge.client.gui.widget.ModListWidget$ModEntry getSelected();
+  public void resize(int, int);
+  public void onClose();
+}
+Compiled from "ModListScreen.java"
+class net.minecraftforge.client.gui.ModListScreen$InfoPanel extends net.minecraftforge.client.gui.widget.ScrollPanel {
+  public int getContentHeight();
+  protected int getScrollAmount();
+  protected void drawPanel(net.minecraft.client.gui.GuiGraphicsExtractor, int, int, int, int);
+  protected boolean clickPanel(double, double, int);
+  public net.minecraft.client.gui.narration.NarratableEntry$NarrationPriority narrationPriority();
+  public void updateNarration(net.minecraft.client.gui.narration.NarrationElementOutput);
+}
+Compiled from "ModListScreen.java"
+final class net.minecraftforge.client.gui.ModListScreen$Logo extends java.lang.Record {
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.resources.Identifier texture();
+  public net.minecraftforge.common.util.Size2i size();
+}
+Compiled from "ModListScreen.java"
+class net.minecraftforge.client.gui.ModListScreen$SortType extends java.lang.Enum<net.minecraftforge.client.gui.ModListScreen$SortType> implements java.util.Comparator<net.minecraftforge.forgespi.language.IModInfo> {
+  public static final net.minecraftforge.client.gui.ModListScreen$SortType NORMAL;
+  public static final net.minecraftforge.client.gui.ModListScreen$SortType A_TO_Z;
+  public static final net.minecraftforge.client.gui.ModListScreen$SortType Z_TO_A;
+  public static net.minecraftforge.client.gui.ModListScreen$SortType[] values();
+  public static net.minecraftforge.client.gui.ModListScreen$SortType valueOf(java.lang.String);
+  protected int compare(java.lang.String, java.lang.String);
+  public int compare(net.minecraftforge.forgespi.language.IModInfo, net.minecraftforge.forgespi.language.IModInfo);
+  public int compare(java.lang.Object, java.lang.Object);
+}
+Compiled from "ModMismatchDisconnectedScreen.java"
+public class net.minecraftforge.client.gui.ModMismatchDisconnectedScreen extends net.minecraft.client.gui.screens.Screen {
+  public net.minecraftforge.client.gui.ModMismatchDisconnectedScreen(net.minecraft.client.gui.screens.Screen, net.minecraft.network.chat.Component, net.minecraft.network.chat.Component, net.minecraftforge.network.NetworkContext$NetworkMismatchData);
+  protected void init();
+  public void extractRenderState(net.minecraft.client.gui.GuiGraphicsExtractor, int, int, float);
+}
+Compiled from "ModMismatchDisconnectedScreen.java"
+class net.minecraftforge.client.gui.ModMismatchDisconnectedScreen$MismatchInfoPanel extends net.minecraftforge.client.gui.widget.ScrollPanel {
+  public net.minecraftforge.client.gui.ModMismatchDisconnectedScreen$MismatchInfoPanel(net.minecraftforge.client.gui.ModMismatchDisconnectedScreen, net.minecraft.client.Minecraft, int, int, int, int);
+  protected int getContentHeight();
+  protected void drawPanel(net.minecraft.client.gui.GuiGraphicsExtractor, int, int, int, int);
+  public void extractRenderState(net.minecraft.client.gui.GuiGraphicsExtractor, int, int, float);
+  public net.minecraft.network.chat.Style getComponentStyleAt(double, double);
+  public boolean mouseClicked(net.minecraft.client.input.MouseButtonEvent, boolean);
+  public net.minecraft.client.gui.narration.NarratableEntry$NarrationPriority narrationPriority();
+  public void updateNarration(net.minecraft.client.gui.narration.NarrationElementOutput);
+}
+Compiled from "TitleScreenModUpdateIndicator.java"
+public class net.minecraftforge.client.gui.TitleScreenModUpdateIndicator extends net.minecraft.client.gui.screens.Screen {
+  public net.minecraftforge.client.gui.TitleScreenModUpdateIndicator(net.minecraft.client.gui.components.Button);
+  public void init();
+  public void extractRenderState(net.minecraft.client.gui.GuiGraphicsExtractor, int, int, float);
+  public static net.minecraftforge.client.gui.TitleScreenModUpdateIndicator init(net.minecraft.client.gui.screens.TitleScreen, net.minecraft.client.gui.components.Button);
+}

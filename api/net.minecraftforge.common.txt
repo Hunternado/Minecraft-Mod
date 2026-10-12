@@ -1,0 +1,1221 @@
+Compiled from "BiomeManager.java"
+public class net.minecraftforge.common.BiomeManager {
+  public net.minecraftforge.common.BiomeManager();
+  public static void addAdditionalOverworldBiomes(net.minecraft.resources.ResourceKey<net.minecraft.world.level.biome.Biome>);
+  public static boolean addBiome(net.minecraftforge.common.BiomeManager$BiomeType, net.minecraftforge.common.BiomeManager$BiomeEntry);
+  public static boolean removeBiome(net.minecraftforge.common.BiomeManager$BiomeType, net.minecraftforge.common.BiomeManager$BiomeEntry);
+  public static java.util.List<net.minecraft.resources.ResourceKey<net.minecraft.world.level.biome.Biome>> getAdditionalOverworldBiomes();
+  public static com.google.common.collect.ImmutableList<net.minecraftforge.common.BiomeManager$BiomeEntry> getBiomes(net.minecraftforge.common.BiomeManager$BiomeType);
+  public static boolean isTypeListModded(net.minecraftforge.common.BiomeManager$BiomeType);
+}
+Compiled from "BiomeManager.java"
+public class net.minecraftforge.common.BiomeManager$BiomeEntry {
+  public net.minecraftforge.common.BiomeManager$BiomeEntry(net.minecraft.resources.ResourceKey<net.minecraft.world.level.biome.Biome>, int);
+  public net.minecraft.resources.ResourceKey<net.minecraft.world.level.biome.Biome> getKey();
+}
+Compiled from "BiomeManager.java"
+public final class net.minecraftforge.common.BiomeManager$BiomeType extends java.lang.Enum<net.minecraftforge.common.BiomeManager$BiomeType> {
+  public static final net.minecraftforge.common.BiomeManager$BiomeType DESERT;
+  public static final net.minecraftforge.common.BiomeManager$BiomeType DESERT_LEGACY;
+  public static final net.minecraftforge.common.BiomeManager$BiomeType WARM;
+  public static final net.minecraftforge.common.BiomeManager$BiomeType COOL;
+  public static final net.minecraftforge.common.BiomeManager$BiomeType ICY;
+  public static net.minecraftforge.common.BiomeManager$BiomeType[] values();
+  public static net.minecraftforge.common.BiomeManager$BiomeType valueOf(java.lang.String);
+}
+Compiled from "BiomeManager.java"
+class net.minecraftforge.common.BiomeManager$TrackedList<E> extends java.util.ArrayList<E> {
+  public E set(int, E);
+  public boolean add(E);
+  public void add(int, E);
+  public E remove(int);
+  public boolean remove(java.lang.Object);
+  public void clear();
+  public boolean addAll(java.util.Collection<? extends E>);
+  public boolean addAll(int, java.util.Collection<? extends E>);
+  public boolean removeAll(java.util.Collection<?>);
+  public boolean retainAll(java.util.Collection<?>);
+  public boolean isModded();
+}
+Compiled from "CreativeModeTabRegistry.java"
+public final class net.minecraftforge.common.CreativeModeTabRegistry {
+  public net.minecraftforge.common.CreativeModeTabRegistry();
+  public static java.util.List<net.minecraft.world.item.CreativeModeTab> getSortedCreativeModeTabs();
+  public static java.util.List<net.minecraft.world.item.CreativeModeTab> getDefaultTabs();
+  public static net.minecraft.world.item.CreativeModeTab getTab(net.minecraft.resources.Identifier);
+  public static net.minecraft.resources.Identifier getName(net.minecraft.world.item.CreativeModeTab);
+  public static void sortTabs();
+}
+Compiled from "DungeonHooks.java"
+public class net.minecraftforge.common.DungeonHooks {
+  public net.minecraftforge.common.DungeonHooks();
+  public static float addDungeonMob(net.minecraft.world.entity.EntityType<?>, int);
+  public static int removeDungeonMob(net.minecraft.world.entity.EntityType<?>);
+  public static net.minecraft.world.entity.EntityType<?> getRandomDungeonMob(net.minecraft.util.RandomSource);
+}
+Compiled from "EventBusMigrationHelper.java"
+public final class net.minecraftforge.common.EventBusMigrationHelper {
+  public static final net.minecraftforge.common.EventBusMigrationHelper INSTANCE;
+  public net.minecraftforge.common.EventBusMigrationHelper(net.minecraftforge.eventbus.api.bus.BusGroup);
+  public java.util.Collection<net.minecraftforge.eventbus.api.listener.EventListener> register(java.lang.Class<?>);
+  public java.util.Collection<net.minecraftforge.eventbus.api.listener.EventListener> register(java.lang.Object);
+  public java.lang.String name();
+  public java.util.Collection<net.minecraftforge.eventbus.api.listener.EventListener> register(java.lang.invoke.MethodHandles$Lookup, java.lang.Class<?>);
+  public java.util.Collection<net.minecraftforge.eventbus.api.listener.EventListener> register(java.lang.invoke.MethodHandles$Lookup, java.lang.Object);
+  public void unregister(java.util.Collection<net.minecraftforge.eventbus.api.listener.EventListener>);
+}
+Compiled from "FarmlandWaterManager.java"
+public class net.minecraftforge.common.FarmlandWaterManager {
+  public net.minecraftforge.common.FarmlandWaterManager();
+  public static <T extends net.minecraftforge.common.ticket.SimpleTicket<net.minecraft.world.phys.Vec3>> T addCustomTicket(net.minecraft.world.level.Level, T, net.minecraft.world.level.ChunkPos, net.minecraft.world.level.ChunkPos...);
+  public static net.minecraftforge.common.ticket.AABBTicket addAABBTicket(net.minecraft.world.level.Level, net.minecraft.world.phys.AABB);
+  public static boolean hasBlockWaterTicket(net.minecraft.world.level.LevelReader, net.minecraft.core.BlockPos);
+}
+Compiled from "ForgeConfig.java"
+public class net.minecraftforge.common.ForgeConfig {
+  public static final net.minecraftforge.common.ForgeConfig$Client CLIENT;
+  public static final net.minecraftforge.common.ForgeConfig$Common COMMON;
+  public static final net.minecraftforge.common.ForgeConfig$Server SERVER;
+  public net.minecraftforge.common.ForgeConfig();
+}
+Compiled from "ForgeConfig.java"
+public class net.minecraftforge.common.ForgeConfig$Client {
+  public final net.minecraftforge.common.ForgeConfigSpec$BooleanValue showLoadWarnings;
+  public final net.minecraftforge.common.ForgeConfigSpec$BooleanValue allowMipmapLowering;
+  public final boolean showLoadWarnings();
+  public final boolean allowMipmapLowering();
+}
+Compiled from "ForgeConfig.java"
+public class net.minecraftforge.common.ForgeConfig$Common {
+  public final net.minecraftforge.common.ForgeConfigSpec$EnumValue<net.minecraftforge.common.ForgeConfig$Common$MigrationHelperMode> migrationHelperMode;
+}
+Compiled from "ForgeConfig.java"
+public final class net.minecraftforge.common.ForgeConfig$Common$MigrationHelperMode extends java.lang.Enum<net.minecraftforge.common.ForgeConfig$Common$MigrationHelperMode> {
+  public static final net.minecraftforge.common.ForgeConfig$Common$MigrationHelperMode OFF;
+  public static final net.minecraftforge.common.ForgeConfig$Common$MigrationHelperMode ONLY_IN_DEV_ENV;
+  public static final net.minecraftforge.common.ForgeConfig$Common$MigrationHelperMode ALWAYS;
+  public static net.minecraftforge.common.ForgeConfig$Common$MigrationHelperMode[] values();
+  public static net.minecraftforge.common.ForgeConfig$Common$MigrationHelperMode valueOf(java.lang.String);
+}
+Compiled from "ForgeConfig.java"
+public class net.minecraftforge.common.ForgeConfig$Server {
+  public final net.minecraftforge.common.ForgeConfigSpec$BooleanValue removeErroringBlockEntities;
+  public final net.minecraftforge.common.ForgeConfigSpec$BooleanValue removeErroringEntities;
+  public final net.minecraftforge.common.ForgeConfigSpec$BooleanValue fullBoundingBoxLadders;
+  public final net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.String> permissionHandler;
+  public final net.minecraftforge.common.ForgeConfigSpec$BooleanValue advertiseDedicatedServerToLan;
+}
+Compiled from "ForgeConfigSpec.java"
+public class net.minecraftforge.common.ForgeConfigSpec extends com.electronwill.nightconfig.core.utils.UnmodifiableConfigWrapper<com.electronwill.nightconfig.core.UnmodifiableConfig> implements net.minecraftforge.fml.config.IConfigSpec<net.minecraftforge.common.ForgeConfigSpec> {
+  public java.lang.String getLevelComment(java.util.List<java.lang.String>);
+  public java.lang.String getLevelTranslationKey(java.util.List<java.lang.String>);
+  public void setConfig(com.electronwill.nightconfig.core.CommentedConfig);
+  public void acceptConfig(com.electronwill.nightconfig.core.CommentedConfig);
+  public boolean isCorrecting();
+  public boolean isLoaded();
+  public com.electronwill.nightconfig.core.UnmodifiableConfig getSpec();
+  public com.electronwill.nightconfig.core.UnmodifiableConfig getValues();
+  public void afterReload();
+  public void save();
+  public synchronized boolean isCorrect(com.electronwill.nightconfig.core.CommentedConfig);
+  public int correct(com.electronwill.nightconfig.core.CommentedConfig);
+  public synchronized int correct(com.electronwill.nightconfig.core.CommentedConfig, com.electronwill.nightconfig.core.ConfigSpec$CorrectionListener);
+  public synchronized int correct(com.electronwill.nightconfig.core.CommentedConfig, com.electronwill.nightconfig.core.ConfigSpec$CorrectionListener, com.electronwill.nightconfig.core.ConfigSpec$CorrectionListener);
+}
+Compiled from "ForgeConfigSpec.java"
+public class net.minecraftforge.common.ForgeConfigSpec$BooleanValue extends net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Boolean> {
+}
+Compiled from "ForgeConfigSpec.java"
+public class net.minecraftforge.common.ForgeConfigSpec$Builder {
+  public net.minecraftforge.common.ForgeConfigSpec$Builder();
+  public <T> net.minecraftforge.common.ForgeConfigSpec$ConfigValue<T> define(java.lang.String, T);
+  public <T> net.minecraftforge.common.ForgeConfigSpec$ConfigValue<T> define(java.util.List<java.lang.String>, T);
+  public <T> net.minecraftforge.common.ForgeConfigSpec$ConfigValue<T> define(java.lang.String, T, java.util.function.Predicate<java.lang.Object>);
+  public <T> net.minecraftforge.common.ForgeConfigSpec$ConfigValue<T> define(java.util.List<java.lang.String>, T, java.util.function.Predicate<java.lang.Object>);
+  public <T> net.minecraftforge.common.ForgeConfigSpec$ConfigValue<T> define(java.lang.String, java.util.function.Supplier<T>, java.util.function.Predicate<java.lang.Object>);
+  public <T> net.minecraftforge.common.ForgeConfigSpec$ConfigValue<T> define(java.util.List<java.lang.String>, java.util.function.Supplier<T>, java.util.function.Predicate<java.lang.Object>);
+  public <T> net.minecraftforge.common.ForgeConfigSpec$ConfigValue<T> define(java.util.List<java.lang.String>, java.util.function.Supplier<T>, java.util.function.Predicate<java.lang.Object>, java.lang.Class<?>);
+  public <T> net.minecraftforge.common.ForgeConfigSpec$ConfigValue<T> define(java.util.List<java.lang.String>, net.minecraftforge.common.ForgeConfigSpec$ValueSpec, java.util.function.Supplier<T>);
+  public <V extends java.lang.Comparable<? super V>> net.minecraftforge.common.ForgeConfigSpec$ConfigValue<V> defineInRange(java.lang.String, V, V, V, java.lang.Class<V>);
+  public <V extends java.lang.Comparable<? super V>> net.minecraftforge.common.ForgeConfigSpec$ConfigValue<V> defineInRange(java.util.List<java.lang.String>, V, V, V, java.lang.Class<V>);
+  public <V extends java.lang.Comparable<? super V>> net.minecraftforge.common.ForgeConfigSpec$ConfigValue<V> defineInRange(java.lang.String, java.util.function.Supplier<V>, V, V, java.lang.Class<V>);
+  public <V extends java.lang.Comparable<? super V>> net.minecraftforge.common.ForgeConfigSpec$ConfigValue<V> defineInRange(java.util.List<java.lang.String>, java.util.function.Supplier<V>, V, V, java.lang.Class<V>);
+  public <T> net.minecraftforge.common.ForgeConfigSpec$ConfigValue<T> defineInList(java.lang.String, T, java.util.Collection<? extends T>);
+  public <T> net.minecraftforge.common.ForgeConfigSpec$ConfigValue<T> defineInList(java.lang.String, java.util.function.Supplier<T>, java.util.Collection<? extends T>);
+  public <T> net.minecraftforge.common.ForgeConfigSpec$ConfigValue<T> defineInList(java.util.List<java.lang.String>, T, java.util.Collection<? extends T>);
+  public <T> net.minecraftforge.common.ForgeConfigSpec$ConfigValue<T> defineInList(java.util.List<java.lang.String>, java.util.function.Supplier<T>, java.util.Collection<? extends T>);
+  public <T> net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.util.List<? extends T>> defineList(java.lang.String, java.util.List<? extends T>, java.util.function.Predicate<java.lang.Object>);
+  public <T> net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.util.List<? extends T>> defineList(java.lang.String, java.util.function.Supplier<java.util.List<? extends T>>, java.util.function.Predicate<java.lang.Object>);
+  public <T> net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.util.List<? extends T>> defineList(java.util.List<java.lang.String>, java.util.List<? extends T>, java.util.function.Predicate<java.lang.Object>);
+  public <T> net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.util.List<? extends T>> defineList(java.util.List<java.lang.String>, java.util.function.Supplier<java.util.List<? extends T>>, java.util.function.Predicate<java.lang.Object>);
+  public <T> net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.util.List<? extends T>> defineListAllowEmpty(java.lang.String, java.util.List<? extends T>, java.util.function.Predicate<java.lang.Object>);
+  public <T> net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.util.List<? extends T>> defineListAllowEmpty(java.lang.String, java.util.function.Supplier<java.util.List<? extends T>>, java.util.function.Predicate<java.lang.Object>);
+  public <T> net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.util.List<? extends T>> defineListAllowEmpty(java.util.List<java.lang.String>, java.util.List<? extends T>, java.util.function.Predicate<java.lang.Object>);
+  public <T> net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.util.List<? extends T>> defineListAllowEmpty(java.util.List<java.lang.String>, java.util.function.Supplier<java.util.List<? extends T>>, java.util.function.Predicate<java.lang.Object>);
+  public <V extends java.lang.Enum<V>> net.minecraftforge.common.ForgeConfigSpec$EnumValue<V> defineEnum(java.lang.String, V);
+  public <V extends java.lang.Enum<V>> net.minecraftforge.common.ForgeConfigSpec$EnumValue<V> defineEnum(java.lang.String, V, com.electronwill.nightconfig.core.EnumGetMethod);
+  public <V extends java.lang.Enum<V>> net.minecraftforge.common.ForgeConfigSpec$EnumValue<V> defineEnum(java.util.List<java.lang.String>, V);
+  public <V extends java.lang.Enum<V>> net.minecraftforge.common.ForgeConfigSpec$EnumValue<V> defineEnum(java.util.List<java.lang.String>, V, com.electronwill.nightconfig.core.EnumGetMethod);
+  public <V extends java.lang.Enum<V>> net.minecraftforge.common.ForgeConfigSpec$EnumValue<V> defineEnum(java.lang.String, V, V...);
+  public <V extends java.lang.Enum<V>> net.minecraftforge.common.ForgeConfigSpec$EnumValue<V> defineEnum(java.lang.String, V, com.electronwill.nightconfig.core.EnumGetMethod, V...);
+  public <V extends java.lang.Enum<V>> net.minecraftforge.common.ForgeConfigSpec$EnumValue<V> defineEnum(java.util.List<java.lang.String>, V, V...);
+  public <V extends java.lang.Enum<V>> net.minecraftforge.common.ForgeConfigSpec$EnumValue<V> defineEnum(java.util.List<java.lang.String>, V, com.electronwill.nightconfig.core.EnumGetMethod, V...);
+  public <V extends java.lang.Enum<V>> net.minecraftforge.common.ForgeConfigSpec$EnumValue<V> defineEnum(java.lang.String, V, java.util.Collection<V>);
+  public <V extends java.lang.Enum<V>> net.minecraftforge.common.ForgeConfigSpec$EnumValue<V> defineEnum(java.lang.String, V, com.electronwill.nightconfig.core.EnumGetMethod, java.util.Collection<V>);
+  public <V extends java.lang.Enum<V>> net.minecraftforge.common.ForgeConfigSpec$EnumValue<V> defineEnum(java.util.List<java.lang.String>, V, java.util.Collection<V>);
+  public <V extends java.lang.Enum<V>> net.minecraftforge.common.ForgeConfigSpec$EnumValue<V> defineEnum(java.util.List<java.lang.String>, V, com.electronwill.nightconfig.core.EnumGetMethod, java.util.Collection<V>);
+  public <V extends java.lang.Enum<V>> net.minecraftforge.common.ForgeConfigSpec$EnumValue<V> defineEnum(java.lang.String, V, java.util.function.Predicate<java.lang.Object>);
+  public <V extends java.lang.Enum<V>> net.minecraftforge.common.ForgeConfigSpec$EnumValue<V> defineEnum(java.lang.String, V, com.electronwill.nightconfig.core.EnumGetMethod, java.util.function.Predicate<java.lang.Object>);
+  public <V extends java.lang.Enum<V>> net.minecraftforge.common.ForgeConfigSpec$EnumValue<V> defineEnum(java.util.List<java.lang.String>, V, java.util.function.Predicate<java.lang.Object>);
+  public <V extends java.lang.Enum<V>> net.minecraftforge.common.ForgeConfigSpec$EnumValue<V> defineEnum(java.util.List<java.lang.String>, V, com.electronwill.nightconfig.core.EnumGetMethod, java.util.function.Predicate<java.lang.Object>);
+  public <V extends java.lang.Enum<V>> net.minecraftforge.common.ForgeConfigSpec$EnumValue<V> defineEnum(java.lang.String, java.util.function.Supplier<V>, java.util.function.Predicate<java.lang.Object>, java.lang.Class<V>);
+  public <V extends java.lang.Enum<V>> net.minecraftforge.common.ForgeConfigSpec$EnumValue<V> defineEnum(java.lang.String, java.util.function.Supplier<V>, com.electronwill.nightconfig.core.EnumGetMethod, java.util.function.Predicate<java.lang.Object>, java.lang.Class<V>);
+  public <V extends java.lang.Enum<V>> net.minecraftforge.common.ForgeConfigSpec$EnumValue<V> defineEnum(java.util.List<java.lang.String>, java.util.function.Supplier<V>, java.util.function.Predicate<java.lang.Object>, java.lang.Class<V>);
+  public <V extends java.lang.Enum<V>> net.minecraftforge.common.ForgeConfigSpec$EnumValue<V> defineEnum(java.util.List<java.lang.String>, java.util.function.Supplier<V>, com.electronwill.nightconfig.core.EnumGetMethod, java.util.function.Predicate<java.lang.Object>, java.lang.Class<V>);
+  public net.minecraftforge.common.ForgeConfigSpec$BooleanValue define(java.lang.String, boolean);
+  public net.minecraftforge.common.ForgeConfigSpec$BooleanValue define(java.util.List<java.lang.String>, boolean);
+  public net.minecraftforge.common.ForgeConfigSpec$BooleanValue define(java.lang.String, java.util.function.Supplier<java.lang.Boolean>);
+  public net.minecraftforge.common.ForgeConfigSpec$BooleanValue define(java.util.List<java.lang.String>, java.util.function.Supplier<java.lang.Boolean>);
+  public net.minecraftforge.common.ForgeConfigSpec$FloatValue defineInRange(java.lang.String, float, float, float);
+  public net.minecraftforge.common.ForgeConfigSpec$FloatValue defineInRange(java.util.List<java.lang.String>, float, float, float);
+  public net.minecraftforge.common.ForgeConfigSpec$FloatValue defineInRange(java.lang.String, java.util.function.Supplier<java.lang.Float>, float, float);
+  public net.minecraftforge.common.ForgeConfigSpec$FloatValue defineInRange(java.util.List<java.lang.String>, java.util.function.Supplier<java.lang.Float>, float, float);
+  public net.minecraftforge.common.ForgeConfigSpec$DoubleValue defineInRange(java.lang.String, double, double, double);
+  public net.minecraftforge.common.ForgeConfigSpec$DoubleValue defineInRange(java.util.List<java.lang.String>, double, double, double);
+  public net.minecraftforge.common.ForgeConfigSpec$DoubleValue defineInRange(java.lang.String, java.util.function.Supplier<java.lang.Double>, double, double);
+  public net.minecraftforge.common.ForgeConfigSpec$DoubleValue defineInRange(java.util.List<java.lang.String>, java.util.function.Supplier<java.lang.Double>, double, double);
+  public net.minecraftforge.common.ForgeConfigSpec$ByteValue defineInRange(java.lang.String, byte, byte, byte);
+  public net.minecraftforge.common.ForgeConfigSpec$ByteValue defineInRange(java.util.List<java.lang.String>, byte, byte, byte);
+  public net.minecraftforge.common.ForgeConfigSpec$ByteValue defineInRange(java.lang.String, java.util.function.Supplier<java.lang.Byte>, byte, byte);
+  public net.minecraftforge.common.ForgeConfigSpec$ByteValue defineInRange(java.util.List<java.lang.String>, java.util.function.Supplier<java.lang.Byte>, byte, byte);
+  public net.minecraftforge.common.ForgeConfigSpec$ShortValue defineInRange(java.lang.String, short, short, short);
+  public net.minecraftforge.common.ForgeConfigSpec$ShortValue defineInRange(java.util.List<java.lang.String>, short, short, short);
+  public net.minecraftforge.common.ForgeConfigSpec$ShortValue defineInRange(java.lang.String, java.util.function.Supplier<java.lang.Short>, short, short);
+  public net.minecraftforge.common.ForgeConfigSpec$ShortValue defineInRange(java.util.List<java.lang.String>, java.util.function.Supplier<java.lang.Short>, short, short);
+  public net.minecraftforge.common.ForgeConfigSpec$IntValue defineInRange(java.lang.String, int, int, int);
+  public net.minecraftforge.common.ForgeConfigSpec$IntValue defineInRange(java.util.List<java.lang.String>, int, int, int);
+  public net.minecraftforge.common.ForgeConfigSpec$IntValue defineInRange(java.lang.String, java.util.function.Supplier<java.lang.Integer>, int, int);
+  public net.minecraftforge.common.ForgeConfigSpec$IntValue defineInRange(java.util.List<java.lang.String>, java.util.function.Supplier<java.lang.Integer>, int, int);
+  public net.minecraftforge.common.ForgeConfigSpec$LongValue defineInRange(java.lang.String, long, long, long);
+  public net.minecraftforge.common.ForgeConfigSpec$LongValue defineInRange(java.util.List<java.lang.String>, long, long, long);
+  public net.minecraftforge.common.ForgeConfigSpec$LongValue defineInRange(java.lang.String, java.util.function.Supplier<java.lang.Long>, long, long);
+  public net.minecraftforge.common.ForgeConfigSpec$LongValue defineInRange(java.util.List<java.lang.String>, java.util.function.Supplier<java.lang.Long>, long, long);
+  public net.minecraftforge.common.ForgeConfigSpec$Builder comment(java.lang.String);
+  public net.minecraftforge.common.ForgeConfigSpec$Builder comment(java.lang.String...);
+  public net.minecraftforge.common.ForgeConfigSpec$Builder translation(java.lang.String);
+  public net.minecraftforge.common.ForgeConfigSpec$Builder worldRestart();
+  public net.minecraftforge.common.ForgeConfigSpec$Builder push(java.lang.String);
+  public net.minecraftforge.common.ForgeConfigSpec$Builder push(java.util.List<java.lang.String>);
+  public net.minecraftforge.common.ForgeConfigSpec$Builder pop();
+  public net.minecraftforge.common.ForgeConfigSpec$Builder pop(int);
+  public <T> org.apache.commons.lang3.tuple.Pair<T, net.minecraftforge.common.ForgeConfigSpec> configure(java.util.function.Function<net.minecraftforge.common.ForgeConfigSpec$Builder, T>);
+  public net.minecraftforge.common.ForgeConfigSpec build();
+}
+Compiled from "ForgeConfigSpec.java"
+public interface net.minecraftforge.common.ForgeConfigSpec$Builder$BuilderConsumer {
+  public abstract void accept(net.minecraftforge.common.ForgeConfigSpec$Builder);
+}
+Compiled from "ForgeConfigSpec.java"
+class net.minecraftforge.common.ForgeConfigSpec$BuilderContext {
+  public void addComment(java.lang.String);
+  public void clearComment();
+  public boolean hasComment();
+  public java.lang.String buildComment();
+  public java.lang.String buildComment(java.util.List<java.lang.String>);
+  public void setTranslationKey(java.lang.String);
+  public java.lang.String getTranslationKey();
+  public <V extends java.lang.Comparable<? super V>> void setRange(net.minecraftforge.common.ForgeConfigSpec$Range<V>);
+  public <V extends java.lang.Comparable<? super V>> net.minecraftforge.common.ForgeConfigSpec$Range<V> getRange();
+  public void worldRestart();
+  public boolean needsWorldRestart();
+  public void setClazz(java.lang.Class<?>);
+  public java.lang.Class<?> getClazz();
+  public void ensureEmpty();
+}
+Compiled from "ForgeConfigSpec.java"
+public class net.minecraftforge.common.ForgeConfigSpec$ByteValue extends net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Byte> {
+  protected java.lang.Byte getRaw(com.electronwill.nightconfig.core.Config, java.util.List<java.lang.String>, java.util.function.Supplier<java.lang.Byte>);
+  protected java.lang.Object getRaw(com.electronwill.nightconfig.core.Config, java.util.List, java.util.function.Supplier);
+}
+Compiled from "ForgeConfigSpec.java"
+public class net.minecraftforge.common.ForgeConfigSpec$ConfigValue<T> implements java.util.function.Supplier<T> {
+  public java.util.List<java.lang.String> getPath();
+  public T get();
+  protected T getRaw(com.electronwill.nightconfig.core.Config, java.util.List<java.lang.String>, java.util.function.Supplier<T>);
+  public T getDefault();
+  public net.minecraftforge.common.ForgeConfigSpec$Builder next();
+  public void save();
+  public void set(T);
+  public void clearCache();
+}
+Compiled from "ForgeConfigSpec.java"
+public class net.minecraftforge.common.ForgeConfigSpec$DoubleValue extends net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Double> {
+  protected java.lang.Double getRaw(com.electronwill.nightconfig.core.Config, java.util.List<java.lang.String>, java.util.function.Supplier<java.lang.Double>);
+  protected java.lang.Object getRaw(com.electronwill.nightconfig.core.Config, java.util.List, java.util.function.Supplier);
+}
+Compiled from "ForgeConfigSpec.java"
+public class net.minecraftforge.common.ForgeConfigSpec$EnumValue<T extends java.lang.Enum<T>> extends net.minecraftforge.common.ForgeConfigSpec$ConfigValue<T> {
+  protected T getRaw(com.electronwill.nightconfig.core.Config, java.util.List<java.lang.String>, java.util.function.Supplier<T>);
+  protected java.lang.Object getRaw(com.electronwill.nightconfig.core.Config, java.util.List, java.util.function.Supplier);
+}
+Compiled from "ForgeConfigSpec.java"
+public class net.minecraftforge.common.ForgeConfigSpec$FloatValue extends net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Float> {
+  protected java.lang.Float getRaw(com.electronwill.nightconfig.core.Config, java.util.List<java.lang.String>, java.util.function.Supplier<java.lang.Float>);
+  protected java.lang.Object getRaw(com.electronwill.nightconfig.core.Config, java.util.List, java.util.function.Supplier);
+}
+Compiled from "ForgeConfigSpec.java"
+public class net.minecraftforge.common.ForgeConfigSpec$IntValue extends net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Integer> {
+  protected java.lang.Integer getRaw(com.electronwill.nightconfig.core.Config, java.util.List<java.lang.String>, java.util.function.Supplier<java.lang.Integer>);
+  protected java.lang.Object getRaw(com.electronwill.nightconfig.core.Config, java.util.List, java.util.function.Supplier);
+}
+Compiled from "ForgeConfigSpec.java"
+public class net.minecraftforge.common.ForgeConfigSpec$LongValue extends net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Long> {
+  protected java.lang.Long getRaw(com.electronwill.nightconfig.core.Config, java.util.List<java.lang.String>, java.util.function.Supplier<java.lang.Long>);
+  protected java.lang.Object getRaw(com.electronwill.nightconfig.core.Config, java.util.List, java.util.function.Supplier);
+}
+Compiled from "ForgeConfigSpec.java"
+public class net.minecraftforge.common.ForgeConfigSpec$Range<V extends java.lang.Comparable<? super V>> implements java.util.function.Predicate<java.lang.Object> {
+  public java.lang.Class<? extends V> getClazz();
+  public V getMin();
+  public V getMax();
+  public boolean test(java.lang.Object);
+  public java.lang.Object correct(java.lang.Object, java.lang.Object);
+  public java.lang.String toString();
+}
+Compiled from "ForgeConfigSpec.java"
+public class net.minecraftforge.common.ForgeConfigSpec$ShortValue extends net.minecraftforge.common.ForgeConfigSpec$ConfigValue<java.lang.Short> {
+  protected java.lang.Short getRaw(com.electronwill.nightconfig.core.Config, java.util.List<java.lang.String>, java.util.function.Supplier<java.lang.Short>);
+  protected java.lang.Object getRaw(com.electronwill.nightconfig.core.Config, java.util.List, java.util.function.Supplier);
+}
+Compiled from "ForgeConfigSpec.java"
+public class net.minecraftforge.common.ForgeConfigSpec$ValueSpec {
+  public java.lang.String getComment();
+  public java.lang.String getTranslationKey();
+  public <V extends java.lang.Comparable<? super V>> net.minecraftforge.common.ForgeConfigSpec$Range<V> getRange();
+  public boolean needsWorldRestart();
+  public java.lang.Class<?> getClazz();
+  public boolean test(java.lang.Object);
+  public java.lang.Object correct(java.lang.Object);
+  public java.lang.Object getDefault();
+}
+Compiled from "ForgeHooks.java"
+public final class net.minecraftforge.common.ForgeHooks {
+  public static void fireLightingCalculatedEvent(net.minecraft.world.level.chunk.ChunkAccess);
+  public static boolean canContinueUsing(net.minecraft.world.item.ItemStack, net.minecraft.world.item.ItemStack);
+  public static boolean isCorrectToolForDrops(net.minecraft.world.level.block.state.BlockState, net.minecraft.world.entity.player.Player);
+  public static net.minecraft.world.entity.ai.Brain<?> onLivingMakeBrain(net.minecraft.world.entity.LivingEntity, net.minecraft.world.entity.ai.Brain<?>, net.minecraft.world.entity.ai.Brain$Packed);
+  public static boolean onLivingAttack(net.minecraft.world.entity.LivingEntity, net.minecraft.world.damagesource.DamageSource, float);
+  public static boolean onPlayerAttack(net.minecraft.world.entity.LivingEntity, net.minecraft.world.damagesource.DamageSource, float);
+  public static boolean onLivingUseTotem(net.minecraft.world.entity.LivingEntity, net.minecraft.world.damagesource.DamageSource, net.minecraft.world.item.ItemStack, net.minecraft.world.InteractionHand);
+  public static float onLivingHurt(net.minecraft.world.entity.LivingEntity, net.minecraft.world.damagesource.DamageSource, float);
+  public static float onLivingDamage(net.minecraft.world.entity.LivingEntity, net.minecraft.world.damagesource.DamageSource, float);
+  public static int getLootingLevel(net.minecraft.world.entity.Entity, net.minecraft.world.entity.Entity, net.minecraft.world.damagesource.DamageSource);
+  public static double getEntityVisibilityMultiplier(net.minecraft.world.entity.LivingEntity, net.minecraft.world.entity.Entity, double);
+  public static java.util.Optional<net.minecraft.core.BlockPos> isLivingOnLadder(net.minecraft.world.level.block.state.BlockState, net.minecraft.world.level.Level, net.minecraft.core.BlockPos, net.minecraft.world.entity.LivingEntity);
+  public static void onLivingJump(net.minecraft.world.entity.LivingEntity);
+  public static net.minecraft.world.entity.item.ItemEntity onPlayerTossEvent(net.minecraft.world.entity.player.Player, net.minecraft.world.item.ItemStack, boolean);
+  public static net.minecraft.network.chat.Component onServerChatSubmittedEvent(net.minecraft.server.level.ServerPlayer, net.minecraft.network.chat.Component);
+  public static net.minecraft.network.chat.Component newChatWithLinks(java.lang.String);
+  public static net.minecraft.network.chat.Component newChatWithLinks(java.lang.String, boolean);
+  public static void dropXpForBlock(net.minecraft.world.level.block.state.BlockState, net.minecraft.server.level.ServerLevel, net.minecraft.core.BlockPos, net.minecraft.world.item.ItemStack);
+  public static int onBlockBreakEvent(net.minecraft.world.level.Level, net.minecraft.world.level.GameType, net.minecraft.server.level.ServerPlayer, net.minecraft.core.BlockPos);
+  public static net.minecraft.world.InteractionResult onPlaceItemIntoWorld(net.minecraft.world.item.context.UseOnContext);
+  public static boolean onAnvilChange(net.minecraft.world.inventory.AnvilMenu, net.minecraft.world.item.ItemStack, net.minecraft.world.item.ItemStack, net.minecraft.world.Container, java.lang.String, long, net.minecraft.world.entity.player.Player);
+  public static boolean onGrindstoneTake(net.minecraft.world.Container, net.minecraft.world.inventory.ContainerLevelAccess, java.util.function.Function<net.minecraft.world.level.Level, java.lang.Integer>);
+  public static void setCraftingPlayer(net.minecraft.world.entity.player.Player);
+  public static net.minecraft.world.entity.player.Player getCraftingPlayer();
+  public static net.minecraft.world.item.ItemStack getCraftingRemainingItem(net.minecraft.world.item.ItemStack);
+  public static boolean onPlayerAttackTarget(net.minecraft.world.entity.player.Player, net.minecraft.world.entity.Entity);
+  public static net.minecraft.world.InteractionResult onItemRightClick(net.minecraft.world.entity.player.Player, net.minecraft.world.InteractionHand);
+  public static net.minecraft.world.level.GameType onChangeGameType(net.minecraft.world.entity.player.Player, net.minecraft.world.level.GameType, net.minecraft.world.level.GameType);
+  public static <E extends net.minecraft.world.level.storage.loot.LootPool> com.mojang.serialization.Codec<java.util.List<E>> createLootTablePoolCodec(com.mojang.serialization.Codec<E>);
+  public static net.minecraftforge.fluids.FluidType getVanillaFluidType(net.minecraft.world.level.material.Fluid);
+  public static boolean onCropsGrowPre(net.minecraft.world.level.Level, net.minecraft.core.BlockPos, net.minecraft.world.level.block.state.BlockState, boolean);
+  public static void onCropsGrowPost(net.minecraft.world.level.Level, net.minecraft.core.BlockPos, net.minecraft.world.level.block.state.BlockState);
+  public static net.minecraftforge.event.entity.player.CriticalHitEvent getCriticalHit(net.minecraft.world.entity.player.Player, net.minecraft.world.entity.Entity, boolean, float);
+  public static net.minecraft.world.item.ItemStack getProjectile(net.minecraft.world.entity.LivingEntity, net.minecraft.world.item.ItemStack, net.minecraft.world.item.ItemStack);
+  public static java.lang.String getDefaultCreatorModId(net.minecraft.world.item.ItemStack);
+  public static boolean onFarmlandTrample(net.minecraft.server.level.ServerLevel, net.minecraft.core.BlockPos, net.minecraft.world.level.block.state.BlockState, double, net.minecraft.world.entity.Entity);
+  public static int onNoteChange(net.minecraft.world.level.Level, net.minecraft.core.BlockPos, net.minecraft.world.level.block.state.BlockState, int, int);
+  public static net.minecraft.network.syncher.EntityDataSerializer<?> getSerializer(int, net.minecraft.util.CrudeIncrementalIntIdentityHashBiMap<net.minecraft.network.syncher.EntityDataSerializer<?>>);
+  public static int getSerializerId(net.minecraft.network.syncher.EntityDataSerializer<?>, net.minecraft.util.CrudeIncrementalIntIdentityHashBiMap<net.minecraft.network.syncher.EntityDataSerializer<?>>);
+  public static boolean canEntityDestroy(net.minecraft.server.level.ServerLevel, net.minecraft.core.BlockPos, net.minecraft.world.entity.LivingEntity);
+  public static it.unimi.dsi.fastutil.objects.ObjectArrayList<net.minecraft.world.item.ItemStack> modifyLoot(net.minecraft.world.level.storage.loot.LootTable, it.unimi.dsi.fastutil.objects.ObjectArrayList<net.minecraft.world.item.ItemStack>, net.minecraft.world.level.storage.loot.LootContext);
+  public static java.util.List<java.lang.String> getModPacks();
+  public static java.util.List<java.lang.String> getModPacksWithVanilla();
+  public static java.util.Map<net.minecraft.world.entity.EntityType<? extends net.minecraft.world.entity.LivingEntity>, net.minecraft.world.entity.ai.attributes.AttributeSupplier> getAttributesView();
+  public static void modifyAttributes();
+  public static void writeAdditionalLevelSaveData(net.minecraft.world.level.storage.WorldData, net.minecraft.nbt.CompoundTag);
+  public static void readAdditionalLevelSaveData(net.minecraft.world.level.storage.LevelStorageSource$LevelStorageAccess, net.minecraft.world.level.storage.LevelStorageSource$LevelDirectory);
+  public static java.lang.String encodeLifecycle(com.mojang.serialization.Lifecycle);
+  public static com.mojang.serialization.Lifecycle parseLifecycle(java.lang.String);
+  public static java.util.function.Predicate<net.minecraft.world.entity.LivingEntity> isNotDisguised(net.minecraft.world.entity.monster.Monster);
+  public static net.minecraft.util.datafix.fixes.StructuresBecomeConfiguredFix$Conversion getStructureConversion(java.lang.String);
+  public static boolean checkStructureNamespace(java.lang.String);
+  public static boolean canUseEntitySelectors(net.minecraft.commands.SharedSuggestionProvider);
+  public static <T> net.minecraft.core.HolderLookup$RegistryLookup<T> wrapRegistryLookup(net.minecraft.core.HolderLookup$RegistryLookup<T>);
+  public static void onLivingBreathe(net.minecraft.world.entity.LivingEntity, int, int);
+  public static void onCreativeModeTabBuildContents(net.minecraft.world.item.CreativeModeTab, net.minecraft.world.item.CreativeModeTab$DisplayItemsGenerator, net.minecraft.world.item.CreativeModeTab$ItemDisplayParameters, net.minecraft.world.item.CreativeModeTab$Output);
+  public static <B extends net.minecraft.network.FriendlyByteBuf> net.minecraft.network.codec.StreamCodec<B, ? extends net.minecraft.network.protocol.common.custom.CustomPacketPayload> getCustomPayloadCodec(net.minecraft.resources.Identifier, int);
+  public static boolean onCustomPayload(net.minecraft.network.protocol.common.custom.CustomPacketPayload, net.minecraft.network.Connection);
+  public static boolean onCustomPayload(net.minecraft.network.protocol.login.ClientboundCustomQueryPacket, net.minecraft.network.Connection);
+  public static boolean onCustomPayload(net.minecraft.network.protocol.login.ServerboundCustomQueryAnswerPacket, net.minecraft.network.Connection);
+  public static boolean onCustomPayload(net.minecraftforge.event.network.CustomPayloadEvent);
+  public static void handleClientConfigurationComplete(net.minecraft.network.Connection);
+  public static net.minecraft.network.protocol.Packet<net.minecraft.network.protocol.game.ClientGamePacketListener> getEntitySpawnPacket(net.minecraft.world.entity.Entity);
+  public static boolean readAndTestCondition(com.mojang.serialization.DynamicOps<com.google.gson.JsonElement>, com.google.gson.JsonObject);
+  public static void writeCondition(net.minecraftforge.common.crafting.conditions.ICondition, com.google.gson.JsonObject);
+  public static com.google.gson.JsonElement readConditional(com.mojang.serialization.DynamicOps<com.google.gson.JsonElement>, com.google.gson.JsonElement);
+  public static com.mojang.serialization.Codec<net.minecraft.world.item.crafting.Ingredient> ingredientBaseCodec(com.mojang.serialization.Codec<net.minecraft.world.item.crafting.Ingredient>);
+  public static net.minecraft.network.codec.StreamCodec<net.minecraft.network.RegistryFriendlyByteBuf, net.minecraft.world.item.crafting.Ingredient> ingredientStreamCodec();
+  public static net.minecraft.world.item.DyeColor getDyeColorFromItemStack(net.minecraft.world.item.ItemStack);
+  public static net.minecraft.core.component.DataComponentMap gatherItemComponents(net.minecraft.world.item.Item, net.minecraft.core.component.DataComponentMap);
+  public static <T> T onJsonDataParsed(com.mojang.serialization.Codec<T>, net.minecraft.resources.Identifier, T);
+  public static net.minecraft.world.level.levelgen.structure.templatesystem.loader.TemplateSource emptyStructureSource();
+}
+Compiled from "ForgeHooks.java"
+public interface net.minecraftforge.common.ForgeHooks$BiomeCallbackFunction {
+  public abstract net.minecraft.world.level.biome.Biome apply(net.minecraft.world.level.biome.Biome$ClimateSettings, net.minecraft.world.level.biome.BiomeSpecialEffects, net.minecraft.world.level.biome.BiomeGenerationSettings, net.minecraft.world.level.biome.MobSpawnSettings);
+}
+Compiled from "ForgeI18n.java"
+public class net.minecraftforge.common.ForgeI18n {
+  public net.minecraftforge.common.ForgeI18n();
+  public static java.lang.String getPattern(java.lang.String);
+  public static void loadLanguageData(java.util.Map<java.lang.String, java.lang.String>);
+  public static java.lang.String parseMessage(java.lang.String, java.lang.Object...);
+  public static java.lang.String parseFormat(java.lang.String, java.lang.Object...);
+  public static java.lang.String stripSpecialChars(java.lang.String);
+  public static java.lang.String stripControlCodes(java.lang.String);
+}
+Compiled from "ForgeI18n.java"
+public class net.minecraftforge.common.ForgeI18n$CustomReadOnlyFormat extends java.text.Format {
+  public java.lang.StringBuffer format(java.lang.Object, java.lang.StringBuffer, java.text.FieldPosition);
+  public java.lang.Object parseObject(java.lang.String, java.text.ParsePosition);
+}
+Compiled from "ForgeInternalHandler.java"
+public final class net.minecraftforge.common.ForgeInternalHandler {
+  public net.minecraftforge.common.ForgeInternalHandler();
+}
+Compiled from "ForgeMod.java"
+public class net.minecraftforge.common.ForgeMod {
+  public static final java.lang.String VERSION_CHECK_CAT;
+  public static final net.minecraftforge.registries.RegistryObject<net.minecraft.world.entity.ai.attributes.Attribute> SWIM_SPEED;
+  public static final net.minecraftforge.registries.RegistryObject<net.minecraft.world.entity.ai.attributes.Attribute> NAMETAG_DISTANCE;
+  public static final net.minecraftforge.registries.RegistryObject<net.minecraftforge.registries.holdersets.HolderSetType> ANY_HOLDER_SET;
+  public static final net.minecraftforge.registries.RegistryObject<net.minecraftforge.registries.holdersets.HolderSetType> AND_HOLDER_SET;
+  public static final net.minecraftforge.registries.RegistryObject<net.minecraftforge.registries.holdersets.HolderSetType> OR_HOLDER_SET;
+  public static final net.minecraftforge.registries.RegistryObject<net.minecraftforge.registries.holdersets.HolderSetType> NOT_HOLDER_SET;
+  public static final net.minecraftforge.registries.RegistryObject<net.minecraftforge.fluids.FluidType> EMPTY_TYPE;
+  public static final net.minecraftforge.registries.RegistryObject<net.minecraftforge.fluids.FluidType> WATER_TYPE;
+  public static final net.minecraftforge.registries.RegistryObject<net.minecraftforge.fluids.FluidType> LAVA_TYPE;
+  public static final net.minecraftforge.registries.RegistryObject<net.minecraft.sounds.SoundEvent> BUCKET_EMPTY_MILK;
+  public static final net.minecraftforge.registries.RegistryObject<net.minecraft.sounds.SoundEvent> BUCKET_FILL_MILK;
+  public static final net.minecraftforge.registries.RegistryObject<net.minecraftforge.fluids.FluidType> MILK_TYPE;
+  public static final net.minecraftforge.registries.RegistryObject<net.minecraft.world.level.material.Fluid> MILK;
+  public static final net.minecraftforge.registries.RegistryObject<net.minecraft.world.level.material.Fluid> FLOWING_MILK;
+  public static final net.minecraftforge.server.permission.nodes.PermissionNode<java.lang.Boolean> USE_SELECTORS_PERMISSION;
+  public static net.minecraftforge.common.ForgeMod getInstance();
+  public static void enableMilkFluid();
+  public net.minecraftforge.common.ForgeMod(net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext);
+}
+Compiled from "ForgeStatesProvider.java"
+public class net.minecraftforge.common.ForgeStatesProvider implements net.minecraftforge.fml.IModStateProvider {
+  public static final net.minecraftforge.fml.ModLoadingState CREATE_REGISTRIES;
+  public static final net.minecraftforge.fml.ModLoadingState INJECT_CAPABILITIES;
+  public static final net.minecraftforge.fml.ModLoadingState UNFREEZE_DATA;
+  public static final net.minecraftforge.fml.ModLoadingState LOAD_REGISTRIES;
+  public static final net.minecraftforge.fml.ModLoadingState FREEZE_DATA;
+  public static final net.minecraftforge.fml.ModLoadingState NETWORK_LOCK;
+  public net.minecraftforge.common.ForgeStatesProvider();
+  public java.util.List<net.minecraftforge.fml.IModLoadingState> getAllStates();
+}
+Compiled from "IExtensibleEnum.java"
+public interface net.minecraftforge.common.IExtensibleEnum {
+  public default void init();
+  public static <E extends java.lang.Enum<E> & net.minecraft.util.StringRepresentable> com.mojang.serialization.Codec<E> createCodecForExtensibleEnum(java.util.function.Supplier<E[]>, java.util.function.Function<? super java.lang.String, ? extends E>);
+}
+Compiled from "IPlantable.java"
+public interface net.minecraftforge.common.IPlantable {
+  public default net.minecraftforge.common.PlantType getPlantType(net.minecraft.world.level.BlockGetter, net.minecraft.core.BlockPos);
+  public abstract net.minecraft.world.level.block.state.BlockState getPlant(net.minecraft.world.level.BlockGetter, net.minecraft.core.BlockPos);
+}
+Compiled from "LenientUnboundedMapCodec.java"
+public class net.minecraftforge.common.LenientUnboundedMapCodec<K, V> implements com.mojang.serialization.codecs.BaseMapCodec<K, V>, com.mojang.serialization.Codec<java.util.Map<K, V>> {
+  public net.minecraftforge.common.LenientUnboundedMapCodec(com.mojang.serialization.Codec<K>, com.mojang.serialization.Codec<V>);
+  public com.mojang.serialization.Codec<K> keyCodec();
+  public com.mojang.serialization.Codec<V> elementCodec();
+  public <T> com.mojang.serialization.DataResult<java.util.Map<K, V>> decode(com.mojang.serialization.DynamicOps<T>, com.mojang.serialization.MapLike<T>);
+  public <T> com.mojang.serialization.DataResult<com.mojang.datafixers.util.Pair<java.util.Map<K, V>, T>> decode(com.mojang.serialization.DynamicOps<T>, T);
+  public <T> com.mojang.serialization.DataResult<T> encode(java.util.Map<K, V>, com.mojang.serialization.DynamicOps<T>, T);
+  public boolean equals(java.lang.Object);
+  public int hashCode();
+  public java.lang.String toString();
+  public com.mojang.serialization.DataResult encode(java.lang.Object, com.mojang.serialization.DynamicOps, java.lang.Object);
+}
+Compiled from "MinecraftForge.java"
+public class net.minecraftforge.common.MinecraftForge {
+  public static final net.minecraftforge.common.EventBusMigrationHelper EVENT_BUS;
+  public net.minecraftforge.common.MinecraftForge();
+  public static void initialize();
+  public static void registerConfigScreen(java.util.function.Function<net.minecraft.client.gui.screens.Screen, net.minecraft.client.gui.screens.Screen>);
+  public static void registerConfigScreen(java.util.function.BiFunction<net.minecraft.client.Minecraft, net.minecraft.client.gui.screens.Screen, net.minecraft.client.gui.screens.Screen>);
+}
+Compiled from "PlantType.java"
+public final class net.minecraftforge.common.PlantType {
+  public static final net.minecraftforge.common.PlantType PLAINS;
+  public static final net.minecraftforge.common.PlantType DESERT;
+  public static final net.minecraftforge.common.PlantType BEACH;
+  public static final net.minecraftforge.common.PlantType CAVE;
+  public static final net.minecraftforge.common.PlantType WATER;
+  public static final net.minecraftforge.common.PlantType NETHER;
+  public static final net.minecraftforge.common.PlantType CROP;
+  public static final net.minecraftforge.common.PlantType FUNGUS;
+  public static final net.minecraftforge.common.PlantType MOIST;
+  public static net.minecraftforge.common.PlantType get(java.lang.String);
+  public java.lang.String getName();
+}
+Compiled from "SoundAction.java"
+public final class net.minecraftforge.common.SoundAction {
+  public static net.minecraftforge.common.SoundAction get(java.lang.String);
+  public java.lang.String name();
+  public java.lang.String toString();
+}
+Compiled from "SoundActions.java"
+public final class net.minecraftforge.common.SoundActions {
+  public static final net.minecraftforge.common.SoundAction BUCKET_FILL;
+  public static final net.minecraftforge.common.SoundAction BUCKET_EMPTY;
+  public static final net.minecraftforge.common.SoundAction FLUID_VAPORIZE;
+}
+Compiled from "TagConventionMappings.java"
+public final class net.minecraftforge.common.TagConventionMappings {
+  public static final java.util.Map<net.minecraft.tags.TagKey<?>, java.lang.String> MAPPINGS;
+}
+Compiled from "TagConventionMigrationHelper.java"
+public final class net.minecraftforge.common.TagConventionMigrationHelper {
+  public static void onServerStarting(net.minecraftforge.event.server.ServerStartingEvent);
+}
+Compiled from "Tags.java"
+public class net.minecraftforge.common.Tags {
+  public net.minecraftforge.common.Tags();
+  public static void init();
+}
+Compiled from "Tags.java"
+public class net.minecraftforge.common.Tags$Biomes {
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> NO_DEFAULT_MONSTERS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> HIDDEN_FROM_LOCATOR_SELECTION;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_VOID;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_HOT;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_HOT_OVERWORLD;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_HOT_NETHER;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_HOT_END;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_COLD;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_COLD_NETHER;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_COLD_OVERWORLD;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_COLD_END;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_SPARSE_VEGETATION;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_SPARSE_VEGETATION_OVERWORLD;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_SPARSE_VEGETATION_NETHER;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_SPARSE_VEGETATION_END;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_DENSE_VEGETATION;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_DENSE_VEGETATION_OVERWORLD;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_DENSE_VEGETATION_NETHER;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_DENSE_VEGETATION_END;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_WET;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_WET_OVERWORLD;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_WET_NETHER;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_WET_END;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_DRY;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_DRY_OVERWORLD;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_DRY_NETHER;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_DRY_END;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_OVERWORLD;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_CONIFEROUS_TREE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_SAVANNA_TREE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_JUNGLE_TREE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_DECIDUOUS_TREE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_DARK_FOREST;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_MOUNTAIN;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_MOUNTAIN_PEAK;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_MOUNTAIN_SLOPE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_PLAINS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_SNOWY_PLAINS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_FOREST;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_BIRCH_FOREST;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_FLOWER_FOREST;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_TAIGA;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_OLD_GROWTH;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_HILL;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_WINDSWEPT;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_JUNGLE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_SAVANNA;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_SWAMP;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_DESERT;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_BADLANDS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_BEACH;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_STONY_SHORES;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_MUSHROOM;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_RIVER;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_OCEAN;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_DEEP_OCEAN;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_SHALLOW_OCEAN;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_UNDERGROUND;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_CAVE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_WASTELAND;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_DEAD;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_FLORAL;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_SNOWY;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_ICY;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_AQUATIC;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_AQUATIC_ICY;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_NETHER;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_NETHER_FOREST;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_END;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_OUTER_END_ISLAND;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_LUSH;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_MAGICAL;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_RARE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_PLATEAU;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_SANDY;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_SPOOKY;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_TEMPERATE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_TEMPERATE_END;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_TEMPERATE_NETHER;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> IS_TEMPERATE_OVERWORLD;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> PRIMARY_WOOD_TYPE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> PRIMARY_WOOD_TYPE_ACACIA;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> PRIMARY_WOOD_TYPE_BAMBOO;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> PRIMARY_WOOD_TYPE_BIRCH;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> PRIMARY_WOOD_TYPE_CHERRY;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> PRIMARY_WOOD_TYPE_CRIMSON;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> PRIMARY_WOOD_TYPE_DARK_OAK;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> PRIMARY_WOOD_TYPE_JUNGLE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> PRIMARY_WOOD_TYPE_MANGROVE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> PRIMARY_WOOD_TYPE_OAK;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> PRIMARY_WOOD_TYPE_PALE_OAK;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> PRIMARY_WOOD_TYPE_SPRUCE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.biome.Biome> PRIMARY_WOOD_TYPE_WARPED;
+  public net.minecraftforge.common.Tags$Biomes();
+}
+Compiled from "Tags.java"
+public class net.minecraftforge.common.Tags$BlockItems {
+  public static final net.minecraft.tags.BlockItemTagId STORAGE_BLOCKS_AMETHYST;
+  public static final net.minecraft.tags.BlockItemTagId STORAGE_BLOCKS_QUARTZ;
+  public static final net.minecraft.tags.BlockItemTagId BARRELS;
+  public static final net.minecraft.tags.BlockItemTagId BARRELS_WOODEN;
+  public static final net.minecraft.tags.BlockItemTagId BARS;
+  public static final net.minecraft.tags.BlockItemTagId BARS_COPPER;
+  public static final net.minecraft.tags.BlockItemTagId BARS_IRON;
+  public static final net.minecraft.tags.BlockItemTagId BOOKSHELVES;
+  public static final net.minecraft.tags.BlockItemTagId BUDDING_BLOCKS;
+  public static final net.minecraft.tags.BlockItemTagId BUDS;
+  public static final net.minecraft.tags.BlockItemTagId CHAINS;
+  public static final net.minecraft.tags.BlockItemTagId CHESTS;
+  public static final net.minecraft.tags.BlockItemTagId CHESTS_ENDER;
+  public static final net.minecraft.tags.BlockItemTagId CHESTS_TRAPPED;
+  public static final net.minecraft.tags.BlockItemTagId CHESTS_WOODEN;
+  public static final net.minecraft.tags.BlockItemTagId CLUSTERS;
+  public static final net.minecraft.tags.BlockItemTagId COBBLESTONES;
+  public static final net.minecraft.tags.BlockItemTagId COBBLESTONES_DEEPSLATE;
+  public static final net.minecraft.tags.BlockItemTagId COBBLESTONES_INFESTED;
+  public static final net.minecraft.tags.BlockItemTagId COBBLESTONES_MOSSY;
+  public static final net.minecraft.tags.BlockItemTagId COBBLESTONES_NORMAL;
+  public static final net.minecraft.tags.BlockItemTagId CONCRETES;
+  public static final net.minecraft.tags.BlockItemTagId END_STONES;
+  public static final net.minecraft.tags.BlockItemTagId FENCE_GATES;
+  public static final net.minecraft.tags.BlockItemTagId FENCE_GATES_WOODEN;
+  public static final net.minecraft.tags.BlockItemTagId FENCES;
+  public static final net.minecraft.tags.BlockItemTagId FENCES_NETHER_BRICK;
+  public static final net.minecraft.tags.BlockItemTagId FENCES_WOODEN;
+  public static final net.minecraft.tags.BlockItemTagId FLOWERS_SMALL;
+  public static final net.minecraft.tags.BlockItemTagId FLOWERS_TALL;
+  public static final net.minecraft.tags.BlockItemTagId FLOWERS;
+  public static final net.minecraft.tags.BlockItemTagId GRAVELS;
+  public static final net.minecraft.tags.BlockItemTagId GLASS_BLOCKS;
+  public static final net.minecraft.tags.BlockItemTagId GLASS_BLOCKS_COLORLESS;
+  public static final net.minecraft.tags.BlockItemTagId GLASS_BLOCKS_CHEAP;
+  public static final net.minecraft.tags.BlockItemTagId GLASS_BLOCKS_TINTED;
+  public static final net.minecraft.tags.BlockItemTagId GLASS_PANES;
+  public static final net.minecraft.tags.BlockItemTagId GLASS_PANES_COLORLESS;
+  public static final net.minecraft.tags.BlockItemTagId GLAZED_TERRACOTTAS;
+  public static final net.minecraft.tags.BlockItemTagId NATURAL_LOGS;
+  public static final net.minecraft.tags.BlockItemTagId NATURAL_LOGS_NETHER;
+  public static final net.minecraft.tags.BlockItemTagId NATURAL_LOGS_OVERWORLD;
+  public static final net.minecraft.tags.BlockItemTagId NATURAL_WOODS;
+  public static final net.minecraft.tags.BlockItemTagId NETHERRACKS;
+  public static final net.minecraft.tags.BlockItemTagId OBSIDIANS;
+  public static final net.minecraft.tags.BlockItemTagId OBSIDIANS_NORMAL;
+  public static final net.minecraft.tags.BlockItemTagId OBSIDIANS_CRYING;
+  public static final net.minecraft.tags.BlockItemTagId ORE_BEARING_GROUND_DEEPSLATE;
+  public static final net.minecraft.tags.BlockItemTagId ORE_BEARING_GROUND_NETHERRACK;
+  public static final net.minecraft.tags.BlockItemTagId ORE_BEARING_GROUND_STONE;
+  public static final net.minecraft.tags.BlockItemTagId ORE_RATES_DENSE;
+  public static final net.minecraft.tags.BlockItemTagId ORE_RATES_SINGULAR;
+  public static final net.minecraft.tags.BlockItemTagId ORE_RATES_SPARSE;
+  public static final net.minecraft.tags.BlockItemTagId ORES;
+  public static final net.minecraft.tags.BlockItemTagId ORES_NETHERITE_SCRAP;
+  public static final net.minecraft.tags.BlockItemTagId ORES_QUARTZ;
+  public static final net.minecraft.tags.BlockItemTagId ORES_COAL;
+  public static final net.minecraft.tags.BlockItemTagId ORES_COPPER;
+  public static final net.minecraft.tags.BlockItemTagId ORES_DIAMOND;
+  public static final net.minecraft.tags.BlockItemTagId ORES_EMERALD;
+  public static final net.minecraft.tags.BlockItemTagId ORES_GOLD;
+  public static final net.minecraft.tags.BlockItemTagId ORES_IRON;
+  public static final net.minecraft.tags.BlockItemTagId ORES_LAPIS;
+  public static final net.minecraft.tags.BlockItemTagId ORES_REDSTONE;
+  public static final net.minecraft.tags.BlockItemTagId ORES_IN_GROUND_DEEPSLATE;
+  public static final net.minecraft.tags.BlockItemTagId ORES_IN_GROUND_NETHERRACK;
+  public static final net.minecraft.tags.BlockItemTagId ORES_IN_GROUND_STONE;
+  public static final net.minecraft.tags.BlockItemTagId PLAYER_WORKSTATIONS_CRAFTING_TABLES;
+  public static final net.minecraft.tags.BlockItemTagId PLAYER_WORKSTATIONS_FURNACES;
+  public static final net.minecraft.tags.BlockItemTagId PUMPKINS;
+  public static final net.minecraft.tags.BlockItemTagId PUMPKINS_NORMAL;
+  public static final net.minecraft.tags.BlockItemTagId PUMPKINS_CARVED;
+  public static final net.minecraft.tags.BlockItemTagId PUMPKINS_JACK_O_LANTERNS;
+  public static final net.minecraft.tags.BlockItemTagId ROPES;
+  public static final net.minecraft.tags.BlockItemTagId SANDS;
+  public static final net.minecraft.tags.BlockItemTagId SANDS_COLORLESS;
+  public static final net.minecraft.tags.BlockItemTagId SANDS_RED;
+  public static final net.minecraft.tags.BlockItemTagId SANDSTONE_BLOCKS;
+  public static final net.minecraft.tags.BlockItemTagId SANDSTONE_SLABS;
+  public static final net.minecraft.tags.BlockItemTagId SANDSTONE_STAIRS;
+  public static final net.minecraft.tags.BlockItemTagId SANDSTONE_RED_BLOCKS;
+  public static final net.minecraft.tags.BlockItemTagId SANDSTONE_RED_SLABS;
+  public static final net.minecraft.tags.BlockItemTagId SANDSTONE_RED_STAIRS;
+  public static final net.minecraft.tags.BlockItemTagId SANDSTONE_UNCOLORED_BLOCKS;
+  public static final net.minecraft.tags.BlockItemTagId SANDSTONE_UNCOLORED_SLABS;
+  public static final net.minecraft.tags.BlockItemTagId SANDSTONE_UNCOLORED_STAIRS;
+  public static final net.minecraft.tags.BlockItemTagId STONES;
+  public static final net.minecraft.tags.BlockItemTagId STORAGE_BLOCKS;
+  public static final net.minecraft.tags.BlockItemTagId STORAGE_BLOCKS_BONE_MEAL;
+  public static final net.minecraft.tags.BlockItemTagId STORAGE_BLOCKS_COAL;
+  public static final net.minecraft.tags.BlockItemTagId STORAGE_BLOCKS_COPPER;
+  public static final net.minecraft.tags.BlockItemTagId STORAGE_BLOCKS_DIAMOND;
+  public static final net.minecraft.tags.BlockItemTagId STORAGE_BLOCKS_DRIED_KELP;
+  public static final net.minecraft.tags.BlockItemTagId STORAGE_BLOCKS_EMERALD;
+  public static final net.minecraft.tags.BlockItemTagId STORAGE_BLOCKS_GOLD;
+  public static final net.minecraft.tags.BlockItemTagId STORAGE_BLOCKS_IRON;
+  public static final net.minecraft.tags.BlockItemTagId STORAGE_BLOCKS_LAPIS;
+  public static final net.minecraft.tags.BlockItemTagId STORAGE_BLOCKS_NETHERITE;
+  public static final net.minecraft.tags.BlockItemTagId STORAGE_BLOCKS_RAW_COPPER;
+  public static final net.minecraft.tags.BlockItemTagId STORAGE_BLOCKS_RAW_GOLD;
+  public static final net.minecraft.tags.BlockItemTagId STORAGE_BLOCKS_RAW_IRON;
+  public static final net.minecraft.tags.BlockItemTagId STORAGE_BLOCKS_REDSTONE;
+  public static final net.minecraft.tags.BlockItemTagId STORAGE_BLOCKS_RESIN;
+  public static final net.minecraft.tags.BlockItemTagId STORAGE_BLOCKS_SLIME;
+  public static final net.minecraft.tags.BlockItemTagId STORAGE_BLOCKS_WHEAT;
+  public static final net.minecraft.tags.BlockItemTagId STRIPPED_LOGS;
+  public static final net.minecraft.tags.BlockItemTagId STRIPPED_WOODS;
+  public net.minecraftforge.common.Tags$BlockItems();
+}
+Compiled from "Tags.java"
+public class net.minecraftforge.common.Tags$Blocks {
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> ENDERMAN_PLACE_ON_BLACKLIST;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> NEEDS_WOOD_TOOL;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> NEEDS_GOLD_TOOL;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> NEEDS_NETHERITE_TOOL;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> STORAGE_BLOCKS_AMETHYST;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> STORAGE_BLOCKS_QUARTZ;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> BARRELS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> BARRELS_WOODEN;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> BARS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> BARS_COPPER;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> BARS_IRON;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> BOOKSHELVES;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> BUDDING_BLOCKS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> BUDS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> CHAINS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> CHESTS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> CHESTS_ENDER;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> CHESTS_TRAPPED;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> CHESTS_WOODEN;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> CLUSTERS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> COBBLESTONES;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> COBBLESTONES_DEEPSLATE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> COBBLESTONES_INFESTED;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> COBBLESTONES_MOSSY;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> COBBLESTONES_NORMAL;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> CONCRETES;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> DYED;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> DYED_BLACK;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> DYED_BLUE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> DYED_BROWN;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> DYED_CYAN;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> DYED_GRAY;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> DYED_GREEN;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> DYED_LIGHT_BLUE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> DYED_LIGHT_GRAY;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> DYED_LIME;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> DYED_MAGENTA;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> DYED_ORANGE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> DYED_PINK;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> DYED_PURPLE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> DYED_RED;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> DYED_WHITE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> DYED_YELLOW;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> END_STONES;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> FENCE_GATES;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> FENCE_GATES_WOODEN;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> FENCES;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> FENCES_NETHER_BRICK;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> FENCES_WOODEN;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> FLOWERS_SMALL;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> FLOWERS_TALL;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> FLOWERS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> GRAVELS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> GLASS_BLOCKS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> GLASS_BLOCKS_COLORLESS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> GLASS_BLOCKS_CHEAP;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> GLASS_BLOCKS_TINTED;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> GLASS_PANES;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> GLASS_PANES_COLORLESS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> GLAZED_TERRACOTTAS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> HIDDEN_FROM_RECIPE_VIEWERS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> NATURAL_LOGS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> NATURAL_LOGS_NETHER;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> NATURAL_LOGS_OVERWORLD;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> NATURAL_WOODS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> NETHERRACKS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> OBSIDIANS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> OBSIDIANS_NORMAL;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> OBSIDIANS_CRYING;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> ORE_BEARING_GROUND_DEEPSLATE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> ORE_BEARING_GROUND_NETHERRACK;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> ORE_BEARING_GROUND_STONE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> ORE_RATES_DENSE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> ORE_RATES_SINGULAR;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> ORE_RATES_SPARSE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> ORES;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> ORES_NETHERITE_SCRAP;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> ORES_QUARTZ;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> ORES_COAL;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> ORES_COPPER;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> ORES_DIAMOND;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> ORES_EMERALD;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> ORES_GOLD;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> ORES_IRON;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> ORES_LAPIS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> ORES_REDSTONE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> ORES_IN_GROUND_DEEPSLATE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> ORES_IN_GROUND_NETHERRACK;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> ORES_IN_GROUND_STONE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> PLAYER_WORKSTATIONS_CRAFTING_TABLES;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> PLAYER_WORKSTATIONS_FURNACES;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> PUMPKINS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> PUMPKINS_NORMAL;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> PUMPKINS_CARVED;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> PUMPKINS_JACK_O_LANTERNS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> RELOCATION_NOT_SUPPORTED;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> ROPES;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> SANDS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> SANDS_COLORLESS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> SANDS_RED;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> SANDSTONE_BLOCKS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> SANDSTONE_SLABS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> SANDSTONE_STAIRS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> SANDSTONE_RED_BLOCKS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> SANDSTONE_RED_SLABS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> SANDSTONE_RED_STAIRS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> SANDSTONE_UNCOLORED_BLOCKS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> SANDSTONE_UNCOLORED_SLABS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> SANDSTONE_UNCOLORED_STAIRS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> SKULLS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> STONES;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> STORAGE_BLOCKS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> STORAGE_BLOCKS_BONE_MEAL;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> STORAGE_BLOCKS_COAL;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> STORAGE_BLOCKS_COPPER;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> STORAGE_BLOCKS_DIAMOND;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> STORAGE_BLOCKS_DRIED_KELP;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> STORAGE_BLOCKS_EMERALD;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> STORAGE_BLOCKS_GOLD;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> STORAGE_BLOCKS_IRON;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> STORAGE_BLOCKS_LAPIS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> STORAGE_BLOCKS_NETHERITE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> STORAGE_BLOCKS_RAW_COPPER;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> STORAGE_BLOCKS_RAW_GOLD;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> STORAGE_BLOCKS_RAW_IRON;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> STORAGE_BLOCKS_REDSTONE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> STORAGE_BLOCKS_RESIN;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> STORAGE_BLOCKS_SLIME;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> STORAGE_BLOCKS_WHEAT;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> STRIPPED_LOGS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> STRIPPED_WOODS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.block.Block> VILLAGER_JOB_SITES;
+  public net.minecraftforge.common.Tags$Blocks();
+}
+Compiled from "Tags.java"
+public class net.minecraftforge.common.Tags$Enchantments {
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.enchantment.Enchantment> INCREASE_BLOCK_DROPS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.enchantment.Enchantment> INCREASE_ENTITY_DROPS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.enchantment.Enchantment> WEAPON_DAMAGE_ENHANCEMENTS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.enchantment.Enchantment> ENTITY_SPEED_ENHANCEMENTS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.enchantment.Enchantment> ENTITY_AUXILIARY_MOVEMENT_ENHANCEMENTS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.enchantment.Enchantment> ENTITY_DEFENSE_ENHANCEMENTS;
+  public net.minecraftforge.common.Tags$Enchantments();
+}
+Compiled from "Tags.java"
+public class net.minecraftforge.common.Tags$EntityTypes {
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.entity.EntityType<?>> BOSSES;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.entity.EntityType<?>> MINECARTS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.entity.EntityType<?>> BOATS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.entity.EntityType<?>> ITEM_FRAMES;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.entity.EntityType<?>> CAPTURING_NOT_SUPPORTED;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.entity.EntityType<?>> TELEPORTING_NOT_SUPPORTED;
+  public net.minecraftforge.common.Tags$EntityTypes();
+}
+Compiled from "Tags.java"
+public class net.minecraftforge.common.Tags$Fluids {
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.material.Fluid> BEETROOT_SOUP;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.material.Fluid> EXPERIENCE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.material.Fluid> GASEOUS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.material.Fluid> MUSHROOM_STEW;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.material.Fluid> POTION;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.material.Fluid> RABBIT_STEW;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.material.Fluid> SUSPICIOUS_STEW;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.material.Fluid> WATER;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.material.Fluid> LAVA;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.material.Fluid> MILK;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.material.Fluid> HONEY;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.material.Fluid> HIDDEN_FROM_RECIPE_VIEWERS;
+  public net.minecraftforge.common.Tags$Fluids();
+}
+Compiled from "Tags.java"
+public class net.minecraftforge.common.Tags$Items {
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> ENCHANTING_FUELS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> STORAGE_BLOCKS_AMETHYST;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> STORAGE_BLOCKS_QUARTZ;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> BARRELS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> BARRELS_WOODEN;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> BARS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> BARS_COPPER;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> BARS_IRON;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> BONES;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> BOOKSHELVES;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> BRICKS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> BRICKS_NORMAL;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> BRICKS_NETHER;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> BRICKS_RESIN;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> BUCKETS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> BUCKETS_EMPTY;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> BUCKETS_WATER;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> BUCKETS_LAVA;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> BUCKETS_MILK;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> BUCKETS_POWDER_SNOW;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> BUCKETS_ENTITY_WATER;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> BUDDING_BLOCKS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> BUDS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> CHAINS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> CHESTS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> CHESTS_WOODEN;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> CHESTS_ENDER;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> CHESTS_TRAPPED;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> COBBLESTONES;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> COBBLESTONES_NORMAL;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> COBBLESTONES_INFESTED;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> COBBLESTONES_MOSSY;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> COBBLESTONES_DEEPSLATE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> CONCRETES;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> CONCRETE_POWDERS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> CLUSTERS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> CLUMPS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> CLUMPS_RESIN;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> CROPS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> CROPS_BEETROOT;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> CROPS_CACTUS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> CROPS_CARROT;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> CROPS_COCOA_BEAN;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> CROPS_MELON;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> CROPS_NETHER_WART;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> CROPS_POTATO;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> CROPS_PUMPKIN;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> CROPS_SUGAR_CANE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> CROPS_WHEAT;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> DUSTS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> DUSTS_REDSTONE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> DUSTS_GLOWSTONE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> DRINKS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> DRINKS_HONEY;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> DRINKS_JUICE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> DRINKS_MAGIC;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> DRINKS_MILK;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> DRINKS_OMINOUS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> DRINKS_WATER;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> DRINKS_WATERY;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> DRINK_CONTAINING_BOTTLE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> DRINK_CONTAINING_BUCKET;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> DYED;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> DYED_BLACK;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> DYED_BLUE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> DYED_BROWN;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> DYED_CYAN;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> DYED_GRAY;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> DYED_GREEN;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> DYED_LIGHT_BLUE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> DYED_LIGHT_GRAY;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> DYED_LIME;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> DYED_MAGENTA;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> DYED_ORANGE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> DYED_PINK;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> DYED_PURPLE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> DYED_RED;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> DYED_WHITE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> DYED_YELLOW;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> DYES;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> DYES_BLACK;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> DYES_RED;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> DYES_GREEN;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> DYES_BROWN;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> DYES_BLUE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> DYES_PURPLE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> DYES_CYAN;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> DYES_LIGHT_GRAY;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> DYES_GRAY;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> DYES_PINK;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> DYES_LIME;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> DYES_YELLOW;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> DYES_LIGHT_BLUE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> DYES_MAGENTA;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> DYES_ORANGE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> DYES_WHITE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> EGGS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> END_STONES;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> ENDER_PEARLS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> FEATHERS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> FENCE_GATES;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> FENCE_GATES_WOODEN;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> FENCES;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> FENCES_NETHER_BRICK;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> FENCES_WOODEN;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> FERTILIZERS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> FLOWERS_SMALL;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> FLOWERS_TALL;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> FLOWERS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> FOODS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> FOODS_FRUIT;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> FOODS_VEGETABLE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> FOODS_BERRY;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> FOODS_BREAD;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> FOODS_COOKIE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> FOODS_DOUGH;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> FOODS_RAW_MEAT;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> FOODS_COOKED_MEAT;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> FOODS_RAW_FISH;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> FOODS_COOKED_FISH;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> FOODS_SOUP;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> FOODS_CANDY;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> FOODS_PIE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> FOODS_GOLDEN;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> FOODS_EDIBLE_WHEN_PLACED;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> FOODS_FOOD_POISONING;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> ANIMAL_FOODS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> GEMS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> GEMS_DIAMOND;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> GEMS_EMERALD;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> GEMS_AMETHYST;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> GEMS_LAPIS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> GEMS_PRISMARINE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> GEMS_QUARTZ;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> GLASS_BLOCKS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> GLASS_BLOCKS_COLORLESS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> GLASS_BLOCKS_CHEAP;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> GLASS_BLOCKS_TINTED;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> GLASS_PANES;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> GLASS_PANES_COLORLESS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> GLAZED_TERRACOTTAS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> GRAVELS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> GUNPOWDERS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> HIDDEN_FROM_RECIPE_VIEWERS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> OBSIDIANS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> OBSIDIANS_NORMAL;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> OBSIDIANS_CRYING;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> ORE_BEARING_GROUND_DEEPSLATE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> ORE_BEARING_GROUND_NETHERRACK;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> ORE_BEARING_GROUND_STONE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> ORE_RATES_DENSE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> ORE_RATES_SINGULAR;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> ORE_RATES_SPARSE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> ORES;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> ORES_COAL;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> ORES_COPPER;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> ORES_DIAMOND;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> ORES_EMERALD;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> ORES_GOLD;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> ORES_IRON;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> ORES_LAPIS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> ORES_NETHERITE_SCRAP;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> ORES_QUARTZ;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> ORES_REDSTONE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> ORES_IN_GROUND_DEEPSLATE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> ORES_IN_GROUND_NETHERRACK;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> ORES_IN_GROUND_STONE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> INGOTS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> INGOTS_COPPER;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> INGOTS_GOLD;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> INGOTS_IRON;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> INGOTS_NETHERITE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> LEATHERS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> MUSHROOMS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> MUSIC_DISCS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> NATURAL_LOGS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> NATURAL_LOGS_NETHER;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> NATURAL_LOGS_OVERWORLD;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> NATURAL_WOODS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> NETHER_STARS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> NETHERRACKS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> NUGGETS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> NUGGETS_COPPER;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> NUGGETS_GOLD;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> NUGGETS_IRON;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> POTIONS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> POTIONS_BOTTLE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> PLAYER_WORKSTATIONS_CRAFTING_TABLES;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> PLAYER_WORKSTATIONS_FURNACES;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> PUMPKINS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> PUMPKINS_NORMAL;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> PUMPKINS_CARVED;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> PUMPKINS_JACK_O_LANTERNS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> RAW_MATERIALS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> RAW_MATERIALS_COPPER;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> RAW_MATERIALS_GOLD;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> RAW_MATERIALS_IRON;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> RODS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> RODS_BLAZE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> RODS_BREEZE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> RODS_WOODEN;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> ROPES;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> SANDS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> SANDS_COLORLESS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> SANDS_RED;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> SEEDS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> SEEDS_BEETROOT;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> SEEDS_MELON;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> SEEDS_PITCHER_PLANT;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> SEEDS_PUMPKIN;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> SEEDS_TORCHFLOWER;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> SEEDS_WHEAT;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> SANDSTONE_BLOCKS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> SANDSTONE_SLABS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> SANDSTONE_STAIRS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> SANDSTONE_RED_BLOCKS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> SANDSTONE_RED_SLABS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> SANDSTONE_RED_STAIRS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> SANDSTONE_UNCOLORED_BLOCKS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> SANDSTONE_UNCOLORED_SLABS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> SANDSTONE_UNCOLORED_STAIRS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> SHULKER_BOXES;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> SLIME_BALLS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> STONES;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> STORAGE_BLOCKS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> STORAGE_BLOCKS_BONE_MEAL;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> STORAGE_BLOCKS_COAL;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> STORAGE_BLOCKS_COPPER;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> STORAGE_BLOCKS_DIAMOND;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> STORAGE_BLOCKS_DRIED_KELP;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> STORAGE_BLOCKS_EMERALD;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> STORAGE_BLOCKS_GOLD;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> STORAGE_BLOCKS_IRON;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> STORAGE_BLOCKS_LAPIS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> STORAGE_BLOCKS_NETHERITE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> STORAGE_BLOCKS_RAW_COPPER;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> STORAGE_BLOCKS_RAW_GOLD;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> STORAGE_BLOCKS_RAW_IRON;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> STORAGE_BLOCKS_REDSTONE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> STORAGE_BLOCKS_RESIN;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> STORAGE_BLOCKS_SLIME;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> STORAGE_BLOCKS_WHEAT;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> STRINGS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> STRIPPED_LOGS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> STRIPPED_WOODS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> VILLAGER_JOB_SITES;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> TOOLS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> TOOLS_SHIELD;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> TOOLS_BOW;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> TOOLS_CROSSBOW;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> TOOLS_FISHING_ROD;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> TOOLS_TRIDENT;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> TOOLS_SHEAR;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> TOOLS_BRUSH;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> TOOLS_IGNITER;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> TOOLS_MACE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> TOOLS_WRENCH;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> MELEE_WEAPON_TOOLS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> RANGED_WEAPON_TOOLS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> MINING_TOOL_TOOLS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> ARMORS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> ARMORS_HORSE;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> ARMORS_HUMANOID;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> ARMORS_NAUTILUS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> ARMORS_WOLF;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.item.Item> ENCHANTABLES;
+  public net.minecraftforge.common.Tags$Items();
+}
+Compiled from "Tags.java"
+public class net.minecraftforge.common.Tags$Structures {
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.levelgen.structure.Structure> HIDDEN_FROM_DISPLAYERS;
+  public static final net.minecraft.tags.TagKey<net.minecraft.world.level.levelgen.structure.Structure> HIDDEN_FROM_LOCATOR_SELECTION;
+  public net.minecraftforge.common.Tags$Structures();
+}
+Compiled from "ToolAction.java"
+public final class net.minecraftforge.common.ToolAction extends java.lang.Record {
+  public static final com.mojang.serialization.Codec<net.minecraftforge.common.ToolAction> CODEC;
+  public net.minecraftforge.common.ToolAction(java.lang.String);
+  public static java.util.Collection<net.minecraftforge.common.ToolAction> getActions();
+  public static net.minecraftforge.common.ToolAction get(java.lang.String);
+  public java.lang.String name();
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+}
+Compiled from "ToolActions.java"
+public class net.minecraftforge.common.ToolActions {
+  public static final net.minecraftforge.common.ToolAction AXE_DIG;
+  public static final net.minecraftforge.common.ToolAction PICKAXE_DIG;
+  public static final net.minecraftforge.common.ToolAction SHOVEL_DIG;
+  public static final net.minecraftforge.common.ToolAction HOE_DIG;
+  public static final net.minecraftforge.common.ToolAction SWORD_DIG;
+  public static final net.minecraftforge.common.ToolAction SHEARS_DIG;
+  public static final net.minecraftforge.common.ToolAction AXE_STRIP;
+  public static final net.minecraftforge.common.ToolAction AXE_SCRAPE;
+  public static final net.minecraftforge.common.ToolAction AXE_WAX_OFF;
+  public static final net.minecraftforge.common.ToolAction SHOVEL_FLATTEN;
+  public static final net.minecraftforge.common.ToolAction SWORD_SWEEP;
+  public static final net.minecraftforge.common.ToolAction SHEARS_HARVEST;
+  public static final net.minecraftforge.common.ToolAction SHEARS_CARVE;
+  public static final net.minecraftforge.common.ToolAction SHEARS_DISARM;
+  public static final net.minecraftforge.common.ToolAction HOE_TILL;
+  public static final net.minecraftforge.common.ToolAction FISHING_ROD_CAST;
+  public static final java.util.Set<net.minecraftforge.common.ToolAction> DEFAULT_AXE_ACTIONS;
+  public static final java.util.Set<net.minecraftforge.common.ToolAction> DEFAULT_HOE_ACTIONS;
+  public static final java.util.Set<net.minecraftforge.common.ToolAction> DEFAULT_SHOVEL_ACTIONS;
+  public static final java.util.Set<net.minecraftforge.common.ToolAction> DEFAULT_PICKAXE_ACTIONS;
+  public static final java.util.Set<net.minecraftforge.common.ToolAction> DEFAULT_SWORD_ACTIONS;
+  public static final java.util.Set<net.minecraftforge.common.ToolAction> DEFAULT_SHEARS_ACTIONS;
+  public static final java.util.Set<net.minecraftforge.common.ToolAction> DEFAULT_FISHING_ROD_ACTIONS;
+  public net.minecraftforge.common.ToolActions();
+}
+Compiled from "UsernameCache.java"
+public final class net.minecraftforge.common.UsernameCache {
+  protected static void setUsername(java.util.UUID, java.lang.String);
+  protected static boolean removeUsername(java.util.UUID);
+  public static java.lang.String getLastKnownUsername(java.util.UUID);
+  public static boolean containsUUID(java.util.UUID);
+  public static java.util.Map<java.util.UUID, java.lang.String> getMap();
+  protected static void save();
+  protected static void load();
+}
+Compiled from "UsernameCache.java"
+class net.minecraftforge.common.UsernameCache$SaveThread extends java.lang.Thread {
+  public net.minecraftforge.common.UsernameCache$SaveThread(java.lang.String);
+  public void run();
+}
+Compiled from "WorldWorkerManager.java"
+public final class net.minecraftforge.common.WorldWorkerManager {
+  public net.minecraftforge.common.WorldWorkerManager();
+  public static synchronized void addWorker(net.minecraftforge.common.WorldWorkerManager$IWorker);
+  public static synchronized void clear();
+}
+Compiled from "WorldWorkerManager.java"
+public interface net.minecraftforge.common.WorldWorkerManager$IWorker {
+  public abstract boolean hasWork();
+  public abstract boolean doWork();
+}

@@ -1,0 +1,25 @@
+Compiled from "ItemEvent.java"
+public interface net.minecraftforge.event.entity.item.ItemEvent extends net.minecraftforge.event.entity.EntityEvent {
+  public abstract net.minecraft.world.entity.item.ItemEntity getEntity();
+  public default net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "ItemExpireEvent.java"
+public final class net.minecraftforge.event.entity.item.ItemExpireEvent extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.event.entity.item.ItemEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.event.entity.item.ItemExpireEvent> BUS;
+  public net.minecraftforge.event.entity.item.ItemExpireEvent(net.minecraft.world.entity.item.ItemEntity, int);
+  public net.minecraft.world.entity.item.ItemEntity getEntity();
+  public int getExtraLife();
+  public void setExtraLife(int);
+  public net.minecraft.world.entity.Entity getEntity();
+}
+Compiled from "ItemTossEvent.java"
+public final class net.minecraftforge.event.entity.item.ItemTossEvent extends java.lang.Record implements net.minecraftforge.eventbus.api.event.characteristic.Cancellable,net.minecraftforge.event.entity.item.ItemEvent,net.minecraftforge.eventbus.api.event.RecordEvent {
+  public static final net.minecraftforge.eventbus.api.bus.CancellableEventBus<net.minecraftforge.event.entity.item.ItemTossEvent> BUS;
+  public net.minecraftforge.event.entity.item.ItemTossEvent(net.minecraft.world.entity.item.ItemEntity, net.minecraft.world.entity.player.Player);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.world.entity.item.ItemEntity getEntity();
+  public net.minecraft.world.entity.player.Player getPlayer();
+  public net.minecraft.world.entity.Entity getEntity();
+}

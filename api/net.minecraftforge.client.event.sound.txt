@@ -1,0 +1,59 @@
+Compiled from "PlaySoundEvent.java"
+public final class net.minecraftforge.client.event.sound.PlaySoundEvent extends net.minecraftforge.eventbus.api.event.MutableEvent implements net.minecraftforge.client.event.sound.SoundEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.sound.PlaySoundEvent> BUS;
+  public net.minecraftforge.client.event.sound.PlaySoundEvent(net.minecraft.client.sounds.SoundEngine, net.minecraft.client.resources.sounds.SoundInstance);
+  public net.minecraft.client.sounds.SoundEngine getEngine();
+  public java.lang.String getName();
+  public net.minecraft.client.resources.sounds.SoundInstance getOriginalSound();
+  public net.minecraft.client.resources.sounds.SoundInstance getSound();
+  public void setSound(net.minecraft.client.resources.sounds.SoundInstance);
+}
+Compiled from "PlaySoundSourceEvent.java"
+public final class net.minecraftforge.client.event.sound.PlaySoundSourceEvent extends java.lang.Record implements net.minecraftforge.client.event.sound.SoundEvent$SoundSourceEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.sound.PlaySoundSourceEvent> BUS;
+  public net.minecraftforge.client.event.sound.PlaySoundSourceEvent(net.minecraft.client.sounds.SoundEngine, net.minecraft.client.resources.sounds.SoundInstance, com.mojang.blaze3d.audio.Channel);
+  public net.minecraftforge.client.event.sound.PlaySoundSourceEvent(net.minecraft.client.sounds.SoundEngine, net.minecraft.client.resources.sounds.SoundInstance, com.mojang.blaze3d.audio.Channel, java.lang.String);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.client.sounds.SoundEngine getEngine();
+  public net.minecraft.client.resources.sounds.SoundInstance getSound();
+  public com.mojang.blaze3d.audio.Channel getChannel();
+  public java.lang.String getName();
+}
+Compiled from "PlayStreamingSourceEvent.java"
+public final class net.minecraftforge.client.event.sound.PlayStreamingSourceEvent extends java.lang.Record implements net.minecraftforge.client.event.sound.SoundEvent$SoundSourceEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.sound.PlayStreamingSourceEvent> BUS;
+  public net.minecraftforge.client.event.sound.PlayStreamingSourceEvent(net.minecraft.client.sounds.SoundEngine, net.minecraft.client.resources.sounds.SoundInstance, com.mojang.blaze3d.audio.Channel);
+  public net.minecraftforge.client.event.sound.PlayStreamingSourceEvent(net.minecraft.client.sounds.SoundEngine, net.minecraft.client.resources.sounds.SoundInstance, com.mojang.blaze3d.audio.Channel, java.lang.String);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.client.sounds.SoundEngine getEngine();
+  public net.minecraft.client.resources.sounds.SoundInstance getSound();
+  public com.mojang.blaze3d.audio.Channel getChannel();
+  public java.lang.String getName();
+}
+Compiled from "SoundEngineLoadEvent.java"
+public final class net.minecraftforge.client.event.sound.SoundEngineLoadEvent extends java.lang.Record implements net.minecraftforge.eventbus.api.event.RecordEvent,net.minecraftforge.client.event.sound.SoundEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.sound.SoundEngineLoadEvent> BUS;
+  public net.minecraftforge.client.event.sound.SoundEngineLoadEvent(net.minecraft.client.sounds.SoundEngine);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public net.minecraft.client.sounds.SoundEngine getEngine();
+}
+Compiled from "SoundEvent.java"
+public interface net.minecraftforge.client.event.sound.SoundEvent {
+  public abstract net.minecraft.client.sounds.SoundEngine getEngine();
+}
+Compiled from "SoundEvent.java"
+public interface net.minecraftforge.client.event.sound.SoundEvent$SoundSourceEvent extends net.minecraftforge.client.event.sound.SoundEvent,net.minecraftforge.eventbus.api.event.InheritableEvent {
+  public static final net.minecraftforge.eventbus.api.bus.EventBus<net.minecraftforge.client.event.sound.SoundEvent$SoundSourceEvent> BUS;
+  public abstract net.minecraft.client.resources.sounds.SoundInstance getSound();
+  public abstract com.mojang.blaze3d.audio.Channel getChannel();
+  public abstract java.lang.String getName();
+}
+Compiled from "package-info.java"
+interface net.minecraftforge.client.event.sound.package-info {
+}

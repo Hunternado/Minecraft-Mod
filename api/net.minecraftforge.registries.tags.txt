@@ -1,0 +1,27 @@
+Compiled from "IReverseTag.java"
+public interface net.minecraftforge.registries.tags.IReverseTag<V> {
+  public abstract java.util.stream.Stream<net.minecraft.tags.TagKey<V>> getTagKeys();
+  public abstract boolean containsTag(net.minecraft.tags.TagKey<V>);
+  public default boolean containsTag(net.minecraftforge.registries.tags.ITag<V>);
+}
+Compiled from "ITag.java"
+public interface net.minecraftforge.registries.tags.ITag<V> extends java.lang.Iterable<V> {
+  public abstract net.minecraft.tags.TagKey<V> getKey();
+  public abstract java.util.stream.Stream<V> stream();
+  public abstract boolean isEmpty();
+  public abstract int size();
+  public abstract boolean contains(V);
+  public abstract java.util.Optional<V> getRandomElement(net.minecraft.util.RandomSource);
+  public abstract boolean isBound();
+}
+Compiled from "ITagManager.java"
+public interface net.minecraftforge.registries.tags.ITagManager<V> extends java.lang.Iterable<net.minecraftforge.registries.tags.ITag<V>> {
+  public abstract net.minecraftforge.registries.tags.ITag<V> getTag(net.minecraft.tags.TagKey<V>);
+  public abstract java.util.Optional<net.minecraftforge.registries.tags.IReverseTag<V>> getReverseTag(V);
+  public abstract boolean isKnownTagName(net.minecraft.tags.TagKey<V>);
+  public abstract java.util.stream.Stream<net.minecraftforge.registries.tags.ITag<V>> stream();
+  public abstract java.util.stream.Stream<net.minecraft.tags.TagKey<V>> getTagNames();
+  public abstract net.minecraft.tags.TagKey<V> createTagKey(net.minecraft.resources.Identifier);
+  public abstract net.minecraft.tags.TagKey<V> createOptionalTagKey(net.minecraft.resources.Identifier, java.util.Set<? extends java.util.function.Supplier<V>>);
+  public abstract void addOptionalTagDefaults(net.minecraft.tags.TagKey<V>, java.util.Set<? extends java.util.function.Supplier<V>>);
+}

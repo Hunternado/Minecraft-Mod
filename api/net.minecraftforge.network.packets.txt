@@ -1,0 +1,138 @@
+Compiled from "Acknowledge.java"
+public final class net.minecraftforge.network.packets.Acknowledge extends java.lang.Record {
+  public static net.minecraft.network.codec.StreamCodec<net.minecraft.network.FriendlyByteBuf, net.minecraftforge.network.packets.Acknowledge> STREAM_CODEC;
+  public net.minecraftforge.network.packets.Acknowledge(int);
+  public void encode(net.minecraft.network.FriendlyByteBuf);
+  public static net.minecraftforge.network.packets.Acknowledge decode(net.minecraft.network.FriendlyByteBuf);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public int token();
+}
+Compiled from "ChannelVersions.java"
+public final class net.minecraftforge.network.packets.ChannelVersions extends java.lang.Record {
+  public static net.minecraft.network.codec.StreamCodec<net.minecraft.network.FriendlyByteBuf, net.minecraftforge.network.packets.ChannelVersions> STREAM_CODEC;
+  public net.minecraftforge.network.packets.ChannelVersions();
+  public net.minecraftforge.network.packets.ChannelVersions(java.util.Map<net.minecraft.resources.Identifier, java.lang.Integer>);
+  public static net.minecraftforge.network.packets.ChannelVersions decode(net.minecraft.network.FriendlyByteBuf);
+  public void encode(net.minecraft.network.FriendlyByteBuf);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public java.util.Map<net.minecraft.resources.Identifier, java.lang.Integer> channels();
+}
+Compiled from "ConfigData.java"
+public final class net.minecraftforge.network.packets.ConfigData extends java.lang.Record {
+  public static final net.minecraft.network.codec.StreamCodec<net.minecraft.network.FriendlyByteBuf, net.minecraftforge.network.packets.ConfigData> STREAM_CODEC;
+  public net.minecraftforge.network.packets.ConfigData(java.lang.String, byte[]);
+  public void encode(net.minecraft.network.FriendlyByteBuf);
+  public static net.minecraftforge.network.packets.ConfigData decode(net.minecraft.network.FriendlyByteBuf);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public java.lang.String name();
+  public byte[] data();
+}
+Compiled from "LoginWrapper.java"
+public class net.minecraftforge.network.packets.LoginWrapper {
+  public static final net.minecraft.network.codec.StreamCodec<net.minecraft.network.FriendlyByteBuf, net.minecraftforge.network.packets.LoginWrapper> STREAM_CODEC;
+  public <MSG> net.minecraftforge.network.packets.LoginWrapper(net.minecraftforge.network.Channel<MSG>, MSG);
+  public void encode(net.minecraft.network.FriendlyByteBuf);
+  public net.minecraft.resources.Identifier name();
+  public net.minecraft.network.FriendlyByteBuf data();
+}
+Compiled from "MismatchData.java"
+public final class net.minecraftforge.network.packets.MismatchData extends java.lang.Record {
+  public static final net.minecraft.network.codec.StreamCodec<net.minecraft.network.FriendlyByteBuf, net.minecraftforge.network.packets.MismatchData> STREAM_CODEC;
+  public net.minecraftforge.network.packets.MismatchData(net.minecraftforge.network.NetworkContext$NetworkMismatchData);
+  public net.minecraftforge.network.packets.MismatchData(java.util.Map<net.minecraft.resources.Identifier, net.minecraftforge.network.NetworkContext$NetworkMismatchData$Version>, java.util.Set<net.minecraft.resources.Identifier>);
+  public static net.minecraftforge.network.packets.MismatchData decode(net.minecraft.network.FriendlyByteBuf);
+  public void encode(net.minecraft.network.FriendlyByteBuf);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public java.util.Map<net.minecraft.resources.Identifier, net.minecraftforge.network.NetworkContext$NetworkMismatchData$Version> mismatched();
+  public java.util.Set<net.minecraft.resources.Identifier> missing();
+}
+Compiled from "ModVersions.java"
+public final class net.minecraftforge.network.packets.ModVersions extends java.lang.Record {
+  public static final net.minecraft.network.codec.StreamCodec<net.minecraft.network.FriendlyByteBuf, net.minecraftforge.network.packets.ModVersions> STREAM_CODEC;
+  public net.minecraftforge.network.packets.ModVersions(java.util.Map<java.lang.String, net.minecraftforge.network.packets.ModVersions$Info>);
+  public static net.minecraftforge.network.packets.ModVersions create();
+  public static net.minecraftforge.network.packets.ModVersions decode(net.minecraft.network.FriendlyByteBuf);
+  public void encode(net.minecraft.network.FriendlyByteBuf);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public java.util.Map<java.lang.String, net.minecraftforge.network.packets.ModVersions$Info> mods();
+}
+Compiled from "ModVersions.java"
+public final class net.minecraftforge.network.packets.ModVersions$Info extends java.lang.Record {
+  public net.minecraftforge.network.packets.ModVersions$Info(java.lang.String, java.lang.String);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public java.lang.String name();
+  public java.lang.String version();
+}
+Compiled from "OpenContainer.java"
+public class net.minecraftforge.network.packets.OpenContainer {
+  public static final net.minecraft.network.codec.StreamCodec<net.minecraft.network.RegistryFriendlyByteBuf, net.minecraftforge.network.packets.OpenContainer> STREAM_CODEC;
+  public net.minecraftforge.network.packets.OpenContainer(net.minecraft.world.inventory.MenuType<?>, int, net.minecraft.network.chat.Component, net.minecraft.network.FriendlyByteBuf);
+  public static void encode(net.minecraftforge.network.packets.OpenContainer, net.minecraft.network.FriendlyByteBuf);
+  public static net.minecraftforge.network.packets.OpenContainer decode(net.minecraft.network.FriendlyByteBuf);
+  public static void handle(net.minecraftforge.network.packets.OpenContainer, net.minecraftforge.event.network.CustomPayloadEvent$Context);
+  public final net.minecraft.world.inventory.MenuType<?> getType();
+  public int getWindowId();
+  public net.minecraft.network.chat.Component getName();
+  public net.minecraft.network.FriendlyByteBuf getAdditionalData();
+}
+Compiled from "RegistryData.java"
+public final class net.minecraftforge.network.packets.RegistryData extends java.lang.Record {
+  public static final net.minecraft.network.codec.StreamCodec<net.minecraft.network.FriendlyByteBuf, net.minecraftforge.network.packets.RegistryData> STREAM_CODEC;
+  public net.minecraftforge.network.packets.RegistryData(int, net.minecraft.resources.Identifier, net.minecraftforge.registries.ForgeRegistry$Snapshot);
+  public void encode(net.minecraft.network.FriendlyByteBuf);
+  public static net.minecraftforge.network.packets.RegistryData decode(net.minecraft.network.FriendlyByteBuf);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public int token();
+  public net.minecraft.resources.Identifier name();
+  public net.minecraftforge.registries.ForgeRegistry$Snapshot data();
+}
+Compiled from "RegistryList.java"
+public final class net.minecraftforge.network.packets.RegistryList extends java.lang.Record {
+  public static final net.minecraft.network.codec.StreamCodec<net.minecraft.network.FriendlyByteBuf, net.minecraftforge.network.packets.RegistryList> STREAM_CODEC;
+  public net.minecraftforge.network.packets.RegistryList(int);
+  public net.minecraftforge.network.packets.RegistryList(int, java.util.List<net.minecraft.resources.Identifier>, java.util.List<net.minecraft.resources.ResourceKey<? extends net.minecraft.core.Registry<?>>>);
+  public static net.minecraftforge.network.packets.RegistryList decode(net.minecraft.network.FriendlyByteBuf);
+  public void encode(net.minecraft.network.FriendlyByteBuf);
+  public final java.lang.String toString();
+  public final int hashCode();
+  public final boolean equals(java.lang.Object);
+  public int token();
+  public java.util.List<net.minecraft.resources.Identifier> normal();
+  public java.util.List<net.minecraft.resources.ResourceKey<? extends net.minecraft.core.Registry<?>>> datapacks();
+}
+Compiled from "SpawnEntity.java"
+public class net.minecraftforge.network.packets.SpawnEntity {
+  public static final net.minecraft.network.codec.StreamCodec<net.minecraft.network.RegistryFriendlyByteBuf, net.minecraftforge.network.packets.SpawnEntity> STREAM_CODEC;
+  public net.minecraftforge.network.packets.SpawnEntity(net.minecraft.world.entity.Entity);
+  public static void encode(net.minecraftforge.network.packets.SpawnEntity, net.minecraft.network.FriendlyByteBuf);
+  public static net.minecraftforge.network.packets.SpawnEntity decode(net.minecraft.network.FriendlyByteBuf);
+  public static void handle(net.minecraftforge.network.packets.SpawnEntity, net.minecraftforge.event.network.CustomPayloadEvent$Context);
+  public net.minecraft.world.entity.Entity getEntity();
+  public int getTypeId();
+  public int getEntityId();
+  public java.util.UUID getUuid();
+  public double getPosX();
+  public double getPosY();
+  public double getPosZ();
+  public byte getPitch();
+  public byte getYaw();
+  public byte getHeadYaw();
+  public int getVelX();
+  public int getVelY();
+  public int getVelZ();
+  public net.minecraft.network.FriendlyByteBuf getAdditionalData();
+}

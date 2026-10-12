@@ -1,0 +1,57 @@
+Compiled from "IForgeBlockStateModel.java"
+public interface net.minecraftforge.client.extensions.IForgeBlockStateModel {
+  public default net.minecraftforge.client.model.data.ModelData getModelData(net.minecraft.client.renderer.block.BlockAndTintGetter, net.minecraft.core.BlockPos, net.minecraft.world.level.block.state.BlockState, net.minecraftforge.client.model.data.ModelData);
+  public default net.minecraft.client.resources.model.sprite.Material$Baked particleMaterial(net.minecraftforge.client.model.data.ModelData);
+  public default void collectParts(net.minecraft.util.RandomSource, java.util.List<net.minecraft.client.renderer.block.dispatch.BlockStateModelPart>, net.minecraftforge.client.model.data.ModelData);
+}
+Compiled from "IForgeFont.java"
+public interface net.minecraftforge.client.extensions.IForgeFont {
+  public static final net.minecraft.network.chat.FormattedText ELLIPSIS;
+  public default net.minecraft.client.gui.Font self();
+  public default net.minecraft.network.chat.FormattedText ellipsize(net.minecraft.network.chat.FormattedText, int);
+}
+Compiled from "IForgeGpuTexture.java"
+public interface net.minecraftforge.client.extensions.IForgeGpuTexture {
+  public default boolean isStencilEnabled();
+}
+Compiled from "IForgeGuiGraphicsExtractor.java"
+public interface net.minecraftforge.client.extensions.IForgeGuiGraphicsExtractor {
+  public static final int DEFAULT_BACKGROUND_COLOR;
+  public static final int DEFAULT_BORDER_COLOR_START;
+  public static final int DEFAULT_BORDER_COLOR_END;
+  public static final java.lang.String UNDO_CHAR;
+  public static final java.lang.String RESET_CHAR;
+  public static final java.lang.String VALID;
+  public static final java.lang.String INVALID;
+  public static final int[] TEXT_COLOR_CODES;
+  public default int getColorFromFormattingCharacter(char, boolean);
+  public default void blitWithBorder(net.minecraft.resources.Identifier, int, int, int, int, int, int, int, int, int);
+  public default void blitWithBorder(net.minecraft.resources.Identifier, int, int, int, int, int, int, int, int, int, int, int, int);
+  public default void blitInscribed(net.minecraft.resources.Identifier, int, int, int, int, int, int);
+  public default void blitInscribed(net.minecraft.resources.Identifier, int, int, int, int, int, int, boolean, boolean);
+}
+Compiled from "IForgeKeyMapping.java"
+public interface net.minecraftforge.client.extensions.IForgeKeyMapping {
+  public abstract com.mojang.blaze3d.platform.InputConstants$Key getKey();
+  public default boolean isActiveAndMatches(com.mojang.blaze3d.platform.InputConstants$Key);
+  public default boolean isActive();
+  public default void setToDefault();
+  public abstract void setKeyConflictContext(net.minecraftforge.client.settings.IKeyConflictContext);
+  public abstract net.minecraftforge.client.settings.IKeyConflictContext getKeyConflictContext();
+  public abstract net.minecraftforge.client.settings.KeyModifier getDefaultKeyModifier();
+  public abstract net.minecraftforge.client.settings.KeyModifier getKeyModifier();
+  public abstract void setKeyModifierAndCode(net.minecraftforge.client.settings.KeyModifier, com.mojang.blaze3d.platform.InputConstants$Key);
+  public default boolean isConflictContextAndModifierActive();
+  public default boolean hasKeyModifierConflict(net.minecraft.client.KeyMapping);
+}
+Compiled from "IForgeMinecraft.java"
+public interface net.minecraftforge.client.extensions.IForgeMinecraft {
+  public default java.util.Locale getLocale();
+}
+Compiled from "IForgePoseStack.java"
+public interface net.minecraftforge.client.extensions.IForgePoseStack {
+  public default void pushTransformation(com.mojang.math.Transformation);
+}
+Compiled from "package-info.java"
+interface net.minecraftforge.client.extensions.package-info {
+}

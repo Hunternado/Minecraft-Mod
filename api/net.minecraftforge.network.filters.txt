@@ -1,0 +1,19 @@
+Compiled from "NetworkFilters.java"
+public class net.minecraftforge.network.filters.NetworkFilters {
+  public static void injectIfNecessary(net.minecraft.network.Connection);
+}
+Compiled from "VanillaConnectionNetworkFilter.java"
+public class net.minecraftforge.network.filters.VanillaConnectionNetworkFilter extends net.minecraftforge.network.filters.VanillaPacketFilter {
+  public net.minecraftforge.network.filters.VanillaConnectionNetworkFilter();
+  protected boolean isNecessary(net.minecraft.network.Connection);
+}
+Compiled from "VanillaPacketFilter.java"
+public abstract class net.minecraftforge.network.filters.VanillaPacketFilter extends io.netty.handler.codec.MessageToMessageEncoder<net.minecraft.network.protocol.Packet<?>> {
+  protected final java.util.Map<java.lang.Class<? extends net.minecraft.network.protocol.Packet<?>>, java.util.function.BiConsumer<net.minecraft.network.protocol.Packet<?>, java.util.List<? super net.minecraft.network.protocol.Packet<?>>>> handlers;
+  protected net.minecraftforge.network.filters.VanillaPacketFilter(java.util.Map<java.lang.Class<? extends net.minecraft.network.protocol.Packet<?>>, java.util.function.BiConsumer<net.minecraft.network.protocol.Packet<?>, java.util.List<? super net.minecraft.network.protocol.Packet<?>>>>);
+  protected static <T extends net.minecraft.network.protocol.Packet<?>> java.util.Map$Entry<java.lang.Class<? extends net.minecraft.network.protocol.Packet<?>>, java.util.function.BiConsumer<net.minecraft.network.protocol.Packet<?>, java.util.List<? super net.minecraft.network.protocol.Packet<?>>>> handler(java.lang.Class<T>, java.util.function.Function<T, ? extends net.minecraft.network.protocol.Packet<?>>);
+  protected static <T extends net.minecraft.network.protocol.Packet<?>> java.util.Map$Entry<java.lang.Class<? extends net.minecraft.network.protocol.Packet<?>>, java.util.function.BiConsumer<net.minecraft.network.protocol.Packet<?>, java.util.List<? super net.minecraft.network.protocol.Packet<?>>>> handler(java.lang.Class<T>, java.util.function.BiConsumer<net.minecraft.network.protocol.Packet<?>, java.util.List<? super net.minecraft.network.protocol.Packet<?>>>);
+  protected abstract boolean isNecessary(net.minecraft.network.Connection);
+  protected void encode(io.netty.channel.ChannelHandlerContext, net.minecraft.network.protocol.Packet<?>, java.util.List<java.lang.Object>);
+  protected void encode(io.netty.channel.ChannelHandlerContext, java.lang.Object, java.util.List) throws java.lang.Exception;
+}
