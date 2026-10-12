@@ -2,41 +2,49 @@ package com.hunternado.frieren.client.render;
 
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.client.model.geom.PartPose;
-import net.minecraft.client.model.geom.builders.CubeDeformation;
-import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
-import net.minecraft.client.model.geom.builders.MeshDefinition;
-import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.util.Mth;
 
-/** A chest with a hinged lid (and teeth on the texture). The lid chomps once the mimic is revealed. */
+/**
+ * The mimic. Disguised it is an ordinary chest (teeth and tongue hidden). Revealed, the lid gapes and chomps,
+ * the tongue lolls out over the front edge and the whole chest hops as it walks.
+ */
 public class MimicModel extends EntityModel<MimicRenderState> {
+    private final ModelPart body;
     private final ModelPart lid;
+    private final ModelPart lowerTeeth;
+    private final ModelPart upperTeeth;
+    private final ModelPart tongue;
 
     public MimicModel(ModelPart root) {
         super(root);
+        this.body = root.getChild("body");
         this.lid = root.getChild("lid");
+        this.lowerTeeth = body.getChild("lower_teeth");
+        this.upperTeeth = lid.getChild("upper_teeth");
+        this.tongue = body.getChild("tongue");
     }
 
     public static LayerDefinition createLayer() {
-        MeshDefinition mesh = new MeshDefinition();
-        PartDefinition root = mesh.getRoot();
-        root.addOrReplaceChild("base",
-            CubeListBuilder.create().texOffs(0, 19).addBox(-7.0F, 0.0F, -7.0F, 14.0F, 10.0F, 14.0F, CubeDeformation.NONE),
-            PartPose.offset(0.0F, 14.0F, 0.0F));
-        root.addOrReplaceChild("lid",
-            CubeListBuilder.create().texOffs(0, 0).addBox(-7.0F, -5.0F, -14.0F, 14.0F, 5.0F, 14.0F, CubeDeformation.NONE)
-                .texOffs(0, 0).addBox(-1.0F, -2.0F, -15.0F, 2.0F, 4.0F, 1.0F, CubeDeformation.NONE),
-            PartPose.offset(0.0F, 14.0F, 7.0F));
-        return LayerDefinition.create(mesh, 64, 64);
+        return MimicLayer.create();
     }
 
     @Override
     public void setupAnim(MimicRenderState state) {
         this.resetPose();
-        if (state.revealed) {
-            this.lid.xRot = -Math.abs(Mth.sin(state.time * 0.35F)) * 0.9F;
+        boolean open = state.revealed;
+        lowerTeeth.visible = open;
+        upperTeeth.visible = open;
+        tongue.visible = open;
+        if (!open) {
+            return;
         }
+        float chomp = Math.abs(Mth.sin(state.time * 0.35F));
+        lid.xRot = -(0.25F + chomp * 0.8F);
+        tongue.xRot = 0.55F + Mth.sin(state.time * 0.18F) * 0.15F;
+        tongue.yRot = Mth.sin(state.time * 0.13F) * 0.25F;
+        float hop = Math.abs(Mth.sin(state.walkAnimationPos * 0.9F)) * Math.min(1.0F, state.walkAnimationSpeed) * 3.0F;
+        body.y -= hop;
+        lid.y -= hop;
     }
 }

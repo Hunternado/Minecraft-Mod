@@ -194,15 +194,32 @@ def add_elf_ears(rig, painter, earring=None):
 
 
 def add_horns(rig, color, tip=None, size="medium"):
-    """Demon horns curving outward and back from the top sides of the head."""
+    """
+    Demon horns: a tapering staircase of segments that sweeps up, out and back from the temples and hooks at the tip
+    (an antelope-like curve instead of straight antennae).
+    """
     tip = tip or shade(color, 1.35)
-    dims = {"small": (1, 2, 2), "medium": (2, 3, 3), "large": (2, 4, 4)}[size]
-    base, mid, end = dims
+    # (thickness, length) per segment, base to tip
+    profile = {
+        "small": [(2, 2), (1, 2), (1, 1)],
+        "medium": [(2, 2), (2, 2), (1, 2), (1, 1)],
+        "large": [(2, 3), (2, 2), (2, 2), (1, 2), (1, 2)],
+    }[size]
+    n = len(profile)
     for part, sx in (("horn_right", -1), ("horn_left", 1)):
-        rig.pose(part, offset=(3.0 * sx, -7.6, -0.5), rotation=(-0.45, 0.0, 0.55 * sx))
-        rig.box(part, -1, -mid, -1, 2, mid, 2, p_fill(color, noise=0.05, gradient=-0.2))
-        rig.box(part, -0.5 + 0.5 * sx, -mid - end, -0.5, 1 + (1 if base > 1 else 0), end, 2, p_fill(shade(color, 1.12), noise=0.05))
-        rig.box(part, 0.0 + 0.5 * sx, -mid - end - 2, 0.0, 1, 2, 1, p_fill(tip, noise=0.03))
+        rig.pose(part, offset=(3.2 * sx, -7.2, -0.5), rotation=(-0.18, 0.0, 0.62 * sx))
+        y = 0.0
+        body = p_fill(color, noise=0.05, gradient=-0.12)
+        for i, (thick, length) in enumerate(profile):
+            t = i / max(1, n - 1)
+            # sweep outward then curl back up: the part's tilt does the outward lean, the offsets bend it inward
+            # again near the tip and push it backward, giving a crescent instead of a straight spike
+            inward = -2.2 * t ** 1.6
+            back = 3.0 * t ** 1.3
+            x = inward * sx - thick / 2.0
+            rig.box(part, x, y - length + 0.5, back - thick / 2.0, thick, length, thick,
+                    p_fill(tip, noise=0.03) if i == n - 1 else body)
+            y -= length - 0.5
 
 
 def robe_body(base, trim_c, collar=None, sash=None, emblem=None, seed=90, collar_rows=3):

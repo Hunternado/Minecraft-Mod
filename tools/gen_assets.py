@@ -815,7 +815,7 @@ def gen_textures():
     save(light_texture(), "block/mana_light.png")
 
     # Character skins are generated with their models by tools/gen_models.py (textures/entity/character/).
-    save(mimic_texture(), "entity/mimic.png")
+    # The mimic's texture is generated with its model by tools/gen_mimic.py.
     save(stille_texture(), "entity/stille.png")
     outer, inner = equipment_textures()
     save(outer, "entity/equipment/humanoid/mage_attire.png")

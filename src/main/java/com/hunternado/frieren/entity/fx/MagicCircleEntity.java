@@ -140,7 +140,12 @@ public class MagicCircleEntity extends Entity {
                 this.discard();
                 return;
             }
+            // A caster who teleports (ender pearl, blink, /tp) leaves the circle behind instead of dragging it along.
+            Vec3 before = this.position();
             anchorTo(caster);
+            if (before.distanceToSqr(this.position()) > 16.0D) {
+                this.discard();
+            }
         }
     }
 
