@@ -59,4 +59,25 @@
 /frieren fx particles 8 120 14
 @wait 8
 @shot fx_night
+# Exam trials: practical constructs, then the Mirror Frieren duel (which must also clear the constructs).
+/time set 6000
+/gamemode survival @a
+/effect give @a minecraft:resistance 1000 4 true
+/effect give @a minecraft:regeneration 1000 4 true
+/tp @a 30 120 9 0 0
+@wait 30
+/frieren exam trial @p practical
+@wait 50
+@shot trial_practical
+/frieren exam trial @p replica
+@wait 50
+/tp @a 28 120 10 -16 4
+@wait 10
+@shot trial_replica_1
+@wait 20
+@shot trial_replica_2
+@wait 20
+@shot trial_replica_3
+@wait 20
+@shot trial_replica_4
 @quit

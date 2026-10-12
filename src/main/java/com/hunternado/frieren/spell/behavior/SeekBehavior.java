@@ -1,37 +1,43 @@
 package com.hunternado.frieren.spell.behavior;
 
-import com.hunternado.frieren.FrierenIds;
 import com.hunternado.frieren.data.MagicData;
+import com.hunternado.frieren.entity.creature.MimicEntity;
 import com.hunternado.frieren.registry.ModSounds;
 import com.hunternado.frieren.spell.SpellBehavior;
 import com.hunternado.frieren.spell.SpellContext;
 import com.hunternado.frieren.spell.SpellFx;
 import com.hunternado.frieren.util.Messages;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.level.levelgen.structure.Structure;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.RandomizableContainer;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.chunk.LevelChunk;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import org.jspecify.annotations.Nullable;
 
 /**
- * The spell to find something lost. Points to the caster's last death position in this dimension;
- * otherwise to the nearest ruin tagged {@code #frieren:seekable}. Params: {@code search_radius} (chunks).
+ * The spell to find something lost. Points to the caster's last death position in this dimension; otherwise to
+ * the nearest unopened loot container (a chest that still has its loot table) or disguised mimic within
+ * {@code search_radius} blocks. Only already-loaded chunks are inspected: no structure lookups, no chunk loading.
  */
 public class SeekBehavior implements SpellBehavior {
-    public static final TagKey<Structure> SEEKABLE = TagKey.create(Registries.STRUCTURE, FrierenIds.id("seekable"));
+    private static final int MAX_RADIUS = 96;
 
     @Override
     public boolean cast(SpellContext ctx) {
         MagicData data = ctx.data();
-        BlockPos target = null;
+        BlockPos target;
         String key;
         if (data.lastDeathPos() != null && ctx.level().dimension().identifier().toString().equals(data.lastDeathDimension())) {
             target = data.lastDeathPos();
             key = "message.frieren.seek_death";
         } else {
-            target = ctx.level().findNearestMapStructure(SEEKABLE, ctx.caster().blockPosition(), (int) ctx.param("search_radius", 64.0D), false);
-            key = "message.frieren.seek_ruin";
+            int radius = (int) Math.min(MAX_RADIUS, ctx.param("search_radius", 64.0D));
+            target = nearestTreasure(ctx.level(), ctx.caster().blockPosition(), radius);
+            key = "message.frieren.seek_treasure";
         }
         if (target == null) {
             Messages.actionBar(ctx.caster(), Component.translatable("message.frieren.seek_nothing"));
@@ -45,6 +51,41 @@ public class SeekBehavior implements SpellBehavior {
         SpellFx.beam(ctx.level(), from.add(0, 1.2D, 0), from.add(0, 1.2D, 0).add(direction.scale(6.0D)), ctx.color());
         SpellFx.sound(ctx.level(), from, ModSounds.UTILITY.get(), 0.8F, 0.9F);
         return true;
+    }
+
+    /** Nearest unlooted container or disguised mimic within {@code radius} blocks, in loaded chunks only. */
+    private static @Nullable BlockPos nearestTreasure(ServerLevel level, BlockPos origin, int radius) {
+        BlockPos best = null;
+        double bestDistance = (double) radius * radius;
+        int chunkRadius = (radius >> 4) + 1;
+        int originChunkX = origin.getX() >> 4;
+        int originChunkZ = origin.getZ() >> 4;
+        for (int cx = originChunkX - chunkRadius; cx <= originChunkX + chunkRadius; cx++) {
+            for (int cz = originChunkZ - chunkRadius; cz <= originChunkZ + chunkRadius; cz++) {
+                LevelChunk chunk = level.getChunkSource().getChunkNow(cx, cz);
+                if (chunk == null) {
+                    continue;
+                }
+                for (BlockEntity blockEntity : chunk.getBlockEntities().values()) {
+                    if (blockEntity instanceof RandomizableContainer container && container.getLootTable() != null) {
+                        double d = blockEntity.getBlockPos().distSqr(origin);
+                        if (d < bestDistance) {
+                            bestDistance = d;
+                            best = blockEntity.getBlockPos();
+                        }
+                    }
+                }
+            }
+        }
+        for (Entity entity : level.getEntities((Entity) null, new AABB(origin).inflate(radius),
+                e -> e instanceof MimicEntity mimic && !mimic.isRevealed())) {
+            double d = entity.blockPosition().distSqr(origin);
+            if (d < bestDistance) {
+                bestDistance = d;
+                best = entity.blockPosition();
+            }
+        }
+        return best;
     }
 
     private static String compass(Vec3 delta) {

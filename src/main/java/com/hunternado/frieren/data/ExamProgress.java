@@ -12,6 +12,8 @@ public final class ExamProgress {
     private int counter;
     private int secondaryCounter;
     private long deadline;
+    /** Ticks left on the clock while the examinee is offline (0 = running). */
+    private long paused;
     private @Nullable BlockPos objective;
 
     public ExamProgress(MageRank target, long deadline) {
@@ -24,6 +26,7 @@ public final class ExamProgress {
     public int counter() { return counter; }
     public int secondaryCounter() { return secondaryCounter; }
     public long deadline() { return deadline; }
+    public long paused() { return paused; }
     public @Nullable BlockPos objective() { return objective; }
 
     public void setStage(int stage) {
@@ -36,6 +39,7 @@ public final class ExamProgress {
     public void incrementCounter() { this.counter++; }
     public void incrementSecondaryCounter() { this.secondaryCounter++; }
     public void setDeadline(long deadline) { this.deadline = deadline; }
+    public void setPaused(long paused) { this.paused = paused; }
     public void setObjective(@Nullable BlockPos objective) { this.objective = objective; }
 
     public ExamProgress copy() {
@@ -43,6 +47,7 @@ public final class ExamProgress {
         copy.stage = stage;
         copy.counter = counter;
         copy.secondaryCounter = secondaryCounter;
+        copy.paused = paused;
         copy.objective = objective;
         return copy;
     }
@@ -54,6 +59,7 @@ public final class ExamProgress {
         tag.putInt("counter", counter);
         tag.putInt("counter2", secondaryCounter);
         tag.putLong("deadline", deadline);
+        tag.putLong("paused", paused);
         if (objective != null) {
             tag.putLong("objective", objective.asLong());
         }
@@ -65,6 +71,7 @@ public final class ExamProgress {
         progress.stage = tag.getIntOr("stage", 0);
         progress.counter = tag.getIntOr("counter", 0);
         progress.secondaryCounter = tag.getIntOr("counter2", 0);
+        progress.paused = tag.getLongOr("paused", 0L);
         if (tag.contains("objective")) {
             progress.objective = BlockPos.of(tag.getLongOr("objective", 0L));
         }

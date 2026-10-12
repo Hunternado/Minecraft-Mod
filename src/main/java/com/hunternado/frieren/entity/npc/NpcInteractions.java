@@ -50,7 +50,11 @@ public final class NpcInteractions {
             return false;
         }
         if (target instanceof MimicEntity mimic) {
-            mimic.chomp(player);
+            if (mimic.isTrueChest()) {
+                mimic.openTrueChest(player);
+            } else {
+                mimic.chomp(player);
+            }
         } else if (target instanceof FrierenNpcBase npc) {
             npc.onInteract(player);
         }

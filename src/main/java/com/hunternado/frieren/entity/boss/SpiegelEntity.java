@@ -1,7 +1,6 @@
 package com.hunternado.frieren.entity.boss;
 
 import com.hunternado.frieren.entity.ai.IdleLookGoal;
-import com.hunternado.frieren.exam.ExamManager;
 import com.hunternado.frieren.mana.ManaSignature;
 import com.hunternado.frieren.registry.ModEntities;
 import com.hunternado.frieren.registry.ModSounds;
@@ -196,13 +195,7 @@ public class SpiegelEntity extends Monster implements FrierenBoss, ManaSignature
         super.die(source);
         bossBar.removeAllPlayers();
         if (this.level() instanceof ServerLevel level) {
-            for (UUID id : replicas) {
-                Entity replica = level.getEntity(id);
-                if (replica != null) {
-                    replica.discard();
-                }
-            }
-            ExamManager.onSpiegelDefeated(level, this.position());
+            discardReplicas(level);
         }
     }
 
@@ -210,6 +203,20 @@ public class SpiegelEntity extends Monster implements FrierenBoss, ManaSignature
     public void remove(Entity.RemovalReason reason) {
         super.remove(reason);
         bossBar.removeAllPlayers();
+        // Replicas never outlive their mirror (trial cleanup, despawn, /kill).
+        if (this.level() instanceof ServerLevel level) {
+            discardReplicas(level);
+        }
+    }
+
+    private void discardReplicas(ServerLevel level) {
+        for (UUID id : List.copyOf(replicas)) {
+            Entity replica = level.getEntity(id);
+            if (replica != null) {
+                replica.discard();
+            }
+        }
+        replicas.clear();
     }
 
     @Override

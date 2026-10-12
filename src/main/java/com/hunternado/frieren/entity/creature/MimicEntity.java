@@ -2,10 +2,12 @@ package com.hunternado.frieren.entity.creature;
 
 import com.hunternado.frieren.data.MagicData;
 import com.hunternado.frieren.entity.ai.HuntPlayersGoal;
+import com.hunternado.frieren.exam.ExamManager;
 import com.hunternado.frieren.mana.ManaSignature;
 import com.hunternado.frieren.quest.QuestManager;
 import com.hunternado.frieren.quest.QuestStats;
 import com.hunternado.frieren.registry.ModSounds;
+import com.hunternado.frieren.spell.SpellFx;
 import com.hunternado.frieren.util.Messages;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -14,6 +16,7 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -36,6 +39,9 @@ import net.minecraft.world.level.storage.ValueOutput;
  */
 public class MimicEntity extends Monster implements ManaSignature {
     private static final EntityDataAccessor<Boolean> DATA_REVEALED = SynchedEntityData.defineId(MimicEntity.class, EntityDataSerializers.BOOLEAN);
+
+    /** Server-only (never synced, so clients cannot tell): a genuine chest planted among mimics by an exam trial. */
+    private boolean trueChest;
 
     public MimicEntity(EntityType<? extends MimicEntity> type, Level level) {
         super(type, level);
@@ -71,7 +77,36 @@ public class MimicEntity extends Monster implements ManaSignature {
         return this.entityData.get(DATA_REVEALED);
     }
 
+    public boolean isTrueChest() {
+        return trueChest;
+    }
+
+    public void setTrueChest(boolean trueChest) {
+        this.trueChest = trueChest;
+    }
+
+    /** The real chest of a grimoire hunt was opened: it pops open, sparkles and vanishes. */
+    public void openTrueChest(ServerPlayer player) {
+        if (!(this.level() instanceof ServerLevel level) || this.isRemoved()) {
+            return;
+        }
+        level.playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.CHEST_OPEN, SoundSource.BLOCKS, 1.0F, 1.0F);
+        SpellFx.burst(level, this.position().add(0.0D, 0.7D, 0.0D), 0xFFD86B, 1.2F);
+        this.discard();
+        ExamManager.onTrueChestOpened(player);
+    }
+
+    /** Mimic Detection on the genuine chest: a golden shimmer instead of a reveal. */
+    public void shimmer() {
+        if (this.level() instanceof ServerLevel level) {
+            SpellFx.ring(level, this.position().add(0.0D, 0.1D, 0.0D), 0xFFD86B, 0.9F);
+        }
+    }
+
     public void reveal(Player revealer) {
+        if (trueChest) {
+            return;
+        }
         if (!isRevealed()) {
             this.entityData.set(DATA_REVEALED, true);
             this.setNoAi(false);
@@ -104,6 +139,15 @@ public class MimicEntity extends Monster implements ManaSignature {
 
     @Override
     public boolean hurtServer(ServerLevel level, DamageSource source, float amount) {
+        if (trueChest) {
+            if (source.isCreativePlayer()) {
+                return super.hurtServer(level, source, amount);
+            }
+            if (source.getEntity() instanceof Player player) {
+                Messages.actionBar(player, Component.translatable("message.frieren.true_chest_hit"));
+            }
+            return false;
+        }
         if (!isRevealed() && source.getEntity() instanceof Player player) {
             reveal(player);
         }
@@ -112,12 +156,12 @@ public class MimicEntity extends Monster implements ManaSignature {
 
     @Override
     public float trueMana() {
-        return 30.0F;
+        return trueChest ? 0.0F : 30.0F;
     }
 
     @Override
     public int concealLevel() {
-        return isRevealed() ? 0 : 6;
+        return trueChest || isRevealed() ? 0 : 6;
     }
 
     @Override
@@ -129,12 +173,14 @@ public class MimicEntity extends Monster implements ManaSignature {
     protected void addAdditionalSaveData(ValueOutput output) {
         super.addAdditionalSaveData(output);
         output.putBoolean("Revealed", isRevealed());
+        output.putBoolean("TrueChest", trueChest);
     }
 
     @Override
     protected void readAdditionalSaveData(ValueInput input) {
         super.readAdditionalSaveData(input);
         boolean revealed = input.getBooleanOr("Revealed", false);
+        trueChest = input.getBooleanOr("TrueChest", false);
         this.entityData.set(DATA_REVEALED, revealed);
         this.setNoAi(!revealed);
     }

@@ -28,6 +28,10 @@ public class MimicDetectionBehavior implements SpellBehavior {
         boolean falseNegative = false;
         for (Entity entity : mimics) {
             MimicEntity mimic = (MimicEntity) entity;
+            if (mimic.isTrueChest()) {
+                mimic.shimmer();
+                continue;
+            }
             if (ctx.level().getRandom().nextInt(100) == 0) {
                 falseNegative = true;
                 continue;

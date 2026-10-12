@@ -199,6 +199,12 @@ def gen_loot():
         pool([item(f"{NS}:mirror_shard", count=(2, 4))]),
         pool([item(f"{NS}:mana_crystal", count=(4, 8))]),
     ])
+    entity("mirror_frieren", [
+        pool([item(f"{NS}:ancient_grimoire")]),
+        pool([item(f"{NS}:mirror_shard", count=(3, 5))]),
+        pool([item(f"{NS}:mana_crystal", count=(6, 10))]),
+    ])
+    entity("exam_construct", [pool([item(f"{NS}:mana_crystal", 1), empty(1)])])
     # NPCs and constructs drop nothing.
     for name in ("wandering_mage", "examiner", "priest", "frieren", "fern", "stark", "serie", "stille", "mana_decoy"):
         entity(name, [])
@@ -343,11 +349,6 @@ def gen_tags():
     tag("minecraft/tags/damage_type/bypasses_armor", [f"{NS}:demon_magic", f"{NS}:curse"])
     tag("minecraft/tags/damage_type/is_projectile", [f"{NS}:zoltraak"])
     tag("minecraft/tags/damage_type/witch_resistant_to", [f"{NS}:spell", f"{NS}:zoltraak"])
-
-    # Structure tags used by code (seeking magic, exam seal).
-    tag(f"{NS}/tags/worldgen/structure/seekable", [f"{NS}:{s}" for s in STRUCTURES])
-    tag(f"{NS}/tags/worldgen/structure/exam_library", [f"{NS}:forgotten_library"])
-    tag(f"{NS}/tags/worldgen/structure/exam_labyrinth", [f"{NS}:kings_tomb"])
 
     biomes = {
         "mage_tower": ["#minecraft:is_forest", "minecraft:plains", "minecraft:meadow", "minecraft:cherry_grove", "minecraft:taiga"],

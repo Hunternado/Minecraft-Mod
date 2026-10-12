@@ -3,6 +3,7 @@ package com.hunternado.frieren.item;
 import com.hunternado.frieren.data.ExamProgress;
 import com.hunternado.frieren.data.MagicData;
 import com.hunternado.frieren.exam.ExamType;
+import com.hunternado.frieren.exam.TrialManager;
 import com.hunternado.frieren.util.Messages;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -40,6 +41,10 @@ public class ExamSealItem extends Item {
         long secondsLeft = Math.max(0L, (progress.deadline() - level.getGameTime()) / 20L);
         Messages.chat(player, Component.translatable("message.frieren.seal_status", type.rank().displayName(),
             type.stage(progress.stage()).title(), String.format("%d:%02d", secondsLeft / 60L, secondsLeft % 60L)).withStyle(ChatFormatting.GOLD));
+        Component trialStatus = TrialManager.status(player.getUUID());
+        if (trialStatus != null) {
+            Messages.chat(player, trialStatus.copy().withStyle(ChatFormatting.YELLOW));
+        }
         BlockPos objective = progress.objective();
         if (objective != null) {
             int dx = objective.getX() - player.getBlockX();

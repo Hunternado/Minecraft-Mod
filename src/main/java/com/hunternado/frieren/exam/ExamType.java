@@ -22,15 +22,26 @@ public enum ExamType {
     FOURTH_CLASS(MageRank.FOURTH_CLASS, 4, 0, 25, 1, false, new Stage[] {Stage.SURVIVAL}),
     THIRD_CLASS(MageRank.THIRD_CLASS, 6, 0, 0, 0, true, new Stage[] {Stage.RETRIEVAL}),
     SECOND_CLASS(MageRank.SECOND_CLASS, 9, 0, 50, 2, false, new Stage[] {Stage.LABYRINTH}),
-    FIRST_CLASS(MageRank.FIRST_CLASS, 12, 250, 0, 0, false, new Stage[] {Stage.STILLE, Stage.LABYRINTH, Stage.INTERVIEW});
+    FIRST_CLASS(MageRank.FIRST_CLASS, 12, 250, 0, 0, false, new Stage[] {Stage.STILLE, Stage.REPLICA, Stage.INTERVIEW});
 
-    /** A single objective. Time limits are in ticks before the config multiplier. */
+    /**
+     * A single objective, played out as a local trial around the examinee (see TrialManager). Time limits are in
+     * ticks before the config multiplier.
+     */
     public enum Stage {
-        PRACTICAL("practical", 12000, 5),
-        SURVIVAL("survival", 18000, 8),
-        RETRIEVAL("retrieval", 48000, 1),
-        LABYRINTH("labyrinth", 36000, 1),
-        STILLE("stille", 12000, 1),
+        /** Break six drifting mana constructs with spells. */
+        PRACTICAL("practical", 6000, 6),
+        /** Survive three waves of Aura's soldiers and demons. */
+        SURVIVAL("survival", 9600, 3),
+        /** Grimoire hunt: one of five chests is real, the rest are mimics. */
+        RETRIEVAL("retrieval", 6000, 1),
+        /** Spiegel's mirror trial. */
+        LABYRINTH("labyrinth", 12000, 1),
+        /** Catch Stille with the cage. */
+        STILLE("stille", 7200, 1),
+        /** Duel the mirror replica of Frieren. */
+        REPLICA("replica", 12000, 1),
+        /** Serie's interview: see through her concealment. */
         INTERVIEW("interview", 6000, 1);
 
         private final String id;
@@ -55,8 +66,6 @@ public enum ExamType {
             return Component.translatable(FrierenIds.key("exam.stage", id) + ".desc");
         }
     }
-
-    public static final int SURVIVAL_DEMONS = 2;
 
     private final MageRank rank;
     private final int minSpells;

@@ -14,6 +14,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A spell's magic circle: a short-lived visual entity drawn by MagicCircleRenderer. Either hangs in front of its
@@ -68,14 +69,14 @@ public class MagicCircleEntity extends Entity {
     }
 
     /** A flat circle on the ground (area spells, summons, barriers). */
-    public static void onGround(ServerLevel level, Vec3 center, byte style, int color, float radius, int life) {
+    public static @Nullable MagicCircleEntity onGround(ServerLevel level, Vec3 center, byte style, int color, float radius, int life) {
         MagicCircleEntity circle = ModEntities.MAGIC_CIRCLE.get().create(level, EntitySpawnReason.TRIGGERED);
         if (circle == null) {
-            return;
+            return null;
         }
         circle.setup(style, color, radius, life, true);
         circle.setPos(center.x, center.y + 0.05D, center.z);
-        level.addFreshEntity(circle);
+        return level.addFreshEntity(circle) ? circle : null;
     }
 
     private void setup(byte style, int color, float radius, int life, boolean flat) {

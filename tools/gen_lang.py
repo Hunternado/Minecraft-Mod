@@ -84,6 +84,8 @@ ENTITIES = {
     "aura": "Aura the Guillotine",
     "qual": "Qual the Corruptor",
     "spiegel": "Spiegel",
+    "mirror_frieren": "Frieren's Reflection",
+    "exam_construct": "Exam Construct",
     "mirror_replica": "Mirror Replica",
     "mimic": "Mimic",
     "stille": "Stille",
@@ -144,7 +146,7 @@ SPELLS = {
     "mimic_detection": ("Mimic Detection", "Reveals nearby mimics disguised as chests. Has a small chance of being wrong."),
     "clothes_cleaning": ("Clothes Cleaning", "Mends the durability of your worn equipment. A housekeeping spell with surprising value."),
     "rust_removal": ("Rust Removal", "Strips oxidation from copper blocks in front of you. Statues everywhere thank you."),
-    "seeking_magic": ("Seeking Magic", "Points toward the nearest point of interest: your last death, or else a ruin worth exploring."),
+    "seeking_magic": ("Seeking Magic", "Points toward your last death, or else the nearest unopened treasure chest (or something pretending to be one)."),
     "light_orb": ("Light Orb", "Conjures a floating light where you look. It fades after a few minutes."),
     "gathering_magic": ("Gathering Magic", "Pulls nearby dropped items and experience toward you."),
     "azeryuze": ("Azeryuze", "Demon magic. Weighs your mana against a creature's; if yours is far greater, it obeys you for a while."),
@@ -175,12 +177,13 @@ RARITIES = {
 }
 SCHOOLS = {"offensive": "Offensive", "defensive": "Defensive", "utility": "Utility", "special": "Special"}
 STAGES = {
-    "practical": ("Practical", "Defeat hostile creatures using only magic."),
-    "survival": ("Survival", "Stay alive until time runs out and defeat demons along the way."),
-    "retrieval": ("Retrieval", "Find the sealed grimoire hidden in a Forgotten Library and bring it to an examiner."),
-    "labyrinth": ("Labyrinth", "Reach the heart of a dungeon and face the reflection waiting there."),
-    "stille": ("Catch the Stille", "Capture a Stille in a Stille Cage and hand it over. Brute force will not work."),
-    "interview": ("Interview", "Speak with Serie. She will look straight through your concealment."),
+    "practical": ("Practical", "Six mana constructs drift around the exam circle. Break all of them with spells; nothing else counts."),
+    "survival": ("Survival", "Hold the exam circle against three waves of Aura's soldiers and demons."),
+    "retrieval": ("Grimoire Hunt", "Five chests appear. One is genuine, the rest are mimics. Open the real one. (Mimic Detection helps... mostly.)"),
+    "labyrinth": ("Spiegel's Mirror", "Spiegel hides behind replicas of you. Break every reflection, then strike while it is exposed."),
+    "stille": ("Catch the Stille", "Tire out the Stille and catch it with your Stille Cage. Brute force will not work."),
+    "replica": ("Mirror of Frieren", "Defeat the mirror replica of Frieren. Her defence drops for a moment whenever she attacks."),
+    "interview": ("Interview", "Serie is waiting. Detect her true mana in the instant her concealment flickers."),
 }
 QUESTS = {
     "journey_begins": ("The Journey Begins", "Learn your first spell from a grimoire.", "Apprentice Staff"),
@@ -288,6 +291,8 @@ def messages():
     m("mimic_bite", "It was a mimic!")
     m("mimics_false_negative", "No mimics nearby... probably.")
     m("mimics_found", "Revealed %s mimic(s)!")
+    m("true_chest_hit", "It's a real chest. Hitting it won't help.")
+    m("construct_magic_only", "Only magic counts in the practical exam.")
     m("mimics_none", "No mimics nearby.")
     m("missing_definition", "Unknown spell %s. The data pack that added it is missing.")
     m("no_health", "You are too hurt to pay this spell's price.")
@@ -300,7 +305,7 @@ def messages():
     m("seal_status", "%s exam - %s - %s left")
     m("seek_death", "Your last death lies %s, %s blocks away.")
     m("seek_nothing", "Your seeking magic finds nothing of interest.")
-    m("seek_ruin", "A ruin lies %s, %s blocks away.")
+    m("seek_treasure", "Something unopened lies %s, %s blocks away.")
     m("sense_count", "You sense %s mana signature(s).")
     m("sense_through", "You sense %s signature(s), and one of them is hiding its true mana.")
     m("stille_caught", "You caught the Stille!")
@@ -334,6 +339,10 @@ def bosses_and_npcs():
     b("spiegel.exposed", "The last replica breaks. Spiegel is exposed!")
     b("spiegel.immune", "Spiegel cannot be harmed while its reflections remain.")
     b("spiegel.reflect", "Spiegel copies a reflection of you.")
+    b("mirror_frieren.spawn", "A perfect copy of Frieren steps out of the mirror.")
+    b("mirror_frieren.guarded", "Her defensive magic holds. Wait for her to attack.")
+    b("mirror_frieren.opening", "She attacked - her defence is down!")
+    b("mirror_frieren.defeated", "The reflection shatters. Even a perfect copy has Frieren's weakness.")
 
     for phase, v in {"command": "Aura commands her headless army!", "scales": "Aura takes up the Scales of Obedience!",
                      "guillotine": "Aura draws the Guillotine blade!"}.items():
@@ -372,6 +381,14 @@ def exams():
     e("fail.abandoned", "you abandoned it")
     e("fail.death", "you died")
     e("fail.time", "time ran out")
+    e("fail.left_arena", "you left the exam circle")
+    e("trial.leaving", "You are leaving the exam circle! Go back or you fail.")
+    e("trial.constructs", "Constructs broken: %s / %s")
+    e("trial.wave", "Wave %s of %s!")
+    e("trial.wave_progress", "Wave %s of %s - %s enemies left")
+    e("trial.wave_cleared", "Wave cleared. Catch your breath...")
+    e("trial.chest_found", "The genuine chest! Inside: your examination seal of approval.")
+    e("trial.resumed", "Your exam resumes: %s")
     e("failed", "Exam failed: %s.")
     e("max_rank", "You hold the highest rank already.")
     e("not_eligible", "You are not yet eligible for the %s exam:")
@@ -380,7 +397,6 @@ def exams():
     e("privilege_claimed", "Serie grants you %s.")
     e("privilege_none", "You have no privilege to claim.")
     e("progress", "Exam progress: %s / %s")
-    e("progress_survival", "Exam progress: %s / %s seconds, %s / %s demons")
     e("req.defensive", "Know a defensive spell")
     e("req.mana", "Max mana %s (you have %s)")
     e("req.mastery", "%s spells at mastery %s (you have %s)")

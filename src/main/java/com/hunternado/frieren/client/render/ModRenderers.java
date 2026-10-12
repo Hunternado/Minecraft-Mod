@@ -3,6 +3,7 @@ package com.hunternado.frieren.client.render;
 import com.hunternado.frieren.client.render.character.CharacterKind;
 import com.hunternado.frieren.client.render.character.CharacterRenderer;
 import com.hunternado.frieren.client.render.fx.BarrierShellRenderer;
+import com.hunternado.frieren.client.render.fx.ExamConstructRenderer;
 import com.hunternado.frieren.client.render.fx.MagicCircleRenderer;
 import com.hunternado.frieren.client.render.fx.SpellBeamRenderer;
 import com.hunternado.frieren.registry.ModEntities;
@@ -26,6 +27,8 @@ public final class ModRenderers {
         character(event, ModEntities.QUAL.get(), CharacterKind.QUAL, 0.6F);
         character(event, ModEntities.SPIEGEL.get(), CharacterKind.MIRROR_REPLICA, 0.7F);
         character(event, ModEntities.MIRROR_REPLICA.get(), CharacterKind.MIRROR_REPLICA, 0.5F);
+        character(event, ModEntities.MIRROR_FRIEREN.get(), CharacterKind.MIRROR_FRIEREN, 0.5F);
+        event.registerEntityRenderer(ModEntities.EXAM_CONSTRUCT.get(), ExamConstructRenderer::new);
         character(event, ModEntities.WANDERING_MAGE.get(), CharacterKind.WANDERING_MAGE, 0.5F);
         character(event, ModEntities.EXAMINER.get(), CharacterKind.EXAMINER, 0.5F);
         character(event, ModEntities.PRIEST.get(), CharacterKind.PRIEST, 0.5F);

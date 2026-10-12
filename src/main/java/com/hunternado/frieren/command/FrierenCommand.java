@@ -43,6 +43,8 @@ public final class FrierenCommand {
         SharedSuggestionProvider.suggestResource(SpellManager.serverDefinitions().stream().map(SpellDefinition::id), builder);
     private static final SuggestionProvider<CommandSourceStack> RANKS = (ctx, builder) ->
         SharedSuggestionProvider.suggest(Arrays.stream(MageRank.values()).map(MageRank::serializedName), builder);
+    private static final SuggestionProvider<CommandSourceStack> STAGES = (ctx, builder) ->
+        SharedSuggestionProvider.suggest(Arrays.stream(ExamType.Stage.values()).map(ExamType.Stage::id), builder);
     private static final SuggestionProvider<CommandSourceStack> QUESTS = (ctx, builder) ->
         SharedSuggestionProvider.suggest(Arrays.stream(Quest.values()).map(Quest::id), builder);
 
@@ -110,7 +112,11 @@ public final class FrierenCommand {
                         .executes(ctx -> examAbandon(ctx, EntityArgument.getPlayer(ctx, "player")))))
                 .then(Commands.literal("pass")
                     .then(Commands.argument("player", EntityArgument.player())
-                        .executes(ctx -> examPass(ctx, EntityArgument.getPlayer(ctx, "player"))))))
+                        .executes(ctx -> examPass(ctx, EntityArgument.getPlayer(ctx, "player")))))
+                .then(Commands.literal("trial")
+                    .then(Commands.argument("player", EntityArgument.player())
+                        .then(Commands.argument("stage", StringArgumentType.word()).suggests(STAGES)
+                            .executes(ctx -> examTrial(ctx, EntityArgument.getPlayer(ctx, "player"), StringArgumentType.getString(ctx, "stage")))))))
             .then(Commands.literal("quest")
                 .then(Commands.literal("complete")
                     .then(Commands.argument("player", EntityArgument.player())
@@ -262,6 +268,16 @@ public final class FrierenCommand {
 
     private static int examStart(CommandContext<CommandSourceStack> ctx, ServerPlayer player) throws CommandSyntaxException {
         return ExamManager.start(player, data(player), null) ? 1 : 0;
+    }
+
+    private static int examTrial(CommandContext<CommandSourceStack> ctx, ServerPlayer player, String stageId) throws CommandSyntaxException {
+        for (ExamType.Stage stage : ExamType.Stage.values()) {
+            if (stage.id().equals(stageId)) {
+                return ExamManager.startStage(player, data(player), stage) ? 1 : 0;
+            }
+        }
+        ctx.getSource().sendFailure(Component.literal("Unknown exam stage: " + stageId));
+        return 0;
     }
 
     private static int examAbandon(CommandContext<CommandSourceStack> ctx, ServerPlayer player) throws CommandSyntaxException {

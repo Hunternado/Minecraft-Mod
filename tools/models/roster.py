@@ -179,6 +179,20 @@ def add_cape(rig, painter, length=18, width=10):
     rig.box("cape", -width / 2, 0, 0, width, length, 1, painter)
 
 
+def add_elf_ears(rig, painter, earring=None):
+    """
+    Frieren-style elf ears: long, flat and pointed, sticking out sideways just above eye level with a slight
+    backward sweep and lift (tips end near brow height, not above the head). Optional dangling earring.
+    """
+    for part, sx in (("ear_right", -1), ("ear_left", 1)):
+        rig.pose(part, offset=(4 * sx, -3.3, 0.4), rotation=(0, -0.32 * sx, -0.14 * sx))
+        rig.box(part, -2 if sx < 0 else 0, -1, -0.5, 2, 2, 1, painter)
+        rig.box(part, -4 if sx < 0 else 2, -1.3, -0.5, 2, 1, 1, painter)
+        rig.box(part, -6 if sx < 0 else 4, -1.5, -0.5, 2, 1, 1, painter)
+        if earring:
+            rig.box(part, -1.3 if sx < 0 else 0.3, 1, -0.5, 1, 1, 1, earring)
+
+
 def add_horns(rig, color, tip=None, size="medium"):
     """Demon horns curving outward and back from the top sides of the head."""
     tip = tip or shade(color, 1.35)
@@ -346,17 +360,7 @@ def frieren():
     }
     humanoid(rig, painters, slim=True)
 
-    # Long elf ears, angled back and up, tapering to a point, with small dangling red earrings.
-    rig.pose("ear_right", offset=(-4, -3.6, 0.6), rotation=(0, 0.5, 0.34))
-    rig.box("ear_right", -2, -1, -0.5, 2, 2, 1, ear)
-    rig.box("ear_right", -4, -1.5, -0.5, 2, 1, 1, ear)
-    rig.box("ear_right", -5.5, -2.2, -0.5, 2, 1, 1, ear)
-    rig.box("ear_right", -1.2, 1, -0.5, 1, 1, 1, p_gem(red))
-    rig.pose("ear_left", offset=(4, -3.6, 0.6), rotation=(0, -0.5, -0.34))
-    rig.box("ear_left", 0, -1, -0.5, 2, 2, 1, ear)
-    rig.box("ear_left", 2, -1.5, -0.5, 2, 1, 1, ear)
-    rig.box("ear_left", 3.5, -2.2, -0.5, 2, 1, 1, ear)
-    rig.box("ear_left", 0.2, 1, -0.5, 1, 1, 1, p_gem(red))
+    add_elf_ears(rig, ear, earring=p_gem(red))
 
     # Twin tails from the back corners of the head.
     for side, sx in (("tail_right", -1), ("tail_left", 1)):
@@ -494,11 +498,7 @@ def serie():
     humanoid(rig, painters, slim=True)
     add_long_hair(rig, hair_c, length=15, width=8)
     add_braid(rig, "tail_right", hair_c, offset=(0, -1, 4.5), length=15, rotation=(0.12, 0, 0), tie=gold)
-    for part, sx in (("ear_right", -1), ("ear_left", 1)):
-        rig.pose(part, offset=(4 * sx, -3.6, 0.6), rotation=(0, -0.5 * sx, -0.34 * sx))
-        rig.box(part, -2 if sx < 0 else 0, -1, -0.5, 2, 2, 1, ear)
-        rig.box(part, -4 if sx < 0 else 2, -1.5, -0.5, 2, 1, 1, ear)
-        rig.box(part, -5.5 if sx < 0 else 3.5, -2.2, -0.5, 2, 1, 1, ear)
+    add_elf_ears(rig, ear)
     # gold circlet
     rig.pose("crown", offset=(0, -6.6, 0))
     rig.box("crown", -4.5, -0.5, -4.5, 9, 1, 9, p_metal(gold), inflate=0.0)

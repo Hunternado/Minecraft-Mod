@@ -1,10 +1,12 @@
 package com.hunternado.frieren.item;
 
 import com.hunternado.frieren.entity.creature.StilleEntity;
+import com.hunternado.frieren.exam.ExamManager;
 import com.hunternado.frieren.registry.ModDataComponents;
 import com.hunternado.frieren.util.Messages;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -46,6 +48,9 @@ public class StilleCageItem extends Item {
         held.set(ModDataComponents.CAGED_STILLE.get(), true);
         stille.discard();
         Messages.actionBar(player, Component.translatable("message.frieren.stille_caught").withStyle(ChatFormatting.GREEN));
+        if (player instanceof ServerPlayer serverPlayer) {
+            ExamManager.onStilleCaught(serverPlayer);
+        }
         return InteractionResult.SUCCESS;
     }
 

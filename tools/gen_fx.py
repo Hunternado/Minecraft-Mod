@@ -2,7 +2,7 @@
 Generates magic visual-effect textures (white/greyscale so the game tints them per spell):
   * textures/particle/<family>_<n>.png and particles/<family>.json for the custom particle types
   * textures/effect/circle_<style>.png  magic circles (arcane, holy, demon, flora)
-  * textures/effect/beam.png, hex_shield.png, glow.png
+  * textures/effect/beam.png, hex_shield.png, glow.png, crystal.png
 Drawn at 4x and downsampled for clean anti-aliased edges.
 """
 import json
@@ -362,6 +362,23 @@ def hex_shield_texture():
     return add_glow(img).resize((64, 64), Image.LANCZOS)
 
 
+def crystal_texture():
+    """Faceted crystal face: bright core fading to the edges, a diagonal glint and faint inner facet lines."""
+    n = 32
+    img = Image.new("RGBA", (n, n))
+    px = img.load()
+    for y in range(n):
+        for x in range(n):
+            u, v = x / (n - 1), y / (n - 1)
+            edge = min(u, 1 - u, v, 1 - v) * 2
+            base = 150 + 105 * min(1.0, edge * 1.6)
+            glint = max(0.0, 1.0 - abs((u + v) - 0.8) * 8) * 90
+            facet = 30 if abs(u - 0.5) < 0.02 or abs(v - 0.62) < 0.02 else 0
+            val = int(min(255, base + glint - facet))
+            px[x, y] = (val, val, 255 if val > 200 else val + 40, 235)
+    return img
+
+
 def main():
     os.makedirs(PARTICLE_TEX, exist_ok=True)
     os.makedirs(EFFECT_TEX, exist_ok=True)
@@ -381,6 +398,7 @@ def main():
     beam_texture().save(os.path.join(EFFECT_TEX, "beam.png"))
     hex_shield_texture().save(os.path.join(EFFECT_TEX, "hex_shield.png"))
     glow_dot(64, 31, falloff=2.0, core=0.1).save(os.path.join(EFFECT_TEX, "glow.png"))
+    crystal_texture().save(os.path.join(EFFECT_TEX, "crystal.png"))
     print(f"generated {len(PARTICLES)} particle families, {len(circles)} circles and effect textures")
 
 

@@ -2,6 +2,7 @@ package com.hunternado.frieren.registry;
 
 import com.hunternado.frieren.FrierenMod;
 import com.hunternado.frieren.entity.boss.AuraEntity;
+import com.hunternado.frieren.entity.boss.MirrorFrierenEntity;
 import com.hunternado.frieren.entity.boss.MirrorReplicaEntity;
 import com.hunternado.frieren.entity.boss.QualEntity;
 import com.hunternado.frieren.entity.boss.SpiegelEntity;
@@ -22,6 +23,7 @@ import com.hunternado.frieren.entity.npc.FrierenEntity;
 import com.hunternado.frieren.entity.npc.PriestEntity;
 import com.hunternado.frieren.entity.npc.SerieEntity;
 import com.hunternado.frieren.entity.npc.WanderingMageEntity;
+import com.hunternado.frieren.entity.trial.ExamConstructEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -56,6 +58,12 @@ public final class ModEntities {
         EntityType.Builder.of(SpiegelEntity::new, MobCategory.MONSTER), b -> b.sized(0.9F, 2.2F).fireImmune().clientTrackingRange(10));
     public static final RegistryObject<EntityType<MirrorReplicaEntity>> MIRROR_REPLICA = register("mirror_replica",
         EntityType.Builder.of(MirrorReplicaEntity::new, MobCategory.MONSTER), b -> b.sized(0.6F, 1.95F).clientTrackingRange(8));
+    public static final RegistryObject<EntityType<MirrorFrierenEntity>> MIRROR_FRIEREN = register("mirror_frieren",
+        EntityType.Builder.of(MirrorFrierenEntity::new, MobCategory.MONSTER), b -> b.sized(0.6F, 1.8F).fireImmune().clientTrackingRange(10));
+
+    // ---- Exam trials ---------------------------------------------------------------------------
+    public static final RegistryObject<EntityType<ExamConstructEntity>> EXAM_CONSTRUCT = register("exam_construct",
+        EntityType.Builder.of(ExamConstructEntity::new, MobCategory.MISC), b -> b.sized(0.8F, 0.8F).fireImmune().clientTrackingRange(8).updateInterval(2));
 
     // ---- Creatures -----------------------------------------------------------------------------
     public static final RegistryObject<EntityType<MimicEntity>> MIMIC = register("mimic",
@@ -112,6 +120,8 @@ public final class ModEntities {
         event.put(QUAL.get(), QualEntity.createAttributes().build());
         event.put(SPIEGEL.get(), SpiegelEntity.createAttributes().build());
         event.put(MIRROR_REPLICA.get(), MirrorReplicaEntity.createAttributes().build());
+        event.put(MIRROR_FRIEREN.get(), MirrorFrierenEntity.createAttributes().build());
+        event.put(EXAM_CONSTRUCT.get(), ExamConstructEntity.createAttributes().build());
         event.put(MIMIC.get(), MimicEntity.createAttributes().build());
         event.put(STILLE.get(), StilleEntity.createAttributes().build());
         event.put(WANDERING_MAGE.get(), WanderingMageEntity.createAttributes().build());
