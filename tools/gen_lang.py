@@ -86,6 +86,7 @@ ENTITIES = {
     "spiegel": "Spiegel",
     "mirror_frieren": "Frieren's Reflection",
     "exam_construct": "Exam Construct",
+    "hero_statue": "Statue of Himmel the Hero",
     "mirror_replica": "Mirror Replica",
     "mimic": "Mimic",
     "stille": "Stille",
@@ -292,6 +293,13 @@ def messages():
     m("mimics_false_negative", "No mimics nearby... probably.")
     m("mimics_found", "Revealed %s mimic(s)!")
     m("true_chest_hit", "It's a real chest. Hitting it won't help.")
+    m("statue_inscription", "\"Himmel the Hero, who defeated the Demon King and brought peace to the land.\"")
+    m("statue_stage.0", "Green with verdigris. Nobody has polished it in a long time.")
+    m("statue_stage.1", "Weathered, but someone remembers to visit.")
+    m("statue_stage.2", "The copper shows through the patina.")
+    m("statue_stage.3", "It gleams. Himmel would have loved how handsome it looks.")
+    m("statue_polished", "Himmel's statue gleams like the day it was cast. Somewhere, he is probably smiling.")
+    m("statue_already_clean", "The statue is already spotless.")
     m("construct_magic_only", "Only magic counts in the practical exam.")
     m("mimics_none", "No mimics nearby.")
     m("missing_definition", "Unknown spell %s. The data pack that added it is missing.")

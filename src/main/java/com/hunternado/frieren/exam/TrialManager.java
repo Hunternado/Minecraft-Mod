@@ -1,5 +1,6 @@
 package com.hunternado.frieren.exam;
 
+import com.hunternado.frieren.FrierenMod;
 import com.hunternado.frieren.data.ExamProgress;
 import com.hunternado.frieren.data.MagicData;
 import com.hunternado.frieren.entity.boss.MirrorFrierenEntity;
@@ -149,6 +150,7 @@ public final class TrialManager {
         }
         SpellFx.ring(level, center.add(0.0D, 0.2D, 0.0D), ARENA_COLOR, ARENA_RADIUS);
 
+        FrierenMod.LOGGER.info("[trial] {} begins {} at {}", player.getName().getString(), stage.id(), BlockPos.containing(center));
         switch (stage) {
             case PRACTICAL -> {
                 for (int i = 0; i < CONSTRUCTS; i++) {
@@ -185,6 +187,8 @@ public final class TrialManager {
             return;
         }
         trial.finished = true;
+        FrierenMod.LOGGER.info("[trial] {} trial for {} ended ({} tracked, {} defeated)", trial.stage.id(), examinee,
+            trial.tracked.size(), trial.defeated.size());
         ServerLevel level = server.getLevel(trial.dimension);
         if (level == null) {
             return;
@@ -463,6 +467,7 @@ public final class TrialManager {
             }
         }
         if (!level.addFreshEntity(entity)) {
+            FrierenMod.LOGGER.warn("[trial] could not add {} for {}", type, trial.examinee);
             return;
         }
         if (tracked) {

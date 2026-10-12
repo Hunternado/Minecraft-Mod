@@ -81,6 +81,8 @@ jobs:
           xvfb-run -a -s "-screen 0 1280x720x24" timeout 900 ./gradlew runClient --no-daemon --console=plain > showcase.log 2>&1
           echo "showcase exit code: $?"
           grep -E '\[showcase\]' showcase.log | head -60
+          echo "---- game events (chat, command feedback, trials) ----"
+          grep -E '\[CHAT\]|minecraft/MinecraftServer\]: \[|\[trial\]|Exception' showcase.log | grep -v 'Realms\|Narrator\|OpenAL\|SoundEngine' | head -120
           tools/ci_log_report.sh showcase.log
           mkdir -p shots && cp run/screenshots/*.png shots/ 2>/dev/null
           ls -la shots

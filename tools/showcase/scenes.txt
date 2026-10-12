@@ -61,13 +61,17 @@
 @shot fx_night
 # Exam trials: practical constructs, then the Mirror Frieren duel (which must also clear the constructs).
 /time set 6000
+/kill @e[type=!minecraft:player]
 /gamemode survival @a
 /effect give @a minecraft:resistance 1000 4 true
 /effect give @a minecraft:regeneration 1000 4 true
 /tp @a 30 120 9 0 0
 @wait 30
 /frieren exam trial @p practical
-@wait 50
+@wait 10
+/frieren debug @p
+@wait 40
+/frieren debug @p
 @shot trial_practical
 /frieren exam trial @p replica
 @wait 50
@@ -80,4 +84,23 @@
 @shot trial_replica_3
 @wait 20
 @shot trial_replica_4
+/frieren debug @p
+/frieren exam abandon @p
+# The Hero's statue plaza (template placed with its statue entity), then the four patina stages side by side.
+/gamemode spectator @a
+/kill @e[type=!minecraft:player]
+/place template frieren:heros_statue 1 119 8
+/tp @a 8 124.5 27 180 6
+@wait 60
+@shot statue_plaza
+/tp @a 8 125.2 20.5 180 -8
+@wait 30
+@shot statue_close
+/summon frieren:hero_statue 20 120 24 {Stage:0,Rotation:[0f,0f]}
+/summon frieren:hero_statue 24 120 24 {Stage:1,Rotation:[0f,0f]}
+/summon frieren:hero_statue 28 120 24 {Stage:2,Rotation:[0f,0f]}
+/summon frieren:hero_statue 32 120 24 {Stage:3,Rotation:[0f,0f]}
+/tp @a 26 123.5 36 180 6
+@wait 40
+@shot statue_stages
 @quit

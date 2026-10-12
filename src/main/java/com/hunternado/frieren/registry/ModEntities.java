@@ -23,6 +23,7 @@ import com.hunternado.frieren.entity.npc.FrierenEntity;
 import com.hunternado.frieren.entity.npc.PriestEntity;
 import com.hunternado.frieren.entity.npc.SerieEntity;
 import com.hunternado.frieren.entity.npc.WanderingMageEntity;
+import com.hunternado.frieren.entity.statue.HeroStatueEntity;
 import com.hunternado.frieren.entity.trial.ExamConstructEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -60,6 +61,10 @@ public final class ModEntities {
         EntityType.Builder.of(MirrorReplicaEntity::new, MobCategory.MONSTER), b -> b.sized(0.6F, 1.95F).clientTrackingRange(8));
     public static final RegistryObject<EntityType<MirrorFrierenEntity>> MIRROR_FRIEREN = register("mirror_frieren",
         EntityType.Builder.of(MirrorFrierenEntity::new, MobCategory.MONSTER), b -> b.sized(0.6F, 1.8F).fireImmune().clientTrackingRange(10));
+
+    // ---- Monuments ------------------------------------------------------------------------------
+    public static final RegistryObject<EntityType<HeroStatueEntity>> HERO_STATUE = register("hero_statue",
+        EntityType.Builder.of(HeroStatueEntity::new, MobCategory.MISC), b -> b.sized(1.4F, 5.2F).fireImmune().clientTrackingRange(12));
 
     // ---- Exam trials ---------------------------------------------------------------------------
     public static final RegistryObject<EntityType<ExamConstructEntity>> EXAM_CONSTRUCT = register("exam_construct",
@@ -122,6 +127,7 @@ public final class ModEntities {
         event.put(MIRROR_REPLICA.get(), MirrorReplicaEntity.createAttributes().build());
         event.put(MIRROR_FRIEREN.get(), MirrorFrierenEntity.createAttributes().build());
         event.put(EXAM_CONSTRUCT.get(), ExamConstructEntity.createAttributes().build());
+        event.put(HERO_STATUE.get(), HeroStatueEntity.createAttributes().build());
         event.put(MIMIC.get(), MimicEntity.createAttributes().build());
         event.put(STILLE.get(), StilleEntity.createAttributes().build());
         event.put(WANDERING_MAGE.get(), WanderingMageEntity.createAttributes().build());

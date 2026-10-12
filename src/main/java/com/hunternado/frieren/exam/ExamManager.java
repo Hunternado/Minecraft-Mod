@@ -1,5 +1,6 @@
 package com.hunternado.frieren.exam;
 
+import com.hunternado.frieren.FrierenMod;
 import com.hunternado.frieren.config.FrierenConfig;
 import com.hunternado.frieren.data.ExamProgress;
 import com.hunternado.frieren.data.MagicData;
@@ -127,6 +128,7 @@ public final class ExamManager {
     }
 
     private static void completeStage(ServerPlayer player, MagicData data) {
+        FrierenMod.LOGGER.info("[trial] {} completed a stage", player.getName().getString());
         TrialManager.end(player.level().getServer(), player.getUUID());
         ExamProgress progress = data.exam();
         ExamType type = progress != null ? ExamType.forRank(progress.target()) : null;
@@ -170,6 +172,7 @@ public final class ExamManager {
     }
 
     private static void fail(ServerPlayer player, MagicData data, String reasonKey) {
+        FrierenMod.LOGGER.info("[trial] {} failed their exam: {}", player.getName().getString(), reasonKey);
         TrialManager.end(player.level().getServer(), player.getUUID());
         data.setExam(null);
         Messages.chat(player, Component.translatable("exam.frieren.failed", Component.translatable(reasonKey)).withStyle(ChatFormatting.RED));

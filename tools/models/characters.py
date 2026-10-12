@@ -74,6 +74,7 @@ class Rig:
         self.name = name
         self.render_scale = render_scale
         self.post_paint = None
+        self.variants = {}  # extra texture name -> post-paint applied to a fresh copy of the base painting
         self.root = Part("root")
         self.parts = {}
         self.pending = []  # (part, cube, painter)
@@ -107,13 +108,14 @@ class Rig:
             part.cubes.append(cube)
         return Model(self.root, TEX, TEX)
 
-    def paint(self):
+    def paint(self, post=None):
         cv = Canvas(TEX * DENSITY, TEX * DENSITY)
         for part, cube, painter in self.pending:
             if painter:
                 painter(cv, face_rects(cube))
-        if self.post_paint:
-            self.post_paint(cv)
+        post = post or self.post_paint
+        if post:
+            post(cv)
         return cv
 
 

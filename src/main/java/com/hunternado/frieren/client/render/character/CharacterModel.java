@@ -18,6 +18,7 @@ public class CharacterModel extends EntityModel<CharacterRenderState> {
     private final ModelPart cape;
     private final ModelPart skirt;
     private final ModelPart rightArm;
+    private final ModelPart prop;
     private final ModelPart leftArm;
     private final ModelPart rightLeg;
     private final ModelPart leftLeg;
@@ -33,6 +34,7 @@ public class CharacterModel extends EntityModel<CharacterRenderState> {
         this.cape = body.getChild("cape");
         this.skirt = body.getChild("skirt");
         this.rightArm = root.getChild("right_arm");
+        this.prop = rightArm.getChild("prop");
         this.leftArm = root.getChild("left_arm");
         this.rightLeg = root.getChild("right_leg");
         this.leftLeg = root.getChild("left_leg");
@@ -41,6 +43,10 @@ public class CharacterModel extends EntityModel<CharacterRenderState> {
     @Override
     public void setupAnim(CharacterRenderState state) {
         this.resetPose();
+        if (state.statue) {
+            statuePose();
+            return;
+        }
         float time = state.ageInTicks;
         float swing = state.walkAnimationPos;
         float amount = Math.min(1.0F, state.walkAnimationSpeed);
@@ -93,5 +99,18 @@ public class CharacterModel extends EntityModel<CharacterRenderState> {
             rightArm.xRot = -1.1F - arc * 1.4F;
             body.yRot = arc * 0.25F;
         }
+    }
+
+    /** The Hero's statue: sword raised to the sky, chin up, cape caught in the wind. */
+    private void statuePose() {
+        rightArm.xRot = -2.75F;
+        rightArm.yRot = 0.1F;
+        prop.xRot = Mth.PI;
+        leftArm.xRot = 0.1F;
+        leftArm.zRot = -0.25F;
+        head.xRot = -0.12F;
+        cape.xRot = 0.32F;
+        rightLeg.xRot = -0.12F;
+        leftLeg.xRot = 0.12F;
     }
 }

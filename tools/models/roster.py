@@ -1111,6 +1111,52 @@ def mana_decoy():
     return rig
 
 
+# ---------------------------------------------------------------------------------------------
+# The Hero's statue: Himmel's rig cast in copper, in four patina stages (Rust Removal polishes it)
+# ---------------------------------------------------------------------------------------------
+COPPER_STAGES = {
+    # name: (shadow, mid, highlight) of the metal; the skin's luminance picks between them
+    "hero_statue": (hexc("#2E6B5E"), hexc("#4FA58B"), hexc("#8FD8C0")),            # oxidized (verdigris)
+    "hero_statue_weathered": (hexc("#3F5E4A"), hexc("#6B9A7A"), hexc("#B5C9A0")),
+    "hero_statue_exposed": (hexc("#6B4535"), hexc("#A77B5B"), hexc("#D9B08A")),
+    "hero_statue_polished": (hexc("#7A3A22"), hexc("#D9773F"), hexc("#FFD1A0")),   # freshly polished copper
+}
+
+
+def copper_cast(stage):
+    """Post-paint turning the painted skin into a metal casting: luminance mapped onto the stage's palette."""
+    lo, mid, hi = COPPER_STAGES[stage]
+    oxidized = stage == "hero_statue"
+
+    def paint(cv):
+        import numpy as np
+        a = cv.a
+        rgb = a[..., :3].astype(float)
+        lum = (rgb[..., 0] * 0.3 + rgb[..., 1] * 0.55 + rgb[..., 2] * 0.15) / 255.0
+        lum = np.clip((lum - 0.12) / 0.8, 0.0, 1.0)
+        lo_c, mid_c, hi_c = (np.array(c[:3], dtype=float) for c in (lo, mid, hi))
+        t = lum[..., None]
+        low_mix = lo_c + (mid_c - lo_c) * np.clip(t * 2.0, 0, 1)
+        high_mix = mid_c + (hi_c - mid_c) * np.clip(t * 2.0 - 1.0, 0, 1)
+        out = np.where(t < 0.5, low_mix, high_mix)
+        if oxidized:
+            # verdigris streaks running down from edges
+            rng = np.random.default_rng(7)
+            streaks = rng.random(out.shape[:2]) < 0.06
+            out[streaks] = out[streaks] * 0.75 + np.array(hi_c) * 0.25
+        a[..., :3] = np.clip(out, 0, 255).astype("uint8")
+    return paint
+
+
+def hero_statue():
+    rig = himmel()
+    rig.name = "hero_statue"
+    rig.render_scale = 2.8
+    rig.post_paint = copper_cast("hero_statue")
+    rig.variants = {name: copper_cast(name) for name in COPPER_STAGES if name != "hero_statue"}
+    return rig
+
+
 ROSTER = {
     "frieren": frieren,
     "fern": fern,
@@ -1134,4 +1180,5 @@ ROSTER = {
     "mirror_frieren": mirror_frieren,
     "mirror_replica": mirror_replica,
     "mana_decoy": mana_decoy,
+    "hero_statue": hero_statue,
 }

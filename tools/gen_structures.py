@@ -38,13 +38,18 @@ class Double:
         self.v = float(v)
 
 
+class Float:
+    def __init__(self, v):
+        self.v = float(v)
+
+
 class List:
     def __init__(self, tag_type, items):
         self.tag_type = tag_type
         self.items = items
 
 
-TAG_END, TAG_INT, TAG_DOUBLE, TAG_STRING, TAG_LIST, TAG_COMPOUND = 0, 3, 6, 8, 9, 10
+TAG_END, TAG_INT, TAG_FLOAT, TAG_DOUBLE, TAG_STRING, TAG_LIST, TAG_COMPOUND = 0, 3, 5, 6, 8, 9, 10
 
 
 def tag_type(value):
@@ -52,6 +57,8 @@ def tag_type(value):
         raise TypeError("use Int(0/1) for booleans")
     if isinstance(value, Int) or isinstance(value, int):
         return TAG_INT
+    if isinstance(value, Float):
+        return TAG_FLOAT
     if isinstance(value, Double) or isinstance(value, float):
         return TAG_DOUBLE
     if isinstance(value, str):
@@ -73,6 +80,8 @@ def write_payload(out, value):
     t = tag_type(value)
     if t == TAG_INT:
         out.write(struct.pack(">i", value.v if isinstance(value, Int) else value))
+    elif t == TAG_FLOAT:
+        out.write(struct.pack(">f", value.v))
     elif t == TAG_DOUBLE:
         out.write(struct.pack(">d", value.v if isinstance(value, Double) else value))
     elif t == TAG_STRING:
@@ -184,13 +193,17 @@ class Template:
     def chest(self, x, y, z, loot, facing="north"):
         self.set(x, y, z, "chest", {"id": "minecraft:chest", "LootTable": f"{NS}:chests/{loot}"}, facing=facing)
 
-    def entity(self, x, y, z, entity_id):
+    def entity(self, x, y, z, entity_id, yaw=None, **extra):
         if not self.inside(int(x), int(y), int(z)):
             raise SystemExit(f"{self.name}: entity {entity_id} outside template")
+        nbt = {"id": entity_id}
+        if yaw is not None:
+            nbt["Rotation"] = List(TAG_FLOAT, [Float(yaw), Float(0.0)])
+        nbt.update(extra)
         self.entities.append({
             "pos": List(TAG_DOUBLE, [Double(x + 0.5), Double(y), Double(z + 0.5)]),
             "blockPos": List(TAG_INT, [Int(x), Int(y), Int(z)]),
-            "nbt": {"id": entity_id},
+            "nbt": nbt,
         })
 
     def save(self):
@@ -456,40 +469,55 @@ def association_outpost():
 
 
 def heros_statue():
-    t = Template("heros_statue", 11, 12, 11, 5)
-    cx = cz = 5
-    for x in range(11):
-        for z in range(11):
-            d = math.hypot(x - cx, z - cz)
-            if d <= 5.5:
-                for y in range(1, 12):
-                    t.set(x, y, z, "air")
-                if d > 4.0:
-                    t.set(x, 0, z, "grass_block", snowy="false")
-                    if t.rng.random() < 0.55:
-                        t.set(x, 1, z, f"{NS}:blue_moon_weed")
-                else:
-                    t.set(x, 0, z, "polished_andesite" if (x + z) % 2 == 0 else "stone_bricks")
-    # Plinth.
-    t.fill(4, 1, 4, 6, 1, 6, "stone_bricks")
-    t.fill(4, 2, 4, 6, 2, 6, "chiseled_stone_bricks")
-    # The statue: a hero raising a sword, long since oxidised (>24 copper blocks for the rust quest).
-    t.fill(4, 3, 5, 4, 5, 5, "oxidized_copper")
-    t.fill(6, 3, 5, 6, 5, 5, "oxidized_copper")
-    t.fill(4, 6, 5, 6, 8, 5, "oxidized_copper")
-    t.fill(4, 6, 6, 6, 8, 6, "oxidized_cut_copper")
-    t.set(5, 9, 5, "oxidized_copper")
-    t.set(5, 10, 5, "oxidized_cut_copper")
-    t.fill(3, 7, 5, 3, 8, 5, "oxidized_copper")
-    t.fill(7, 8, 5, 7, 9, 5, "oxidized_copper")
-    t.set(7, 10, 5, "oxidized_lightning_rod", facing="up")
-    # Benches facing the statue and the traveller's chest behind it.
-    for x in (3, 7):
-        t.set(x, 1, 1, "spruce_stairs", facing="north", half="bottom", shape="straight")
-        t.set(x, 1, 9, "spruce_stairs", facing="south", half="bottom", shape="straight")
-    t.chest(5, 1, 7, "heros_statue", facing="south")
-    t.set(1, 1, 5, "lantern")
-    t.set(9, 1, 5, "lantern")
+    """
+    A village plaza around Himmel's statue: a ring of blue moon weed (the flowers Frieren plants in his memory),
+    a stone plinth trimmed in oxidised copper, benches, lanterns and the traveller's chest. The statue itself is a
+    frieren:hero_statue entity (Himmel's model cast in copper) standing on the plinth, facing the path.
+    """
+    size = 15
+    t = Template("heros_statue", size, 12, size, 5)
+    c = size // 2
+    for x in range(size):
+        for z in range(size):
+            d = math.hypot(x - c, z - c)
+            if d > 7.4:
+                continue
+            for y in range(1, 12):
+                t.set(x, y, z, "air")
+            if d > 5.6:
+                t.set(x, 0, z, "grass_block", snowy="false")
+                t.set(x, 1, z, f"{NS}:blue_moon_weed" if t.rng.random() < 0.8 else "air")
+            elif d > 5.0:
+                t.set(x, 0, z, "mossy_stone_bricks" if t.rng.random() < 0.3 else "stone_bricks")
+            else:
+                ring = int(d) % 2 == 0
+                t.set(x, 0, z, "polished_andesite" if ring else t.weathered([("andesite", 3), ("polished_andesite", 1)]))
+    # Path to the south edge.
+    for z in range(c + 5, size):
+        for x in (c - 1, c, c + 1):
+            t.set(x, 0, z, "dirt_path")
+            t.set(x, 1, z, "air")
+    # Plinth: 5x5 copper-trimmed base, 3x3 shaft, chiseled cap.
+    for x in range(c - 2, c + 3):
+        for z in range(c - 2, c + 3):
+            edge = x in (c - 2, c + 2) or z in (c - 2, c + 2)
+            t.set(x, 1, z, "oxidized_cut_copper" if edge else "stone_bricks")
+    t.fill(c - 1, 2, c - 1, c + 1, 2, c + 1, "stone_bricks")
+    t.fill(c - 1, 3, c - 1, c + 1, 3, c + 1, "chiseled_stone_bricks")
+    for x, z in ((c - 1, c - 1), (c - 1, c + 1), (c + 1, c - 1), (c + 1, c + 1)):
+        t.set(x, 3, z, "oxidized_copper")
+    t.set(c, 2, c + 2, "oxidized_cut_copper")  # plaque
+    # The statue stands on the plinth facing south, down the path.
+    t.entity(c, 4, c, f"{NS}:hero_statue", yaw=0.0)
+    # Benches facing the statue from east and west, lanterns on posts, the traveller's chest behind the plinth.
+    for z in (c - 1, c + 1):
+        t.set(c - 4, 1, z, "spruce_stairs", facing="west", half="bottom", shape="straight")
+        t.set(c + 4, 1, z, "spruce_stairs", facing="east", half="bottom", shape="straight")
+    for x, z in ((c - 4, c - 4), (c + 4, c - 4), (c - 4, c + 4), (c + 4, c + 4)):
+        t.set(x, 1, z, "stripped_spruce_log", axis="y")
+        t.set(x, 2, z, "stripped_spruce_log", axis="y")
+        t.set(x, 3, z, "lantern", hanging="false")
+    t.chest(c, 1, c - 3, "heros_statue", facing="north")
     t.save()
 
 

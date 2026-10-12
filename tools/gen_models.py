@@ -74,6 +74,8 @@ def main():
         rig = factory()
         model = rig.build()
         Image.fromarray(rig.paint().a, "RGBA").save(os.path.join(TEXTURES, f"{name}.png"))
+        for variant, post in rig.variants.items():
+            Image.fromarray(rig.paint(post).a, "RGBA").save(os.path.join(TEXTURES, f"{variant}.png"))
         skirt = model.root.find("skirt")
         long_robe = sum(c.h for c in skirt.cubes) >= 10
         constants.append(f"    {name.upper()}(\"{name}\", {f(rig.render_scale)}, {str(long_robe).lower()})")
