@@ -10,6 +10,9 @@ import com.hunternado.frieren.entity.creature.StilleEntity;
 import com.hunternado.frieren.entity.demon.AuraThrallEntity;
 import com.hunternado.frieren.entity.demon.DemonMageEntity;
 import com.hunternado.frieren.entity.demon.DemonSoldierEntity;
+import com.hunternado.frieren.entity.fx.BarrierShellEntity;
+import com.hunternado.frieren.entity.fx.MagicCircleEntity;
+import com.hunternado.frieren.entity.fx.SpellBeamEntity;
 import com.hunternado.frieren.entity.magic.ManaBoltEntity;
 import com.hunternado.frieren.entity.magic.ManaDecoyEntity;
 import com.hunternado.frieren.entity.magic.SpellAreaEntity;
@@ -81,6 +84,16 @@ public final class ModEntities {
         EntityType.Builder.<ManaBoltEntity>of(ManaBoltEntity::new, MobCategory.MISC), b -> b.sized(0.3F, 0.3F).clientTrackingRange(6).updateInterval(2));
     public static final RegistryObject<EntityType<SpellAreaEntity>> SPELL_AREA = register("spell_area",
         EntityType.Builder.<SpellAreaEntity>of(SpellAreaEntity::new, MobCategory.MISC), b -> b.sized(0.5F, 0.5F).clientTrackingRange(8).updateInterval(10));
+    // ---- Visual effects (never saved) -----------------------------------------------------------
+    public static final RegistryObject<EntityType<MagicCircleEntity>> MAGIC_CIRCLE = register("magic_circle",
+        EntityType.Builder.<MagicCircleEntity>of(MagicCircleEntity::new, MobCategory.MISC),
+        b -> b.sized(0.5F, 0.5F).noSave().noSummon().fireImmune().clientTrackingRange(8).updateInterval(1));
+    public static final RegistryObject<EntityType<SpellBeamEntity>> SPELL_BEAM = register("spell_beam",
+        EntityType.Builder.<SpellBeamEntity>of(SpellBeamEntity::new, MobCategory.MISC),
+        b -> b.sized(0.2F, 0.2F).noSave().noSummon().fireImmune().clientTrackingRange(10).updateInterval(20));
+    public static final RegistryObject<EntityType<BarrierShellEntity>> BARRIER_SHELL = register("barrier_shell",
+        EntityType.Builder.<BarrierShellEntity>of(BarrierShellEntity::new, MobCategory.MISC),
+        b -> b.sized(0.5F, 0.5F).noSave().noSummon().fireImmune().clientTrackingRange(8).updateInterval(1));
     public static final RegistryObject<EntityType<ManaDecoyEntity>> MANA_DECOY = register("mana_decoy",
         EntityType.Builder.of(ManaDecoyEntity::new, MobCategory.MISC), b -> b.sized(0.6F, 1.8F).clientTrackingRange(8));
 

@@ -3,7 +3,13 @@ package com.hunternado.frieren.client.dev;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Screenshot;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.events.GuiEventListener;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.TitleScreen;
+import net.minecraft.client.input.KeyEvent;
+import net.minecraft.network.chat.contents.TranslatableContents;
+import org.lwjgl.glfw.GLFW;
 import net.minecraft.client.server.IntegratedServer;
 import org.slf4j.Logger;
 
@@ -11,6 +17,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Development-only scripted showcase used by CI to take in-game screenshots. Inactive unless the environment
@@ -32,7 +39,27 @@ public final class ShowcaseDirector {
     private static int ticksWithoutWorld;
     private static boolean openRequested;
 
+    private static final Set<String> PROCEED_KEYS = Set.of("selectWorld.backupJoinSkipButton", "gui.proceed", "gui.yes");
+
     private ShowcaseDirector() {}
+
+    /**
+     * Opening a copied world can stop on confirmation prompts (backup before loading, experimental features); press
+     * the button that proceeds without changing anything.
+     */
+    private static void confirmPrompts(Screen screen) {
+        if (screen == null || screen instanceof TitleScreen) {
+            return;
+        }
+        for (GuiEventListener child : screen.children()) {
+            if (child instanceof Button button && button.getMessage().getContents() instanceof TranslatableContents contents
+                    && PROCEED_KEYS.contains(contents.getKey())) {
+                LOGGER.info("[showcase] pressing '{}' on {}", contents.getKey(), screen.getClass().getSimpleName());
+                button.onPress(new KeyEvent(GLFW.GLFW_KEY_ENTER, 0, 0));
+                return;
+            }
+        }
+    }
 
     public static boolean active() {
         return SCRIPT != null && !SCRIPT.isBlank();
@@ -49,6 +76,9 @@ public final class ShowcaseDirector {
                 openRequested = true;
                 LOGGER.info("[showcase] opening world 'showcase'");
                 minecraft.createWorldOpenFlows().openWorld("showcase", () -> LOGGER.warn("[showcase] world open cancelled"));
+            }
+            if (openRequested && ticksWithoutWorld % 20 == 0) {
+                confirmPrompts(minecraft.gui.screen());
             }
             if (++ticksWithoutWorld % 200 == 0) {
                 LOGGER.info("[showcase] waiting for world, screen = {}",

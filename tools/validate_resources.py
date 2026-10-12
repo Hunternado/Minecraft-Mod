@@ -212,7 +212,7 @@ def check_loot_and_data(items, blocks, entities, components):
     for block in blocks - no_drop_blocks:
         if not os.path.exists(os.path.join(DATA, "loot_table", "blocks", block + ".json")):
             error(f"block {block} has no loot table")
-    for entity in entities - {"mana_bolt", "spell_area"}:
+    for entity in entities - {"mana_bolt", "spell_area", "magic_circle", "spell_beam", "barrier_shell"}:
         if not os.path.exists(os.path.join(DATA, "loot_table", "entities", entity + ".json")):
             error(f"entity {entity} has no loot table")
     loot_ids = {os.path.relpath(p, os.path.join(DATA, "loot_table"))[:-5].replace(os.sep, "/")

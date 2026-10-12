@@ -2,6 +2,9 @@ package com.hunternado.frieren.client.render;
 
 import com.hunternado.frieren.client.render.character.CharacterKind;
 import com.hunternado.frieren.client.render.character.CharacterRenderer;
+import com.hunternado.frieren.client.render.fx.BarrierShellRenderer;
+import com.hunternado.frieren.client.render.fx.MagicCircleRenderer;
+import com.hunternado.frieren.client.render.fx.SpellBeamRenderer;
 import com.hunternado.frieren.registry.ModEntities;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -35,6 +38,9 @@ public final class ModRenderers {
         event.registerEntityRenderer(ModEntities.STILLE.get(), StilleRenderer::new);
         event.registerEntityRenderer(ModEntities.MANA_BOLT.get(), InvisibleRenderer::new);
         event.registerEntityRenderer(ModEntities.SPELL_AREA.get(), InvisibleRenderer::new);
+        event.registerEntityRenderer(ModEntities.MAGIC_CIRCLE.get(), MagicCircleRenderer::new);
+        event.registerEntityRenderer(ModEntities.SPELL_BEAM.get(), SpellBeamRenderer::new);
+        event.registerEntityRenderer(ModEntities.BARRIER_SHELL.get(), BarrierShellRenderer::new);
     }
 
     private static <T extends LivingEntity> void character(EntityRenderersEvent.RegisterRenderers event, EntityType<T> type,

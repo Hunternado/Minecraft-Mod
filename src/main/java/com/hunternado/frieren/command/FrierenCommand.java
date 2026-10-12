@@ -26,6 +26,7 @@ import net.minecraft.commands.Commands;
 import net.minecraft.commands.SharedSuggestionProvider;
 import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.commands.arguments.IdentifierArgument;
+import net.minecraft.commands.arguments.coordinates.Vec3Argument;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
@@ -126,6 +127,18 @@ public final class FrierenCommand {
             .then(Commands.literal("reset")
                 .then(Commands.argument("player", EntityArgument.player())
                     .executes(ctx -> resetPlayer(ctx, EntityArgument.getPlayer(ctx, "player")))))
+            .then(Commands.literal("fx")
+                .then(Commands.argument("pos", Vec3Argument.vec3())
+                    .executes(ctx -> {
+                        FxSampler.spawn(ctx.getSource().getLevel(), Vec3Argument.getVec3(ctx, "pos"));
+                        return 1;
+                    }))
+                .then(Commands.literal("particles")
+                    .then(Commands.argument("pos", Vec3Argument.vec3())
+                        .executes(ctx -> {
+                            FxSampler.particles(ctx.getSource().getLevel(), Vec3Argument.getVec3(ctx, "pos"));
+                            return 1;
+                        }))))
             .then(Commands.literal("debug")
                 .executes(ctx -> debug(ctx, ctx.getSource().getPlayerOrException()))
                 .then(Commands.argument("player", EntityArgument.player())

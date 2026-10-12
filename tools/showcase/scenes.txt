@@ -42,4 +42,21 @@
 /tp @a 5 123 9 160 18
 @wait 50
 @shot heroes_back
+# Magic visuals sampler (circles, beams, barrier shell, particle families)
+/frieren fx 8 120 14
+/tp @a 8 123.5 7 0 15
+@wait 40
+/frieren fx particles 8 120 14
+@wait 8
+@shot fx_overview
+/tp @a 8 121.8 11.5 0 8
+/frieren fx particles 8 120 14
+@wait 8
+@shot fx_close
+/time set 18000
+/tp @a 8 123.5 7 0 15
+@wait 30
+/frieren fx particles 8 120 14
+@wait 8
+@shot fx_night
 @quit

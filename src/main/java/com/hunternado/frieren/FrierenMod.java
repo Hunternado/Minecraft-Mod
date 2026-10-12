@@ -15,6 +15,7 @@ import com.hunternado.frieren.registry.ModDataComponents;
 import com.hunternado.frieren.registry.ModEffects;
 import com.hunternado.frieren.registry.ModEntities;
 import com.hunternado.frieren.registry.ModItems;
+import com.hunternado.frieren.registry.ModParticles;
 import com.hunternado.frieren.registry.ModSounds;
 import com.hunternado.frieren.registry.ModTriggers;
 import com.hunternado.frieren.spell.SpellBehaviors;
@@ -45,6 +46,7 @@ public final class FrierenMod {
         ModBlocks.BLOCKS.register(modBusGroup);
         ModItems.ITEMS.register(modBusGroup);
         ModEntities.ENTITY_TYPES.register(modBusGroup);
+        ModParticles.PARTICLE_TYPES.register(modBusGroup);
         ModSounds.SOUND_EVENTS.register(modBusGroup);
         ModEffects.MOB_EFFECTS.register(modBusGroup);
         ModDataComponents.DATA_COMPONENTS.register(modBusGroup);

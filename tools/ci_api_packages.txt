@@ -57,3 +57,12 @@ net/minecraft/world/level/block/state/properties/
 net/minecraft/tags/*
 net/minecraft/resources/*
 net/minecraft/server/commands/*
+net/minecraft/world/*
+net/minecraft/world/level/chunk/*
+net/minecraft/client/input/*
+net/minecraft/network/chat/contents/*
+net/minecraft/commands/arguments/coordinates/*
+net/minecraft/server/players/*
+net/minecraft/world/level/block/entity/*
+net/minecraft/world/entity/ai/goal/
+net/minecraft/world/entity/projectile/

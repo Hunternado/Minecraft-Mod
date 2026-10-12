@@ -3,6 +3,7 @@ package com.hunternado.frieren.client;
 import com.hunternado.frieren.FrierenIds;
 import com.hunternado.frieren.FrierenMod;
 import com.hunternado.frieren.client.dev.ShowcaseDirector;
+import com.hunternado.frieren.client.fx.MagicFx;
 import com.hunternado.frieren.client.gui.ManaHudLayer;
 import com.hunternado.frieren.client.render.MimicModel;
 import com.hunternado.frieren.client.render.ModModelLayers;
@@ -15,6 +16,7 @@ import net.minecraftforge.client.event.AddGuiOverlayLayersEvent;
 import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
+import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.client.gui.overlay.ForgeLayeredDraw;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.listener.SubscribeEvent;
@@ -44,6 +46,11 @@ public final class ClientSetup {
     @SubscribeEvent
     public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
         ModRenderers.register(event);
+    }
+
+    @SubscribeEvent
+    public static void onRegisterParticles(RegisterParticleProvidersEvent event) {
+        MagicFx.registerProviders(event);
     }
 
     /** Added inside vanilla's pre-sleep HUD stack, so it hides with F1 like the hotbar does. */

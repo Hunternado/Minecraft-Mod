@@ -108,7 +108,7 @@ public final class CombatEvents {
             data.trySpendMana(needed);
             absorbed = blockable;
             ManaHelper.onManaSpent(player, data, needed);
-            SpellFx.hexagon(player.level(), player.position().add(0, 1.0D, 0), definition.color(), 1.2F);
+            SpellFx.shell(player.level(), player, definition.color());
             SpellFx.sound(player.level(), player.position(), ModSounds.BARRIER_HIT.get(), 0.7F, 1.0F + player.getRandom().nextFloat() * 0.3F);
         } else {
             absorbed = data.mana() / costPerPoint;

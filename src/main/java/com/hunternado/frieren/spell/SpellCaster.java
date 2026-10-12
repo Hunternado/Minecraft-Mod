@@ -148,6 +148,7 @@ public final class SpellCaster {
         int castTime = effectiveCastTime(spell, mastery);
         if (castTime > 0) {
             data.beginCast(spellId, castTime);
+            SpellFx.castCircle(level, player, spell, castTime + 6);
             Messages.actionBar(player, Component.translatable("message.frieren.casting", spell.displayName()));
             return;
         }
@@ -183,6 +184,9 @@ public final class SpellCaster {
             return;
         }
 
+        if (spell.castTime() <= 0) {
+            SpellFx.castCircle(level, player, spell, spell.isChannelled() ? 20 : 12);
+        }
         ManaHelper.onManaSpent(player, data, cost);
         data.pauseRegenUntil(time + 40L);
         data.setCooldown(spell.id(), time + effectiveCooldown(spell, mastery, staff));

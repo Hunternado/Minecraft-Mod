@@ -97,6 +97,9 @@ ENTITIES = {
     "mana_bolt": "Mana Bolt",
     "spell_area": "Spell Area",
     "mana_decoy": "Mana Decoy",
+    "magic_circle": "Magic Circle",
+    "spell_beam": "Spell Beam",
+    "barrier_shell": "Barrier Shell",
 }
 EFFECTS = {
     "enthralled": "Enthralled",

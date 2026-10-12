@@ -15,6 +15,10 @@ public record SpellFxPacket(byte type, double x1, double y1, double z1, double x
     public static final byte HEXAGON = 4;
     public static final byte SPIRAL = 5;
     public static final byte SCALES = 6;
+    public static final byte PETALS = 7;
+    public static final byte STREAKS = 8;
+    public static final byte FROST = 9;
+    public static final byte WISPS = 10;
 
     public static final StreamCodec<RegistryFriendlyByteBuf, SpellFxPacket> STREAM_CODEC =
         StreamCodec.ofMember(SpellFxPacket::encode, SpellFxPacket::decode);
