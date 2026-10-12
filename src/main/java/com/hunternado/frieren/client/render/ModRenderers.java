@@ -29,6 +29,11 @@ public final class ModRenderers {
         character(event, ModEntities.SPIEGEL.get(), CharacterKind.MIRROR_REPLICA, 0.7F);
         character(event, ModEntities.MIRROR_REPLICA.get(), CharacterKind.MIRROR_REPLICA, 0.5F);
         character(event, ModEntities.MIRROR_FRIEREN.get(), CharacterKind.MIRROR_FRIEREN, 0.5F);
+        character(event, ModEntities.DEMON_KING.get(), CharacterKind.DEMON_KING, 0.6F);
+        character(event, ModEntities.MACHT.get(), CharacterKind.MACHT, 0.55F);
+        character(event, ModEntities.LINIE.get(), CharacterKind.LINIE, 0.5F);
+        character(event, ModEntities.DRAHT.get(), CharacterKind.DRAHT, 0.5F);
+        character(event, ModEntities.LUGNER.get(), CharacterKind.LUGNER, 0.5F);
         event.registerEntityRenderer(ModEntities.EXAM_CONSTRUCT.get(), ExamConstructRenderer::new);
         event.registerEntityRenderer(ModEntities.HERO_STATUE.get(), HeroStatueRenderer::new);
         character(event, ModEntities.WANDERING_MAGE.get(), CharacterKind.WANDERING_MAGE, 0.5F);

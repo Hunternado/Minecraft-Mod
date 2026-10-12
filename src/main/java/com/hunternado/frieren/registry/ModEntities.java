@@ -2,6 +2,11 @@ package com.hunternado.frieren.registry;
 
 import com.hunternado.frieren.FrierenMod;
 import com.hunternado.frieren.entity.boss.AuraEntity;
+import com.hunternado.frieren.entity.boss.DemonKingEntity;
+import com.hunternado.frieren.entity.boss.DrahtEntity;
+import com.hunternado.frieren.entity.boss.LinieEntity;
+import com.hunternado.frieren.entity.boss.LugnerEntity;
+import com.hunternado.frieren.entity.boss.MachtEntity;
 import com.hunternado.frieren.entity.boss.MirrorFrierenEntity;
 import com.hunternado.frieren.entity.boss.MirrorReplicaEntity;
 import com.hunternado.frieren.entity.boss.QualEntity;
@@ -59,6 +64,16 @@ public final class ModEntities {
         EntityType.Builder.of(SpiegelEntity::new, MobCategory.MONSTER), b -> b.sized(0.9F, 2.2F).fireImmune().clientTrackingRange(10));
     public static final RegistryObject<EntityType<MirrorReplicaEntity>> MIRROR_REPLICA = register("mirror_replica",
         EntityType.Builder.of(MirrorReplicaEntity::new, MobCategory.MONSTER), b -> b.sized(0.6F, 1.95F).clientTrackingRange(8));
+    public static final RegistryObject<EntityType<DemonKingEntity>> DEMON_KING = register("demon_king",
+        EntityType.Builder.of(DemonKingEntity::new, MobCategory.MONSTER), b -> b.sized(1.0F, 3.0F).fireImmune().clientTrackingRange(12));
+    public static final RegistryObject<EntityType<MachtEntity>> MACHT = register("macht",
+        EntityType.Builder.of(MachtEntity::new, MobCategory.MONSTER), b -> b.sized(0.7F, 2.1F).fireImmune().clientTrackingRange(10));
+    public static final RegistryObject<EntityType<LinieEntity>> LINIE = register("linie",
+        EntityType.Builder.of(LinieEntity::new, MobCategory.MONSTER), b -> b.sized(0.6F, 1.75F).clientTrackingRange(10));
+    public static final RegistryObject<EntityType<DrahtEntity>> DRAHT = register("draht",
+        EntityType.Builder.of(DrahtEntity::new, MobCategory.MONSTER), b -> b.sized(0.6F, 1.9F).clientTrackingRange(10));
+    public static final RegistryObject<EntityType<LugnerEntity>> LUGNER = register("lugner",
+        EntityType.Builder.of(LugnerEntity::new, MobCategory.MONSTER), b -> b.sized(0.6F, 1.9F).clientTrackingRange(10));
     public static final RegistryObject<EntityType<MirrorFrierenEntity>> MIRROR_FRIEREN = register("mirror_frieren",
         EntityType.Builder.of(MirrorFrierenEntity::new, MobCategory.MONSTER), b -> b.sized(0.6F, 1.8F).fireImmune().clientTrackingRange(10));
 
@@ -126,6 +141,11 @@ public final class ModEntities {
         event.put(SPIEGEL.get(), SpiegelEntity.createAttributes().build());
         event.put(MIRROR_REPLICA.get(), MirrorReplicaEntity.createAttributes().build());
         event.put(MIRROR_FRIEREN.get(), MirrorFrierenEntity.createAttributes().build());
+        event.put(DEMON_KING.get(), DemonKingEntity.createAttributes().build());
+        event.put(MACHT.get(), MachtEntity.createAttributes().build());
+        event.put(LINIE.get(), LinieEntity.createAttributes().build());
+        event.put(DRAHT.get(), DrahtEntity.createAttributes().build());
+        event.put(LUGNER.get(), LugnerEntity.createAttributes().build());
         event.put(EXAM_CONSTRUCT.get(), ExamConstructEntity.createAttributes().build());
         event.put(HERO_STATUE.get(), HeroStatueEntity.createAttributes().build());
         event.put(MIMIC.get(), MimicEntity.createAttributes().build());

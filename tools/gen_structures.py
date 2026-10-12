@@ -689,6 +689,10 @@ def aura_fortress():
         t.set(x, 1, z, "soul_campfire", lit="true", facing="north")
     for (x, z) in ((5, 21), (21, 21), (13, 18), (9, 20), (17, 20), (13, 22)):
         t.entity(x, 1, z, f"{NS}:aura_thrall")
+    # Aura's three generals hold the courtyard in front of the keep.
+    t.entity(9, 1, 17, f"{NS}:linie", yaw=0.0)
+    t.entity(13, 1, 16, f"{NS}:draht", yaw=0.0)
+    t.entity(17, 1, 17, f"{NS}:lugner", yaw=0.0)
     t.save()
 
 

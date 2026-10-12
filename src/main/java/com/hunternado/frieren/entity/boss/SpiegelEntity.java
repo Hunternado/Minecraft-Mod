@@ -16,6 +16,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.BossEvent;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySpawnReason;
@@ -181,7 +182,7 @@ public class SpiegelEntity extends Monster implements FrierenBoss, ManaSignature
 
     @Override
     public boolean hurtServer(ServerLevel level, DamageSource source, float amount) {
-        if (!isExposed()) {
+        if (!isExposed() && !source.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
             if (source.getEntity() instanceof Player player && this.getRandom().nextInt(4) == 0) {
                 Messages.actionBar(player, Component.translatable("boss.frieren.spiegel.immune"));
             }

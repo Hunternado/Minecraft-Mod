@@ -62,6 +62,7 @@
 # Exam trials: practical constructs, then the Mirror Frieren duel (which must also clear the constructs).
 /time set 6000
 /kill @e[type=!minecraft:player]
+/kill @e[type=minecraft:item]
 /gamemode survival @a
 /effect give @a minecraft:resistance 1000 4 true
 /effect give @a minecraft:regeneration 1000 4 true
@@ -86,39 +87,54 @@
 @shot trial_replica_4
 /frieren debug @p
 /frieren exam abandon @p
-# New spells, cast through /frieren cast and watched from behind the caster.
+# New spells: cast facing the demons, then cut to a side view so beams and lines are not hidden behind the caster.
 /kill @e[type=!minecraft:player]
+/kill @e[type=minecraft:item]
 /summon frieren:demon_soldier 28 120 19 {NoAI:1b,PersistenceRequired:1b,Rotation:[180f,0f]}
 /summon frieren:demon_soldier 30 120 20 {NoAI:1b,PersistenceRequired:1b,Rotation:[180f,0f]}
 /summon frieren:demon_soldier 32 120 19 {NoAI:1b,PersistenceRequired:1b,Rotation:[180f,0f]}
 /summon frieren:demon_mage 30 120 23 {NoAI:1b,PersistenceRequired:1b,Rotation:[180f,0f]}
+@wait 10
 /tp @a 30 120 9 0 6
-@camera back
-@wait 20
 /frieren cast @p frieren:zoltraak_full_power
-@wait 3
+/tp @a 21 123 14 -90 14
+@wait 2
 @shot spell_zoltraak_full
-@wait 20
+@wait 16
+/tp @a 30 120 9 0 6
 /frieren cast @p frieren:earth_spikes
+/tp @a 21 123 14 -90 14
 @wait 2
 @shot spell_earth_spikes
-@wait 20
+@wait 16
+/tp @a 30 120 9 0 6
 /frieren cast @p frieren:frost_lance
+/tp @a 21 123 14 -90 14
 @wait 4
 @shot spell_frost_lance
-@wait 20
+@wait 16
+/tp @a 30 120 9 0 6
 /frieren cast @p frieren:blood_blades
+/tp @a 21 123 14 -90 14
 @wait 4
 @shot spell_blood_blades
-@wait 20
+@wait 16
+/tp @a 30 120 9 0 6
 /frieren cast @p frieren:wire_snare
+/tp @a 21 123 14 -90 14
 @wait 4
 @shot spell_wire_snare
-@wait 10
+@wait 16
+/tp @a 30 120 9 0 6
 /frieren cast @p frieren:water_whip
+/tp @a 21 123 14 -90 14
 @wait 3
 @shot spell_water_whip
-@wait 10
+@wait 16
+# Area spells read best from behind the caster.
+@camera back
+/tp @a 30 120 9 0 6
+@wait 5
 /frieren cast @p frieren:goddess_sanctuary
 @wait 12
 @shot spell_sanctuary
@@ -132,6 +148,33 @@
 @wait 3
 @shot spell_mana_release
 @camera first
+/kill @e[type=minecraft:item]
+# The 2.0 bosses: lineup, then a live round against the Demon King.
+/kill @e[type=!minecraft:player]
+/summon frieren:linie 24 120 18 {NoAI:1b,Rotation:[180f,0f]}
+/summon frieren:draht 27 120 18 {NoAI:1b,Rotation:[180f,0f]}
+/summon frieren:lugner 30 120 18 {NoAI:1b,Rotation:[180f,0f]}
+/summon frieren:macht 33 120 18 {NoAI:1b,Rotation:[180f,0f]}
+/summon frieren:demon_king 37 120 19 {NoAI:1b,Rotation:[180f,0f]}
+/tp @a 30.5 122.2 10 0 6
+@wait 40
+@shot bosses_lineup
+/tp @a 34 121.6 14.5 0 4
+@wait 20
+@shot bosses_close
+/kill @e[type=!minecraft:player]
+/summon frieren:demon_king 30 120 24 {Rotation:[180f,0f]}
+/tp @a 30 120 10 0 0
+@wait 60
+/tp @a 21 122 14 -55 6
+@wait 20
+@shot boss_demon_king_1
+@wait 25
+@shot boss_demon_king_2
+@wait 25
+@shot boss_demon_king_3
+/kill @e[type=!minecraft:player]
+/kill @e[type=minecraft:item]
 # The Hero's statue plaza (template placed with its statue entity), then the four patina stages side by side.
 /gamemode spectator @a
 /kill @e[type=!minecraft:player]

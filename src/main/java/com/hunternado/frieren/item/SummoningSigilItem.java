@@ -15,7 +15,9 @@ public class SummoningSigilItem extends Item {
     public enum Boss {
         AURA("aura"),
         QUAL("qual"),
-        SPIEGEL("spiegel");
+        SPIEGEL("spiegel"),
+        MACHT("macht"),
+        DEMON_KING("demon_king");
 
         private final String id;
 

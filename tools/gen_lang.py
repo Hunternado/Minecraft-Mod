@@ -66,6 +66,8 @@ ITEMS = {
     "sealed_exam_grimoire": "Sealed Exam Grimoire",
     "journey_journal": "Journey Journal",
     "sigil_of_the_guillotine": "Sigil of the Guillotine",
+    "seal_of_the_golden_land": "Seal of the Golden Land",
+    "seal_of_the_demon_king": "Seal of the Demon King",
     "seal_of_corruption": "Seal of Corruption",
     "mirror_shard": "Mirror Shard",
     "demon_soldier_spawn_egg": "Demon Soldier Spawn Egg",
@@ -73,6 +75,9 @@ ITEMS = {
     "aura_thrall_spawn_egg": "Headless Thrall Spawn Egg",
     "mimic_spawn_egg": "Mimic Spawn Egg",
     "stille_spawn_egg": "Stille Spawn Egg",
+    "linie_spawn_egg": "Linie Spawn Egg",
+    "draht_spawn_egg": "Draht Spawn Egg",
+    "lugner_spawn_egg": "Lügner Spawn Egg",
     "wandering_mage_spawn_egg": "Wandering Mage Spawn Egg",
     "examiner_spawn_egg": "Association Examiner Spawn Egg",
     "priest_spawn_egg": "Priest Spawn Egg",
@@ -86,6 +91,11 @@ ENTITIES = {
     "qual": "Qual the Corruptor",
     "spiegel": "Spiegel",
     "mirror_frieren": "Frieren's Reflection",
+    "demon_king": "The Demon King",
+    "macht": "Macht of the Golden Land",
+    "linie": "Linie the Imitator",
+    "draht": "Draht the Wire",
+    "lugner": "Lügner the Liar",
     "exam_construct": "Exam Construct",
     "hero_statue": "Statue of Himmel the Hero",
     "mirror_replica": "Mirror Replica",
@@ -252,6 +262,8 @@ def tooltips():
     t("sigil_aura", "Summons Aura the Guillotine.")
     t("sigil_qual", "Summons Qual the Corruptor.")
     t("sigil_spiegel", "Summons Spiegel, the mirror of the labyrinth.")
+    t("sigil_macht", "Summons Macht of the Golden Land, Sage of Destruction.")
+    t("sigil_demon_king", "Summons the Demon King. Himmel's party needed all four of them.")
     t("sigil_hint", "Use on a Summoning Altar.")
     t("mirror_lotus_ring", "A ring said to mean eternal love. Polished, not appraised.")
     t("mirror_lotus_ring.effect", "+25% mana regeneration")
@@ -353,6 +365,8 @@ def messages():
     m("summoned.aura", "Aura the Guillotine answers the summons.")
     m("summoned.qual", "Qual the Corruptor emerges from his seal.")
     m("summoned.spiegel", "The mirror shatters, and Spiegel steps out.")
+    m("summoned.macht", "The ground turns to gold. Macht has arrived.")
+    m("summoned.demon_king", "The sky darkens. The Demon King has returned.")
     m("trade_cannot_afford", "You cannot afford that.")
     m("trade_done", "Bought %s")
     m("unknown_spell", "You do not know that spell.")
@@ -378,6 +392,26 @@ def bosses_and_npcs():
     b("spiegel.exposed", "The last replica breaks. Spiegel is exposed!")
     b("spiegel.immune", "Spiegel cannot be harmed while its reflections remain.")
     b("spiegel.reflect", "Spiegel copies a reflection of you.")
+    for boss, lines in {
+        "demon_king": ("The Demon King looks down at you. \"Another hero? How nostalgic.\"",
+                       "The Black Sun rises behind the Demon King!",
+                       "The Demon King stops holding back.",
+                       "The Demon King falls. Somewhere, Himmel's party smiles."),
+        "macht": ("Macht inclines his head politely. \"I would like to understand you. Hold still.\"",
+                  "\"Let me show you my Golden Land.\"", "", "Macht crumbles into gold dust."),
+        "linie": ("Linie watches you closely. \"I wonder whose fighting style you copied.\"",
+                  "Linie mirrors your movements perfectly.", "", "Linie falls. She never had a style of her own."),
+        "draht": ("Draht flexes his fingers. Threads glint in the air.", "Draht's wires fill the air around you.", "",
+                  "Draht's threads go slack."),
+        "lugner": ("Lügner smiles. \"I'm not here to fight. Truly.\"", "Lügner's wounds begin to close.", "",
+                   "Lügner's last lie dies with him."),
+    }.items():
+        spawn, phase2, phase3, defeated = lines
+        b(f"{boss}.spawn", spawn)
+        b(f"{boss}.phase2", phase2)
+        if phase3:
+            b(f"{boss}.phase3", phase3)
+        b(f"{boss}.defeated", defeated)
     b("mirror_frieren.spawn", "A perfect copy of Frieren steps out of the mirror.")
     b("mirror_frieren.guarded", "Her defensive magic holds. Wait for her to attack.")
     b("mirror_frieren.opening", "She attacked - her defence is down!")

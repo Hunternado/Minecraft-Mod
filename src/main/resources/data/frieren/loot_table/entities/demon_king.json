@@ -1,0 +1,61 @@
+{
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "frieren:legendary_grimoire"
+        }
+      ],
+      "bonus_rolls": 0.0
+    },
+    {
+      "rolls": 1.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "frieren:legendary_grimoire"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "frieren:ancient_grimoire",
+          "weight": 2
+        }
+      ],
+      "bonus_rolls": 0.0
+    },
+    {
+      "rolls": 1.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "frieren:demonic_mana_core",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 6.0,
+                "max": 10.0
+              }
+            }
+          ]
+        }
+      ],
+      "bonus_rolls": 0.0
+    },
+    {
+      "rolls": 1.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:nether_star"
+        }
+      ],
+      "bonus_rolls": 0.0
+    }
+  ],
+  "random_sequence": "frieren:entities/demon_king"
+}

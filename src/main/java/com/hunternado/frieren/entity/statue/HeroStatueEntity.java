@@ -12,6 +12,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -107,7 +108,8 @@ public class HeroStatueEntity extends Mob {
 
     @Override
     public boolean hurtServer(ServerLevel level, DamageSource source, float amount) {
-        if (source.isCreativePlayer() && source.getEntity() instanceof Player player && player.isShiftKeyDown()) {
+        if (source.is(DamageTypeTags.BYPASSES_INVULNERABILITY)
+                || source.isCreativePlayer() && source.getEntity() instanceof Player player && player.isShiftKeyDown()) {
             this.discard();
             return true;
         }

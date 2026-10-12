@@ -7,6 +7,7 @@ import com.hunternado.frieren.util.Messages;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -72,7 +73,7 @@ public class ExamConstructEntity extends Mob {
 
     @Override
     public boolean hurtServer(ServerLevel level, DamageSource source, float amount) {
-        if (!(source instanceof SpellDamageSource) && !source.isCreativePlayer()) {
+        if (!(source instanceof SpellDamageSource) && !source.isCreativePlayer() && !source.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
             if (source.getEntity() instanceof Player player) {
                 Messages.actionBar(player, Component.translatable("message.frieren.construct_magic_only"));
             }

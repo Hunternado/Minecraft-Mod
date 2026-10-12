@@ -280,6 +280,13 @@ def sigil_icon(color, shape):
         img.rect(7, 2, 9, 12, hex_color("#C8CCD8"))
         img.rect(4, 11, 12, 12, c)
         img.rect(7, 13, 9, 14, c)
+    elif shape == "crown":
+        img.rect(3, 8, 13, 12, c)
+        for x in (3, 8, 13):
+            img.rect(x - 1 if x > 3 else x, 4, x if x < 13 else x, 7, c)
+        img.set(8, 10, hex_color("#E03050"))
+        img.set(5, 10, hex_color("#D4AF37"))
+        img.set(11, 10, hex_color("#D4AF37"))
     elif shape == "eye":
         img.circle(8, 8, 5, c)
         img.circle(8, 8, 2, hex_color("#1B1426"))
@@ -385,6 +392,8 @@ ITEM_ICONS = {
     "journey_journal": journal_icon,
     "sigil_of_the_guillotine": lambda: sigil_icon("#B0263A", "blade"),
     "seal_of_corruption": lambda: sigil_icon("#9B2D6F", "eye"),
+    "seal_of_the_golden_land": lambda: sigil_icon("#E8B830", "eye"),
+    "seal_of_the_demon_king": lambda: sigil_icon("#5A0A1A", "crown"),
     "mirror_shard": shard_icon,
 }
 
@@ -398,6 +407,9 @@ SPAWN_EGGS = {
     "examiner": ("#1F3A6B", "#D4AF37"),
     "priest": ("#F0F0F0", "#5FA8FF"),
     "frieren": ("#F4F4FA", "#3E8A3E"),
+    "linie": ("#3A2232", "#D04A8A"),
+    "draht": ("#2A2A36", "#E8E8F0"),
+    "lugner": ("#2A1018", "#B0102A"),
 }
 
 HANDHELD = {"apprentice_staff", "mage_staff", "sages_staff", "guillotine_staff", "guillotine_blade"}

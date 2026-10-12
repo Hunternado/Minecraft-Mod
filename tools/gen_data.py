@@ -241,6 +241,23 @@ def gen_loot():
         pool([item(f"{NS}:mirror_shard", count=(3, 5))]),
         pool([item(f"{NS}:mana_crystal", count=(6, 10))]),
     ])
+    entity("demon_king", [
+        pool([item(f"{NS}:legendary_grimoire")]),
+        pool([item(f"{NS}:legendary_grimoire"), item(f"{NS}:ancient_grimoire", 2)]),
+        pool([item(f"{NS}:demonic_mana_core", count=(6, 10))]),
+        pool([item("minecraft:nether_star")]),
+    ])
+    entity("macht", [
+        pool([grimoire_of("diagolze", "forbidden")]),
+        pool([item(f"{NS}:cursed_gold_block", count=(2, 4))]),
+        pool([item("minecraft:gold_block", count=(3, 6))]),
+        pool([item(f"{NS}:demonic_mana_core", count=(3, 5))]),
+    ])
+    for general, spell in (("linie", None), ("draht", "wire_snare"), ("lugner", "blood_blades")):
+        pools = [pool([item(f"{NS}:demonic_mana_core", count=(1, 3))]), pool([item(f"{NS}:rare_grimoire")])]
+        if spell:
+            pools.append(pool([grimoire_of(spell, "demon"), empty(1)], conditions=KILLED_BY_PLAYER))
+        entity(general, pools)
     entity("exam_construct", [pool([item(f"{NS}:mana_crystal", 1), empty(1)])])
     # NPCs and constructs drop nothing.
     for name in ("wandering_mage", "examiner", "priest", "frieren", "fern", "stark", "serie", "stille", "mana_decoy",
@@ -347,6 +364,11 @@ def gen_recipes():
            f"{NS}:summoning_altar", category="building")
     shaped("sigil_of_the_guillotine", ["HCH", "CGC", "HCH"], {"H": f"{NS}:demon_horn", "C": f"{NS}:demonic_mana_core", "G": "minecraft:gold_block"},
            f"{NS}:sigil_of_the_guillotine")
+    shaped("seal_of_the_golden_land", ["GCG", "CBC", "GCG"], {"G": "minecraft:gold_block", "C": f"{NS}:demonic_mana_core",
+                                                              "B": f"{NS}:cursed_gold_block"}, f"{NS}:seal_of_the_golden_land")
+    shaped("seal_of_the_demon_king", ["CMC", "BSB", "CMC"], {"C": f"{NS}:demonic_mana_core", "M": f"{NS}:mirror_shard",
+                                                             "B": f"{NS}:guillotine_blade", "S": "minecraft:nether_star"},
+           f"{NS}:seal_of_the_demon_king")
     shaped("seal_of_corruption", ["HCH", "CEC", "HCH"], {"H": f"{NS}:demon_horn", "C": f"{NS}:demonic_mana_core", "E": "minecraft:ender_eye"},
            f"{NS}:seal_of_corruption")
     shaped("mirror_shard", [" G ", "GCG", " G "], {"G": "minecraft:glass_pane", "C": C}, f"{NS}:mirror_shard")

@@ -24,7 +24,7 @@ public final class QuestEvents {
         }
         if (victim instanceof FrierenBoss && victim.level() instanceof net.minecraft.server.level.ServerLevel level) {
             for (ServerPlayer player : level.players()) {
-                if (player.distanceToSqr(victim) > 48.0D * 48.0D) {
+                if (player.isSpectator() || player.distanceToSqr(victim) > 48.0D * 48.0D) {
                     continue;
                 }
                 MagicData data = MagicData.get(player);

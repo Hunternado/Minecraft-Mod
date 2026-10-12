@@ -88,6 +88,8 @@ public final class ModItems {
     public static final RegistryObject<Item> JOURNEY_JOURNAL = simple("journey_journal", p -> new JourneyJournalItem(p.stacksTo(1)));
     public static final RegistryObject<Item> SIGIL_OF_THE_GUILLOTINE = simple("sigil_of_the_guillotine", p -> new SummoningSigilItem(p.stacksTo(1).rarity(Rarity.EPIC), SummoningSigilItem.Boss.AURA));
     public static final RegistryObject<Item> SEAL_OF_CORRUPTION = simple("seal_of_corruption", p -> new SummoningSigilItem(p.stacksTo(1).rarity(Rarity.RARE), SummoningSigilItem.Boss.QUAL));
+    public static final RegistryObject<Item> SEAL_OF_THE_GOLDEN_LAND = simple("seal_of_the_golden_land", p -> new SummoningSigilItem(p.stacksTo(1).rarity(Rarity.EPIC), SummoningSigilItem.Boss.MACHT));
+    public static final RegistryObject<Item> SEAL_OF_THE_DEMON_KING = simple("seal_of_the_demon_king", p -> new SummoningSigilItem(p.stacksTo(1).rarity(Rarity.EPIC), SummoningSigilItem.Boss.DEMON_KING));
     public static final RegistryObject<Item> MIRROR_SHARD = simple("mirror_shard", p -> new SummoningSigilItem(p.stacksTo(16).rarity(Rarity.UNCOMMON), SummoningSigilItem.Boss.SPIEGEL));
 
     // ---- Spawn eggs (spawn through a supplier so item construction never needs entity types) --
@@ -100,6 +102,9 @@ public final class ModItems {
     public static final RegistryObject<Item> EXAMINER_SPAWN_EGG = spawnEgg("examiner_spawn_egg", ModEntities.EXAMINER);
     public static final RegistryObject<Item> PRIEST_SPAWN_EGG = spawnEgg("priest_spawn_egg", ModEntities.PRIEST);
     public static final RegistryObject<Item> FRIEREN_SPAWN_EGG = spawnEgg("frieren_spawn_egg", ModEntities.FRIEREN);
+    public static final RegistryObject<Item> LINIE_SPAWN_EGG = spawnEgg("linie_spawn_egg", ModEntities.LINIE);
+    public static final RegistryObject<Item> DRAHT_SPAWN_EGG = spawnEgg("draht_spawn_egg", ModEntities.DRAHT);
+    public static final RegistryObject<Item> LUGNER_SPAWN_EGG = spawnEgg("lugner_spawn_egg", ModEntities.LUGNER);
 
     private ModItems() {}
 

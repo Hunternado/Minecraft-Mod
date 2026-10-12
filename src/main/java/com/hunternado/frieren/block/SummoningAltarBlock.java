@@ -53,6 +53,8 @@ public class SummoningAltarBlock extends Block {
             case AURA -> ModEntities.AURA.get();
             case QUAL -> ModEntities.QUAL.get();
             case SPIEGEL -> ModEntities.SPIEGEL.get();
+            case MACHT -> ModEntities.MACHT.get();
+            case DEMON_KING -> ModEntities.DEMON_KING.get();
         };
         Mob boss = type.create(serverLevel, EntitySpawnReason.TRIGGERED);
         if (boss == null) {

@@ -18,6 +18,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -140,7 +141,7 @@ public class MimicEntity extends Monster implements ManaSignature {
     @Override
     public boolean hurtServer(ServerLevel level, DamageSource source, float amount) {
         if (trueChest) {
-            if (source.isCreativePlayer()) {
+            if (source.isCreativePlayer() || source.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
                 return super.hurtServer(level, source, amount);
             }
             if (source.getEntity() instanceof Player player) {
