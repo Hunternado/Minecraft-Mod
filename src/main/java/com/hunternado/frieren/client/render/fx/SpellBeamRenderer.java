@@ -85,15 +85,19 @@ public class SpellBeamRenderer extends EntityRenderer<SpellBeamEntity, SpellBeam
         }
         side.normalize();
         Vector3f up = new Vector3f(side).cross(dir).normalize();
-        int halo = FxQuads.argb(state.color, alpha * 0.85F);
-        int core = FxQuads.argb(MagicFx.brighten(state.color, 0.8F), alpha);
+        // Three layers: a wide faint glow, the coloured body, and a white-hot core (anime Zoltraak look).
+        int glow = FxQuads.argb(state.color, alpha * 0.28F);
+        int body = FxQuads.argb(MagicFx.brighten(state.color, 0.15F), alpha * 0.9F);
+        int core = FxQuads.argb(MagicFx.brighten(state.color, 0.85F), alpha);
         boolean jagged = state.style == SpellBeamEntity.STYLE_LIGHTNING;
         float scroll = state.age * 0.35F;
         collector.submitCustomGeometry(poseStack, RenderTypes.entityTranslucentEmissive(BEAM), (pose, consumer) -> {
-            ribbon(consumer, pose, dir, side, length, width, halo, scroll, jagged, state.seed);
-            ribbon(consumer, pose, dir, up, length, width, halo, scroll, jagged, state.seed);
-            ribbon(consumer, pose, dir, side, length, width * 0.35F, core, scroll * 1.6F, jagged, state.seed);
-            ribbon(consumer, pose, dir, up, length, width * 0.35F, core, scroll * 1.6F, jagged, state.seed);
+            ribbon(consumer, pose, dir, side, length, width * 2.6F, glow, scroll * 0.5F, jagged, state.seed);
+            ribbon(consumer, pose, dir, up, length, width * 2.6F, glow, scroll * 0.5F, jagged, state.seed);
+            ribbon(consumer, pose, dir, side, length, width, body, scroll, jagged, state.seed);
+            ribbon(consumer, pose, dir, up, length, width, body, scroll, jagged, state.seed);
+            ribbon(consumer, pose, dir, side, length, width * 0.45F, core, scroll * 1.6F, jagged, state.seed);
+            ribbon(consumer, pose, dir, up, length, width * 0.45F, core, scroll * 1.6F, jagged, state.seed);
         });
     }
 

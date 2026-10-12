@@ -332,16 +332,16 @@ def add_glow(img):
 
 
 def beam_texture():
-    """32x32: bright core fading to transparent edges across U; tiles along V."""
+    """32x32: solid bright core across the middle third, a soft halo to transparent edges across U; tiles along V."""
     img = Image.new("RGBA", (32, 32), (0, 0, 0, 0))
     px = img.load()
     for x in range(32):
         d = abs(x + 0.5 - 16) / 16
-        core = max(0.0, 1 - d * 2.6)
-        halo = max(0.0, 1 - d) ** 2
+        core = 1.0 if d < 0.3 else max(0.0, 1 - (d - 0.3) / 0.25)
+        halo = max(0.0, 1 - d) ** 1.5 * 0.75
         for y in range(32):
-            ripple = 0.85 + 0.15 * math.sin((y / 32) * math.tau * 2 + x * 0.3)
-            a = min(1.0, core + halo * 0.6 * ripple)
+            ripple = 0.88 + 0.12 * math.sin((y / 32) * math.tau * 2 + x * 0.3)
+            a = min(1.0, core + halo * ripple)
             px[x, y] = (255, 255, 255, int(255 * a))
     return img
 

@@ -93,7 +93,7 @@ public class MimicEntity extends Monster implements ManaSignature {
         level.playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.CHEST_OPEN, SoundSource.BLOCKS, 1.0F, 1.0F);
         SpellFx.burst(level, this.position().add(0.0D, 0.7D, 0.0D), 0xFFD86B, 1.2F);
         this.discard();
-        ExamManager.onTrueChestOpened(player);
+        ExamManager.onTrueChestOpened(this, player);
     }
 
     /** Mimic Detection on the genuine chest: a golden shimmer instead of a reveal. */
