@@ -135,3 +135,51 @@ tools/                              Python generators for every resource file + 
 * `ClientSetup` is an `@Mod.EventBusSubscriber(value = Dist.CLIENT)` class: Forge never loads it on a
   dedicated server.
 * Common code never touches `Minecraft`, screens, key mappings or renderers.
+
+## 2.0 additions
+
+### Character models (`client/render/character/`, `tools/models/`)
+* **One model class for every character.** `CharacterModel` animates a fixed part tree (head with hair, twin
+  tails, ears, horns and crown; body with jacket, cape and skirt; arms with props). It handles the walk cycle,
+  breathing, cloth sway, the casting pose and the statue pose.
+* **Generated geometry.** Each character's geometry is generated into `CharacterKind` by `tools/gen_models.py`
+  from Python rigs in `tools/models/roster.py`. Skins are painted at 2× density into
+  `textures/entity/character/`.
+* **Offline previews.** `tools/preview_characters.py` renders the same rigs with Minecraft's transform order, so
+  art can be judged without the game.
+* **The mimic** is generated the same way by `tools/gen_mimic.py`, into `MimicLayer` plus its texture.
+
+### Magic visuals (`entity/fx/`, `client/fx/`, `client/render/fx/`)
+* **Server-spawned visual entities.** `MagicCircleEntity`, `SpellBeamEntity` and `BarrierShellEntity` carry
+  their look in synced data. They are `noSave` and discard themselves on reload.
+* **Renderers.** Each entity draws emissive textured quads through `submitCustomGeometry`. Large ones override
+  `shouldRender` with their real extent.
+* **Particles.** `MagicFx` spawns tinted `MagicParticle`s from nine sprite families (`ModParticles`), driven by
+  `SpellFxPacket`.
+
+### Exam trials (`exam/TrialManager`)
+* **Local arenas.** Each stage spawns its content around the examinee, inside a ground magic circle.
+* **Lifetime.** Entities carry `frieren_trial` plus an owner tag. They are tracked in memory and discarded when
+  the trial ends. Copies loaded from disk without a live trial are refused in `EntityJoinLevelEvent`.
+* **Completion.** Deaths (from `LivingDeathEvent`) and a twice-a-second poll decide when a stage is done. The
+  poll also replaces lost entities, enforces the arena radius, and rebuilds trials after a login.
+
+### Bosses (`entity/boss/DemonBoss`)
+* **Shared base.** It provides the boss bar, difficulty scaling, health phases, an attack cooldown, telegraphed
+  ground blasts, beams and owned minions.
+* **Subclasses** only implement `attack()`, plus optional `move()` and `tickBoss()`. They are the Demon King,
+  Macht, Linie, Draht and Lügner.
+* **Separate implementations.** `MirrorFrierenEntity`, `SpiegelEntity`, `AuraEntity` and `QualEntity` keep
+  their own.
+
+### Monuments (`entity/statue/`)
+* **`HeroStatueEntity`** is a polishable, slowly re-oxidising copper Himmel, rendered by `HeroStatueRenderer`
+  with one texture per patina stage.
+* **`HimmelEchoEntity`** is the fleeting translucent echo that appears when a statue reaches full shine.
+
+### Testing hooks
+* **`/frieren cast`** runs `SpellCaster.adminCast`.
+* **`/frieren exam trial`** runs `ExamManager.startStage`.
+* **`/frieren fx`** runs `FxSampler`.
+* **`client/dev/ShowcaseDirector`** is active only with `FRIEREN_SHOWCASE` set. It runs
+  `tools/showcase/scenes.txt` in CI and takes the screenshots.
