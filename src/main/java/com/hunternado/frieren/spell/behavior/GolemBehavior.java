@@ -7,7 +7,7 @@ import com.hunternado.frieren.spell.SpellBehavior;
 import com.hunternado.frieren.spell.SpellContext;
 import com.hunternado.frieren.spell.SpellFx;
 import net.minecraft.world.entity.EntitySpawnReason;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.animal.golem.IronGolem;
 import net.minecraft.world.phys.Vec3;
 
@@ -19,7 +19,7 @@ import net.minecraft.world.phys.Vec3;
 public class GolemBehavior implements SpellBehavior {
     @Override
     public boolean cast(SpellContext ctx) {
-        IronGolem golem = EntityType.IRON_GOLEM.create(ctx.level(), EntitySpawnReason.MOB_SUMMONED);
+        IronGolem golem = EntityTypes.IRON_GOLEM.create(ctx.level(), EntitySpawnReason.MOB_SUMMONED);
         if (golem == null) {
             return false;
         }
