@@ -88,6 +88,9 @@
 /frieren debug @p
 /frieren exam abandon @p
 # New spells: cast facing the demons, then cut to a side view so beams and lines are not hidden behind the caster.
+# A fresh showcase player is an unranked 50-mana apprentice; make them a First-Class mage with a deep pool first.
+/frieren rank set @p first_class
+/frieren mana growth @p 2000
 /kill @e[type=!minecraft:player]
 /kill @e[type=minecraft:item]
 /summon frieren:demon_soldier 28 120 19 {NoAI:1b,PersistenceRequired:1b,Rotation:[180f,0f]}

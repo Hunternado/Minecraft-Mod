@@ -1,44 +1,59 @@
 # Known Risks
 
 The mod **compiles against Minecraft 26.2 / Forge 65.1.0** and **boots cleanly as both a dedicated server and a
-client**. Both are checked on every push by `.github/workflows/build.yml` on GitHub Actions. The development
-sandbox itself cannot reach Forge's or Mojang's servers (see `docs/VALIDATION.md`), so CI is where the real build
-runs. What remains is gameplay behaviour that only a person in a world can judge.
+client**. On every push, `.github/workflows/build.yml` checks both on GitHub Actions and can drive a real client
+through a scripted in-game showcase. The development sandbox cannot reach Forge's or Mojang's servers (see
+`docs/VALIDATION.md`), so CI is where the real build and the in-game checks run. What remains is what only people
+playing together can judge: feel, balance and long sessions.
 
 ## What is verified
 
 | Check | Where | Result |
 |---|---|---|
-| Full Gradle build (ForgeGradle 7, Minecraft decompiled + Forge patched, `compileJava` reporting every error) | CI `Build` | passes, produces `frieren-1.0.0.jar` |
-| Dedicated server boot: mod construction, every registry, configs, network channel, every datapack file (spells, loot, recipes, advancements, tags, damage types, worldgen) | CI `Server smoke test` (`runGameTestServer`) | clean, no errors or mod warnings |
-| Client boot: client mod construction, key mappings, model layers, entity renderers, HUD layer, every model / blockstate / texture / item definition | CI `Client smoke test` (`runClient` under xvfb) | clean, no crash, no missing-resource warnings |
-| Resources ↔ code (models, textures, loot, tags, structures, spells, sounds, every lang key, placeholder counts) | `tools/validate_resources.py`, also in CI | 0 problems |
-| Exact signatures of APIs that no reference code used (`findNearestMapStructure`, `Hud#isHidden`, …) | CI `Probe Minecraft API signatures` (`javap` on the real 26.2 classes) | confirmed |
+| Full Gradle build (`compileJava` reports every error in one pass) | CI `Build` | passes, produces `frieren-2.0.0.jar` |
+| Dedicated server boot: every registry, config, network channel and datapack file | CI `Server smoke test` | clean |
+| Client boot: model layers, renderers, HUD, every model / texture / item definition | CI `Client smoke test` | clean, no missing resources |
+| In-game behaviour driven by `tools/showcase/scenes.txt` (commit tag `[showcase]`), screenshots published to the `ci-artifacts` branch | CI `In-game showcase` | see below |
+| Resources ↔ code (models, textures, loot, tags, structures, spells, sounds, lang keys) | `tools/validate_resources.py` | 0 problems |
+| Calls and constructors between mod classes match a declaration | `tools/check_calls.py` | 0 problems |
+| Exact signatures of every 26.2 API used | `javap` dumps of the real classes (CI `[api]`, `ci-artifacts/api/`) | looked up before use |
+
+What the showcase has confirmed in a running client (with screenshots):
+* Every character renders with its own model and skin.
+* The magic circles, beams, barrier shells and particle families render.
+* The 16 new spells cast and hit (a demon soldier pleaded for its life mid-run).
+* The practical and Mirror Frieren trials start, spawn their content and clean up. The trial log in CI records
+  begin/end with tracked and defeated counts.
+* The five new bosses spawn and fight (the Demon King summoned soldiers on cue).
+* The statue plaza template places with its statue entity, and all four patina stages render.
+* The new dungeons place.
 
 ## Not covered by automation
 
-* **Gameplay.** No automated test enters a world, so spell feel, AI behaviour, boss phases, exams and quests are
-  only checked by reading the code. A crash in an entity's tick or a spell behaviour would only show up in play.
-  The next step would be Forge GameTests that spawn each entity and cast each spell.
-* **Structure templates** are decoded and validated offline (and the Kings' Tomb maze is path-checked), but they
-  are only loaded by the game when a structure generates.
-* **Structure placement height.** Surface templates use `start_height: -1` so their floor replaces the top
-  ground block. On steep terrain `beard_thin` should smooth this, but the mage tower may sit partly buried on
-  cliffs. Tune `start_height` in `tools/gen_data.py` if needed.
-* **Kings' Tomb** is underground (y −30..10) with a ladder shaft that ends at the template's top. Players
-  normally dig down from the Exam Seal's coordinates.
-* **Placeholder art and sound.** Textures are procedurally generated originals (`tools/gen_assets.py`); sounds
-  reuse vanilla sound events.
-* **Balance** has not been playtested. Every major number is a server config multiplier (see README).
+* **Feel and balance.** Damage, mana costs, boss health and trial timings are first passes. Every major number is
+  a spell JSON parameter or a server config multiplier (see README), so they can be tuned without code.
+* **Multiplayer at scale.** Trials and bosses are per-player and friend-friendly by design: helpers count, and
+  spectators are ignored by boss AI. They have only been exercised with one player in CI.
+* **Every trial stage end-to-end.** The showcase covers the practical and replica stages. Survival waves, the
+  grimoire hunt, Spiegel, Stille and Serie use the same trial framework, but nobody has played them to the
+  finish in a running game yet.
+* **Structure placement on rough terrain.** Templates use `start_height: -1` with `beard_thin`. On cliffs a
+  structure can sit partly buried; tune per structure in `tools/gen_data.py`.
+* **Sound.** Spells reuse vanilla sound events.
 
 ## Bugs found by verification (for the record)
 
 | Bug | Found by | Effect if shipped |
 |---|---|---|
-| All tag files written without `.json` | offline audit | Minecraft ignores them: no structure would ever generate, exam objectives find nothing, armour/mining tags missing |
-| `ClientSetup.humanoid(RegisterRenderers, …)` helper inside the `@EventBusSubscriber` class | CI client smoke test | EventBus 7 rejects it: **client crashes during mod loading** for every player |
-| Literal `${...}` in a `mods.toml` comment | CI build | Gradle's resource templating fails; no jar |
-| `Options.hideGui` (removed in 26.x) | CI compile | compile error; the HUD now sits in Forge's pre-sleep stack, which hides with F1 |
-| `Entity.hurtMarked` (renamed `needsSync` in 26.x) | Mekanism 26.2 sources | compile error |
-| Structure-placed demons/thralls despawning | offline review | camps and Aura's fortress empty out; now persistent via `finalizeSpawn(STRUCTURE)` |
-| Three vanilla AI goals with no 26.2 evidence | offline audit | replaced with the mod's own `IdleLookGoal` / `WanderGoal` |
+| All tag files written without `.json` | offline audit | no structure would ever generate; armour/mining tags missing |
+| A helper inside an `@EventBusSubscriber` class | CI client smoke test | **client crashes during mod loading** |
+| Literal `${...}` in a `mods.toml` comment | CI build | no jar |
+| `Options.hideGui` / `Entity.hurtMarked` / `EntityType.IRON_GOLEM` (moved or renamed in 26.x) | CI compile, API dump | compile errors |
+| Copied showcase world stopped on the backup prompt | showcase log | no screenshots; the director now confirms prompts |
+| Big magic circles culled when their centre left the screen | showcase screenshot | arenas and area spells vanished from view |
+| Spiegel copying spectators; spectators earning boss credit | showcase log | phantom replicas, free rewards |
+| Spiegel, constructs, true chests and statues ignoring `/kill` | showcase log | admins could not clear them |
+| Elf ears ending level with the top of the head | in-game screenshot vs preview | ears read as horns |
+| Beam texture opaque only in its middle eighth | in-game screenshot | Zoltraak looked like a thread |
+| A caster's magic circle snapping along on teleport | showcase screenshot | circles dragged through ender pearls and blinks |
+| Structure searches (`findNearestMapStructure`) for exams and Seeking Magic | design review | could fail or stall far from structures; replaced by local trials and a loaded-chunk scan |

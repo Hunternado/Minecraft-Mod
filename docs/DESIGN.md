@@ -52,7 +52,7 @@ Rarities: `common`, `uncommon`, `rare`, `ancient`, `legendary`, `demon`, `forbid
 * **Demon** spells are human analyses of demon magic: demon grimoires must be analysed at a **Spell Research Desk** (Third‑Class+), mirroring how humans analysed Qual's Zoltraak.
 * **Forbidden** spells need First‑Class and also cost health.
 
-### Spell list (23)
+### Spell list (23 from 1.x; 2.0 adds 16 more, see README)
 
 | Spell | School | Rarity | Behavior (summary) |
 |---|---|---|---|
@@ -93,19 +93,23 @@ Plus the two core abilities (keys, not spells): **Mana Detection** and **Mana Co
 
 ## 4. Progression — Continental Magic Association ranks
 
-| Rank | Requirements to sit the exam | Exam |
+| Rank | Requirements to sit the exam | Exam (a local trial around the examinee) |
 |---|---|---|
-| Fifth‑Class | know 2 spells, max mana ≥ 60 | **Practical** — defeat 5 hostile mobs with spells within 10 minutes |
-| Fourth‑Class | know 4 spells, one spell at mastery 25 | **Survival** — defeat 8 monsters including 2 demons within 15 minutes |
-| Third‑Class | know 6 spells incl. a defensive spell | **Retrieval** — bring back a *Sealed Examination Grimoire* from a Forgotten Library (the Exam Seal points the way) |
-| Second‑Class | know 9 spells, two at mastery 50 | **Labyrinth** — enter the Ruined King's Tomb and defeat Spiegel at the Mirror Altar |
-| First‑Class | know 12 spells, max mana ≥ 250, Second-Class | Three stages: **(1)** capture a Stille bird with a Stille Cage · **(2)** defeat Spiegel again under time pressure · **(3)** Serie's interview: use Mana Detection on Serie while she conceals; your detection must see through her (detection power from rank, concealment and detection mastery). |
+| Fifth‑Class | know 2 spells, max mana ≥ 60 | **Practical**: break six drifting exam constructs; only spells damage them (5 min) |
+| Fourth‑Class | know 4 spells, one spell at mastery 25 | **Survival**: hold the circle through three waves of Aura's thralls, demon soldiers and a demon mage. Waves grow with helpers (8 min). |
+| Third‑Class | know 6 spells incl. a defensive spell | **Grimoire Hunt**: five chests, one genuine and four mimics. Mimic Detection shimmers on the real one (5 min). |
+| Second‑Class | know 9 spells, two at mastery 50 | **Spiegel's Mirror**: break every replica of yourself, then strike Spiegel while it is exposed (10 min) |
+| First‑Class | know 12 spells, max mana ≥ 250, Second-Class | **(1)** catch the Stille with your cage. **(2)** Duel Frieren's reflection: her barrier drops only when she attacks (dodge the telegraphed Zoltraak, then punish). **(3)** Serie's interview: detect her true mana in the instant her concealment flickers. |
 
 Promotion rewards: rank title, regen multiplier, higher growth cap, and a reward grimoire. First‑Class also
 grants **Serie's Privilege**: one guaranteed Legendary grimoire of your choice at the examiner.
 
-Exams are per-player state, so any number of players can sit exams at once. Spiegel credit goes to every
-examinee within 48 blocks when it dies. Dying fails the current exam (it can be retaken).
+**Trials** (`exam/TrialManager`): each stage spawns a magic-circle arena around the examinee, so nothing has to
+be found or generated. Trial entities are tagged and die with their trial on pass, fail, death, logout or
+restart. Lost entities that didn't die are replaced, so a stage cannot soft-lock. Straying past 26 blocks warns
+you; past 40, the stage fails. The exam clock pauses while you are offline, and the trial rebuilds when you log
+back in. Exams are per-player, so any number of players can sit them at once, and friends can help. Dying fails
+the current exam (it can be retaken).
 
 ## 5. Enemies
 
