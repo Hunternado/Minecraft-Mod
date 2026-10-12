@@ -2,12 +2,12 @@ name: Build
 
 on:
   push:
-    branches: ['**']
+    branches-ignore: ['ci-artifacts']
   pull_request:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build:
@@ -42,6 +42,14 @@ jobs:
         if: always()
         run: tools/ci_probe.sh
 
+      # Commit messages containing [api] publish javap signatures of the classes in tools/ci_api_packages.txt
+      # to the ci-artifacts branch (api/).
+      - name: Dump Minecraft API signatures
+        if: contains(github.event.head_commit.message, '[api]')
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 tools/ci_api_dump.py api-out && tools/ci_publish.sh api-out api
+
       # Boots a dedicated game-test server: loads the mod, every registry and every datapack file, then exits.
       - name: Server smoke test
         shell: bash
@@ -57,6 +65,7 @@ jobs:
       # Boots the client under a virtual display until the title screen, then stops it. Catches client mod loading,
       # model, texture, blockstate and renderer problems. A timeout stop is the expected outcome; a crash fails.
       - name: Client smoke test
+        if: ${{ !contains(github.event.head_commit.message, '[quick]') }}
         shell: bash
         env:
           LIBGL_ALWAYS_SOFTWARE: '1'

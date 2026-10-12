@@ -1,0 +1,45 @@
+# Classes whose public/protected signatures the CI API dump publishes (to the ci-artifacts branch, api/).
+# "pkg/"   = package and all sub-packages      "pkg/*" = only classes directly in the package
+# anything else = an exact class (inner classes included)
+net/minecraft/client/renderer/
+net/minecraft/client/model/
+net/minecraft/client/particle/
+net/minecraft/client/gui/
+net/minecraft/client/player/
+net/minecraft/client/multiplayer/
+net/minecraft/client/sounds/*
+net/minecraft/client/*
+com/mojang/blaze3d/vertex/
+com/mojang/math/
+net/minecraft/core/particles/
+net/minecraft/core/*
+net/minecraft/world/entity/*
+net/minecraft/world/entity/ai/
+net/minecraft/world/entity/monster/*
+net/minecraft/world/entity/projectile/
+net/minecraft/world/entity/player/
+net/minecraft/world/entity/item/
+net/minecraft/world/entity/decoration/
+net/minecraft/world/level/*
+net/minecraft/world/level/block/*
+net/minecraft/world/level/block/state/
+net/minecraft/world/level/block/entity/*
+net/minecraft/world/level/levelgen/structure/
+net/minecraft/world/level/levelgen/presets/
+net/minecraft/world/level/storage/*
+net/minecraft/world/level/gamerules/
+net/minecraft/server/level/
+net/minecraft/server/MinecraftServer
+net/minecraft/world/item/*
+net/minecraft/world/effect/
+net/minecraft/world/damagesource/
+net/minecraft/world/phys/
+net/minecraft/sounds/
+net/minecraft/util/*
+net/minecraft/network/chat/*
+net/minecraft/commands/*
+net/minecraftforge/client/
+net/minecraftforge/event/
+net/minecraftforge/registries/
+net/minecraftforge/common/*
+net/minecraftforge/network/
