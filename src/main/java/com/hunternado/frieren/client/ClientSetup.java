@@ -4,11 +4,11 @@ import com.hunternado.frieren.FrierenIds;
 import com.hunternado.frieren.FrierenMod;
 import com.hunternado.frieren.client.dev.ShowcaseDirector;
 import com.hunternado.frieren.client.gui.ManaHudLayer;
-import com.hunternado.frieren.client.render.FrierenHumanoidModel;
 import com.hunternado.frieren.client.render.MimicModel;
 import com.hunternado.frieren.client.render.ModModelLayers;
 import com.hunternado.frieren.client.render.ModRenderers;
 import com.hunternado.frieren.client.render.StilleModel;
+import com.hunternado.frieren.client.render.character.CharacterKind;
 import com.hunternado.frieren.spell.SpellManager;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.AddGuiOverlayLayersEvent;
@@ -36,7 +36,7 @@ public final class ClientSetup {
 
     @SubscribeEvent
     public static void onRegisterLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-        event.registerLayerDefinition(ModModelLayers.HUMANOID, FrierenHumanoidModel::createLayer);
+        CharacterKind.registerLayers(event);
         event.registerLayerDefinition(ModModelLayers.MIMIC, MimicModel::createLayer);
         event.registerLayerDefinition(ModModelLayers.STILLE, StilleModel::createLayer);
     }

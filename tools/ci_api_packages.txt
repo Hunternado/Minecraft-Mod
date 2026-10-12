@@ -43,3 +43,17 @@ net/minecraftforge/event/
 net/minecraftforge/registries/
 net/minecraftforge/common/*
 net/minecraftforge/network/
+net/minecraft/network/syncher/
+net/minecraft/network/codec/*
+net/minecraft/network/*
+net/minecraft/core/component/*
+net/minecraft/world/item/component/*
+net/minecraft/world/inventory/*
+net/minecraft/client/server/*
+net/minecraft/world/level/levelgen/*
+net/minecraft/world/entity/boss/
+net/minecraft/world/entity/npc/
+net/minecraft/world/level/block/state/properties/
+net/minecraft/tags/*
+net/minecraft/resources/*
+net/minecraft/server/commands/*

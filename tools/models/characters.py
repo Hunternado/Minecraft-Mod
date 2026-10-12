@@ -73,6 +73,7 @@ class Rig:
     def __init__(self, name, render_scale=1.0):
         self.name = name
         self.render_scale = render_scale
+        self.post_paint = None
         self.root = Part("root")
         self.parts = {}
         self.pending = []  # (part, cube, painter)
@@ -111,13 +112,15 @@ class Rig:
         for part, cube, painter in self.pending:
             if painter:
                 painter(cv, face_rects(cube))
+        if self.post_paint:
+            self.post_paint(cv)
         return cv
 
 
 # ---------------------------------------------------------------------------------------------
 # Standard bodies
 # ---------------------------------------------------------------------------------------------
-def humanoid(rig, painters, slim=False, legs=12, body_h=12, arm_len=12):
+def humanoid(rig, painters, slim=False, legs=12, body_h=12, arm_len=12, headless=False):
     """
     Player-proportioned body. painters maps part names to painter callables. body_h/legs let dwarves and giants
     reuse the same rig; the arm/leg pivots follow.
@@ -130,8 +133,9 @@ def humanoid(rig, painters, slim=False, legs=12, body_h=12, arm_len=12):
     rig.pose("left_arm", offset=(5, 2 if not slim else 2.5, 0))
     rig.pose("right_leg", offset=(-1.9, leg_top, 0))
     rig.pose("left_leg", offset=(1.9, leg_top, 0))
-    rig.box("head", -4, -8, -4, 8, 8, 8, painters.get("head"))
-    rig.box("hat", -4, -8, -4, 8, 8, 8, painters.get("hat"), inflate=0.5)
+    if not headless:
+        rig.box("head", -4, -8, -4, 8, 8, 8, painters.get("head"))
+        rig.box("hat", -4, -8, -4, 8, 8, 8, painters.get("hat"), inflate=0.5)
     rig.box("body", -4, 0, -2, 8, body_h, 4, painters.get("body"))
     rig.box("jacket", -4, 0, -2, 8, body_h, 4, painters.get("jacket"), inflate=0.25)
     rx = -3 if not slim else -2

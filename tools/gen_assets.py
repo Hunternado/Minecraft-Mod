@@ -742,8 +742,7 @@ def gen_textures():
     save(flower_texture(), "block/blue_moon_weed.png")
     save(light_texture(), "block/mana_light.png")
 
-    for index, (name, palette) in enumerate(CHARACTERS.items()):
-        save(humanoid_skin(palette, seed=index * 101, **CHARACTER_EXTRAS.get(name, {})), f"entity/{name}.png")
+    # Character skins are generated with their models by tools/gen_models.py (textures/entity/character/).
     save(mimic_texture(), "entity/mimic.png")
     save(stille_texture(), "entity/stille.png")
     outer, inner = equipment_textures()

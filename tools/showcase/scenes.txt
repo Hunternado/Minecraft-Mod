@@ -4,23 +4,42 @@
 /gamemode spectator @a
 /time set 6000
 /weather clear
-/tp @a 9 122.5 -7 0 12
+/tp @a 8 122.5 -6 0 10
 @wait 80
-/fill -6 119 -6 26 119 14 minecraft:grass_block
-/fill -6 120 -6 26 128 14 minecraft:air
-/summon frieren:frieren 0 120 4 {NoAI:1b,Rotation:[180f,0f]}
-/summon frieren:fern 2 120 4 {NoAI:1b,Rotation:[180f,0f]}
-/summon frieren:stark 4 120 4 {NoAI:1b,Rotation:[180f,0f]}
-/summon frieren:serie 6 120 4 {NoAI:1b,Rotation:[180f,0f]}
-/summon frieren:aura 9 120 4 {NoAI:1b,Rotation:[180f,0f]}
-/summon frieren:qual 11 120 4 {NoAI:1b,Rotation:[180f,0f]}
-/summon frieren:demon_soldier 13 120 4 {NoAI:1b,Rotation:[180f,0f]}
-/summon frieren:examiner 15 120 4 {NoAI:1b,Rotation:[180f,0f]}
-/summon frieren:mimic 17 120 4 {NoAI:1b,Rotation:[180f,0f]}
+/fill -8 119 -8 40 119 30 minecraft:grass_block
+/fill -8 120 -8 40 130 30 minecraft:air
+# Row 1: heroes and NPCs
+/summon frieren:frieren 2 120 4 {NoAI:1b,Rotation:[180f,0f]}
+/summon frieren:fern 4 120 4 {NoAI:1b,Rotation:[180f,0f]}
+/summon frieren:stark 6 120 4 {NoAI:1b,Rotation:[180f,0f]}
+/summon frieren:serie 8 120 4 {NoAI:1b,Rotation:[180f,0f]}
+/summon frieren:examiner 10 120 4 {NoAI:1b,Rotation:[180f,0f]}
+/summon frieren:priest 12 120 4 {NoAI:1b,Rotation:[180f,0f]}
+/summon frieren:wandering_mage 14 120 4 {NoAI:1b,Rotation:[180f,0f]}
+# Row 2 (further back): demons
+/summon frieren:aura 22 120 4 {NoAI:1b,Rotation:[180f,0f]}
+/summon frieren:qual 24 120 4 {NoAI:1b,Rotation:[180f,0f]}
+/summon frieren:demon_soldier 26 120 4 {NoAI:1b,Rotation:[180f,0f]}
+/summon frieren:demon_mage 28 120 4 {NoAI:1b,Rotation:[180f,0f]}
+/summon frieren:aura_thrall 30 120 4 {NoAI:1b,Rotation:[180f,0f]}
+/summon frieren:spiegel 32 120 4 {NoAI:1b,Rotation:[180f,0f]}
+/summon frieren:mimic 34 120 4 {NoAI:1b,Rotation:[180f,0f]}
 @hud
 @wait 100
-@shot lineup_wide
-/tp @a 3 121.6 0.5 0 8
+@shot heroes_lineup
+/tp @a 3 121.3 1 0 6
+@wait 40
+@shot frieren_fern_close
+/tp @a 9 121.4 1 0 6
+@wait 40
+@shot stark_serie_close
+/tp @a 28 122.5 -6 0 10
 @wait 60
-@shot lineup_close
+@shot demons_lineup
+/tp @a 23 121.5 1 0 4
+@wait 40
+@shot aura_qual_close
+/tp @a 5 123 9 160 18
+@wait 50
+@shot heroes_back
 @quit

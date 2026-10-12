@@ -44,7 +44,8 @@ public final class ShowcaseDirector {
         }
         Minecraft minecraft = Minecraft.getInstance();
         if (minecraft.player == null || minecraft.level == null) {
-            if (!openRequested && minecraft.gui.screen() instanceof TitleScreen) {
+            // First launches show onboarding screens before the title screen; open the world from any screen.
+            if (!openRequested && (minecraft.gui.screen() instanceof TitleScreen || ticksWithoutWorld > 100)) {
                 openRequested = true;
                 LOGGER.info("[showcase] opening world 'showcase'");
                 minecraft.createWorldOpenFlows().openWorld("showcase", () -> LOGGER.warn("[showcase] world open cancelled"));
