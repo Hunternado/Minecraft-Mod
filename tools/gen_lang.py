@@ -224,6 +224,9 @@ QUESTS = {
     "spell_collector": ("Spell Collector", "Know 10 different spells.", "+25 permanent mana growth"),
     "demon_slayer": ("Demon Slayer", "Slay 25 demons.", "Demon Hunter Insignia"),
     "aura_kill_yourself": ("Aura, Kill Yourself", "Defeat Aura the Guillotine.", "+60 mana growth and an unidentified Legendary grimoire"),
+    "auras_generals": ("Aura's Generals", "Defeat Linie, Draht and Lügner.", "+30 mana growth and an unidentified Ancient grimoire"),
+    "the_golden_land": ("The Golden Land", "Defeat Macht of the Golden Land.", "+60 mana growth and an unidentified Legendary grimoire"),
+    "journeys_end": ("Journey's End", "Defeat the Demon King, as Himmel's party once did.", "+120 mana growth and two unidentified Legendary grimoires"),
 }
 
 
@@ -489,6 +492,7 @@ def exams():
 
 def screens():
     s = lambda k, v: put(f"screen.{NS}.{k}", v)
+    s("journey.more_quests", "...and %s more")
     s("examiner", "Continental Magic Association")
     s("examiner.abandon", "Abandon Exam")
     s("examiner.begin", "Begin Exam")
@@ -590,6 +594,9 @@ ADVANCEMENTS = {
     "quest_mimic_hunter": ("It Was Definitely a Mimic", "Complete the Mimic Hunter quest"),
     "quest_the_heros_statue": ("Polished Memories", "Restore the Hero's statue"),
     "quest_a_field_of_flowers": ("Her Favourite Spell", "Bloom ten flower fields"),
+    "quest_auras_generals": ("The Three Who Served Aura", "Defeat Linie, Draht and Lügner"),
+    "quest_the_golden_land": ("Not Everything That Glitters", "Defeat Macht of the Golden Land"),
+    "quest_journeys_end": ("Journey's End", "Defeat the Demon King"),
 }
 
 

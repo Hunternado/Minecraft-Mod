@@ -34,6 +34,22 @@ public enum Quest {
         (player, data) -> {
             ManaHelper.grantBonusGrowth(player, data, 60);
             give(player, GrimoireItem.unidentified(SpellRarity.LEGENDARY));
+        }),
+    AURAS_GENERALS("auras_generals", QuestStats.GENERALS_SLAIN, 3,
+        (player, data) -> {
+            ManaHelper.grantBonusGrowth(player, data, 30);
+            give(player, GrimoireItem.unidentified(SpellRarity.ANCIENT));
+        }),
+    THE_GOLDEN_LAND("the_golden_land", QuestStats.MACHT_SLAIN, 1,
+        (player, data) -> {
+            ManaHelper.grantBonusGrowth(player, data, 60);
+            give(player, GrimoireItem.unidentified(SpellRarity.LEGENDARY));
+        }),
+    JOURNEYS_END("journeys_end", QuestStats.DEMON_KING_SLAIN, 1,
+        (player, data) -> {
+            ManaHelper.grantBonusGrowth(player, data, 120);
+            give(player, GrimoireItem.unidentified(SpellRarity.LEGENDARY));
+            give(player, GrimoireItem.unidentified(SpellRarity.LEGENDARY));
         });
 
     private final String id;

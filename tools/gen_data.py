@@ -493,6 +493,9 @@ def gen_advancements():
     adv("quest_aura_kill_yourself", f"{NS}:sigil_of_the_guillotine", milestone("quest_aura_kill_yourself"), parent="slay_demon", frame="challenge")
     adv("quest_mimic_hunter", f"{NS}:mimic_spawn_egg", milestone("quest_mimic_hunter"), parent="first_spell")
     adv("quest_the_heros_statue", f"{NS}:mirror_lotus_ring", milestone("quest_the_heros_statue"), parent="first_spell", frame="goal")
+    adv("quest_auras_generals", f"{NS}:linie_spawn_egg", milestone("quest_auras_generals"), parent="slay_demon", frame="goal")
+    adv("quest_the_golden_land", f"{NS}:seal_of_the_golden_land", milestone("quest_the_golden_land"), parent="quest_aura_kill_yourself", frame="challenge")
+    adv("quest_journeys_end", f"{NS}:seal_of_the_demon_king", milestone("quest_journeys_end"), parent="quest_the_golden_land", frame="challenge")
     adv("quest_a_field_of_flowers", f"{NS}:blue_moon_weed", milestone("quest_a_field_of_flowers"), parent="first_spell")
 
 

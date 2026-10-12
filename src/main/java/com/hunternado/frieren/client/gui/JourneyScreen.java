@@ -85,15 +85,28 @@ public class JourneyScreen extends Screen {
         int qy = 32;
         graphics.text(this.font, Component.translatable("screen.frieren.journey.quests"), questLeft, qy, 0xFFFFFFFF, true);
         qy += 14;
-        for (Quest quest : Quest.values()) {
+        Quest[] quests = Quest.values();
+        for (int i = 0; i < quests.length; i++) {
+            Quest quest = quests[i];
             boolean done = data.questCompleted(quest.id());
+            int rowHeight = done ? 11 : 22;
+            if (qy + rowHeight > this.height - 6) {
+                // Small windows: summarise the rest instead of drawing off-screen.
+                graphics.text(this.font, Component.translatable("screen.frieren.journey.more_quests", quests.length - i), questLeft, qy,
+                    0xFF999999, false);
+                break;
+            }
             int progress = Math.min(quest.target(), data.stat(quest.stat()));
             int color = done ? 0xFF7FE07F : 0xFFFFFFFF;
             graphics.text(this.font, Component.literal(done ? "✔ " : "• ").append(quest.title()), questLeft, qy, color, false);
             qy += 10;
-            graphics.text(this.font, done ? quest.rewardText() : quest.description().copy().append(" (" + progress + "/" + quest.target() + ")"),
-                questLeft + 8, qy, 0xFF999999, false);
-            qy += 13;
+            if (!done) {
+                graphics.text(this.font, quest.description().copy().append(" (" + progress + "/" + quest.target() + ")"),
+                    questLeft + 8, qy, 0xFF999999, false);
+                qy += 12;
+            } else {
+                qy += 1;
+            }
         }
     }
 

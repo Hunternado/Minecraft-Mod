@@ -1,0 +1,28 @@
+{
+  "criteria": {
+    "m": {
+      "trigger": "frieren:milestone",
+      "conditions": {
+        "milestone": "quest_auras_generals"
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "frieren:linie_spawn_egg"
+    },
+    "title": {
+      "translate": "advancements.frieren.quest_auras_generals.title"
+    },
+    "description": {
+      "translate": "advancements.frieren.quest_auras_generals.description"
+    },
+    "frame": "goal"
+  },
+  "requirements": [
+    [
+      "m"
+    ]
+  ],
+  "parent": "frieren:slay_demon"
+}

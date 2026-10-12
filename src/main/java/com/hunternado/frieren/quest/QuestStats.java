@@ -10,6 +10,10 @@ public final class QuestStats {
     public static final String DEMONS_SLAIN = "demons_slain";
     public static final String AURA_SLAIN = "aura_slain";
     public static final String BOSSES_SLAIN = "bosses_slain";
+    /** Distinct generals defeated (0-3); each general's own count is "linie_slain", "draht_slain" or "lugner_slain". */
+    public static final String GENERALS_SLAIN = "generals_slain";
+    public static final String MACHT_SLAIN = "macht_slain";
+    public static final String DEMON_KING_SLAIN = "demon_king_slain";
 
     private QuestStats() {}
 }

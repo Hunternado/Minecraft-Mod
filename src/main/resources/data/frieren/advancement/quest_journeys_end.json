@@ -1,0 +1,28 @@
+{
+  "criteria": {
+    "m": {
+      "trigger": "frieren:milestone",
+      "conditions": {
+        "milestone": "quest_journeys_end"
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "frieren:seal_of_the_demon_king"
+    },
+    "title": {
+      "translate": "advancements.frieren.quest_journeys_end.title"
+    },
+    "description": {
+      "translate": "advancements.frieren.quest_journeys_end.description"
+    },
+    "frame": "challenge"
+  },
+  "requirements": [
+    [
+      "m"
+    ]
+  ],
+  "parent": "frieren:quest_the_golden_land"
+}

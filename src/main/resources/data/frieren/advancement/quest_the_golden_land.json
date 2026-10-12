@@ -1,0 +1,28 @@
+{
+  "criteria": {
+    "m": {
+      "trigger": "frieren:milestone",
+      "conditions": {
+        "milestone": "quest_the_golden_land"
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "frieren:seal_of_the_golden_land"
+    },
+    "title": {
+      "translate": "advancements.frieren.quest_the_golden_land.title"
+    },
+    "description": {
+      "translate": "advancements.frieren.quest_the_golden_land.description"
+    },
+    "frame": "challenge"
+  },
+  "requirements": [
+    [
+      "m"
+    ]
+  ],
+  "parent": "frieren:quest_aura_kill_yourself"
+}

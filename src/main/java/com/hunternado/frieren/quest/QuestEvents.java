@@ -2,7 +2,12 @@ package com.hunternado.frieren.quest;
 
 import com.hunternado.frieren.data.MagicData;
 import com.hunternado.frieren.entity.boss.AuraEntity;
+import com.hunternado.frieren.entity.boss.DemonKingEntity;
+import com.hunternado.frieren.entity.boss.DrahtEntity;
 import com.hunternado.frieren.entity.boss.FrierenBoss;
+import com.hunternado.frieren.entity.boss.LinieEntity;
+import com.hunternado.frieren.entity.boss.LugnerEntity;
+import com.hunternado.frieren.entity.boss.MachtEntity;
 import com.hunternado.frieren.entity.demon.DemonEntity;
 import com.hunternado.frieren.mana.ManaHelper;
 import net.minecraft.server.level.ServerPlayer;
@@ -36,6 +41,23 @@ public final class QuestEvents {
                 if (victim instanceof AuraEntity) {
                     data.incrementStat(QuestStats.AURA_SLAIN);
                     QuestManager.onStat(player, data, QuestStats.AURA_SLAIN);
+                }
+                String bossStat = victim instanceof DemonKingEntity ? QuestStats.DEMON_KING_SLAIN
+                    : victim instanceof MachtEntity ? QuestStats.MACHT_SLAIN : null;
+                if (bossStat != null) {
+                    data.incrementStat(bossStat);
+                    QuestManager.onStat(player, data, bossStat);
+                }
+                String general = victim instanceof LinieEntity ? "linie_slain"
+                    : victim instanceof DrahtEntity ? "draht_slain"
+                    : victim instanceof LugnerEntity ? "lugner_slain" : null;
+                if (general != null) {
+                    // The quest names all three, so only each general's first defeat counts toward it.
+                    if (data.stat(general) == 0) {
+                        data.incrementStat(QuestStats.GENERALS_SLAIN);
+                        QuestManager.onStat(player, data, QuestStats.GENERALS_SLAIN);
+                    }
+                    data.incrementStat(general);
                 }
                 if (victim instanceof DemonEntity) {
                     data.incrementStat(QuestStats.DEMONS_SLAIN);
