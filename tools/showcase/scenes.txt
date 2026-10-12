@@ -1,0 +1,26 @@
+# In-game showcase script, run by client/dev/ShowcaseDirector in CI (commit message tag: [showcase]).
+# /command runs on the integrated server; @wait <ticks>, @hud, @shot <name>, @quit are director directives.
+# Yaw 0 looks south (+z); entities with Rotation [180f,0f] face the camera.
+/gamemode spectator @a
+/time set 6000
+/weather clear
+/tp @a 9 122.5 -7 0 12
+@wait 80
+/fill -6 119 -6 26 119 14 minecraft:grass_block
+/fill -6 120 -6 26 128 14 minecraft:air
+/summon frieren:frieren 0 120 4 {NoAI:1b,Rotation:[180f,0f]}
+/summon frieren:fern 2 120 4 {NoAI:1b,Rotation:[180f,0f]}
+/summon frieren:stark 4 120 4 {NoAI:1b,Rotation:[180f,0f]}
+/summon frieren:serie 6 120 4 {NoAI:1b,Rotation:[180f,0f]}
+/summon frieren:aura 9 120 4 {NoAI:1b,Rotation:[180f,0f]}
+/summon frieren:qual 11 120 4 {NoAI:1b,Rotation:[180f,0f]}
+/summon frieren:demon_soldier 13 120 4 {NoAI:1b,Rotation:[180f,0f]}
+/summon frieren:examiner 15 120 4 {NoAI:1b,Rotation:[180f,0f]}
+/summon frieren:mimic 17 120 4 {NoAI:1b,Rotation:[180f,0f]}
+@hud
+@wait 100
+@shot lineup_wide
+/tp @a 3 121.6 0.5 0 8
+@wait 60
+@shot lineup_close
+@quit

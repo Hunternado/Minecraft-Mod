@@ -2,6 +2,7 @@ package com.hunternado.frieren.client;
 
 import com.hunternado.frieren.FrierenIds;
 import com.hunternado.frieren.FrierenMod;
+import com.hunternado.frieren.client.dev.ShowcaseDirector;
 import com.hunternado.frieren.client.gui.ManaHudLayer;
 import com.hunternado.frieren.client.render.FrierenHumanoidModel;
 import com.hunternado.frieren.client.render.MimicModel;
@@ -55,6 +56,7 @@ public final class ClientSetup {
     public static void onClientTick(TickEvent.ClientTickEvent.Post event) {
         KeyBindings.tick();
         ClientPacketHandlers.tickSenseMarks();
+        ShowcaseDirector.tick();
     }
 
     @SubscribeEvent

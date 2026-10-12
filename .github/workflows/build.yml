@@ -62,6 +62,29 @@ jobs:
         shell: bash
         run: tools/ci_log_report.sh gametest.log
 
+      # Commit messages containing [showcase] run tools/showcase/scenes.txt in a real client (copying the world the
+      # game-test server just created) and publish the screenshots to the ci-artifacts branch (screenshots/).
+      - name: In-game showcase
+        if: contains(github.event.head_commit.message, '[showcase]')
+        shell: bash
+        env:
+          LIBGL_ALWAYS_SOFTWARE: '1'
+          FRIEREN_SHOWCASE: showcase/scenes.txt
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq xvfb libgl1-mesa-dri mesa-utils > /dev/null
+          rm -rf run/saves/showcase && mkdir -p run/saves run/showcase
+          cp -r run/gametestserver/gametestworld run/saves/showcase && rm -f run/saves/showcase/session.lock
+          cp tools/showcase/scenes.txt run/showcase/scenes.txt
+          set +e
+          xvfb-run -a -s "-screen 0 1280x720x24" timeout 900 ./gradlew runClient --no-daemon --console=plain > showcase.log 2>&1
+          echo "showcase exit code: $?"
+          grep -E '\[showcase\]' showcase.log | head -60
+          tools/ci_log_report.sh showcase.log
+          mkdir -p shots && cp run/screenshots/*.png shots/ 2>/dev/null
+          ls -la shots
+          if ls shots/*.png > /dev/null 2>&1; then tools/ci_publish.sh shots screenshots; fi
+
       # Boots the client under a virtual display until the title screen, then stops it. Catches client mod loading,
       # model, texture, blockstate and renderer problems. A timeout stop is the expected outcome; a crash fails.
       - name: Client smoke test
