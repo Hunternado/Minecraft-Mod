@@ -29,6 +29,7 @@ import com.hunternado.frieren.entity.npc.PriestEntity;
 import com.hunternado.frieren.entity.npc.SerieEntity;
 import com.hunternado.frieren.entity.npc.WanderingMageEntity;
 import com.hunternado.frieren.entity.statue.HeroStatueEntity;
+import com.hunternado.frieren.entity.statue.HimmelEchoEntity;
 import com.hunternado.frieren.entity.trial.ExamConstructEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -80,6 +81,10 @@ public final class ModEntities {
     // ---- Monuments ------------------------------------------------------------------------------
     public static final RegistryObject<EntityType<HeroStatueEntity>> HERO_STATUE = register("hero_statue",
         EntityType.Builder.of(HeroStatueEntity::new, MobCategory.MISC), b -> b.sized(1.4F, 5.2F).fireImmune().clientTrackingRange(12));
+
+    public static final RegistryObject<EntityType<HimmelEchoEntity>> HIMMEL_ECHO = register("himmel_echo",
+        EntityType.Builder.of(HimmelEchoEntity::new, MobCategory.MISC), b -> b.sized(0.6F, 1.8F).noSave().noSummon().fireImmune()
+            .clientTrackingRange(10));
 
     // ---- Exam trials ---------------------------------------------------------------------------
     public static final RegistryObject<EntityType<ExamConstructEntity>> EXAM_CONSTRUCT = register("exam_construct",
@@ -148,6 +153,7 @@ public final class ModEntities {
         event.put(LUGNER.get(), LugnerEntity.createAttributes().build());
         event.put(EXAM_CONSTRUCT.get(), ExamConstructEntity.createAttributes().build());
         event.put(HERO_STATUE.get(), HeroStatueEntity.createAttributes().build());
+        event.put(HIMMEL_ECHO.get(), HimmelEchoEntity.createAttributes().build());
         event.put(MIMIC.get(), MimicEntity.createAttributes().build());
         event.put(STILLE.get(), StilleEntity.createAttributes().build());
         event.put(WANDERING_MAGE.get(), WanderingMageEntity.createAttributes().build());

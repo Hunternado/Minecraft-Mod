@@ -98,6 +98,7 @@ ENTITIES = {
     "lugner": "Lügner the Liar",
     "exam_construct": "Exam Construct",
     "hero_statue": "Statue of Himmel the Hero",
+    "himmel_echo": "Himmel",
     "mirror_replica": "Mirror Replica",
     "mimic": "Mimic",
     "stille": "Stille",
@@ -343,6 +344,10 @@ def messages():
     m("statue_stage.3", "It gleams. Himmel would have loved how handsome it looks.")
     m("statue_polished", "Himmel's statue gleams like the day it was cast. Somewhere, he is probably smiling.")
     m("statue_already_clean", "The statue is already spotless.")
+    m("himmel_echo.0", "Himmel: \"Thanks for keeping me handsome. I wanted to be remembered... mostly by one particular elf.\"")
+    m("himmel_echo.1", "Himmel: \"Even a long journey goes by quickly with good friends. Don't walk it alone.\"")
+    m("himmel_echo.2", "Himmel: \"You came all this way just to polish a statue? I'd have done the same.\"")
+    m("himmel_echo.3", "Himmel: \"Don't forget to smile once in a while. It suits you.\"")
     m("construct_magic_only", "Only magic counts in the practical exam.")
     m("mimics_none", "No mimics nearby.")
     m("missing_definition", "Unknown spell %s. The data pack that added it is missing.")

@@ -261,7 +261,7 @@ def gen_loot():
     entity("exam_construct", [pool([item(f"{NS}:mana_crystal", 1), empty(1)])])
     # NPCs and constructs drop nothing.
     for name in ("wandering_mage", "examiner", "priest", "frieren", "fern", "stark", "serie", "stille", "mana_decoy",
-                 "hero_statue"):
+                 "hero_statue", "himmel_echo"):
         entity(name, [])
 
     # ---- Chests ----

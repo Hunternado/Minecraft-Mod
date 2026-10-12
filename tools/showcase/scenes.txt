@@ -185,6 +185,16 @@
 /tp @a 8 125.2 20.5 180 -8
 @wait 30
 @shot statue_close
+# Polish the plaza statue three times with the spell to remove rust: it gleams, and Himmel's echo appears.
+/tp @a 8.5 120 21.5 180 -22
+@wait 10
+/frieren cast @p frieren:rust_removal
+@wait 6
+/frieren cast @p frieren:rust_removal
+@wait 6
+/frieren cast @p frieren:rust_removal
+@wait 30
+@shot statue_polished_echo
 /summon frieren:hero_statue 20 120 24 {Stage:0,Rotation:[0f,0f]}
 /summon frieren:hero_statue 24 120 24 {Stage:1,Rotation:[0f,0f]}
 /summon frieren:hero_statue 28 120 24 {Stage:2,Rotation:[0f,0f]}
