@@ -27,7 +27,7 @@ public final class ModRenderers {
         character(event, ModEntities.AURA_THRALL.get(), CharacterKind.AURA_THRALL, 0.55F);
         character(event, ModEntities.AURA.get(), CharacterKind.AURA, 0.6F);
         character(event, ModEntities.QUAL.get(), CharacterKind.QUAL, 0.6F);
-        character(event, ModEntities.SPIEGEL.get(), CharacterKind.MIRROR_REPLICA, 0.7F);
+        character(event, ModEntities.SPIEGEL.get(), CharacterKind.SPIEGEL, 0.6F);
         character(event, ModEntities.MIRROR_REPLICA.get(), CharacterKind.MIRROR_REPLICA, 0.5F);
         character(event, ModEntities.MIRROR_FRIEREN.get(), CharacterKind.MIRROR_FRIEREN, 0.5F);
         character(event, ModEntities.DEMON_KING.get(), CharacterKind.DEMON_KING, 0.6F);

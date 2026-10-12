@@ -1114,6 +1114,68 @@ def mirror_replica():
     return rig
 
 
+def spiegel():
+    """
+    Spiegel, the mirror of the labyrinth: a pale being of silver and glass shards in a long robe. Its head is a blank
+    oval mirror in a silver frame (corners cut away), crowned by a small silver crest; a mirror is set into its chest.
+    """
+    silver = hexc("#D9DEE8")
+    silver_dark = hexc("#9AA3B5")
+    glass = hexc("#CFEAF4")
+    robe = hexc("#E4EEF4")
+    rig = Rig("spiegel", render_scale=1.15)
+
+    def mirror_face(cv, r, frame=2, oval=True):
+        x0, y0, w, h = r
+        for yy in range(h):
+            for xx in range(w):
+                # elliptical mask: pixels outside the oval are cleared (character skins render as cutout)
+                nx, ny = (xx + 0.5 - w / 2) / (w / 2), (yy + 0.5 - h / 2) / (h / 2)
+                d = nx * nx + ny * ny
+                if oval and d > 1.0:
+                    cv.a[y0 + yy, x0 + xx] = (0, 0, 0, 0)
+                elif oval and d > 0.62 or not oval and min(xx, yy, w - 1 - xx, h - 1 - yy) < frame:
+                    cv.px(x0 + xx, y0 + yy, silver if (xx + yy) % 5 else silver_dark)
+                else:
+                    t = (xx + yy) / (w + h)
+                    cv.px(x0 + xx, y0 + yy, mix(glass, (250, 254, 255, 255), max(0.0, 0.7 - abs(t - 0.4) * 3)))
+
+    def head(cv, f):
+        for name, r in f.items():
+            fill(cv, r, silver, noise=0.04, seed=600)
+        mirror_face(cv, f["front"])
+        mirror_face(cv, f["back"])
+
+    def shards(seed, base):
+        def painter(cv, f):
+            for i, (name, r) in enumerate(f.items()):
+                fill(cv, r, base, noise=0.05, seed=seed + i, gradient=0.12)
+                x0, y0, w, h = r
+                for k in range(max(1, w // 4)):
+                    sx = (seed * 3 + k * 7 + i * 5) % max(1, w)
+                    for yy in range(0, h, 1):
+                        xx = sx + (yy // 3) % 2
+                        if 0 <= xx < w and (yy + k) % 6 < 4:
+                            cv.px(x0 + xx, y0 + yy, shade(base, 0.85))
+        return painter
+
+    def body(cv, f):
+        shards(610, robe)(cv, f)
+        r = f["front"]
+        mirror_face(cv, sub(r, 3, 3, r[2] - 6, r[3] - 8), oval=False)
+
+    painters = {"head": head, "body": body, "right_arm": shards(620, robe), "left_arm": shards(630, robe),
+                "right_leg": shards(640, silver_dark), "left_leg": shards(650, silver_dark)}
+    humanoid(rig, painters, slim=True, legs=13, arm_len=13)
+    add_skirt(rig, shards(660, robe), length=12, width=9, depth=5)
+    # A small silver crest on the head.
+    rig.pose("crown", offset=(0, -8, 0))
+    rig.box("crown", -1, -3, -0.5, 2, 3, 1, p_metal(silver))
+    rig.box("crown", -3, -2, -0.5, 1, 2, 1, p_metal(silver))
+    rig.box("crown", 2, -2, -0.5, 1, 2, 1, p_metal(silver))
+    return rig
+
+
 def mana_decoy():
     glow = hexc("#7FB8FF")
     rig = Rig("mana_decoy", render_scale=1.0)
@@ -1196,6 +1258,7 @@ ROSTER = {
     "demon_king": demon_king,
     "mirror_frieren": mirror_frieren,
     "mirror_replica": mirror_replica,
+    "spiegel": spiegel,
     "mana_decoy": mana_decoy,
     "hero_statue": hero_statue,
 }
