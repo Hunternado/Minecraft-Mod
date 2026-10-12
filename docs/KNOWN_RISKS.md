@@ -16,6 +16,7 @@ playing together can judge: feel, balance and long sessions.
 | In-game behaviour driven by `tools/showcase/scenes.txt` (commit tag `[showcase]`), screenshots published to the `ci-artifacts` branch | CI `In-game showcase` | see below |
 | Resources ↔ code (models, textures, loot, tags, structures, spells, sounds, lang keys) | `tools/validate_resources.py` | 0 problems |
 | Calls and constructors between mod classes match a declaration | `tools/check_calls.py` | 0 problems |
+| No local redeclared inside its own scope (javac only reports this once types resolve) | `tools/javac/DuplicateLocals.java` | 0 problems |
 | Exact signatures of every 26.2 API used | `javap` dumps of the real classes (CI `[api]`, `ci-artifacts/api/`) | looked up before use |
 
 What the showcase has confirmed in a running client (with screenshots):
@@ -57,3 +58,7 @@ What the showcase has confirmed in a running client (with screenshots):
 | Beam texture opaque only in its middle eighth | in-game screenshot | Zoltraak looked like a thread |
 | A caster's magic circle snapping along on teleport | showcase screenshot | circles dragged through ender pearls and blinks |
 | Structure searches (`findNearestMapStructure`) for exams and Seeking Magic | design review | could fail or stall far from structures; replaced by local trials and a loaded-chunk scan |
+| Aura raising thralls on a timer with nobody to fight (a 1.x bug) | showcase screenshot | an idle Aura built up an army before players arrived |
+| Himmel's echo placed relative to the statue, inside a wide plinth | showcase screenshot | the echo stood waist-deep in the steps |
+| Polished-copper palette topping out at a skin tone | showcase screenshot | the gleaming statue read as a shirtless Himmel |
+| "Defeat Linie, Draht and Lügner" counting any three general kills | code review | killing Linie three times passed the quest |

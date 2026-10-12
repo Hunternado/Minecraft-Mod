@@ -135,7 +135,7 @@ overridable (`worldgen/structure_set/`, `tags/worldgen/biome/has_structure/`).
   * `gen_structures.py`, `gen_data.py`, `gen_lang.py` and `gen_assets.py` cover the rest.
   * `preview_characters.py` renders turnaround sheets without the game.
   * `showcase/scenes.txt` is the in-game screenshot script CI runs.
-  * `precheck.sh` runs the local checks (syntax, imports, call arity, resources) before a push.
+  * `precheck.sh` runs the local checks (syntax, duplicate locals, imports, call arity, resources) before a push.
 
 ## License
 

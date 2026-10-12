@@ -170,7 +170,9 @@ public class AuraEntity extends DemonEntity implements FrierenBoss, RangedSpellG
             return;
         }
 
-        if (--thrallCooldown <= 0) {
+        // Raising the dead only once she is actually fighting: an idle Aura must not build an army before you arrive.
+        LivingEntity foe = this.getTarget();
+        if (foe != null && foe.isAlive() && --thrallCooldown <= 0) {
             thrallCooldown = phase == Phase.GUILLOTINE ? 200 : 300;
             summonThralls(level, phase == Phase.COMMAND ? 2 : 1);
         }

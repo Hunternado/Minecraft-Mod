@@ -57,6 +57,7 @@ tools/                              Python generators for every resource file + 
 ├── validate_resources.py           Self-contained resource ↔ code consistency check
 ├── check_imports.py                Import audit against reference sources (no Minecraft jars needed)
 ├── javac_parse.sh                  Parses every Java file with JDK 25 (syntax gate without Minecraft jars)
+├── javac/DuplicateLocals.java      Flags locals redeclared in scope, which javac hides while types are unresolved
 └── ci_probe.sh · ci_log_report.sh  CI helpers: javap API probe, filtered run-log report
 
 .github/workflows/build.yml         CI: resource check, Gradle build (jar artifact), API probe, server + client boot

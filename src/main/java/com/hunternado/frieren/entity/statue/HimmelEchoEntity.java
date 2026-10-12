@@ -1,6 +1,7 @@
 package com.hunternado.frieren.entity.statue;
 
 import com.hunternado.frieren.spell.SpellFx;
+import com.hunternado.frieren.util.Ground;
 import com.hunternado.frieren.util.Messages;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -17,7 +18,7 @@ import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
 
 /**
- * A fleeting echo of Himmel that appears beside his statue the moment someone polishes it to a full shine: he looks
+ * A fleeting echo of Himmel that appears near his statue the moment someone polishes it to a full shine: he looks
  * at whoever did it, says a few words and fades away. Purely sentimental, untouchable, and never saved.
  */
 public class HimmelEchoEntity extends Mob {
@@ -36,17 +37,19 @@ public class HimmelEchoEntity extends Mob {
         return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 20.0D);
     }
 
-    /** Appears next to {@code statue}, facing {@code polisher}. */
+    /**
+     * Appears on open ground between {@code polisher} and the statue, just off their line of sight, facing them.
+     * Never inside the plinth: each candidate spot is checked for floor and headroom, nearest the polisher's height
+     * first.
+     */
     public static void appear(ServerLevel level, HeroStatueEntity statue, Player polisher, EntityType<HimmelEchoEntity> type) {
         HimmelEchoEntity echo = type.create(level, net.minecraft.world.entity.EntitySpawnReason.TRIGGERED);
         if (echo == null) {
             return;
         }
-        Vec3 toPlayer = polisher.position().subtract(statue.position()).multiply(1.0D, 0.0D, 1.0D);
-        Vec3 side = toPlayer.lengthSqr() > 1.0E-4D ? toPlayer.normalize() : new Vec3(0.0D, 0.0D, 1.0D);
-        Vec3 at = statue.position().add(side.scale(1.8D)).add(new Vec3(-side.z, 0.0D, side.x).scale(1.2D));
+        Vec3 at = spotNear(level, statue, polisher);
         float yaw = (float) (Math.atan2(polisher.getZ() - at.z, polisher.getX() - at.x) * (180.0D / Math.PI)) - 90.0F;
-        echo.snapTo(at.x, polisher.getY(), at.z, yaw, 0.0F);
+        echo.snapTo(at.x, at.y, at.z, yaw, 0.0F);
         echo.setYHeadRot(yaw);
         echo.setYBodyRot(yaw);
         level.addFreshEntity(echo);
@@ -54,6 +57,31 @@ public class HimmelEchoEntity extends Mob {
         int line = level.getRandom().nextInt(LINES);
         Messages.nearby(level, at, 16.0D, Component.translatable("message.frieren.himmel_echo." + line)
             .withStyle(ChatFormatting.ITALIC, ChatFormatting.AQUA));
+    }
+
+    private static Vec3 spotNear(ServerLevel level, HeroStatueEntity statue, Player polisher) {
+        Vec3 toStatue = statue.position().subtract(polisher.position()).multiply(1.0D, 0.0D, 1.0D);
+        Vec3 forward = toStatue.lengthSqr() > 1.0E-4D ? toStatue.normalize() : new Vec3(0.0D, 0.0D, -1.0D);
+        Vec3 side = new Vec3(-forward.z, 0.0D, forward.x);
+        double[][] offsets = {{2.0D, 1.2D}, {2.0D, -1.2D}, {1.0D, 1.6D}, {1.0D, -1.6D}, {0.0D, 1.6D}, {0.0D, -1.6D}};
+        Vec3 fallback = null;
+        for (double[] offset : offsets) {
+            Vec3 candidate = polisher.position().add(forward.scale(offset[0])).add(side.scale(offset[1]));
+            if (candidate.multiply(1.0D, 0.0D, 1.0D).distanceToSqr(statue.position().multiply(1.0D, 0.0D, 1.0D)) < 2.25D) {
+                continue; // too close to stand beside the statue rather than in it
+            }
+            Vec3 ground = Ground.standable(level, candidate);
+            if (ground == null) {
+                continue;
+            }
+            if (Math.abs(ground.y - polisher.getY()) <= 1.0D) {
+                return ground;
+            }
+            if (fallback == null) {
+                fallback = ground;
+            }
+        }
+        return fallback != null ? fallback : polisher.position().add(side.scale(1.2D));
     }
 
     @Override

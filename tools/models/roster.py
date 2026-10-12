@@ -1197,15 +1197,20 @@ COPPER_STAGES = {
     # name: (shadow, mid, highlight) of the metal; the skin's luminance picks between them
     "hero_statue": (hexc("#2E6B5E"), hexc("#4FA58B"), hexc("#8FD8C0")),            # oxidized (verdigris)
     "hero_statue_weathered": (hexc("#3F5E4A"), hexc("#6B9A7A"), hexc("#B5C9A0")),
-    "hero_statue_exposed": (hexc("#6B4535"), hexc("#A77B5B"), hexc("#D9B08A")),
-    "hero_statue_polished": (hexc("#7A3A22"), hexc("#D9773F"), hexc("#FFD1A0")),   # freshly polished copper
+    "hero_statue_exposed": (hexc("#5A3B30"), hexc("#A0705A"), hexc("#CFA28A")),
+    # freshly polished: saturated like a vanilla copper block, so a white shirt reads as bright metal, not skin
+    "hero_statue_polished": (hexc("#6B2C17"), hexc("#C0592F"), hexc("#F29265")),
 }
+VERDIGRIS = hexc("#5FA88E")
+GLINT = hexc("#FFD9BE")
 
 
 def copper_cast(stage):
     """Post-paint turning the painted skin into a metal casting: luminance mapped onto the stage's palette."""
     lo, mid, hi = COPPER_STAGES[stage]
     oxidized = stage == "hero_statue"
+    exposed = stage == "hero_statue_exposed"
+    polished = stage == "hero_statue_polished"
 
     def paint(cv):
         import numpy as np
@@ -1223,6 +1228,16 @@ def copper_cast(stage):
             rng = np.random.default_rng(7)
             streaks = rng.random(out.shape[:2]) < 0.06
             out[streaks] = out[streaks] * 0.75 + np.array(hi_c) * 0.25
+        if exposed:
+            # the first verdigris specks, like vanilla exposed copper
+            rng = np.random.default_rng(11)
+            specks = rng.random(out.shape[:2]) < 0.07
+            out[specks] = out[specks] * 0.45 + np.array(VERDIGRIS[:3], dtype=float) * 0.55
+        if polished:
+            # sparse specular glints on the lit surfaces, which is what makes metal read as metal at a distance
+            rng = np.random.default_rng(5)
+            glints = (rng.random(out.shape[:2]) < 0.025) & (lum > 0.45)
+            out[glints] = np.array(GLINT[:3], dtype=float)
         a[..., :3] = np.clip(out, 0, 255).astype("uint8")
     return paint
 

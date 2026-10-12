@@ -14,6 +14,7 @@ import com.hunternado.frieren.item.StilleCageItem;
 import com.hunternado.frieren.registry.ModEntities;
 import com.hunternado.frieren.registry.ModItems;
 import com.hunternado.frieren.spell.SpellFx;
+import com.hunternado.frieren.util.Ground;
 import com.hunternado.frieren.util.Messages;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -483,7 +484,7 @@ public final class TrialManager {
         for (int attempt = 0; attempt < 16; attempt++) {
             double angle = random.nextDouble() * Math.PI * 2.0D;
             double radius = minRadius + random.nextDouble() * (maxRadius - minRadius);
-            Vec3 found = standable(level, center.add(Math.cos(angle) * radius, 0.0D, Math.sin(angle) * radius));
+            Vec3 found = Ground.standable(level, center.add(Math.cos(angle) * radius, 0.0D, Math.sin(angle) * radius));
             if (found != null) {
                 return found;
             }
@@ -492,27 +493,8 @@ public final class TrialManager {
     }
 
     private static Vec3 groundAt(ServerLevel level, Vec3 at) {
-        Vec3 found = standable(level, at);
+        Vec3 found = Ground.standable(level, at);
         return found != null ? found : at;
-    }
-
-    /** Scans a few blocks up and down for solid ground with two free blocks above. */
-    private static @Nullable Vec3 standable(ServerLevel level, Vec3 at) {
-        BlockPos base = BlockPos.containing(at);
-        for (int dy = 4; dy >= -6; dy--) {
-            BlockPos feet = base.offset(0, dy, 0);
-            if (!level.getChunkSource().hasChunk(feet.getX() >> 4, feet.getZ() >> 4)) {
-                return null;
-            }
-            BlockPos below = feet.below();
-            if (!level.getBlockState(below).getCollisionShape(level, below).isEmpty()
-                    && level.getBlockState(feet).getCollisionShape(level, feet).isEmpty()
-                    && level.getBlockState(feet.above()).getCollisionShape(level, feet.above()).isEmpty()
-                    && level.getFluidState(feet).isEmpty()) {
-                return new Vec3(feet.getX() + 0.5D, feet.getY(), feet.getZ() + 0.5D);
-            }
-        }
-        return null;
     }
 
     // ---------------------------------------------------------------------------------------
