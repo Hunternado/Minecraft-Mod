@@ -148,6 +148,112 @@ def arm_skin_painter(skin, sleeve=None, hand_rows=6, seed=41):
 
 
 # ---------------------------------------------------------------------------------------------
+# Rig helpers
+# ---------------------------------------------------------------------------------------------
+def add_long_hair(rig, hair_c, length=14, width=8, seed=70, painter=None):
+    """Flat panel of long hair hanging from the back of the head; sways with movement in Java."""
+    rig.pose("hair_back", offset=(0, -6.5, 4.0), rotation=(0.08, 0, 0))
+    rig.box("hair_back", -width / 2, 0, 0, width, length, 1, painter or p_hair_all(hair_c, seed=seed))
+
+
+def add_braid(rig, part, hair_c, offset, length=12, rotation=(0.1, 0, 0), tie=None, seed=80):
+    rig.pose(part, offset=offset, rotation=rotation)
+    if tie:
+        rig.box(part, -1, -1, -1, 2, 1, 2, p_fill(tie, noise=0.02))
+    for i in range(0, length, 3):
+        w = 2 if (i // 3) % 2 == 0 else 3
+        rig.box(part, -w / 2, i, -w / 2 + 0.0, w, 3, 2 if w == 2 else 2, p_hair_all(shade(hair_c, 1.0 - 0.03 * (i // 3)), seed=seed + i))
+
+
+def add_skirt(rig, painter, length=6, width=9, depth=5, top=10.5, lower=None):
+    """Robe/dress skirt hanging from the waist; an optional wider lower tier for long robes."""
+    rig.pose("skirt", offset=(0, top, 0))
+    rig.box("skirt", -width / 2, 0, -depth / 2, width, length, depth, painter)
+    if lower:
+        lw, ll, ld, lp = lower
+        rig.box("skirt", -lw / 2, length, -ld / 2, lw, ll, ld, lp)
+
+
+def add_cape(rig, painter, length=18, width=10):
+    rig.pose("cape", offset=(0, 0.2, 2.6), rotation=(0.08, 0, 0))
+    rig.box("cape", -width / 2, 0, 0, width, length, 1, painter)
+
+
+def add_horns(rig, color, tip=None, size="medium"):
+    """Demon horns curving outward and back from the top sides of the head."""
+    tip = tip or shade(color, 1.35)
+    dims = {"small": (1, 2, 2), "medium": (2, 3, 3), "large": (2, 4, 4)}[size]
+    base, mid, end = dims
+    for part, sx in (("horn_right", -1), ("horn_left", 1)):
+        rig.pose(part, offset=(3.0 * sx, -7.6, -0.5), rotation=(-0.45, 0.0, 0.55 * sx))
+        rig.box(part, -1, -mid, -1, 2, mid, 2, p_fill(color, noise=0.05, gradient=-0.2))
+        rig.box(part, -0.5 + 0.5 * sx, -mid - end, -0.5, 1 + (1 if base > 1 else 0), end, 2, p_fill(shade(color, 1.12), noise=0.05))
+        rig.box(part, 0.0 + 0.5 * sx, -mid - end - 2, 0.0, 1, 2, 1, p_fill(tip, noise=0.03))
+
+
+def robe_body(base, trim_c, collar=None, sash=None, emblem=None, seed=90, collar_rows=3):
+    """Body painter for robes/dresses: base cloth, trims on the edges, optional collar, sash and chest emblem."""
+    def painter(cv, f):
+        for i, (name, r) in enumerate(f.items()):
+            fill(cv, r, base, noise=0.03, seed=seed + i, gradient=0.1, vertical_streaks=0.04)
+            if name in ("front", "back", "left", "right"):
+                hline(cv, r, r[3] - 1, trim_c)
+        r = f["front"]
+        vline(cv, r, r[2] // 2 - 1, trim_c, y_from=collar_rows)
+        if collar:
+            for i in range(collar_rows):
+                hline(cv, r, i, collar, x_from=4 - i, x_to=r[2] - 4 + i)
+        if sash:
+            for name in ("front", "back", "left", "right"):
+                fill(cv, sub(f[name], 0, 17, f[name][2], 3), sash, noise=0.03)
+        if emblem:
+            emblem_diamond(cv, r[0] + r[2] // 2 + 3, r[1] + 7, emblem, radius=2)
+    return painter
+
+
+def skirt_painter(base, trim_c, pleats=True, slit=False):
+    def painter(cv, f):
+        for name, r in f.items():
+            if name == "bottom":
+                continue
+            fill(cv, r, base, noise=0.03, gradient=0.14)
+            if name == "top":
+                continue
+            if pleats:
+                for col in range(2, r[2], 4):
+                    vline(cv, r, col, shade(base, 0.85), y_from=1)
+            hline(cv, r, r[3] - 2, trim_c)
+            hline(cv, r, r[3] - 1, shade(trim_c, 0.8))
+            if slit and name == "front":
+                vline(cv, r, r[2] // 2, shade(base, 0.55), y_from=r[3] // 3)
+    return painter
+
+
+def armor_painter(plate, cloth, trim_c, seed=100, belt=None):
+    def painter(cv, f):
+        for i, (name, r) in enumerate(f.items()):
+            fill(cv, r, plate, noise=0.05, seed=seed + i, gradient=0.12)
+            if name in ("front", "back"):
+                for row in range(6, r[3], 7):
+                    hline(cv, r, row, shade(plate, 0.7))
+                border(cv, r, trim_c, top=False, bottom=False)
+                fill(cv, sub(r, 0, r[3] - 5, r[2], 5), cloth, noise=0.04)
+            if belt and name in ("front", "back", "left", "right"):
+                fill(cv, sub(r, 0, 16, r[2], 2), belt, noise=0.03)
+    return painter
+
+
+def p_blade(edge, core, seed=110):
+    def painter(cv, f):
+        for i, (name, r) in enumerate(f.items()):
+            fill(cv, r, core, noise=0.03, seed=seed + i)
+            if r[2] > 2:
+                vline(cv, r, 0, edge)
+                vline(cv, r, r[2] - 1, shade(edge, 0.85))
+    return painter
+
+
+# ---------------------------------------------------------------------------------------------
 # Frieren
 # ---------------------------------------------------------------------------------------------
 def frieren():
@@ -273,6 +379,338 @@ def frieren():
     return rig
 
 
+# ---------------------------------------------------------------------------------------------
+# Fern
+# ---------------------------------------------------------------------------------------------
+def fern():
+    skin = hexc("#F8E6DA")
+    hair_c = hexc("#5C3A7C")
+    eye = hexc("#9A63C8")
+    black = hexc("#1D1B24")
+    white = hexc("#F2F0F4")
+    rig = Rig("fern", render_scale=0.95)
+    painters = {
+        "head": head_painter(skin, hair_c, eye, fringe=6, part=None, locks=(2, 12),
+                             face_kw=dict(eye_y=7, gap=4, mouth="small", brow=shade(hair_c, 1.1),
+                                          lash=hexc("#2A1C38"))),
+        "hat": hat_hair_painter(hair_c, fringe=4, side_rows=12, back_rows=16),
+        "body": robe_body(black, shade(black, 1.6), collar=white, collar_rows=3),
+        "right_arm": arm_skin_painter(skin, sleeve=black), "left_arm": arm_skin_painter(skin, sleeve=black),
+        "right_sleeve": sleeve_painter(black, white), "left_sleeve": sleeve_painter(black, white),
+        "right_leg": legs_painter(black, hexc("#2B2420"), boot_top=12),
+        "left_leg": legs_painter(black, hexc("#2B2420"), boot_top=12),
+    }
+    humanoid(rig, painters, slim=True)
+    add_long_hair(rig, hair_c, length=16, width=8)
+    add_skirt(rig, skirt_painter(black, shade(black, 1.7), pleats=True), length=7, width=9, depth=5,
+              lower=(10, 6, 6, skirt_painter(black, shade(black, 1.7))))
+    hand_prop_pivot(rig, slim=True)
+    rig.box("prop", -0.5, -17, -0.5, 1, 25, 1, p_wood(hexc("#7B5536")))
+    rig.box("prop", -1, -19, -1, 2, 2, 2, p_metal(hexc("#C9CCD6")))
+    rig.box("prop", -0.5, -20.5, -0.5, 1, 1, 1, p_gem(hexc("#BFE3FF")))
+    return rig
+
+
+# ---------------------------------------------------------------------------------------------
+# Stark
+# ---------------------------------------------------------------------------------------------
+def stark():
+    skin = hexc("#F2D7C2")
+    hair_c = hexc("#C2382C")
+    eye = hexc("#A0402F")
+    navy = hexc("#2A3048")
+    shirt = hexc("#EDEBE6")
+    brown = hexc("#6A4630")
+    rig = Rig("stark", render_scale=1.0)
+
+    def body(cv, f):
+        for i, (name, r) in enumerate(f.items()):
+            fill(cv, r, navy, noise=0.035, seed=120 + i, gradient=0.1)
+        r = f["front"]
+        fill(cv, sub(r, 5, 0, 6, 16), shirt, noise=0.02)
+        vline(cv, r, 4, shade(navy, 1.4), y_to=17)
+        vline(cv, r, 11, shade(navy, 1.4), y_to=17)
+        for name in ("front", "back", "left", "right"):
+            fill(cv, sub(f[name], 0, 16, f[name][2], 2), brown, noise=0.03)
+        cv.rect(r[0] + 7, r[1] + 16, 2, 2, hexc("#C9A43A"))
+
+    def spikes(cv, f):
+        for i, r in enumerate(f.values()):
+            hair(cv, r, hair_c, seed=130 + i, highlight_row=0)
+
+    painters = {
+        "head": head_painter(skin, hair_c, eye, fringe=4, part=None, locks=(1, 6),
+                             face_kw=dict(eye_y=7, gap=4, mouth="small", brow_angle=-1, brow=shade(hair_c, 0.7),
+                                          lash=hexc("#3A1A14"))),
+        "hat": hat_hair_painter(hair_c, fringe=3, side_rows=6, back_rows=9),
+        "body": body,
+        "right_arm": arm_skin_painter(skin, sleeve=navy), "left_arm": arm_skin_painter(skin, sleeve=navy),
+        "right_sleeve": sleeve_painter(navy, brown), "left_sleeve": sleeve_painter(navy, brown),
+        "right_leg": legs_painter(hexc("#4A4A55"), brown, boot_top=13, cuff=shade(brown, 1.2)),
+        "left_leg": legs_painter(hexc("#4A4A55"), brown, boot_top=13, cuff=shade(brown, 1.2)),
+    }
+    humanoid(rig, painters, slim=False)
+    # spiky hair tufts
+    rig.pose("crown", offset=(0, -8, 0))
+    for x, z, h in ((-3, -2, 2), (0, -3, 3), (2, -1, 2), (-2, 1, 2), (1, 2, 3)):
+        rig.box("crown", x, -h, z, 2, h, 2, spikes)
+    # Stark's axe: long haft, broad blade and a back spike
+    hand_prop_pivot(rig, slim=False)
+    steel = hexc("#B9BEC8")
+    rig.box("prop", -0.5, -16, -0.5, 1, 26, 1, p_wood(hexc("#5C3E28")))
+    rig.box("prop", -5.5, -17, -0.5, 5, 7, 1, p_blade(shade(steel, 1.25), steel))
+    rig.box("prop", -6.5, -18, -0.5, 1, 9, 1, p_blade(shade(steel, 1.35), shade(steel, 1.15)))
+    rig.box("prop", 0.5, -15, -0.5, 2, 2, 1, p_metal(steel))
+    rig.box("prop", -1, -17.5, -1, 2, 2, 2, p_metal(shade(steel, 0.8)))
+    return rig
+
+
+# ---------------------------------------------------------------------------------------------
+# Serie
+# ---------------------------------------------------------------------------------------------
+def serie():
+    skin = hexc("#F7E6D8")
+    hair_c = hexc("#E9C86E")
+    eye = hexc("#D79A2B")
+    robe = hexc("#1E2236")
+    gold = hexc("#D8B04A")
+    rig = Rig("serie", render_scale=0.88)
+
+    def ear(cv, f):
+        for r in f.values():
+            fill(cv, r, skin, noise=0.02)
+
+    painters = {
+        "head": head_painter(skin, hair_c, eye, fringe=5, part=8, locks=(2, 11),
+                             face_kw=dict(sleepy=True, eye_y=7, gap=4, mouth="stern", brow_angle=1,
+                                          brow=shade(hair_c, 0.78), lash=hexc("#5A4320"))),
+        "hat": hat_hair_painter(hair_c, fringe=3, side_rows=11, back_rows=16),
+        "body": robe_body(robe, gold, collar=gold, emblem=gold, collar_rows=2),
+        "right_arm": arm_skin_painter(skin, sleeve=robe), "left_arm": arm_skin_painter(skin, sleeve=robe),
+        "right_sleeve": sleeve_painter(robe, gold, trim_c=gold), "left_sleeve": sleeve_painter(robe, gold, trim_c=gold),
+        "right_leg": legs_painter(robe, hexc("#2E2A24"), boot_top=14),
+        "left_leg": legs_painter(robe, hexc("#2E2A24"), boot_top=14),
+    }
+    humanoid(rig, painters, slim=True)
+    add_long_hair(rig, hair_c, length=15, width=8)
+    add_braid(rig, "tail_right", hair_c, offset=(0, -1, 4.5), length=15, rotation=(0.12, 0, 0), tie=gold)
+    for part, sx in (("ear_right", -1), ("ear_left", 1)):
+        rig.pose(part, offset=(4 * sx, -3.6, 0.6), rotation=(0, -0.5 * sx, -0.34 * sx))
+        rig.box(part, -2 if sx < 0 else 0, -1, -0.5, 2, 2, 1, ear)
+        rig.box(part, -4 if sx < 0 else 2, -1.5, -0.5, 2, 1, 1, ear)
+        rig.box(part, -5.5 if sx < 0 else 3.5, -2.2, -0.5, 2, 1, 1, ear)
+    # gold circlet
+    rig.pose("crown", offset=(0, -6.6, 0))
+    rig.box("crown", -4.5, -0.5, -4.5, 9, 1, 9, p_metal(gold), inflate=0.0)
+    add_skirt(rig, skirt_painter(robe, gold), length=7, width=9, depth=5,
+              lower=(10, 6, 6, skirt_painter(robe, gold)))
+    return rig
+
+
+# ---------------------------------------------------------------------------------------------
+# Himmel the Hero
+# ---------------------------------------------------------------------------------------------
+def himmel():
+    skin = hexc("#F5DCC8")
+    hair_c = hexc("#8FC3EA")
+    eye = hexc("#4D8FD1")
+    white = hexc("#F1F0EC")
+    blue = hexc("#2F5FA8")
+    gold = hexc("#D8B04A")
+    rig = Rig("himmel", render_scale=1.0)
+
+    def body(cv, f):
+        for i, (name, r) in enumerate(f.items()):
+            fill(cv, r, white, noise=0.025, seed=140 + i, gradient=0.08)
+        r = f["front"]
+        fill(cv, sub(r, 0, 0, r[2], 3), blue, noise=0.02)
+        vline(cv, r, 7, gold, y_from=3, y_to=18)
+        vline(cv, r, 8, shade(gold, 0.85), y_from=3, y_to=18)
+        for name in ("front", "back", "left", "right"):
+            fill(cv, sub(f[name], 0, 17, f[name][2], 2), hexc("#4A3426"), noise=0.03)
+        cv.rect(r[0] + 6, r[1] + 17, 4, 2, gold)
+
+    def cape(cv, f):
+        for name, r in f.items():
+            fill(cv, r, blue if name != "front" else hexc("#E9E6DF"), noise=0.03, gradient=0.15)
+        r = f["back"]
+        hline(cv, r, r[3] - 1, gold)
+        hline(cv, r, 0, gold)
+
+    painters = {
+        "head": head_painter(skin, hair_c, eye, fringe=5, part=10, locks=(2, 7),
+                             face_kw=dict(eye_y=7, gap=4, mouth="smile", brow=shade(hair_c, 0.7), lash=hexc("#1F3A5E"))),
+        "hat": hat_hair_painter(hair_c, fringe=3, side_rows=7, back_rows=10),
+        "body": body,
+        "right_arm": arm_skin_painter(skin, sleeve=white), "left_arm": arm_skin_painter(skin, sleeve=white),
+        "right_sleeve": sleeve_painter(white, blue, trim_c=gold), "left_sleeve": sleeve_painter(white, blue, trim_c=gold),
+        "right_leg": legs_painter(hexc("#2C3550"), hexc("#5B3E2B"), boot_top=11, cuff=gold),
+        "left_leg": legs_painter(hexc("#2C3550"), hexc("#5B3E2B"), boot_top=11, cuff=gold),
+    }
+    humanoid(rig, painters, slim=False)
+    add_cape(rig, cape, length=19, width=10)
+    hand_prop_pivot(rig, slim=False)
+    steel = hexc("#D9DEE6")
+    rig.box("prop", -0.5, 2, -0.5, 1, 4, 1, p_wood(hexc("#3D2A4A")))
+    rig.box("prop", -2.5, 1, -0.5, 5, 1, 1, p_metal(gold))
+    rig.box("prop", -1, -15, -0.5, 2, 16, 1, p_blade(shade(steel, 1.2), steel))
+    rig.box("prop", -0.5, 6, -0.5, 1, 1, 1, p_gem(hexc("#3C7BD6")))
+    return rig
+
+
+# ---------------------------------------------------------------------------------------------
+# Eisen (dwarf warrior)
+# ---------------------------------------------------------------------------------------------
+def eisen():
+    skin = hexc("#E9C9AE")
+    hair_c = hexc("#B8B8BE")
+    eye = hexc("#6A5A3A")
+    tunic = hexc("#7A3A2A")
+    leather = hexc("#4E3424")
+    rig = Rig("eisen", render_scale=0.95)
+
+    def beard(cv, f):
+        for i, r in enumerate(f.values()):
+            hair(cv, r, hair_c, seed=150 + i, highlight_row=1)
+
+    painters = {
+        "head": head_painter(skin, hair_c, eye, fringe=4, part=None, locks=(1, 5),
+                             face_kw=dict(eye_y=7, gap=4, mouth="stern", brow_angle=1, brow=shade(hair_c, 0.7))),
+        "hat": hat_hair_painter(hair_c, fringe=2, side_rows=7, back_rows=10),
+        "body": armor_painter(tunic, leather, hexc("#B48A3A"), belt=leather),
+        "right_arm": arm_skin_painter(skin, sleeve=tunic), "left_arm": arm_skin_painter(skin, sleeve=tunic),
+        "right_leg": legs_painter(leather, hexc("#3A2A1E"), boot_top=8),
+        "left_leg": legs_painter(leather, hexc("#3A2A1E"), boot_top=8),
+    }
+    humanoid(rig, painters, slim=False, legs=8, body_h=10, arm_len=10)
+    rig.pose("crown", offset=(0, -2, -4.2))
+    rig.box("crown", -3.5, 0, -1, 7, 6, 1, beard)
+    rig.box("crown", -2.5, 6, -1, 5, 3, 1, beard)
+    rig.box("crown", -4, -1.2, -1.3, 3, 1, 1, beard)
+    rig.box("crown", 1, -1.2, -1.3, 3, 1, 1, beard)
+    hand_prop_pivot(rig, slim=False, arm_len=10)
+    steel = hexc("#A9AEB8")
+    rig.box("prop", -0.5, -12, -0.5, 1, 18, 1, p_wood(hexc("#4A3020")))
+    rig.box("prop", -4.5, -13, -0.5, 4, 6, 1, p_blade(shade(steel, 1.25), steel))
+    rig.box("prop", 0.5, -13, -0.5, 4, 6, 1, p_blade(shade(steel, 1.25), steel))
+    return rig
+
+
+# ---------------------------------------------------------------------------------------------
+# Association examiner, wandering mage, priest
+# ---------------------------------------------------------------------------------------------
+def examiner():
+    skin = hexc("#EBCDB4")
+    hair_c = hexc("#9A9AA2")
+    eye = hexc("#4E6A86")
+    robe = hexc("#1F3A3A")
+    gold = hexc("#C9A43A")
+    rig = Rig("examiner", render_scale=1.0)
+
+    def hat(cv, f):
+        for i, r in enumerate(f.values()):
+            fill(cv, r, shade(robe, 0.8), noise=0.04, seed=160 + i, gradient=0.1)
+        hline(cv, f["front"], f["front"][3] - 1, gold)
+
+    def monocle(cv, r):
+        pass
+
+    painters = {
+        "head": head_painter(skin, hair_c, eye, fringe=3, part=6, locks=(1, 6),
+                             face_kw=dict(eye_y=7, gap=4, mouth="stern", brow=shade(hair_c, 0.6), lash=hexc("#2A2A30"))),
+        "hat": hat_hair_painter(hair_c, fringe=2, side_rows=8, back_rows=10, top=False),
+        "body": robe_body(robe, gold, collar=gold, emblem=gold, sash=shade(robe, 0.7), collar_rows=2),
+        "right_arm": arm_skin_painter(skin, sleeve=robe), "left_arm": arm_skin_painter(skin, sleeve=robe),
+        "right_sleeve": sleeve_painter(robe, gold), "left_sleeve": sleeve_painter(robe, gold),
+        "right_leg": legs_painter(robe, hexc("#2A2420"), boot_top=14),
+        "left_leg": legs_painter(robe, hexc("#2A2420"), boot_top=14),
+    }
+    humanoid(rig, painters, slim=False)
+    rig.pose("crown", offset=(0, -8, 0))
+    rig.box("crown", -5.5, -0.5, -5.5, 11, 1, 11, hat)
+    rig.box("crown", -3.5, -4.5, -3.5, 7, 4, 7, hat)
+    rig.box("crown", -2, -7.5, -2, 4, 3, 4, hat)
+    add_skirt(rig, skirt_painter(robe, gold, pleats=False), length=7, width=9, depth=5,
+              lower=(10, 6, 6, skirt_painter(robe, gold, pleats=False)))
+    return rig
+
+
+def wandering_mage():
+    skin = hexc("#E8C8AC")
+    hair_c = hexc("#5A3E2A")
+    eye = hexc("#4F7A3A")
+    cloak = hexc("#56603A")
+    rig = Rig("wandering_mage", render_scale=1.0)
+
+    def hood(cv, f):
+        for i, (name, r) in enumerate(f.items()):
+            if name == "front":
+                hline(cv, r, 0, cloak)
+                hline(cv, r, 1, cloak)
+                vline(cv, r, 0, cloak)
+                vline(cv, r, r[2] - 1, cloak)
+                continue
+            fill(cv, r, cloak, noise=0.05, seed=170 + i, gradient=0.12)
+
+    painters = {
+        "head": head_painter(skin, hair_c, eye, fringe=3, part=None, locks=(1, 4),
+                             face_kw=dict(eye_y=7, gap=4, mouth="smile")),
+        "hat": hood,
+        "body": robe_body(cloak, hexc("#A88B4A"), sash=hexc("#7A4A2A")),
+        "right_arm": arm_skin_painter(skin, sleeve=cloak), "left_arm": arm_skin_painter(skin, sleeve=cloak),
+        "right_leg": legs_painter(hexc("#4A3A2A"), hexc("#3A2A1E"), boot_top=12),
+        "left_leg": legs_painter(hexc("#4A3A2A"), hexc("#3A2A1E"), boot_top=12),
+    }
+    humanoid(rig, painters, slim=False)
+    add_skirt(rig, skirt_painter(cloak, hexc("#A88B4A"), pleats=False), length=8, width=9, depth=5)
+    hand_prop_pivot(rig, slim=False)
+    rig.box("prop", -0.5, -16, -0.5, 1, 24, 1, p_wood(hexc("#6B4A2E")))
+    rig.box("prop", -1, -18, -1, 2, 2, 2, p_gem(hexc("#5FCF6A")))
+    return rig
+
+
+def priest():
+    skin = hexc("#EFD3BE")
+    hair_c = hexc("#8A6A48")
+    eye = hexc("#5A7A9A")
+    white = hexc("#EEEEF0")
+    blue = hexc("#3456A0")
+    gold = hexc("#D2AE48")
+    rig = Rig("priest", render_scale=1.0)
+
+    def body(cv, f):
+        robe_body(white, gold)(cv, f)
+        r = f["front"]
+        # blue stole and the Goddess's sigil
+        fill(cv, sub(r, 3, 0, 3, 20), blue, noise=0.02)
+        fill(cv, sub(r, 10, 0, 3, 20), blue, noise=0.02)
+        vline(cv, r, 7, gold, y_from=5, y_to=11)
+        hline(cv, r, 7, gold, x_from=5, x_to=10)
+
+    painters = {
+        "head": head_painter(skin, hair_c, eye, fringe=4, part=9, locks=(1, 5),
+                             face_kw=dict(eye_y=7, gap=4, mouth="smile", brow=shade(hair_c, 0.7))),
+        "hat": hat_hair_painter(hair_c, fringe=2, side_rows=6, back_rows=9),
+        "body": body,
+        "right_arm": arm_skin_painter(skin, sleeve=white), "left_arm": arm_skin_painter(skin, sleeve=white),
+        "right_sleeve": sleeve_painter(white, blue), "left_sleeve": sleeve_painter(white, blue),
+        "right_leg": legs_painter(white, hexc("#3A3030"), boot_top=14),
+        "left_leg": legs_painter(white, hexc("#3A3030"), boot_top=14),
+    }
+    humanoid(rig, painters, slim=False)
+    add_skirt(rig, skirt_painter(white, gold, pleats=False), length=7, width=9, depth=5,
+              lower=(10, 6, 6, skirt_painter(white, blue, pleats=False)))
+    return rig
+
+
 ROSTER = {
     "frieren": frieren,
+    "fern": fern,
+    "stark": stark,
+    "serie": serie,
+    "himmel": himmel,
+    "eisen": eisen,
+    "examiner": examiner,
+    "wandering_mage": wandering_mage,
+    "priest": priest,
 }

@@ -84,8 +84,8 @@ public final class ShowcaseDirector {
                 return;
             }
             if (line.equals("@hud")) {
-                if (!minecraft.hud.isHidden()) {
-                    minecraft.hud.toggle();
+                if (!minecraft.gui.hud.isHidden()) {
+                    minecraft.gui.hud.toggle();
                 }
                 continue;
             }
