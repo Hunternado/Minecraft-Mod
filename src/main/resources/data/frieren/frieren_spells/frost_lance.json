@@ -1,0 +1,16 @@
+{
+  "behavior": "frieren:ice_shards",
+  "school": "offensive",
+  "rarity": "uncommon",
+  "mana_cost": 14,
+  "cooldown": 30,
+  "color": "#BFEFFF",
+  "params": {
+    "damage": 4.0,
+    "count": 3,
+    "spread": 7.0,
+    "speed": 1.4,
+    "slow_ticks": 60,
+    "range": 32.0
+  }
+}

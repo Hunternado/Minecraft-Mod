@@ -56,6 +56,7 @@ ITEMS = {
     "demonic_mana_core": "Demonic Mana Core",
     "guillotine_blade": "Guillotine Blade",
     "mana_potion": "Mana Potion",
+    "sweet_grapes": "Sweet Grapes",
     "heiter_flask": "Heiter's Flask",
     "mirror_lotus_ring": "Mirror Lotus Ring",
     "concealment_charm": "Concealment Charm",
@@ -108,6 +109,8 @@ EFFECTS = {
     "enthralled": "Enthralled",
     "gilded": "Gilded",
     "warded": "Warded",
+    "bound": "Bound",
+    "reflecting": "Reflecting",
 }
 
 
@@ -148,6 +151,22 @@ SPELLS = {
     "clothes_cleaning": ("Clothes Cleaning", "Mends the durability of your worn equipment. A housekeeping spell with surprising value."),
     "rust_removal": ("Rust Removal", "Strips oxidation from copper blocks in front of you. Statues everywhere thank you."),
     "seeking_magic": ("Seeking Magic", "Points toward your last death, or else the nearest unopened treasure chest (or something pretending to be one)."),
+    "frost_lance": ("Frost Lance", "Lawine-style ice magic: a fan of ice shards that chill and slow what they strike."),
+    "earth_spikes": ("Earth Spikes", "The ground erupts in a line before you, battering and launching everything on it."),
+    "water_whip": ("Water Whip", "A lash of water sweeps the area in front of you, knocking foes back and dousing flames."),
+    "zoltraak_full_power": ("Zoltraak: Full Power", "Ordinary offensive magic, poured into without restraint. A long wind-up, then a beam that pierces everything in its path."),
+    "mana_release": ("Mana Release", "Drop all restraint: half your remaining mana explodes outward. The more you have, the bigger the blast."),
+    "blood_blades": ("Lügner's Blood Blades", "Demon blood magic. A fan of crimson blades; each one feeds you part of the wound it opens. Costs health."),
+    "wire_snare": ("Draht's Wire Snare", "Demon thread magic. Invisible wires lash out from a point and bind every enemy around it."),
+    "sorganeil": ("Sorganeil", "Whatever you hold in your gaze cannot move. Keep casting and keep looking; look away and it is free."),
+    "reflection_barrier": ("Reflection Barrier", "For a few seconds, projectiles and spells that strike you are turned back at their source."),
+    "goddess_sanctuary": ("Goddess's Sanctuary", "A circle of holy light that heals allies standing in it and puts out flames."),
+    "bottled_golem": ("Serie's Bottled Golem", "The guardian the Association hands to First-Class examinees. A stone golem fights at your side for a while."),
+    "wind_step": ("Wind Step", "A gust carries you forward and softens your landing."),
+    "harvest_magic": ("The Spell to Harvest Crops", "Every ripe crop around you is harvested and replanted on the spot."),
+    "cooking_magic": ("The Spell to Cook a Meal", "Cooks the raw food you are carrying. Heiter would have approved."),
+    "grape_sweetening": ("The Spell to Turn Sour Grapes Sweet", "Utterly useless and absolutely delightful: sweet berries become Sweet Grapes."),
+    "clear_skies": ("The Spell to Clear the Skies", "Ends rain and thunder for a while. Perfect weather for a journey."),
     "light_orb": ("Light Orb", "Conjures a floating light where you look. It fades after a few minutes."),
     "gathering_magic": ("Gathering Magic", "Pulls nearby dropped items and experience toward you."),
     "azeryuze": ("Azeryuze", "Demon magic. Weighs your mana against a creature's; if yours is far greater, it obeys you for a while."),
@@ -225,6 +244,7 @@ def tooltips():
     t("sealed_exam_grimoire", "The exam objective. Return it to an examiner unopened.")
     t("mage_attire", "Mage's Attire: each piece adds max mana and regeneration.")
     t("heiter_flask", "Never empties itself, and never quite sobers you up.")
+    t("sweet_grapes", "Formerly sour. Frieren insists this is the most important spell she knows.")
     t("staff_none", "No focus.")
     for tier in ("apprentice", "mage", "sage", "guillotine"):
         t(f"staff_{tier}", "A spellcasting focus. Hold it in either hand while casting.")
@@ -293,6 +313,17 @@ def messages():
     m("mimics_false_negative", "No mimics nearby... probably.")
     m("mimics_found", "Revealed %s mimic(s)!")
     m("true_chest_hit", "It's a real chest. Hitting it won't help.")
+    m("no_target", "No target in sight.")
+    m("bind_broken", "You looked away. Sorganeil releases its hold.")
+    m("release_too_little", "Not enough mana to release.")
+    m("harvest_nothing", "Nothing here is ripe yet.")
+    m("harvest_done", "Harvested and replanted %s crop(s).")
+    m("cook_nothing", "You have nothing raw to cook.")
+    m("cook_done", "Cooked %s item(s).")
+    m("sweeten_nothing", "You have no sour grapes (sweet berries) to sweeten.")
+    m("sweeten_done", "%s berries are now Sweet Grapes.")
+    m("weather_no_sky", "There is no sky here to clear.")
+    m("weather_cleared", "The clouds part.")
     m("statue_inscription", "\"Himmel the Hero, who defeated the Demon King and brought peace to the land.\"")
     m("statue_stage.0", "Green with verdigris. Nobody has polished it in a long time.")
     m("statue_stage.1", "Weathered, but someone remembers to visit.")

@@ -1,0 +1,11 @@
+{
+  "behavior": "frieren:sweeten",
+  "school": "utility",
+  "rarity": "common",
+  "mana_cost": 4,
+  "cooldown": 100,
+  "color": "#C08AE0",
+  "params": {
+    "max_items": 32
+  }
+}

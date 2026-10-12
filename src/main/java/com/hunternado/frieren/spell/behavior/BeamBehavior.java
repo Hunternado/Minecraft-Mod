@@ -1,6 +1,7 @@
 package com.hunternado.frieren.spell.behavior;
 
 import com.hunternado.frieren.combat.ModDamageTypes;
+import com.hunternado.frieren.entity.fx.SpellBeamEntity;
 import com.hunternado.frieren.registry.ModSounds;
 import com.hunternado.frieren.spell.SpellBehavior;
 import com.hunternado.frieren.spell.SpellContext;
@@ -19,7 +20,7 @@ import java.util.List;
 /**
  * Zoltraak: an instantaneous killing beam. Params: {@code damage}, {@code range}, {@code pierce} (0/1),
  * {@code barrier_cost} (how expensive it is for barriers to stop), {@code demon_magic} (0/1: armour-piercing
- * demon formula, e.g. Qual's original Zoltraak).
+ * demon formula, e.g. Qual's original Zoltraak), {@code width} (visual beam width; full-power Zoltraak is wide).
  */
 public class BeamBehavior implements SpellBehavior {
     @Override
@@ -55,6 +56,11 @@ public class BeamBehavior implements SpellBehavior {
             }
             current *= 0.85F;
         }
-        SpellFx.beam(ctx.level(), from.add(direction.normalize().scale(0.6D)), visualEnd, ctx.color());
+        float width = (float) ctx.param("width", 0.32D);
+        SpellFx.beam(ctx.level(), from.add(direction.normalize().scale(0.6D)), visualEnd, ctx.color(), width,
+            8 + (int) (width * 10.0F), SpellBeamEntity.STYLE_ZOLTRAAK);
+        if (width >= 0.6F) {
+            SpellFx.burst(ctx.level(), visualEnd, ctx.color(), width * 2.5F);
+        }
     }
 }

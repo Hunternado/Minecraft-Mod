@@ -69,7 +69,7 @@
 @wait 30
 /frieren exam trial @p practical
 @wait 10
-/frieren debug @p
+/tp @a 30 124 -2 0 24
 @wait 40
 /frieren debug @p
 @shot trial_practical
@@ -86,6 +86,52 @@
 @shot trial_replica_4
 /frieren debug @p
 /frieren exam abandon @p
+# New spells, cast through /frieren cast and watched from behind the caster.
+/kill @e[type=!minecraft:player]
+/summon frieren:demon_soldier 28 120 19 {NoAI:1b,PersistenceRequired:1b,Rotation:[180f,0f]}
+/summon frieren:demon_soldier 30 120 20 {NoAI:1b,PersistenceRequired:1b,Rotation:[180f,0f]}
+/summon frieren:demon_soldier 32 120 19 {NoAI:1b,PersistenceRequired:1b,Rotation:[180f,0f]}
+/summon frieren:demon_mage 30 120 23 {NoAI:1b,PersistenceRequired:1b,Rotation:[180f,0f]}
+/tp @a 30 120 9 0 6
+@camera back
+@wait 20
+/frieren cast @p frieren:zoltraak_full_power
+@wait 3
+@shot spell_zoltraak_full
+@wait 20
+/frieren cast @p frieren:earth_spikes
+@wait 2
+@shot spell_earth_spikes
+@wait 20
+/frieren cast @p frieren:frost_lance
+@wait 4
+@shot spell_frost_lance
+@wait 20
+/frieren cast @p frieren:blood_blades
+@wait 4
+@shot spell_blood_blades
+@wait 20
+/frieren cast @p frieren:wire_snare
+@wait 4
+@shot spell_wire_snare
+@wait 10
+/frieren cast @p frieren:water_whip
+@wait 3
+@shot spell_water_whip
+@wait 10
+/frieren cast @p frieren:goddess_sanctuary
+@wait 12
+@shot spell_sanctuary
+/frieren cast @p frieren:reflection_barrier
+@wait 6
+@shot spell_reflection
+/frieren cast @p frieren:bottled_golem
+@wait 30
+@shot spell_golem
+/frieren cast @p frieren:mana_release
+@wait 3
+@shot spell_mana_release
+@camera first
 # The Hero's statue plaza (template placed with its statue entity), then the four patina stages side by side.
 /gamemode spectator @a
 /kill @e[type=!minecraft:player]

@@ -133,6 +133,10 @@ public final class FrierenCommand {
             .then(Commands.literal("reset")
                 .then(Commands.argument("player", EntityArgument.player())
                     .executes(ctx -> resetPlayer(ctx, EntityArgument.getPlayer(ctx, "player")))))
+            .then(Commands.literal("cast")
+                .then(Commands.argument("player", EntityArgument.player())
+                    .then(Commands.argument("spell", IdentifierArgument.id()).suggests(SPELLS)
+                        .executes(ctx -> adminCast(ctx, EntityArgument.getPlayer(ctx, "player"), IdentifierArgument.getId(ctx, "spell"))))))
             .then(Commands.literal("fx")
                 .then(Commands.argument("pos", Vec3Argument.vec3())
                     .executes(ctx -> {
@@ -203,6 +207,14 @@ public final class FrierenCommand {
         }
         QuestManager.onSpellLearned(player, data);
         return ok(ctx, Component.translatable("commands.frieren.spell.given", spell.toString(), player.getDisplayName()));
+    }
+
+    private static int adminCast(CommandContext<CommandSourceStack> ctx, ServerPlayer player, Identifier spell) throws CommandSyntaxException {
+        if (!SpellCaster.adminCast(player, data(player), spell)) {
+            ctx.getSource().sendFailure(Component.translatable("commands.frieren.spell.unknown", spell.toString()));
+            return 0;
+        }
+        return 1;
     }
 
     private static int spellRemove(CommandContext<CommandSourceStack> ctx, ServerPlayer player, Identifier spell) throws CommandSyntaxException {

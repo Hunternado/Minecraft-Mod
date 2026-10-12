@@ -76,6 +76,43 @@ SPELLS = {
                      color="#D4AF37", params=dict(range=16.0, duration=1200, ratio=6.0)),
     "lands_doppelganger": dict(behavior="decoy", school="special", rarity="rare", mana_cost=25, cooldown=400,
                                color="#9FD8FF", params=dict(duration=200, radius=16.0)),
+    # ---- 2.0: new offensive magic ----
+    "frost_lance": dict(behavior="ice_shards", school="offensive", rarity="uncommon", mana_cost=14, cooldown=30,
+                        color="#BFEFFF", params=dict(damage=4.0, count=3, spread=7.0, speed=1.4, slow_ticks=60, range=32.0)),
+    "earth_spikes": dict(behavior="earth_spikes", school="offensive", rarity="rare", mana_cost=22, cooldown=80, cast_time=8,
+                         color="#C9A66B", params=dict(damage=7.0, range=14.0, launch=0.7)),
+    "water_whip": dict(behavior="water_whip", school="offensive", rarity="uncommon", mana_cost=12, cooldown=40,
+                       color="#6FC3FF", params=dict(damage=3.0, range=7.0, angle=45.0, knockback=1.3)),
+    "zoltraak_full_power": dict(behavior="beam", school="offensive", rarity="ancient", mana_cost=45, cooldown=200, cast_time=30,
+                                color="#DDF2FF", params=dict(damage=16.0, range=48.0, pierce=1, barrier_cost=2.5, width=1.1)),
+    "mana_release": dict(behavior="mana_release", school="offensive", rarity="rare", mana_cost=5, cooldown=400,
+                         color="#A8D8FF", params=dict(fraction=0.5, min_mana=15.0, base_damage=4.0, damage_per_mana=0.12,
+                                                      base_radius=3.5, radius_per_mana=0.03, max_radius=9.0)),
+    # ---- 2.0: demon magic (from demon grimoires) ----
+    "blood_blades": dict(behavior="blood_blades", school="offensive", rarity="demon", mana_cost=18, health_cost=2, cooldown=60,
+                         color="#B0102A", params=dict(damage=4.0, count=5, spread=9.0, speed=1.6, lifesteal=0.3, range=28.0)),
+    "wire_snare": dict(behavior="wire_snare", school="special", rarity="demon", mana_cost=24, cooldown=240,
+                       color="#E8E8F0", params=dict(range=20.0, radius=6.0, duration=60, damage=2.0, max_targets=6)),
+    # ---- 2.0: defensive and special ----
+    "sorganeil": dict(behavior="bind", school="special", rarity="rare", mana_cost=20, cooldown=300, channel=100,
+                      color="#C8D8FF", params=dict(range=24.0, pulse_cost=3.0, gaze_angle=15.0, boss_ticks=30)),
+    "reflection_barrier": dict(behavior="reflect", school="defensive", rarity="rare", mana_cost=20, cooldown=300,
+                               color="#E6F4FF", params=dict(duration=60)),
+    "goddess_sanctuary": dict(behavior="sanctuary", school="defensive", rarity="rare", mana_cost=30, cooldown=600, cast_time=10,
+                              color="#FFF2B0", params=dict(radius=5.0, duration=200, heal=1.5)),
+    "bottled_golem": dict(behavior="golem", school="special", rarity="ancient", mana_cost=50, cooldown=2400, cast_time=20,
+                          color="#E8E0C8", params=dict(duration=1200, distance=2.5)),
+    # ---- 2.0: Frieren's beloved everyday magic ----
+    "wind_step": dict(behavior="dash", school="utility", rarity="uncommon", mana_cost=6, cooldown=40,
+                      color="#DFF7F0", params=dict(strength=1.6, lift=0.35, speed_ticks=60)),
+    "harvest_magic": dict(behavior="harvest", school="utility", rarity="common", mana_cost=6, cooldown=100,
+                          color="#B7E07A", params=dict(radius=6.0)),
+    "cooking_magic": dict(behavior="cook", school="utility", rarity="uncommon", mana_cost=8, cooldown=200,
+                          color="#FF9A4A", params=dict(max_items=16)),
+    "grape_sweetening": dict(behavior="sweeten", school="utility", rarity="common", mana_cost=4, cooldown=100,
+                             color="#C08AE0", params=dict(max_items=32)),
+    "clear_skies": dict(behavior="clear_weather", school="utility", rarity="rare", mana_cost=40, cooldown=6000, cast_time=40,
+                        color="#BFE3FF", params=dict(clear_ticks=12000)),
 }
 
 

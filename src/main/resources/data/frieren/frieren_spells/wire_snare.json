@@ -1,0 +1,15 @@
+{
+  "behavior": "frieren:wire_snare",
+  "school": "special",
+  "rarity": "demon",
+  "mana_cost": 24,
+  "cooldown": 240,
+  "color": "#E8E8F0",
+  "params": {
+    "range": 20.0,
+    "radius": 6.0,
+    "duration": 60,
+    "damage": 2.0,
+    "max_targets": 6
+  }
+}

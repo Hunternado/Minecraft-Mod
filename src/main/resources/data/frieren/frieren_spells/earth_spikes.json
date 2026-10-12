@@ -1,0 +1,14 @@
+{
+  "behavior": "frieren:earth_spikes",
+  "school": "offensive",
+  "rarity": "rare",
+  "mana_cost": 22,
+  "cooldown": 80,
+  "cast_time": 8,
+  "color": "#C9A66B",
+  "params": {
+    "damage": 7.0,
+    "range": 14.0,
+    "launch": 0.7
+  }
+}

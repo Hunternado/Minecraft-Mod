@@ -1,0 +1,16 @@
+{
+  "behavior": "frieren:beam",
+  "school": "offensive",
+  "rarity": "ancient",
+  "mana_cost": 45,
+  "cooldown": 200,
+  "cast_time": 30,
+  "color": "#DDF2FF",
+  "params": {
+    "damage": 16.0,
+    "range": 48.0,
+    "pierce": 1,
+    "barrier_cost": 2.5,
+    "width": 1.1
+  }
+}

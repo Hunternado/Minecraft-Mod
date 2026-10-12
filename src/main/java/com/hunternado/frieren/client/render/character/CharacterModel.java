@@ -106,6 +106,7 @@ public class CharacterModel extends EntityModel<CharacterRenderState> {
         rightArm.xRot = -2.75F;
         rightArm.yRot = 0.1F;
         prop.xRot = Mth.PI;
+        prop.y += 4.0F; // slide the flipped sword out of the fist so the crossguard shows above it
         leftArm.xRot = 0.1F;
         leftArm.zRot = -0.25F;
         head.xRot = -0.12F;

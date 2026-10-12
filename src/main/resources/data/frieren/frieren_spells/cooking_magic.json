@@ -1,0 +1,11 @@
+{
+  "behavior": "frieren:cook",
+  "school": "utility",
+  "rarity": "uncommon",
+  "mana_cost": 8,
+  "cooldown": 200,
+  "color": "#FF9A4A",
+  "params": {
+    "max_items": 16
+  }
+}

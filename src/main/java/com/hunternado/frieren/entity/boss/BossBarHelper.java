@@ -9,7 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Keeps a boss bar's audience equal to the players within range. Called once per second, so bosses do
+ * Keeps a boss bar's audience equal to the (non-spectating) players within range; bosses use the audience as
+ * their list of combatants (Spiegel copies them). Called once per second, so bosses do
  * not depend on entity tracking callbacks.
  */
 public final class BossBarHelper {
@@ -25,12 +26,12 @@ public final class BossBarHelper {
         double rangeSqr = RANGE * RANGE;
         List<ServerPlayer> current = new ArrayList<>(bar.getPlayers());
         for (ServerPlayer player : current) {
-            if (!player.isAlive() || player.level() != level || player.distanceToSqr(boss) > rangeSqr) {
+            if (!player.isAlive() || player.isSpectator() || player.level() != level || player.distanceToSqr(boss) > rangeSqr) {
                 bar.removePlayer(player);
             }
         }
         for (ServerPlayer player : level.players()) {
-            if (player.isAlive() && player.distanceToSqr(boss) <= rangeSqr && !bar.getPlayers().contains(player)) {
+            if (player.isAlive() && !player.isSpectator() && player.distanceToSqr(boss) <= rangeSqr && !bar.getPlayers().contains(player)) {
                 bar.addPlayer(player);
             }
         }

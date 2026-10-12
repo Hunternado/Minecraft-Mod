@@ -155,6 +155,32 @@ public final class SpellCaster {
         execute(player, data, spell, behavior);
     }
 
+    /**
+     * Admin/testing (/frieren cast): casts a spell immediately as if the player had cast it, teaching it first if
+     * needed and topping mana up. Skips cast time and cooldown checks; channels run to their full length.
+     *
+     * @return false if the spell or its behavior does not exist
+     */
+    public static boolean adminCast(ServerPlayer player, MagicData data, Identifier spellId) {
+        SpellDefinition spell = SpellManager.server(spellId);
+        SpellBehavior behavior = spell != null ? SpellBehaviors.get(spell.behavior()) : null;
+        if (spell == null || behavior == null) {
+            return false;
+        }
+        data.learn(spellId);
+        data.setMana(data.maxMana());
+        data.clearCooldowns();
+        if (data.channelingSpell() != null || data.pendingCast() != null) {
+            return false;
+        }
+        if (behavior.isToggle() && behavior.isActive(data)) {
+            behavior.deactivate(player, data);
+            return true;
+        }
+        execute(player, data, spell, behavior);
+        return true;
+    }
+
     private static boolean isSilenced(ServerPlayer player, MagicData data, long time) {
         return data.enthralledUntil() > time || player.hasEffect(ModEffects.holder(ModEffects.ENTHRALLED));
     }

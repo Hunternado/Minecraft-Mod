@@ -147,6 +147,63 @@ def potion_icon(liquid, flask=False):
     return img
 
 
+def grapes_icon():
+    """Sweet Grapes: a plump purple bunch with a sugary sparkle and a green vine leaf."""
+    img = icon()
+    berry, dark, shine = hex_color("#8E44AD"), hex_color("#5E2A78"), hex_color("#D7B0F0")
+    for (x, y) in ((6, 6), (10, 6), (8, 8), (5, 9), (11, 9), (7, 11), (10, 11), (8, 13)):
+        img.circle(x, y, 1.9, berry)
+        img.set(x + 1, y + 1, dark)
+        img.set(x - 1, y - 1, shine)
+    img.rect(8, 2, 8, 4, hex_color("#6B8E23"))
+    img.rect(9, 2, 11, 3, hex_color("#7FB236"))
+    img.set(12, 4, (255, 255, 255, 255))
+    img.set(3, 7, (255, 255, 255, 255))
+    img.outline_shape(OUTLINE)
+    return img
+
+
+# ---------------------------------------------------------------------------------------------
+# Status effect icons (textures/mob_effect/<id>.png, 18x18 like vanilla)
+# ---------------------------------------------------------------------------------------------
+def effect_icon(kind):
+    img = Image(18, 18)
+    if kind == "enthralled":      # Aura's scales tipping: a chained heart
+        img.circle(6.5, 7, 3, hex_color("#B0243A"))
+        img.circle(11.5, 7, 3, hex_color("#B0243A"))
+        for y in range(8, 15):
+            half = 15 - y
+            img.rect(9 - half, y, 9 + half - 1, y, hex_color("#B0243A"))
+        img.line(2, 15, 16, 3, hex_color("#8E8E9A"))
+        img.set(5, 6, hex_color("#F07A8A"))
+    elif kind == "gilded":        # Macht's gold curse: a gold ingot with a sparkle
+        img.rect(3, 8, 15, 13, hex_color("#D9A520"))
+        img.rect(5, 6, 13, 8, hex_color("#F2C94C"))
+        img.line(4, 13, 14, 13, hex_color("#9C7412"))
+        img.set(12, 3, (255, 255, 255, 255))
+        img.set(13, 4, (255, 245, 200, 255))
+    elif kind == "warded":        # barrier dome: a blue shield
+        img.rect(4, 3, 13, 9, hex_color("#5FB8F0"))
+        for y in range(10, 16):
+            inset = y - 9
+            img.rect(4 + inset, y, 13 - inset, y, hex_color("#5FB8F0"))
+        img.line(9, 4, 9, 13, hex_color("#D8F0FF"))
+        img.line(5, 7, 12, 7, hex_color("#D8F0FF"))
+    elif kind == "bound":         # Sorganeil / wires: a staring eye wrapped in thread
+        img.circle(9, 9, 5.5, hex_color("#E8EEF8"))
+        img.circle(9, 9, 3, hex_color("#4D7BD1"))
+        img.circle(9, 9, 1.3, hex_color("#14213D"))
+        img.line(1, 4, 17, 14, hex_color("#C8D8FF"))
+        img.line(1, 14, 17, 4, hex_color("#C8D8FF"))
+    else:                         # reflecting: a mirror pane with a bouncing ray
+        img.rect(6, 2, 11, 15, hex_color("#BFE6F0"))
+        img.line(7, 3, 7, 14, hex_color("#F4FBFF"))
+        img.line(1, 14, 6, 9, hex_color("#FFE9A8"))
+        img.line(6, 9, 1, 4, hex_color("#FFE9A8"))
+    img.outline_shape(OUTLINE)
+    return img
+
+
 def ring_icon():
     img = icon()
     img.circle(8, 9, 4.2, hex_color("#D4AF37"), fill=False)
@@ -319,6 +376,7 @@ ITEM_ICONS = {
     "guillotine_blade": blade_icon,
     "mana_potion": lambda: potion_icon("#4FA8FF"),
     "heiter_flask": lambda: potion_icon("#C0392B", flask=True),
+    "sweet_grapes": grapes_icon,
     "mirror_lotus_ring": ring_icon,
     "concealment_charm": charm_icon,
     "demon_hunter_insignia": insignia_icon,
@@ -740,6 +798,8 @@ def gen_textures():
     save(side, "block/summoning_altar_side.png")
     save(bottom, "block/summoning_altar_bottom.png")
     save(flower_texture(), "block/blue_moon_weed.png")
+    for effect in ("enthralled", "gilded", "warded", "bound", "reflecting"):
+        save(effect_icon(effect), f"mob_effect/{effect}.png")
     save(light_texture(), "block/mana_light.png")
 
     # Character skins are generated with their models by tools/gen_models.py (textures/entity/character/).

@@ -1,0 +1,13 @@
+{
+  "behavior": "frieren:golem",
+  "school": "special",
+  "rarity": "ancient",
+  "mana_cost": 50,
+  "cooldown": 2400,
+  "cast_time": 20,
+  "color": "#E8E0C8",
+  "params": {
+    "duration": 1200,
+    "distance": 2.5
+  }
+}

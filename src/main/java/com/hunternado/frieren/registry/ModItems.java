@@ -15,6 +15,7 @@ import com.hunternado.frieren.item.TooltipItem;
 import com.hunternado.frieren.magic.SpellRarity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -71,6 +72,8 @@ public final class ModItems {
 
     // ---- Consumables -------------------------------------------------------------------------
     public static final RegistryObject<Item> MANA_POTION = simple("mana_potion", p -> new ManaPotionItem(p.stacksTo(16), 60.0F, false));
+    public static final RegistryObject<Item> SWEET_GRAPES = simple("sweet_grapes", p -> new TooltipItem(p.food(new FoodProperties.Builder()
+        .alwaysEdible().nutrition(4).saturationModifier(1.2F).build()), "sweet_grapes"));
     public static final RegistryObject<Item> HEITER_FLASK = simple("heiter_flask", p -> new ManaPotionItem(p.stacksTo(1).rarity(Rarity.UNCOMMON), 150.0F, true));
 
     // ---- Artifacts ---------------------------------------------------------------------------

@@ -1,0 +1,15 @@
+{
+  "behavior": "frieren:bind",
+  "school": "special",
+  "rarity": "rare",
+  "mana_cost": 20,
+  "cooldown": 300,
+  "channel": 100,
+  "color": "#C8D8FF",
+  "params": {
+    "range": 24.0,
+    "pulse_cost": 3.0,
+    "gaze_angle": 15.0,
+    "boss_ticks": 30
+  }
+}

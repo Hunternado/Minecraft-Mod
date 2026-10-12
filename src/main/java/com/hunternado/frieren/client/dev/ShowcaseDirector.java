@@ -1,6 +1,7 @@
 package com.hunternado.frieren.client.dev;
 
 import com.mojang.logging.LogUtils;
+import net.minecraft.client.CameraType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Screenshot;
 import net.minecraft.client.gui.components.Button;
@@ -25,7 +26,8 @@ import java.util.Set;
  * called "showcase", then runs the script line by line:
  * <ul>
  *   <li>{@code /command} - executed on the integrated server with full permissions,</li>
- *   <li>{@code @wait <ticks>}, {@code @hud} (hide the HUD), {@code @shot <name>} (screenshot), {@code @quit}.</li>
+ *   <li>{@code @wait <ticks>}, {@code @hud} (hide the HUD), {@code @camera first|back|front}, {@code @shot <name>}
+ *   (screenshot), {@code @quit}.</li>
  * </ul>
  */
 public final class ShowcaseDirector {
@@ -118,6 +120,15 @@ public final class ShowcaseDirector {
                 if (!minecraft.gui.hud.isHidden()) {
                     minecraft.gui.hud.toggle();
                 }
+                continue;
+            }
+            if (line.startsWith("@camera")) {
+                String mode = line.substring(7).trim();
+                minecraft.options.setCameraType(switch (mode) {
+                    case "back" -> CameraType.THIRD_PERSON_BACK;
+                    case "front" -> CameraType.THIRD_PERSON_FRONT;
+                    default -> CameraType.FIRST_PERSON;
+                });
                 continue;
             }
             if (line.startsWith("@shot")) {

@@ -5,6 +5,7 @@ import com.hunternado.frieren.data.SpellProgress;
 import com.hunternado.frieren.mana.ManaHelper;
 import com.hunternado.frieren.registry.ModEffects;
 import com.hunternado.frieren.registry.ModSounds;
+import com.hunternado.frieren.spell.SpellDamage;
 import com.hunternado.frieren.spell.SpellDefinition;
 import com.hunternado.frieren.spell.SpellFx;
 import com.hunternado.frieren.spell.SpellManager;
@@ -19,9 +20,11 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 import java.util.UUID;
+import java.util.function.Predicate;
 
 /**
  * Combat rules shared by every entity: defensive-magic absorption, cast interruption, gilded and
@@ -32,14 +35,20 @@ public final class CombatEvents {
 
     private CombatEvents() {}
 
+    /** Guards against reflection ping-pong between two reflecting combatants. */
+    private static final ThreadLocal<Boolean> REFLECTING_NOW = ThreadLocal.withInitial(() -> false);
+
     public static void register() {
         LivingHurtEvent.BUS.addListener(CombatEvents::onLivingHurt);
         TickEvent.ServerTickEvent.Post.BUS.addListener(CombatEvents::onServerTick);
+        EntityJoinLevelEvent.BUS.addListener((Predicate<EntityJoinLevelEvent>) event -> event.loadedFromDisk()
+            && !event.getLevel().isClientSide() && SummonTracker.isExpired(event.getEntity(), event.getLevel().getGameTime()));
     }
 
     private static void onServerTick(TickEvent.ServerTickEvent.Post event) {
         if (event.server().getTickCount() % 10 == 0) {
             ObedienceTracker.tick(event.server());
+            SummonTracker.tick(event.server());
         }
     }
 
@@ -64,6 +73,26 @@ public final class CombatEvents {
                 event.setAmount(0.0F);
                 return;
             }
+        }
+
+        // Reflection barrier: projectiles and spells bounce back at their source.
+        if (event.getAmount() > 0.0F && victim.hasEffect(ModEffects.holder(ModEffects.REFLECTING))
+                && (source.is(DamageTypeTags.IS_PROJECTILE) || source instanceof SpellDamageSource) && !REFLECTING_NOW.get()
+                && victim.level() instanceof net.minecraft.server.level.ServerLevel serverLevel) {
+            float reflected = event.getAmount() * 0.75F;
+            event.setAmount(0.0F);
+            SpellFx.shell(serverLevel, victim, 0xE6F4FF);
+            if (attacker instanceof LivingEntity livingAttacker && livingAttacker != victim && livingAttacker.isAlive()) {
+                REFLECTING_NOW.set(true);
+                try {
+                    SpellFx.beam(serverLevel, victim.position().add(0.0D, victim.getBbHeight() * 0.6D, 0.0D),
+                        livingAttacker.position().add(0.0D, livingAttacker.getBbHeight() * 0.6D, 0.0D), 0xE6F4FF);
+                    SpellDamage.hurt(serverLevel, victim, victim, livingAttacker, reflected, ModDamageTypes.SPELL, 1.0F, false, null);
+                } finally {
+                    REFLECTING_NOW.set(false);
+                }
+            }
+            return;
         }
 
         if (victim instanceof ServerPlayer player) {

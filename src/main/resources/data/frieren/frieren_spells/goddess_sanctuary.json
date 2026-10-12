@@ -1,0 +1,14 @@
+{
+  "behavior": "frieren:sanctuary",
+  "school": "defensive",
+  "rarity": "rare",
+  "mana_cost": 30,
+  "cooldown": 600,
+  "cast_time": 10,
+  "color": "#FFF2B0",
+  "params": {
+    "radius": 5.0,
+    "duration": 200,
+    "heal": 1.5
+  }
+}

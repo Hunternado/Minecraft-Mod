@@ -2,6 +2,7 @@ package com.hunternado.frieren.entity.magic;
 
 import com.hunternado.frieren.combat.ModDamageTypes;
 import com.hunternado.frieren.registry.ModEntities;
+import com.hunternado.frieren.registry.ModParticles;
 import com.hunternado.frieren.spell.SpellDamage;
 import com.hunternado.frieren.spell.SpellFx;
 import com.hunternado.frieren.spell.SpellTargeting;
@@ -17,6 +18,8 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.ARGB;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
@@ -39,7 +42,11 @@ import java.util.UUID;
  * particles.
  */
 public class ManaBoltEntity extends Entity {
+    public static final byte STYLE_PLAIN = 0;
+    public static final byte STYLE_FROST = 1;
+    public static final byte STYLE_BLOOD = 2;
     private static final EntityDataAccessor<Integer> DATA_COLOR = SynchedEntityData.defineId(ManaBoltEntity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Byte> DATA_STYLE = SynchedEntityData.defineId(ManaBoltEntity.class, EntityDataSerializers.BYTE);
     private static final int MAX_LIFE = 80;
 
     private @Nullable UUID ownerId;
@@ -48,6 +55,8 @@ public class ManaBoltEntity extends Entity {
     private float barrierCost = 1.0F;
     private ResourceKey<DamageType> damageType = ModDamageTypes.DEMON_MAGIC;
     private int life;
+    private int slowTicks;
+    private float lifesteal;
 
     public ManaBoltEntity(EntityType<? extends ManaBoltEntity> type, Level level) {
         super(type, level);
@@ -74,9 +83,28 @@ public class ManaBoltEntity extends Entity {
         return bolt;
     }
 
+    /** Frost bolts slow what they hit for {@code ticks}. */
+    public ManaBoltEntity withFrost(int ticks) {
+        this.slowTicks = ticks;
+        this.entityData.set(DATA_STYLE, STYLE_FROST);
+        return this;
+    }
+
+    /** Blood bolts heal their owner for a fraction of the damage dealt. */
+    public ManaBoltEntity withLifesteal(float fraction) {
+        this.lifesteal = fraction;
+        this.entityData.set(DATA_STYLE, STYLE_BLOOD);
+        return this;
+    }
+
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
         builder.define(DATA_COLOR, 0xC03A5A);
+        builder.define(DATA_STYLE, STYLE_PLAIN);
+    }
+
+    public byte style() {
+        return this.entityData.get(DATA_STYLE);
     }
 
     public int color() {
@@ -109,7 +137,16 @@ public class ManaBoltEntity extends Entity {
             List<SpellTargeting.EntityHit> hits = SpellTargeting.entitiesOnLine(level, this, from, end, 0.3D,
                 target -> target != owner && SpellDamage.canHarm(level, attacker, target));
             if (!hits.isEmpty()) {
-                SpellDamage.hurt(level, this, attacker, hits.get(0).entity(), damage, damageType, barrierCost, false, null);
+                LivingEntity target = hits.get(0).entity();
+                boolean damaged = SpellDamage.hurt(level, this, attacker, target, damage, damageType, barrierCost, false, null);
+                if (damaged && slowTicks > 0) {
+                    target.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, slowTicks, 2));
+                    SpellFx.frost(level, hits.get(0).location(), color(), 0.8F);
+                }
+                if (damaged && lifesteal > 0.0F && owner instanceof LivingEntity livingOwner && livingOwner.isAlive()) {
+                    livingOwner.heal(damage * lifesteal);
+                    SpellFx.wisps(level, livingOwner.position().add(0.0D, 1.0D, 0.0D), color(), 0.6F);
+                }
                 SpellFx.burst(level, hits.get(0).location(), color(), 0.5F);
                 this.discard();
                 return;
@@ -125,7 +162,11 @@ public class ManaBoltEntity extends Entity {
                 this.level().addParticle(ColorParticleOption.create(ParticleTypes.ENTITY_EFFECT, ARGB.color(255, color())),
                     from.x + motion.x * t, from.y + motion.y * t, from.z + motion.z * t, 0.0D, 0.0D, 0.0D);
             }
-            this.level().addParticle(ParticleTypes.END_ROD, from.x, from.y, from.z, 0.0D, 0.0D, 0.0D);
+            switch (style()) {
+                case STYLE_FROST -> this.level().addParticle(ModParticles.FROST.get(), from.x, from.y, from.z, 0.0D, -0.01D, 0.0D);
+                case STYLE_BLOOD -> this.level().addParticle(ModParticles.DEMON_WISP.get(), from.x, from.y, from.z, 0.0D, 0.0D, 0.0D);
+                default -> this.level().addParticle(ParticleTypes.END_ROD, from.x, from.y, from.z, 0.0D, 0.0D, 0.0D);
+            }
         }
         this.setPos(to);
     }
@@ -138,6 +179,8 @@ public class ManaBoltEntity extends Entity {
     @Override
     protected void addAdditionalSaveData(ValueOutput output) {
         output.putFloat("Damage", damage);
+        output.putInt("SlowTicks", slowTicks);
+        output.putFloat("Lifesteal", lifesteal);
         output.putFloat("BarrierCost", barrierCost);
         output.putInt("Life", life);
         output.putInt("Color", color());

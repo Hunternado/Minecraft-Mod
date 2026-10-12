@@ -1,0 +1,17 @@
+{
+  "behavior": "frieren:mana_release",
+  "school": "offensive",
+  "rarity": "rare",
+  "mana_cost": 5,
+  "cooldown": 400,
+  "color": "#A8D8FF",
+  "params": {
+    "fraction": 0.5,
+    "min_mana": 15.0,
+    "base_damage": 4.0,
+    "damage_per_mana": 0.12,
+    "base_radius": 3.5,
+    "radius_per_mana": 0.03,
+    "max_radius": 9.0
+  }
+}

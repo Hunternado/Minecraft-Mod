@@ -1,0 +1,11 @@
+{
+  "behavior": "frieren:harvest",
+  "school": "utility",
+  "rarity": "common",
+  "mana_cost": 6,
+  "cooldown": 100,
+  "color": "#B7E07A",
+  "params": {
+    "radius": 6.0
+  }
+}

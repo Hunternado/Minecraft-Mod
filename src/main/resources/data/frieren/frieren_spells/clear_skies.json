@@ -1,0 +1,12 @@
+{
+  "behavior": "frieren:clear_weather",
+  "school": "utility",
+  "rarity": "rare",
+  "mana_cost": 40,
+  "cooldown": 6000,
+  "cast_time": 40,
+  "color": "#BFE3FF",
+  "params": {
+    "clear_ticks": 12000
+  }
+}

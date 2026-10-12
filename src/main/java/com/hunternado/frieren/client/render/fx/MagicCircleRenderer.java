@@ -5,12 +5,14 @@ import com.hunternado.frieren.entity.fx.MagicCircleEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.phys.AABB;
 
 /** Draws a magic circle: grows in, rotates (inner ring counter-rotating), then fades out. */
 public class MagicCircleRenderer extends EntityRenderer<MagicCircleEntity, MagicCircleRenderer.State> {
@@ -35,6 +37,14 @@ public class MagicCircleRenderer extends EntityRenderer<MagicCircleEntity, Magic
     public MagicCircleRenderer(EntityRendererProvider.Context context) {
         super(context);
         this.shadowRadius = 0.0F;
+    }
+
+    /** A big circle stays visible while its centre (the entity position) is off-screen. */
+    @Override
+    public boolean shouldRender(MagicCircleEntity entity, Frustum frustum, double x, double y, double z) {
+        double r = entity.radius() + 0.5D;
+        return frustum.isVisible(new AABB(entity.getX() - r, entity.getY() - r, entity.getZ() - r,
+            entity.getX() + r, entity.getY() + r, entity.getZ() + r));
     }
 
     @Override

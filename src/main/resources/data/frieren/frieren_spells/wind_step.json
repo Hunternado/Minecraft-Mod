@@ -1,0 +1,13 @@
+{
+  "behavior": "frieren:dash",
+  "school": "utility",
+  "rarity": "uncommon",
+  "mana_cost": 6,
+  "cooldown": 40,
+  "color": "#DFF7F0",
+  "params": {
+    "strength": 1.6,
+    "lift": 0.35,
+    "speed_ticks": 60
+  }
+}

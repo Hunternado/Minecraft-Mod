@@ -1,0 +1,17 @@
+{
+  "behavior": "frieren:blood_blades",
+  "school": "offensive",
+  "rarity": "demon",
+  "mana_cost": 18,
+  "health_cost": 2,
+  "cooldown": 60,
+  "color": "#B0102A",
+  "params": {
+    "damage": 4.0,
+    "count": 5,
+    "spread": 9.0,
+    "speed": 1.6,
+    "lifesteal": 0.3,
+    "range": 28.0
+  }
+}

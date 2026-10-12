@@ -42,7 +42,7 @@ import java.util.UUID;
  */
 public class SpellAreaEntity extends Entity {
     public enum Mode {
-        TORNADO, LIGHT_RAIN, DOME, FLOWER_FIELD, GUILLOTINE_MARK;
+        TORNADO, LIGHT_RAIN, DOME, FLOWER_FIELD, GUILLOTINE_MARK, SANCTUARY;
 
         static Mode byId(int id) {
             Mode[] values = values();
@@ -195,6 +195,19 @@ public class SpellAreaEntity extends Entity {
                     }
                 }
             }
+            case SANCTUARY -> {
+                // "damage" is the heal per pulse for this mode.
+                if (age % 20 == 0) {
+                    for (LivingEntity ally : SpellTargeting.livingInRadius(level, null, center, radius,
+                        target -> target instanceof Player || !Hostility.isHostile(target))) {
+                        if (ally.getHealth() < ally.getMaxHealth()) {
+                            ally.heal(damage);
+                            SpellFx.burst(level, ally.position().add(0.0D, 1.0D, 0.0D), color(), 0.4F);
+                        }
+                        ally.clearFire();
+                    }
+                }
+            }
             case GUILLOTINE_MARK -> {
                 if (age == duration - 1) {
                     for (LivingEntity target : SpellTargeting.livingInRadius(level, owner, center, radius,
@@ -249,6 +262,14 @@ public class SpellAreaEntity extends Entity {
                     double distance = random.nextDouble() * radius;
                     level.addParticle(ParticleTypes.HAPPY_VILLAGER, center.x + Math.cos(angle) * distance, center.y + 0.3D,
                         center.z + Math.sin(angle) * distance, 0.0D, 0.02D, 0.0D);
+                }
+            }
+            case SANCTUARY -> {
+                if (age % 2 == 0) {
+                    double angle = random.nextDouble() * Math.PI * 2.0D;
+                    double distance = Math.sqrt(random.nextDouble()) * radius;
+                    level.addParticle(ParticleTypes.END_ROD, center.x + Math.cos(angle) * distance, center.y + 0.1D,
+                        center.z + Math.sin(angle) * distance, 0.0D, 0.04D, 0.0D);
                 }
             }
             case GUILLOTINE_MARK -> {

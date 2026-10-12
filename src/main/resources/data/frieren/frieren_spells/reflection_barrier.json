@@ -1,0 +1,11 @@
+{
+  "behavior": "frieren:reflect",
+  "school": "defensive",
+  "rarity": "rare",
+  "mana_cost": 20,
+  "cooldown": 300,
+  "color": "#E6F4FF",
+  "params": {
+    "duration": 60
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "behavior": "frieren:water_whip",
+  "school": "offensive",
+  "rarity": "uncommon",
+  "mana_cost": 12,
+  "cooldown": 40,
+  "color": "#6FC3FF",
+  "params": {
+    "damage": 3.0,
+    "range": 7.0,
+    "angle": 45.0,
+    "knockback": 1.3
+  }
+}
