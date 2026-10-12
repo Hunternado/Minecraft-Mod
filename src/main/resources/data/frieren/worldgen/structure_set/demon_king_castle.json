@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 61937402,
+    "separation": 32,
+    "spacing": 96
+  },
+  "structures": [
+    {
+      "structure": "frieren:demon_king_castle",
+      "weight": 1
+    }
+  ]
+}

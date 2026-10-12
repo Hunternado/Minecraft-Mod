@@ -315,6 +315,19 @@ def gen_loot():
         pool([item(f"{NS}:sigil_of_the_guillotine")]),
         pool([item(f"{NS}:ancient_grimoire", 4), item(f"{NS}:legendary_grimoire", 1), item(f"{NS}:sages_staff", 2)]),
     ])
+    chest("golden_land", [
+        pool([item("minecraft:gold_ingot", 8, count=(4, 10)), item("minecraft:gold_block", 2, count=(1, 2)),
+              item(f"{NS}:cursed_gold_block", 3, count=(1, 2)), item(f"{NS}:demonic_mana_core", 3, count=(1, 2))], rolls_range=(4, 7)),
+        pool([item(f"{NS}:seal_of_the_golden_land"), empty(2)]),
+        pool([grimoire_of("diagolze", "forbidden", 1), item(f"{NS}:ancient_grimoire", 3), empty(4)]),
+    ])
+    chest("demon_king_castle", [
+        pool([item(f"{NS}:demonic_mana_core", 6, count=(2, 5)), item(f"{NS}:demon_horn", 6, count=(2, 6)),
+              item("minecraft:netherite_scrap", 2, count=(1, 2)), item("minecraft:diamond", 3, count=(1, 3))], rolls_range=(4, 7)),
+        pool([grimoire_of("blood_blades", "demon", 2), grimoire_of("wire_snare", "demon", 2), item(f"{NS}:legendary_grimoire", 1),
+              item(f"{NS}:ancient_grimoire", 3)]),
+        pool([item("minecraft:nether_star"), empty(3)]),
+    ])
     chest("heros_statue", [
         pool([item("minecraft:bread", 6, count=(1, 3)), item(f"{NS}:blue_moon_weed", 4, count=(1, 2)),
               item("minecraft:copper_ingot", 4, count=(2, 5)), item(f"{NS}:mana_potion", 2)], rolls_range=(2, 4)),
@@ -386,7 +399,7 @@ def tag(rel, values, replace=False):
 
 
 STRUCTURES = ["mage_tower", "forgotten_library", "demon_camp", "association_outpost", "heros_statue", "sealed_shrine",
-              "kings_tomb", "aura_fortress"]
+              "kings_tomb", "aura_fortress", "golden_land", "demon_king_castle"]
 
 
 def gen_tags():
@@ -419,6 +432,8 @@ def gen_tags():
         "sealed_shrine": ["#minecraft:is_mountain", "minecraft:taiga", "minecraft:old_growth_spruce_taiga", "minecraft:windswept_hills"],
         "kings_tomb": ["#minecraft:is_overworld"],
         "aura_fortress": ["minecraft:plains", "minecraft:savanna", "minecraft:sunflower_plains", "minecraft:windswept_savanna"],
+        "golden_land": ["minecraft:desert", "minecraft:badlands", "minecraft:wooded_badlands", "minecraft:savanna_plateau"],
+        "demon_king_castle": ["minecraft:dark_forest", "minecraft:snowy_taiga", "minecraft:snowy_plains", "minecraft:grove"],
     }
     for s, values in biomes.items():
         tag(f"{NS}/tags/worldgen/biome/has_structure/{s}", values)
@@ -521,6 +536,8 @@ def gen_worldgen():
         "sealed_shrine": dict(spacing=50, separation=16, salt=33440912),
         "kings_tomb": dict(spacing=56, separation=20, salt=88231904, underground=True),
         "aura_fortress": dict(spacing=80, separation=28, salt=44120987),
+        "golden_land": dict(spacing=72, separation=24, salt=27810364),
+        "demon_king_castle": dict(spacing=96, separation=32, salt=61937402),
     }
     for name, d in defs.items():
         underground = d.get("underground", False)

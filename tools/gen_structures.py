@@ -696,6 +696,107 @@ def aura_fortress():
     t.save()
 
 
+def golden_land():
+    """
+    A plaza of the city Macht turned to gold: gilded paving and rubble, toppled columns, citizens frozen mid-step as
+    golden figures, and a dais with a Summoning Altar and the traveller's chest.
+    """
+    size = 21
+    t = Template("golden_land", size, 10, size, 21)
+    c = size // 2
+    paving = [("smooth_sandstone", 5), ("cut_sandstone", 3), ("gold_block", 1), (f"{NS}:cursed_gold_block", 1)]
+    for x in range(size):
+        for z in range(size):
+            d = math.hypot(x - c, z - c)
+            if d > 10.4:
+                continue
+            for y in range(1, 10):
+                t.set(x, y, z, "air")
+            t.set(x, 0, z, t.weathered(paving) if d < 9.5 else "sandstone")
+            if 6.5 < d < 9.5 and t.rng.random() < 0.08:
+                t.set(x, 1, z, t.weathered([("raw_gold_block", 2), (f"{NS}:cursed_gold_block", 2), ("smooth_sandstone_slab", 1)]))
+    # Columns: some whole, some toppled.
+    for i, (x, z) in enumerate(((c - 6, c - 6), (c + 6, c - 6), (c - 6, c + 6), (c + 6, c + 6))):
+        height = 6 if i % 2 == 0 else 2
+        for y in range(1, height + 1):
+            t.set(x, y, z, "chiseled_sandstone" if y in (1, height) else "gold_block")
+        if height == 2:
+            for k in range(1, 4):
+                t.set(x + (k if x < c else -k), 1, z, "gold_block" if k % 2 else "cut_sandstone")
+    # Gilded citizens: frozen mid-step, arms raised against the curse.
+    for (x, z, arms) in ((c - 3, c + 6, True), (c + 4, c + 5, False), (c - 7, c, True), (c + 7, c - 1, False), (c, c - 7, True)):
+        t.set(x, 1, z, "gold_block")
+        t.set(x, 2, z, "gold_block")
+        t.set(x, 3, z, "raw_gold_block")
+        if arms:
+            t.set(x - 1, 3, z, "gold_block")
+            t.set(x + 1, 3, z, "gold_block")
+    # Dais with the altar.
+    for x in range(c - 2, c + 3):
+        for z in range(c - 2, c + 3):
+            t.set(x, 1, z, "chiseled_sandstone" if (x + z) % 2 == 0 else "gold_block")
+    t.set(c, 2, c, f"{NS}:summoning_altar")
+    t.chest(c, 2, c + 2, "golden_land", facing="south")
+    t.save()
+
+
+def demon_king_castle():
+    """
+    The ruined throne hall of the Demon King in the far north: black stone walls open to the sky, a crimson path to
+    a throne, a Summoning Altar before it, a broken spire, and demons still standing guard.
+    """
+    sx, sz = 25, 25
+    t = Template("demon_king_castle", sx, 22, sz, 23)
+    for x in range(sx):
+        for z in range(sz):
+            for y in range(1, 22):
+                t.set(x, y, z, "air")
+            t.set(x, 0, z, t.weathered([("polished_blackstone_bricks", 5), ("cracked_polished_blackstone_bricks", 3), ("blackstone", 2)]))
+    # Outer walls with gaps and crumbled tops.
+    for x in range(sx):
+        for z in range(sz):
+            if x in (0, sx - 1) or z in (0, sz - 1):
+                if z == 0 and 10 <= x <= 14:
+                    continue  # gate
+                top = 5 + int(3 * t.rng.random())
+                for y in range(1, top):
+                    t.set(x, y, z, t.weathered(BLACK_BRICKS))
+    # Hall floor: obsidian with a crying-obsidian inlay and the crimson path.
+    for x in range(4, sx - 4):
+        for z in range(4, sz - 4):
+            t.set(x, 0, z, "crying_obsidian" if (x - 12) % 4 == 0 and (z - 12) % 4 == 0 else "obsidian")
+    for z in range(1, 19):
+        for x in (11, 12, 13):
+            t.set(x, 1, z, "red_carpet")
+    # Pillars.
+    for z in (6, 10, 14):
+        for x in (6, 18):
+            for y in range(1, 9):
+                t.set(x, y, z, "polished_blackstone" if y < 8 else "chiseled_polished_blackstone")
+            t.set(x, 9, z, "soul_lantern", hanging="false")
+    # Throne on a raised dais.
+    t.fill(9, 1, 19, 15, 1, 22, "polished_blackstone_bricks")
+    t.fill(10, 2, 20, 14, 2, 22, "polished_blackstone_bricks")
+    t.set(12, 3, 21, "polished_blackstone_stairs", facing="south", half="bottom", shape="straight")
+    t.fill(11, 3, 22, 13, 6, 22, "polished_blackstone")
+    t.set(12, 7, 22, "crying_obsidian")
+    # The altar before the throne, chests to either side.
+    t.set(12, 1, 17, f"{NS}:summoning_altar")
+    t.chest(8, 1, 20, "demon_king_castle", facing="east")
+    t.chest(16, 1, 20, "demon_king_castle", facing="west")
+    # Broken spire in the back-left corner.
+    for y in range(1, 21):
+        for (x, z) in ((1, 21), (2, 21), (3, 21), (1, 22), (3, 22), (1, 23), (2, 23), (3, 23)):
+            if y < 21 - (x + z) % 3:
+                t.set(x, y, z, t.weathered(BLACK_BRICKS))
+    # Guards.
+    t.entity(9, 1, 8, f"{NS}:demon_soldier", yaw=0.0)
+    t.entity(15, 1, 8, f"{NS}:demon_soldier", yaw=0.0)
+    t.entity(8, 1, 15, f"{NS}:demon_mage", yaw=0.0)
+    t.entity(16, 1, 15, f"{NS}:demon_mage", yaw=0.0)
+    t.save()
+
+
 def main():
     print("structures:")
     mage_tower()
@@ -706,6 +807,8 @@ def main():
     sealed_shrine()
     kings_tomb()
     aura_fortress()
+    golden_land()
+    demon_king_castle()
 
 
 if __name__ == "__main__":

@@ -192,4 +192,18 @@
 /tp @a 26 123.5 36 180 6
 @wait 40
 @shot statue_stages
+# New dungeons, placed away from the platform once their chunks are loaded.
+/tp @a 70.5 128 -13 0 28
+@wait 50
+/place template frieren:golden_land 60 119 0
+@wait 30
+@shot dungeon_golden_land
+/tp @a 112.5 134 -17 0 28
+@wait 50
+/place template frieren:demon_king_castle 100 119 0
+@wait 30
+@shot dungeon_demon_king_castle
+/tp @a 112.5 122 6 0 6
+@wait 20
+@shot dungeon_throne_room
 @quit
