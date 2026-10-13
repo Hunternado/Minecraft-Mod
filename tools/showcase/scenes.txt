@@ -227,99 +227,100 @@
 @wait 20
 @shot dungeon_throne_room
 # Portrait studio: every character alone, full body, turned a little toward the camera.
+# The previous sitter is dropped into the void rather than killed, so no death poof or loot lands in frame.
 /kill @e[type=!minecraft:player]
 /gamemode spectator @a
-/kill @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player]
+/tp @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player] 24.5 -300 0.5
 /summon frieren:frieren 24.5 120 0.5 {NoAI:1b,Rotation:[205f,0f]}
 /tp @a 24.5 120.2 -2.10 0 10
 @wait 25
 @shot portrait_frieren
-/kill @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player]
+/tp @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player] 24.5 -300 0.5
 /summon frieren:fern 24.5 120 0.5 {NoAI:1b,Rotation:[205f,0f]}
 /tp @a 24.5 120.2 -2.20 0 10
 @wait 25
 @shot portrait_fern
-/kill @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player]
+/tp @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player] 24.5 -300 0.5
 /summon frieren:stark 24.5 120 0.5 {NoAI:1b,Rotation:[205f,0f]}
 /tp @a 24.5 120.2 -2.30 0 10
 @wait 25
 @shot portrait_stark
-/kill @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player]
+/tp @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player] 24.5 -300 0.5
 /summon frieren:serie 24.5 120 0.5 {NoAI:1b,Rotation:[205f,0f]}
 /tp @a 24.5 120.2 -2.10 0 10
 @wait 25
 @shot portrait_serie
-/kill @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player]
+/tp @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player] 24.5 -300 0.5
 /summon frieren:examiner 24.5 120 0.5 {NoAI:1b,Rotation:[205f,0f]}
 /tp @a 24.5 120.2 -2.30 0 10
 @wait 25
 @shot portrait_examiner
-/kill @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player]
+/tp @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player] 24.5 -300 0.5
 /summon frieren:priest 24.5 120 0.5 {NoAI:1b,Rotation:[205f,0f]}
 /tp @a 24.5 120.2 -2.30 0 10
 @wait 25
 @shot portrait_priest
-/kill @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player]
+/tp @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player] 24.5 -300 0.5
 /summon frieren:wandering_mage 24.5 120 0.5 {NoAI:1b,Rotation:[205f,0f]}
 /tp @a 24.5 120.2 -2.30 0 10
 @wait 25
 @shot portrait_wandering_mage
-/kill @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player]
+/tp @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player] 24.5 -300 0.5
 /summon frieren:aura 24.5 120 0.5 {NoAI:1b,Rotation:[205f,0f]}
 /tp @a 24.5 120.2 -2.30 0 10
 @wait 25
 @shot portrait_aura
-/kill @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player]
+/tp @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player] 24.5 -300 0.5
 /summon frieren:qual 24.5 120 0.5 {NoAI:1b,Rotation:[205f,0f]}
 /tp @a 24.5 120.2 -2.40 0 10
 @wait 25
 @shot portrait_qual
-/kill @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player]
+/tp @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player] 24.5 -300 0.5
 /summon frieren:demon_soldier 24.5 120 0.5 {NoAI:1b,Rotation:[205f,0f]}
 /tp @a 24.5 120.2 -2.30 0 10
 @wait 25
 @shot portrait_demon_soldier
-/kill @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player]
+/tp @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player] 24.5 -300 0.5
 /summon frieren:demon_mage 24.5 120 0.5 {NoAI:1b,Rotation:[205f,0f]}
 /tp @a 24.5 120.2 -2.30 0 10
 @wait 25
 @shot portrait_demon_mage
-/kill @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player]
+/tp @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player] 24.5 -300 0.5
 /summon frieren:aura_thrall 24.5 120 0.5 {NoAI:1b,Rotation:[205f,0f]}
 /tp @a 24.5 120.2 -2.40 0 10
 @wait 25
 @shot portrait_aura_thrall
-/kill @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player]
+/tp @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player] 24.5 -300 0.5
 /summon frieren:linie 24.5 120 0.5 {NoAI:1b,Rotation:[205f,0f]}
 /tp @a 24.5 120.2 -2.20 0 10
 @wait 25
 @shot portrait_linie
-/kill @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player]
+/tp @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player] 24.5 -300 0.5
 /summon frieren:draht 24.5 120 0.5 {NoAI:1b,Rotation:[205f,0f]}
 /tp @a 24.5 120.2 -2.30 0 10
 @wait 25
 @shot portrait_draht
-/kill @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player]
+/tp @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player] 24.5 -300 0.5
 /summon frieren:lugner 24.5 120 0.5 {NoAI:1b,Rotation:[205f,0f]}
 /tp @a 24.5 120.2 -2.30 0 10
 @wait 25
 @shot portrait_lugner
-/kill @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player]
+/tp @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player] 24.5 -300 0.5
 /summon frieren:macht 24.5 120 0.5 {NoAI:1b,Rotation:[205f,0f]}
 /tp @a 24.5 120.2 -2.70 0 10
 @wait 25
 @shot portrait_macht
-/kill @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player]
+/tp @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player] 24.5 -300 0.5
 /summon frieren:demon_king 24.5 120 0.5 {NoAI:1b,Rotation:[205f,0f]}
 /tp @a 24.5 120.2 -3.40 0 10
 @wait 25
 @shot portrait_demon_king
-/kill @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player]
+/tp @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player] 24.5 -300 0.5
 /summon frieren:mirror_frieren 24.5 120 0.5 {NoAI:1b,Rotation:[205f,0f]}
 /tp @a 24.5 120.2 -2.10 0 10
 @wait 25
 @shot portrait_mirror_frieren
-/kill @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player]
+/tp @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player] 24.5 -300 0.5
 /summon frieren:spiegel 24.5 120 0.5 {NoAI:1b,Rotation:[205f,0f]}
 /tp @a 24.5 120.2 -2.60 0 10
 @wait 25
