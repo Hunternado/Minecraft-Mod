@@ -1,6 +1,7 @@
 package com.hunternado.frieren.client.render.character;
 
 import net.minecraft.client.renderer.entity.state.ArmedEntityRenderState;
+import net.minecraft.client.renderer.item.ItemStackRenderState;
 
 /** Render state shared by every character model; filled by {@link CharacterRenderer}. Armed: hands hold items. */
 public class CharacterRenderState extends ArmedEntityRenderState {
@@ -16,4 +17,6 @@ public class CharacterRenderState extends ArmedEntityRenderState {
     public int variant;
     /** The main-hand item is a staff: it aims further forward while casting than a weapon does. */
     public boolean holdingStaff;
+    /** A weapon worn across the back out of combat (BackItemLayer); empty when it is in hand. */
+    public final ItemStackRenderState backItemState = new ItemStackRenderState();
 }

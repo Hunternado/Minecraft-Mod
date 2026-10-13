@@ -20,30 +20,30 @@ import org.jspecify.annotations.Nullable;
  * 2x-density skins in {@code textures/entity/character/}.
  */
 public enum CharacterKind {
-    FRIEREN("frieren", 0.9F, false, true, 12.0F, "frieren:sages_staff", null),
-    FERN("fern", 0.95F, true, true, 12.0F, "frieren:mage_staff", null),
-    STARK("stark", 1.0F, false, false, 12.0F, "frieren:warriors_axe", null),
-    SERIE("serie", 0.88F, true, true, 12.0F, null, null),
-    HIMMEL("himmel", 1.0F, false, false, 12.0F, "frieren:heros_sword", null),
-    EISEN("eisen", 0.95F, false, false, 10.0F, "frieren:warriors_axe", null),
-    EXAMINER("examiner", 1.0F, true, false, 12.0F, "frieren:mage_staff", null),
-    WANDERING_MAGE("wandering_mage", 1.0F, false, false, 12.0F, "frieren:apprentice_staff", null),
-    PRIEST("priest", 1.0F, true, false, 12.0F, null, null),
-    AURA("aura", 0.95F, true, true, 12.0F, null, "frieren:scale_of_obedience"),
-    QUAL("qual", 1.05F, true, false, 12.0F, null, null),
-    DEMON_SOLDIER("demon_soldier", 1.0F, false, false, 12.0F, "minecraft:iron_sword", null),
-    DEMON_MAGE("demon_mage", 1.0F, false, false, 12.0F, "frieren:guillotine_staff", null),
-    AURA_THRALL("aura_thrall", 1.05F, false, false, 12.0F, "minecraft:iron_sword", null),
-    LINIE("linie", 0.92F, false, true, 12.0F, "frieren:warriors_axe", null),
-    DRAHT("draht", 1.0F, false, false, 12.0F, null, null),
-    LUGNER("lugner", 1.0F, false, false, 12.0F, null, null),
-    MACHT("macht", 1.12F, false, false, 12.0F, null, null),
-    DEMON_KING("demon_king", 1.65F, false, false, 12.0F, "frieren:demon_kings_blade", null),
-    MIRROR_FRIEREN("mirror_frieren", 0.9F, false, true, 12.0F, "frieren:sages_staff", null),
-    MIRROR_REPLICA("mirror_replica", 1.0F, false, false, 12.0F, null, null),
-    SPIEGEL("spiegel", 1.15F, true, true, 13.0F, null, null),
-    MANA_DECOY("mana_decoy", 1.0F, false, false, 12.0F, null, null),
-    HERO_STATUE("hero_statue", 2.8F, false, false, 12.0F, null, null);
+    FRIEREN("frieren", 0.9F, false, true, 12.0F, "frieren:sages_staff", null, false),
+    FERN("fern", 0.95F, true, true, 12.0F, "frieren:mage_staff", null, false),
+    STARK("stark", 1.0F, false, false, 12.0F, "frieren:warriors_axe", null, true),
+    SERIE("serie", 0.88F, true, true, 12.0F, null, null, false),
+    HIMMEL("himmel", 1.0F, false, false, 12.0F, "frieren:heros_sword", null, false),
+    EISEN("eisen", 0.95F, false, false, 10.0F, "frieren:warriors_axe", null, true),
+    EXAMINER("examiner", 1.0F, true, false, 12.0F, "frieren:mage_staff", null, false),
+    WANDERING_MAGE("wandering_mage", 1.0F, false, false, 12.0F, "frieren:apprentice_staff", null, false),
+    PRIEST("priest", 1.0F, true, false, 12.0F, null, null, false),
+    AURA("aura", 0.95F, true, true, 12.0F, null, "frieren:scale_of_obedience", false),
+    QUAL("qual", 1.05F, true, false, 12.0F, null, null, false),
+    DEMON_SOLDIER("demon_soldier", 1.0F, false, false, 12.0F, "minecraft:iron_sword", null, false),
+    DEMON_MAGE("demon_mage", 1.0F, false, false, 12.0F, "frieren:guillotine_staff", null, false),
+    AURA_THRALL("aura_thrall", 1.05F, false, false, 12.0F, "minecraft:iron_sword", null, false),
+    LINIE("linie", 0.92F, false, true, 12.0F, "frieren:warriors_axe", null, true),
+    DRAHT("draht", 1.0F, false, false, 12.0F, null, null, false),
+    LUGNER("lugner", 1.0F, false, false, 12.0F, null, null, false),
+    MACHT("macht", 1.12F, false, false, 12.0F, null, null, false),
+    DEMON_KING("demon_king", 1.45F, true, false, 12.0F, "frieren:demon_kings_blade", null, false),
+    MIRROR_FRIEREN("mirror_frieren", 0.9F, false, true, 12.0F, "frieren:sages_staff", null, false),
+    MIRROR_REPLICA("mirror_replica", 1.0F, false, false, 12.0F, null, null, false),
+    SPIEGEL("spiegel", 1.15F, true, true, 13.0F, null, null, false),
+    MANA_DECOY("mana_decoy", 1.0F, false, false, 12.0F, null, null, false),
+    HERO_STATUE("hero_statue", 2.8F, false, false, 12.0F, null, null, false);
 
     private final String id;
     private final float scale;
@@ -52,13 +52,14 @@ public enum CharacterKind {
     private final float armLength;
     private final @Nullable String mainHandItem;
     private final @Nullable String offHandItem;
+    private final boolean backCarry;
     private final ModelLayerLocation layer;
     private final Identifier texture;
     private @Nullable ItemStack mainHandStack;
     private @Nullable ItemStack offHandStack;
 
     CharacterKind(String id, float scale, boolean longRobe, boolean slim, float armLength, @Nullable String mainHandItem,
-                  @Nullable String offHandItem) {
+                  @Nullable String offHandItem, boolean backCarry) {
         this.id = id;
         this.scale = scale;
         this.longRobe = longRobe;
@@ -66,8 +67,14 @@ public enum CharacterKind {
         this.armLength = armLength;
         this.mainHandItem = mainHandItem;
         this.offHandItem = offHandItem;
+        this.backCarry = backCarry;
         this.layer = new ModelLayerLocation(FrierenIds.id("character/" + id), "main");
         this.texture = FrierenIds.id("textures/entity/character/" + id + ".png");
+    }
+
+    /** The main-hand weapon is worn across the back until the character fights (Stark's axe). */
+    public boolean backCarry() {
+        return backCarry;
     }
 
     /** Slim (three pixel) arms: held items sit half a pixel closer to the body, as on slim player models. */
@@ -165,37 +172,74 @@ public enum CharacterKind {
                 .texOffs(0, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("hat", CubeListBuilder.create()
-                .texOffs(32, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.5F))
-                .texOffs(118, 16).addBox(-4.6F, -4.5F, -4.6F, 1.0F, 7.0F, 1.0F, CubeDeformation.NONE)
-                .texOffs(122, 16).addBox(3.6F, -4.5F, -4.6F, 1.0F, 7.0F, 1.0F, CubeDeformation.NONE),
+                .texOffs(32, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.5F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("hair_back", CubeListBuilder.create(),
+        head.addOrReplaceChild("hair_top", CubeListBuilder.create()
+                .texOffs(0, 45).addBox(-4.0F, -9.1F, -4.0F, 8.0F, 1.0F, 8.0F, CubeDeformation.NONE)
+                .texOffs(78, 32).addBox(-4.5F, -8.6F, -4.5F, 9.0F, 1.0F, 9.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("tail_left", CubeListBuilder.create()
-                .texOffs(0, 32).addBox(-1.5F, -1.0F, -1.5F, 3.0F, 11.0F, 3.0F, CubeDeformation.NONE)
-                .texOffs(66, 32).addBox(-2.1F, 10.0F, -1.5F, 3.0F, 8.0F, 3.0F, CubeDeformation.NONE)
-                .texOffs(114, 32).addBox(-2.4F, 18.0F, -1.0F, 2.0F, 5.0F, 2.0F, CubeDeformation.NONE),
-            PartPose.offsetAndRotation(5.6F, -6.0F, 4.0F, 0.1F, 0.0F, -0.24F));
-        head.addOrReplaceChild("tail_right", CubeListBuilder.create()
-                .texOffs(106, 16).addBox(-1.5F, -1.0F, -1.5F, 3.0F, 11.0F, 3.0F, CubeDeformation.NONE)
-                .texOffs(54, 32).addBox(-0.9F, 10.0F, -1.5F, 3.0F, 8.0F, 3.0F, CubeDeformation.NONE)
-                .texOffs(106, 32).addBox(0.4F, 18.0F, -1.0F, 2.0F, 5.0F, 2.0F, CubeDeformation.NONE),
-            PartPose.offsetAndRotation(-5.6F, -6.0F, 4.0F, 0.1F, 0.0F, 0.24F));
+        head.addOrReplaceChild("bangs", CubeListBuilder.create()
+                .texOffs(98, 45).addBox(-4.5F, -8.3F, -4.75F, 9.0F, 5.0F, 1.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition lockLeft = head.addOrReplaceChild("lock_left", CubeListBuilder.create()
+                .texOffs(118, 45).addBox(-1.0F, 0.0F, -0.5F, 2.0F, 5.0F, 1.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(3.8F, -4.8F, -3.8F, -0.05F, 0.0F, -0.06F));
+        lockLeft.addOrReplaceChild("lock_left_2", CubeListBuilder.create()
+                .texOffs(38, 54).addBox(-1.0F, 0.0F, -0.5F, 2.0F, 4.0F, 1.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 5.0F, 0.0F, 0.04F, 0.0F, 0.05F));
+        PartDefinition lockRight = head.addOrReplaceChild("lock_right", CubeListBuilder.create()
+                .texOffs(122, 32).addBox(-1.0F, 0.0F, -0.5F, 2.0F, 5.0F, 1.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(-3.8F, -4.8F, -3.8F, -0.05F, 0.0F, 0.06F));
+        lockRight.addOrReplaceChild("lock_right_2", CubeListBuilder.create()
+                .texOffs(32, 54).addBox(-1.0F, 0.0F, -0.5F, 2.0F, 4.0F, 1.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 5.0F, 0.0F, 0.04F, 0.0F, -0.05F));
+        PartDefinition hairBack = head.addOrReplaceChild("hair_back", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hairBack.addOrReplaceChild("hair_back_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailLeft = head.addOrReplaceChild("tail_left", CubeListBuilder.create()
+                .texOffs(0, 32).addBox(-1.5F, -1.0F, -1.5F, 3.0F, 10.0F, 3.0F, CubeDeformation.NONE)
+                .texOffs(56, 54).addBox(-1.5F, -1.6F, -1.5F, 3.0F, 1.0F, 3.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(4.6F, -6.6F, 4.2F, 0.12F, 0.0F, -0.28F));
+        PartDefinition tailLeft2 = tailLeft.addOrReplaceChild("tail_left_2", CubeListBuilder.create()
+                .texOffs(66, 32).addBox(-1.5F, 0.0F, -1.5F, 3.0F, 8.0F, 3.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 8.5F, 0.0F, 0.05F, 0.0F, 0.13F));
+        tailLeft2.addOrReplaceChild("tail_left_3", CubeListBuilder.create()
+                .texOffs(114, 32).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 7.0F, 2.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 7.5F, 0.0F, 0.04F, 0.0F, 0.1F));
+        PartDefinition tailRight = head.addOrReplaceChild("tail_right", CubeListBuilder.create()
+                .texOffs(106, 16).addBox(-1.5F, -1.0F, -1.5F, 3.0F, 10.0F, 3.0F, CubeDeformation.NONE)
+                .texOffs(44, 54).addBox(-1.5F, -1.6F, -1.5F, 3.0F, 1.0F, 3.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(-4.6F, -6.6F, 4.2F, 0.12F, 0.0F, 0.28F));
+        PartDefinition tailRight2 = tailRight.addOrReplaceChild("tail_right_2", CubeListBuilder.create()
+                .texOffs(54, 32).addBox(-1.5F, 0.0F, -1.5F, 3.0F, 8.0F, 3.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 8.5F, 0.0F, 0.05F, 0.0F, -0.13F));
+        tailRight2.addOrReplaceChild("tail_right_3", CubeListBuilder.create()
+                .texOffs(118, 16).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 7.0F, 2.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 7.5F, 0.0F, 0.04F, 0.0F, -0.1F));
         head.addOrReplaceChild("ear_left", CubeListBuilder.create()
-                .texOffs(36, 46).addBox(0.0F, -1.0F, -0.5F, 2.0F, 2.0F, 1.0F, CubeDeformation.NONE)
-                .texOffs(58, 46).addBox(2.0F, -1.2F, -0.5F, 2.0F, 1.0F, 1.0F, CubeDeformation.NONE)
-                .texOffs(64, 46).addBox(4.0F, -1.4F, -0.5F, 2.0F, 1.0F, 1.0F, CubeDeformation.NONE)
-                .texOffs(42, 46).addBox(0.2F, 1.0F, -0.5F, 1.0F, 2.0F, 1.0F, CubeDeformation.NONE),
+                .texOffs(74, 54).addBox(0.0F, -1.0F, -0.5F, 2.0F, 2.0F, 1.0F, CubeDeformation.NONE)
+                .texOffs(96, 54).addBox(2.0F, -1.2F, -0.5F, 2.0F, 1.0F, 1.0F, CubeDeformation.NONE)
+                .texOffs(102, 54).addBox(4.0F, -1.4F, -0.5F, 2.0F, 1.0F, 1.0F, CubeDeformation.NONE)
+                .texOffs(80, 54).addBox(0.2F, 1.0F, -0.5F, 1.0F, 2.0F, 1.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(4.0F, -3.0F, 0.6F, 0.0F, -0.3F, -0.3F));
         head.addOrReplaceChild("ear_right", CubeListBuilder.create()
-                .texOffs(122, 32).addBox(-2.0F, -1.0F, -0.5F, 2.0F, 2.0F, 1.0F, CubeDeformation.NONE)
-                .texOffs(46, 46).addBox(-4.0F, -1.2F, -0.5F, 2.0F, 1.0F, 1.0F, CubeDeformation.NONE)
-                .texOffs(52, 46).addBox(-6.0F, -1.4F, -0.5F, 2.0F, 1.0F, 1.0F, CubeDeformation.NONE)
-                .texOffs(32, 46).addBox(-1.2F, 1.0F, -0.5F, 1.0F, 2.0F, 1.0F, CubeDeformation.NONE),
+                .texOffs(68, 54).addBox(-2.0F, -1.0F, -0.5F, 2.0F, 2.0F, 1.0F, CubeDeformation.NONE)
+                .texOffs(84, 54).addBox(-4.0F, -1.2F, -0.5F, 2.0F, 1.0F, 1.0F, CubeDeformation.NONE)
+                .texOffs(90, 54).addBox(-6.0F, -1.4F, -0.5F, 2.0F, 1.0F, 1.0F, CubeDeformation.NONE)
+                .texOffs(124, 45).addBox(-1.2F, 1.0F, -0.5F, 1.0F, 2.0F, 1.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(-4.0F, -3.0F, 0.6F, 0.0F, 0.3F, 0.3F));
-        head.addOrReplaceChild("horn_left", CubeListBuilder.create(),
+        PartDefinition hornLeft = head.addOrReplaceChild("horn_left", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("horn_right", CubeListBuilder.create(),
+        PartDefinition hornLeft2 = hornLeft.addOrReplaceChild("horn_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hornLeft2.addOrReplaceChild("horn_left_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hornRight = head.addOrReplaceChild("horn_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hornRight2 = hornRight.addOrReplaceChild("horn_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hornRight2.addOrReplaceChild("horn_right_3", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("crown", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
@@ -204,14 +248,25 @@ public enum CharacterKind {
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         body.addOrReplaceChild("jacket", CubeListBuilder.create()
                 .texOffs(88, 0).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.25F))
-                .texOffs(12, 32).addBox(-7.5F, -0.5F, -3.0F, 15.0F, 7.0F, 6.0F, CubeDeformation.NONE),
+                .texOffs(12, 32).addBox(-7.5F, 1.4F, -3.0F, 15.0F, 5.0F, 6.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        body.addOrReplaceChild("cape", CubeListBuilder.create(),
+        body.addOrReplaceChild("collar", CubeListBuilder.create()
+                .texOffs(60, 45).addBox(-6.5F, -0.6F, -2.75F, 13.0F, 2.0F, 6.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        body.addOrReplaceChild("skirt", CubeListBuilder.create()
-                .texOffs(78, 32).addBox(-4.5F, 0.0F, -2.5F, 9.0F, 4.0F, 5.0F, CubeDeformation.NONE)
-                .texOffs(0, 46).addBox(-5.0F, 4.0F, -3.0F, 10.0F, 2.0F, 6.0F, CubeDeformation.NONE),
+        PartDefinition cape = body.addOrReplaceChild("cape", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        cape.addOrReplaceChild("cape_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition skirt = body.addOrReplaceChild("skirt", CubeListBuilder.create()
+                .texOffs(32, 45).addBox(-4.5F, 0.0F, -2.5F, 9.0F, 4.0F, 5.0F, CubeDeformation.NONE)
+                .texOffs(0, 54).addBox(-5.0F, 4.0F, -3.0F, 10.0F, 2.0F, 6.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 10.5F, 0.0F, 0.0F, 0.0F, 0.0F));
+        skirt.addOrReplaceChild("skirt_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        body.addOrReplaceChild("coat_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        body.addOrReplaceChild("coat_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition rightArm = root.addOrReplaceChild("right_arm", CubeListBuilder.create()
                 .texOffs(112, 0).addBox(-2.0F, -2.0F, -2.0F, 3.0F, 12.0F, 4.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(-5.0F, 2.5F, 0.0F, 0.0F, 0.0F, 0.0F));
@@ -247,67 +302,120 @@ public enum CharacterKind {
         MeshDefinition mesh = new MeshDefinition();
         PartDefinition root = mesh.getRoot();
         PartDefinition head = root.addOrReplaceChild("head", CubeListBuilder.create()
-                .texOffs(18, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, CubeDeformation.NONE),
+                .texOffs(74, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("hat", CubeListBuilder.create()
-                .texOffs(50, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.5F)),
+                .texOffs(0, 24).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.5F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("hair_back", CubeListBuilder.create()
-                .texOffs(0, 0).addBox(-4.0F, 0.0F, 0.0F, 8.0F, 16.0F, 1.0F, CubeDeformation.NONE),
-            PartPose.offsetAndRotation(0.0F, -6.5F, 4.0F, 0.08F, 0.0F, 0.0F));
-        head.addOrReplaceChild("tail_left", CubeListBuilder.create(),
+        head.addOrReplaceChild("hair_top", CubeListBuilder.create()
+                .texOffs(70, 56).addBox(-4.0F, -9.1F, -4.0F, 8.0F, 1.0F, 8.0F, CubeDeformation.NONE)
+                .texOffs(0, 56).addBox(-4.5F, -8.6F, -4.5F, 9.0F, 1.0F, 9.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("tail_right", CubeListBuilder.create(),
+        head.addOrReplaceChild("bangs", CubeListBuilder.create()
+                .texOffs(108, 56).addBox(-4.5F, -8.3F, -4.75F, 9.0F, 4.0F, 1.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition lockLeft = head.addOrReplaceChild("lock_left", CubeListBuilder.create()
+                .texOffs(122, 40).addBox(-1.0F, 0.0F, -0.5F, 2.0F, 6.0F, 1.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(3.7F, -4.6F, -3.7F, -0.04F, 0.0F, -0.04F));
+        lockLeft.addOrReplaceChild("lock_left_2", CubeListBuilder.create()
+                .texOffs(102, 56).addBox(-1.0F, 0.0F, -0.5F, 2.0F, 6.0F, 1.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 6.0F, 0.0F, 0.03F, 0.0F, 0.03F));
+        PartDefinition lockRight = head.addOrReplaceChild("lock_right", CubeListBuilder.create()
+                .texOffs(122, 24).addBox(-1.0F, 0.0F, -0.5F, 2.0F, 6.0F, 1.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(-3.7F, -4.6F, -3.7F, -0.04F, 0.0F, 0.04F));
+        lockRight.addOrReplaceChild("lock_right_2", CubeListBuilder.create()
+                .texOffs(116, 40).addBox(-1.0F, 0.0F, -0.5F, 2.0F, 6.0F, 1.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 6.0F, 0.0F, 0.03F, 0.0F, -0.03F));
+        PartDefinition hairBack = head.addOrReplaceChild("hair_back", CubeListBuilder.create()
+                .texOffs(64, 40).addBox(-4.5F, 0.0F, -0.5F, 9.0F, 11.0F, 2.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, -7.0F, 4.0F, 0.06F, 0.0F, 0.0F));
+        hairBack.addOrReplaceChild("hair_back_2", CubeListBuilder.create()
+                .texOffs(94, 40).addBox(-4.5F, 0.0F, -0.5F, 9.0F, 9.0F, 2.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 11.0F, 0.0F, 0.03F, 0.0F, 0.0F));
+        PartDefinition tailLeft = head.addOrReplaceChild("tail_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailLeft2 = tailLeft.addOrReplaceChild("tail_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        tailLeft2.addOrReplaceChild("tail_left_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailRight = head.addOrReplaceChild("tail_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailRight2 = tailRight.addOrReplaceChild("tail_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        tailRight2.addOrReplaceChild("tail_right_3", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("ear_left", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("ear_right", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("horn_left", CubeListBuilder.create(),
+        PartDefinition hornLeft = head.addOrReplaceChild("horn_left", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("horn_right", CubeListBuilder.create(),
+        PartDefinition hornLeft2 = hornLeft.addOrReplaceChild("horn_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hornLeft2.addOrReplaceChild("horn_left_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hornRight = head.addOrReplaceChild("horn_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hornRight2 = hornRight.addOrReplaceChild("horn_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hornRight2.addOrReplaceChild("horn_right_3", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("crown", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition body = root.addOrReplaceChild("body", CubeListBuilder.create()
-                .texOffs(82, 0).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, CubeDeformation.NONE),
+                .texOffs(32, 24).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         body.addOrReplaceChild("jacket", CubeListBuilder.create()
-                .texOffs(0, 17).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
+                .texOffs(56, 24).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        body.addOrReplaceChild("cape", CubeListBuilder.create(),
+        body.addOrReplaceChild("collar", CubeListBuilder.create()
+                .texOffs(36, 56).addBox(-5.0F, -0.8F, -2.6F, 10.0F, 3.0F, 7.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        body.addOrReplaceChild("skirt", CubeListBuilder.create()
-                .texOffs(16, 33).addBox(-4.5F, 0.0F, -2.5F, 9.0F, 7.0F, 5.0F, CubeDeformation.NONE)
-                .texOffs(44, 33).addBox(-5.0F, 7.0F, -3.0F, 10.0F, 6.0F, 6.0F, CubeDeformation.NONE),
-            PartPose.offsetAndRotation(0.0F, 10.5F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition cape = body.addOrReplaceChild("cape", CubeListBuilder.create()
+                .texOffs(0, 0).addBox(-5.0F, 0.0F, 0.0F, 10.0F, 23.0F, 1.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 0.5F, 2.6F, 0.04F, 0.0F, 0.0F));
+        cape.addOrReplaceChild("cape_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition skirt = body.addOrReplaceChild("skirt", CubeListBuilder.create()
+                .texOffs(22, 0).addBox(-4.5F, 0.0F, -2.5F, 9.0F, 12.0F, 5.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 11.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        skirt.addOrReplaceChild("skirt_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        body.addOrReplaceChild("coat_left", CubeListBuilder.create()
+                .texOffs(86, 40).addBox(2.6F, 0.0F, -3.2F, 3.0F, 12.0F, 1.0F, CubeDeformation.NONE)
+                .texOffs(62, 0).addBox(4.6F, 0.0F, -2.6F, 1.0F, 12.0F, 5.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 11.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        body.addOrReplaceChild("coat_right", CubeListBuilder.create()
+                .texOffs(120, 0).addBox(-5.2F, 0.0F, -3.2F, 3.0F, 12.0F, 1.0F, CubeDeformation.NONE)
+                .texOffs(50, 0).addBox(-5.6F, 0.0F, -2.6F, 1.0F, 12.0F, 5.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 11.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition rightArm = root.addOrReplaceChild("right_arm", CubeListBuilder.create()
                 .texOffs(106, 0).addBox(-2.0F, -2.0F, -2.0F, 3.0F, 12.0F, 4.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(-5.0F, 2.5F, 0.0F, 0.0F, 0.0F, 0.0F));
         rightArm.addOrReplaceChild("right_sleeve", CubeListBuilder.create()
-                .texOffs(24, 17).addBox(-2.0F, -2.0F, -2.0F, 3.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
+                .texOffs(80, 24).addBox(-2.0F, -2.0F, -2.0F, 3.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         rightArm.addOrReplaceChild("prop", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition leftArm = root.addOrReplaceChild("left_arm", CubeListBuilder.create()
-                .texOffs(38, 17).addBox(-1.0F, -2.0F, -2.0F, 3.0F, 12.0F, 4.0F, CubeDeformation.NONE),
+                .texOffs(94, 24).addBox(-1.0F, -2.0F, -2.0F, 3.0F, 12.0F, 4.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(5.0F, 2.5F, 0.0F, 0.0F, 0.0F, 0.0F));
         leftArm.addOrReplaceChild("left_sleeve", CubeListBuilder.create()
-                .texOffs(52, 17).addBox(-1.0F, -2.0F, -2.0F, 3.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
+                .texOffs(108, 24).addBox(-1.0F, -2.0F, -2.0F, 3.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         leftArm.addOrReplaceChild("prop_left", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition rightLeg = root.addOrReplaceChild("right_leg", CubeListBuilder.create()
-                .texOffs(66, 17).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, CubeDeformation.NONE),
+                .texOffs(0, 40).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(-1.9F, 12.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         rightLeg.addOrReplaceChild("right_pants", CubeListBuilder.create()
-                .texOffs(82, 17).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
+                .texOffs(16, 40).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition leftLeg = root.addOrReplaceChild("left_leg", CubeListBuilder.create()
-                .texOffs(98, 17).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, CubeDeformation.NONE),
+                .texOffs(32, 40).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(1.9F, 12.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         leftLeg.addOrReplaceChild("left_pants", CubeListBuilder.create()
-                .texOffs(0, 33).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
+                .texOffs(48, 40).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         return LayerDefinition.create(mesh, 128, 128);
     }
@@ -321,36 +429,78 @@ public enum CharacterKind {
         head.addOrReplaceChild("hat", CubeListBuilder.create()
                 .texOffs(32, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.5F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("hair_back", CubeListBuilder.create(),
+        head.addOrReplaceChild("hair_top", CubeListBuilder.create()
+                .texOffs(36, 32).addBox(-4.0F, -9.1F, -4.0F, 8.0F, 1.0F, 8.0F, CubeDeformation.NONE)
+                .texOffs(0, 32).addBox(-4.5F, -8.6F, -4.5F, 9.0F, 1.0F, 9.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("tail_left", CubeListBuilder.create(),
+        head.addOrReplaceChild("bangs", CubeListBuilder.create()
+                .texOffs(96, 32).addBox(-4.5F, -8.3F, -4.75F, 9.0F, 4.0F, 1.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("tail_right", CubeListBuilder.create(),
+        PartDefinition lockLeft = head.addOrReplaceChild("lock_left", CubeListBuilder.create()
+                .texOffs(120, 16).addBox(-0.5F, 0.0F, -1.5F, 1.0F, 4.0F, 3.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(4.3F, -5.5F, -0.5F, 0.15F, 0.0F, -0.25F));
+        lockLeft.addOrReplaceChild("lock_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition lockRight = head.addOrReplaceChild("lock_right", CubeListBuilder.create()
+                .texOffs(112, 16).addBox(-0.5F, 0.0F, -1.5F, 1.0F, 4.0F, 3.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(-4.3F, -5.5F, -0.5F, 0.15F, 0.0F, 0.25F));
+        lockRight.addOrReplaceChild("lock_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hairBack = head.addOrReplaceChild("hair_back", CubeListBuilder.create()
+                .texOffs(0, 42).addBox(-3.5F, 0.0F, -0.5F, 7.0F, 3.0F, 1.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, -3.0F, 4.1F, 0.35F, 0.0F, 0.0F));
+        hairBack.addOrReplaceChild("hair_back_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailLeft = head.addOrReplaceChild("tail_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailLeft2 = tailLeft.addOrReplaceChild("tail_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        tailLeft2.addOrReplaceChild("tail_left_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailRight = head.addOrReplaceChild("tail_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailRight2 = tailRight.addOrReplaceChild("tail_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        tailRight2.addOrReplaceChild("tail_right_3", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("ear_left", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("ear_right", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("horn_left", CubeListBuilder.create(),
+        PartDefinition hornLeft = head.addOrReplaceChild("horn_left", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("horn_right", CubeListBuilder.create(),
+        PartDefinition hornLeft2 = hornLeft.addOrReplaceChild("horn_left_2", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("crown", CubeListBuilder.create()
-                .texOffs(0, 32).addBox(-3.0F, -2.0F, -2.0F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(112, 16).addBox(0.0F, -3.0F, -3.0F, 2.0F, 3.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(8, 32).addBox(2.0F, -2.0F, -1.0F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(16, 32).addBox(-2.0F, -2.0F, 1.0F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(120, 16).addBox(1.0F, -3.0F, 2.0F, 2.0F, 3.0F, 2.0F, CubeDeformation.NONE),
-            PartPose.offsetAndRotation(0.0F, -8.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hornLeft2.addOrReplaceChild("horn_left_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hornRight = head.addOrReplaceChild("horn_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hornRight2 = hornRight.addOrReplaceChild("horn_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hornRight2.addOrReplaceChild("horn_right_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        head.addOrReplaceChild("crown", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition body = root.addOrReplaceChild("body", CubeListBuilder.create()
                 .texOffs(64, 0).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         body.addOrReplaceChild("jacket", CubeListBuilder.create()
                 .texOffs(88, 0).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        body.addOrReplaceChild("cape", CubeListBuilder.create(),
+        body.addOrReplaceChild("collar", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        body.addOrReplaceChild("skirt", CubeListBuilder.create(),
+        PartDefinition cape = body.addOrReplaceChild("cape", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        cape.addOrReplaceChild("cape_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition skirt = body.addOrReplaceChild("skirt", CubeListBuilder.create()
+                .texOffs(68, 32).addBox(-4.5F, 0.0F, -2.5F, 9.0F, 3.0F, 5.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 10.5F, 0.0F, 0.0F, 0.0F, 0.0F));
+        skirt.addOrReplaceChild("skirt_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        body.addOrReplaceChild("coat_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        body.addOrReplaceChild("coat_right", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition rightArm = root.addOrReplaceChild("right_arm", CubeListBuilder.create()
                 .texOffs(112, 0).addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, CubeDeformation.NONE),
@@ -392,35 +542,68 @@ public enum CharacterKind {
         head.addOrReplaceChild("hat", CubeListBuilder.create()
                 .texOffs(32, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.5F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("hair_back", CubeListBuilder.create()
+        head.addOrReplaceChild("hair_top", CubeListBuilder.create()
+                .texOffs(96, 32).addBox(-4.0F, -9.1F, -4.0F, 8.0F, 1.0F, 8.0F, CubeDeformation.NONE)
+                .texOffs(60, 32).addBox(-4.5F, -8.6F, -4.5F, 9.0F, 1.0F, 9.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        head.addOrReplaceChild("bangs", CubeListBuilder.create()
+                .texOffs(36, 44).addBox(-4.5F, -8.3F, -4.75F, 9.0F, 5.0F, 1.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition lockLeft = head.addOrReplaceChild("lock_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        lockLeft.addOrReplaceChild("lock_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition lockRight = head.addOrReplaceChild("lock_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        lockRight.addOrReplaceChild("lock_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hairBack = head.addOrReplaceChild("hair_back", CubeListBuilder.create()
                 .texOffs(106, 16).addBox(-4.0F, 0.0F, 0.0F, 8.0F, 15.0F, 1.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, -6.5F, 4.0F, 0.08F, 0.0F, 0.0F));
-        head.addOrReplaceChild("tail_left", CubeListBuilder.create(),
+        hairBack.addOrReplaceChild("hair_back_2", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("tail_right", CubeListBuilder.create()
-                .texOffs(18, 44).addBox(-1.0F, -1.0F, -1.0F, 2.0F, 1.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(96, 32).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 3.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(104, 32).addBox(-1.5F, 3.0F, -1.5F, 3.0F, 3.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(114, 32).addBox(-1.0F, 6.0F, -1.0F, 2.0F, 3.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(0, 44).addBox(-1.5F, 9.0F, -1.5F, 3.0F, 3.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(10, 44).addBox(-1.0F, 12.0F, -1.0F, 2.0F, 3.0F, 2.0F, CubeDeformation.NONE),
+        PartDefinition tailLeft = head.addOrReplaceChild("tail_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailLeft2 = tailLeft.addOrReplaceChild("tail_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        tailLeft2.addOrReplaceChild("tail_left_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailRight = head.addOrReplaceChild("tail_right", CubeListBuilder.create()
+                .texOffs(100, 44).addBox(-1.0F, -1.0F, -1.0F, 2.0F, 1.0F, 2.0F, CubeDeformation.NONE)
+                .texOffs(56, 44).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 3.0F, 2.0F, CubeDeformation.NONE)
+                .texOffs(64, 44).addBox(-1.5F, 3.0F, -1.5F, 3.0F, 3.0F, 2.0F, CubeDeformation.NONE)
+                .texOffs(74, 44).addBox(-1.0F, 6.0F, -1.0F, 2.0F, 3.0F, 2.0F, CubeDeformation.NONE)
+                .texOffs(82, 44).addBox(-1.5F, 9.0F, -1.5F, 3.0F, 3.0F, 2.0F, CubeDeformation.NONE)
+                .texOffs(92, 44).addBox(-1.0F, 12.0F, -1.0F, 2.0F, 3.0F, 2.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, -1.0F, 4.5F, 0.12F, 0.0F, 0.0F));
+        PartDefinition tailRight2 = tailRight.addOrReplaceChild("tail_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        tailRight2.addOrReplaceChild("tail_right_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("ear_left", CubeListBuilder.create()
-                .texOffs(26, 44).addBox(0.0F, -1.0F, -0.5F, 2.0F, 2.0F, 1.0F, CubeDeformation.NONE)
-                .texOffs(44, 44).addBox(2.0F, -1.3F, -0.5F, 2.0F, 1.0F, 1.0F, CubeDeformation.NONE)
-                .texOffs(50, 44).addBox(4.0F, -1.5F, -0.5F, 2.0F, 1.0F, 1.0F, CubeDeformation.NONE),
+                .texOffs(114, 44).addBox(0.0F, -1.0F, -0.5F, 2.0F, 2.0F, 1.0F, CubeDeformation.NONE)
+                .texOffs(6, 54).addBox(2.0F, -1.3F, -0.5F, 2.0F, 1.0F, 1.0F, CubeDeformation.NONE)
+                .texOffs(12, 54).addBox(4.0F, -1.5F, -0.5F, 2.0F, 1.0F, 1.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(4.0F, -3.3F, 0.4F, 0.0F, -0.32F, -0.14F));
         head.addOrReplaceChild("ear_right", CubeListBuilder.create()
-                .texOffs(122, 32).addBox(-2.0F, -1.0F, -0.5F, 2.0F, 2.0F, 1.0F, CubeDeformation.NONE)
-                .texOffs(32, 44).addBox(-4.0F, -1.3F, -0.5F, 2.0F, 1.0F, 1.0F, CubeDeformation.NONE)
-                .texOffs(38, 44).addBox(-6.0F, -1.5F, -0.5F, 2.0F, 1.0F, 1.0F, CubeDeformation.NONE),
+                .texOffs(108, 44).addBox(-2.0F, -1.0F, -0.5F, 2.0F, 2.0F, 1.0F, CubeDeformation.NONE)
+                .texOffs(120, 44).addBox(-4.0F, -1.3F, -0.5F, 2.0F, 1.0F, 1.0F, CubeDeformation.NONE)
+                .texOffs(0, 54).addBox(-6.0F, -1.5F, -0.5F, 2.0F, 1.0F, 1.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(-4.0F, -3.3F, 0.4F, 0.0F, 0.32F, 0.14F));
-        head.addOrReplaceChild("horn_left", CubeListBuilder.create(),
+        PartDefinition hornLeft = head.addOrReplaceChild("horn_left", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("horn_right", CubeListBuilder.create(),
+        PartDefinition hornLeft2 = hornLeft.addOrReplaceChild("horn_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hornLeft2.addOrReplaceChild("horn_left_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hornRight = head.addOrReplaceChild("horn_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hornRight2 = hornRight.addOrReplaceChild("horn_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hornRight2.addOrReplaceChild("horn_right_3", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("crown", CubeListBuilder.create()
-                .texOffs(60, 32).addBox(-4.5F, -0.5F, -4.5F, 9.0F, 1.0F, 9.0F, CubeDeformation.NONE),
+                .texOffs(0, 44).addBox(-4.5F, -0.5F, -4.5F, 9.0F, 1.0F, 9.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, -6.6F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition body = root.addOrReplaceChild("body", CubeListBuilder.create()
                 .texOffs(64, 0).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, CubeDeformation.NONE),
@@ -428,12 +611,22 @@ public enum CharacterKind {
         body.addOrReplaceChild("jacket", CubeListBuilder.create()
                 .texOffs(88, 0).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        body.addOrReplaceChild("cape", CubeListBuilder.create(),
+        body.addOrReplaceChild("collar", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        body.addOrReplaceChild("skirt", CubeListBuilder.create()
+        PartDefinition cape = body.addOrReplaceChild("cape", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        cape.addOrReplaceChild("cape_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition skirt = body.addOrReplaceChild("skirt", CubeListBuilder.create()
                 .texOffs(0, 32).addBox(-4.5F, 0.0F, -2.5F, 9.0F, 7.0F, 5.0F, CubeDeformation.NONE)
                 .texOffs(28, 32).addBox(-5.0F, 7.0F, -3.0F, 10.0F, 6.0F, 6.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 10.5F, 0.0F, 0.0F, 0.0F, 0.0F));
+        skirt.addOrReplaceChild("skirt_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        body.addOrReplaceChild("coat_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        body.addOrReplaceChild("coat_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition rightArm = root.addOrReplaceChild("right_arm", CubeListBuilder.create()
                 .texOffs(112, 0).addBox(-2.0F, -2.0F, -2.0F, 3.0F, 12.0F, 4.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(-5.0F, 2.5F, 0.0F, 0.0F, 0.0F, 0.0F));
@@ -469,65 +662,111 @@ public enum CharacterKind {
         MeshDefinition mesh = new MeshDefinition();
         PartDefinition root = mesh.getRoot();
         PartDefinition head = root.addOrReplaceChild("head", CubeListBuilder.create()
-                .texOffs(22, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, CubeDeformation.NONE),
+                .texOffs(0, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("hat", CubeListBuilder.create()
-                .texOffs(54, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.5F)),
+                .texOffs(32, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.5F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("hair_back", CubeListBuilder.create(),
+        head.addOrReplaceChild("hair_top", CubeListBuilder.create()
+                .texOffs(38, 45).addBox(-4.0F, -9.1F, -4.0F, 8.0F, 1.0F, 8.0F, CubeDeformation.NONE)
+                .texOffs(60, 32).addBox(-4.5F, -8.6F, -4.5F, 9.0F, 1.0F, 9.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("tail_left", CubeListBuilder.create(),
+        head.addOrReplaceChild("bangs", CubeListBuilder.create()
+                .texOffs(70, 45).addBox(-4.5F, -8.3F, -4.75F, 9.0F, 4.0F, 1.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("tail_right", CubeListBuilder.create(),
+        PartDefinition lockLeft = head.addOrReplaceChild("lock_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        lockLeft.addOrReplaceChild("lock_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition lockRight = head.addOrReplaceChild("lock_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        lockRight.addOrReplaceChild("lock_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hairBack = head.addOrReplaceChild("hair_back", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hairBack.addOrReplaceChild("hair_back_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailLeft = head.addOrReplaceChild("tail_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailLeft2 = tailLeft.addOrReplaceChild("tail_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        tailLeft2.addOrReplaceChild("tail_left_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailRight = head.addOrReplaceChild("tail_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailRight2 = tailRight.addOrReplaceChild("tail_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        tailRight2.addOrReplaceChild("tail_right_3", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("ear_left", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("ear_right", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("horn_left", CubeListBuilder.create(),
+        PartDefinition hornLeft = head.addOrReplaceChild("horn_left", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("horn_right", CubeListBuilder.create(),
+        PartDefinition hornLeft2 = hornLeft.addOrReplaceChild("horn_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hornLeft2.addOrReplaceChild("horn_left_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hornRight = head.addOrReplaceChild("horn_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hornRight2 = hornRight.addOrReplaceChild("horn_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hornRight2.addOrReplaceChild("horn_right_3", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("crown", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition body = root.addOrReplaceChild("body", CubeListBuilder.create()
-                .texOffs(86, 0).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, CubeDeformation.NONE),
+                .texOffs(64, 0).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         body.addOrReplaceChild("jacket", CubeListBuilder.create()
-                .texOffs(0, 20).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
+                .texOffs(88, 0).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        body.addOrReplaceChild("cape", CubeListBuilder.create()
-                .texOffs(0, 0).addBox(-5.0F, 0.0F, 0.0F, 10.0F, 19.0F, 1.0F, CubeDeformation.NONE),
-            PartPose.offsetAndRotation(0.0F, 0.2F, 2.6F, 0.08F, 0.0F, 0.0F));
-        body.addOrReplaceChild("skirt", CubeListBuilder.create(),
+        body.addOrReplaceChild("collar", CubeListBuilder.create()
+                .texOffs(0, 45).addBox(-6.5F, -0.8F, -3.0F, 13.0F, 4.0F, 6.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition cape = body.addOrReplaceChild("cape", CubeListBuilder.create()
+                .texOffs(0, 32).addBox(-7.0F, 0.0F, 0.0F, 14.0F, 12.0F, 1.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 0.4F, 3.0F, 0.06F, 0.0F, 0.0F));
+        cape.addOrReplaceChild("cape_2", CubeListBuilder.create()
+                .texOffs(30, 32).addBox(-7.0F, 0.0F, 0.0F, 14.0F, 11.0F, 1.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 12.0F, 0.0F, 0.04F, 0.0F, 0.0F));
+        PartDefinition skirt = body.addOrReplaceChild("skirt", CubeListBuilder.create()
+                .texOffs(96, 32).addBox(-4.5F, 0.0F, -2.5F, 9.0F, 5.0F, 5.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 11.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        skirt.addOrReplaceChild("skirt_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        body.addOrReplaceChild("coat_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        body.addOrReplaceChild("coat_right", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition rightArm = root.addOrReplaceChild("right_arm", CubeListBuilder.create()
-                .texOffs(110, 0).addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, CubeDeformation.NONE),
+                .texOffs(112, 0).addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(-5.0F, 2.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         rightArm.addOrReplaceChild("right_sleeve", CubeListBuilder.create()
-                .texOffs(24, 20).addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
+                .texOffs(0, 16).addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         rightArm.addOrReplaceChild("prop", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition leftArm = root.addOrReplaceChild("left_arm", CubeListBuilder.create()
-                .texOffs(40, 20).addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, CubeDeformation.NONE),
+                .texOffs(16, 16).addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(5.0F, 2.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         leftArm.addOrReplaceChild("left_sleeve", CubeListBuilder.create()
-                .texOffs(56, 20).addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
+                .texOffs(32, 16).addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         leftArm.addOrReplaceChild("prop_left", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition rightLeg = root.addOrReplaceChild("right_leg", CubeListBuilder.create()
-                .texOffs(72, 20).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, CubeDeformation.NONE),
+                .texOffs(48, 16).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(-1.9F, 12.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         rightLeg.addOrReplaceChild("right_pants", CubeListBuilder.create()
-                .texOffs(88, 20).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
+                .texOffs(64, 16).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition leftLeg = root.addOrReplaceChild("left_leg", CubeListBuilder.create()
-                .texOffs(104, 20).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, CubeDeformation.NONE),
+                .texOffs(80, 16).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(1.9F, 12.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         leftLeg.addOrReplaceChild("left_pants", CubeListBuilder.create()
-                .texOffs(0, 36).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
+                .texOffs(96, 16).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         return LayerDefinition.create(mesh, 128, 128);
     }
@@ -541,25 +780,58 @@ public enum CharacterKind {
         head.addOrReplaceChild("hat", CubeListBuilder.create()
                 .texOffs(32, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.5F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("hair_back", CubeListBuilder.create(),
+        head.addOrReplaceChild("hair_top", CubeListBuilder.create()
+                .texOffs(36, 30).addBox(-4.0F, -9.1F, -4.0F, 8.0F, 1.0F, 8.0F, CubeDeformation.NONE)
+                .texOffs(0, 30).addBox(-4.5F, -8.6F, -4.5F, 9.0F, 1.0F, 9.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("tail_left", CubeListBuilder.create(),
+        head.addOrReplaceChild("bangs", CubeListBuilder.create()
+                .texOffs(68, 30).addBox(-4.5F, -8.3F, -4.75F, 9.0F, 4.0F, 1.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("tail_right", CubeListBuilder.create(),
+        PartDefinition lockLeft = head.addOrReplaceChild("lock_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        lockLeft.addOrReplaceChild("lock_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition lockRight = head.addOrReplaceChild("lock_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        lockRight.addOrReplaceChild("lock_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hairBack = head.addOrReplaceChild("hair_back", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hairBack.addOrReplaceChild("hair_back_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailLeft = head.addOrReplaceChild("tail_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailLeft2 = tailLeft.addOrReplaceChild("tail_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        tailLeft2.addOrReplaceChild("tail_left_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailRight = head.addOrReplaceChild("tail_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailRight2 = tailRight.addOrReplaceChild("tail_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        tailRight2.addOrReplaceChild("tail_right_3", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("ear_left", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("ear_right", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("horn_left", CubeListBuilder.create(),
+        PartDefinition hornLeft = head.addOrReplaceChild("horn_left", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("horn_right", CubeListBuilder.create(),
+        PartDefinition hornLeft2 = hornLeft.addOrReplaceChild("horn_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hornLeft2.addOrReplaceChild("horn_left_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hornRight = head.addOrReplaceChild("horn_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hornRight2 = hornRight.addOrReplaceChild("horn_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hornRight2.addOrReplaceChild("horn_right_3", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("crown", CubeListBuilder.create()
                 .texOffs(112, 16).addBox(-3.5F, 0.0F, -1.0F, 7.0F, 6.0F, 1.0F, CubeDeformation.NONE)
-                .texOffs(0, 30).addBox(-2.5F, 6.0F, -1.0F, 5.0F, 3.0F, 1.0F, CubeDeformation.NONE)
-                .texOffs(12, 30).addBox(-4.0F, -1.2F, -1.3F, 3.0F, 1.0F, 1.0F, CubeDeformation.NONE)
-                .texOffs(20, 30).addBox(1.0F, -1.2F, -1.3F, 3.0F, 1.0F, 1.0F, CubeDeformation.NONE),
+                .texOffs(88, 30).addBox(-2.5F, 6.0F, -1.0F, 5.0F, 3.0F, 1.0F, CubeDeformation.NONE)
+                .texOffs(100, 30).addBox(-4.0F, -1.2F, -1.3F, 3.0F, 1.0F, 1.0F, CubeDeformation.NONE)
+                .texOffs(108, 30).addBox(1.0F, -1.2F, -1.3F, 3.0F, 1.0F, 1.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, -2.0F, -4.2F, 0.0F, 0.0F, 0.0F));
         PartDefinition body = root.addOrReplaceChild("body", CubeListBuilder.create()
                 .texOffs(64, 0).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 10.0F, 4.0F, CubeDeformation.NONE),
@@ -567,9 +839,19 @@ public enum CharacterKind {
         body.addOrReplaceChild("jacket", CubeListBuilder.create()
                 .texOffs(88, 0).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 10.0F, 4.0F, new CubeDeformation(0.25F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        body.addOrReplaceChild("cape", CubeListBuilder.create(),
+        body.addOrReplaceChild("collar", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        body.addOrReplaceChild("skirt", CubeListBuilder.create(),
+        PartDefinition cape = body.addOrReplaceChild("cape", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        cape.addOrReplaceChild("cape_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition skirt = body.addOrReplaceChild("skirt", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        skirt.addOrReplaceChild("skirt_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        body.addOrReplaceChild("coat_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        body.addOrReplaceChild("coat_right", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition rightArm = root.addOrReplaceChild("right_arm", CubeListBuilder.create()
                 .texOffs(112, 0).addBox(-3.0F, -2.0F, -2.0F, 4.0F, 10.0F, 4.0F, CubeDeformation.NONE),
@@ -611,19 +893,52 @@ public enum CharacterKind {
         head.addOrReplaceChild("hat", CubeListBuilder.create()
                 .texOffs(32, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.5F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("hair_back", CubeListBuilder.create(),
+        head.addOrReplaceChild("hair_top", CubeListBuilder.create()
+                .texOffs(64, 44).addBox(-4.0F, -9.1F, -4.0F, 8.0F, 1.0F, 8.0F, CubeDeformation.NONE)
+                .texOffs(28, 44).addBox(-4.5F, -8.6F, -4.5F, 9.0F, 1.0F, 9.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("tail_left", CubeListBuilder.create(),
+        head.addOrReplaceChild("bangs", CubeListBuilder.create()
+                .texOffs(104, 32).addBox(-4.5F, -8.3F, -4.75F, 9.0F, 3.0F, 1.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("tail_right", CubeListBuilder.create(),
+        PartDefinition lockLeft = head.addOrReplaceChild("lock_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        lockLeft.addOrReplaceChild("lock_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition lockRight = head.addOrReplaceChild("lock_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        lockRight.addOrReplaceChild("lock_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hairBack = head.addOrReplaceChild("hair_back", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hairBack.addOrReplaceChild("hair_back_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailLeft = head.addOrReplaceChild("tail_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailLeft2 = tailLeft.addOrReplaceChild("tail_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        tailLeft2.addOrReplaceChild("tail_left_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailRight = head.addOrReplaceChild("tail_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailRight2 = tailRight.addOrReplaceChild("tail_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        tailRight2.addOrReplaceChild("tail_right_3", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("ear_left", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("ear_right", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("horn_left", CubeListBuilder.create(),
+        PartDefinition hornLeft = head.addOrReplaceChild("horn_left", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("horn_right", CubeListBuilder.create(),
+        PartDefinition hornLeft2 = hornLeft.addOrReplaceChild("horn_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hornLeft2.addOrReplaceChild("horn_left_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hornRight = head.addOrReplaceChild("horn_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hornRight2 = hornRight.addOrReplaceChild("horn_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hornRight2.addOrReplaceChild("horn_right_3", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("crown", CubeListBuilder.create()
                 .texOffs(0, 32).addBox(-5.5F, -0.5F, -5.5F, 11.0F, 1.0F, 11.0F, CubeDeformation.NONE)
@@ -636,12 +951,22 @@ public enum CharacterKind {
         body.addOrReplaceChild("jacket", CubeListBuilder.create()
                 .texOffs(88, 0).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        body.addOrReplaceChild("cape", CubeListBuilder.create(),
+        body.addOrReplaceChild("collar", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        body.addOrReplaceChild("skirt", CubeListBuilder.create()
+        PartDefinition cape = body.addOrReplaceChild("cape", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        cape.addOrReplaceChild("cape_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition skirt = body.addOrReplaceChild("skirt", CubeListBuilder.create()
                 .texOffs(44, 32).addBox(-4.5F, 0.0F, -2.5F, 9.0F, 7.0F, 5.0F, CubeDeformation.NONE)
                 .texOffs(72, 32).addBox(-5.0F, 7.0F, -3.0F, 10.0F, 6.0F, 6.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 10.5F, 0.0F, 0.0F, 0.0F, 0.0F));
+        skirt.addOrReplaceChild("skirt_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        body.addOrReplaceChild("coat_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        body.addOrReplaceChild("coat_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition rightArm = root.addOrReplaceChild("right_arm", CubeListBuilder.create()
                 .texOffs(112, 0).addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(-5.0F, 2.0F, 0.0F, 0.0F, 0.0F, 0.0F));
@@ -682,19 +1007,50 @@ public enum CharacterKind {
         head.addOrReplaceChild("hat", CubeListBuilder.create()
                 .texOffs(32, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.5F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("hair_back", CubeListBuilder.create(),
+        head.addOrReplaceChild("hair_top", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("tail_left", CubeListBuilder.create(),
+        head.addOrReplaceChild("bangs", CubeListBuilder.create()
+                .texOffs(28, 32).addBox(-4.5F, -8.3F, -4.75F, 9.0F, 3.0F, 1.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("tail_right", CubeListBuilder.create(),
+        PartDefinition lockLeft = head.addOrReplaceChild("lock_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        lockLeft.addOrReplaceChild("lock_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition lockRight = head.addOrReplaceChild("lock_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        lockRight.addOrReplaceChild("lock_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hairBack = head.addOrReplaceChild("hair_back", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hairBack.addOrReplaceChild("hair_back_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailLeft = head.addOrReplaceChild("tail_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailLeft2 = tailLeft.addOrReplaceChild("tail_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        tailLeft2.addOrReplaceChild("tail_left_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailRight = head.addOrReplaceChild("tail_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailRight2 = tailRight.addOrReplaceChild("tail_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        tailRight2.addOrReplaceChild("tail_right_3", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("ear_left", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("ear_right", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("horn_left", CubeListBuilder.create(),
+        PartDefinition hornLeft = head.addOrReplaceChild("horn_left", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("horn_right", CubeListBuilder.create(),
+        PartDefinition hornLeft2 = hornLeft.addOrReplaceChild("horn_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hornLeft2.addOrReplaceChild("horn_left_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hornRight = head.addOrReplaceChild("horn_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hornRight2 = hornRight.addOrReplaceChild("horn_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hornRight2.addOrReplaceChild("horn_right_3", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("crown", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
@@ -704,11 +1060,21 @@ public enum CharacterKind {
         body.addOrReplaceChild("jacket", CubeListBuilder.create()
                 .texOffs(88, 0).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        body.addOrReplaceChild("cape", CubeListBuilder.create(),
+        body.addOrReplaceChild("collar", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        body.addOrReplaceChild("skirt", CubeListBuilder.create()
+        PartDefinition cape = body.addOrReplaceChild("cape", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        cape.addOrReplaceChild("cape_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition skirt = body.addOrReplaceChild("skirt", CubeListBuilder.create()
                 .texOffs(0, 32).addBox(-4.5F, 0.0F, -2.5F, 9.0F, 8.0F, 5.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 10.5F, 0.0F, 0.0F, 0.0F, 0.0F));
+        skirt.addOrReplaceChild("skirt_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        body.addOrReplaceChild("coat_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        body.addOrReplaceChild("coat_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition rightArm = root.addOrReplaceChild("right_arm", CubeListBuilder.create()
                 .texOffs(112, 0).addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(-5.0F, 2.0F, 0.0F, 0.0F, 0.0F, 0.0F));
@@ -749,19 +1115,52 @@ public enum CharacterKind {
         head.addOrReplaceChild("hat", CubeListBuilder.create()
                 .texOffs(32, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.5F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("hair_back", CubeListBuilder.create(),
+        head.addOrReplaceChild("hair_top", CubeListBuilder.create()
+                .texOffs(96, 32).addBox(-4.0F, -9.1F, -4.0F, 8.0F, 1.0F, 8.0F, CubeDeformation.NONE)
+                .texOffs(60, 32).addBox(-4.5F, -8.6F, -4.5F, 9.0F, 1.0F, 9.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("tail_left", CubeListBuilder.create(),
+        head.addOrReplaceChild("bangs", CubeListBuilder.create()
+                .texOffs(0, 44).addBox(-4.5F, -8.3F, -4.75F, 9.0F, 4.0F, 1.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("tail_right", CubeListBuilder.create(),
+        PartDefinition lockLeft = head.addOrReplaceChild("lock_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        lockLeft.addOrReplaceChild("lock_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition lockRight = head.addOrReplaceChild("lock_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        lockRight.addOrReplaceChild("lock_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hairBack = head.addOrReplaceChild("hair_back", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hairBack.addOrReplaceChild("hair_back_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailLeft = head.addOrReplaceChild("tail_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailLeft2 = tailLeft.addOrReplaceChild("tail_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        tailLeft2.addOrReplaceChild("tail_left_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailRight = head.addOrReplaceChild("tail_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailRight2 = tailRight.addOrReplaceChild("tail_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        tailRight2.addOrReplaceChild("tail_right_3", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("ear_left", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("ear_right", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("horn_left", CubeListBuilder.create(),
+        PartDefinition hornLeft = head.addOrReplaceChild("horn_left", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("horn_right", CubeListBuilder.create(),
+        PartDefinition hornLeft2 = hornLeft.addOrReplaceChild("horn_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hornLeft2.addOrReplaceChild("horn_left_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hornRight = head.addOrReplaceChild("horn_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hornRight2 = hornRight.addOrReplaceChild("horn_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hornRight2.addOrReplaceChild("horn_right_3", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("crown", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
@@ -771,12 +1170,22 @@ public enum CharacterKind {
         body.addOrReplaceChild("jacket", CubeListBuilder.create()
                 .texOffs(88, 0).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        body.addOrReplaceChild("cape", CubeListBuilder.create(),
+        body.addOrReplaceChild("collar", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        body.addOrReplaceChild("skirt", CubeListBuilder.create()
+        PartDefinition cape = body.addOrReplaceChild("cape", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        cape.addOrReplaceChild("cape_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition skirt = body.addOrReplaceChild("skirt", CubeListBuilder.create()
                 .texOffs(0, 32).addBox(-4.5F, 0.0F, -2.5F, 9.0F, 7.0F, 5.0F, CubeDeformation.NONE)
                 .texOffs(28, 32).addBox(-5.0F, 7.0F, -3.0F, 10.0F, 6.0F, 6.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 10.5F, 0.0F, 0.0F, 0.0F, 0.0F));
+        skirt.addOrReplaceChild("skirt_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        body.addOrReplaceChild("coat_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        body.addOrReplaceChild("coat_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition rightArm = root.addOrReplaceChild("right_arm", CubeListBuilder.create()
                 .texOffs(112, 0).addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(-5.0F, 2.0F, 0.0F, 0.0F, 0.0F, 0.0F));
@@ -812,52 +1221,101 @@ public enum CharacterKind {
         MeshDefinition mesh = new MeshDefinition();
         PartDefinition root = mesh.getRoot();
         PartDefinition head = root.addOrReplaceChild("head", CubeListBuilder.create()
-                .texOffs(18, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, CubeDeformation.NONE),
+                .texOffs(24, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("hat", CubeListBuilder.create()
-                .texOffs(50, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.5F)),
+                .texOffs(56, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.5F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("hair_back", CubeListBuilder.create()
-                .texOffs(0, 0).addBox(-4.0F, 0.0F, 0.0F, 8.0F, 17.0F, 1.0F, CubeDeformation.NONE),
-            PartPose.offsetAndRotation(0.0F, -6.5F, 4.0F, 0.08F, 0.0F, 0.0F));
-        head.addOrReplaceChild("tail_left", CubeListBuilder.create(),
+        head.addOrReplaceChild("hair_top", CubeListBuilder.create()
+                .texOffs(78, 34).addBox(-4.0F, -9.1F, -4.0F, 8.0F, 1.0F, 8.0F, CubeDeformation.NONE)
+                .texOffs(42, 34).addBox(-4.5F, -8.6F, -4.5F, 9.0F, 1.0F, 9.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("tail_right", CubeListBuilder.create(),
+        head.addOrReplaceChild("bangs", CubeListBuilder.create()
+                .texOffs(36, 50).addBox(-4.5F, -8.3F, -4.75F, 9.0F, 4.0F, 1.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition lockLeft = head.addOrReplaceChild("lock_left", CubeListBuilder.create()
+                .texOffs(110, 34).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 5.0F, 2.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(4.1F, -3.0F, -2.6F, -0.08F, 0.0F, -0.05F));
+        lockLeft.addOrReplaceChild("lock_left_2", CubeListBuilder.create()
+                .texOffs(28, 50).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 4.0F, 2.0F, CubeDeformation.NONE)
+                .texOffs(120, 50).addBox(-1.0F, 4.0F, -1.0F, 2.0F, 1.0F, 2.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 5.0F, 0.0F, 0.05F, 0.0F, 0.04F));
+        PartDefinition lockRight = head.addOrReplaceChild("lock_right", CubeListBuilder.create()
+                .texOffs(114, 18).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 5.0F, 2.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(-4.1F, -3.0F, -2.6F, -0.08F, 0.0F, 0.05F));
+        lockRight.addOrReplaceChild("lock_right_2", CubeListBuilder.create()
+                .texOffs(118, 34).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 4.0F, 2.0F, CubeDeformation.NONE)
+                .texOffs(112, 50).addBox(-1.0F, 4.0F, -1.0F, 2.0F, 1.0F, 2.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 5.0F, 0.0F, 0.05F, 0.0F, -0.04F));
+        PartDefinition hairBack = head.addOrReplaceChild("hair_back", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hairBack.addOrReplaceChild("hair_back_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailLeft = head.addOrReplaceChild("tail_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailLeft2 = tailLeft.addOrReplaceChild("tail_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        tailLeft2.addOrReplaceChild("tail_left_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailRight = head.addOrReplaceChild("tail_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailRight2 = tailRight.addOrReplaceChild("tail_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        tailRight2.addOrReplaceChild("tail_right_3", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("ear_left", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("ear_right", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("horn_left", CubeListBuilder.create()
-                .texOffs(114, 18).addBox(-1.0F, -2.5F, -1.0F, 2.0F, 3.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(92, 34).addBox(-1.2394F, -4.0F, -0.5052F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(100, 34).addBox(-1.7257F, -5.5F, 0.2184F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(112, 34).addBox(-1.8884F, -7.0F, 1.564F, 1.0F, 2.0F, 1.0F, CubeDeformation.NONE)
-                .texOffs(116, 34).addBox(-2.7F, -8.5F, 2.5F, 1.0F, 2.0F, 1.0F, CubeDeformation.NONE),
-            PartPose.offsetAndRotation(3.2F, -7.2F, -0.5F, -0.18F, 0.0F, 0.62F));
-        head.addOrReplaceChild("horn_right", CubeListBuilder.create()
-                .texOffs(120, 0).addBox(-1.0F, -2.5F, -1.0F, 2.0F, 3.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(76, 34).addBox(-0.7606F, -4.0F, -0.5052F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(84, 34).addBox(-0.2743F, -5.5F, 0.2184F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(122, 18).addBox(0.8884F, -7.0F, 1.564F, 1.0F, 2.0F, 1.0F, CubeDeformation.NONE)
-                .texOffs(108, 34).addBox(1.7F, -8.5F, 2.5F, 1.0F, 2.0F, 1.0F, CubeDeformation.NONE),
-            PartPose.offsetAndRotation(-3.2F, -7.2F, -0.5F, -0.18F, 0.0F, -0.62F));
+        PartDefinition hornLeft = head.addOrReplaceChild("horn_left", CubeListBuilder.create()
+                .texOffs(72, 50).addBox(-1.0F, -3.0F, -1.0F, 2.0F, 3.0F, 2.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(3.0F, -7.8F, 0.5F, 0.0F, 0.0F, 1.1F));
+        PartDefinition hornLeft2 = hornLeft.addOrReplaceChild("horn_left_2", CubeListBuilder.create()
+                .texOffs(80, 50).addBox(-1.0F, -3.0F, -1.0F, 2.0F, 3.0F, 2.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, -2.6F, 0.0F, 0.0F, 0.0F, -0.75F));
+        hornLeft2.addOrReplaceChild("horn_left_3", CubeListBuilder.create()
+                .texOffs(108, 50).addBox(-0.5F, -3.0F, -0.5F, 1.0F, 3.0F, 1.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, -2.6F, 0.0F, 0.0F, 0.0F, -0.6F));
+        PartDefinition hornRight = head.addOrReplaceChild("horn_right", CubeListBuilder.create()
+                .texOffs(56, 50).addBox(-1.0F, -3.0F, -1.0F, 2.0F, 3.0F, 2.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(-3.0F, -7.8F, 0.5F, 0.0F, -0.0F, -1.1F));
+        PartDefinition hornRight2 = hornRight.addOrReplaceChild("horn_right_2", CubeListBuilder.create()
+                .texOffs(64, 50).addBox(-1.0F, -3.0F, -1.0F, 2.0F, 3.0F, 2.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, -2.6F, 0.0F, 0.0F, -0.0F, 0.75F));
+        hornRight2.addOrReplaceChild("horn_right_3", CubeListBuilder.create()
+                .texOffs(122, 18).addBox(-0.5F, -3.0F, -0.5F, 1.0F, 3.0F, 1.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, -2.6F, 0.0F, 0.0F, -0.0F, 0.6F));
         head.addOrReplaceChild("crown", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition body = root.addOrReplaceChild("body", CubeListBuilder.create()
-                .texOffs(82, 0).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, CubeDeformation.NONE),
+                .texOffs(88, 0).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         body.addOrReplaceChild("jacket", CubeListBuilder.create()
                 .texOffs(0, 18).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        body.addOrReplaceChild("cape", CubeListBuilder.create(),
+        body.addOrReplaceChild("collar", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        body.addOrReplaceChild("skirt", CubeListBuilder.create()
-                .texOffs(16, 34).addBox(-4.5F, 0.0F, -2.5F, 9.0F, 7.0F, 5.0F, CubeDeformation.NONE)
-                .texOffs(44, 34).addBox(-5.0F, 7.0F, -3.0F, 10.0F, 6.0F, 6.0F, CubeDeformation.NONE),
+        PartDefinition cape = body.addOrReplaceChild("cape", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        cape.addOrReplaceChild("cape_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition skirt = body.addOrReplaceChild("skirt", CubeListBuilder.create()
+                .texOffs(0, 50).addBox(-4.5F, 0.0F, -2.5F, 9.0F, 3.0F, 5.0F, CubeDeformation.NONE)
+                .texOffs(88, 50).addBox(-4.0F, -0.5F, 2.5F, 3.0F, 3.0F, 2.0F, CubeDeformation.NONE)
+                .texOffs(98, 50).addBox(1.0F, -0.5F, 2.5F, 3.0F, 3.0F, 2.0F, CubeDeformation.NONE)
+                .texOffs(0, 58).addBox(-1.0F, 0.0F, 2.6F, 2.0F, 2.0F, 1.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 10.5F, 0.0F, 0.0F, 0.0F, 0.0F));
+        skirt.addOrReplaceChild("skirt_2", CubeListBuilder.create()
+                .texOffs(16, 34).addBox(-6.0F, 0.0F, 0.0F, 12.0F, 12.0F, 1.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 1.5F, 3.2F, 0.1F, 0.0F, 0.0F));
+        body.addOrReplaceChild("coat_left", CubeListBuilder.create()
+                .texOffs(12, 0).addBox(-0.5F, 0.0F, -2.0F, 1.0F, 13.0F, 5.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(5.0F, 10.5F, 0.0F, 0.0F, 0.0F, -0.12F));
+        body.addOrReplaceChild("coat_right", CubeListBuilder.create()
+                .texOffs(0, 0).addBox(-0.5F, 0.0F, -2.0F, 1.0F, 13.0F, 5.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(-5.0F, 10.5F, 0.0F, 0.0F, 0.0F, 0.12F));
         PartDefinition rightArm = root.addOrReplaceChild("right_arm", CubeListBuilder.create()
-                .texOffs(106, 0).addBox(-2.0F, -2.0F, -2.0F, 3.0F, 12.0F, 4.0F, CubeDeformation.NONE),
+                .texOffs(112, 0).addBox(-2.0F, -2.0F, -2.0F, 3.0F, 12.0F, 4.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(-5.0F, 2.5F, 0.0F, 0.0F, 0.0F, 0.0F));
         rightArm.addOrReplaceChild("right_sleeve", CubeListBuilder.create()
                 .texOffs(24, 18).addBox(-2.0F, -2.0F, -2.0F, 3.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
@@ -896,34 +1354,67 @@ public enum CharacterKind {
         head.addOrReplaceChild("hat", CubeListBuilder.create()
                 .texOffs(32, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.5F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("hair_back", CubeListBuilder.create()
+        head.addOrReplaceChild("hair_top", CubeListBuilder.create()
+                .texOffs(0, 45).addBox(-4.0F, -9.1F, -4.0F, 8.0F, 1.0F, 8.0F, CubeDeformation.NONE)
+                .texOffs(78, 32).addBox(-4.5F, -8.6F, -4.5F, 9.0F, 1.0F, 9.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        head.addOrReplaceChild("bangs", CubeListBuilder.create()
+                .texOffs(80, 45).addBox(-4.5F, -8.3F, -4.75F, 9.0F, 2.0F, 1.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition lockLeft = head.addOrReplaceChild("lock_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        lockLeft.addOrReplaceChild("lock_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition lockRight = head.addOrReplaceChild("lock_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        lockRight.addOrReplaceChild("lock_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hairBack = head.addOrReplaceChild("hair_back", CubeListBuilder.create()
                 .texOffs(0, 32).addBox(-4.0F, 0.0F, 0.0F, 8.0F, 12.0F, 1.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, -6.5F, 4.0F, 0.08F, 0.0F, 0.0F));
-        head.addOrReplaceChild("tail_left", CubeListBuilder.create(),
+        hairBack.addOrReplaceChild("hair_back_2", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("tail_right", CubeListBuilder.create(),
+        PartDefinition tailLeft = head.addOrReplaceChild("tail_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailLeft2 = tailLeft.addOrReplaceChild("tail_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        tailLeft2.addOrReplaceChild("tail_left_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailRight = head.addOrReplaceChild("tail_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailRight2 = tailRight.addOrReplaceChild("tail_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        tailRight2.addOrReplaceChild("tail_right_3", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("ear_left", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("ear_right", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("horn_left", CubeListBuilder.create()
-                .texOffs(86, 32).addBox(-1.0F, -2.5F, -1.0F, 2.0F, 3.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(110, 32).addBox(-1.2394F, -4.0F, -0.5052F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(118, 32).addBox(-1.7257F, -5.5F, 0.2184F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(12, 45).addBox(-1.8884F, -7.0F, 1.564F, 1.0F, 2.0F, 1.0F, CubeDeformation.NONE)
-                .texOffs(16, 45).addBox(-2.7F, -8.5F, 2.5F, 1.0F, 2.0F, 1.0F, CubeDeformation.NONE),
+        PartDefinition hornLeft = head.addOrReplaceChild("horn_left", CubeListBuilder.create()
+                .texOffs(32, 45).addBox(-1.0F, -2.5F, -1.0F, 2.0F, 3.0F, 2.0F, CubeDeformation.NONE)
+                .texOffs(56, 45).addBox(-1.2394F, -4.0F, -0.5052F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE)
+                .texOffs(64, 45).addBox(-1.7257F, -5.5F, 0.2184F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE)
+                .texOffs(100, 45).addBox(-1.8884F, -7.0F, 1.564F, 1.0F, 2.0F, 1.0F, CubeDeformation.NONE)
+                .texOffs(104, 45).addBox(-2.7F, -8.5F, 2.5F, 1.0F, 2.0F, 1.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(3.2F, -7.2F, -0.5F, -0.18F, 0.0F, 0.62F));
-        head.addOrReplaceChild("horn_right", CubeListBuilder.create()
-                .texOffs(78, 32).addBox(-1.0F, -2.5F, -1.0F, 2.0F, 3.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(94, 32).addBox(-0.7606F, -4.0F, -0.5052F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(102, 32).addBox(-0.2743F, -5.5F, 0.2184F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE)
+        PartDefinition hornLeft2 = hornLeft.addOrReplaceChild("horn_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hornLeft2.addOrReplaceChild("horn_left_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hornRight = head.addOrReplaceChild("horn_right", CubeListBuilder.create()
+                .texOffs(114, 32).addBox(-1.0F, -2.5F, -1.0F, 2.0F, 3.0F, 2.0F, CubeDeformation.NONE)
+                .texOffs(40, 45).addBox(-0.7606F, -4.0F, -0.5052F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE)
+                .texOffs(48, 45).addBox(-0.2743F, -5.5F, 0.2184F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE)
                 .texOffs(124, 16).addBox(0.8884F, -7.0F, 1.564F, 1.0F, 2.0F, 1.0F, CubeDeformation.NONE)
-                .texOffs(8, 45).addBox(1.7F, -8.5F, 2.5F, 1.0F, 2.0F, 1.0F, CubeDeformation.NONE),
+                .texOffs(122, 32).addBox(1.7F, -8.5F, 2.5F, 1.0F, 2.0F, 1.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(-3.2F, -7.2F, -0.5F, -0.18F, 0.0F, -0.62F));
+        PartDefinition hornRight2 = hornRight.addOrReplaceChild("horn_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hornRight2.addOrReplaceChild("horn_right_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("crown", CubeListBuilder.create()
                 .texOffs(112, 16).addBox(-2.5F, 0.0F, -0.5F, 5.0F, 6.0F, 1.0F, CubeDeformation.NONE)
-                .texOffs(0, 45).addBox(-1.5F, 6.0F, -0.5F, 3.0F, 3.0F, 1.0F, CubeDeformation.NONE),
+                .texOffs(72, 45).addBox(-1.5F, 6.0F, -0.5F, 3.0F, 3.0F, 1.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, -1.5F, -4.2F, 0.0F, 0.0F, 0.0F));
         PartDefinition body = root.addOrReplaceChild("body", CubeListBuilder.create()
                 .texOffs(64, 0).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, CubeDeformation.NONE),
@@ -931,12 +1422,22 @@ public enum CharacterKind {
         body.addOrReplaceChild("jacket", CubeListBuilder.create()
                 .texOffs(88, 0).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        body.addOrReplaceChild("cape", CubeListBuilder.create(),
+        body.addOrReplaceChild("collar", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        body.addOrReplaceChild("skirt", CubeListBuilder.create()
+        PartDefinition cape = body.addOrReplaceChild("cape", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        cape.addOrReplaceChild("cape_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition skirt = body.addOrReplaceChild("skirt", CubeListBuilder.create()
                 .texOffs(18, 32).addBox(-4.5F, 0.0F, -2.5F, 9.0F, 7.0F, 5.0F, CubeDeformation.NONE)
                 .texOffs(46, 32).addBox(-5.0F, 7.0F, -3.0F, 10.0F, 6.0F, 6.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 10.5F, 0.0F, 0.0F, 0.0F, 0.0F));
+        skirt.addOrReplaceChild("skirt_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        body.addOrReplaceChild("coat_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        body.addOrReplaceChild("coat_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition rightArm = root.addOrReplaceChild("right_arm", CubeListBuilder.create()
                 .texOffs(112, 0).addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(-5.0F, 2.0F, 0.0F, 0.0F, 0.0F, 0.0F));
@@ -977,28 +1478,61 @@ public enum CharacterKind {
         head.addOrReplaceChild("hat", CubeListBuilder.create()
                 .texOffs(32, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.5F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("hair_back", CubeListBuilder.create(),
+        head.addOrReplaceChild("hair_top", CubeListBuilder.create()
+                .texOffs(36, 32).addBox(-4.0F, -9.1F, -4.0F, 8.0F, 1.0F, 8.0F, CubeDeformation.NONE)
+                .texOffs(0, 32).addBox(-4.5F, -8.6F, -4.5F, 9.0F, 1.0F, 9.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("tail_left", CubeListBuilder.create(),
+        head.addOrReplaceChild("bangs", CubeListBuilder.create()
+                .texOffs(68, 32).addBox(-4.5F, -8.3F, -4.75F, 9.0F, 4.0F, 1.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("tail_right", CubeListBuilder.create(),
+        PartDefinition lockLeft = head.addOrReplaceChild("lock_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        lockLeft.addOrReplaceChild("lock_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition lockRight = head.addOrReplaceChild("lock_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        lockRight.addOrReplaceChild("lock_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hairBack = head.addOrReplaceChild("hair_back", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hairBack.addOrReplaceChild("hair_back_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailLeft = head.addOrReplaceChild("tail_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailLeft2 = tailLeft.addOrReplaceChild("tail_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        tailLeft2.addOrReplaceChild("tail_left_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailRight = head.addOrReplaceChild("tail_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailRight2 = tailRight.addOrReplaceChild("tail_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        tailRight2.addOrReplaceChild("tail_right_3", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("ear_left", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("ear_right", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("horn_left", CubeListBuilder.create()
-                .texOffs(0, 32).addBox(-1.0F, -1.5F, -1.0F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(8, 32).addBox(-1.3793F, -3.0F, -0.2808F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(20, 32).addBox(-1.6499F, -4.5F, 1.2709F, 1.0F, 2.0F, 1.0F, CubeDeformation.NONE)
-                .texOffs(28, 32).addBox(-2.7F, -5.0F, 2.5F, 1.0F, 1.0F, 1.0F, CubeDeformation.NONE),
+        PartDefinition hornLeft = head.addOrReplaceChild("horn_left", CubeListBuilder.create()
+                .texOffs(88, 32).addBox(-1.0F, -1.5F, -1.0F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE)
+                .texOffs(96, 32).addBox(-1.3793F, -3.0F, -0.2808F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE)
+                .texOffs(108, 32).addBox(-1.6499F, -4.5F, 1.2709F, 1.0F, 2.0F, 1.0F, CubeDeformation.NONE)
+                .texOffs(116, 32).addBox(-2.7F, -5.0F, 2.5F, 1.0F, 1.0F, 1.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(3.2F, -7.2F, -0.5F, -0.18F, 0.0F, 0.62F));
-        head.addOrReplaceChild("horn_right", CubeListBuilder.create()
+        PartDefinition hornLeft2 = hornLeft.addOrReplaceChild("horn_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hornLeft2.addOrReplaceChild("horn_left_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hornRight = head.addOrReplaceChild("horn_right", CubeListBuilder.create()
                 .texOffs(112, 16).addBox(-1.0F, -1.5F, -1.0F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE)
                 .texOffs(120, 16).addBox(-0.6207F, -3.0F, -0.2808F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(16, 32).addBox(0.6499F, -4.5F, 1.2709F, 1.0F, 2.0F, 1.0F, CubeDeformation.NONE)
-                .texOffs(24, 32).addBox(1.7F, -5.0F, 2.5F, 1.0F, 1.0F, 1.0F, CubeDeformation.NONE),
+                .texOffs(104, 32).addBox(0.6499F, -4.5F, 1.2709F, 1.0F, 2.0F, 1.0F, CubeDeformation.NONE)
+                .texOffs(112, 32).addBox(1.7F, -5.0F, 2.5F, 1.0F, 1.0F, 1.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(-3.2F, -7.2F, -0.5F, -0.18F, 0.0F, -0.62F));
+        PartDefinition hornRight2 = hornRight.addOrReplaceChild("horn_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hornRight2.addOrReplaceChild("horn_right_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("crown", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition body = root.addOrReplaceChild("body", CubeListBuilder.create()
@@ -1007,9 +1541,19 @@ public enum CharacterKind {
         body.addOrReplaceChild("jacket", CubeListBuilder.create()
                 .texOffs(88, 0).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        body.addOrReplaceChild("cape", CubeListBuilder.create(),
+        body.addOrReplaceChild("collar", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        body.addOrReplaceChild("skirt", CubeListBuilder.create(),
+        PartDefinition cape = body.addOrReplaceChild("cape", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        cape.addOrReplaceChild("cape_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition skirt = body.addOrReplaceChild("skirt", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        skirt.addOrReplaceChild("skirt_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        body.addOrReplaceChild("coat_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        body.addOrReplaceChild("coat_right", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition rightArm = root.addOrReplaceChild("right_arm", CubeListBuilder.create()
                 .texOffs(112, 0).addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, CubeDeformation.NONE),
@@ -1051,29 +1595,62 @@ public enum CharacterKind {
         head.addOrReplaceChild("hat", CubeListBuilder.create()
                 .texOffs(32, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.5F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("hair_back", CubeListBuilder.create()
+        head.addOrReplaceChild("hair_top", CubeListBuilder.create()
+                .texOffs(82, 32).addBox(-4.0F, -9.1F, -4.0F, 8.0F, 1.0F, 8.0F, CubeDeformation.NONE)
+                .texOffs(46, 32).addBox(-4.5F, -8.6F, -4.5F, 9.0F, 1.0F, 9.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        head.addOrReplaceChild("bangs", CubeListBuilder.create()
+                .texOffs(0, 45).addBox(-4.5F, -8.3F, -4.75F, 9.0F, 5.0F, 1.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition lockLeft = head.addOrReplaceChild("lock_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        lockLeft.addOrReplaceChild("lock_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition lockRight = head.addOrReplaceChild("lock_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        lockRight.addOrReplaceChild("lock_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hairBack = head.addOrReplaceChild("hair_back", CubeListBuilder.create()
                 .texOffs(28, 32).addBox(-4.0F, 0.0F, 0.0F, 8.0F, 10.0F, 1.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, -6.5F, 4.0F, 0.08F, 0.0F, 0.0F));
-        head.addOrReplaceChild("tail_left", CubeListBuilder.create(),
+        hairBack.addOrReplaceChild("hair_back_2", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("tail_right", CubeListBuilder.create(),
+        PartDefinition tailLeft = head.addOrReplaceChild("tail_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailLeft2 = tailLeft.addOrReplaceChild("tail_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        tailLeft2.addOrReplaceChild("tail_left_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailRight = head.addOrReplaceChild("tail_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailRight2 = tailRight.addOrReplaceChild("tail_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        tailRight2.addOrReplaceChild("tail_right_3", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("ear_left", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("ear_right", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("horn_left", CubeListBuilder.create()
-                .texOffs(46, 32).addBox(-1.0F, -1.5F, -1.0F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(54, 32).addBox(-1.3793F, -3.0F, -0.2808F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(66, 32).addBox(-1.6499F, -4.5F, 1.2709F, 1.0F, 2.0F, 1.0F, CubeDeformation.NONE)
-                .texOffs(74, 32).addBox(-2.7F, -5.0F, 2.5F, 1.0F, 1.0F, 1.0F, CubeDeformation.NONE),
+        PartDefinition hornLeft = head.addOrReplaceChild("horn_left", CubeListBuilder.create()
+                .texOffs(114, 32).addBox(-1.0F, -1.5F, -1.0F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE)
+                .texOffs(20, 45).addBox(-1.3793F, -3.0F, -0.2808F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE)
+                .texOffs(28, 45).addBox(-1.6499F, -4.5F, 1.2709F, 1.0F, 2.0F, 1.0F, CubeDeformation.NONE)
+                .texOffs(36, 45).addBox(-2.7F, -5.0F, 2.5F, 1.0F, 1.0F, 1.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(3.2F, -7.2F, -0.5F, -0.18F, 0.0F, 0.62F));
-        head.addOrReplaceChild("horn_right", CubeListBuilder.create()
+        PartDefinition hornLeft2 = hornLeft.addOrReplaceChild("horn_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hornLeft2.addOrReplaceChild("horn_left_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hornRight = head.addOrReplaceChild("horn_right", CubeListBuilder.create()
                 .texOffs(112, 16).addBox(-1.0F, -1.5F, -1.0F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE)
                 .texOffs(120, 16).addBox(-0.6207F, -3.0F, -0.2808F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(62, 32).addBox(0.6499F, -4.5F, 1.2709F, 1.0F, 2.0F, 1.0F, CubeDeformation.NONE)
-                .texOffs(70, 32).addBox(1.7F, -5.0F, 2.5F, 1.0F, 1.0F, 1.0F, CubeDeformation.NONE),
+                .texOffs(122, 32).addBox(0.6499F, -4.5F, 1.2709F, 1.0F, 2.0F, 1.0F, CubeDeformation.NONE)
+                .texOffs(32, 45).addBox(1.7F, -5.0F, 2.5F, 1.0F, 1.0F, 1.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(-3.2F, -7.2F, -0.5F, -0.18F, 0.0F, -0.62F));
+        PartDefinition hornRight2 = hornRight.addOrReplaceChild("horn_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hornRight2.addOrReplaceChild("horn_right_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("crown", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition body = root.addOrReplaceChild("body", CubeListBuilder.create()
@@ -1082,11 +1659,21 @@ public enum CharacterKind {
         body.addOrReplaceChild("jacket", CubeListBuilder.create()
                 .texOffs(88, 0).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        body.addOrReplaceChild("cape", CubeListBuilder.create(),
+        body.addOrReplaceChild("collar", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        body.addOrReplaceChild("skirt", CubeListBuilder.create()
+        PartDefinition cape = body.addOrReplaceChild("cape", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        cape.addOrReplaceChild("cape_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition skirt = body.addOrReplaceChild("skirt", CubeListBuilder.create()
                 .texOffs(0, 32).addBox(-4.5F, 0.0F, -2.5F, 9.0F, 8.0F, 5.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 10.5F, 0.0F, 0.0F, 0.0F, 0.0F));
+        skirt.addOrReplaceChild("skirt_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        body.addOrReplaceChild("coat_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        body.addOrReplaceChild("coat_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition rightArm = root.addOrReplaceChild("right_arm", CubeListBuilder.create()
                 .texOffs(112, 0).addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(-5.0F, 2.0F, 0.0F, 0.0F, 0.0F, 0.0F));
@@ -1127,19 +1714,49 @@ public enum CharacterKind {
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("hat", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("hair_back", CubeListBuilder.create(),
+        head.addOrReplaceChild("hair_top", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("tail_left", CubeListBuilder.create(),
+        head.addOrReplaceChild("bangs", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("tail_right", CubeListBuilder.create(),
+        PartDefinition lockLeft = head.addOrReplaceChild("lock_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        lockLeft.addOrReplaceChild("lock_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition lockRight = head.addOrReplaceChild("lock_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        lockRight.addOrReplaceChild("lock_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hairBack = head.addOrReplaceChild("hair_back", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hairBack.addOrReplaceChild("hair_back_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailLeft = head.addOrReplaceChild("tail_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailLeft2 = tailLeft.addOrReplaceChild("tail_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        tailLeft2.addOrReplaceChild("tail_left_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailRight = head.addOrReplaceChild("tail_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailRight2 = tailRight.addOrReplaceChild("tail_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        tailRight2.addOrReplaceChild("tail_right_3", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("ear_left", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("ear_right", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("horn_left", CubeListBuilder.create(),
+        PartDefinition hornLeft = head.addOrReplaceChild("horn_left", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("horn_right", CubeListBuilder.create(),
+        PartDefinition hornLeft2 = hornLeft.addOrReplaceChild("horn_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hornLeft2.addOrReplaceChild("horn_left_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hornRight = head.addOrReplaceChild("horn_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hornRight2 = hornRight.addOrReplaceChild("horn_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hornRight2.addOrReplaceChild("horn_right_3", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("crown", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
@@ -1149,9 +1766,19 @@ public enum CharacterKind {
         body.addOrReplaceChild("jacket", CubeListBuilder.create()
                 .texOffs(24, 0).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        body.addOrReplaceChild("cape", CubeListBuilder.create(),
+        body.addOrReplaceChild("collar", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        body.addOrReplaceChild("skirt", CubeListBuilder.create(),
+        PartDefinition cape = body.addOrReplaceChild("cape", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        cape.addOrReplaceChild("cape_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition skirt = body.addOrReplaceChild("skirt", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        skirt.addOrReplaceChild("skirt_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        body.addOrReplaceChild("coat_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        body.addOrReplaceChild("coat_right", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition rightArm = root.addOrReplaceChild("right_arm", CubeListBuilder.create()
                 .texOffs(48, 0).addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, CubeDeformation.NONE),
@@ -1193,36 +1820,69 @@ public enum CharacterKind {
         head.addOrReplaceChild("hat", CubeListBuilder.create()
                 .texOffs(32, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.5F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("hair_back", CubeListBuilder.create(),
+        head.addOrReplaceChild("hair_top", CubeListBuilder.create()
+                .texOffs(36, 32).addBox(-4.0F, -9.1F, -4.0F, 8.0F, 1.0F, 8.0F, CubeDeformation.NONE)
+                .texOffs(0, 32).addBox(-4.5F, -8.6F, -4.5F, 9.0F, 1.0F, 9.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("tail_left", CubeListBuilder.create()
-                .texOffs(82, 32).addBox(-1.0F, -1.0F, -1.0F, 2.0F, 1.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(18, 32).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 3.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(26, 32).addBox(-1.5F, 3.0F, -1.5F, 3.0F, 3.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(36, 32).addBox(-1.0F, 6.0F, -1.0F, 2.0F, 3.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(44, 32).addBox(-1.5F, 9.0F, -1.5F, 3.0F, 3.0F, 2.0F, CubeDeformation.NONE),
+        head.addOrReplaceChild("bangs", CubeListBuilder.create()
+                .texOffs(106, 16).addBox(-4.5F, -8.3F, -4.75F, 9.0F, 5.0F, 1.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition lockLeft = head.addOrReplaceChild("lock_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        lockLeft.addOrReplaceChild("lock_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition lockRight = head.addOrReplaceChild("lock_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        lockRight.addOrReplaceChild("lock_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hairBack = head.addOrReplaceChild("hair_back", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hairBack.addOrReplaceChild("hair_back_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailLeft = head.addOrReplaceChild("tail_left", CubeListBuilder.create()
+                .texOffs(46, 42).addBox(-1.0F, -1.0F, -1.0F, 2.0F, 1.0F, 2.0F, CubeDeformation.NONE)
+                .texOffs(104, 32).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 3.0F, 2.0F, CubeDeformation.NONE)
+                .texOffs(112, 32).addBox(-1.5F, 3.0F, -1.5F, 3.0F, 3.0F, 2.0F, CubeDeformation.NONE)
+                .texOffs(0, 42).addBox(-1.0F, 6.0F, -1.0F, 2.0F, 3.0F, 2.0F, CubeDeformation.NONE)
+                .texOffs(8, 42).addBox(-1.5F, 9.0F, -1.5F, 3.0F, 3.0F, 2.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(3.0F, -2.0F, 3.0F, 0.1F, 0.0F, -0.1F));
-        head.addOrReplaceChild("tail_right", CubeListBuilder.create()
-                .texOffs(74, 32).addBox(-1.0F, -1.0F, -1.0F, 2.0F, 1.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(106, 16).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 3.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(114, 16).addBox(-1.5F, 3.0F, -1.5F, 3.0F, 3.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(0, 32).addBox(-1.0F, 6.0F, -1.0F, 2.0F, 3.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(8, 32).addBox(-1.5F, 9.0F, -1.5F, 3.0F, 3.0F, 2.0F, CubeDeformation.NONE),
+        PartDefinition tailLeft2 = tailLeft.addOrReplaceChild("tail_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        tailLeft2.addOrReplaceChild("tail_left_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailRight = head.addOrReplaceChild("tail_right", CubeListBuilder.create()
+                .texOffs(38, 42).addBox(-1.0F, -1.0F, -1.0F, 2.0F, 1.0F, 2.0F, CubeDeformation.NONE)
+                .texOffs(68, 32).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 3.0F, 2.0F, CubeDeformation.NONE)
+                .texOffs(76, 32).addBox(-1.5F, 3.0F, -1.5F, 3.0F, 3.0F, 2.0F, CubeDeformation.NONE)
+                .texOffs(86, 32).addBox(-1.0F, 6.0F, -1.0F, 2.0F, 3.0F, 2.0F, CubeDeformation.NONE)
+                .texOffs(94, 32).addBox(-1.5F, 9.0F, -1.5F, 3.0F, 3.0F, 2.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(-3.0F, -2.0F, 3.0F, 0.1F, 0.0F, 0.1F));
+        PartDefinition tailRight2 = tailRight.addOrReplaceChild("tail_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        tailRight2.addOrReplaceChild("tail_right_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("ear_left", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("ear_right", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("horn_left", CubeListBuilder.create()
-                .texOffs(62, 32).addBox(-1.0F, -1.5F, -1.0F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(70, 32).addBox(-1.2257F, -3.0F, 0.7184F, 1.0F, 2.0F, 1.0F, CubeDeformation.NONE)
-                .texOffs(94, 32).addBox(-2.7F, -3.5F, 2.5F, 1.0F, 1.0F, 1.0F, CubeDeformation.NONE),
+        PartDefinition hornLeft = head.addOrReplaceChild("horn_left", CubeListBuilder.create()
+                .texOffs(26, 42).addBox(-1.0F, -1.5F, -1.0F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE)
+                .texOffs(34, 42).addBox(-1.2257F, -3.0F, 0.7184F, 1.0F, 2.0F, 1.0F, CubeDeformation.NONE)
+                .texOffs(58, 42).addBox(-2.7F, -3.5F, 2.5F, 1.0F, 1.0F, 1.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(3.2F, -7.2F, -0.5F, -0.18F, 0.0F, 0.62F));
-        head.addOrReplaceChild("horn_right", CubeListBuilder.create()
-                .texOffs(54, 32).addBox(-1.0F, -1.5F, -1.0F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(124, 16).addBox(0.2257F, -3.0F, 0.7184F, 1.0F, 2.0F, 1.0F, CubeDeformation.NONE)
-                .texOffs(90, 32).addBox(1.7F, -3.5F, 2.5F, 1.0F, 1.0F, 1.0F, CubeDeformation.NONE),
+        PartDefinition hornLeft2 = hornLeft.addOrReplaceChild("horn_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hornLeft2.addOrReplaceChild("horn_left_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hornRight = head.addOrReplaceChild("horn_right", CubeListBuilder.create()
+                .texOffs(18, 42).addBox(-1.0F, -1.5F, -1.0F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE)
+                .texOffs(122, 32).addBox(0.2257F, -3.0F, 0.7184F, 1.0F, 2.0F, 1.0F, CubeDeformation.NONE)
+                .texOffs(54, 42).addBox(1.7F, -3.5F, 2.5F, 1.0F, 1.0F, 1.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(-3.2F, -7.2F, -0.5F, -0.18F, 0.0F, -0.62F));
+        PartDefinition hornRight2 = hornRight.addOrReplaceChild("horn_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hornRight2.addOrReplaceChild("horn_right_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("crown", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition body = root.addOrReplaceChild("body", CubeListBuilder.create()
@@ -1231,9 +1891,19 @@ public enum CharacterKind {
         body.addOrReplaceChild("jacket", CubeListBuilder.create()
                 .texOffs(88, 0).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        body.addOrReplaceChild("cape", CubeListBuilder.create(),
+        body.addOrReplaceChild("collar", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        body.addOrReplaceChild("skirt", CubeListBuilder.create(),
+        PartDefinition cape = body.addOrReplaceChild("cape", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        cape.addOrReplaceChild("cape_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition skirt = body.addOrReplaceChild("skirt", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        skirt.addOrReplaceChild("skirt_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        body.addOrReplaceChild("coat_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        body.addOrReplaceChild("coat_right", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition rightArm = root.addOrReplaceChild("right_arm", CubeListBuilder.create()
                 .texOffs(112, 0).addBox(-2.0F, -2.0F, -2.0F, 3.0F, 12.0F, 4.0F, CubeDeformation.NONE),
@@ -1275,28 +1945,61 @@ public enum CharacterKind {
         head.addOrReplaceChild("hat", CubeListBuilder.create()
                 .texOffs(32, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.5F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("hair_back", CubeListBuilder.create(),
+        head.addOrReplaceChild("hair_top", CubeListBuilder.create()
+                .texOffs(36, 32).addBox(-4.0F, -9.1F, -4.0F, 8.0F, 1.0F, 8.0F, CubeDeformation.NONE)
+                .texOffs(0, 32).addBox(-4.5F, -8.6F, -4.5F, 9.0F, 1.0F, 9.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("tail_left", CubeListBuilder.create(),
+        head.addOrReplaceChild("bangs", CubeListBuilder.create()
+                .texOffs(68, 32).addBox(-4.5F, -8.3F, -4.75F, 9.0F, 5.0F, 1.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("tail_right", CubeListBuilder.create(),
+        PartDefinition lockLeft = head.addOrReplaceChild("lock_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        lockLeft.addOrReplaceChild("lock_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition lockRight = head.addOrReplaceChild("lock_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        lockRight.addOrReplaceChild("lock_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hairBack = head.addOrReplaceChild("hair_back", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hairBack.addOrReplaceChild("hair_back_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailLeft = head.addOrReplaceChild("tail_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailLeft2 = tailLeft.addOrReplaceChild("tail_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        tailLeft2.addOrReplaceChild("tail_left_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailRight = head.addOrReplaceChild("tail_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailRight2 = tailRight.addOrReplaceChild("tail_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        tailRight2.addOrReplaceChild("tail_right_3", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("ear_left", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("ear_right", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("horn_left", CubeListBuilder.create()
-                .texOffs(28, 32).addBox(-1.0F, -1.5F, -1.0F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(36, 32).addBox(-1.3793F, -3.0F, -0.2808F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(44, 32).addBox(-1.6499F, -4.5F, 1.2709F, 1.0F, 2.0F, 1.0F, CubeDeformation.NONE)
-                .texOffs(52, 32).addBox(-2.7F, -5.0F, 2.5F, 1.0F, 1.0F, 1.0F, CubeDeformation.NONE),
+        PartDefinition hornLeft = head.addOrReplaceChild("horn_left", CubeListBuilder.create()
+                .texOffs(116, 32).addBox(-1.0F, -1.5F, -1.0F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE)
+                .texOffs(0, 42).addBox(-1.3793F, -3.0F, -0.2808F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE)
+                .texOffs(124, 32).addBox(-1.6499F, -4.5F, 1.2709F, 1.0F, 2.0F, 1.0F, CubeDeformation.NONE)
+                .texOffs(12, 42).addBox(-2.7F, -5.0F, 2.5F, 1.0F, 1.0F, 1.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(3.2F, -7.2F, -0.5F, -0.18F, 0.0F, 0.62F));
-        head.addOrReplaceChild("horn_right", CubeListBuilder.create()
-                .texOffs(12, 32).addBox(-1.0F, -1.5F, -1.0F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(20, 32).addBox(-0.6207F, -3.0F, -0.2808F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE)
+        PartDefinition hornLeft2 = hornLeft.addOrReplaceChild("horn_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hornLeft2.addOrReplaceChild("horn_left_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hornRight = head.addOrReplaceChild("horn_right", CubeListBuilder.create()
+                .texOffs(100, 32).addBox(-1.0F, -1.5F, -1.0F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE)
+                .texOffs(108, 32).addBox(-0.6207F, -3.0F, -0.2808F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE)
                 .texOffs(124, 16).addBox(0.6499F, -4.5F, 1.2709F, 1.0F, 2.0F, 1.0F, CubeDeformation.NONE)
-                .texOffs(48, 32).addBox(1.7F, -5.0F, 2.5F, 1.0F, 1.0F, 1.0F, CubeDeformation.NONE),
+                .texOffs(8, 42).addBox(1.7F, -5.0F, 2.5F, 1.0F, 1.0F, 1.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(-3.2F, -7.2F, -0.5F, -0.18F, 0.0F, -0.62F));
+        PartDefinition hornRight2 = hornRight.addOrReplaceChild("horn_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hornRight2.addOrReplaceChild("horn_right_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("crown", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition body = root.addOrReplaceChild("body", CubeListBuilder.create()
@@ -1305,9 +2008,19 @@ public enum CharacterKind {
         body.addOrReplaceChild("jacket", CubeListBuilder.create()
                 .texOffs(88, 0).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        body.addOrReplaceChild("cape", CubeListBuilder.create(),
+        body.addOrReplaceChild("collar", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        body.addOrReplaceChild("skirt", CubeListBuilder.create(),
+        PartDefinition cape = body.addOrReplaceChild("cape", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        cape.addOrReplaceChild("cape_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition skirt = body.addOrReplaceChild("skirt", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        skirt.addOrReplaceChild("skirt_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        body.addOrReplaceChild("coat_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        body.addOrReplaceChild("coat_right", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition rightArm = root.addOrReplaceChild("right_arm", CubeListBuilder.create()
                 .texOffs(112, 0).addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, CubeDeformation.NONE),
@@ -1325,7 +2038,7 @@ public enum CharacterKind {
                 .texOffs(32, 16).addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         leftArm.addOrReplaceChild("prop_left", CubeListBuilder.create()
-                .texOffs(0, 32).addBox(-1.5F, -1.0F, -1.5F, 3.0F, 3.0F, 3.0F, CubeDeformation.NONE),
+                .texOffs(88, 32).addBox(-1.5F, -1.0F, -1.5F, 3.0F, 3.0F, 3.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(1.0F, 9.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition rightLeg = root.addOrReplaceChild("right_leg", CubeListBuilder.create()
                 .texOffs(48, 16).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, CubeDeformation.NONE),
@@ -1351,28 +2064,61 @@ public enum CharacterKind {
         head.addOrReplaceChild("hat", CubeListBuilder.create()
                 .texOffs(32, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.5F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("hair_back", CubeListBuilder.create(),
+        head.addOrReplaceChild("hair_top", CubeListBuilder.create()
+                .texOffs(36, 32).addBox(-4.0F, -9.1F, -4.0F, 8.0F, 1.0F, 8.0F, CubeDeformation.NONE)
+                .texOffs(0, 32).addBox(-4.5F, -8.6F, -4.5F, 9.0F, 1.0F, 9.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("tail_left", CubeListBuilder.create(),
+        head.addOrReplaceChild("bangs", CubeListBuilder.create()
+                .texOffs(68, 32).addBox(-4.5F, -8.3F, -4.75F, 9.0F, 3.0F, 1.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("tail_right", CubeListBuilder.create(),
+        PartDefinition lockLeft = head.addOrReplaceChild("lock_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        lockLeft.addOrReplaceChild("lock_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition lockRight = head.addOrReplaceChild("lock_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        lockRight.addOrReplaceChild("lock_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hairBack = head.addOrReplaceChild("hair_back", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hairBack.addOrReplaceChild("hair_back_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailLeft = head.addOrReplaceChild("tail_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailLeft2 = tailLeft.addOrReplaceChild("tail_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        tailLeft2.addOrReplaceChild("tail_left_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailRight = head.addOrReplaceChild("tail_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailRight2 = tailRight.addOrReplaceChild("tail_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        tailRight2.addOrReplaceChild("tail_right_3", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("ear_left", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("ear_right", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("horn_left", CubeListBuilder.create()
-                .texOffs(0, 32).addBox(-1.0F, -1.5F, -1.0F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(8, 32).addBox(-1.3793F, -3.0F, -0.2808F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(20, 32).addBox(-1.6499F, -4.5F, 1.2709F, 1.0F, 2.0F, 1.0F, CubeDeformation.NONE)
-                .texOffs(28, 32).addBox(-2.7F, -5.0F, 2.5F, 1.0F, 1.0F, 1.0F, CubeDeformation.NONE),
+        PartDefinition hornLeft = head.addOrReplaceChild("horn_left", CubeListBuilder.create()
+                .texOffs(88, 32).addBox(-1.0F, -1.5F, -1.0F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE)
+                .texOffs(96, 32).addBox(-1.3793F, -3.0F, -0.2808F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE)
+                .texOffs(108, 32).addBox(-1.6499F, -4.5F, 1.2709F, 1.0F, 2.0F, 1.0F, CubeDeformation.NONE)
+                .texOffs(116, 32).addBox(-2.7F, -5.0F, 2.5F, 1.0F, 1.0F, 1.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(3.2F, -7.2F, -0.5F, -0.18F, 0.0F, 0.62F));
-        head.addOrReplaceChild("horn_right", CubeListBuilder.create()
+        PartDefinition hornLeft2 = hornLeft.addOrReplaceChild("horn_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hornLeft2.addOrReplaceChild("horn_left_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hornRight = head.addOrReplaceChild("horn_right", CubeListBuilder.create()
                 .texOffs(112, 16).addBox(-1.0F, -1.5F, -1.0F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE)
                 .texOffs(120, 16).addBox(-0.6207F, -3.0F, -0.2808F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(16, 32).addBox(0.6499F, -4.5F, 1.2709F, 1.0F, 2.0F, 1.0F, CubeDeformation.NONE)
-                .texOffs(24, 32).addBox(1.7F, -5.0F, 2.5F, 1.0F, 1.0F, 1.0F, CubeDeformation.NONE),
+                .texOffs(104, 32).addBox(0.6499F, -4.5F, 1.2709F, 1.0F, 2.0F, 1.0F, CubeDeformation.NONE)
+                .texOffs(112, 32).addBox(1.7F, -5.0F, 2.5F, 1.0F, 1.0F, 1.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(-3.2F, -7.2F, -0.5F, -0.18F, 0.0F, -0.62F));
+        PartDefinition hornRight2 = hornRight.addOrReplaceChild("horn_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hornRight2.addOrReplaceChild("horn_right_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("crown", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition body = root.addOrReplaceChild("body", CubeListBuilder.create()
@@ -1381,9 +2127,19 @@ public enum CharacterKind {
         body.addOrReplaceChild("jacket", CubeListBuilder.create()
                 .texOffs(88, 0).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        body.addOrReplaceChild("cape", CubeListBuilder.create(),
+        body.addOrReplaceChild("collar", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        body.addOrReplaceChild("skirt", CubeListBuilder.create(),
+        PartDefinition cape = body.addOrReplaceChild("cape", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        cape.addOrReplaceChild("cape_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition skirt = body.addOrReplaceChild("skirt", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        skirt.addOrReplaceChild("skirt_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        body.addOrReplaceChild("coat_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        body.addOrReplaceChild("coat_right", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition rightArm = root.addOrReplaceChild("right_arm", CubeListBuilder.create()
                 .texOffs(112, 0).addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, CubeDeformation.NONE),
@@ -1420,76 +2176,126 @@ public enum CharacterKind {
         MeshDefinition mesh = new MeshDefinition();
         PartDefinition root = mesh.getRoot();
         PartDefinition head = root.addOrReplaceChild("head", CubeListBuilder.create()
-                .texOffs(40, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, CubeDeformation.NONE),
+                .texOffs(0, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("hat", CubeListBuilder.create()
-                .texOffs(72, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.5F)),
+                .texOffs(32, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.5F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("hair_back", CubeListBuilder.create()
-                .texOffs(22, 0).addBox(-4.0F, 0.0F, 0.0F, 8.0F, 16.0F, 1.0F, CubeDeformation.NONE),
-            PartPose.offsetAndRotation(0.0F, -6.5F, 4.0F, 0.08F, 0.0F, 0.0F));
-        head.addOrReplaceChild("tail_left", CubeListBuilder.create(),
+        head.addOrReplaceChild("hair_top", CubeListBuilder.create()
+                .texOffs(36, 44).addBox(-4.0F, -9.1F, -4.0F, 8.0F, 1.0F, 8.0F, CubeDeformation.NONE)
+                .texOffs(0, 44).addBox(-4.5F, -8.6F, -4.5F, 9.0F, 1.0F, 9.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("tail_right", CubeListBuilder.create(),
+        head.addOrReplaceChild("bangs", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("ear_left", CubeListBuilder.create(),
+        PartDefinition lockLeft = head.addOrReplaceChild("lock_left", CubeListBuilder.create()
+                .texOffs(120, 16).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 6.0F, 2.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(4.0F, -4.5F, -1.5F, -0.05F, 0.0F, -0.1F));
+        lockLeft.addOrReplaceChild("lock_left_2", CubeListBuilder.create()
+                .texOffs(12, 54).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 5.0F, 2.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 6.0F, 0.0F, 0.05F, 0.0F, 0.05F));
+        PartDefinition lockRight = head.addOrReplaceChild("lock_right", CubeListBuilder.create()
+                .texOffs(112, 16).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 6.0F, 2.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(-4.0F, -4.5F, -1.5F, -0.05F, 0.0F, 0.1F));
+        lockRight.addOrReplaceChild("lock_right_2", CubeListBuilder.create()
+                .texOffs(120, 32).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 5.0F, 2.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 6.0F, 0.0F, 0.05F, 0.0F, -0.05F));
+        PartDefinition hairBack = head.addOrReplaceChild("hair_back", CubeListBuilder.create()
+                .texOffs(0, 32).addBox(-4.5F, 0.0F, -0.5F, 9.0F, 10.0F, 2.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, -7.2F, 4.0F, 0.08F, 0.0F, 0.0F));
+        hairBack.addOrReplaceChild("hair_back_2", CubeListBuilder.create()
+                .texOffs(68, 44).addBox(-4.0F, 0.0F, -0.5F, 8.0F, 7.0F, 2.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 10.0F, 0.0F, 0.05F, 0.0F, 0.0F));
+        PartDefinition tailLeft = head.addOrReplaceChild("tail_left", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("ear_right", CubeListBuilder.create(),
+        PartDefinition tailLeft2 = tailLeft.addOrReplaceChild("tail_left_2", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("horn_left", CubeListBuilder.create()
-                .texOffs(32, 37).addBox(-1.0F, -2.5F, -1.0F, 2.0F, 3.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(56, 37).addBox(-1.2394F, -4.0F, -0.5052F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(64, 37).addBox(-1.7257F, -5.5F, 0.2184F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(80, 37).addBox(-1.8884F, -7.0F, 1.564F, 1.0F, 2.0F, 1.0F, CubeDeformation.NONE)
-                .texOffs(84, 37).addBox(-2.7F, -8.5F, 2.5F, 1.0F, 2.0F, 1.0F, CubeDeformation.NONE),
-            PartPose.offsetAndRotation(3.2F, -7.2F, -0.5F, -0.18F, 0.0F, 0.62F));
-        head.addOrReplaceChild("horn_right", CubeListBuilder.create()
-                .texOffs(120, 21).addBox(-1.0F, -2.5F, -1.0F, 2.0F, 3.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(40, 37).addBox(-0.7606F, -4.0F, -0.5052F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(48, 37).addBox(-0.2743F, -5.5F, 0.2184F, 2.0F, 2.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(72, 37).addBox(0.8884F, -7.0F, 1.564F, 1.0F, 2.0F, 1.0F, CubeDeformation.NONE)
-                .texOffs(76, 37).addBox(1.7F, -8.5F, 2.5F, 1.0F, 2.0F, 1.0F, CubeDeformation.NONE),
-            PartPose.offsetAndRotation(-3.2F, -7.2F, -0.5F, -0.18F, 0.0F, -0.62F));
+        tailLeft2.addOrReplaceChild("tail_left_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailRight = head.addOrReplaceChild("tail_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailRight2 = tailRight.addOrReplaceChild("tail_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        tailRight2.addOrReplaceChild("tail_right_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        head.addOrReplaceChild("ear_left", CubeListBuilder.create()
+                .texOffs(56, 54).addBox(0.0F, -1.0F, -0.5F, 2.0F, 2.0F, 1.0F, CubeDeformation.NONE)
+                .texOffs(62, 54).addBox(2.0F, -1.4F, -0.5F, 1.0F, 1.0F, 1.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(4.0F, -3.2F, 0.6F, 0.0F, -0.35F, -0.35F));
+        head.addOrReplaceChild("ear_right", CubeListBuilder.create()
+                .texOffs(50, 54).addBox(-2.0F, -1.0F, -0.5F, 2.0F, 2.0F, 1.0F, CubeDeformation.NONE)
+                .texOffs(124, 44).addBox(-3.0F, -1.4F, -0.5F, 1.0F, 1.0F, 1.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(-4.0F, -3.2F, 0.6F, 0.0F, 0.35F, 0.35F));
+        PartDefinition hornLeft = head.addOrReplaceChild("horn_left", CubeListBuilder.create()
+                .texOffs(112, 44).addBox(-1.5F, -4.0F, -1.5F, 3.0F, 4.0F, 3.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(3.2F, -7.6F, 0.0F, -0.3F, 0.0F, 0.3F));
+        PartDefinition hornLeft2 = hornLeft.addOrReplaceChild("horn_left_2", CubeListBuilder.create()
+                .texOffs(0, 54).addBox(-1.5F, -4.0F, -1.5F, 3.0F, 4.0F, 3.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, -3.7F, 0.0F, -0.75F, 0.0F, 0.45F));
+        hornLeft2.addOrReplaceChild("horn_left_3", CubeListBuilder.create()
+                .texOffs(28, 54).addBox(-1.0F, -4.0F, -1.0F, 2.0F, 4.0F, 2.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, -3.7F, 0.0F, -0.95F, 0.0F, 0.55F));
+        PartDefinition hornRight = head.addOrReplaceChild("horn_right", CubeListBuilder.create()
+                .texOffs(88, 44).addBox(-1.5F, -4.0F, -1.5F, 3.0F, 4.0F, 3.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(-3.2F, -7.6F, 0.0F, -0.3F, -0.0F, -0.3F));
+        PartDefinition hornRight2 = hornRight.addOrReplaceChild("horn_right_2", CubeListBuilder.create()
+                .texOffs(100, 44).addBox(-1.5F, -4.0F, -1.5F, 3.0F, 4.0F, 3.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, -3.7F, 0.0F, -0.75F, -0.0F, -0.45F));
+        hornRight2.addOrReplaceChild("horn_right_3", CubeListBuilder.create()
+                .texOffs(20, 54).addBox(-1.0F, -4.0F, -1.0F, 2.0F, 4.0F, 2.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, -3.7F, 0.0F, -0.95F, -0.0F, -0.55F));
         head.addOrReplaceChild("crown", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition body = root.addOrReplaceChild("body", CubeListBuilder.create()
-                .texOffs(104, 0).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, CubeDeformation.NONE),
+                .texOffs(64, 0).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         body.addOrReplaceChild("jacket", CubeListBuilder.create()
-                .texOffs(0, 21).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
+                .texOffs(88, 0).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        body.addOrReplaceChild("cape", CubeListBuilder.create()
-                .texOffs(0, 0).addBox(-5.0F, 0.0F, 0.0F, 10.0F, 20.0F, 1.0F, CubeDeformation.NONE),
-            PartPose.offsetAndRotation(0.0F, 0.2F, 2.6F, 0.08F, 0.0F, 0.0F));
-        body.addOrReplaceChild("skirt", CubeListBuilder.create(),
+        body.addOrReplaceChild("collar", CubeListBuilder.create()
+                .texOffs(50, 32).addBox(-7.0F, -1.0F, -3.2F, 14.0F, 4.0F, 7.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition cape = body.addOrReplaceChild("cape", CubeListBuilder.create()
+                .texOffs(22, 32).addBox(-6.5F, 0.0F, 0.0F, 13.0F, 11.0F, 1.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 1.5F, 3.0F, 0.05F, 0.0F, 0.0F));
+        cape.addOrReplaceChild("cape_2", CubeListBuilder.create()
+                .texOffs(92, 32).addBox(-6.5F, 0.0F, 0.0F, 13.0F, 10.0F, 1.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 11.0F, 0.0F, 0.04F, 0.0F, 0.0F));
+        PartDefinition skirt = body.addOrReplaceChild("skirt", CubeListBuilder.create()
+                .texOffs(36, 54).addBox(-3.0F, 0.0F, -2.4F, 6.0F, 3.0F, 1.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 11.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        skirt.addOrReplaceChild("skirt_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        body.addOrReplaceChild("coat_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        body.addOrReplaceChild("coat_right", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition rightArm = root.addOrReplaceChild("right_arm", CubeListBuilder.create()
-                .texOffs(24, 21).addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, CubeDeformation.NONE),
+                .texOffs(112, 0).addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(-5.0F, 2.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         rightArm.addOrReplaceChild("right_sleeve", CubeListBuilder.create()
-                .texOffs(40, 21).addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
+                .texOffs(0, 16).addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         rightArm.addOrReplaceChild("prop", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition leftArm = root.addOrReplaceChild("left_arm", CubeListBuilder.create()
-                .texOffs(56, 21).addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, CubeDeformation.NONE),
+                .texOffs(16, 16).addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(5.0F, 2.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         leftArm.addOrReplaceChild("left_sleeve", CubeListBuilder.create()
-                .texOffs(72, 21).addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
+                .texOffs(32, 16).addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         leftArm.addOrReplaceChild("prop_left", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition rightLeg = root.addOrReplaceChild("right_leg", CubeListBuilder.create()
-                .texOffs(88, 21).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, CubeDeformation.NONE),
+                .texOffs(48, 16).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(-1.9F, 12.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         rightLeg.addOrReplaceChild("right_pants", CubeListBuilder.create()
-                .texOffs(104, 21).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
+                .texOffs(64, 16).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition leftLeg = root.addOrReplaceChild("left_leg", CubeListBuilder.create()
-                .texOffs(0, 37).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, CubeDeformation.NONE),
+                .texOffs(80, 16).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(1.9F, 12.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         leftLeg.addOrReplaceChild("left_pants", CubeListBuilder.create()
-                .texOffs(16, 37).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
+                .texOffs(96, 16).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         return LayerDefinition.create(mesh, 128, 128);
     }
@@ -1498,74 +2304,129 @@ public enum CharacterKind {
         MeshDefinition mesh = new MeshDefinition();
         PartDefinition root = mesh.getRoot();
         PartDefinition head = root.addOrReplaceChild("head", CubeListBuilder.create()
-                .texOffs(26, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, CubeDeformation.NONE),
+                .texOffs(32, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("hat", CubeListBuilder.create()
-                .texOffs(58, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.5F)),
+                .texOffs(64, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.5F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("hair_back", CubeListBuilder.create(),
+        head.addOrReplaceChild("hair_top", CubeListBuilder.create()
+                .texOffs(56, 50).addBox(-4.0F, -9.1F, -4.0F, 8.0F, 1.0F, 8.0F, CubeDeformation.NONE)
+                .texOffs(0, 50).addBox(-4.5F, -8.6F, -4.5F, 9.0F, 1.0F, 9.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("tail_left", CubeListBuilder.create(),
+        head.addOrReplaceChild("bangs", CubeListBuilder.create()
+                .texOffs(8, 68).addBox(-4.5F, -8.3F, -4.75F, 9.0F, 3.0F, 1.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("tail_right", CubeListBuilder.create(),
+        PartDefinition lockLeft = head.addOrReplaceChild("lock_left", CubeListBuilder.create()
+                .texOffs(120, 18).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 6.0F, 2.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(3.9F, -4.4F, -2.0F, -0.04F, 0.0F, -0.08F));
+        lockLeft.addOrReplaceChild("lock_left_2", CubeListBuilder.create()
+                .texOffs(44, 60).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 5.0F, 2.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 6.0F, 0.0F, 0.04F, 0.0F, 0.04F));
+        PartDefinition lockRight = head.addOrReplaceChild("lock_right", CubeListBuilder.create()
+                .texOffs(120, 0).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 6.0F, 2.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(-3.9F, -4.4F, -2.0F, -0.04F, 0.0F, 0.08F));
+        lockRight.addOrReplaceChild("lock_right_2", CubeListBuilder.create()
+                .texOffs(114, 34).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 5.0F, 2.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 6.0F, 0.0F, 0.04F, 0.0F, -0.04F));
+        PartDefinition hairBack = head.addOrReplaceChild("hair_back", CubeListBuilder.create()
+                .texOffs(92, 34).addBox(-4.5F, 0.0F, -0.5F, 9.0F, 10.0F, 2.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, -7.0F, 4.0F, 0.06F, 0.0F, 0.0F));
+        hairBack.addOrReplaceChild("hair_back_2", CubeListBuilder.create()
+                .texOffs(36, 50).addBox(-4.0F, 0.0F, -0.5F, 8.0F, 8.0F, 2.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 10.0F, 0.0F, 0.04F, 0.0F, 0.0F));
+        PartDefinition tailLeft = head.addOrReplaceChild("tail_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailLeft2 = tailLeft.addOrReplaceChild("tail_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        tailLeft2.addOrReplaceChild("tail_left_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailRight = head.addOrReplaceChild("tail_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailRight2 = tailRight.addOrReplaceChild("tail_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        tailRight2.addOrReplaceChild("tail_right_3", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("ear_left", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("ear_right", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("horn_left", CubeListBuilder.create()
-                .texOffs(120, 23).addBox(-1.0F, -4.0F, -1.0F, 2.0F, 4.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(32, 39).addBox(0.5F, -9.0F, -0.5F, 1.0F, 5.0F, 1.0F, CubeDeformation.NONE)
-                .texOffs(40, 39).addBox(2.0F, -11.0F, -0.5F, 1.0F, 3.0F, 1.0F, CubeDeformation.NONE),
-            PartPose.offsetAndRotation(3.2F, -7.8F, 0.0F, -0.2F, 0.0F, 0.35F));
-        head.addOrReplaceChild("horn_right", CubeListBuilder.create()
-                .texOffs(114, 0).addBox(-1.0F, -4.0F, -1.0F, 2.0F, 4.0F, 2.0F, CubeDeformation.NONE)
-                .texOffs(122, 0).addBox(-1.5F, -9.0F, -0.5F, 1.0F, 5.0F, 1.0F, CubeDeformation.NONE)
-                .texOffs(36, 39).addBox(-2.0F, -11.0F, -0.5F, 1.0F, 3.0F, 1.0F, CubeDeformation.NONE),
-            PartPose.offsetAndRotation(-3.2F, -7.8F, 0.0F, -0.2F, 0.0F, -0.35F));
+        PartDefinition hornLeft = head.addOrReplaceChild("horn_left", CubeListBuilder.create()
+                .texOffs(64, 60).addBox(-1.5F, -4.0F, -1.5F, 3.0F, 4.0F, 3.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(3.2F, -7.2F, -0.6F, -0.35F, 0.0F, 0.85F));
+        PartDefinition hornLeft2 = hornLeft.addOrReplaceChild("horn_left_2", CubeListBuilder.create()
+                .texOffs(114, 60).addBox(-1.0F, -4.0F, -1.0F, 2.0F, 4.0F, 2.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, -3.7F, 0.0F, -0.55F, 0.0F, -0.55F));
+        hornLeft2.addOrReplaceChild("horn_left_3", CubeListBuilder.create()
+                .texOffs(0, 68).addBox(-1.0F, -4.0F, -1.0F, 2.0F, 4.0F, 2.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, -3.7F, 0.0F, -0.2F, 0.0F, -0.45F));
+        PartDefinition hornRight = head.addOrReplaceChild("horn_right", CubeListBuilder.create()
+                .texOffs(52, 60).addBox(-1.5F, -4.0F, -1.5F, 3.0F, 4.0F, 3.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(-3.2F, -7.2F, -0.6F, -0.35F, -0.0F, -0.85F));
+        PartDefinition hornRight2 = hornRight.addOrReplaceChild("horn_right_2", CubeListBuilder.create()
+                .texOffs(98, 60).addBox(-1.0F, -4.0F, -1.0F, 2.0F, 4.0F, 2.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, -3.7F, 0.0F, -0.55F, -0.0F, 0.55F));
+        hornRight2.addOrReplaceChild("horn_right_3", CubeListBuilder.create()
+                .texOffs(106, 60).addBox(-1.0F, -4.0F, -1.0F, 2.0F, 4.0F, 2.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, -3.7F, 0.0F, -0.2F, -0.0F, 0.45F));
         head.addOrReplaceChild("crown", CubeListBuilder.create()
-                .texOffs(44, 39).addBox(-3.5F, -3.0F, -4.6F, 2.0F, 3.0F, 1.0F, CubeDeformation.NONE)
-                .texOffs(50, 39).addBox(-1.0F, -3.0F, -4.6F, 2.0F, 3.0F, 1.0F, CubeDeformation.NONE)
-                .texOffs(56, 39).addBox(1.5F, -3.0F, -4.6F, 2.0F, 3.0F, 1.0F, CubeDeformation.NONE),
-            PartPose.offsetAndRotation(0.0F, -8.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+                .texOffs(28, 68).addBox(-4.6F, -7.6F, -4.7F, 9.0F, 1.0F, 1.0F, CubeDeformation.NONE)
+                .texOffs(88, 50).addBox(-4.7F, -7.6F, -4.6F, 1.0F, 1.0F, 8.0F, CubeDeformation.NONE)
+                .texOffs(106, 50).addBox(3.7F, -7.6F, -4.6F, 1.0F, 1.0F, 8.0F, CubeDeformation.NONE)
+                .texOffs(122, 34).addBox(-1.0F, -8.8F, -4.75F, 2.0F, 2.0F, 1.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition body = root.addOrReplaceChild("body", CubeListBuilder.create()
-                .texOffs(90, 0).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, CubeDeformation.NONE),
+                .texOffs(96, 0).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         body.addOrReplaceChild("jacket", CubeListBuilder.create()
-                .texOffs(0, 23).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
+                .texOffs(0, 18).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        body.addOrReplaceChild("cape", CubeListBuilder.create()
-                .texOffs(0, 0).addBox(-6.0F, 0.0F, 0.0F, 12.0F, 22.0F, 1.0F, CubeDeformation.NONE),
-            PartPose.offsetAndRotation(0.0F, 0.2F, 2.6F, 0.08F, 0.0F, 0.0F));
-        body.addOrReplaceChild("skirt", CubeListBuilder.create(),
+        body.addOrReplaceChild("collar", CubeListBuilder.create()
+                .texOffs(76, 60).addBox(-5.0F, -5.5F, 2.2F, 10.0F, 6.0F, 1.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition cape = body.addOrReplaceChild("cape", CubeListBuilder.create()
+                .texOffs(32, 34).addBox(-7.0F, 0.0F, 0.0F, 14.0F, 12.0F, 1.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 0.2F, 3.2F, 0.05F, 0.0F, 0.0F));
+        cape.addOrReplaceChild("cape_2", CubeListBuilder.create()
+                .texOffs(62, 34).addBox(-7.0F, 0.0F, 0.0F, 14.0F, 12.0F, 1.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 12.0F, 0.0F, 0.04F, 0.0F, 0.0F));
+        PartDefinition skirt = body.addOrReplaceChild("skirt", CubeListBuilder.create()
+                .texOffs(0, 0).addBox(-5.0F, 0.0F, -3.0F, 10.0F, 12.0F, 6.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 11.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        skirt.addOrReplaceChild("skirt_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        body.addOrReplaceChild("coat_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        body.addOrReplaceChild("coat_right", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition rightArm = root.addOrReplaceChild("right_arm", CubeListBuilder.create()
-                .texOffs(24, 23).addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, CubeDeformation.NONE),
+                .texOffs(24, 18).addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(-5.0F, 2.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         rightArm.addOrReplaceChild("right_sleeve", CubeListBuilder.create()
-                .texOffs(40, 23).addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
+                .texOffs(40, 18).addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.25F))
+                .texOffs(0, 60).addBox(-4.5F, -2.8F, -2.5F, 6.0F, 3.0F, 5.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         rightArm.addOrReplaceChild("prop", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition leftArm = root.addOrReplaceChild("left_arm", CubeListBuilder.create()
-                .texOffs(56, 23).addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, CubeDeformation.NONE),
+                .texOffs(56, 18).addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(5.0F, 2.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         leftArm.addOrReplaceChild("left_sleeve", CubeListBuilder.create()
-                .texOffs(72, 23).addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
+                .texOffs(72, 18).addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.25F))
+                .texOffs(22, 60).addBox(-1.5F, -2.8F, -2.5F, 6.0F, 3.0F, 5.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         leftArm.addOrReplaceChild("prop_left", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition rightLeg = root.addOrReplaceChild("right_leg", CubeListBuilder.create()
-                .texOffs(88, 23).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, CubeDeformation.NONE),
+                .texOffs(88, 18).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(-1.9F, 12.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         rightLeg.addOrReplaceChild("right_pants", CubeListBuilder.create()
-                .texOffs(104, 23).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
+                .texOffs(104, 18).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition leftLeg = root.addOrReplaceChild("left_leg", CubeListBuilder.create()
-                .texOffs(0, 39).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, CubeDeformation.NONE),
+                .texOffs(0, 34).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(1.9F, 12.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         leftLeg.addOrReplaceChild("left_pants", CubeListBuilder.create()
-                .texOffs(16, 39).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
+                .texOffs(16, 34).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         return LayerDefinition.create(mesh, 128, 128);
     }
@@ -1577,37 +2438,74 @@ public enum CharacterKind {
                 .texOffs(0, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("hat", CubeListBuilder.create()
-                .texOffs(32, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.5F))
-                .texOffs(118, 16).addBox(-4.6F, -4.5F, -4.6F, 1.0F, 7.0F, 1.0F, CubeDeformation.NONE)
-                .texOffs(122, 16).addBox(3.6F, -4.5F, -4.6F, 1.0F, 7.0F, 1.0F, CubeDeformation.NONE),
+                .texOffs(32, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.5F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("hair_back", CubeListBuilder.create(),
+        head.addOrReplaceChild("hair_top", CubeListBuilder.create()
+                .texOffs(0, 45).addBox(-4.0F, -9.1F, -4.0F, 8.0F, 1.0F, 8.0F, CubeDeformation.NONE)
+                .texOffs(78, 32).addBox(-4.5F, -8.6F, -4.5F, 9.0F, 1.0F, 9.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("tail_left", CubeListBuilder.create()
-                .texOffs(0, 32).addBox(-1.5F, -1.0F, -1.5F, 3.0F, 11.0F, 3.0F, CubeDeformation.NONE)
-                .texOffs(66, 32).addBox(-2.1F, 10.0F, -1.5F, 3.0F, 8.0F, 3.0F, CubeDeformation.NONE)
-                .texOffs(114, 32).addBox(-2.4F, 18.0F, -1.0F, 2.0F, 5.0F, 2.0F, CubeDeformation.NONE),
-            PartPose.offsetAndRotation(5.6F, -6.0F, 4.0F, 0.1F, 0.0F, -0.24F));
-        head.addOrReplaceChild("tail_right", CubeListBuilder.create()
-                .texOffs(106, 16).addBox(-1.5F, -1.0F, -1.5F, 3.0F, 11.0F, 3.0F, CubeDeformation.NONE)
-                .texOffs(54, 32).addBox(-0.9F, 10.0F, -1.5F, 3.0F, 8.0F, 3.0F, CubeDeformation.NONE)
-                .texOffs(106, 32).addBox(0.4F, 18.0F, -1.0F, 2.0F, 5.0F, 2.0F, CubeDeformation.NONE),
-            PartPose.offsetAndRotation(-5.6F, -6.0F, 4.0F, 0.1F, 0.0F, 0.24F));
+        head.addOrReplaceChild("bangs", CubeListBuilder.create()
+                .texOffs(98, 45).addBox(-4.5F, -8.3F, -4.75F, 9.0F, 5.0F, 1.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition lockLeft = head.addOrReplaceChild("lock_left", CubeListBuilder.create()
+                .texOffs(118, 45).addBox(-1.0F, 0.0F, -0.5F, 2.0F, 5.0F, 1.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(3.8F, -4.8F, -3.8F, -0.05F, 0.0F, -0.06F));
+        lockLeft.addOrReplaceChild("lock_left_2", CubeListBuilder.create()
+                .texOffs(38, 54).addBox(-1.0F, 0.0F, -0.5F, 2.0F, 4.0F, 1.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 5.0F, 0.0F, 0.04F, 0.0F, 0.05F));
+        PartDefinition lockRight = head.addOrReplaceChild("lock_right", CubeListBuilder.create()
+                .texOffs(122, 32).addBox(-1.0F, 0.0F, -0.5F, 2.0F, 5.0F, 1.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(-3.8F, -4.8F, -3.8F, -0.05F, 0.0F, 0.06F));
+        lockRight.addOrReplaceChild("lock_right_2", CubeListBuilder.create()
+                .texOffs(32, 54).addBox(-1.0F, 0.0F, -0.5F, 2.0F, 4.0F, 1.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 5.0F, 0.0F, 0.04F, 0.0F, -0.05F));
+        PartDefinition hairBack = head.addOrReplaceChild("hair_back", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hairBack.addOrReplaceChild("hair_back_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailLeft = head.addOrReplaceChild("tail_left", CubeListBuilder.create()
+                .texOffs(0, 32).addBox(-1.5F, -1.0F, -1.5F, 3.0F, 10.0F, 3.0F, CubeDeformation.NONE)
+                .texOffs(56, 54).addBox(-1.5F, -1.6F, -1.5F, 3.0F, 1.0F, 3.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(4.6F, -6.6F, 4.2F, 0.12F, 0.0F, -0.28F));
+        PartDefinition tailLeft2 = tailLeft.addOrReplaceChild("tail_left_2", CubeListBuilder.create()
+                .texOffs(66, 32).addBox(-1.5F, 0.0F, -1.5F, 3.0F, 8.0F, 3.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 8.5F, 0.0F, 0.05F, 0.0F, 0.13F));
+        tailLeft2.addOrReplaceChild("tail_left_3", CubeListBuilder.create()
+                .texOffs(114, 32).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 7.0F, 2.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 7.5F, 0.0F, 0.04F, 0.0F, 0.1F));
+        PartDefinition tailRight = head.addOrReplaceChild("tail_right", CubeListBuilder.create()
+                .texOffs(106, 16).addBox(-1.5F, -1.0F, -1.5F, 3.0F, 10.0F, 3.0F, CubeDeformation.NONE)
+                .texOffs(44, 54).addBox(-1.5F, -1.6F, -1.5F, 3.0F, 1.0F, 3.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(-4.6F, -6.6F, 4.2F, 0.12F, 0.0F, 0.28F));
+        PartDefinition tailRight2 = tailRight.addOrReplaceChild("tail_right_2", CubeListBuilder.create()
+                .texOffs(54, 32).addBox(-1.5F, 0.0F, -1.5F, 3.0F, 8.0F, 3.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 8.5F, 0.0F, 0.05F, 0.0F, -0.13F));
+        tailRight2.addOrReplaceChild("tail_right_3", CubeListBuilder.create()
+                .texOffs(118, 16).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 7.0F, 2.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 7.5F, 0.0F, 0.04F, 0.0F, -0.1F));
         head.addOrReplaceChild("ear_left", CubeListBuilder.create()
-                .texOffs(36, 46).addBox(0.0F, -1.0F, -0.5F, 2.0F, 2.0F, 1.0F, CubeDeformation.NONE)
-                .texOffs(58, 46).addBox(2.0F, -1.2F, -0.5F, 2.0F, 1.0F, 1.0F, CubeDeformation.NONE)
-                .texOffs(64, 46).addBox(4.0F, -1.4F, -0.5F, 2.0F, 1.0F, 1.0F, CubeDeformation.NONE)
-                .texOffs(42, 46).addBox(0.2F, 1.0F, -0.5F, 1.0F, 2.0F, 1.0F, CubeDeformation.NONE),
+                .texOffs(74, 54).addBox(0.0F, -1.0F, -0.5F, 2.0F, 2.0F, 1.0F, CubeDeformation.NONE)
+                .texOffs(96, 54).addBox(2.0F, -1.2F, -0.5F, 2.0F, 1.0F, 1.0F, CubeDeformation.NONE)
+                .texOffs(102, 54).addBox(4.0F, -1.4F, -0.5F, 2.0F, 1.0F, 1.0F, CubeDeformation.NONE)
+                .texOffs(80, 54).addBox(0.2F, 1.0F, -0.5F, 1.0F, 2.0F, 1.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(4.0F, -3.0F, 0.6F, 0.0F, -0.3F, -0.3F));
         head.addOrReplaceChild("ear_right", CubeListBuilder.create()
-                .texOffs(122, 32).addBox(-2.0F, -1.0F, -0.5F, 2.0F, 2.0F, 1.0F, CubeDeformation.NONE)
-                .texOffs(46, 46).addBox(-4.0F, -1.2F, -0.5F, 2.0F, 1.0F, 1.0F, CubeDeformation.NONE)
-                .texOffs(52, 46).addBox(-6.0F, -1.4F, -0.5F, 2.0F, 1.0F, 1.0F, CubeDeformation.NONE)
-                .texOffs(32, 46).addBox(-1.2F, 1.0F, -0.5F, 1.0F, 2.0F, 1.0F, CubeDeformation.NONE),
+                .texOffs(68, 54).addBox(-2.0F, -1.0F, -0.5F, 2.0F, 2.0F, 1.0F, CubeDeformation.NONE)
+                .texOffs(84, 54).addBox(-4.0F, -1.2F, -0.5F, 2.0F, 1.0F, 1.0F, CubeDeformation.NONE)
+                .texOffs(90, 54).addBox(-6.0F, -1.4F, -0.5F, 2.0F, 1.0F, 1.0F, CubeDeformation.NONE)
+                .texOffs(124, 45).addBox(-1.2F, 1.0F, -0.5F, 1.0F, 2.0F, 1.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(-4.0F, -3.0F, 0.6F, 0.0F, 0.3F, 0.3F));
-        head.addOrReplaceChild("horn_left", CubeListBuilder.create(),
+        PartDefinition hornLeft = head.addOrReplaceChild("horn_left", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("horn_right", CubeListBuilder.create(),
+        PartDefinition hornLeft2 = hornLeft.addOrReplaceChild("horn_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hornLeft2.addOrReplaceChild("horn_left_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hornRight = head.addOrReplaceChild("horn_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hornRight2 = hornRight.addOrReplaceChild("horn_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hornRight2.addOrReplaceChild("horn_right_3", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("crown", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
@@ -1616,14 +2514,25 @@ public enum CharacterKind {
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         body.addOrReplaceChild("jacket", CubeListBuilder.create()
                 .texOffs(88, 0).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.25F))
-                .texOffs(12, 32).addBox(-7.5F, -0.5F, -3.0F, 15.0F, 7.0F, 6.0F, CubeDeformation.NONE),
+                .texOffs(12, 32).addBox(-7.5F, 1.4F, -3.0F, 15.0F, 5.0F, 6.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        body.addOrReplaceChild("cape", CubeListBuilder.create(),
+        body.addOrReplaceChild("collar", CubeListBuilder.create()
+                .texOffs(60, 45).addBox(-6.5F, -0.6F, -2.75F, 13.0F, 2.0F, 6.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        body.addOrReplaceChild("skirt", CubeListBuilder.create()
-                .texOffs(78, 32).addBox(-4.5F, 0.0F, -2.5F, 9.0F, 4.0F, 5.0F, CubeDeformation.NONE)
-                .texOffs(0, 46).addBox(-5.0F, 4.0F, -3.0F, 10.0F, 2.0F, 6.0F, CubeDeformation.NONE),
+        PartDefinition cape = body.addOrReplaceChild("cape", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        cape.addOrReplaceChild("cape_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition skirt = body.addOrReplaceChild("skirt", CubeListBuilder.create()
+                .texOffs(32, 45).addBox(-4.5F, 0.0F, -2.5F, 9.0F, 4.0F, 5.0F, CubeDeformation.NONE)
+                .texOffs(0, 54).addBox(-5.0F, 4.0F, -3.0F, 10.0F, 2.0F, 6.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 10.5F, 0.0F, 0.0F, 0.0F, 0.0F));
+        skirt.addOrReplaceChild("skirt_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        body.addOrReplaceChild("coat_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        body.addOrReplaceChild("coat_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition rightArm = root.addOrReplaceChild("right_arm", CubeListBuilder.create()
                 .texOffs(112, 0).addBox(-2.0F, -2.0F, -2.0F, 3.0F, 12.0F, 4.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(-5.0F, 2.5F, 0.0F, 0.0F, 0.0F, 0.0F));
@@ -1664,19 +2573,49 @@ public enum CharacterKind {
         head.addOrReplaceChild("hat", CubeListBuilder.create()
                 .texOffs(32, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.5F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("hair_back", CubeListBuilder.create(),
+        head.addOrReplaceChild("hair_top", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("tail_left", CubeListBuilder.create(),
+        head.addOrReplaceChild("bangs", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("tail_right", CubeListBuilder.create(),
+        PartDefinition lockLeft = head.addOrReplaceChild("lock_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        lockLeft.addOrReplaceChild("lock_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition lockRight = head.addOrReplaceChild("lock_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        lockRight.addOrReplaceChild("lock_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hairBack = head.addOrReplaceChild("hair_back", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hairBack.addOrReplaceChild("hair_back_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailLeft = head.addOrReplaceChild("tail_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailLeft2 = tailLeft.addOrReplaceChild("tail_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        tailLeft2.addOrReplaceChild("tail_left_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailRight = head.addOrReplaceChild("tail_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailRight2 = tailRight.addOrReplaceChild("tail_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        tailRight2.addOrReplaceChild("tail_right_3", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("ear_left", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("ear_right", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("horn_left", CubeListBuilder.create(),
+        PartDefinition hornLeft = head.addOrReplaceChild("horn_left", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("horn_right", CubeListBuilder.create(),
+        PartDefinition hornLeft2 = hornLeft.addOrReplaceChild("horn_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hornLeft2.addOrReplaceChild("horn_left_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hornRight = head.addOrReplaceChild("horn_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hornRight2 = hornRight.addOrReplaceChild("horn_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hornRight2.addOrReplaceChild("horn_right_3", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("crown", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
@@ -1686,9 +2625,19 @@ public enum CharacterKind {
         body.addOrReplaceChild("jacket", CubeListBuilder.create()
                 .texOffs(88, 0).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        body.addOrReplaceChild("cape", CubeListBuilder.create(),
+        body.addOrReplaceChild("collar", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        body.addOrReplaceChild("skirt", CubeListBuilder.create(),
+        PartDefinition cape = body.addOrReplaceChild("cape", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        cape.addOrReplaceChild("cape_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition skirt = body.addOrReplaceChild("skirt", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        skirt.addOrReplaceChild("skirt_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        body.addOrReplaceChild("coat_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        body.addOrReplaceChild("coat_right", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition rightArm = root.addOrReplaceChild("right_arm", CubeListBuilder.create()
                 .texOffs(112, 0).addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, CubeDeformation.NONE),
@@ -1730,19 +2679,49 @@ public enum CharacterKind {
         head.addOrReplaceChild("hat", CubeListBuilder.create()
                 .texOffs(60, 17).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.5F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("hair_back", CubeListBuilder.create(),
+        head.addOrReplaceChild("hair_top", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("tail_left", CubeListBuilder.create(),
+        head.addOrReplaceChild("bangs", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("tail_right", CubeListBuilder.create(),
+        PartDefinition lockLeft = head.addOrReplaceChild("lock_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        lockLeft.addOrReplaceChild("lock_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition lockRight = head.addOrReplaceChild("lock_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        lockRight.addOrReplaceChild("lock_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hairBack = head.addOrReplaceChild("hair_back", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hairBack.addOrReplaceChild("hair_back_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailLeft = head.addOrReplaceChild("tail_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailLeft2 = tailLeft.addOrReplaceChild("tail_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        tailLeft2.addOrReplaceChild("tail_left_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailRight = head.addOrReplaceChild("tail_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailRight2 = tailRight.addOrReplaceChild("tail_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        tailRight2.addOrReplaceChild("tail_right_3", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("ear_left", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("ear_right", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("horn_left", CubeListBuilder.create(),
+        PartDefinition hornLeft = head.addOrReplaceChild("horn_left", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("horn_right", CubeListBuilder.create(),
+        PartDefinition hornLeft2 = hornLeft.addOrReplaceChild("horn_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hornLeft2.addOrReplaceChild("horn_left_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hornRight = head.addOrReplaceChild("horn_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hornRight2 = hornRight.addOrReplaceChild("horn_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hornRight2.addOrReplaceChild("horn_right_3", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("crown", CubeListBuilder.create()
                 .texOffs(120, 0).addBox(-1.0F, -3.0F, -0.5F, 2.0F, 3.0F, 1.0F, CubeDeformation.NONE)
@@ -1755,11 +2734,21 @@ public enum CharacterKind {
         body.addOrReplaceChild("jacket", CubeListBuilder.create()
                 .texOffs(0, 34).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        body.addOrReplaceChild("cape", CubeListBuilder.create(),
+        body.addOrReplaceChild("collar", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        body.addOrReplaceChild("skirt", CubeListBuilder.create()
+        PartDefinition cape = body.addOrReplaceChild("cape", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        cape.addOrReplaceChild("cape_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition skirt = body.addOrReplaceChild("skirt", CubeListBuilder.create()
                 .texOffs(0, 17).addBox(-4.5F, 0.0F, -2.5F, 9.0F, 12.0F, 5.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 10.5F, 0.0F, 0.0F, 0.0F, 0.0F));
+        skirt.addOrReplaceChild("skirt_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        body.addOrReplaceChild("coat_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        body.addOrReplaceChild("coat_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition rightArm = root.addOrReplaceChild("right_arm", CubeListBuilder.create()
                 .texOffs(0, 0).addBox(-2.0F, -2.0F, -2.0F, 3.0F, 13.0F, 4.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(-5.0F, 2.5F, 0.0F, 0.0F, 0.0F, 0.0F));
@@ -1800,19 +2789,49 @@ public enum CharacterKind {
         head.addOrReplaceChild("hat", CubeListBuilder.create()
                 .texOffs(32, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.5F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("hair_back", CubeListBuilder.create(),
+        head.addOrReplaceChild("hair_top", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("tail_left", CubeListBuilder.create(),
+        head.addOrReplaceChild("bangs", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("tail_right", CubeListBuilder.create(),
+        PartDefinition lockLeft = head.addOrReplaceChild("lock_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        lockLeft.addOrReplaceChild("lock_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition lockRight = head.addOrReplaceChild("lock_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        lockRight.addOrReplaceChild("lock_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hairBack = head.addOrReplaceChild("hair_back", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hairBack.addOrReplaceChild("hair_back_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailLeft = head.addOrReplaceChild("tail_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailLeft2 = tailLeft.addOrReplaceChild("tail_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        tailLeft2.addOrReplaceChild("tail_left_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailRight = head.addOrReplaceChild("tail_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailRight2 = tailRight.addOrReplaceChild("tail_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        tailRight2.addOrReplaceChild("tail_right_3", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("ear_left", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("ear_right", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("horn_left", CubeListBuilder.create(),
+        PartDefinition hornLeft = head.addOrReplaceChild("horn_left", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("horn_right", CubeListBuilder.create(),
+        PartDefinition hornLeft2 = hornLeft.addOrReplaceChild("horn_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hornLeft2.addOrReplaceChild("horn_left_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hornRight = head.addOrReplaceChild("horn_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hornRight2 = hornRight.addOrReplaceChild("horn_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hornRight2.addOrReplaceChild("horn_right_3", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("crown", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
@@ -1822,9 +2841,19 @@ public enum CharacterKind {
         body.addOrReplaceChild("jacket", CubeListBuilder.create()
                 .texOffs(88, 0).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        body.addOrReplaceChild("cape", CubeListBuilder.create(),
+        body.addOrReplaceChild("collar", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        body.addOrReplaceChild("skirt", CubeListBuilder.create(),
+        PartDefinition cape = body.addOrReplaceChild("cape", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        cape.addOrReplaceChild("cape_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition skirt = body.addOrReplaceChild("skirt", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        skirt.addOrReplaceChild("skirt_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        body.addOrReplaceChild("coat_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        body.addOrReplaceChild("coat_right", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition rightArm = root.addOrReplaceChild("right_arm", CubeListBuilder.create()
                 .texOffs(112, 0).addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, CubeDeformation.NONE),
@@ -1861,69 +2890,115 @@ public enum CharacterKind {
         MeshDefinition mesh = new MeshDefinition();
         PartDefinition root = mesh.getRoot();
         PartDefinition head = root.addOrReplaceChild("head", CubeListBuilder.create()
-                .texOffs(28, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, CubeDeformation.NONE),
+                .texOffs(6, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("hat", CubeListBuilder.create()
-                .texOffs(60, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.5F)),
+                .texOffs(38, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.5F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("hair_back", CubeListBuilder.create(),
+        head.addOrReplaceChild("hair_top", CubeListBuilder.create()
+                .texOffs(38, 46).addBox(-4.0F, -9.1F, -4.0F, 8.0F, 1.0F, 8.0F, CubeDeformation.NONE)
+                .texOffs(60, 33).addBox(-4.5F, -8.6F, -4.5F, 9.0F, 1.0F, 9.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("tail_left", CubeListBuilder.create(),
+        head.addOrReplaceChild("bangs", CubeListBuilder.create()
+                .texOffs(70, 46).addBox(-4.5F, -8.3F, -4.75F, 9.0F, 4.0F, 1.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("tail_right", CubeListBuilder.create(),
+        PartDefinition lockLeft = head.addOrReplaceChild("lock_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        lockLeft.addOrReplaceChild("lock_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition lockRight = head.addOrReplaceChild("lock_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        lockRight.addOrReplaceChild("lock_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hairBack = head.addOrReplaceChild("hair_back", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hairBack.addOrReplaceChild("hair_back_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailLeft = head.addOrReplaceChild("tail_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailLeft2 = tailLeft.addOrReplaceChild("tail_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        tailLeft2.addOrReplaceChild("tail_left_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailRight = head.addOrReplaceChild("tail_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition tailRight2 = tailRight.addOrReplaceChild("tail_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        tailRight2.addOrReplaceChild("tail_right_3", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("ear_left", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("ear_right", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("horn_left", CubeListBuilder.create(),
+        PartDefinition hornLeft = head.addOrReplaceChild("horn_left", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        head.addOrReplaceChild("horn_right", CubeListBuilder.create(),
+        PartDefinition hornLeft2 = hornLeft.addOrReplaceChild("horn_left_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hornLeft2.addOrReplaceChild("horn_left_3", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hornRight = head.addOrReplaceChild("horn_right", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition hornRight2 = hornRight.addOrReplaceChild("horn_right_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        hornRight2.addOrReplaceChild("horn_right_3", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         head.addOrReplaceChild("crown", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition body = root.addOrReplaceChild("body", CubeListBuilder.create()
-                .texOffs(92, 0).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, CubeDeformation.NONE),
+                .texOffs(70, 0).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         body.addOrReplaceChild("jacket", CubeListBuilder.create()
-                .texOffs(0, 20).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
+                .texOffs(94, 0).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-        body.addOrReplaceChild("cape", CubeListBuilder.create()
-                .texOffs(0, 0).addBox(-5.0F, 0.0F, 0.0F, 10.0F, 19.0F, 1.0F, CubeDeformation.NONE),
-            PartPose.offsetAndRotation(0.0F, 0.2F, 2.6F, 0.08F, 0.0F, 0.0F));
-        body.addOrReplaceChild("skirt", CubeListBuilder.create(),
+        body.addOrReplaceChild("collar", CubeListBuilder.create()
+                .texOffs(0, 46).addBox(-6.5F, -0.8F, -3.0F, 13.0F, 4.0F, 6.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        PartDefinition cape = body.addOrReplaceChild("cape", CubeListBuilder.create()
+                .texOffs(0, 33).addBox(-7.0F, 0.0F, 0.0F, 14.0F, 12.0F, 1.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 0.4F, 3.0F, 0.06F, 0.0F, 0.0F));
+        cape.addOrReplaceChild("cape_2", CubeListBuilder.create()
+                .texOffs(30, 33).addBox(-7.0F, 0.0F, 0.0F, 14.0F, 11.0F, 1.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 12.0F, 0.0F, 0.04F, 0.0F, 0.0F));
+        PartDefinition skirt = body.addOrReplaceChild("skirt", CubeListBuilder.create()
+                .texOffs(96, 33).addBox(-4.5F, 0.0F, -2.5F, 9.0F, 5.0F, 5.0F, CubeDeformation.NONE),
+            PartPose.offsetAndRotation(0.0F, 11.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        skirt.addOrReplaceChild("skirt_2", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        body.addOrReplaceChild("coat_left", CubeListBuilder.create(),
+            PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+        body.addOrReplaceChild("coat_right", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition rightArm = root.addOrReplaceChild("right_arm", CubeListBuilder.create()
-                .texOffs(24, 20).addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, CubeDeformation.NONE),
+                .texOffs(0, 17).addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(-5.0F, 2.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         rightArm.addOrReplaceChild("right_sleeve", CubeListBuilder.create()
-                .texOffs(40, 20).addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
+                .texOffs(16, 17).addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         rightArm.addOrReplaceChild("prop", CubeListBuilder.create()
-                .texOffs(116, 0).addBox(-0.5F, 2.0F, -0.5F, 1.0F, 4.0F, 1.0F, CubeDeformation.NONE)
-                .texOffs(32, 36).addBox(-2.5F, 1.0F, -0.5F, 5.0F, 1.0F, 1.0F, CubeDeformation.NONE)
-                .texOffs(22, 0).addBox(-1.0F, -15.0F, -0.5F, 2.0F, 16.0F, 1.0F, CubeDeformation.NONE)
-                .texOffs(120, 0).addBox(-0.5F, 6.0F, -0.5F, 1.0F, 1.0F, 1.0F, CubeDeformation.NONE),
+                .texOffs(118, 0).addBox(-0.5F, 2.0F, -0.5F, 1.0F, 4.0F, 1.0F, CubeDeformation.NONE)
+                .texOffs(90, 46).addBox(-2.5F, 1.0F, -0.5F, 5.0F, 1.0F, 1.0F, CubeDeformation.NONE)
+                .texOffs(0, 0).addBox(-1.0F, -15.0F, -0.5F, 2.0F, 16.0F, 1.0F, CubeDeformation.NONE)
+                .texOffs(122, 0).addBox(-0.5F, 6.0F, -0.5F, 1.0F, 1.0F, 1.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(-1.0F, 9.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition leftArm = root.addOrReplaceChild("left_arm", CubeListBuilder.create()
-                .texOffs(56, 20).addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, CubeDeformation.NONE),
+                .texOffs(32, 17).addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(5.0F, 2.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         leftArm.addOrReplaceChild("left_sleeve", CubeListBuilder.create()
-                .texOffs(72, 20).addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
+                .texOffs(48, 17).addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         leftArm.addOrReplaceChild("prop_left", CubeListBuilder.create(),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition rightLeg = root.addOrReplaceChild("right_leg", CubeListBuilder.create()
-                .texOffs(88, 20).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, CubeDeformation.NONE),
+                .texOffs(64, 17).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(-1.9F, 12.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         rightLeg.addOrReplaceChild("right_pants", CubeListBuilder.create()
-                .texOffs(104, 20).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
+                .texOffs(80, 17).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         PartDefinition leftLeg = root.addOrReplaceChild("left_leg", CubeListBuilder.create()
-                .texOffs(0, 36).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, CubeDeformation.NONE),
+                .texOffs(96, 17).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, CubeDeformation.NONE),
             PartPose.offsetAndRotation(1.9F, 12.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         leftLeg.addOrReplaceChild("left_pants", CubeListBuilder.create()
-                .texOffs(16, 36).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
+                .texOffs(112, 17).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
             PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         return LayerDefinition.create(mesh, 128, 128);
     }

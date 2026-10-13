@@ -226,6 +226,104 @@
 /tp @a 112.5 122 6 0 6
 @wait 20
 @shot dungeon_throne_room
+# Portrait studio: every character alone, full body, turned a little toward the camera.
+/kill @e[type=!minecraft:player]
+/gamemode spectator @a
+/kill @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player]
+/summon frieren:frieren 24.5 120 0.5 {NoAI:1b,Rotation:[205f,0f]}
+/tp @a 24.5 120.2 -2.10 0 10
+@wait 25
+@shot portrait_frieren
+/kill @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player]
+/summon frieren:fern 24.5 120 0.5 {NoAI:1b,Rotation:[205f,0f]}
+/tp @a 24.5 120.2 -2.20 0 10
+@wait 25
+@shot portrait_fern
+/kill @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player]
+/summon frieren:stark 24.5 120 0.5 {NoAI:1b,Rotation:[205f,0f]}
+/tp @a 24.5 120.2 -2.30 0 10
+@wait 25
+@shot portrait_stark
+/kill @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player]
+/summon frieren:serie 24.5 120 0.5 {NoAI:1b,Rotation:[205f,0f]}
+/tp @a 24.5 120.2 -2.10 0 10
+@wait 25
+@shot portrait_serie
+/kill @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player]
+/summon frieren:examiner 24.5 120 0.5 {NoAI:1b,Rotation:[205f,0f]}
+/tp @a 24.5 120.2 -2.30 0 10
+@wait 25
+@shot portrait_examiner
+/kill @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player]
+/summon frieren:priest 24.5 120 0.5 {NoAI:1b,Rotation:[205f,0f]}
+/tp @a 24.5 120.2 -2.30 0 10
+@wait 25
+@shot portrait_priest
+/kill @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player]
+/summon frieren:wandering_mage 24.5 120 0.5 {NoAI:1b,Rotation:[205f,0f]}
+/tp @a 24.5 120.2 -2.30 0 10
+@wait 25
+@shot portrait_wandering_mage
+/kill @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player]
+/summon frieren:aura 24.5 120 0.5 {NoAI:1b,Rotation:[205f,0f]}
+/tp @a 24.5 120.2 -2.30 0 10
+@wait 25
+@shot portrait_aura
+/kill @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player]
+/summon frieren:qual 24.5 120 0.5 {NoAI:1b,Rotation:[205f,0f]}
+/tp @a 24.5 120.2 -2.40 0 10
+@wait 25
+@shot portrait_qual
+/kill @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player]
+/summon frieren:demon_soldier 24.5 120 0.5 {NoAI:1b,Rotation:[205f,0f]}
+/tp @a 24.5 120.2 -2.30 0 10
+@wait 25
+@shot portrait_demon_soldier
+/kill @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player]
+/summon frieren:demon_mage 24.5 120 0.5 {NoAI:1b,Rotation:[205f,0f]}
+/tp @a 24.5 120.2 -2.30 0 10
+@wait 25
+@shot portrait_demon_mage
+/kill @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player]
+/summon frieren:aura_thrall 24.5 120 0.5 {NoAI:1b,Rotation:[205f,0f]}
+/tp @a 24.5 120.2 -2.40 0 10
+@wait 25
+@shot portrait_aura_thrall
+/kill @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player]
+/summon frieren:linie 24.5 120 0.5 {NoAI:1b,Rotation:[205f,0f]}
+/tp @a 24.5 120.2 -2.20 0 10
+@wait 25
+@shot portrait_linie
+/kill @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player]
+/summon frieren:draht 24.5 120 0.5 {NoAI:1b,Rotation:[205f,0f]}
+/tp @a 24.5 120.2 -2.30 0 10
+@wait 25
+@shot portrait_draht
+/kill @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player]
+/summon frieren:lugner 24.5 120 0.5 {NoAI:1b,Rotation:[205f,0f]}
+/tp @a 24.5 120.2 -2.30 0 10
+@wait 25
+@shot portrait_lugner
+/kill @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player]
+/summon frieren:macht 24.5 120 0.5 {NoAI:1b,Rotation:[205f,0f]}
+/tp @a 24.5 120.2 -2.70 0 10
+@wait 25
+@shot portrait_macht
+/kill @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player]
+/summon frieren:demon_king 24.5 120 0.5 {NoAI:1b,Rotation:[205f,0f]}
+/tp @a 24.5 120.2 -3.40 0 10
+@wait 25
+@shot portrait_demon_king
+/kill @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player]
+/summon frieren:mirror_frieren 24.5 120 0.5 {NoAI:1b,Rotation:[205f,0f]}
+/tp @a 24.5 120.2 -2.10 0 10
+@wait 25
+@shot portrait_mirror_frieren
+/kill @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player]
+/summon frieren:spiegel 24.5 120 0.5 {NoAI:1b,Rotation:[205f,0f]}
+/tp @a 24.5 120.2 -2.60 0 10
+@wait 25
+@shot portrait_spiegel
 # Held items: a player holding Frieren's staff and the Warrior's Axe, first person and from the front.
 /kill @e[type=!minecraft:player]
 /gamemode creative @a

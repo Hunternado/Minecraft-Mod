@@ -24,11 +24,24 @@ public class CharacterModel extends EntityModel<CharacterRenderState> implements
     private final CharacterKind kind;
     private final ModelPart head;
     private final ModelPart hairBack;
+    private final ModelPart hairBack2;
+    private final ModelPart lockLeft;
+    private final ModelPart lockLeft2;
+    private final ModelPart lockRight;
+    private final ModelPart lockRight2;
     private final ModelPart tailLeft;
+    private final ModelPart tailLeft2;
+    private final ModelPart tailLeft3;
     private final ModelPart tailRight;
+    private final ModelPart tailRight2;
+    private final ModelPart tailRight3;
     private final ModelPart body;
     private final ModelPart cape;
+    private final ModelPart cape2;
     private final ModelPart skirt;
+    private final ModelPart skirt2;
+    private final ModelPart coatLeft;
+    private final ModelPart coatRight;
     private final ModelPart rightArm;
     private final ModelPart prop;
     private final ModelPart leftArm;
@@ -40,11 +53,24 @@ public class CharacterModel extends EntityModel<CharacterRenderState> implements
         this.kind = kind;
         this.head = root.getChild("head");
         this.hairBack = head.getChild("hair_back");
+        this.hairBack2 = hairBack.getChild("hair_back_2");
+        this.lockLeft = head.getChild("lock_left");
+        this.lockLeft2 = lockLeft.getChild("lock_left_2");
+        this.lockRight = head.getChild("lock_right");
+        this.lockRight2 = lockRight.getChild("lock_right_2");
         this.tailLeft = head.getChild("tail_left");
+        this.tailLeft2 = tailLeft.getChild("tail_left_2");
+        this.tailLeft3 = tailLeft2.getChild("tail_left_3");
         this.tailRight = head.getChild("tail_right");
+        this.tailRight2 = tailRight.getChild("tail_right_2");
+        this.tailRight3 = tailRight2.getChild("tail_right_3");
         this.body = root.getChild("body");
         this.cape = body.getChild("cape");
+        this.cape2 = cape.getChild("cape_2");
         this.skirt = body.getChild("skirt");
+        this.skirt2 = skirt.getChild("skirt_2");
+        this.coatLeft = body.getChild("coat_left");
+        this.coatRight = body.getChild("coat_right");
         this.rightArm = root.getChild("right_arm");
         this.prop = rightArm.getChild("prop");
         this.leftArm = root.getChild("left_arm");
@@ -77,16 +103,36 @@ public class CharacterModel extends EntityModel<CharacterRenderState> implements
         rightArm.zRot += breathe + 0.05F;
         leftArm.zRot -= breathe + 0.05F;
 
-        // Hair and cloth: trail behind when moving, sway gently when idle.
+        // Hair and cloth: trail behind when moving and sway gently when idle; every link of a chain adds a little
+        // more, so long hair and capes bend instead of swinging like boards. Hair hangs from the head but should
+        // fall with gravity, so it partly cancels the head's pitch.
         float sway = Mth.sin(time * 0.09F) * 0.04F;
+        float sway2 = Mth.sin(time * 0.09F - 0.8F) * 0.05F;
         float trail = amount * 0.45F;
-        hairBack.xRot += trail + sway * 0.5F;
-        tailRight.xRot += trail;
-        tailLeft.xRot += trail;
+        float gravity = -head.xRot * 0.7F;
+        hairBack.xRot += trail * 0.7F + sway * 0.5F + gravity;
+        hairBack2.xRot += trail * 0.5F + sway2 * 0.5F;
+        tailRight.xRot += trail * 0.6F + gravity;
+        tailLeft.xRot += trail * 0.6F + gravity;
         tailRight.zRot += sway;
         tailLeft.zRot -= sway;
-        cape.xRot += amount * 0.7F + sway * 0.6F;
+        tailRight2.xRot += trail * 0.35F;
+        tailLeft2.xRot += trail * 0.35F;
+        tailRight2.zRot += sway2;
+        tailLeft2.zRot -= sway2;
+        tailRight3.zRot += sway2 * 0.8F;
+        tailLeft3.zRot -= sway2 * 0.8F;
+        lockRight.xRot += gravity * 0.6F + trail * 0.2F;
+        lockLeft.xRot += gravity * 0.6F + trail * 0.2F;
+        lockRight2.zRot += sway * 0.5F;
+        lockLeft2.zRot -= sway * 0.5F;
+        cape.xRot += amount * 0.55F + sway * 0.6F;
+        cape2.xRot += amount * 0.35F + sway2 * 0.6F;
         skirt.xRot += Math.abs(Mth.sin(walk)) * 0.04F * amount;
+        skirt2.xRot += amount * 0.25F + sway2 * 0.4F;
+        // Open coat panels swing forward with the leg beneath them instead of letting it poke through.
+        coatRight.xRot += Math.min(0.0F, rightLeg.xRot) * 0.55F + sway * 0.3F;
+        coatLeft.xRot += Math.min(0.0F, leftLeg.xRot) * 0.55F - sway * 0.3F;
 
         if (state.casting) {
             rightArm.xRot = -Mth.HALF_PI + head.xRot * 0.6F;
@@ -97,9 +143,14 @@ public class CharacterModel extends EntityModel<CharacterRenderState> implements
             // Mana flowing outward lifts hair and cloth.
             float flutter = Mth.sin(time * 0.35F) * 0.05F;
             hairBack.xRot += 0.18F + flutter;
+            hairBack2.xRot += 0.1F - flutter;
             tailRight.xRot += 0.22F + flutter;
             tailLeft.xRot += 0.22F - flutter;
+            tailRight2.xRot += 0.12F;
+            tailLeft2.xRot += 0.12F;
             cape.xRot += 0.3F + flutter;
+            cape2.xRot += 0.15F - flutter;
+            skirt2.xRot += 0.12F + flutter;
         }
         if (state.raisedArm) {
             leftArm.xRot = -2.7F;
@@ -146,6 +197,11 @@ public class CharacterModel extends EntityModel<CharacterRenderState> implements
             poseStack.mulPose(Axis.XP.rotation(wrist));
             poseStack.translate(0.0F, -HAND, 0.0F);
         }
+    }
+
+    /** The torso part; BackItemLayer hangs back-carried weapons from it. */
+    public ModelPart body() {
+        return body;
     }
 
     /** The Hero's statue: sword raised to the sky, chin up, cape caught in the wind. */

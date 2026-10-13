@@ -25,6 +25,7 @@ public class CharacterRenderer<T extends LivingEntity> extends LivingEntityRende
         super(context, new CharacterModel(context.bakeLayer(kind.layer()), kind), shadowRadius * kind.scale());
         this.kind = kind;
         this.addLayer(new ItemInHandLayer<>(this));
+        this.addLayer(new BackItemLayer(this));
     }
 
     @Override
@@ -43,9 +44,18 @@ public class CharacterRenderer<T extends LivingEntity> extends LivingEntityRende
         ArmedEntityRenderState.extractArmedEntityRenderState(entity, state, this.itemModelResolver, partialTicks);
         state.rightArmPose = HumanoidModel.ArmPose.EMPTY;
         state.leftArmPose = HumanoidModel.ArmPose.EMPTY;
+        state.backItemState.clear();
         if (showsSignatureItems()) {
             if (state.rightHandItemState.isEmpty()) {
-                hold(entity, state, kind.mainHandStack(), true);
+                boolean fighting = state.casting || state.attack > 0.0F;
+                if (kind.backCarry() && !fighting) {
+                    // Out of combat the weapon rides on the back; it comes to hand when the fight starts.
+                    if (!kind.mainHandStack().isEmpty()) {
+                        this.itemModelResolver.updateForLiving(state.backItemState, kind.mainHandStack(), ItemDisplayContext.NONE, entity);
+                    }
+                } else {
+                    hold(entity, state, kind.mainHandStack(), true);
+                }
             }
             if (state.leftHandItemState.isEmpty()) {
                 hold(entity, state, kind.offHandStack(), false);
