@@ -1,0 +1,9 @@
+{
+  "behavior": "frieren:pocket_space",
+  "school": "utility",
+  "rarity": "rare",
+  "mana_cost": 10,
+  "cooldown": 40,
+  "color": "#9A6AE0",
+  "params": {}
+}

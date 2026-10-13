@@ -1,0 +1,12 @@
+{
+  "behavior": "frieren:growth",
+  "school": "utility",
+  "rarity": "uncommon",
+  "mana_cost": 14,
+  "cooldown": 400,
+  "color": "#9BE07A",
+  "params": {
+    "radius": 5.0,
+    "rounds": 2
+  }
+}

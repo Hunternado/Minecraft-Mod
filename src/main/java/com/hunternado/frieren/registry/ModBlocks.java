@@ -1,6 +1,7 @@
 package com.hunternado.frieren.registry;
 
 import com.hunternado.frieren.FrierenMod;
+import com.hunternado.frieren.block.ManaBridgeBlock;
 import com.hunternado.frieren.block.ManaLightBlock;
 import com.hunternado.frieren.block.SpellResearchDeskBlock;
 import com.hunternado.frieren.block.SummoningAltarBlock;
@@ -92,6 +93,22 @@ public final class ModBlocks {
             .lightLevel(state -> 15)
             .replaceable()
             .sound(SoundType.AMETHYST_CLUSTER)
+            .pushReaction(PushReaction.DESTROY)));
+
+    /** Laid by the bridge spell; a walkable plate of light that removes itself after a minute. Has no item. */
+    public static final RegistryObject<Block> MANA_BRIDGE = BLOCKS.register("mana_bridge", () ->
+        new ManaBridgeBlock(BlockBehaviour.Properties.of()
+            .setId(BLOCKS.key("mana_bridge"))
+            .mapColor(MapColor.NONE)
+            .instabreak()
+            .noOcclusion()
+            .noLootTable()
+            .lightLevel(state -> 10)
+            .isValidSpawn((state, level, pos, type) -> false)
+            .isRedstoneConductor((state, level, pos) -> false)
+            .isSuffocating((state, level, pos) -> false)
+            .isViewBlocking((state, level, pos) -> false)
+            .sound(SoundType.AMETHYST)
             .pushReaction(PushReaction.DESTROY)));
 
     private ModBlocks() {}

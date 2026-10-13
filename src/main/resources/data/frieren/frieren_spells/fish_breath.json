@@ -1,0 +1,14 @@
+{
+  "behavior": "frieren:buff",
+  "school": "utility",
+  "rarity": "common",
+  "mana_cost": 6,
+  "cooldown": 200,
+  "color": "#5AC8E8",
+  "params": {
+    "effect": 1,
+    "duration": 3600,
+    "amplifier": 0,
+    "radius": 4.0
+  }
+}

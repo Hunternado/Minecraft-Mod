@@ -15,3 +15,5 @@ net.minecraft.core.Registry|getValue|getOptional
 net.minecraft.world.item.ToolMaterial|static
 code:net.minecraft.client.resources.model.cuboid.ItemTransform|apply
 code:net.minecraft.client.renderer.item.ItemStackRenderState$LayerRenderState|applyTransform
+net.minecraft.world.level.portal.TeleportTransition|.
+net.minecraft.world.level.portal.TeleportTransition$PostTeleportTransition|.

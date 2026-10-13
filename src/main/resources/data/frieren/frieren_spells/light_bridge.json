@@ -1,0 +1,12 @@
+{
+  "behavior": "frieren:bridge",
+  "school": "utility",
+  "rarity": "uncommon",
+  "mana_cost": 12,
+  "cooldown": 100,
+  "color": "#CFF4FF",
+  "params": {
+    "length": 16.0,
+    "width": 3.0
+  }
+}

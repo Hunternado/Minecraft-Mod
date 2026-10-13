@@ -36,6 +36,7 @@ BLOCKS = {
     "cursed_gold_block": "Cursed Gold",
     "blue_moon_weed": "Blue Moon Weed",
     "mana_light": "Mana Light",
+    "mana_bridge": "Bridge of Light",
 }
 ITEMS = {
     "common_grimoire": "Common Grimoire",
@@ -192,6 +193,19 @@ SPELLS = {
     "gathering_magic": ("Gathering Magic", "Pulls nearby dropped items and experience toward you."),
     "azeryuze": ("Azeryuze", "Demon magic. Weighs your mana against a creature's; if yours is far greater, it obeys you for a while."),
     "lands_doppelganger": ("Land's Doppelganger", "Leaves a mana decoy behind that draws enemy attention while you slip away."),
+    "tree_felling": ("The Spell to Fell a Tree", "Look at a living tree and it comes down in one stroke, every log at once. Log cabins are spared."),
+    "field_blessing": ("The Spell to Bless the Fields", "Crops, saplings and berry bushes around you grow as if a season had passed."),
+    "ore_finding": ("The Spell to Find Glittering Stones", "Feels the ores hidden around you and tells you how many there are and where the nearest of each lies."),
+    "tunnel_carving": ("The Spell to Carve a Tunnel", "Opens a 3x3 passage the way you face, up and down included. Stone drops as if mined."),
+    "return_home": ("The Spell to Return Home", "A long incantation that carries you to your bed, or to the world's spawn if you have none."),
+    "light_bridge": ("The Spell to Lay a Bridge of Light", "A level walkway of solid light runs out from under your feet. It fades after a minute."),
+    "night_sight": ("The Spell to See in the Dark", "You and your companions see in the dark for five minutes."),
+    "fish_breath": ("The Spell to Breathe Like a Fish", "You and your companions can breathe underwater for three minutes."),
+    "swift_hands": ("The Spell to Work Swiftly", "Your hands move twice as fast for a while. Mining has never been so pleasant."),
+    "feather_fall": ("The Spell to Fall Like a Feather", "You and your companions drift down gently for half a minute."),
+    "flame_ward": ("The Spell to Ward Off Flames", "Fire and lava cannot burn you or your companions for a minute and a half."),
+    "smelting_magic": ("The Spell to Smelt Ore", "Fires the raw metal, sand, stone, clay and logs you carry as a furnace would."),
+    "pocket_space": ("The Spell to Open a Pocket of Space", "Reach into your ender chest from anywhere."),
 }
 
 
@@ -354,6 +368,30 @@ def messages():
     m("sweeten_done", "%s berries are now Sweet Grapes.")
     m("weather_no_sky", "There is no sky here to clear.")
     m("weather_cleared", "The clouds part.")
+    m("fell_no_tree", "Look at the trunk of a tree.")
+    m("fell_not_living", "That is not a living tree. The spell will not fell a house.")
+    m("fell_done", "Felled %s log(s).")
+    m("growth_nothing", "Nothing around you can grow any further.")
+    m("growth_done", "%s plant(s) grew.")
+    m("ore_sense_nothing", "No ore within %s blocks.")
+    m("ore_sense_header", "Ores within %s blocks:")
+    m("ore_sense_line", "  %s: %s, nearest %s blocks away, %s")
+    for key, name in (("coal", "Coal"), ("copper", "Copper"), ("iron", "Iron"), ("gold", "Gold"), ("redstone", "Redstone"),
+                      ("lapis", "Lapis"), ("diamond", "Diamond"), ("emerald", "Emerald"), ("mana_crystal", "Mana Crystal")):
+        m(f"ore.{key}", name)
+    m("dir.below", "%s below, %s")
+    m("dir.above", "%s above, %s")
+    m("dir.level", "level, %2$s")
+    for key, name in (("north", "north"), ("south", "south"), ("east", "east"), ("west", "west"),
+                      ("north_east", "north-east"), ("north_west", "north-west"), ("south_east", "south-east"),
+                      ("south_west", "south-west"), ("here", "right here")):
+        m(f"dir.{key}", name)
+    m("tunnel_nothing", "Nothing here the spell can carve.")
+    m("tunnel_done", "Carved %s block(s).")
+    m("recall_done", "You are home.")
+    m("bridge_nothing", "There is no gap here to bridge.")
+    m("smelt_nothing", "You carry nothing a furnace could fire.")
+    m("smelt_done", "Smelted %s item(s).")
     m("statue_inscription", "\"Himmel the Hero, who defeated the Demon King and brought peace to the land.\"")
     m("statue_stage.0", "Green with verdigris. Nobody has polished it in a long time.")
     m("statue_stage.1", "Weathered, but someone remembers to visit.")
@@ -507,6 +545,7 @@ def exams():
 def screens():
     s = lambda k, v: put(f"screen.{NS}.{k}", v)
     s("journey.more_quests", "...and %s more")
+    put(f"container.{NS}.pocket_space", "Pocket Space")
     s("examiner", "Continental Magic Association")
     s("examiner.abandon", "Abandon Exam")
     s("examiner.begin", "Begin Exam")

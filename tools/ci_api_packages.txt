@@ -66,3 +66,5 @@ net/minecraft/server/players/*
 net/minecraft/world/level/block/entity/*
 net/minecraft/world/entity/ai/goal/
 net/minecraft/world/entity/projectile/
+net/minecraft/world/level/portal/*
+net/minecraft/world/item/crafting/*

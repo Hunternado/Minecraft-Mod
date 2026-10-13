@@ -1,0 +1,12 @@
+{
+  "behavior": "frieren:tree_fell",
+  "school": "utility",
+  "rarity": "common",
+  "mana_cost": 8,
+  "cooldown": 60,
+  "color": "#C8A26A",
+  "params": {
+    "range": 6.0,
+    "max_logs": 96
+  }
+}

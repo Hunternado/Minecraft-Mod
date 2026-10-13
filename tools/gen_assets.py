@@ -431,6 +431,7 @@ BLOCKS = {
     "summoning_altar": "bottom_top",
     "blue_moon_weed": "cross",
     "mana_light": "orb",
+    "mana_bridge": "plate",
 }
 
 
@@ -521,6 +522,19 @@ def flower_texture():
         img.set(x, y, petal)
     img.set(8, 4, center)
     img.set(7, 5, shade(petal, 1.25))
+    return img
+
+
+def bridge_texture():
+    """A pane of pale, faintly ruled light: brighter rim, soft see-through body, a rune line across the middle.
+    Pixels are written directly because Image.set flattens translucent colours over existing ones."""
+    img = Image(16, 16)
+    body, rim, rune = (200, 240, 255, 96), (236, 252, 255, 200), (255, 255, 255, 160)
+    for y in range(16):
+        for x in range(16):
+            edge = x in (0, 15) or y in (0, 15)
+            mark = (3 <= x <= 12 and y in (7, 8)) or (x, y) in ((5, 5), (10, 5), (5, 10), (10, 10), (7, 3), (8, 12))
+            img.pixels[y][x] = rim if edge else (rune if mark else body)
     return img
 
 
@@ -782,8 +796,17 @@ def gen_models():
                 "textures": {"orb": tex, "particle": tex},
                 "elements": [{"from": [5, 5, 5], "to": [11, 11, 11], "shade": False,
                               "faces": {d: dict(face) for d in ("north", "south", "east", "west", "up", "down")}}]})
+        elif kind == "plate":
+            tex = f"{NS}:block/{block}"
+            write_json(f"models/block/{block}.json", {
+                "render_type": "minecraft:translucent", "ambientocclusion": False,
+                "textures": {"plate": tex, "particle": tex},
+                "elements": [{"from": [0, 12, 0], "to": [16, 16, 16], "shade": False, "faces": {
+                    "up": {"texture": "#plate", "uv": [0, 0, 16, 16], "cullface": "up"},
+                    "down": {"texture": "#plate", "uv": [0, 0, 16, 16]},
+                    **{d: {"texture": "#plate", "uv": [0, 0, 16, 4], "cullface": d} for d in ("north", "south", "east", "west")}}}]})
         write_json(f"blockstates/{block}.json", {"variants": {"": {"model": f"{NS}:block/{block}"}}})
-        if block == "mana_light":
+        if block in ("mana_light", "mana_bridge"):
             continue
         if kind == "cross":
             write_json(f"models/item/{block}.json", {"parent": "minecraft:item/generated", "textures": {"layer0": f"{NS}:block/{block}"}})
@@ -821,6 +844,7 @@ def gen_textures():
     for effect in ("enthralled", "gilded", "warded", "bound", "reflecting"):
         save(effect_icon(effect), f"mob_effect/{effect}.png")
     save(light_texture(), "block/mana_light.png")
+    save(bridge_texture(), "block/mana_bridge.png")
 
     # Character skins are generated with their models by tools/gen_models.py (textures/entity/character/).
     # The mimic's texture is generated with its model by tools/gen_mimic.py.

@@ -1,0 +1,11 @@
+{
+  "behavior": "frieren:ore_sense",
+  "school": "utility",
+  "rarity": "uncommon",
+  "mana_cost": 12,
+  "cooldown": 300,
+  "color": "#8FD8FF",
+  "params": {
+    "radius": 12.0
+  }
+}

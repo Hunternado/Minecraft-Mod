@@ -1,0 +1,11 @@
+{
+  "behavior": "frieren:smelt",
+  "school": "utility",
+  "rarity": "uncommon",
+  "mana_cost": 12,
+  "cooldown": 200,
+  "color": "#FF6A2A",
+  "params": {
+    "max_items": 32
+  }
+}

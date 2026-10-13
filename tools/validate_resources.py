@@ -212,7 +212,7 @@ def check_models(items, blocks):
 
 def check_loot_and_data(items, blocks, entities, components):
     known = items | blocks | entities
-    no_drop_blocks = {"mana_light"}
+    no_drop_blocks = {"mana_light", "mana_bridge"}
     for block in blocks - no_drop_blocks:
         if not os.path.exists(os.path.join(DATA, "loot_table", "blocks", block + ".json")):
             error(f"block {block} has no loot table")

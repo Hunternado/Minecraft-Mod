@@ -1,0 +1,11 @@
+{
+  "behavior": "frieren:tunnel",
+  "school": "utility",
+  "rarity": "uncommon",
+  "mana_cost": 10,
+  "cooldown": 40,
+  "color": "#B89A78",
+  "params": {
+    "depth": 6.0
+  }
+}

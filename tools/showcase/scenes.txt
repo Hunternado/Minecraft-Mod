@@ -480,4 +480,64 @@
 /summon frieren:mimic 32 120 4 {Revealed:1b,Rotation:[180f,0f]}
 @wait 20
 @shot mimic_close
+# Everyday magic on its own patch of ground: crops blessed to ripeness, the ore-finding report in chat, a tunnel
+# carved into a cliff, and a bridge of light over a lava ravine. Cast in creative (block breaking needs a player
+# who may build), photographed in spectator.
+/kill @e[type=!minecraft:player]
+/tp @a -40 126 -36 0 0
+@wait 60
+/fill -54 110 -54 -26 118 -22 minecraft:stone
+/fill -54 119 -54 -26 119 -22 minecraft:grass_block
+/fill -54 120 -54 -26 134 -22 minecraft:air
+/fill -36 119 -30 -30 119 -26 minecraft:farmland
+/fill -36 119 -28 -30 119 -28 minecraft:water
+/fill -36 120 -30 -30 120 -30 minecraft:wheat
+/fill -36 120 -29 -30 120 -29 minecraft:carrots
+/fill -36 120 -27 -30 120 -27 minecraft:potatoes
+/fill -36 120 -26 -30 120 -26 minecraft:beetroots
+/fill -52 120 -32 -46 126 -26 minecraft:stone
+/setblock -49 121 -29 minecraft:iron_ore
+/setblock -50 122 -30 minecraft:coal_ore
+/setblock -50 125 -27 minecraft:diamond_ore
+/setblock -48 124 -31 minecraft:gold_ore
+/fill -43 112 -45 -37 119 -35 minecraft:air
+/fill -43 112 -45 -37 112 -35 minecraft:lava
+/tp @a -33 123.5 -21.5 180 38
+@wait 30
+@shot utility_growth_before
+/gamemode creative @a
+/tp @a -33 120 -24.5 180 30
+@wait 5
+/frieren cast @p frieren:field_blessing
+@wait 10
+/gamemode spectator @a
+/tp @a -33 123.5 -21.5 180 38
+@wait 20
+@shot utility_growth_after
+/gamemode creative @a
+/tp @a -44.5 120 -28.5 90 0
+@wait 5
+/frieren cast @p frieren:ore_finding
+@hud show
+@wait 10
+@shot utility_ore_finding
+@hud
+/frieren cast @p frieren:tunnel_carving
+@wait 10
+/gamemode spectator @a
+/tp @a -41 123.5 -24 126 16
+@wait 15
+@shot utility_tunnel
+/gamemode creative @a
+/tp @a -40 120 -33.5 180 20
+@wait 5
+/frieren cast @p frieren:light_bridge
+@wait 4
+/gamemode spectator @a
+/tp @a -34 125 -29 151 26
+@wait 6
+@shot utility_light_bridge
+/tp @a -40 120 -34 180 12
+@wait 10
+@shot utility_light_bridge_walk
 @quit
