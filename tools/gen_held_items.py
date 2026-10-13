@@ -102,13 +102,13 @@ def display(third, first):
 # target instead of flipping back over the shoulder.
 HAND = {"translation": [1.5, 1, 1.25]}
 STAFF = display({"rotation": [80, 0, 0], **HAND, "scale": [1, 1, 1]},
-                {"rotation": [-20, 0, 15], "translation": [-1, -3, 0], "scale": [0.6, 0.6, 0.6]})
+                {"rotation": [-20, 0, 8], "translation": [3, -5, 0], "scale": [0.55, 0.55, 0.55]})
 AXE = display({"rotation": [55, 0, 0], **HAND, "scale": [1, 1, 1]},
-              {"rotation": [-10, 0, 20], "translation": [-1, -3, 0], "scale": [0.7, 0.7, 0.7]})
+              {"rotation": [-10, 0, 10], "translation": [3, -5, 0], "scale": [0.6, 0.6, 0.6]})
 SWORD = display({"rotation": [45, 0, 0], **HAND, "scale": [0.95, 0.95, 0.95]},
-                {"rotation": [-10, 0, 25], "translation": [-1, -3, 0], "scale": [0.7, 0.7, 0.7]})
+                {"rotation": [-10, 0, 12], "translation": [3, -5, 0], "scale": [0.6, 0.6, 0.6]})
 SCALE = display({"rotation": [90, 0, 0], **HAND, "scale": [0.8, 0.8, 0.8]},
-                {"rotation": [0, 0, 10], "translation": [-1, -3, 0], "scale": [0.6, 0.6, 0.6]})
+                {"rotation": [0, 0, 5], "translation": [3, -4, 0], "scale": [0.55, 0.55, 0.55]})
 
 
 # ---------------------------------------------------------------------------------------------
@@ -124,8 +124,10 @@ def sages_staff(a):
         box(a, (6.25, 20.5, 7.25), (9.75, 21.5, 8.75), "gold", gold, "metal"),       # cradle base
         box(a, (5.25, 21.0, 7.25), (6.5, 25.5, 8.75), "gold", gold, "metal"),        # crescent arms
         box(a, (9.5, 21.0, 7.25), (10.75, 25.5, 8.75), "gold", gold, "metal"),
-        box(a, (5.75, 25.25, 7.25), (6.75, 27.25, 8.75), "gold", gold, "metal"),     # tips curling inward
-        box(a, (9.25, 25.25, 7.25), (10.25, 27.25, 8.75), "gold", gold, "metal"),
+        box(a, (6.0, 25.25, 7.25), (7.25, 26.5, 8.75), "gold", gold, "metal"),       # tips curling in over the orb
+        box(a, (8.75, 25.25, 7.25), (10.0, 26.5, 8.75), "gold", gold, "metal"),
+        box(a, (6.75, 26.25, 7.5), (7.75, 27.25, 8.5), "gold", gold, "metal"),
+        box(a, (8.25, 26.25, 7.5), (9.25, 27.25, 8.5), "gold", gold, "metal"),
         box(a, (6.75, 21.75, 6.75), (9.25, 24.25, 9.25), "red", red, "gem"),         # the orb
         box(a, (7.25, 24.0, 7.25), (8.75, 24.75, 8.75), "red", red, "gem"),
     ]

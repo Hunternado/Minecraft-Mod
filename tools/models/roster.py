@@ -511,7 +511,7 @@ def frieren():
 
     # Twin tails tied at the back corners of the head, flaring out past the shoulders behind the capelet.
     for part, sx in (("tail_right", -1), ("tail_left", 1)):
-        rig.pose(part, offset=(5.2 * sx, -6.0, 4.0), rotation=(0.1, 0.0, -0.18 * sx))
+        rig.pose(part, offset=(5.6 * sx, -6.0, 4.0), rotation=(0.1, 0.0, -0.24 * sx))
         # lower segments step back toward the body, so the tail curves instead of splaying like a plank
         rig.box(part, -1.5, -1, -1.5, 3, 11, 3, p_hair_all(hair_c, seed=50 + sx))
         rig.box(part, -1.5 - 0.6 * sx, 10, -1.5, 3, 8, 3, p_hair_all(shade(hair_c, 0.97), seed=55 + sx))

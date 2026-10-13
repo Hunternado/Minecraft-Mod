@@ -31,7 +31,7 @@
 @wait 40
 @shot frieren_fern_close
 # Frieren up close (the angle of the player's report: face, ears, twin tails, capelet, staff in hand).
-/tp @a 2.0 119.9 1.7 0 2
+/tp @a 2.0 119.8 2.6 0 0
 @wait 30
 @shot frieren_portrait
 /tp @a 3.6 120.1 2.3 40 4
@@ -243,6 +243,10 @@
 @wait 20
 @shot held_axe_front
 @camera first
+@hud show
+@wait 20
+@shot held_axe_first_person
+@hud
 /item replace entity @a weapon.mainhand with minecraft:air
 /gamemode spectator @a
 # Every item icon on a wall of item frames (the flat icon shows in frames, the 3D model in hands).
