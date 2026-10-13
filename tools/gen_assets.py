@@ -15,6 +15,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from pixelart import CLEAR, Image, hex_color, mix, paint_box, shade, solid  # noqa: E402
 from gen_held_items import HELD_ITEMS  # noqa: E402
 import icons  # noqa: E402
+import gui_icons  # noqa: E402
+from gen_models import FACE_EGGS  # noqa: E402
 
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "src", "main", "resources")
 ASSETS = os.path.join(ROOT, "assets", "frieren")
@@ -418,6 +420,44 @@ SPAWN_EGGS = {
     "draht": ("#2A2A36", "#E8E8F0"),
     "lugner": ("#2A1018", "#B0102A"),
 }
+
+def mimic_egg():
+    """The mimic mid-bite: a chest with its lid thrown open over a row of teeth and a lolling tongue."""
+    ic = gui_icons.Icon()
+    wood, wood_d, gold = hex_color("#9A6432"), hex_color("#5E3A1C"), hex_color("#F0C850")
+    ic.rect(1.5, 9.0, 14.5, 15.2, wood).rect(1.5, 9.0, 14.5, 10.2, wood_d).rect(7.0, 10.6, 9.0, 12.6, gold)
+    ic.poly([(1.0, 7.4), (2.6, 1.4), (13.4, 1.4), (15.0, 7.4)], wood).rect(1.6, 6.2, 14.4, 7.6, wood_d)
+    ic.rect(2.4, 7.4, 13.6, 9.2, hex_color("#3A0E14"))
+    for x in (2.6, 5.0, 7.4, 9.8, 12.2):
+        ic.poly([(x, 7.4), (x + 1.2, 9.4), (x + 2.4, 7.4)], (250, 246, 236, 255))
+    ic.ellipse(9.6, 10.4, 2.0, 1.2, hex_color("#E0506A"))
+    return ic.finish()
+
+
+def stille_egg():
+    """The Stille: a round, swift little bird in pale blue with a white breast."""
+    ic = gui_icons.Icon()
+    blue, blue_d, white = hex_color("#7FC4EE"), hex_color("#3E86C0"), (248, 250, 255, 255)
+    ic.poly([(1.0, 6.0), (5.0, 8.0), (4.0, 11.0)], blue_d)
+    ic.disc(8.6, 9.0, 5.6, blue).ellipse(9.4, 10.8, 3.6, 3.0, white)
+    ic.poly([(6.0, 7.6), (11.0, 9.6), (5.0, 12.0)], blue_d)
+    ic.poly([(13.6, 7.0), (15.6, 8.0), (13.6, 9.0)], hex_color("#F0B040"))
+    ic.disc(11.6, 6.8, 1.0, (24, 24, 36, 255)).disc(11.9, 6.5, 0.35, white)
+    return ic.finish()
+
+
+def aura_thrall_egg():
+    """One of Aura's headless soldiers: a grey breastplate and pauldrons with a dark collar where the head was."""
+    ic = gui_icons.Icon()
+    steel, steel_d, steel_l, cloth = hex_color("#8C929E"), hex_color("#5A606C"), hex_color("#C4CAD4"), hex_color("#7A1E2C")
+    ic.rect(4.0, 4.6, 12.0, 15.2, steel).rect(4.0, 11.6, 12.0, 15.2, cloth)
+    ic.ellipse(3.4, 6.0, 3.0, 2.4, steel_l).ellipse(12.6, 6.0, 3.0, 2.4, steel_l)
+    ic.rect(7.4, 5.0, 8.6, 11.4, steel_d).rect(4.0, 10.8, 12.0, 11.8, steel_d)
+    ic.ellipse(8.0, 3.8, 2.6, 1.4, (30, 20, 24, 255))
+    return ic.finish()
+
+
+CREATURE_EGGS = {"mimic": mimic_egg, "stille": stille_egg, "aura_thrall": aura_thrall_egg}
 
 HANDHELD = {"apprentice_staff", "mage_staff", "sages_staff", "guillotine_staff", "guillotine_blade"}
 
@@ -826,7 +866,10 @@ def gen_textures():
     for item_id, painter in ITEM_ICONS.items():
         save(painter(), f"item/{item_id}.png")
     for i, (mob, (base, spots)) in enumerate(SPAWN_EGGS.items()):
-        save(egg_icon(base, spots, i), f"item/{mob}_spawn_egg.png")
+        if mob in FACE_EGGS:
+            continue   # a portrait of the character's face, painted by gen_models.py with the skin
+        painter = CREATURE_EGGS.get(mob)
+        save(painter() if painter else egg_icon(base, spots, i), f"item/{mob}_spawn_egg.png")
 
     save(ore_texture("#7F7F7F", 1), "block/mana_crystal_ore.png")
     save(ore_texture("#4A4A52", 2), "block/deepslate_mana_crystal_ore.png")

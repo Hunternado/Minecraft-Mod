@@ -10,7 +10,7 @@ playing together can judge: feel, balance and long sessions.
 
 | Check | Where | Result |
 |---|---|---|
-| Full Gradle build (`compileJava` reports every error in one pass) | CI `Build` | passes, produces `frieren-2.1.0.jar` |
+| Full Gradle build (`compileJava` reports every error in one pass) | CI `Build` | passes, produces `frieren-2.2.0.jar` |
 | Dedicated server boot: every registry, config, network channel and datapack file | CI `Server smoke test` | clean |
 | Client boot: model layers, renderers, HUD, every model / texture / item definition | CI `Client smoke test` | clean, no missing resources |
 | In-game behaviour driven by `tools/showcase/scenes.txt` (commit tag `[showcase]`), screenshots published to the `ci-artifacts` branch | CI `In-game showcase` | see below |
@@ -18,6 +18,8 @@ playing together can judge: feel, balance and long sessions.
 | Calls and constructors between mod classes match a declaration | `tools/check_calls.py` | 0 problems |
 | No local redeclared inside its own scope (javac only reports this once types resolve) | `tools/javac/DuplicateLocals.java` | 0 problems |
 | Exact signatures of every 26.2 API used | `javap` dumps of the real classes (CI `[api]`, `ci-artifacts/api/`) | looked up before use |
+| Every `Vanilla.CONSTANT` and static call exists in 26.2; no `ItemStack` built in a static initializer | `tools/check_members.py` | 0 problems |
+| Every item in exactly one creative tab; every spell has a grimoire icon | `tools/check_tabs.py`, `tools/validate_resources.py` | 0 problems |
 
 What the showcase has confirmed in a running client (with screenshots):
 * Every character renders with its own model and skin.
@@ -66,3 +68,7 @@ What the showcase has confirmed in a running client (with screenshots):
 | An upright held item rotating with a raised arm | held-item preview (tools/preview_held.py) | casting would have flipped staffs back over the shoulder; the wrist now turns |
 | Shadows as plain RGB multiplies on silver hair | player report (screenshot) | Frieren's hair read as dull grey |
 | A local redeclared in a nested block of `AuraEntity.aiStep` | tools/javac/DuplicateLocals.java (written for it) | a compile error only CI could see |
+| `BlockTags.COAL_ORES` and friends (26.2 ships them as data-only tags) | CI compile | ore sense and growth spells did not build; `check_members.py` written for it |
+| A static `ItemStack` field in the tunnel spell | CI server smoke test | **the mod failed to load**: components are not bound at construction |
+| Portrait studio killing each sitter | showcase screenshot | death poofs and loot in every portrait; sitters now drop into the void |
+| The block sampler built where the mimic camera stands | showcase screenshot | the mimic close-up showed a wall of slate |

@@ -836,21 +836,19 @@ def stark():
             for xx in (r[2] // 2 - 1, r[2] // 2):
                 if cv.get(r[0] + xx, r[1] + yy)[3]:
                     cv.px(r[0] + xx, r[1] + yy, streak if yy < r[3] - 3 else shade(streak, 1.6))
-        t = f["top"]
-        for yy in range(t[3]):
-            cv.px(t[0] + t[2] // 2 - 1, t[1] + yy, streak)
-            cv.px(t[0] + t[2] // 2, t[1] + yy, streak)
 
     def streak_crown(cv, f):
+        # a lock, not a stripe: it starts at the hairline and tapers out across the front of the crown
         t = f["top"]
-        for yy in range(t[3]):
-            for xx in range(t[2] // 2 - 2, t[2] // 2 + 2):
-                cv.px(t[0] + xx, t[1] + yy, streak if abs(xx - t[2] // 2 + 0.5) < 1.6 else shade(streak, 1.5))
-        for name in ("front", "back"):
-            r = f[name]
-            for xx in range(r[2] // 2 - 2, r[2] // 2 + 2):
-                for yy in range(r[3]):
-                    cv.px(r[0] + xx, r[1] + yy, streak)
+        reach = max(2, t[3] * 2 // 5)
+        for yy in range(reach):
+            half = 2 if yy < reach // 2 else 1
+            for xx in range(t[2] // 2 - half, t[2] // 2 + half):
+                cv.px(t[0] + xx, t[1] + t[3] - 1 - yy, streak if half == 1 or abs(xx - t[2] // 2 + 0.5) < 1 else shade(streak, 1.5))
+        r = f["front"]
+        for xx in range(r[2] // 2 - 1, r[2] // 2 + 1):
+            for yy in range(r[3]):
+                cv.px(r[0] + xx, r[1] + yy, streak)
 
     head, shell = soft_head(rig, skin, hair_c, eye,
                             face=dict(style="sharp", eye_y=8, fringe=6, part=None, locks=(1, 6), lash=hexc("#3A2A2A"),

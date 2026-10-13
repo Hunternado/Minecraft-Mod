@@ -2,6 +2,7 @@
 Generates the character models from tools/models/roster.py:
   * src/main/java/.../client/render/character/CharacterKind.java  (one enum constant + layer definition per rig)
   * src/main/resources/assets/frieren/textures/entity/character/<name>.png  (2x-density skins)
+  * src/main/resources/assets/frieren/textures/item/<mob>_spawn_egg.png  (a portrait of the face, for FACE_EGGS)
 
 The preview renderer (tools/preview_characters.py) reads the same rigs, so previews match the game exactly.
 """
@@ -11,12 +12,43 @@ import sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "models"))
 from PIL import Image  # noqa: E402
 
-from characters import walk_tree  # noqa: E402
+from characters import pose_idle, walk_tree  # noqa: E402
+from render import render  # noqa: E402
 from roster import ROSTER  # noqa: E402
 
 REPO = os.path.normpath(os.path.join(os.path.dirname(__file__), ".."))
 JAVA = os.path.join(REPO, "src/main/java/com/hunternado/frieren/client/render/character/CharacterKind.java")
 TEXTURES = os.path.join(REPO, "src/main/resources/assets/frieren/textures/entity/character")
+ITEM_TEXTURES = os.path.join(REPO, "src/main/resources/assets/frieren/textures/item")
+
+# Spawn eggs whose icon is the character's face (the rest are drawn in gen_assets.py).
+FACE_EGGS = ("frieren", "examiner", "wandering_mage", "priest", "demon_soldier", "demon_mage", "linie", "draht", "lugner")
+_PORTRAIT_HIDDEN = ("body", "right_arm", "left_arm", "right_leg", "left_leg", "hair_back", "lock_left", "lock_right",
+                    "tail_left", "tail_right")
+
+
+def face_portrait(rig, model, skin):
+    """
+    The head straight on at one pixel per skin texel (skins are 2x density, so the face is exactly 16x16), cropped
+    to the 16 rows above the chin: hair, fringe and eyes, like a player-head icon. Corners are rounded off.
+    """
+    full = render(model, skin, yaw=0, pitch=0, scale=2, pose=pose_idle(rig), hidden=_PORTRAIT_HIDDEN, shade=False)
+    px = full.load()
+    cx = full.width // 2
+    chin = max(y for y in range(full.height) if px[cx, y][3] > 0)
+    icon = full.crop((cx - 8, chin - 16, cx + 8, chin))
+    ip = icon.load()
+    for x, y in ((0, 0), (15, 0), (0, 15), (15, 15)):
+        ip[x, y] = (0, 0, 0, 0)
+    # a darker rim so pale hair still reads against the light inventory slot
+    for y in range(16):
+        for x in range(16):
+            r, g, b, a = ip[x, y]
+            rim = x in (0, 15) or y in (0, 15) or any(ip[x + dx, y + dy][3] == 0 for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1))
+                                                      if 0 <= x + dx < 16 and 0 <= y + dy < 16)
+            if a and rim:
+                ip[x, y] = (int(r * 0.72), int(g * 0.72), int(b * 0.76), a)
+    return icon
 
 
 def f(v):
@@ -70,7 +102,10 @@ def main():
     for name, factory in ROSTER.items():
         rig = factory()
         model = rig.build()
-        Image.fromarray(rig.paint().a, "RGBA").save(os.path.join(TEXTURES, f"{name}.png"))
+        skin = Image.fromarray(rig.paint().a, "RGBA")
+        skin.save(os.path.join(TEXTURES, f"{name}.png"))
+        if name in FACE_EGGS:
+            face_portrait(rig, model, skin).save(os.path.join(ITEM_TEXTURES, f"{name}_spawn_egg.png"))
         for variant, post in rig.variants.items():
             Image.fromarray(rig.paint(post).a, "RGBA").save(os.path.join(TEXTURES, f"{variant}.png"))
         skirt = model.root.find("skirt")

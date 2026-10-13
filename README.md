@@ -1,7 +1,8 @@
 # Frieren: Mage's Journey
 
 A Forge mod inspired by *Frieren: Beyond Journey's End*. You can train your mana, conceal it, and sense it in
-others. There are 39 data-driven spells, Continental Magic Association exams that play out wherever you stand,
+others. There are 52 data-driven spells (13 of them everyday magic that earns its keep in an ordinary world),
+a 45-block building set in the anime's style, Continental Magic Association exams that play out wherever you stand,
 demons who plead and lie, and multi-phase bosses up to the Demon King. Fan-made; all art and text are original.
 
 | | |
@@ -10,14 +11,49 @@ demons who plead and lie, and multi-phase bosses up to the Demon King. Fan-made;
 | Forge | **65.1.0** |
 | Java | **25** |
 | Side | Client + server (required on both) |
-| Version | **2.1.0** |
+| Version | **2.2.0** |
 
 > **Status:** builds against Minecraft 26.2 / Forge 65.1.0 and boots cleanly as a dedicated server and as a
 > client. On every push, GitHub Actions also starts a real client. It plays a scripted showcase covering
 > characters, spells, trials, bosses, the statue and the dungeons, and saves screenshots to the `ci-artifacts`
 > branch. Balance and long multiplayer sessions still need human playtesting; see `docs/KNOWN_RISKS.md`.
 
-## What's new in 2.1
+## What's new in 2.2
+
+* **The whole cast, rebuilt from the anime.** Hair is soft and layered instead of a helmet of blocks: a rounded
+  crown, a fringe that frames the face, side locks and tails that bend link by link. Frieren, Fern, Stark, Himmel,
+  Aura and Macht were redrawn from reference art, and everyone else got the same hair and face treatment. Faces
+  are calm and symmetric; the smirks are gone.
+* **A Demon King worth the name.** Tall and regal: long black hair, crimson-tipped horns sweeping back from a gold
+  circlet, a high collar with pauldrons, a floor-length robe and a crimson-lined cape, and his own blade.
+* **Axes ride on backs.** Stark, Eisen and Linie carry their axes slung across the back and draw them only to
+  fight, instead of holding them at an angle that made no sense.
+* **A Frieren building set: 45 blocks** for towns, Association halls, elven ruins and demon castles:
+  * whitewashed plaster and four half-timber patterns over dark timber beams;
+  * terracotta, slate and verdigris roof tiles;
+  * town cobblestone, Association stone (bricks, chiseled, gilded, pillar), elven ruin bricks (and cracked), demon
+    castle bricks (and chiseled);
+  * leaded glass and panes, mana lanterns, window flower boxes, grimoire shelves and the Association carpet;
+  * stairs, slabs and walls for every brick, all craftable, with stonecutter recipes.
+* **A creative tab for each part of the mod:** Magic, Gear, Building and Characters.
+* **Thirteen everyday spells** that pull their weight in an ordinary world:
+  * the spell to fell a tree in one stroke (living trees only: it will not fell your log cabin);
+  * the spell to bless the fields (crops, saplings and berry bushes grow as if a season had passed);
+  * the spell to find glittering stones (a chat report of nearby ores, with distance and direction);
+  * the spell to carve a tunnel (a 3x3 passage the way you face; stone drops as if mined);
+  * the spell to return home (a long incantation that takes you to your bed or the world spawn);
+  * the spell to lay a bridge of light over gaps, ravines and lava, which fades after a minute;
+  * five blessings shared with companions nearby: night sight, breathing underwater, working swiftly, falling
+    like a feather and warding off flames;
+  * the spell to smelt ore from your inventory, and a pocket of space that opens your ender chest anywhere.
+
+  Block-breaking spells respect spawn protection and fire the usual break events, so claim mods apply.
+* **A grimoire UI.** The spellbook is an open leather-bound book. The left page lists your spells by rarity, with
+  silk ribbons to filter by school. The right page shows the chosen spell with its icon, lore, costs and
+  mastery. Every spell has its own icon. The HUD, the Journey Journal, the examiner and the traders use the same
+  parchment, ink and gold.
+
+## What's in 2.1
 
 * **The cast is drawn in the anime's style.** Skins use flat cel shading with soft, slightly violet shadows
   instead of noisy textures, hair falls in clean locks, and every face is hand-placed pixel art with big anime
@@ -79,25 +115,26 @@ demons who plead and lie, and multi-phase bosses up to the Demon King. Fan-made;
 ## Getting the jar
 
 **Without building:** open the repository's **Actions** tab and pick the latest green **Build** run. Download the
-**frieren-mod-jar** artifact (a zip containing `frieren-2.1.0.jar`). Artifacts expire after 90 days.
+**frieren-mod-jar** artifact (a zip containing `frieren-2.2.0.jar`). Artifacts expire after 90 days.
 
 **Building it yourself:** you need JDK 25 and internet access to `maven.minecraftforge.net`,
 `piston-meta.mojang.com`, `piston-data.mojang.com`, `libraries.minecraft.net` and the Gradle plugin portal.
 
 ```bash
-./gradlew build          # Windows: gradlew.bat build  ->  build/libs/frieren-2.1.0.jar
+./gradlew build          # Windows: gradlew.bat build  ->  build/libs/frieren-2.2.0.jar
 ```
 
 ## Installing in CurseForge
 
 1. In the CurseForge app, create a profile: **Minecraft 26.2**, modloader **Forge 65.1.0** (or newer 65.x).
-2. Open the profile, click **⋯ → Open Folder**, and copy `frieren-2.1.0.jar` into `mods`.
+2. Open the profile, click **⋯ → Open Folder**, and copy `frieren-2.2.0.jar` into `mods`.
 3. For multiplayer, put the same jar in the server's `mods` folder.
 
 ## Playing
 
 You start with a **Journey Journal**, which tracks your rank, mana, quests and exam eligibility. Read
-**grimoires** to learn spells, assign them in the **Spellbook**, then cast. Casting trains your mana capacity.
+**grimoires** to learn spells, bind them to quick slots in the **Spellbook** (pick a spell, then click a slot under
+the book), then cast. Casting trains your mana capacity.
 When you're eligible, talk to an **Association Examiner** to sit your next exam. The **Exam Seal** shows your
 current trial and time left.
 
@@ -156,8 +193,11 @@ overridable (`worldgen/structure_set/`, `tags/worldgen/biome/has_structure/`).
   * `gen_held_items.py` builds the 3D in-hand item models; `preview_held.py` shows characters holding them through
     the game's exact hand transform chain.
   * `icons.py` holds the hand-drawn item icons that `gen_assets.py` saves.
+  * `gen_building.py` builds the building set (textures, models, blockstates, loot, recipes and the Java registry).
+  * `gen_gui.py` draws the GUI sprites and, through `gui_icons.py`, an icon for every spell.
   * `showcase/scenes.txt` is the in-game screenshot script CI runs.
-  * `precheck.sh` runs the local checks (syntax, duplicate locals, imports, call arity, resources) before a push.
+  * `precheck.sh` runs the local checks before a push: syntax, duplicate locals, imports, call arity, static
+    members against the 26.2 API dump, resources and creative tabs.
 
 ## License
 

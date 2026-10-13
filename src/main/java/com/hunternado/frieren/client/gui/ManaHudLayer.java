@@ -21,6 +21,9 @@ import net.minecraftforge.client.gui.overlay.ForgeLayer;
  */
 public final class ManaHudLayer implements ForgeLayer {
     private static final int SLOT_SIZE = 22;
+    /** 23px pitch keeps five slots clear of the hotbar at GUI scale 2 on an 854px-wide window. */
+    private static final int SLOT_STEP = 23;
+    private static final int[][] OUTLINE = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
     private static final Identifier MANA_FRAME = FrierenIds.id("hud/mana_frame");
     private static final Identifier MANA_FILL = FrierenIds.id("hud/mana_fill");
     private static final Identifier MANA_FILL_CONCEAL = FrierenIds.id("hud/mana_fill_conceal");
@@ -43,7 +46,7 @@ public final class ManaHudLayer implements ForgeLayer {
         // ---- Quick slots: metal-framed glass with the spell's icon, a dial of shade while it cools down ----
         int slotsTop = bottom - SLOT_SIZE;
         for (int i = 0; i < MagicData.QUICK_SLOTS; i++) {
-            int x = left + i * (SLOT_SIZE + 2);
+            int x = left + i * SLOT_STEP;
             boolean selected = i == data.selectedSlot();
             if (selected) {
                 GrimoireUi.sprite(graphics, GrimoireUi.SLOT_SELECTED, x - 1, slotsTop - 1, SLOT_SIZE + 2, SLOT_SIZE + 2);
@@ -67,9 +70,11 @@ public final class ManaHudLayer implements ForgeLayer {
             }
         }
 
-        // ---- Mana bar: a gem-capped frame, filled with flowing blue (violet while concealing) ----
-        int barTop = slotsTop - 11;
-        int barWidth = MagicData.QUICK_SLOTS * (SLOT_SIZE + 2) - 2;
+        // ---- Mana bar: a gem-capped frame, filled with flowing blue (violet while concealing). Bar and slots fit in
+        // the 40px strip under vanilla's chat, so chat never runs through them; the number sits on the bar, outlined
+        // like the vanilla experience level. ----
+        int barTop = slotsTop - 10;
+        int barWidth = MagicData.QUICK_SLOTS * SLOT_STEP - 1;
         float fraction = data.maxMana() > 0 ? Math.min(1.0F, data.mana() / data.maxMana()) : 0.0F;
         GrimoireUi.sprite(graphics, MANA_FRAME, left, barTop, barWidth, 9);
         int fillLeft = left + 7;
@@ -81,10 +86,15 @@ public final class ManaHudLayer implements ForgeLayer {
             graphics.disableScissor();
         }
         String manaText = Math.round(data.mana()) + " / " + data.maxMana();
-        graphics.text(font, manaText, left + 1, barTop - 10, 0xFFCFE8FF, true);
+        int textX = left + (barWidth - font.width(manaText)) / 2;
+        int textY = barTop + 1;
+        for (int[] d : OUTLINE) {
+            graphics.text(font, manaText, textX + d[0], textY + d[1], 0xFF0A0C18, false);
+        }
+        graphics.text(font, manaText, textX, textY, data.concealing() ? 0xFFD6CCFF : 0xFFCFEFFF, false);
 
         // ---- Status tags ----
-        int tagX = left + font.width(manaText) + 6;
+        int tagX = left + 1;
         if (data.concealing()) {
             tagX = tag(graphics, font, Component.translatable("hud.frieren.concealed", Math.round(ManaHelper.concealFraction(data) * 100)), tagX, barTop - 10, 0xFFB7A8FF);
         }

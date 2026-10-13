@@ -25,6 +25,7 @@
 /summon frieren:spiegel 32 120 4 {NoAI:1b,Rotation:[180f,0f]}
 /summon frieren:mimic 34 120 4 {NoAI:1b,Rotation:[180f,0f]}
 @hud
+/tp @a 8 121.8 -2.5 0 8
 @wait 100
 @shot heroes_lineup
 /tp @a 3 121.3 1 0 6
@@ -40,7 +41,7 @@
 /tp @a 9 121.4 1 0 6
 @wait 40
 @shot stark_serie_close
-/tp @a 28 122.5 -6 0 10
+/tp @a 28 121.8 -2.5 0 8
 @wait 60
 @shot demons_lineup
 /tp @a 23 121.5 1 0 4
