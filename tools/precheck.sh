@@ -8,5 +8,6 @@ bash tools/javac_parse.sh 2>&1 | grep -v "^Picked up" | tail -1
 "${JAVA_HOME:+$JAVA_HOME/bin/}java" tools/javac/DuplicateLocals.java src/main/java 2>&1 | grep -v "^Picked up"
 python3 tools/check_imports.py | tail -1
 python3 tools/check_calls.py
+python3 tools/check_members.py | tail -6
 python3 tools/validate_resources.py | tail -1
 python3 tools/check_tabs.py | tail -1

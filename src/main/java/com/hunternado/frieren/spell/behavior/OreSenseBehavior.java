@@ -8,8 +8,10 @@ import com.hunternado.frieren.spell.SpellFx;
 import com.hunternado.frieren.util.Messages;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
@@ -28,11 +30,16 @@ public class OreSenseBehavior implements SpellBehavior {
     private record Kind(String key, TagKey<Block> tag, int color) {}
 
     private static final Kind[] KINDS = {
-        new Kind("coal", BlockTags.COAL_ORES, 0x3A3A3A), new Kind("copper", BlockTags.COPPER_ORES, 0xE07A4A),
+        new Kind("coal", ores("coal_ores"), 0x3A3A3A), new Kind("copper", BlockTags.COPPER_ORES, 0xE07A4A),
         new Kind("iron", BlockTags.IRON_ORES, 0xD8B8A0), new Kind("gold", BlockTags.GOLD_ORES, 0xF3D24A),
-        new Kind("redstone", BlockTags.REDSTONE_ORES, 0xE0302A), new Kind("lapis", BlockTags.LAPIS_ORES, 0x3A5AD8),
-        new Kind("diamond", BlockTags.DIAMOND_ORES, 0x6AE8E0), new Kind("emerald", BlockTags.EMERALD_ORES, 0x3AD86A),
+        new Kind("redstone", ores("redstone_ores"), 0xE0302A), new Kind("lapis", ores("lapis_ores"), 0x3A5AD8),
+        new Kind("diamond", ores("diamond_ores"), 0x6AE8E0), new Kind("emerald", ores("emerald_ores"), 0x3AD86A),
     };
+
+    /** Vanilla ships these block tags as data only; BlockTags has constants for just iron, gold and copper. */
+    private static TagKey<Block> ores(String name) {
+        return TagKey.create(Registries.BLOCK, Identifier.withDefaultNamespace(name));
+    }
 
     @Override
     public boolean cast(SpellContext ctx) {

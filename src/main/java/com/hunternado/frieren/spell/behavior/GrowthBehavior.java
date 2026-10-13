@@ -6,8 +6,12 @@ import com.hunternado.frieren.spell.SpellContext;
 import com.hunternado.frieren.spell.SpellFx;
 import com.hunternado.frieren.util.Messages;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.CocoaBlock;
 import net.minecraft.world.level.block.StemBlock;
@@ -21,6 +25,9 @@ import net.minecraft.world.phys.Vec3;
  * {@code radius}, {@code rounds}.
  */
 public class GrowthBehavior implements SpellBehavior {
+    /** A data-only vanilla tag (no BlockTags constant in 26.2); covers azaleas and the mangrove propagule too. */
+    private static final TagKey<Block> SAPLINGS = TagKey.create(Registries.BLOCK, Identifier.withDefaultNamespace("saplings"));
+
     @Override
     public boolean cast(SpellContext ctx) {
         int radius = (int) ctx.param("radius", 5.0D);
@@ -57,7 +64,7 @@ public class GrowthBehavior implements SpellBehavior {
     }
 
     private static boolean isPlant(BlockState state) {
-        return state.is(BlockTags.CROPS) || state.is(BlockTags.SAPLINGS) || state.getBlock() instanceof StemBlock
+        return state.is(BlockTags.CROPS) || state.is(SAPLINGS) || state.getBlock() instanceof StemBlock
             || state.getBlock() instanceof SweetBerryBushBlock || state.getBlock() instanceof CocoaBlock;
     }
 }
