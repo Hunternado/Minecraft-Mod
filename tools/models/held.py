@@ -4,7 +4,8 @@ display transforms can be designed and checked without starting the game.
 
 ItemInHandLayer.submitArmWithItem (26.2 bytecode): translateToHand (root, then the arm; slim arms nudged 0.5 px
 toward the body), rotX(-90), rotY(180), translate(+-1/16, 2/16, -10/16); then the item layer applies the model's
-display transform (translate, rotationXYZ, scale) and draws element vertices at (pos / 16 - 0.5).
+display transform (translate, rotationXYZ, scale; left hands negate translation x and rotation y/z) and draws
+element vertices at (pos / 16 - 0.5).
 Everything here works in model pixels (y down) like boxmodel.py.
 """
 import math
@@ -60,9 +61,11 @@ def item_matrix(arm_m, transform, arm="right"):
     m = mat_mul(m, mat_rot_x(math.radians(-90)))
     m = mat_mul(m, mat_rot_y(math.radians(180)))
     m = mat_mul(m, mat_translate(sign / 16.0, 2 / 16.0, -10 / 16.0))
-    t = transform.get("translation", [0, 0, 0])
-    r = transform.get("rotation", [0, 0, 0])
+    t = list(transform.get("translation", [0, 0, 0]))
+    r = list(transform.get("rotation", [0, 0, 0]))
     s = transform.get("scale", [1, 1, 1])
+    if arm == "left":  # ItemTransform.apply(leftHand = true) negates translation x and rotation y, z
+        t[0], r[1], r[2] = -t[0], -r[1], -r[2]
     m = mat_mul(m, mat_translate(t[0] / 16.0, t[1] / 16.0, t[2] / 16.0))
     m = mat_mul(m, mat_rot_x(math.radians(r[0])))
     m = mat_mul(m, mat_rot_y(math.radians(r[1])))

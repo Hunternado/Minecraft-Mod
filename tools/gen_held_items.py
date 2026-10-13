@@ -83,9 +83,12 @@ def box(atlas, frm, to, name, color, pattern="flat", faces=("north", "south", "e
 # Display transforms (designed with tools/models/held.py; see tools/preview_held.py)
 # ---------------------------------------------------------------------------------------------
 def mirror(t):
-    """Left-hand transform from a right-hand one: mirror across the body's centre plane."""
+    """
+    Left-hand transform authored the vanilla way (see models/item/handheld.json): rotations pre-mirrored, translation
+    as for the right hand. ItemTransform.apply(leftHand) then negates translation x and rotation y/z (26.2 bytecode).
+    """
     r, tr = t.get("rotation", [0, 0, 0]), t.get("translation", [0, 0, 0])
-    return {"rotation": [r[0], -r[1], -r[2]], "translation": [-tr[0], tr[1], tr[2]], "scale": t.get("scale", [1, 1, 1])}
+    return {"rotation": [r[0], -r[1], -r[2]], "translation": list(tr), "scale": t.get("scale", [1, 1, 1])}
 
 
 def display(third, first):
