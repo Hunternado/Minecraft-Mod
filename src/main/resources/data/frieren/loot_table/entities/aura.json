@@ -16,6 +16,16 @@
       "entries": [
         {
           "type": "minecraft:item",
+          "name": "frieren:scale_of_obedience"
+        }
+      ],
+      "bonus_rolls": 0.0
+    },
+    {
+      "rolls": 1.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
           "name": "frieren:demon_grimoire",
           "functions": [
             {

@@ -75,6 +75,9 @@ class Rig:
         self.render_scale = render_scale
         self.post_paint = None
         self.variants = {}  # extra texture name -> post-paint applied to a fresh copy of the base painting
+        self.held = (None, None)  # (main hand, off hand) item ids the character is drawn holding
+        self.slim = False
+        self.arm_len = 12
         self.root = Part("root")
         self.parts = {}
         self.pending = []  # (part, cube, painter)
@@ -129,6 +132,8 @@ def humanoid(rig, painters, slim=False, legs=12, body_h=12, arm_len=12, headless
     """
     arm_w = 3 if slim else 4
     leg_top = body_h
+    rig.slim = slim
+    rig.arm_len = arm_len
     rig.pose("head", offset=(0, 0, 0))
     rig.pose("body", offset=(0, 0, 0))
     rig.pose("right_arm", offset=(-5, 2 if not slim else 2.5, 0))

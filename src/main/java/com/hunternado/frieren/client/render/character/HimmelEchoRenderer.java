@@ -17,6 +17,12 @@ public class HimmelEchoRenderer extends CharacterRenderer<HimmelEchoEntity> {
         state.variant = Math.round(entity.presence(partialTicks) * 255.0F);
     }
 
+    /** A translucent memory: an opaque sword in his hand would break the effect. */
+    @Override
+    protected boolean showsSignatureItems() {
+        return false;
+    }
+
     @Override
     protected RenderType getRenderType(CharacterRenderState state, boolean bodyVisible, boolean translucent, boolean glowing) {
         return RenderTypes.entityTranslucent(getTextureLocation(state));

@@ -13,3 +13,5 @@ code:net.minecraft.client.renderer.entity.LivingEntityRenderer|void submit\(
 net.minecraft.world.entity.Mob|setDropChance|DropChances
 net.minecraft.core.Registry|getValue|getOptional
 net.minecraft.world.item.ToolMaterial|static
+code:net.minecraft.client.resources.model.cuboid.ItemTransform|apply
+code:net.minecraft.client.renderer.item.ItemStackRenderState$LayerRenderState|applyTransform

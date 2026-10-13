@@ -78,7 +78,10 @@ def main():
             Image.fromarray(rig.paint(post).a, "RGBA").save(os.path.join(TEXTURES, f"{variant}.png"))
         skirt = model.root.find("skirt")
         long_robe = sum(c.h for c in skirt.cubes) >= 10
-        constants.append(f"    {name.upper()}(\"{name}\", {f(rig.render_scale)}, {str(long_robe).lower()})")
+        main_hand, off_hand = rig.held
+        held = ", ".join(f"\"{i}\"" if i else "null" for i in (main_hand, off_hand))
+        constants.append(f"    {name.upper()}(\"{name}\", {f(rig.render_scale)}, {str(long_robe).lower()}, "
+                         f"{str(rig.slim).lower()}, {f(rig.arm_len)}, {held})")
         cases.append(f"            case {name.upper()} -> {camel(name)}();")
         methods.append(layer_method(name, model))
     constants_java = ",\n".join(constants)
@@ -95,8 +98,11 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Every character model of the mod. All share the part names animated by {{@link CharacterModel}}; textures are
@@ -108,15 +114,57 @@ public enum CharacterKind {{
     private final String id;
     private final float scale;
     private final boolean longRobe;
+    private final boolean slim;
+    private final float armLength;
+    private final @Nullable String mainHandItem;
+    private final @Nullable String offHandItem;
     private final ModelLayerLocation layer;
     private final Identifier texture;
+    private @Nullable ItemStack mainHandStack;
+    private @Nullable ItemStack offHandStack;
 
-    CharacterKind(String id, float scale, boolean longRobe) {{
+    CharacterKind(String id, float scale, boolean longRobe, boolean slim, float armLength, @Nullable String mainHandItem,
+                  @Nullable String offHandItem) {{
         this.id = id;
         this.scale = scale;
         this.longRobe = longRobe;
+        this.slim = slim;
+        this.armLength = armLength;
+        this.mainHandItem = mainHandItem;
+        this.offHandItem = offHandItem;
         this.layer = new ModelLayerLocation(FrierenIds.id("character/" + id), "main");
         this.texture = FrierenIds.id("textures/entity/character/" + id + ".png");
+    }}
+
+    /** Slim (three pixel) arms: held items sit half a pixel closer to the body, as on slim player models. */
+    public boolean slim() {{
+        return slim;
+    }}
+
+    /** Arm length in model pixels (12 for player proportions); held items move up the arm for shorter arms. */
+    public float armLength() {{
+        return armLength;
+    }}
+
+    /** The item this character is drawn holding in its main (right) hand when it holds nothing itself. */
+    public ItemStack mainHandStack() {{
+        if (mainHandStack == null) {{
+            mainHandStack = stackOf(mainHandItem);
+        }}
+        return mainHandStack;
+    }}
+
+    /** The item drawn in the off (left) hand, e.g. Aura's Scale of Obedience. */
+    public ItemStack offHandStack() {{
+        if (offHandStack == null) {{
+            offHandStack = stackOf(offHandItem);
+        }}
+        return offHandStack;
+    }}
+
+    private static ItemStack stackOf(@Nullable String item) {{
+        // Resolved lazily (registries are frozen by the first render); an unknown id resolves to air: nothing drawn.
+        return item == null ? ItemStack.EMPTY : new ItemStack(BuiltInRegistries.ITEM.getValue(Identifier.parse(item)));
     }}
 
     public String id() {{

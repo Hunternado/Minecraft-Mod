@@ -20,6 +20,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.DeferredRegister;
@@ -57,6 +58,16 @@ public final class ModItems {
     public static final RegistryObject<Item> MAGE_STAFF = staff("mage_staff", StaffItem.Tier.MAGE, Rarity.UNCOMMON);
     public static final RegistryObject<Item> SAGES_STAFF = staff("sages_staff", StaffItem.Tier.SAGE, Rarity.RARE);
     public static final RegistryObject<Item> GUILLOTINE_STAFF = staff("guillotine_staff", StaffItem.Tier.GUILLOTINE, Rarity.EPIC);
+
+    // Weapons the cast carries (drawn in their hands; players can craft or win them)
+    public static final RegistryObject<Item> WARRIORS_AXE = simple("warriors_axe",
+        p -> new TooltipItem(p.axe(ToolMaterial.DIAMOND, 6.0F, -3.1F).rarity(Rarity.RARE), "warriors_axe"));
+    public static final RegistryObject<Item> HEROS_SWORD = simple("heros_sword",
+        p -> new TooltipItem(p.sword(ToolMaterial.DIAMOND, 3.5F, -2.3F).rarity(Rarity.EPIC), "heros_sword"));
+    public static final RegistryObject<Item> DEMON_KINGS_BLADE = simple("demon_kings_blade",
+        p -> new TooltipItem(p.sword(ToolMaterial.NETHERITE, 5.0F, -2.6F).fireResistant().rarity(Rarity.EPIC), "demon_kings_blade"));
+    public static final RegistryObject<Item> SCALE_OF_OBEDIENCE = simple("scale_of_obedience",
+        p -> new TooltipItem(p.stacksTo(1).rarity(Rarity.EPIC), "scale_of_obedience"));
 
     // ---- Mage's Attire -----------------------------------------------------------------------
     public static final RegistryObject<Item> MAGE_HAT = armor("mage_hat", ArmorType.HELMET);

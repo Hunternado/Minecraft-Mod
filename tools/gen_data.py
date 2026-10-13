@@ -221,6 +221,7 @@ def gen_loot():
     ])
     entity("aura", [
         pool([item(f"{NS}:guillotine_blade")]),
+        pool([item(f"{NS}:scale_of_obedience")]),
         pool([grimoire_of("azeryuze", "demon")]),
         pool([item(f"{NS}:legendary_grimoire")]),
         pool([item(f"{NS}:demonic_mana_core", count=(3, 5))]),
@@ -242,6 +243,7 @@ def gen_loot():
         pool([item(f"{NS}:mana_crystal", count=(6, 10))]),
     ])
     entity("demon_king", [
+        pool([item(f"{NS}:demon_kings_blade")]),
         pool([item(f"{NS}:legendary_grimoire")]),
         pool([item(f"{NS}:legendary_grimoire"), item(f"{NS}:ancient_grimoire", 2)]),
         pool([item(f"{NS}:demonic_mana_core", count=(6, 10))]),
@@ -361,6 +363,10 @@ def gen_recipes():
            f"{NS}:mage_staff", category="equipment")
     shaped("sages_staff", [" DC", " SD", "S  "], {"C": f"{NS}:demonic_mana_core", "S": f"{NS}:mage_staff", "D": "minecraft:diamond"},
            f"{NS}:sages_staff", category="equipment")
+    shaped("warriors_axe", ["IDI", "IS ", " S "], {"I": "minecraft:iron_ingot", "D": "minecraft:diamond",
+                                                     "S": "minecraft:stick"}, f"{NS}:warriors_axe", category="equipment")
+    shaped("heros_sword", [" D ", "GDG", " L "], {"D": "minecraft:diamond", "G": "minecraft:gold_ingot",
+                                                 "L": "minecraft:lapis_block"}, f"{NS}:heros_sword", category="equipment")
     shaped("guillotine_staff", [" BC", " SB", "N  "], {"B": f"{NS}:guillotine_blade", "C": f"{NS}:demonic_mana_core",
                                                       "S": f"{NS}:sages_staff", "N": "minecraft:netherite_ingot"},
            f"{NS}:guillotine_staff", category="equipment")

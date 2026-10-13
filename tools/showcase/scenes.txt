@@ -30,6 +30,13 @@
 /tp @a 3 121.3 1 0 6
 @wait 40
 @shot frieren_fern_close
+# Frieren up close (the angle of the player's report: face, ears, twin tails, capelet, staff in hand).
+/tp @a 2.0 119.9 1.7 0 2
+@wait 30
+@shot frieren_portrait
+/tp @a 3.6 120.1 2.3 40 4
+@wait 30
+@shot frieren_three_quarter
 /tp @a 9 121.4 1 0 6
 @wait 40
 @shot stark_serie_close
@@ -219,6 +226,70 @@
 /tp @a 112.5 122 6 0 6
 @wait 20
 @shot dungeon_throne_room
+# Held items: a player holding Frieren's staff and the Warrior's Axe, first person and from the front.
+/kill @e[type=!minecraft:player]
+/gamemode creative @a
+/tp @a 20 120 10 0 0
+/item replace entity @a weapon.mainhand with frieren:sages_staff
+@hud show
+@camera first
+@wait 30
+@shot held_staff_first_person
+@hud
+@camera front
+@wait 20
+@shot held_staff_front
+/item replace entity @a weapon.mainhand with frieren:warriors_axe
+@wait 20
+@shot held_axe_front
+@camera first
+/item replace entity @a weapon.mainhand with minecraft:air
+/gamemode spectator @a
+# Every item icon on a wall of item frames (the flat icon shows in frames, the 3D model in hands).
+/tp @a -2.5 120 21.5 0 -10
+@wait 30
+/fill -8 119 29 3 125 29 minecraft:smooth_stone
+/summon minecraft:item_frame -7 124 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:common_grimoire",count:1}}
+/summon minecraft:item_frame -6 124 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:uncommon_grimoire",count:1}}
+/summon minecraft:item_frame -5 124 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:rare_grimoire",count:1}}
+/summon minecraft:item_frame -4 124 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:ancient_grimoire",count:1}}
+/summon minecraft:item_frame -3 124 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:legendary_grimoire",count:1}}
+/summon minecraft:item_frame -2 124 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:demon_grimoire",count:1}}
+/summon minecraft:item_frame -1 124 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:forbidden_grimoire",count:1}}
+/summon minecraft:item_frame 0 124 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:sealed_demon_grimoire",count:1}}
+/summon minecraft:item_frame 1 124 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:sealed_exam_grimoire",count:1}}
+/summon minecraft:item_frame 2 124 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:apprentice_staff",count:1}}
+/summon minecraft:item_frame -7 123 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:mage_staff",count:1}}
+/summon minecraft:item_frame -6 123 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:sages_staff",count:1}}
+/summon minecraft:item_frame -5 123 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:guillotine_staff",count:1}}
+/summon minecraft:item_frame -4 123 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:mage_hat",count:1}}
+/summon minecraft:item_frame -3 123 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:mage_coat",count:1}}
+/summon minecraft:item_frame -2 123 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:mage_trousers",count:1}}
+/summon minecraft:item_frame -1 123 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:mage_boots",count:1}}
+/summon minecraft:item_frame 0 123 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:mana_crystal",count:1}}
+/summon minecraft:item_frame 1 123 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:demon_horn",count:1}}
+/summon minecraft:item_frame 2 123 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:demonic_mana_core",count:1}}
+/summon minecraft:item_frame -7 122 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:guillotine_blade",count:1}}
+/summon minecraft:item_frame -6 122 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:mana_potion",count:1}}
+/summon minecraft:item_frame -5 122 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:heiter_flask",count:1}}
+/summon minecraft:item_frame -4 122 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:sweet_grapes",count:1}}
+/summon minecraft:item_frame -3 122 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:mirror_lotus_ring",count:1}}
+/summon minecraft:item_frame -2 122 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:concealment_charm",count:1}}
+/summon minecraft:item_frame -1 122 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:demon_hunter_insignia",count:1}}
+/summon minecraft:item_frame 0 122 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:exam_seal",count:1}}
+/summon minecraft:item_frame 1 122 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:stille_cage",count:1}}
+/summon minecraft:item_frame 2 122 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:journey_journal",count:1}}
+/summon minecraft:item_frame -7 121 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:sigil_of_the_guillotine",count:1}}
+/summon minecraft:item_frame -6 121 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:seal_of_corruption",count:1}}
+/summon minecraft:item_frame -5 121 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:seal_of_the_golden_land",count:1}}
+/summon minecraft:item_frame -4 121 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:seal_of_the_demon_king",count:1}}
+/summon minecraft:item_frame -3 121 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:mirror_shard",count:1}}
+/summon minecraft:item_frame -2 121 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:warriors_axe",count:1}}
+/summon minecraft:item_frame -1 121 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:heros_sword",count:1}}
+/summon minecraft:item_frame 0 121 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:demon_kings_blade",count:1}}
+/summon minecraft:item_frame 1 121 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:scale_of_obedience",count:1}}
+@wait 30
+@shot item_icons
 # The mimic up close: disguised on the left, revealed on the right (teeth, fangs, tongue, gaping lid).
 /kill @e[type=frieren:mimic]
 /tp @a 33 120 0.8 0 18

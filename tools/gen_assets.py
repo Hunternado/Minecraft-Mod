@@ -13,6 +13,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from pixelart import CLEAR, Image, hex_color, mix, paint_box, shade, solid  # noqa: E402
+from gen_held_items import HELD_ITEMS  # noqa: E402
 
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "src", "main", "resources")
 ASSETS = os.path.join(ROOT, "assets", "frieren")
@@ -395,6 +396,10 @@ ITEM_ICONS = {
     "seal_of_the_golden_land": lambda: sigil_icon("#E8B830", "eye"),
     "seal_of_the_demon_king": lambda: sigil_icon("#5A0A1A", "crown"),
     "mirror_shard": shard_icon,
+    "warriors_axe": blade_icon,
+    "heros_sword": blade_icon,
+    "demon_kings_blade": blade_icon,
+    "scale_of_obedience": lambda: staff_icon("#D8B04A", "#B04CD8", "#D8B04A"),
 }
 
 SPAWN_EGGS = {
@@ -751,7 +756,8 @@ def gen_models():
     for item_id in ITEM_ICONS:
         parent = "minecraft:item/handheld" if item_id in HANDHELD else "minecraft:item/generated"
         write_json(f"models/item/{item_id}.json", {"parent": parent, "textures": {"layer0": f"{NS}:item/{item_id}"}})
-        write_json(f"items/{item_id}.json", {"model": {"type": "minecraft:model", "model": f"{NS}:item/{item_id}"}})
+        if item_id not in HELD_ITEMS:  # 3D in-hand items: tools/gen_held_items.py writes their definitions
+            write_json(f"items/{item_id}.json", {"model": {"type": "minecraft:model", "model": f"{NS}:item/{item_id}"}})
     for mob in SPAWN_EGGS:
         item_id = f"{mob}_spawn_egg"
         write_json(f"models/item/{item_id}.json", {"parent": "minecraft:item/generated", "textures": {"layer0": f"{NS}:item/{item_id}"}})

@@ -49,14 +49,18 @@ def collect_faces(model, pose=None, hidden=()):
     return out
 
 
-def render(model, texture, yaw=0.0, pitch=10.0, scale=8, pose=None, hidden=(), background=(0, 0, 0, 0), shade=True):
-    tex = np.asarray(texture.convert("RGBA"), dtype=np.float32)
-    th, tw = tex.shape[0], tex.shape[1]
-    sx, sy = tw / model.tex_w, th / model.tex_h
+def render(model, texture, yaw=0.0, pitch=10.0, scale=8, pose=None, hidden=(), background=(0, 0, 0, 0), shade=True,
+           extra=()):
+    """extra: (faces, image) groups drawn with their own texture (held items); their rects are in image pixels."""
+    base = np.asarray(texture.convert("RGBA"), dtype=np.float32)
     view = _view(yaw, pitch)
     faces = []
-    for c0, cs, ct, rect, flat in collect_faces(model, pose, hidden):
-        faces.append((np.array(view(c0)), np.array(view(cs)), np.array(view(ct)), rect, flat))
+    groups = [(collect_faces(model, pose, hidden), base, base.shape[1] / model.tex_w, base.shape[0] / model.tex_h)]
+    for extra_faces, image in extra:
+        groups.append((extra_faces, np.asarray(image.convert("RGBA"), dtype=np.float32), 1.0, 1.0))
+    for group_faces, tex, sx, sy in groups:
+        for c0, cs, ct, rect, flat in group_faces:
+            faces.append((np.array(view(c0)), np.array(view(cs)), np.array(view(ct)), rect, flat, tex, sx, sy))
     if not faces:
         return Image.new("RGBA", (16, 16), background)
     pts = np.array([p for f in faces for p in f[:3]] + [f[1] + f[2] - f[0] for f in faces])
@@ -67,7 +71,8 @@ def render(model, texture, yaw=0.0, pitch=10.0, scale=8, pose=None, hidden=(), b
     color[:] = background
     depth = np.full((H, W), np.inf, dtype=np.float32)
 
-    for p0, ps, pt, (u0, v0, fw, fh), flat in faces:
+    for p0, ps, pt, (u0, v0, fw, fh), flat, tex, sx, sy in faces:
+        th, tw = tex.shape[0], tex.shape[1]
         e1, e2 = ps - p0, pt - p0
         # Model space is y-down, so the outward normal is the negated cross product of the UV edges.
         normal = -np.cross(e1, e2)

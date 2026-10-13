@@ -47,6 +47,10 @@ ITEMS = {
     "mage_staff": "Mage Staff",
     "sages_staff": "Sage's Staff",
     "guillotine_staff": "Staff of the Guillotine",
+    "warriors_axe": "Warrior's Axe",
+    "heros_sword": "Replica of the Hero's Sword",
+    "demon_kings_blade": "Blade of the Demon King",
+    "scale_of_obedience": "Scale of Obedience",
     "mage_hat": "Mage Hat",
     "mage_coat": "Mage Coat",
     "mage_trousers": "Mage Trousers",
@@ -255,6 +259,10 @@ def tooltips():
     t("demon_horn", "Still warm. Demons are never as harmless as they sound.")
     t("demonic_mana_core", "The condensed mana of a slain demon.")
     t("guillotine_blade", "Aura's weapon. The scales are gone, but the edge remains.")
+    t("warriors_axe", "Eisen's kind of axe. Stark swears he's scared every time he swings it.")
+    t("heros_sword", "Himmel never pulled the real one from its stone. He saved the world with this anyway.")
+    t("demon_kings_blade", "Forged before humanity had a word for magic.")
+    t("scale_of_obedience", "It weighs mana and never lies, which is more than its owner could say.")
     t("sealed_exam_grimoire", "The exam objective. Return it to an examiner unopened.")
     t("mage_attire", "Mage's Attire: each piece adds max mana and regeneration.")
     t("heiter_flask", "Never empties itself, and never quite sobers you up.")

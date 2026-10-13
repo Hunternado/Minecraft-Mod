@@ -1,14 +1,26 @@
 package com.hunternado.frieren.client.render.character;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
+import net.minecraft.client.model.ArmedModel;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.HumanoidArm;
 
 /**
  * One model class animates every character: all rigs share the same part names (parts a character does not use are
- * empty). Hair, twin tails and capes swing with movement and lift while casting.
+ * empty). Hair, twin tails and capes swing with movement and lift while casting. Characters hold real items, placed
+ * by {@link #translateToHand} exactly like a player's.
  */
-public class CharacterModel extends EntityModel<CharacterRenderState> {
+public class CharacterModel extends EntityModel<CharacterRenderState> implements ArmedModel<CharacterRenderState> {
+    /** Where ItemInHandLayer puts the grip: 10 px down the arm from the shoulder pivot. */
+    private static final float HAND = 10.0F / 16.0F;
+    /** While casting, a staff's tip tilts this far toward the target (55 degrees past upright)... */
+    private static final float STAFF_AIM = 55.0F * Mth.DEG_TO_RAD;
+    /** ...and a weapon this far (35 degrees), which levels a sword or axe in front of the character. */
+    private static final float WEAPON_AIM = 35.0F * Mth.DEG_TO_RAD;
+
     private final CharacterKind kind;
     private final ModelPart head;
     private final ModelPart hairBack;
@@ -98,6 +110,41 @@ public class CharacterModel extends EntityModel<CharacterRenderState> {
             float arc = Mth.sin(state.attack * Mth.PI);
             rightArm.xRot = -1.1F - arc * 1.4F;
             body.yRot = arc * 0.25F;
+        }
+    }
+
+    /**
+     * Same placement as a player's hand ({@code PlayerModel.translateToHand}): root, then the arm, slim arms nudged
+     * half a pixel toward the body, shorter arms moving the grip up. Items rest upright in a hanging hand, which
+     * would flip them back over the shoulder once the arm rises, so the wrist turns: while casting or swinging,
+     * the arm's nominal raise is cancelled at the hand and an aim tilt added (the swing itself still moves the
+     * item); Aura's raised left hand keeps the scale upright.
+     */
+    @Override
+    public void translateToHand(CharacterRenderState state, HumanoidArm arm, PoseStack poseStack) {
+        this.root().translateAndRotate(poseStack);
+        ModelPart part = arm == HumanoidArm.RIGHT ? rightArm : leftArm;
+        if (kind.slim()) {
+            float nudge = arm == HumanoidArm.RIGHT ? 0.5F : -0.5F;
+            part.x += nudge;
+            part.translateAndRotate(poseStack);
+            part.x -= nudge;
+        } else {
+            part.translateAndRotate(poseStack);
+        }
+        if (kind.armLength() != 12.0F) {
+            poseStack.translate(0.0F, (kind.armLength() - 12.0F) / 16.0F, 0.0F);
+        }
+        float wrist = 0.0F;
+        if (arm == HumanoidArm.RIGHT && (state.casting || state.attack > 0.0F) && !state.statue) {
+            wrist = Mth.HALF_PI + (state.holdingStaff ? STAFF_AIM : WEAPON_AIM);
+        } else if (arm == HumanoidArm.LEFT && state.raisedArm) {
+            wrist = -leftArm.xRot;
+        }
+        if (wrist != 0.0F) {
+            poseStack.translate(0.0F, HAND, 0.0F);
+            poseStack.mulPose(Axis.XP.rotation(wrist));
+            poseStack.translate(0.0F, -HAND, 0.0F);
         }
     }
 

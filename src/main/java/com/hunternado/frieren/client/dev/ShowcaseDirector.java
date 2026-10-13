@@ -116,8 +116,9 @@ public final class ShowcaseDirector {
                 wait = Integer.parseInt(line.substring(5).trim());
                 return;
             }
-            if (line.equals("@hud")) {
-                if (!minecraft.gui.hud.isHidden()) {
+            if (line.equals("@hud") || line.equals("@hud show")) {
+                // "@hud" hides the HUD for clean shots; "@hud show" brings it back (first-person hands need it)
+                if (minecraft.gui.hud.isHidden() == line.equals("@hud show")) {
                     minecraft.gui.hud.toggle();
                 }
                 continue;
