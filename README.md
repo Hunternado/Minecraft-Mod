@@ -10,12 +10,31 @@ demons who plead and lie, and multi-phase bosses up to the Demon King. Fan-made;
 | Forge | **65.1.0** |
 | Java | **25** |
 | Side | Client + server (required on both) |
-| Version | **2.0.0** |
+| Version | **2.1.0** |
 
 > **Status:** builds against Minecraft 26.2 / Forge 65.1.0 and boots cleanly as a dedicated server and as a
 > client. On every push, GitHub Actions also starts a real client. It plays a scripted showcase covering
 > characters, spells, trials, bosses, the statue and the dungeons, and saves screenshots to the `ci-artifacts`
 > branch. Balance and long multiplayer sessions still need human playtesting; see `docs/KNOWN_RISKS.md`.
+
+## What's new in 2.1
+
+* **The cast is drawn in the anime's style.** Skins use flat cel shading with soft, slightly violet shadows
+  instead of noisy textures, hair falls in clean locks, and every face is hand-placed pixel art with big anime
+  eyes. Frieren was rebuilt from her character sheet:
+  * silver twin tails hanging past her waist, long ears with red drop earrings;
+  * the white capelet with gold trim and red gems over her black-and-white striped high collar;
+  * gold cuffs, dark tights and brown boots.
+* **Characters hold real items.** Staffs and weapons are held in the hand like a player holds them, instead of
+  being glued to the arm (the old staff ran straight through the shoulder). Casters aim their staff at you when
+  they cast.
+* **3D item models.** Every staff and weapon is a proper 3D model in the hand. Inventories, item frames and
+  dropped items keep a crisp flat icon, and all 39 icons were redrawn.
+* **New items:**
+  * **Warrior's Axe** (Stark's), craftable;
+  * **Replica of the Hero's Sword** (Himmel's), craftable;
+  * **Blade of the Demon King**, dropped by the Demon King;
+  * **Scale of Obedience**, dropped by Aura.
 
 ## What's in 2.0
 
@@ -60,19 +79,19 @@ demons who plead and lie, and multi-phase bosses up to the Demon King. Fan-made;
 ## Getting the jar
 
 **Without building:** open the repository's **Actions** tab and pick the latest green **Build** run. Download the
-**frieren-mod-jar** artifact (a zip containing `frieren-2.0.0.jar`). Artifacts expire after 90 days.
+**frieren-mod-jar** artifact (a zip containing `frieren-2.1.0.jar`). Artifacts expire after 90 days.
 
 **Building it yourself:** you need JDK 25 and internet access to `maven.minecraftforge.net`,
 `piston-meta.mojang.com`, `piston-data.mojang.com`, `libraries.minecraft.net` and the Gradle plugin portal.
 
 ```bash
-./gradlew build          # Windows: gradlew.bat build  ->  build/libs/frieren-2.0.0.jar
+./gradlew build          # Windows: gradlew.bat build  ->  build/libs/frieren-2.1.0.jar
 ```
 
 ## Installing in CurseForge
 
 1. In the CurseForge app, create a profile: **Minecraft 26.2**, modloader **Forge 65.1.0** (or newer 65.x).
-2. Open the profile, click **⋯ → Open Folder**, and copy `frieren-2.0.0.jar` into `mods`.
+2. Open the profile, click **⋯ → Open Folder**, and copy `frieren-2.1.0.jar` into `mods`.
 3. For multiplayer, put the same jar in the server's `mods` folder.
 
 ## Playing
@@ -134,6 +153,9 @@ overridable (`worldgen/structure_set/`, `tags/worldgen/biome/has_structure/`).
   * `gen_fx.py` builds the particles, magic circles, beams and shells.
   * `gen_structures.py`, `gen_data.py`, `gen_lang.py` and `gen_assets.py` cover the rest.
   * `preview_characters.py` renders turnaround sheets without the game.
+  * `gen_held_items.py` builds the 3D in-hand item models; `preview_held.py` shows characters holding them through
+    the game's exact hand transform chain.
+  * `icons.py` holds the hand-drawn item icons that `gen_assets.py` saves.
   * `showcase/scenes.txt` is the in-game screenshot script CI runs.
   * `precheck.sh` runs the local checks (syntax, duplicate locals, imports, call arity, resources) before a push.
 

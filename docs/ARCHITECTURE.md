@@ -149,6 +149,25 @@ tools/                              Python generators for every resource file + 
 * **Offline previews.** `tools/preview_characters.py` renders the same rigs with Minecraft's transform order, so
   art can be judged without the game.
 * **The mimic** is generated the same way by `tools/gen_mimic.py`, into `MimicLayer` plus its texture.
+* **Anime style (2.1).** `roster.py` paints with `skinpaint`'s cel primitives under the classic names:
+  * `cel_fill` gives flat colour with one shadow band, and `tone` hue-shifts shadows violet and highlights warm;
+  * `anime_hair` draws clean locks with a highlight band;
+  * `face_template` places each face by hand: a fringe of pointed locks, side locks, eyes from `EYE_STYLES`, brows
+    and mouth.
+
+  Frieren's front face is a fully custom pixel template.
+* **Held items (2.1).** `CharacterModel` implements `ArmedModel` and `CharacterRenderer` adds the vanilla
+  `ItemInHandLayer`:
+  * `translateToHand` places items exactly like `PlayerModel` does (checked against the 26.2 bytecode).
+  * While casting or swinging, the wrist cancels the arm's nominal raise and adds an aim tilt (55° for staffs,
+    35° for weapons). Otherwise upright items would flip back over the shoulder.
+  * `CharacterKind` carries each character's signature items. The renderer draws them only when the entity's
+    hands are empty. They are visual only: nothing is equipped, synced or dropped.
+  * Baked props remain for two cases: the statue's copper sword and Draht's wire spools.
+* **3D item models (2.1).** `tools/gen_held_items.py` writes element models for staffs and weapons, and a
+  `display_context` select so GUIs, frames and the ground keep the flat icon. Display transforms were designed with
+  `tools/models/held.py`, the same hand transform chain in Python, and are previewed by `tools/preview_held.py`.
+  Icons are hand-drawn pixel art in `tools/icons.py`.
 
 ### Magic visuals (`entity/fx/`, `client/fx/`, `client/render/fx/`)
 * **Server-spawned visual entities.** `MagicCircleEntity`, `SpellBeamEntity` and `BarrierShellEntity` carry

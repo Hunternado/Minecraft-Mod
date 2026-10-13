@@ -10,7 +10,7 @@ playing together can judge: feel, balance and long sessions.
 
 | Check | Where | Result |
 |---|---|---|
-| Full Gradle build (`compileJava` reports every error in one pass) | CI `Build` | passes, produces `frieren-2.0.0.jar` |
+| Full Gradle build (`compileJava` reports every error in one pass) | CI `Build` | passes, produces `frieren-2.1.0.jar` |
 | Dedicated server boot: every registry, config, network channel and datapack file | CI `Server smoke test` | clean |
 | Client boot: model layers, renderers, HUD, every model / texture / item definition | CI `Client smoke test` | clean, no missing resources |
 | In-game behaviour driven by `tools/showcase/scenes.txt` (commit tag `[showcase]`), screenshots published to the `ci-artifacts` branch | CI `In-game showcase` | see below |
@@ -62,3 +62,7 @@ What the showcase has confirmed in a running client (with screenshots):
 | Himmel's echo placed relative to the statue, inside a wide plinth | showcase screenshot | the echo stood waist-deep in the steps |
 | Polished-copper palette topping out at a skin tone | showcase screenshot | the gleaming statue read as a shirtless Himmel |
 | "Defeat Linie, Draht and Lügner" counting any three general kills | code review | killing Linie three times passed the quest |
+| Staffs and weapons baked into the arm model, pivoting in the hand | player report (screenshot) | Frieren's staff ran through her arm and out of her shoulder |
+| An upright held item rotating with a raised arm | held-item preview (tools/preview_held.py) | casting would have flipped staffs back over the shoulder; the wrist now turns |
+| Shadows as plain RGB multiplies on silver hair | player report (screenshot) | Frieren's hair read as dull grey |
+| A local redeclared in a nested block of `AuraEntity.aiStep` | tools/javac/DuplicateLocals.java (written for it) | a compile error only CI could see |
