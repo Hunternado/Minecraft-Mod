@@ -110,6 +110,16 @@ def main():
                     problems += 1
                     line = body.count("\n", 0, m.start()) + 1
                     print(f"{os.path.relpath(path, REPO)}:{line}: {imports[simple]} has no member {member}")
+    # ItemStacks need bound data components: one built in a static initializer kills mod construction.
+    for dirpath, _, files in os.walk(SRC):
+        for name in files:
+            if name.endswith(".java"):
+                path = os.path.join(dirpath, name)
+                body = COMMENT_RE.sub("", open(path, encoding="utf-8").read())
+                for m in re.finditer(r"\bstatic\b[^;{}()]*=\s*new\s+ItemStack\s*\(", body):
+                    problems += 1
+                    line = body.count("\n", 0, m.start()) + 1
+                    print(f"{os.path.relpath(path, REPO)}:{line}: static ItemStack initializer (components are not bound yet)")
     print(f"checked {checked} static member references against the API dump, {problems} problem(s)")
     return 1 if problems else 0
 

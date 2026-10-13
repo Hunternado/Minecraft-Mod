@@ -24,8 +24,6 @@ import net.minecraftforge.common.ForgeHooks;
  * apply to every block. Params: {@code depth}.
  */
 public class TunnelBehavior implements SpellBehavior {
-    private static final ItemStack VIRTUAL_PICKAXE = new ItemStack(Items.IRON_PICKAXE);
-
     @Override
     public boolean cast(SpellContext ctx) {
         ServerPlayer caster = ctx.caster();
@@ -40,12 +38,14 @@ public class TunnelBehavior implements SpellBehavior {
         };
         Direction across = vertical ? Direction.EAST : facing.getClockWise();
         Direction along = vertical ? Direction.SOUTH : Direction.UP;
+        // made per cast: an ItemStack cannot exist before data components are bound (a static field breaks mod loading)
+        ItemStack pickaxe = new ItemStack(Items.IRON_PICKAXE);
         int carved = 0;
         for (int step = 0; step < depth; step++) {
             BlockPos middle = start.relative(facing, step);
             for (int a = -1; a <= 1; a++) {
                 for (int b = -1; b <= 1; b++) {
-                    if (carve(ctx.level(), caster, middle.relative(across, a).relative(along, b))) {
+                    if (carve(ctx.level(), caster, middle.relative(across, a).relative(along, b), pickaxe)) {
                         carved++;
                     }
                 }
@@ -61,7 +61,7 @@ public class TunnelBehavior implements SpellBehavior {
         return true;
     }
 
-    private static boolean carve(ServerLevel level, ServerPlayer caster, BlockPos pos) {
+    private static boolean carve(ServerLevel level, ServerPlayer caster, BlockPos pos, ItemStack pickaxe) {
         BlockState state = level.getBlockState(pos);
         if (state.isAir() || state.hasBlockEntity() || !state.getFluidState().isEmpty()) {
             return false;
@@ -71,7 +71,7 @@ public class TunnelBehavior implements SpellBehavior {
                 || ForgeHooks.onBlockBreakEvent(level, caster.gameMode(), caster, pos) == -1) {
             return false;
         }
-        for (ItemStack drop : Block.getDrops(state, level, pos, null, caster, VIRTUAL_PICKAXE)) {
+        for (ItemStack drop : Block.getDrops(state, level, pos, null, caster, pickaxe)) {
             Block.popResource(level, pos, drop);
         }
         return level.destroyBlock(pos, false, caster);

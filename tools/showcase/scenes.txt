@@ -473,6 +473,8 @@
 @wait 20
 @shot building_sampler
 # The mimic up close: disguised on the left, revealed on the right (teeth, fangs, tongue, gaping lid).
+# The block sampler row stands where this camera goes, so it comes down first.
+/fill 26 120 1 38 122 1 minecraft:air
 /kill @e[type=frieren:mimic]
 /tp @a 33 120 0.8 0 18
 @wait 30
