@@ -1,5 +1,10 @@
 package com.hunternado.frieren.client.dev;
 
+import com.hunternado.frieren.client.ClientMagicCache;
+import com.hunternado.frieren.client.gui.JourneyScreen;
+import com.hunternado.frieren.client.gui.SpellbookScreen;
+import com.hunternado.frieren.network.FrierenNetwork;
+import com.hunternado.frieren.network.packet.BindSpellPacket;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.CameraType;
 import net.minecraft.client.Minecraft;
@@ -10,6 +15,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.client.input.KeyEvent;
 import net.minecraft.network.chat.contents.TranslatableContents;
+import net.minecraft.resources.Identifier;
 import org.lwjgl.glfw.GLFW;
 import net.minecraft.client.server.IntegratedServer;
 import org.slf4j.Logger;
@@ -138,6 +144,24 @@ public final class ShowcaseDirector {
                     message -> LOGGER.info("[showcase] {}: {}", name, message.getString()));
                 wait = 10;
                 return;
+            }
+            if (line.startsWith("@screen")) {
+                // "@screen spellbook [spell id]", "@screen journey", "@screen close": the mod's own screens for UI shots
+                String[] parts = line.substring(7).trim().split("\\s+");
+                minecraft.gui.setScreen(switch (parts[0]) {
+                    case "spellbook" -> new SpellbookScreen(parts.length > 1 ? Identifier.parse(parts[1]) : null);
+                    case "journey" -> new JourneyScreen();
+                    default -> null;
+                });
+                continue;
+            }
+            if (line.startsWith("@bind")) {
+                // "@bind <slot 1-5> <spell id>": fills a quick slot the way the grimoire does
+                String[] parts = line.substring(5).trim().split("\\s+");
+                int slot = Integer.parseInt(parts[0]) - 1;
+                ClientMagicCache.data().setSlot(slot, Identifier.parse(parts[1]));
+                FrierenNetwork.sendToServer(new BindSpellPacket(slot, parts[1]));
+                continue;
             }
             if (line.equals("@quit")) {
                 break;

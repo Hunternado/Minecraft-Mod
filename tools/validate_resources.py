@@ -277,6 +277,9 @@ def check_spells(behaviours):
         behaviour = spell.get("behavior", "")
         if not behaviour.startswith(NS + ":") or behaviour[len(NS) + 1:] not in behaviours:
             error(f"spell {os.path.basename(path)} uses unknown behaviour {behaviour}")
+        icon = os.path.join(ASSETS, "textures", "gui", "sprites", "spell", os.path.basename(path)[:-5] + ".png")
+        if not os.path.isfile(icon):
+            error(f"spell {os.path.basename(path)} has no grimoire icon (run tools/gen_gui.py)")
 
 
 def check_sounds(sounds):

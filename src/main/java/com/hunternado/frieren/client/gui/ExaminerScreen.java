@@ -10,15 +10,23 @@ import com.hunternado.frieren.network.packet.NpcActionPacket;
 import com.hunternado.frieren.spell.SpellDefinition;
 import com.hunternado.frieren.spell.SpellManager;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
-import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.FormattedCharSequence;
 
 import java.util.List;
 
-/** Association examiner dialog: requirements, starting/abandoning exams, submitting items, Serie's privilege. */
+/**
+ * Association examiner dialog on an official parchment: rank, the next exam and what it still needs, starting or
+ * abandoning exams, submitting items, and Serie's privilege when it is earned.
+ */
 public class ExaminerScreen extends Screen {
+    private static final int SHEET_W = 260;
+
     private final int entityId;
+    private int sheetX;
+    private int sheetY;
+    private int sheetH;
 
     public ExaminerScreen(int entityId) {
         super(Component.translatable("screen.frieren.examiner"));
@@ -33,69 +41,96 @@ public class ExaminerScreen extends Screen {
     @Override
     protected void init() {
         MagicData data = ClientMagicCache.data();
-        int center = this.width / 2;
-        int y = this.height / 2 + 10;
         MageRank next = data.rank().next();
         ExamType type = next != null ? ExamType.forRank(next) : null;
+        List<SpellDefinition> choices = data.seriePrivilegeAvailable()
+            ? NpcInteractions.privilegeChoices(SpellManager.clientDefinitions()) : List.of();
+        int buttons = (data.exam() == null ? 1 : 2) + Math.min(6, choices.size());
+        sheetH = Math.min(this.height - 16, 112 + buttons * 18);
+        sheetX = (this.width - SHEET_W) / 2;
+        sheetY = (this.height - sheetH) / 2;
 
+        int bx = sheetX + 30;
+        int bw = SHEET_W - 60;
+        int y = sheetY + sheetH - 14 - buttons * 18;
         if (data.exam() == null) {
-            Button begin = Button.builder(Component.translatable("screen.frieren.examiner.begin"), b -> send(NpcActionPacket.EXAM_START, 0))
-                .pos(center - 100, y).size(200, 20).build();
+            InkButton begin = new InkButton(bx, y, bw, 15, Component.translatable("screen.frieren.examiner.begin"),
+                () -> send(NpcActionPacket.EXAM_START, 0));
             begin.active = type != null && type.unmetRequirements(data, false).isEmpty();
             this.addRenderableWidget(begin);
+            y += 18;
         } else {
-            this.addRenderableWidget(Button.builder(Component.translatable("screen.frieren.examiner.submit"), b -> send(NpcActionPacket.SUBMIT_EXAM_ITEM, 0))
-                .pos(center - 100, y).size(200, 20).build());
-            this.addRenderableWidget(Button.builder(Component.translatable("screen.frieren.examiner.abandon"), b -> send(NpcActionPacket.EXAM_ABANDON, 0))
-                .pos(center - 100, y + 24).size(200, 20).build());
+            this.addRenderableWidget(new InkButton(bx, y, bw, 15, Component.translatable("screen.frieren.examiner.submit"),
+                () -> send(NpcActionPacket.SUBMIT_EXAM_ITEM, 0)));
+            y += 18;
+            this.addRenderableWidget(new InkButton(bx, y, bw, 15, Component.translatable("screen.frieren.examiner.abandon"),
+                () -> send(NpcActionPacket.EXAM_ABANDON, 0)));
+            y += 18;
         }
+        for (int i = 0; i < choices.size() && i < 6; i++) {
+            final int index = i;
+            this.addRenderableWidget(new InkButton(bx, y, bw, 15,
+                GrimoireUi.plain(Component.translatable("screen.frieren.examiner.privilege", choices.get(i).displayName())),
+                () -> send(NpcActionPacket.CLAIM_PRIVILEGE, index)));
+            y += 18;
+        }
+    }
 
-        if (data.seriePrivilegeAvailable()) {
-            List<SpellDefinition> choices = NpcInteractions.privilegeChoices(SpellManager.clientDefinitions());
-            int py = y + 52;
-            for (int i = 0; i < choices.size() && i < 6; i++) {
-                final int index = i;
-                this.addRenderableWidget(Button.builder(Component.translatable("screen.frieren.examiner.privilege", choices.get(i).displayName()),
-                    b -> send(NpcActionPacket.CLAIM_PRIVILEGE, index)).pos(center - 100, py + i * 22).size(200, 20).build());
-            }
-        }
+    @Override
+    public void extractBackground(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTick) {
+        super.extractBackground(graphics, mouseX, mouseY, partialTick);
+        // the sheet belongs to the background so the ink buttons (widgets) land on top of it
+        GrimoireUi.sheet(graphics, sheetX, sheetY, SHEET_W, sheetH);
+        GrimoireUi.circle(graphics, sheetX + SHEET_W / 2, sheetY + 52, 84);
     }
 
     @Override
     public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTick) {
         super.extractRenderState(graphics, mouseX, mouseY, partialTick);
         MagicData data = ClientMagicCache.data();
-        int center = this.width / 2;
-        int y = this.height / 2 - 80;
-        graphics.centeredText(this.font, this.title, center, y, 0xFFFFFFFF);
-        y += 16;
-        graphics.centeredText(this.font, Component.translatable("screen.frieren.journey.rank", data.rank().displayName()), center, y, 0xFFFFFFFF);
+        int cx = sheetX + SHEET_W / 2;
+        int y = sheetY + 13;
+        GrimoireUi.centered(graphics, this.font, this.title, cx, y, GrimoireUi.INK);
+        y += 12;
+        GrimoireUi.divider(graphics, sheetX + 40, y, SHEET_W - 80);
+        y += 7;
+        GrimoireUi.centered(graphics, this.font, GrimoireUi.plain(Component.translatable("screen.frieren.journey.rank", data.rank().displayName())),
+            cx, y, GrimoireUi.INK_GOLD);
         y += 14;
+        int wrap = SHEET_W - 36;
         MageRank next = data.rank().next();
         ExamType type = next != null ? ExamType.forRank(next) : null;
         if (data.exam() != null) {
             ExamType active = ExamType.forRank(data.exam().target());
             if (active != null) {
-                graphics.centeredText(this.font, active.stage(data.exam().stage()).title(), center, y, 0xFFE8C15A);
+                GrimoireUi.centered(graphics, this.font, GrimoireUi.plain(active.stage(data.exam().stage()).title()), cx, y, GrimoireUi.INK);
                 y += 12;
-                graphics.centeredText(this.font, active.stage(data.exam().stage()).instructions(), center, y, 0xFFAAAAAA);
+                lines(graphics, active.stage(data.exam().stage()).instructions(), cx, y, wrap, GrimoireUi.INK_SOFT);
             }
             return;
         }
         if (type == null) {
-            graphics.centeredText(this.font, Component.translatable("exam.frieren.max_rank"), center, y, 0xFFE8C15A);
+            GrimoireUi.centered(graphics, this.font, GrimoireUi.plain(Component.translatable("exam.frieren.max_rank")), cx, y, GrimoireUi.INK_GOLD);
             return;
         }
-        graphics.centeredText(this.font, Component.translatable("screen.frieren.journey.next_exam", next.displayName()), center, y, 0xFFFFFFFF);
+        GrimoireUi.centered(graphics, this.font, GrimoireUi.plain(Component.translatable("screen.frieren.journey.next_exam", next.displayName())),
+            cx, y, GrimoireUi.INK);
         y += 12;
         List<Component> unmet = type.unmetRequirements(data, false);
         if (unmet.isEmpty()) {
-            graphics.centeredText(this.font, Component.translatable("screen.frieren.journey.eligible"), center, y, 0xFF7FE07F);
+            GrimoireUi.centered(graphics, this.font, GrimoireUi.plain(Component.translatable("screen.frieren.journey.eligible")), cx, y, GrimoireUi.INK_GREEN);
         }
         for (Component line : unmet) {
-            graphics.centeredText(this.font, line, center, y, 0xFFE07F7F);
-            y += 11;
+            y = lines(graphics, Component.literal("- " + line.getString()), cx, y, wrap, GrimoireUi.INK_RED);
         }
+    }
+
+    private int lines(GuiGraphicsExtractor graphics, Component text, int cx, int y, int wrap, int color) {
+        for (FormattedCharSequence line : this.font.split(GrimoireUi.plain(text), wrap)) {
+            graphics.centeredText(this.font, line, cx, y, color);
+            y += 10;
+        }
+        return y;
     }
 
     @Override

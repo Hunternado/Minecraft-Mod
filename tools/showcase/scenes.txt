@@ -542,4 +542,31 @@
 /tp @a -40 120 -34 180 12
 @wait 10
 @shot utility_light_bridge_walk
+# The UI: the HUD with five bound spells (Zoltraak cooling down), the grimoire with and without a spell chosen, and
+# the Journey Journal. Screens are opened by the director, as the keybinds would.
+/frieren spell learnall @p
+/gamemode creative @a
+/tp @a 33 120 -2 0 4
+@wait 20
+@bind 1 frieren:zoltraak
+@bind 2 frieren:defensive_magic
+@bind 3 frieren:flight_magic
+@bind 4 frieren:light_bridge
+@bind 5 frieren:return_home
+/frieren cast @p frieren:zoltraak
+@hud show
+@camera first
+@wait 12
+@shot ui_hud
+@screen spellbook
+@wait 10
+@shot ui_spellbook
+@screen spellbook frieren:zoltraak
+@wait 10
+@shot ui_spellbook_zoltraak
+@screen journey
+@wait 10
+@shot ui_journey
+@screen close
+@hud
 @quit

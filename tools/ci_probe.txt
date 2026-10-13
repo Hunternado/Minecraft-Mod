@@ -17,3 +17,6 @@ code:net.minecraft.client.resources.model.cuboid.ItemTransform|apply
 code:net.minecraft.client.renderer.item.ItemStackRenderState$LayerRenderState|applyTransform
 net.minecraft.world.level.portal.TeleportTransition|.
 net.minecraft.world.level.portal.TeleportTransition$PostTeleportTransition|.
+code:net.minecraft.client.resources.metadata.gui.GuiSpriteScaling$NineSlice|static \{\}
+code:net.minecraft.client.resources.metadata.gui.GuiSpriteScaling$NineSlice$Border|static \{\}
+net.minecraft.client.resources.metadata.gui.GuiSpriteScaling$NineSlice|.
