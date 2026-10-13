@@ -20,7 +20,12 @@ def held_extra(rig, model, pose, items, casting=False, raised=False):
     """Item faces for both hands; casting/raised apply the same wrist rules as CharacterModel.translateToHand."""
     import math
     from held import STAFF_AIM, WEAPON_AIM
+    from held import back_matrix
     extra = []
+    if rig.back_carry and not casting and items[0] and items[0].startswith("frieren:"):
+        elements, disp, img = gen_held_items.build(items[0].split(":", 1)[1])
+        extra.append((element_faces(elements, back_matrix(model, pose), img.width), img))
+        items = (None, items[1])
     for arm, item_id in zip(("right", "left"), items):
         if not item_id or not item_id.startswith("frieren:"):
             continue

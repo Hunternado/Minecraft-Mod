@@ -472,7 +472,8 @@ EYE_STYLES = {
 
 
 def face_template(skin, hair_c, eye, fringe=5, part=None, locks=(2, 10), eye_y=8, eye_w=4, gap=4, style="soft",
-                  mouth="small", brow=None, lash=None, brow_angle=0, blush=False, glow=False, depth=None, seed=0):
+                  mouth="small", brow=None, lash=None, brow_angle=0, blush=False, glow=False, depth=None, seed=0,
+                  nose=False):
     """
     Builds a hand-placed anime face for a 16x16 head front: a fringe of pointed locks (or an explicit per-column
     depth list), side locks, eyes from EYE_STYLES, thin brows, a one-pixel nose and a small mouth.
@@ -531,21 +532,19 @@ def face_template(skin, hair_c, eye, fringe=5, part=None, locks=(2, 10), eye_y=8
             y = by + (brow_angle if inner else 0)
             if 0 <= y < 16 and grid[y][x] in ("S", "s"):
                 grid[y][x] = "B"
-    grid[min(15, eye_y + 5)][8] = "n"
+    if nose:
+        grid[min(15, eye_y + 5)][7] = "n"
+    # Mouths stay small and symmetric (an off-centre pixel reads as a smirk at this size).
     my = min(15, eye_y + 6)
-    if mouth == "small":
+    if mouth in ("small", "smirk"):
         grid[my][7] = grid[my][8] = "m"
     elif mouth == "smile":
-        grid[my - 1][6] = grid[my - 1][9] = "m"
+        grid[my][6] = grid[my][9] = "u"
         grid[my][7] = grid[my][8] = "m"
-    elif mouth == "smirk":
-        grid[my][7] = grid[my][8] = "m"
-        grid[my - 1][9] = "m"
     elif mouth == "fangs":
-        for x in (6, 7, 8, 9):
-            grid[my][x] = "M"
+        grid[my][7] = grid[my][8] = "M"
         if my + 1 < 16:
-            grid[my + 1][6] = grid[my + 1][9] = "W"
+            grid[my + 1][8] = "W"
     elif mouth == "stern":
         for x in (6, 7, 8, 9):
             grid[my][x] = "M"
@@ -560,8 +559,9 @@ def face_template(skin, hair_c, eye, fringe=5, part=None, locks=(2, 10), eye_y=8
     lash = lash or tone(skin, 0.28)
     palette = {
         "H": hair_c, "h": tone(hair_c, 0.88), "d": tone(hair_c, 0.74),
-        "S": skin, "s": tone(skin, 0.9), "n": tone(skin, 0.84),
-        "m": mix(tone(skin, 0.78), (200, 96, 100, 255), 0.35), "M": tone(skin, 0.55),
+        "S": skin, "s": tone(skin, 0.9), "n": tone(skin, 0.9),
+        "m": mix(tone(skin, 0.8), (205, 105, 110, 255), 0.3), "u": mix(skin, tone(skin, 0.8), 0.5),
+        "M": tone(skin, 0.6),
         "L": lash, "l": mix(lash, skin, 0.5),
         "I": tone(eye, 0.55) if not glow else tone(eye, 1.05), "i": eye if not glow else tone(eye, 1.3),
         "j": tone(eye, 1.35) if not glow else tone(eye, 1.7), "p": tone(eye, 0.4), "W": (255, 255, 255, 255),

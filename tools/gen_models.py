@@ -11,7 +11,7 @@ import sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "models"))
 from PIL import Image  # noqa: E402
 
-from characters import PART_TREE, ROOT_PARTS, TEX  # noqa: E402
+from characters import walk_tree  # noqa: E402
 from roster import ROSTER  # noqa: E402
 
 REPO = os.path.normpath(os.path.join(os.path.dirname(__file__), ".."))
@@ -47,16 +47,13 @@ def layer_method(name, model):
     lines = [f"    private static LayerDefinition {camel(name)}() {{",
              "        MeshDefinition mesh = new MeshDefinition();",
              "        PartDefinition root = mesh.getRoot();"]
-    for top in ROOT_PARTS:
-        part = root.find(top)
-        var = camel(top)
-        lines.append(f"        PartDefinition {var} = root.addOrReplaceChild(\"{top}\", {cubes_java(part)},\n"
+    for parent, part_name, sub in walk_tree():
+        part = root.find(part_name)
+        holder = "root" if parent is None else camel(parent)
+        prefix = f"PartDefinition {camel(part_name)} = " if sub else ""
+        lines.append(f"        {prefix}{holder}.addOrReplaceChild(\"{part_name}\", {cubes_java(part)},\n"
                      f"            {pose_java(part)});")
-        for child_name in PART_TREE[top]:
-            child = part.find(child_name)
-            lines.append(f"        {var}.addOrReplaceChild(\"{child_name}\", {cubes_java(child)},\n"
-                         f"            {pose_java(child)});")
-    lines.append(f"        return LayerDefinition.create(mesh, {TEX}, {TEX});")
+    lines.append(f"        return LayerDefinition.create(mesh, {model.tex_w}, {model.tex_h});")
     lines.append("    }")
     return "\n".join(lines)
 
@@ -81,7 +78,7 @@ def main():
         main_hand, off_hand = rig.held
         held = ", ".join(f"\"{i}\"" if i else "null" for i in (main_hand, off_hand))
         constants.append(f"    {name.upper()}(\"{name}\", {f(rig.render_scale)}, {str(long_robe).lower()}, "
-                         f"{str(rig.slim).lower()}, {f(rig.arm_len)}, {held})")
+                         f"{str(rig.slim).lower()}, {f(rig.arm_len)}, {held}, {str(rig.back_carry).lower()})")
         cases.append(f"            case {name.upper()} -> {camel(name)}();")
         methods.append(layer_method(name, model))
     constants_java = ",\n".join(constants)
@@ -118,13 +115,14 @@ public enum CharacterKind {{
     private final float armLength;
     private final @Nullable String mainHandItem;
     private final @Nullable String offHandItem;
+    private final boolean backCarry;
     private final ModelLayerLocation layer;
     private final Identifier texture;
     private @Nullable ItemStack mainHandStack;
     private @Nullable ItemStack offHandStack;
 
     CharacterKind(String id, float scale, boolean longRobe, boolean slim, float armLength, @Nullable String mainHandItem,
-                  @Nullable String offHandItem) {{
+                  @Nullable String offHandItem, boolean backCarry) {{
         this.id = id;
         this.scale = scale;
         this.longRobe = longRobe;
@@ -132,8 +130,14 @@ public enum CharacterKind {{
         this.armLength = armLength;
         this.mainHandItem = mainHandItem;
         this.offHandItem = offHandItem;
+        this.backCarry = backCarry;
         this.layer = new ModelLayerLocation(FrierenIds.id("character/" + id), "main");
         this.texture = FrierenIds.id("textures/entity/character/" + id + ".png");
+    }}
+
+    /** The main-hand weapon is worn across the back until the character fights (Stark's axe). */
+    public boolean backCarry() {{
+        return backCarry;
     }}
 
     /** Slim (three pixel) arms: held items sit half a pixel closer to the body, as on slim player models. */

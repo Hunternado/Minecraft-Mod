@@ -98,3 +98,18 @@ def element_faces(elements, m, tex_size):
             rect = (u0 * k, v0 * k, (u1 - u0) * k, (v1 - v0) * k)
             out.append((apply(m, c0), apply(m, cs), apply(m, ct), rect, True))
     return out
+
+
+def back_matrix(model, pose):
+    """
+    Item-model coordinates to model pixels for a weapon worn across the back (BackItemLayer): body transform,
+    translate(0, 6, 3.6), rotZ(145), scale 0.85, translate(0, -7, 0), then the item's own -0.5 centring.
+    """
+    root = model.root
+    m = part_matrix(mat_identity(), root, pose)
+    m = part_matrix(m, root.find("body"), pose)
+    m = mat_mul(m, mat_translate(0, 6, 3.6))
+    m = mat_mul(m, mat_rot_z(math.radians(145)))
+    m = mat_mul(m, mat_scale(0.85, 0.85, 0.85))
+    m = mat_mul(m, mat_translate(0, -7, 0))
+    return mat_mul(m, mat_translate(-8, -8, -8))

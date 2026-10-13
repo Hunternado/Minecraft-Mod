@@ -1,11 +1,13 @@
 """
 Character rigs. Every character shares one set of named parts (so one Java model class animates them all); parts a
 character does not use simply have no cubes. Cubes get UVs from a deterministic shelf packer and a painter that
-draws their faces into a 2x-density texture (256x256 PNG for a 128x128 UV space).
+draws their faces into a 2x-density texture (a 128x128 UV space, grown to 256x256 for rigs with many parts).
 
-Part tree (Java names):
-  head -> hat, hair_back, tail_left, tail_right, ear_left, ear_right, horn_left, horn_right, crown
-  body -> jacket, cape, skirt
+Part tree (Java names; nested parts are chains the model sways progressively):
+  head -> hat, hair_top, bangs, lock_left -> lock_left_2, lock_right -> lock_right_2, hair_back -> hair_back_2,
+          tail_left -> tail_left_2 -> tail_left_3, tail_right -> tail_right_2 -> tail_right_3,
+          ear_left, ear_right, horn_left -> horn_left_2 -> horn_left_3, horn_right -> ..., crown
+  body -> jacket, collar, cape -> cape_2, skirt -> skirt_2, coat_left, coat_right
   right_arm -> right_sleeve, prop        left_arm -> left_sleeve, prop_left
   right_leg -> right_pants               left_leg -> left_pants
 """
@@ -20,15 +22,36 @@ from skinpaint import Canvas  # noqa: E402
 TEX = 128      # UV space
 DENSITY = 2    # texels per UV unit
 
+def _chain(*names):
+    """Nested dict for a chain of parts: a -> b -> c."""
+    out = {}
+    for name in reversed(names):
+        out = {name: out}
+    return out
+
+
 PART_TREE = {
-    "head": ["hat", "hair_back", "tail_left", "tail_right", "ear_left", "ear_right", "horn_left", "horn_right", "crown"],
-    "body": ["jacket", "cape", "skirt"],
-    "right_arm": ["right_sleeve", "prop"],
-    "left_arm": ["left_sleeve", "prop_left"],
-    "right_leg": ["right_pants"],
-    "left_leg": ["left_pants"],
+    "head": {"hat": {}, "hair_top": {}, "bangs": {}, **_chain("lock_left", "lock_left_2"),
+             **_chain("lock_right", "lock_right_2"), **_chain("hair_back", "hair_back_2"),
+             **_chain("tail_left", "tail_left_2", "tail_left_3"), **_chain("tail_right", "tail_right_2", "tail_right_3"),
+             "ear_left": {}, "ear_right": {}, **_chain("horn_left", "horn_left_2", "horn_left_3"),
+             **_chain("horn_right", "horn_right_2", "horn_right_3"), "crown": {}},
+    "body": {"jacket": {}, "collar": {}, **_chain("cape", "cape_2"), **_chain("skirt", "skirt_2"),
+             "coat_left": {}, "coat_right": {}},
+    "right_arm": {"right_sleeve": {}, "prop": {}},
+    "left_arm": {"left_sleeve": {}, "prop_left": {}},
+    "right_leg": {"right_pants": {}},
+    "left_leg": {"left_pants": {}},
 }
 ROOT_PARTS = list(PART_TREE.keys())
+
+
+def walk_tree(tree=None, parent=None):
+    """Yields (parent_name, name, subtree) depth-first, parents before children."""
+    tree = PART_TREE if tree is None else tree
+    for name, sub in tree.items():
+        yield parent, name, sub
+        yield from walk_tree(sub, name)
 
 
 class Packer:
@@ -76,16 +99,16 @@ class Rig:
         self.post_paint = None
         self.variants = {}  # extra texture name -> post-paint applied to a fresh copy of the base painting
         self.held = (None, None)  # (main hand, off hand) item ids the character is drawn holding
+        self.back_carry = False   # main-hand weapon worn across the back out of combat
         self.slim = False
         self.arm_len = 12
         self.root = Part("root")
         self.parts = {}
         self.pending = []  # (part, cube, painter)
-        for top in ROOT_PARTS:
-            p = self.root.child(top)
-            self.parts[top] = p
-            for c in PART_TREE[top]:
-                self.parts[c] = p.child(c)
+        self.tex = TEX
+        for parent, name, _ in walk_tree():
+            holder = self.root if parent is None else self.parts[parent]
+            self.parts[name] = holder.child(name)
 
     def pose(self, name, offset=None, rotation=None):
         part = self.parts[name]
@@ -101,18 +124,26 @@ class Rig:
         return cube
 
     def build(self):
-        packer = Packer()
         order = sorted(range(len(self.pending)),
                        key=lambda i: (-(self.pending[i][1].d + self.pending[i][1].h), i))
-        for i in order:
-            part, cube, _ = self.pending[i]
-            cube.u, cube.v = packer.alloc(int(cube.w), int(cube.h), int(cube.d))
+        for size in (TEX, TEX * 2):
+            packer = Packer(size)
+            try:
+                for i in order:
+                    part, cube, _ = self.pending[i]
+                    cube.u, cube.v = packer.alloc(int(cube.w), int(cube.h), int(cube.d))
+            except ValueError:
+                continue
+            self.tex = size
+            break
+        else:
+            raise ValueError(f"{self.name}: texture full even at {TEX * 2}")
         for part, cube, _ in self.pending:
             part.cubes.append(cube)
-        return Model(self.root, TEX, TEX)
+        return Model(self.root, self.tex, self.tex)
 
     def paint(self, post=None):
-        cv = Canvas(TEX * DENSITY, TEX * DENSITY)
+        cv = Canvas(self.tex * DENSITY, self.tex * DENSITY)
         for part, cube, painter in self.pending:
             if painter:
                 painter(cv, face_rects(cube))

@@ -179,16 +179,20 @@ def guillotine_staff(a):
 
 
 def warriors_axe(a):
-    """Stark's (and once Eisen's) axe: long haft with leather wraps, broad steel bit and a back spike."""
-    haft, steel, edge, leather = "#5C3E28", "#9AA0AA", "#E4E8EE", "#3E2A1C"
+    """Stark's axe (once Eisen's): a broad bearded blade, dark steel inside a bright rim, a spiked top on a long
+    haft with leather wraps."""
+    haft, steel, rim, dark, leather = "#5C3E28", "#9AA0AA", "#C8CCD4", "#3E4048", "#3E2A1C"
     return [
         box(a, (7.25, -4, 7.25), (8.75, 25, 8.75), "haft", haft, "grain"),
         box(a, (7.0, 2.0, 7.0), (9.0, 9.0, 9.0), "leather", leather, "wrap"),        # grip
-        box(a, (6.75, 19.0, 6.75), (9.25, 25.0, 9.25), "steel", steel, "metal"),     # eye of the axe
-        box(a, (9.25, 18.0, 7.5), (12.5, 26.0, 8.5), "steel", steel, "metal"),       # bit
-        box(a, (12.5, 16.5, 7.75), (14.0, 27.5, 8.25), "edge", edge, "metal"),       # flared cutting edge
-        box(a, (3.5, 21.0, 7.6), (6.75, 22.5, 8.4), "steel", steel, "metal"),        # back spike
-        box(a, (7.5, 25.0, 7.5), (8.5, 27.0, 8.5), "steel", steel, "metal"),         # top spike
+        box(a, (6.75, 17.0, 6.75), (9.25, 25.0, 9.25), "steel", steel, "metal"),     # socket around the haft
+        box(a, (9.25, 15.0, 7.6), (14.5, 26.5, 8.4), "dark", dark, "flat"),          # the dark face of the blade
+        box(a, (14.5, 14.0, 7.5), (15.75, 27.5, 8.5), "rim", rim, "metal"),          # bright cutting edge
+        box(a, (9.25, 26.5, 7.5), (14.5, 27.5, 8.5), "rim", rim, "metal"),           # rim along the top
+        box(a, (9.25, 14.0, 7.5), (14.5, 15.0, 8.5), "rim", rim, "metal"),           # rim along the beard
+        box(a, (4.5, 20.0, 7.6), (6.75, 22.0, 8.4), "steel", steel, "metal"),        # back spur
+        box(a, (7.5, 25.0, 7.5), (8.5, 28.5, 8.5), "steel", steel, "metal"),         # spiked top
+        box(a, (7.75, 28.5, 7.75), (8.25, 29.75, 8.25), "rim", rim, "metal"),
     ]
 
 
@@ -222,16 +226,23 @@ def demon_kings_blade(a):
 
 
 def scale_of_obedience(a):
-    """Aura's Scale of Obedience: a gold balance on a short handle, violet gem at the top, two hanging pans."""
-    gold, gem, chain = "#D8B04A", "#B04CD8", "#A88A3A"
+    """Aura's Scale of Obedience: a gold balance with a heart-shaped handle above the beam and two hanging pans."""
+    gold, chain_c = "#D8B04A", "#A88A3A"
     out = [
-        box(a, (7.25, 2.0, 7.25), (8.75, 18.0, 8.75), "gold", gold, "metal"),        # post
-        box(a, (2.0, 16.0, 7.5), (14.0, 17.0, 8.5), "gold", gold, "metal"),          # beam
-        box(a, (7.0, 18.0, 7.0), (9.0, 20.0, 9.0), "gem", gem, "gem"),
-        box(a, (6.5, 1.0, 6.5), (9.5, 2.0, 9.5), "gold", gold, "metal"),             # base knob
+        box(a, (7.25, 6.0, 7.5), (8.75, 17.0, 8.5), "gold", gold, "metal"),       # post
+        box(a, (2.0, 16.0, 7.5), (14.0, 17.0, 8.5), "gold", gold, "metal"),        # beam
+        box(a, (6.5, 5.0, 7.0), (9.5, 6.0, 9.0), "gold", gold, "metal"),           # knob under the post
+        # the heart: two lobes and a point, open in the middle like a ring
+        box(a, (5.5, 19.0, 7.6), (7.0, 21.0, 8.4), "gold", gold, "metal"),
+        box(a, (9.0, 19.0, 7.6), (10.5, 21.0, 8.4), "gold", gold, "metal"),
+        box(a, (6.25, 21.0, 7.6), (7.75, 22.0, 8.4), "gold", gold, "metal"),
+        box(a, (8.25, 21.0, 7.6), (9.75, 22.0, 8.4), "gold", gold, "metal"),
+        box(a, (7.75, 20.0, 7.6), (8.25, 21.5, 8.4), "gold", gold, "metal"),
+        box(a, (6.25, 18.0, 7.6), (9.75, 19.0, 8.4), "gold", gold, "metal"),
+        box(a, (7.25, 17.0, 7.6), (8.75, 18.0, 8.4), "gold", gold, "metal"),
     ]
     for x in (2.5, 12.5):
-        out.append(box(a, (x, 11.0, 7.75), (x + 1.0, 16.0, 8.25), "chain", chain, "flat"))
+        out.append(box(a, (x, 11.0, 7.75), (x + 1.0, 16.0, 8.25), "chain", chain_c, "flat"))
         out.append(box(a, (x - 1.5, 10.0, 6.5), (x + 2.5, 11.0, 9.5), "gold", gold, "metal"))
     return out
 
@@ -242,10 +253,10 @@ ITEMS = {
     "mage_staff": (mage_staff, STAFF, 4.75),
     "apprentice_staff": (apprentice_staff, STAFF, 5.0),
     "guillotine_staff": (guillotine_staff, STAFF, 5.0),
-    "warriors_axe": (warriors_axe, AXE, 4.0),
+    "warriors_axe": (warriors_axe, AXE, 2.0),
     "heros_sword": (heros_sword, SWORD, 3.0),
     "demon_kings_blade": (demon_kings_blade, SWORD, 4.0),
-    "scale_of_obedience": (scale_of_obedience, SCALE, 5.0),
+    "scale_of_obedience": (scale_of_obedience, SCALE, 2.0),
 }
 HELD_ITEMS = set(ITEMS)
 
@@ -269,6 +280,9 @@ def write_json(rel, data):
 def main():
     for item_id in ITEMS:
         elements, disp, img = build(item_id)
+        coords = [v for el in elements for v in el["from"] + el["to"]]
+        if min(coords) < -16 or max(coords) > 32:   # the model loader rejects elements outside [-16, 32]
+            raise SystemExit(f"{item_id}: element coordinates {min(coords)}..{max(coords)} outside [-16, 32]")
         tex = f"{NS}:item/held/{item_id}"
         os.makedirs(os.path.join(ASSETS, "textures/item/held"), exist_ok=True)
         img.save(os.path.join(ASSETS, f"textures/item/held/{item_id}.png"))
