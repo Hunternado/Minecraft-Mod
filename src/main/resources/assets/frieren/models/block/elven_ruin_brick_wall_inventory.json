@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/wall_inventory",
+  "textures": {
+    "wall": "frieren:block/elven_ruin_bricks"
+  }
+}

@@ -392,6 +392,85 @@
 /summon minecraft:item_frame 1 121 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:scale_of_obedience",count:1}}
 @wait 30
 @shot item_icons
+# Building set: a half-timbered town house with a terracotta roof, and a sampler wall of every material.
+/kill @e[type=!minecraft:player]
+/gamemode spectator @a
+/tp @a 33 124 -2 0 12
+@wait 30
+/fill 28 119 6 38 119 14 frieren:town_cobblestone
+/fill 30 120 8 36 123 12 frieren:whitewashed_plaster hollow
+/fill 30 120 8 30 123 8 frieren:dark_timber
+/fill 30 120 12 30 123 12 frieren:dark_timber
+/fill 36 120 8 36 123 8 frieren:dark_timber
+/fill 36 120 12 36 123 12 frieren:dark_timber
+/fill 31 123 8 35 123 8 frieren:half_timber_frame
+/setblock 31 121 8 frieren:half_timber_cross
+/setblock 35 121 8 frieren:half_timber_cross
+/setblock 31 122 8 frieren:half_timber_diagonal
+/setblock 35 122 8 frieren:half_timber_diagonal
+/setblock 31 120 8 frieren:half_timber_posts
+/setblock 35 120 8 frieren:half_timber_posts
+/setblock 32 121 8 frieren:leaded_glass_pane
+/setblock 34 121 8 frieren:leaded_glass_pane
+/setblock 32 122 8 frieren:leaded_glass_pane
+/setblock 34 122 8 frieren:leaded_glass_pane
+/fill 33 120 8 33 121 8 minecraft:air
+/setblock 32 120 7 frieren:window_flower_box
+/setblock 34 120 7 frieren:window_flower_box
+/fill 31 120 9 35 120 11 frieren:association_carpet
+/fill 29 124 7 37 124 7 frieren:terracotta_roof_tile_stairs[facing=south]
+/fill 29 125 8 37 125 8 frieren:terracotta_roof_tile_stairs[facing=south]
+/fill 29 126 9 37 126 9 frieren:terracotta_roof_tile_stairs[facing=south]
+/fill 29 127 10 37 127 10 frieren:terracotta_roof_tile_slab
+/fill 29 124 13 37 124 13 frieren:terracotta_roof_tile_stairs[facing=north]
+/fill 29 125 12 37 125 12 frieren:terracotta_roof_tile_stairs[facing=north]
+/fill 29 126 11 37 126 11 frieren:terracotta_roof_tile_stairs[facing=north]
+/fill 30 124 8 30 124 12 frieren:whitewashed_plaster
+/fill 30 125 9 30 125 11 frieren:whitewashed_plaster
+/setblock 30 126 10 frieren:half_timber_frame
+/fill 36 124 8 36 124 12 frieren:whitewashed_plaster
+/fill 36 125 9 36 125 11 frieren:whitewashed_plaster
+/setblock 36 126 10 frieren:half_timber_frame
+/setblock 28 120 6 frieren:mana_lantern
+/setblock 38 120 6 frieren:mana_lantern
+/fill 28 120 7 28 120 14 frieren:town_cobblestone_wall
+/fill 38 120 7 38 120 14 frieren:town_cobblestone_wall
+@wait 20
+@shot building_house
+/tp @a 39.5 123 2.5 40 18
+@wait 20
+@shot building_house_angle
+/setblock 26 120 1 frieren:whitewashed_plaster
+/setblock 27 120 1 frieren:half_timber_frame
+/setblock 28 120 1 frieren:half_timber_cross
+/setblock 29 120 1 frieren:half_timber_diagonal
+/setblock 30 120 1 frieren:half_timber_posts
+/setblock 31 120 1 frieren:dark_timber
+/setblock 32 120 1 frieren:terracotta_roof_tiles
+/setblock 33 120 1 frieren:slate_roof_tiles
+/setblock 34 120 1 frieren:verdigris_roof_tiles
+/setblock 35 120 1 frieren:town_cobblestone
+/setblock 36 120 1 frieren:association_stone_bricks
+/setblock 37 120 1 frieren:chiseled_association_stone
+/setblock 38 120 1 frieren:association_stone_pillar
+/setblock 26 121 1 frieren:gilded_association_stone
+/setblock 27 121 1 frieren:elven_ruin_bricks
+/setblock 28 121 1 frieren:cracked_elven_ruin_bricks
+/setblock 29 121 1 frieren:demon_castle_bricks
+/setblock 30 121 1 frieren:chiseled_demon_castle_bricks
+/setblock 31 121 1 frieren:leaded_glass
+/setblock 32 121 1 frieren:grimoire_shelf
+/setblock 33 121 1 frieren:slate_roof_tile_stairs[facing=south]
+/setblock 34 121 1 frieren:association_stone_brick_slab
+/setblock 35 121 1 frieren:elven_ruin_brick_wall
+/setblock 36 121 1 frieren:demon_castle_brick_stairs[facing=south]
+/setblock 37 121 1 frieren:verdigris_roof_tile_slab
+/setblock 38 121 1 frieren:whitewashed_plaster_wall
+/setblock 26 122 1 frieren:mana_lantern
+/setblock 38 122 1 frieren:window_flower_box
+/tp @a 32 121.5 -3.5 0 8
+@wait 20
+@shot building_sampler
 # The mimic up close: disguised on the left, revealed on the right (teeth, fangs, tongue, gaping lid).
 /kill @e[type=frieren:mimic]
 /tp @a 33 120 0.8 0 18

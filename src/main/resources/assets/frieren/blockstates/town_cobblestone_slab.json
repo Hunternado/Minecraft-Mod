@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "frieren:block/town_cobblestone_slab"
+    },
+    "type=top": {
+      "model": "frieren:block/town_cobblestone_slab_top"
+    },
+    "type=double": {
+      "model": "frieren:block/town_cobblestone"
+    }
+  }
+}

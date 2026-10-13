@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "frieren:whitewashed_plaster",
+  "result": {
+    "id": "frieren:whitewashed_plaster_slab",
+    "count": 2
+  }
+}

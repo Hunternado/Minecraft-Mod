@@ -10,6 +10,7 @@ import com.hunternado.frieren.exam.ExamEvents;
 import com.hunternado.frieren.network.FrierenNetwork;
 import com.hunternado.frieren.quest.QuestEvents;
 import com.hunternado.frieren.registry.ModBlocks;
+import com.hunternado.frieren.registry.ModBuildingBlocks;
 import com.hunternado.frieren.registry.ModCreativeTabs;
 import com.hunternado.frieren.registry.ModDataComponents;
 import com.hunternado.frieren.registry.ModEffects;
@@ -45,6 +46,8 @@ public final class FrierenMod {
 
         ModBlocks.BLOCKS.register(modBusGroup);
         ModItems.ITEMS.register(modBusGroup);
+        ModBuildingBlocks.BLOCKS.register(modBusGroup);
+        ModBuildingBlocks.ITEMS.register(modBusGroup);
         ModEntities.ENTITY_TYPES.register(modBusGroup);
         ModParticles.PARTICLE_TYPES.register(modBusGroup);
         ModSounds.SOUND_EVENTS.register(modBusGroup);

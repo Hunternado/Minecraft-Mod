@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "frieren:town_cobblestone",
+  "result": {
+    "id": "frieren:town_cobblestone_wall",
+    "count": 1
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "frieren:block/elven_ruin_bricks",
+    "top": "frieren:block/elven_ruin_bricks",
+    "side": "frieren:block/elven_ruin_bricks"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": "frieren:verdigris_roof_tiles"
+  },
+  "result": {
+    "id": "frieren:verdigris_roof_tile_stairs",
+    "count": 4
+  }
+}

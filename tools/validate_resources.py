@@ -68,6 +68,10 @@ def registry_ids(src):
 
     items = ids("registry/ModItems.java", r'= (?:simple|grimoire|staff|armor|spawnEgg|blockItem)\("([a-z0-9_]+)"')
     blocks = ids("registry/ModBlocks.java", r'register\("([a-z0-9_]+)"')
+    # the building set registers its blocks and their items in one generated class
+    building = ids("registry/ModBuildingBlocks.java", r'BLOCKS\.register\("([a-z0-9_]+)"')
+    items |= building
+    blocks |= building
     entities = ids("registry/ModEntities.java", r'register\("([a-z0-9_]+)"')
     sounds = ids("registry/ModSounds.java", r'register\("([a-z0-9_.]+)"\)')
     effects = ids("registry/ModEffects.java", r'register\("([a-z0-9_]+)"')
@@ -408,7 +412,8 @@ def check_lang(src, items, blocks, entities, effects, sounds):
     for name in re.findall(r'key\("([a-z_]+)", GLFW', src[os.path.join(JAVA, "client", "KeyBindings.java")]):
         need(f"key.{NS}.{name}", "key mapping")
     need(f"key.category.{NS}.magic", "key category")
-    need(f"itemGroup.{NS}.{NS}", "creative tab")
+    for tab in re.findall(r'TABS\.register\("([a-z0-9_]+)"', src[os.path.join(JAVA, "registry", "ModCreativeTabs.java")]):
+        need(f"itemGroup.{NS}.{tab}", "creative tab")
     # NPC dialogue: every subclass declares npcId() and optionally dialogueLines().
     for path, text in src.items():
         npc_id = re.search(r'String npcId\(\)\s*\{\s*return "([a-z_]+)";', text)

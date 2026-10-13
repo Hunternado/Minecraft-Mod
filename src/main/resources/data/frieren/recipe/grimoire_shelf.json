@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "PPP",
+    "BNB",
+    "PPP"
+  ],
+  "key": {
+    "P": "#minecraft:planks",
+    "B": "minecraft:book",
+    "N": "minecraft:gold_nugget"
+  },
+  "result": {
+    "id": "frieren:grimoire_shelf",
+    "count": 1
+  }
+}

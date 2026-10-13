@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:polished_blackstone_bricks",
+  "result": {
+    "id": "frieren:demon_castle_bricks",
+    "count": 1
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "frieren:whitewashed_plaster_stairs",
+    "frieren:terracotta_roof_tile_stairs",
+    "frieren:slate_roof_tile_stairs",
+    "frieren:verdigris_roof_tile_stairs",
+    "frieren:town_cobblestone_stairs",
+    "frieren:association_stone_brick_stairs",
+    "frieren:elven_ruin_brick_stairs",
+    "frieren:demon_castle_brick_stairs"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:terracotta",
+  "result": {
+    "id": "frieren:terracotta_roof_tiles",
+    "count": 1
+  }
+}

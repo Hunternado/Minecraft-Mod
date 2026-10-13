@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "FFF",
+    "PPP"
+  ],
+  "key": {
+    "F": "frieren:blue_moon_weed",
+    "P": "#minecraft:planks"
+  },
+  "result": {
+    "id": "frieren:window_flower_box",
+    "count": 2
+  }
+}

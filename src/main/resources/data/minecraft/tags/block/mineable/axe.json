@@ -1,6 +1,13 @@
 {
   "replace": false,
   "values": [
-    "frieren:spell_research_desk"
+    "frieren:spell_research_desk",
+    "frieren:half_timber_frame",
+    "frieren:half_timber_cross",
+    "frieren:half_timber_diagonal",
+    "frieren:half_timber_posts",
+    "frieren:dark_timber",
+    "frieren:window_flower_box",
+    "frieren:grimoire_shelf"
   ]
 }

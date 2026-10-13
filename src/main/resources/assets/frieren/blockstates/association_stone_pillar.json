@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=y": {
+      "model": "frieren:block/association_stone_pillar"
+    },
+    "axis=z": {
+      "model": "frieren:block/association_stone_pillar_horizontal",
+      "x": 90
+    },
+    "axis=x": {
+      "model": "frieren:block/association_stone_pillar_horizontal",
+      "x": 90,
+      "y": 90
+    }
+  }
+}

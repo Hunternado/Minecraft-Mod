@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "frieren:elven_ruin_bricks",
+  "result": {
+    "id": "frieren:cracked_elven_ruin_bricks",
+    "count": 1
+  }
+}

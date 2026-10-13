@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "frieren:block/elven_ruin_brick_slab"
+    },
+    "type=top": {
+      "model": "frieren:block/elven_ruin_brick_slab_top"
+    },
+    "type=double": {
+      "model": "frieren:block/elven_ruin_bricks"
+    }
+  }
+}

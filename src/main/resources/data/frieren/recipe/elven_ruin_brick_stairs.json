@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": "frieren:elven_ruin_bricks"
+  },
+  "result": {
+    "id": "frieren:elven_ruin_brick_stairs",
+    "count": 4
+  }
+}

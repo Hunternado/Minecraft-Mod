@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "hanging=false": {
+      "model": "frieren:block/mana_lantern"
+    },
+    "hanging=true": {
+      "model": "frieren:block/mana_lantern_hanging"
+    }
+  }
+}

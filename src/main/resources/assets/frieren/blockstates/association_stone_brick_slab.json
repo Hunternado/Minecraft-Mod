@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "frieren:block/association_stone_brick_slab"
+    },
+    "type=top": {
+      "model": "frieren:block/association_stone_brick_slab_top"
+    },
+    "type=double": {
+      "model": "frieren:block/association_stone_bricks"
+    }
+  }
+}

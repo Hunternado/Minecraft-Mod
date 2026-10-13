@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": "frieren:demon_castle_bricks"
+  },
+  "result": {
+    "id": "frieren:demon_castle_brick_wall",
+    "count": 6
+  }
+}

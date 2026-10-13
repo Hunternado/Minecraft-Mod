@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "frieren:block/association_stone_bricks",
+    "top": "frieren:block/association_stone_bricks",
+    "side": "frieren:block/association_stone_bricks"
+  }
+}

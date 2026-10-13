@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "GGG",
+    "GGG"
+  ],
+  "key": {
+    "G": "frieren:leaded_glass"
+  },
+  "result": {
+    "id": "frieren:leaded_glass_pane",
+    "count": 16
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "frieren:demon_castle_bricks",
+  "result": {
+    "id": "frieren:chiseled_demon_castle_bricks",
+    "count": 1
+  }
+}

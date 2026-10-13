@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "frieren:demon_castle_bricks",
+  "result": {
+    "id": "frieren:demon_castle_brick_slab",
+    "count": 2
+  }
+}

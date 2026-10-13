@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": "frieren:association_stone_bricks"
+  },
+  "result": {
+    "id": "frieren:association_stone_brick_slab",
+    "count": 6
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    " N ",
+    "NCN",
+    "NNN"
+  ],
+  "key": {
+    "N": "minecraft:iron_nugget",
+    "C": "frieren:mana_crystal"
+  },
+  "result": {
+    "id": "frieren:mana_lantern",
+    "count": 1
+  }
+}

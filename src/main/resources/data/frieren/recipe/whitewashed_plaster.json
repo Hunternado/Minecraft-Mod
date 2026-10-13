@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    "minecraft:clay_ball",
+    "minecraft:sand",
+    "minecraft:bone_meal"
+  ],
+  "result": {
+    "id": "frieren:whitewashed_plaster",
+    "count": 4
+  }
+}

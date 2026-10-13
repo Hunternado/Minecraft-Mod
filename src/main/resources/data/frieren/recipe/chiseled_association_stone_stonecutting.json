@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "frieren:association_stone_bricks",
+  "result": {
+    "id": "frieren:chiseled_association_stone",
+    "count": 1
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": "frieren:whitewashed_plaster"
+  },
+  "result": {
+    "id": "frieren:whitewashed_plaster_stairs",
+    "count": 4
+  }
+}

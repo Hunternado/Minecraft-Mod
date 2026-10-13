@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "GGG",
+    "GNG",
+    "GGG"
+  ],
+  "key": {
+    "G": "minecraft:glass",
+    "N": "minecraft:iron_nugget"
+  },
+  "result": {
+    "id": "frieren:leaded_glass",
+    "count": 8
+  }
+}

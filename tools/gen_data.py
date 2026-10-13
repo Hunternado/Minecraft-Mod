@@ -8,6 +8,9 @@ Re-run after editing:  python3 tools/gen_data.py
 """
 import json
 import os
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import gen_building  # noqa: E402
 
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "src", "main", "resources")
 DATA = os.path.join(ROOT, "data")
@@ -401,7 +404,9 @@ def gen_recipes():
 # Tags, damage types
 # ---------------------------------------------------------------------------------------------
 def tag(rel, values, replace=False):
-    write(rel + ".json", {"replace": replace, "values": values})
+    """Writes a tag, merged with the building set's entries for the same tag (tools/gen_building.py)."""
+    merged = list(values) + [v for v in gen_building.BLOCK_TAGS.get(rel, []) if v not in values]
+    write(rel + ".json", {"replace": replace, "values": merged})
 
 
 STRUCTURES = ["mage_tower", "forgotten_library", "demon_camp", "association_outpost", "heros_statue", "sealed_shrine",
@@ -428,6 +433,9 @@ def gen_tags():
     tag("minecraft/tags/damage_type/bypasses_armor", [f"{NS}:demon_magic", f"{NS}:curse"])
     tag("minecraft/tags/damage_type/is_projectile", [f"{NS}:zoltraak"])
     tag("minecraft/tags/damage_type/witch_resistant_to", [f"{NS}:spell", f"{NS}:zoltraak"])
+    for rel in gen_building.BLOCK_TAGS:           # building-set tags the lines above do not write
+        if rel not in ("minecraft/tags/block/mineable/pickaxe", "minecraft/tags/block/mineable/axe"):
+            tag(rel, [])
 
     biomes = {
         "mage_tower": ["#minecraft:is_forest", "minecraft:plains", "minecraft:meadow", "minecraft:cherry_grove", "minecraft:taiga"],

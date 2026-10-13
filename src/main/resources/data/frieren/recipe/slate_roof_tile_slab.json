@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": "frieren:slate_roof_tiles"
+  },
+  "result": {
+    "id": "frieren:slate_roof_tile_slab",
+    "count": 6
+  }
+}

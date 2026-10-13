@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": "frieren:town_cobblestone"
+  },
+  "result": {
+    "id": "frieren:town_cobblestone_stairs",
+    "count": 4
+  }
+}

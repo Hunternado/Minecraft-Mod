@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "frieren:block/whitewashed_plaster_slab"
+    },
+    "type=top": {
+      "model": "frieren:block/whitewashed_plaster_slab_top"
+    },
+    "type=double": {
+      "model": "frieren:block/whitewashed_plaster"
+    }
+  }
+}

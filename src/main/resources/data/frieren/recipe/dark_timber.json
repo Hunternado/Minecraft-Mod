@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "L",
+    "L"
+  ],
+  "key": {
+    "L": "minecraft:stripped_dark_oak_log"
+  },
+  "result": {
+    "id": "frieren:dark_timber",
+    "count": 2
+  }
+}

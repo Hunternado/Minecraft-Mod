@@ -8,6 +8,9 @@ All text is original; character names are used only as labels.
 """
 import json
 import os
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import gen_building  # noqa: E402
 
 ROOT = os.path.join(os.path.dirname(__file__), "..", "src", "main", "resources", "assets", "frieren", "lang")
 NS = "frieren"
@@ -130,7 +133,7 @@ EFFECTS = {
 
 
 def registry_names():
-    for k, v in BLOCKS.items():
+    for k, v in {**BLOCKS, **gen_building.NAMES}.items():
         put(f"block.{NS}.{k}", v)
     for k, v in ITEMS.items():
         put(f"item.{NS}.{k}", v)
@@ -138,7 +141,10 @@ def registry_names():
         put(f"entity.{NS}.{k}", v)
     for k, v in EFFECTS.items():
         put(f"effect.{NS}.{k}", v)
-    put(f"itemGroup.{NS}.{NS}", "Frieren: Beyond Journey's End")
+    put(f"itemGroup.{NS}.frieren_magic", "Frieren: Magic & Grimoires")
+    put(f"itemGroup.{NS}.frieren_gear", "Frieren: Staffs, Weapons & Attire")
+    put(f"itemGroup.{NS}.frieren_building", "Frieren: Building")
+    put(f"itemGroup.{NS}.frieren_characters", "Frieren: Characters & Bosses")
     put(f"item.{NS}.grimoire_of", "Grimoire of %s")
     put(f"entity.{NS}.mirror_replica.of", "Reflection of %s")
 

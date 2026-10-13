@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column_horizontal",
+  "textures": {
+    "end": "frieren:block/dark_timber_top",
+    "side": "frieren:block/dark_timber"
+  }
+}

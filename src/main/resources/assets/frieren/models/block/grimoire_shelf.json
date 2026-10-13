@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "frieren:block/grimoire_shelf_top",
+    "side": "frieren:block/grimoire_shelf"
+  }
+}

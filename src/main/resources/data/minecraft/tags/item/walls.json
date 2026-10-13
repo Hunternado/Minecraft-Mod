@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "frieren:whitewashed_plaster_wall",
+    "frieren:town_cobblestone_wall",
+    "frieren:association_stone_brick_wall",
+    "frieren:elven_ruin_brick_wall",
+    "frieren:demon_castle_brick_wall"
+  ]
+}

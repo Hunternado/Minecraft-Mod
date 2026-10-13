@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "frieren:block/town_cobblestone",
+    "top": "frieren:block/town_cobblestone",
+    "side": "frieren:block/town_cobblestone"
+  }
+}

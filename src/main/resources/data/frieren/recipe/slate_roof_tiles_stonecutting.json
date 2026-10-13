@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:cobbled_deepslate",
+  "result": {
+    "id": "frieren:slate_roof_tiles",
+    "count": 1
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "frieren:block/terracotta_roof_tiles",
+    "top": "frieren:block/terracotta_roof_tiles",
+    "side": "frieren:block/terracotta_roof_tiles"
+  }
+}

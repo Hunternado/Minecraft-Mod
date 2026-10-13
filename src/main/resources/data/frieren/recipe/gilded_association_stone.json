@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    "frieren:association_stone_bricks",
+    "minecraft:gold_nugget"
+  ],
+  "result": {
+    "id": "frieren:gilded_association_stone",
+    "count": 1
+  }
+}
