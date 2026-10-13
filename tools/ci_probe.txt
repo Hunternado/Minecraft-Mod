@@ -2,3 +2,14 @@
 # Add a line when an API name needs checking against the real 26.2 classes.
 net.minecraft.client.gui.Hud|isHidden
 net.minecraft.server.level.ServerLevel|findNearestMapStructure
+# Held-item placement: the transform chain from a character's arm to the item's vertices.
+code:net.minecraft.client.renderer.entity.layers.ItemInHandLayer|submitArmWithItem
+code:net.minecraft.client.model.HumanoidModel|translateToHand
+code:net.minecraft.client.model.player.PlayerModel|translateToHand
+code:net.minecraft.client.renderer.block.model.ItemTransform|apply
+code:net.minecraft.client.renderer.item.ItemStackRenderState$LayerRenderState|submit
+code:net.minecraft.client.renderer.entity.state.ArmedEntityRenderState|extractArmedEntityRenderState
+code:net.minecraft.client.renderer.entity.LivingEntityRenderer|void submit\(
+net.minecraft.world.entity.Mob|setDropChance|DropChances
+net.minecraft.core.Registry|getValue|getOptional
+net.minecraft.world.item.ToolMaterial|static
