@@ -114,10 +114,16 @@ public class JourneyScreen extends Screen {
         }
     }
 
+    /** One stat with its glyph; long values wrap under the text instead of running into the gutter. */
     private int stat(GuiGraphicsExtractor graphics, String icon, Component text, int x, int y) {
         GrimoireUi.sprite(graphics, GrimoireUi.stat(icon), x, y, 9, 9);
-        graphics.text(this.font, GrimoireUi.plain(text), x + 13, y + 1, GrimoireUi.INK_SOFT, false);
-        return y + 12;
+        int width = bookW / 2 - 26 - 13;
+        int ly = y + 1;
+        for (FormattedCharSequence line : this.font.split(GrimoireUi.plain(text), width)) {
+            graphics.text(this.font, line, x + 13, ly, GrimoireUi.INK_SOFT, false);
+            ly += 10;
+        }
+        return Math.max(y + 12, ly + 2);
     }
 
     /** Wrapped ink text that stops at the bottom of the page; returns the next line's y. */
@@ -198,7 +204,7 @@ public class JourneyScreen extends Screen {
             boolean complete = data.questCompleted(quest.id());
             int progress = Math.min(quest.target(), data.stat(quest.stat()));
             graphics.text(this.font, complete ? "✔" : "•", left, y, complete ? GrimoireUi.INK_GREEN : GrimoireUi.INK_GOLD, false);
-            String title = this.font.plainSubstrByWidth(quest.title().getString(), width - 10);
+            String title = GrimoireUi.fit(this.font, quest.title().getString(), width - 10);
             graphics.text(this.font, title, left + 10, y, complete ? GrimoireUi.INK_GREEN : GrimoireUi.INK, false);
             y += 10;
             if (complete) {

@@ -70,7 +70,7 @@ public class TradeScreen extends Screen {
             }
             graphics.text(this.font, "→", x + 4, y + 7, GrimoireUi.INK, false);
             x = stack(graphics, offer.result(), x + 16, y + 3, mouseX, mouseY);
-            String name = this.font.plainSubstrByWidth(offer.result().getHoverName().getString(), sheetX + SHEET_W - 64 - x);
+            String name = GrimoireUi.fit(this.font, offer.result().getHoverName().getString(), sheetX + SHEET_W - 64 - x);
             graphics.text(this.font, name, x + 2, y + 7, GrimoireUi.INK, false);
         }
     }

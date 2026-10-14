@@ -145,6 +145,14 @@ public final class GrimoireUi {
         };
     }
 
+    /** Cuts text to fit {@code width}, ending in an ellipsis when anything was cut. */
+    public static String fit(Font font, String text, int width) {
+        if (font.width(text) <= width) {
+            return text;
+        }
+        return font.plainSubstrByWidth(text, Math.max(0, width - font.width("…"))).stripTrailing() + "…";
+    }
+
     /** The text without its chat colours, so it can be inked onto parchment. */
     public static Component plain(Component text) {
         return Component.literal(text.getString());

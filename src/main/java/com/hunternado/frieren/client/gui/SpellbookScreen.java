@@ -156,7 +156,7 @@ public class SpellbookScreen extends Screen {
             GrimoireUi.row(graphics, left, ry, width, ROW_HEIGHT, id.equals(selected), hovered);
             GrimoireUi.spellIcon(graphics, id, definition, left + 3, ry + 1, 16);
             Component name = definition != null ? definition.displayName() : Component.literal(id.toString());
-            String text = this.font.plainSubstrByWidth(name.getString(), width - 34);
+            String text = GrimoireUi.fit(this.font, name.getString(), width - 34);
             graphics.text(this.font, text, left + 23, ry + 5, GrimoireUi.INK, false);
             if (definition != null) {
                 GrimoireUi.sprite(graphics, GrimoireUi.gem(definition.rarity()), left + width - 10, ry + 5, 7, 7);
@@ -194,9 +194,10 @@ public class SpellbookScreen extends Screen {
             return;
         }
 
-        GrimoireUi.circle(graphics, cx, y + 18, 56);
-        GrimoireUi.spellIcon(graphics, selected, definition, cx - 16, y + 2, 32);
-        y += 40;
+        // the icon sits in the middle of a small circle; the name starts below the circle, never across it
+        GrimoireUi.circle(graphics, cx, y + 20, 44);
+        GrimoireUi.spellIcon(graphics, selected, definition, cx - 16, y + 4, 32);
+        y += 46;
         Component name = definition.displayName();
         for (FormattedCharSequence line : this.font.split(name, width)) {
             graphics.centeredText(this.font, line, cx, y, GrimoireUi.INK);
