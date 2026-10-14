@@ -591,11 +591,12 @@
 /tp @a 24.5 120.2 -1.75 -0 13
 @wait 20
 @shot portrait_ubel_back
-# Held weapons up close: the shaft must run through the fist, from above (where a gap shows first) and the side.
+# Held weapons up close: the shaft must run through the fist, from above (where a gap shows first) and from the
+# staff's side (the right).
 /tp @a 26.0 122.3 2.0 135 34
 @wait 20
 @shot held_ubel_high
-/tp @a 27.4 120.9 0.5 90 6
+/tp @a 21.6 120.9 0.5 -90 6
 @wait 20
 @shot held_ubel_side
 /tp @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player] 24.5 -300 0.5
@@ -603,7 +604,7 @@
 /tp @a 26.0 122.3 2.0 135 34
 @wait 25
 @shot held_frieren_high
-/tp @a 27.4 120.9 0.5 90 6
+/tp @a 21.6 120.9 0.5 -90 6
 @wait 20
 @shot held_frieren_side
 /tp @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player] 24.5 -300 0.5
