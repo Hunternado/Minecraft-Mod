@@ -99,22 +99,26 @@ def display(third, first):
     }
 
 
-# All items rest upright-ish in a hanging hand, gripped at y = 8 (the model centre) and held 1 px in front of the
-# arm and 1.5 px outward, so nothing runs through the arm, shoulder or face. While a character casts or attacks,
-# CharacterModel.translateToHand cancels the arm's raise at the wrist and adds an aim tilt, so staffs point at the
-# target instead of flipping back over the shoulder.
-HAND = {"translation": [1.5, 1, 1.25]}
-STAFF = display({"rotation": [80, 0, 0], **HAND, "scale": [1, 1, 1]},
+# Every item is gripped in the middle of the fist: the model centre (y = 8, where the grip is) lands on the arm's
+# centre line 8.5 px below the shoulder and 1.2 px in front of the arm's axis, inside the fist (it is 4 px deep, the
+# shafts at most 1.2 px thick), so the hand closes around it. The rotations are authored for an arm raised by pi/10,
+# as a player holds an item (HumanoidModel ArmPose.ITEM) and as CharacterModel raises an item-holding arm: at that
+# angle a staff stands up with its head leaning 10 degrees forward and clears the arm above the fist, and the
+# weapons lean 35-45 degrees, blade forward. While a character casts or attacks, CharacterModel.translateToHand
+# cancels the arm's further raise at the wrist and adds an aim tilt, so staffs point at the target instead of
+# flipping back over the shoulder.
+HAND = {"translation": [0, -0.8, 1.5]}
+STAFF = display({"rotation": [62, 0, 0], **HAND, "scale": [1, 1, 1]},
                 {"rotation": [-20, 0, 8], "translation": [3, -5, 0], "scale": [0.55, 0.55, 0.55]})
-AXE = display({"rotation": [55, 0, 0], **HAND, "scale": [1, 1, 1]},
+AXE = display({"rotation": [37, 0, 0], **HAND, "scale": [1, 1, 1]},
               {"rotation": [-10, 0, 10], "translation": [3, -5, 0], "scale": [0.6, 0.6, 0.6]})
 # A one-handed sword is held at about the size it is sheathed at (CarriedItemLayer draws the scabbard at 0.62);
 # the Demon King's greatsword stays big.
-SWORD = display({"rotation": [45, 0, 0], **HAND, "scale": [0.72, 0.72, 0.72]},
+SWORD = display({"rotation": [27, 0, 0], **HAND, "scale": [0.72, 0.72, 0.72]},
                 {"rotation": [-10, 0, 12], "translation": [3, -5, 0], "scale": [0.6, 0.6, 0.6]})
-GREATSWORD = display({"rotation": [45, 0, 0], **HAND, "scale": [0.95, 0.95, 0.95]},
+GREATSWORD = display({"rotation": [27, 0, 0], **HAND, "scale": [0.95, 0.95, 0.95]},
                      {"rotation": [-10, 0, 12], "translation": [3, -5, 0], "scale": [0.6, 0.6, 0.6]})
-SCALE = display({"rotation": [90, 0, 0], **HAND, "scale": [0.8, 0.8, 0.8]},
+SCALE = display({"rotation": [72, 0, 0], **HAND, "scale": [0.8, 0.8, 0.8]},
                 {"rotation": [0, 0, 5], "translation": [3, -4, 0], "scale": [0.55, 0.55, 0.55]})
 
 

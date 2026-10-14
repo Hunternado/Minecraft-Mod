@@ -21,6 +21,7 @@ def mat_scale(x, y, z):
 
 STAFF_AIM = math.radians(55)   # CharacterModel.STAFF_AIM
 WEAPON_AIM = math.radians(35)  # CharacterModel.WEAPON_AIM
+ITEM_RAISE = math.pi / 10      # CharacterModel.ITEM_RAISE (HumanoidModel ArmPose.ITEM): an item-holding arm's lift
 
 
 def arm_matrix(model, pose, arm, slim=False, arm_len=12, wrist=0.0):

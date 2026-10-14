@@ -16,10 +16,32 @@ from render import grid, render  # noqa: E402
 from roster import ROSTER  # noqa: E402
 
 
+def holding_pose(rig, pose, items=None, casting=False):
+    """
+    The pose with CharacterModel's item raise applied: an arm with an item in hand swings half as far and rises by
+    ITEM_RAISE (the right arm holds its weapon only in a fight when the rig carries it on the back or hip). A casting
+    right arm keeps its casting angle.
+    """
+    from held import ITEM_RAISE
+    items = items or rig.held
+    pose = {k: dict(v) for k, v in (pose or {}).items()}
+    in_hand = (bool(items[0]) and (rig.carry == "hand" or casting), bool(items[1]))
+    for name, holding in zip(("right_arm", "left_arm"), in_hand):
+        if not holding or (name == "right_arm" and casting):
+            continue
+        entry = pose.setdefault(name, {})
+        x, y, z = entry.get("rotation", (0.0, 0.0, 0.0))
+        entry["rotation"] = (x * 0.5 - ITEM_RAISE, y, z)
+    return pose
+
+
 def held_extra(rig, model, pose, items, casting=False, raised=False):
-    """Item faces for both hands; casting/raised apply the same wrist rules as CharacterModel.translateToHand."""
+    """
+    Item faces for both hands; casting/raised apply the same wrist rules as CharacterModel.translateToHand. pose
+    should already carry the item raise (holding_pose).
+    """
     import math
-    from held import STAFF_AIM, WEAPON_AIM
+    from held import ITEM_RAISE, STAFF_AIM, WEAPON_AIM
     from held import carry_matrix
     extra = []
     if rig.carry != "hand" and not casting and items[0] and items[0].startswith("frieren:"):
@@ -37,9 +59,9 @@ def held_extra(rig, model, pose, items, casting=False, raised=False):
         t = disp["thirdperson_righthand" if arm == "right" else "thirdperson_lefthand"]
         wrist = 0.0
         if arm == "right" and casting:
-            wrist = math.pi / 2 + (STAFF_AIM if key.endswith("staff") else WEAPON_AIM)
+            wrist = math.pi / 2 - ITEM_RAISE + (STAFF_AIM if key.endswith("staff") else WEAPON_AIM)
         elif arm == "left" and raised:
-            wrist = -pose["left_arm"]["rotation"][0]
+            wrist = -pose["left_arm"]["rotation"][0] - ITEM_RAISE
         am = arm_matrix(model, pose, arm, slim=rig.slim, arm_len=rig.arm_len, wrist=wrist)
         extra.append((element_faces(elements, item_matrix(am, t, arm), img.width), img))
     return extra
@@ -52,8 +74,9 @@ def sheet(name, items=None, background=(110, 150, 110, 255)):
     items = items or rig.held
     views = []
     for pose_fn, angles in ((pose_idle, (0, 40, 90, 200)), (pose_cast, (0, 60, 90)), (pose_walk, (40,))):
-        pose = pose_fn(rig)
-        extra = held_extra(rig, model, pose, items, casting=pose_fn is pose_cast)
+        casting = pose_fn is pose_cast
+        pose = holding_pose(rig, pose_fn(rig), items, casting=casting)
+        extra = held_extra(rig, model, pose, items, casting=casting)
         for yaw in angles:
             views.append(render(model, img, yaw=yaw, pitch=8, scale=6, pose=pose, extra=extra, background=background))
     return grid(views, 8)

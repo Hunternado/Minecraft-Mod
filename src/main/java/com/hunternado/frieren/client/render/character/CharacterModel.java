@@ -16,6 +16,12 @@ import net.minecraft.world.entity.HumanoidArm;
 public class CharacterModel extends EntityModel<CharacterRenderState> implements ArmedModel<CharacterRenderState> {
     /** Where ItemInHandLayer puts the grip: 10 px down the arm from the shoulder pivot. */
     private static final float HAND = 10.0F / 16.0F;
+    /**
+     * An arm holding something rises this far forward (HumanoidModel's ArmPose.ITEM: half the swing, minus pi/10),
+     * so a staff gripped in the fist stands clear of the arm above it. The held models' display transforms are
+     * authored for this raised arm, the same one a player holds them with (tools/gen_held_items.py).
+     */
+    private static final float ITEM_RAISE = Mth.PI / 10.0F;
     /** While casting, a staff's tip tilts this far toward the target (55 degrees past upright)... */
     private static final float STAFF_AIM = 55.0F * Mth.DEG_TO_RAD;
     /** ...and a weapon this far (35 degrees), which levels a sword or axe in front of the character. */
@@ -98,6 +104,12 @@ public class CharacterModel extends EntityModel<CharacterRenderState> implements
         leftLeg.xRot = Mth.cos(walk + Mth.PI) * 1.4F * amount * legScale;
         rightArm.xRot = Mth.cos(walk + Mth.PI) * 0.9F * amount;
         leftArm.xRot = Mth.cos(walk) * 0.9F * amount;
+        if (!state.rightHandItemState.isEmpty()) {
+            rightArm.xRot = rightArm.xRot * 0.5F - ITEM_RAISE;
+        }
+        if (!state.leftHandItemState.isEmpty()) {
+            leftArm.xRot = leftArm.xRot * 0.5F - ITEM_RAISE;
+        }
 
         float breathe = Mth.sin(time * 0.067F) * 0.05F;
         rightArm.zRot += breathe + 0.05F;
@@ -166,10 +178,10 @@ public class CharacterModel extends EntityModel<CharacterRenderState> implements
 
     /**
      * Same placement as a player's hand ({@code PlayerModel.translateToHand}): root, then the arm, slim arms nudged
-     * half a pixel toward the body, shorter arms moving the grip up. Items rest upright in a hanging hand, which
-     * would flip them back over the shoulder once the arm rises, so the wrist turns: while casting or swinging,
-     * the arm's nominal raise is cancelled at the hand and an aim tilt added (the swing itself still moves the
-     * item); Aura's raised left hand keeps the scale upright.
+     * half a pixel toward the body, shorter arms moving the grip up. Items stand upright in the fist of an arm
+     * raised by {@link #ITEM_RAISE}, which would flip them back over the shoulder once the arm rises further, so
+     * the wrist turns: while casting or swinging, the arm's nominal raise is cancelled at the hand and an aim tilt
+     * added (the swing itself still moves the item); Aura's raised left hand keeps the scale upright.
      */
     @Override
     public void translateToHand(CharacterRenderState state, HumanoidArm arm, PoseStack poseStack) {
@@ -186,11 +198,13 @@ public class CharacterModel extends EntityModel<CharacterRenderState> implements
         if (kind.armLength() != 12.0F) {
             poseStack.translate(0.0F, (kind.armLength() - 12.0F) / 16.0F, 0.0F);
         }
+        // The display transforms stand an item upright at an arm raised by ITEM_RAISE; the wrist turns any other
+        // arm angle back to that (and then tilts by the aim while casting or swinging).
         float wrist = 0.0F;
         if (arm == HumanoidArm.RIGHT && (state.casting || state.attack > 0.0F) && !state.statue) {
-            wrist = Mth.HALF_PI + (state.holdingStaff ? STAFF_AIM : WEAPON_AIM);
+            wrist = Mth.HALF_PI - ITEM_RAISE + (state.holdingStaff ? STAFF_AIM : WEAPON_AIM);
         } else if (arm == HumanoidArm.LEFT && state.raisedArm) {
-            wrist = -leftArm.xRot;
+            wrist = -leftArm.xRot - ITEM_RAISE;
         }
         if (wrist != 0.0F) {
             poseStack.translate(0.0F, HAND, 0.0F);

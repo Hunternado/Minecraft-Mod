@@ -485,14 +485,14 @@
   "display": {
     "thirdperson_righthand": {
       "rotation": [
-        80,
+        62,
         0,
         0
       ],
       "translation": [
-        1.5,
-        1,
-        1.25
+        0,
+        -0.8,
+        1.5
       ],
       "scale": [
         1,
@@ -502,14 +502,14 @@
     },
     "thirdperson_lefthand": {
       "rotation": [
-        80,
+        62,
         0,
         0
       ],
       "translation": [
-        1.5,
-        1,
-        1.25
+        0,
+        -0.8,
+        1.5
       ],
       "scale": [
         1,

@@ -591,6 +591,21 @@
 /tp @a 24.5 120.2 -1.75 -0 13
 @wait 20
 @shot portrait_ubel_back
+# Held weapons up close: the shaft must run through the fist, from above (where a gap shows first) and the side.
+/tp @a 26.0 122.3 2.0 135 34
+@wait 20
+@shot held_ubel_high
+/tp @a 27.4 120.9 0.5 90 6
+@wait 20
+@shot held_ubel_side
+/tp @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player] 24.5 -300 0.5
+/summon frieren:frieren 24.5 120 0.5 {NoAI:1b,Rotation:[0f,0f]}
+/tp @a 26.0 122.3 2.0 135 34
+@wait 25
+@shot held_frieren_high
+/tp @a 27.4 120.9 0.5 90 6
+@wait 20
+@shot held_frieren_side
 /tp @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player] 24.5 -300 0.5
 # 3.0: Frieren meets Aura. Within four chunks of each other the scene plays itself out: the scales, the reveal,
 # "Aura, kill yourself." The chat shows the lines.

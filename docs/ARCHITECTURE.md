@@ -158,7 +158,9 @@ tools/                              Python generators for every resource file + 
   Frieren's front face is a fully custom pixel template.
 * **Held items (2.1).** `CharacterModel` implements `ArmedModel` and `CharacterRenderer` adds the vanilla
   `ItemInHandLayer`:
-  * `translateToHand` places items exactly like `PlayerModel` does (checked against the 26.2 bytecode).
+  * `translateToHand` places items exactly like `PlayerModel` does (checked against the 26.2 bytecode), and an
+    item-holding arm rises by pi/10 like a player's (`HumanoidModel` ArmPose.ITEM); the held models' display
+    transforms are authored for that raised arm, with the grip in the middle of the fist.
   * While casting or swinging, the wrist cancels the arm's nominal raise and adds an aim tilt (55° for staffs,
     35° for weapons). Otherwise upright items would flip back over the shoulder.
   * `CharacterKind` carries each character's signature items. The renderer draws them only when the entity's

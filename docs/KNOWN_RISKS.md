@@ -87,6 +87,7 @@ What the showcase has confirmed in a running client (with screenshots):
 | "Defeat Linie, Draht and Lügner" counting any three general kills | code review | killing Linie three times passed the quest |
 | Staffs and weapons baked into the arm model, pivoting in the hand | player report (screenshot) | Frieren's staff ran through her arm and out of her shoulder |
 | An upright held item rotating with a raised arm | held-item preview (tools/preview_held.py) | casting would have flipped staffs back over the shoulder; the wrist now turns |
+| Held items gripped 1 px outside the fist to keep shafts off a hanging arm | player report (screenshot) | Übel's staff, and every other weapon, floated next to the hand instead of in it |
 | Shadows as plain RGB multiplies on silver hair | player report (screenshot) | Frieren's hair read as dull grey |
 | A local redeclared in a nested block of `AuraEntity.aiStep` | tools/javac/DuplicateLocals.java (written for it) | a compile error only CI could see |
 | `BlockTags.COAL_ORES` and friends (26.2 ships them as data-only tags) | CI compile | ore sense and growth spells did not build; `check_members.py` written for it |
