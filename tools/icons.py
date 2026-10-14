@@ -133,6 +133,26 @@ def staff_guillotine():
 # ---------------------------------------------------------------------------------------------
 # Weapons
 # ---------------------------------------------------------------------------------------------
+def staff_ubel():
+    """Übel's black spear-staff: twin curved blades and a lightning-bolt tip, drawn on the diagonal."""
+    img = Image(16, 16)
+    shaft, shaft_l = hex_color("#1E1C24"), hex_color("#4A4652")
+    steel, edge = hex_color("#B8BEC8"), hex_color("#EEF2F8")
+    for i in range(10):                                   # the shaft, lower-left to the collar
+        img.set(2 + i, 13 - i, shaft)
+        img.set(2 + i, 14 - i, shaft_l if i % 3 == 0 else shaft)
+    for (x, y) in ((10, 6), (9, 4), (9, 3), (10, 2)):     # left blade
+        img.set(x, y, steel)
+    for (x, y) in ((12, 5), (13, 4), (14, 4), (14, 3)):   # right blade
+        img.set(x, y, steel)
+    img.set(10, 1, edge)
+    img.set(15, 2, edge)
+    for (x, y) in ((12, 3), (13, 2), (12, 2), (13, 1), (14, 0)):   # the zigzag tip
+        img.set(x, y, edge if (x + y) % 2 else steel)
+    img.outline_shape(OUTLINE)
+    return img
+
+
 def sword(blade, edge, guard, grip, pommel, long=True):
     img = Image(16, 16)
     e, b, d = ramp(edge, 1.15, 1.0, 1.0)[0], ramp(blade, 1.0)[0], ramp(blade, 0.72)[0]

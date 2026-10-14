@@ -47,6 +47,7 @@ public final class ModRenderers {
         character(event, ModEntities.FERN.get(), CharacterKind.FERN, 0.5F);
         character(event, ModEntities.STARK.get(), CharacterKind.STARK, 0.5F);
         character(event, ModEntities.SERIE.get(), CharacterKind.SERIE, 0.5F);
+        character(event, ModEntities.UBEL.get(), CharacterKind.UBEL, 0.5F);
         character(event, ModEntities.MANA_DECOY.get(), CharacterKind.MANA_DECOY, 0.0F);
         event.registerEntityRenderer(ModEntities.MIMIC.get(), MimicRenderer::new);
         event.registerEntityRenderer(ModEntities.STILLE.get(), StilleRenderer::new);

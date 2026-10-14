@@ -19,7 +19,9 @@ public class StaffItem extends Item {
         APPRENTICE("apprentice", 1.00F, 1.00F, 1.00F),
         MAGE("mage", 0.90F, 0.90F, 1.15F),
         SAGE("sage", 0.80F, 0.80F, 1.30F),
-        GUILLOTINE("guillotine", 0.75F, 0.75F, 1.50F);
+        GUILLOTINE("guillotine", 0.75F, 0.75F, 1.50F),
+        /** Übel's spear-staff: not the strongest focus, but the quickest. */
+        UBEL("ubel", 0.85F, 0.65F, 1.35F);
 
         private final String id;
         private final float costMultiplier;

@@ -182,6 +182,26 @@ def guillotine_staff(a):
     ]
 
 
+def ubel_staff(a):
+    """Übel's staff: a black spear shaft, twin curved blades sweeping up from the collar, and a lightning-bolt tip."""
+    shaft, steel, dark, edge = "#1E1C24", "#B8BEC8", "#3A3842", "#E6EAF2"
+    return [
+        box(a, (7.25, -4, 7.25), (8.75, 19.5, 8.75), "shaft", shaft, "grain"),
+        box(a, (7.0, -4.5, 7.0), (9.0, -3.5, 9.0), "steel", steel, "metal"),            # ferrule
+        box(a, (6.75, 18.0, 6.75), (9.25, 20.0, 9.25), "dark", dark, "metal"),           # collar
+        box(a, (4.75, 19.0, 7.6), (6.75, 20.0, 8.4), "steel", steel, "metal"),           # left blade sweeping out and up
+        box(a, (3.75, 20.0, 7.6), (5.0, 22.5, 8.4), "steel", steel, "metal"),
+        box(a, (4.25, 22.5, 7.6), (5.25, 24.25, 8.4), "edge", edge, "metal"),
+        box(a, (9.25, 19.0, 7.6), (11.25, 20.0, 8.4), "steel", steel, "metal"),          # right blade
+        box(a, (11.0, 20.0, 7.6), (12.25, 22.5, 8.4), "steel", steel, "metal"),
+        box(a, (10.75, 22.5, 7.6), (11.75, 24.25, 8.4), "edge", edge, "metal"),
+        box(a, (7.25, 20.0, 7.5), (8.75, 22.5, 8.5), "steel", steel, "metal"),           # the lightning tip, zigzagging up
+        box(a, (7.75, 22.5, 7.5), (9.5, 24.0, 8.5), "steel", steel, "metal"),
+        box(a, (6.75, 24.0, 7.5), (8.5, 25.5, 8.5), "steel", steel, "metal"),
+        box(a, (7.5, 25.5, 7.6), (8.5, 27.0, 8.4), "edge", edge, "metal"),
+    ]
+
+
 def warriors_axe(a):
     """Stark's axe (once Eisen's): a broad bearded blade, dark steel inside a bright rim, a spiked top on a long
     haft with leather wraps."""
@@ -271,6 +291,7 @@ ITEMS = {
     "mage_staff": (mage_staff, STAFF, 4.75),
     "apprentice_staff": (apprentice_staff, STAFF, 5.0),
     "guillotine_staff": (guillotine_staff, STAFF, 5.0),
+    "ubel_staff": (ubel_staff, STAFF, 4.75),
     "warriors_axe": (warriors_axe, AXE, 2.0),
     "heros_sword": (heros_sword, SWORD, 3.0),
     "demon_kings_blade": (demon_kings_blade, GREATSWORD, 4.0),

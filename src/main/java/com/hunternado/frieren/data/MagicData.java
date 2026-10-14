@@ -92,6 +92,7 @@ public final class MagicData {
     private boolean serieImpressed;
     private boolean ubelDefeated;
     private long serieLetterReadyAt;
+    private long ubelReturnAt;
     private long concealedSince = -1L;
     private long flareUntil;
     private boolean flaring;
@@ -475,6 +476,10 @@ public final class MagicData {
     public void setSerieImpressed(boolean value) { this.serieImpressed = value; markDirty(); }
     public boolean ubelDefeated() { return ubelDefeated; }
     public void setUbelDefeated(boolean value) { this.ubelDefeated = value; markDirty(); }
+    /** Game time at which a retreated Übel comes back to this mage (0 = she is not away). */
+    public long ubelReturnAt() { return ubelReturnAt; }
+    public void setUbelReturnAt(long time) { this.ubelReturnAt = time; }
+
     /** Game time after which Serie's letter can summon her again. */
     public long serieLetterReadyAt() { return serieLetterReadyAt; }
     public void setSerieLetterReadyAt(long time) { this.serieLetterReadyAt = time; }
@@ -587,6 +592,7 @@ public final class MagicData {
         tag.putBoolean("serieImpressed", serieImpressed);
         tag.putBoolean("ubelDefeated", ubelDefeated);
         tag.putLong("serieLetterReadyAt", serieLetterReadyAt);
+        tag.putLong("ubelReturnAt", ubelReturnAt);
         if (lastDeathDimension != null && lastDeathPos != null) {
             tag.putString("deathDim", lastDeathDimension);
             tag.putLong("deathPos", lastDeathPos.asLong());
@@ -680,6 +686,7 @@ public final class MagicData {
         serieImpressed = tag.getBooleanOr("serieImpressed", false);
         ubelDefeated = tag.getBooleanOr("ubelDefeated", false);
         serieLetterReadyAt = tag.getLongOr("serieLetterReadyAt", 0L);
+        ubelReturnAt = tag.getLongOr("ubelReturnAt", 0L);
         if (tag.contains("deathDim")) {
             lastDeathDimension = tag.getStringOr("deathDim", "");
             lastDeathPos = BlockPos.of(tag.getLongOr("deathPos", 0L));

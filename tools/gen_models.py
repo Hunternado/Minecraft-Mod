@@ -22,7 +22,7 @@ TEXTURES = os.path.join(REPO, "src/main/resources/assets/frieren/textures/entity
 ITEM_TEXTURES = os.path.join(REPO, "src/main/resources/assets/frieren/textures/item")
 
 # Spawn eggs whose icon is the character's face (the rest are drawn in gen_assets.py).
-FACE_EGGS = ("frieren", "examiner", "wandering_mage", "priest", "demon_soldier", "demon_mage", "linie", "draht", "lugner")
+FACE_EGGS = ("frieren", "examiner", "wandering_mage", "priest", "demon_soldier", "demon_mage", "linie", "draht", "lugner", "ubel")
 _PORTRAIT_HIDDEN = ("body", "right_arm", "left_arm", "right_leg", "left_leg", "hair_back", "lock_left", "lock_right",
                     "tail_left", "tail_right")
 

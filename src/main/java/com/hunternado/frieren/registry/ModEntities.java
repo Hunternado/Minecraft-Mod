@@ -27,6 +27,7 @@ import com.hunternado.frieren.entity.npc.ExaminerEntity;
 import com.hunternado.frieren.entity.npc.FrierenEntity;
 import com.hunternado.frieren.entity.npc.PriestEntity;
 import com.hunternado.frieren.entity.npc.SerieEntity;
+import com.hunternado.frieren.entity.npc.UbelEntity;
 import com.hunternado.frieren.entity.npc.WanderingMageEntity;
 import com.hunternado.frieren.entity.statue.HeroStatueEntity;
 import com.hunternado.frieren.entity.statue.HimmelEchoEntity;
@@ -118,6 +119,8 @@ public final class ModEntities {
         EntityType.Builder.of(CompanionEntity::stark, MobCategory.CREATURE), b -> b.sized(0.65F, 1.95F).clientTrackingRange(10));
     public static final RegistryObject<EntityType<SerieEntity>> SERIE = register("serie",
         EntityType.Builder.of(SerieEntity::new, MobCategory.CREATURE), b -> b.sized(0.55F, 1.7F).clientTrackingRange(10));
+    public static final RegistryObject<EntityType<UbelEntity>> UBEL = register("ubel",
+        EntityType.Builder.of(UbelEntity::new, MobCategory.CREATURE), b -> b.sized(0.55F, 1.75F).clientTrackingRange(10));
 
     // ---- Magic constructs ----------------------------------------------------------------------
     public static final RegistryObject<EntityType<ManaBoltEntity>> MANA_BOLT = register("mana_bolt",
@@ -172,6 +175,7 @@ public final class ModEntities {
         event.put(FERN.get(), CompanionEntity.createAttributes().build());
         event.put(STARK.get(), CompanionEntity.createAttributes().build());
         event.put(SERIE.get(), SerieEntity.createAttributes().build());
+        event.put(UBEL.get(), UbelEntity.createAttributes().build());
         event.put(MANA_DECOY.get(), ManaDecoyEntity.createAttributes().build());
     }
 

@@ -47,7 +47,7 @@ public final class ModCreativeTabs {
         .withTabsBefore(MAGIC.getKey())
         .icon(() -> new ItemStack(ModItems.SAGES_STAFF.get()))
         .displayItems((parameters, output) -> accept(output, List.of(ModItems.APPRENTICE_STAFF, ModItems.MAGE_STAFF,
-            ModItems.SAGES_STAFF, ModItems.GUILLOTINE_STAFF, ModItems.WARRIORS_AXE, ModItems.HEROS_SWORD,
+            ModItems.SAGES_STAFF, ModItems.GUILLOTINE_STAFF, ModItems.UBEL_STAFF, ModItems.WARRIORS_AXE, ModItems.HEROS_SWORD,
             ModItems.DEMON_KINGS_BLADE, ModItems.MAGE_HAT, ModItems.MAGE_COAT, ModItems.MAGE_TROUSERS, ModItems.MAGE_BOOTS,
             ModItems.MIRROR_LOTUS_RING, ModItems.CONCEALMENT_CHARM, ModItems.DEMON_HUNTER_INSIGNIA,
             ModItems.SCALE_OF_OBEDIENCE)))
@@ -73,7 +73,7 @@ public final class ModCreativeTabs {
         .displayItems((parameters, output) -> accept(output, List.of(ModItems.FRIEREN_SPAWN_EGG, ModItems.EXAMINER_SPAWN_EGG,
             ModItems.PRIEST_SPAWN_EGG, ModItems.WANDERING_MAGE_SPAWN_EGG, ModItems.STILLE_SPAWN_EGG, ModItems.MIMIC_SPAWN_EGG,
             ModItems.DEMON_SOLDIER_SPAWN_EGG, ModItems.DEMON_MAGE_SPAWN_EGG, ModItems.AURA_THRALL_SPAWN_EGG,
-            ModItems.LINIE_SPAWN_EGG, ModItems.DRAHT_SPAWN_EGG, ModItems.LUGNER_SPAWN_EGG,
+            ModItems.LINIE_SPAWN_EGG, ModItems.DRAHT_SPAWN_EGG, ModItems.LUGNER_SPAWN_EGG, ModItems.UBEL_SPAWN_EGG,
             ModItems.SIGIL_OF_THE_GUILLOTINE, ModItems.SEAL_OF_CORRUPTION, ModItems.SEAL_OF_THE_GOLDEN_LAND,
             ModItems.SEAL_OF_THE_DEMON_KING, ModItems.MIRROR_SHARD, ModItems.GUILLOTINE_BLADE, ModItems.DEMON_HORN)))
         .build());

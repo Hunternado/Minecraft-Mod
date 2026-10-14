@@ -59,6 +59,7 @@ public final class ModItems {
     public static final RegistryObject<Item> MAGE_STAFF = staff("mage_staff", StaffItem.Tier.MAGE, Rarity.UNCOMMON);
     public static final RegistryObject<Item> SAGES_STAFF = staff("sages_staff", StaffItem.Tier.SAGE, Rarity.RARE);
     public static final RegistryObject<Item> GUILLOTINE_STAFF = staff("guillotine_staff", StaffItem.Tier.GUILLOTINE, Rarity.EPIC);
+    public static final RegistryObject<Item> UBEL_STAFF = staff("ubel_staff", StaffItem.Tier.UBEL, Rarity.EPIC);
 
     // Weapons the cast carries (drawn in their hands; players can craft or win them)
     public static final RegistryObject<Item> WARRIORS_AXE = simple("warriors_axe",
@@ -117,6 +118,7 @@ public final class ModItems {
     public static final RegistryObject<Item> LINIE_SPAWN_EGG = spawnEgg("linie_spawn_egg", ModEntities.LINIE);
     public static final RegistryObject<Item> DRAHT_SPAWN_EGG = spawnEgg("draht_spawn_egg", ModEntities.DRAHT);
     public static final RegistryObject<Item> LUGNER_SPAWN_EGG = spawnEgg("lugner_spawn_egg", ModEntities.LUGNER);
+    public static final RegistryObject<Item> UBEL_SPAWN_EGG = spawnEgg("ubel_spawn_egg", ModEntities.UBEL);
 
     private ModItems() {}
 

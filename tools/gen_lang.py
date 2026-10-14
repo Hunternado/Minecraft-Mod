@@ -52,6 +52,7 @@ ITEMS = {
     "mage_staff": "Mage Staff",
     "sages_staff": "Sage's Staff",
     "guillotine_staff": "Staff of the Guillotine",
+    "ubel_staff": "Übel's Staff",
     "warriors_axe": "Warrior's Axe",
     "heros_sword": "Replica of the Hero's Sword",
     "demon_kings_blade": "Blade of the Demon King",
@@ -87,6 +88,7 @@ ITEMS = {
     "linie_spawn_egg": "Linie Spawn Egg",
     "draht_spawn_egg": "Draht Spawn Egg",
     "lugner_spawn_egg": "Lügner Spawn Egg",
+    "ubel_spawn_egg": "Übel Spawn Egg",
     "wandering_mage_spawn_egg": "Wandering Mage Spawn Egg",
     "examiner_spawn_egg": "Association Examiner Spawn Egg",
     "priest_spawn_egg": "Priest Spawn Egg",
@@ -105,6 +107,7 @@ ENTITIES = {
     "linie": "Linie the Imitator",
     "draht": "Draht the Wire",
     "lugner": "Lügner the Liar",
+    "ubel": "Übel",
     "exam_construct": "Exam Construct",
     "hero_statue": "Statue of Himmel the Hero",
     "himmel_echo": "Himmel",
@@ -312,6 +315,7 @@ def tooltips():
     t("staff_none", "No focus.")
     for tier in ("apprentice", "mage", "sage", "guillotine"):
         t(f"staff_{tier}", "A spellcasting focus. Hold it in either hand while casting.")
+    t("staff_ubel", "Übel's spare: a black spear-staff with twin blades. \"It's sharp. That's the point.\"")
     t("staff_stats", "-%s%% mana cost, -%s%% cooldown, +%s%% spell power")
     t("sigil_aura", "Summons Aura the Guillotine.")
     t("sigil_qual", "Summons Qual the Corruptor.")
@@ -556,6 +560,28 @@ def bosses_and_npcs():
             put(f"npc.{NS}.{npc_id}.line.{i}", v)
     put(f"npc.{NS}.priest.heal", "The Goddess's light washes over you.")
     put(f"npc.{NS}.serie.interview", "Serie studies you for a long time. Then she makes up her mind.")
+    u = lambda k, v: put(f"npc.{NS}.ubel.{k}", v)
+    for i, v in enumerate(["Hm? You look like you'd be fun to cut.", "Don't stare. Or do; I don't mind.",
+                           "Want to play? Hit me and we'll see who's sharper.",
+                           "I can cut anything I can imagine being cut. Can you imagine what that means for you?"]):
+        u(f"wild.{i}", v)
+    for i, v in enumerate(["Where are we going next? Somewhere fun?", "You're interesting. I've decided to stay interested.",
+                           "If something annoys you, just point. I'll cut it.", "Don't wander off without me.",
+                           "Hehe. You smell like mana and bad decisions. I like it.",
+                           "I copied a spell by understanding someone once. I wonder what I'd learn from you."]):
+        u(f"clingy.{i}", v)
+    u("stay", "Fine, I'll wait here. Don't make me wait long.")
+    u("follow", "Finally. Let's go.")
+    u("taken", "Sorry, I'm already following someone. They're more fun than you.")
+    u("dueling", "Busy. Wait your turn.")
+    u("duel_start", "Oh? You want to play? Don't hold back. I won't.")
+    u("duel_bored", "You ran away? Boring.")
+    u("yield", "Ahaha! Okay, okay, you win. You're fun. I think I'll follow you around for a while.")
+    u("gift_grimoire", "Übel scribbles her Reelseiden into a grimoire and presses it into your hands, along with her spare staff.")
+    u("gift_later", "\"You can't use it yet? Then get stronger. Come find me as a %s.\"")
+    u("retreat", "Ugh, that hurt. I'm going to go lick my wounds. I'll find you again tomorrow.")
+    u("returned", "Did you miss me? Of course you did.")
+    u("caught_up", "Hey! Don't leave me behind.")
 
 
 def exams():

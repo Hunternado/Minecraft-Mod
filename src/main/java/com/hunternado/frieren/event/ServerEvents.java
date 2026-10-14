@@ -3,6 +3,7 @@ package com.hunternado.frieren.event;
 import com.hunternado.frieren.combat.ObedienceTracker;
 import com.hunternado.frieren.command.FrierenCommand;
 import com.hunternado.frieren.entity.npc.FrierenEntity;
+import com.hunternado.frieren.entity.npc.UbelEntity;
 import com.hunternado.frieren.network.FrierenNetwork;
 import com.hunternado.frieren.spell.SpellManager;
 import net.minecraft.server.level.ServerLevel;
@@ -49,6 +50,9 @@ public final class ServerEvents {
         }
         if (level.getGameTime() % TRAVELLER_INTERVAL == 12000L) {
             FrierenEntity.trySpawnTravellingParty(level);
+        }
+        if (level.getGameTime() % TRAVELLER_INTERVAL == 18000L) {
+            UbelEntity.dailyCheck(level);
         }
     }
 

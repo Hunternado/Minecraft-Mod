@@ -1,5 +1,6 @@
 package com.hunternado.frieren.data;
 
+import com.hunternado.frieren.entity.npc.UbelEntity;
 import com.hunternado.frieren.exam.ExamManager;
 import com.hunternado.frieren.mana.ManaHelper;
 import com.hunternado.frieren.network.FrierenNetwork;
@@ -52,6 +53,9 @@ public final class MagicDataEvents {
         ManaHelper.serverTick(player, data);
         SpellCaster.serverTick(player, data);
         ExamManager.tick(player, data);
+        if (player.tickCount % 100 == 0) {
+            UbelEntity.tickReturn(player.level(), player, data);
+        }
 
         if (data.fullSyncNeeded()) {
             FrierenNetwork.syncFull(player, data);

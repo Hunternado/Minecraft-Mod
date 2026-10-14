@@ -2807,6 +2807,125 @@ def hero_statue():
     return rig
 
 
+def ubel():
+    """
+    Übel, First-Class exam candidate: dark green hair with a fringe split into three locks and one thick side
+    ponytail tied low on her left and falling over the shoulder; droopy purple eyes with heavy lashes and a lazy smile.
+    A snug black corset dress held up by four thin straps that meet at a silver ring on her choker, a front-clasped
+    belt and a pleated skirt; bare arms with a black band on the left arm and a long black glove on the right;
+    knee-high black boots. Her black spear-staff (frieren:ubel_staff) has twin curved blades under a lightning tip.
+    """
+    skin = hexc("#F7E1D3")
+    hair_c = hexc("#33493C")
+    eye = hexc("#8A5CB8")
+    black = hexc("#23212A")
+    black_l = shade(black, 1.35)
+    silver = hexc("#C6CAD4")
+    boot = hexc("#1C1B22")
+    rig = Rig("ubel", render_scale=0.94)
+
+    # The fringe in three locks: a short centre lock and two longer ones either side, parted at columns 5 and 10.
+    depth = [12, 11, 6, 7, 7, 3, 6, 7, 7, 6, 3, 7, 7, 6, 11, 12]
+    head, shell = soft_head(rig, skin, hair_c, eye,
+                            face=dict(style="calm", eye_y=8, depth=depth, lash=hexc("#1E1A24"), mouth="smile",
+                                      brow=shade(hair_c, 0.8)),
+                            side_rows=12, side_tips=4, back_rows=13, back_tips=4, fringe_tips=3, fringe_period=5,
+                            fringe_rows=4, part_col=None, seed=151)
+
+    def body(cv, f):
+        for name, r in f.items():
+            fill(cv, r, black, gradient=0.06)
+        r = f["front"]
+        w = r[2]
+        # bare shoulders and upper chest above the corset's straight neckline, the choker on top
+        for name in ("front", "back", "left", "right"):
+            q = f[name]
+            fill(cv, sub(q, 0, 0, q[2], 6), skin)
+            hline(cv, q, 0, black)
+            hline(cv, q, 1, black)
+        cv.rect(r[0] + w // 2 - 1, r[1] + 1, 2, 2, silver)                  # the ring on the choker
+        cv.px(r[0] + w // 2 - 1, r[1] + 1, shade(silver, 1.2))
+
+        def strap(x0, y0, x1, y1):
+            steps = max(abs(x1 - x0), abs(y1 - y0))
+            for k in range(steps + 1):
+                cv.px(r[0] + round(x0 + (x1 - x0) * k / steps), r[1] + round(y0 + (y1 - y0) * k / steps), black)
+        for side in (0, 1):                                                 # four straps from the neckline up to the ring
+            mx = (lambda x: x) if side == 0 else (lambda x: w - 1 - x)
+            strap(mx(w // 2 - 5), 5, mx(w // 2 - 2), 2)
+            strap(mx(w // 2 - 2), 5, mx(w // 2 - 1), 3)
+        b = f["back"]
+        for x0 in (3, b[2] - 4):                                            # the straps cross the back to the corset
+            for y in range(2, 6):
+                cv.px(b[0] + x0, b[1] + y, black)
+        hline(cv, r, 6, black_l)                                            # neckline edge
+        for name in ("front", "back", "left", "right"):                     # the belt
+            fill(cv, sub(f[name], 0, 15, f[name][2], 2), shade(black, 0.8))
+        cv.rect(r[0] + w // 2 - 1, r[1] + 15, 2, 2, silver)                 # front clasp
+        for y in range(8, 15, 2):                                           # corset seams
+            cv.px(r[0] + 4, r[1] + y, black_l)
+            cv.px(r[0] + w - 5, r[1] + y, black_l)
+
+    def skirt(cv, f):
+        for name, r in f.items():
+            if name == "bottom":
+                fill(cv, r, shade(black, 0.7))
+                continue
+            fill(cv, r, black, gradient=0.08)
+            if name != "top":
+                for x in range(1, r[2], 3):                                 # pleats
+                    vline(cv, r, x, black_l, y_from=1)
+                hline(cv, r, r[3] - 1, shade(black, 0.75))
+
+    def legs(cv, f):
+        for name, r in f.items():
+            if name == "top":
+                fill(cv, r, skin)
+                continue
+            if name == "bottom":
+                fill(cv, r, shade(boot, 0.6))
+                continue
+            fill(cv, r, skin, noise=0.015)
+            fill(cv, sub(r, 0, 9, r[2], r[3] - 9), boot, gradient=0.06)     # knee-high boots
+            hline(cv, r, 9, shade(boot, 1.6))
+            hline(cv, r, r[3] - 1, shade(boot, 0.6))
+
+    def right_arm(cv, f):
+        # the long black glove reaching above the elbow
+        for i, (name, r) in enumerate(f.items()):
+            fill(cv, r, skin, noise=0.015, seed=161 + i)
+            if name != "top":
+                fill(cv, sub(r, 0, 4, r[2], r[3] - 4), black, gradient=0.05)
+                hline(cv, r, 4, black_l)
+
+    def left_arm(cv, f):
+        for i, (name, r) in enumerate(f.items()):
+            fill(cv, r, skin, noise=0.015, seed=171 + i)
+            if name not in ("top", "bottom"):
+                fill(cv, sub(r, 0, 3, r[2], 2), black)                      # the band on her upper arm
+                hline(cv, r, 3, silver)
+
+    painters = {"head": head, "hat": shell, "body": body, "right_arm": right_arm, "left_arm": left_arm,
+                "right_leg": legs, "left_leg": legs}
+    humanoid(rig, painters, slim=True)
+
+    # One thick side ponytail tied low on her left, falling forward over the shoulder and down to the chest.
+    tail = hair_painter(hair_c, seed=152, highlight_row=2, soft=True)
+    chain(rig, ("tail_left", "tail_left_2", "tail_left_3"),
+          ((4.4, -3.2, 0.6), (0, 4.5, 0), (0, 4.0, 0)), ((-0.25, 0, -0.18), (-0.2, 0, 0.12), (-0.1, 0, 0.08)))
+    rig.box("tail_left", -1.75, -0.5, -1.75, 3.5, 5.0, 3.5, tail)
+    rig.box("tail_left_2", -1.6, 0, -1.6, 3.2, 4.5, 3.2, hair_painter(shade(hair_c, 0.97), seed=153, highlight_row=None, soft=True))
+    rig.box("tail_left_3", -1.25, 0, -1.25, 2.5, 3.5, 2.5,
+            hair_painter(shade(hair_c, 0.94), seed=154, highlight_row=None, tips=3, bottom=False, soft=True))
+    rig.box("tail_left", -1.4, -1.4, -1.4, 2.8, 1.0, 2.8, cloth_painter(black))          # the tie
+
+    # The pleated skirt to mid-thigh.
+    rig.pose("skirt", offset=(0, 11, 0))
+    rig.box("skirt", -4.5, 0, -2.5, 9, 4.5, 5, skirt)
+    rig.held = ("frieren:ubel_staff", None)
+    return rig
+
+
 ROSTER = {
     "frieren": frieren,
     "fern": fern,
@@ -2833,4 +2952,5 @@ ROSTER = {
     "spiegel": spiegel,
     "mana_decoy": mana_decoy,
     "hero_statue": hero_statue,
+    "ubel": ubel,
 }

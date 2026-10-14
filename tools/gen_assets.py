@@ -414,6 +414,7 @@ ITEM_ICONS = {
     "legendary_grimoire": lambda: icons.grimoire("#6A2C70", "#F3D27A", "#FFB7F0"),
     "demon_grimoire": lambda: icons.grimoire("#5A1020", "#8E8E9A", "#E0405A"),
     "forbidden_grimoire": lambda: icons.grimoire("#1E1030", "#9B2D6F", "#C9A0FF"),
+    "ubel_staff": icons.staff_ubel,
     "mythic_grimoire": lambda: icons.grimoire("#2A1408", "#F3D27A", "#FFB040"),
     "sealed_demon_grimoire": lambda: icons.grimoire("#5A1020", "#8E8E9A", "#E0405A", chains=True),
     "sealed_exam_grimoire": lambda: icons.grimoire("#1F3A6B", "#D04050", "#F3D27A", chains=True),
@@ -462,6 +463,7 @@ SPAWN_EGGS = {
     "linie": ("#3A2232", "#D04A8A"),
     "draht": ("#2A2A36", "#E8E8F0"),
     "lugner": ("#2A1018", "#B0102A"),
+    "ubel": ("#23212A", "#3A8A6A"),
 }
 
 def mimic_egg():
@@ -502,7 +504,7 @@ def aura_thrall_egg():
 
 CREATURE_EGGS = {"mimic": mimic_egg, "stille": stille_egg, "aura_thrall": aura_thrall_egg}
 
-HANDHELD = {"apprentice_staff", "mage_staff", "sages_staff", "guillotine_staff", "guillotine_blade"}
+HANDHELD = {"apprentice_staff", "mage_staff", "sages_staff", "guillotine_staff", "ubel_staff", "guillotine_blade"}
 
 # Block id -> kind
 BLOCKS = {
