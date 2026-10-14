@@ -197,7 +197,7 @@ public class SpellbookScreen extends Screen {
         // the icon sits in the middle of a small circle; the name starts below the circle, never across it
         GrimoireUi.circle(graphics, cx, y + 20, 44);
         GrimoireUi.spellIcon(graphics, selected, definition, cx - 16, y + 4, 32);
-        y += 46;
+        y += 49;
         Component name = definition.displayName();
         for (FormattedCharSequence line : this.font.split(name, width)) {
             graphics.centeredText(this.font, line, cx, y, GrimoireUi.INK);

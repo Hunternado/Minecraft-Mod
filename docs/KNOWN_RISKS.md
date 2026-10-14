@@ -30,6 +30,14 @@ What the showcase has confirmed in a running client (with screenshots):
 * The five new bosses spawn and fight (the Demon King summoned soldiers on cue).
 * The statue plaza template places with its statue entity, and all four patina stages render.
 * The new dungeons place.
+* (2.2) All 19 rebuilt characters render alone in the portrait studio, with back-carried axes and held staffs.
+* (2.2) The building set places: a half-timbered house with roof tiles, leaded glass, lanterns, walls and flower
+  boxes, and a sampler of every family.
+* (2.2) The everyday spells work in a running world: the field blessing ripens crops, ore finding reports the
+  planted ores with correct counts, distances and directions, tunnel carving opens a 3x3 passage with drops, and
+  the bridge of light spans a lava ravine.
+* (2.2) The grimoire, the Journey Journal and the HUD render from the generated GUI sprites (nine-slice included)
+  with every spell icon.
 
 ## Not covered by automation
 
@@ -43,6 +51,9 @@ What the showcase has confirmed in a running client (with screenshots):
 * **Structure placement on rough terrain.** Templates use `start_height: -1` with `beard_thin`. On cliffs a
   structure can sit partly buried; tune per structure in `tools/gen_data.py`.
 * **Sound.** Spells reuse vanilla sound events.
+* **Everyday spells not photographed:** tree felling, return home, the five blessings, smelting and the pocket
+  of space are covered by code review and the server boot only.
+* **Examiner and trader screens** are restyled but not opened by the showcase (they need an NPC interaction).
 
 ## Bugs found by verification (for the record)
 
