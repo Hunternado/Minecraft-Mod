@@ -11,6 +11,7 @@
     "range": 40.0,
     "pierce": 1,
     "barrier_cost": 0.33,
-    "demon_magic": 1
+    "demon_magic": 1,
+    "execute_max_health": 150.0
   }
 }

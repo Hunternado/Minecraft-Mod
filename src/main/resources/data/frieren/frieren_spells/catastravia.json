@@ -10,6 +10,7 @@
     "damage": 4.0,
     "range": 40.0,
     "radius": 6.0,
-    "duration": 60
+    "duration": 60,
+    "execute_max_health": 100.0
   }
 }

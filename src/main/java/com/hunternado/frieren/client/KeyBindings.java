@@ -6,6 +6,7 @@ import com.hunternado.frieren.client.gui.SpellbookScreen;
 import com.hunternado.frieren.data.MagicData;
 import com.hunternado.frieren.network.FrierenNetwork;
 import com.hunternado.frieren.network.packet.CastSpellPacket;
+import com.hunternado.frieren.network.packet.CommandPuppetsPacket;
 import com.hunternado.frieren.network.packet.DetectManaPacket;
 import com.hunternado.frieren.network.packet.ReleaseChannelPacket;
 import com.hunternado.frieren.network.packet.SelectSlotPacket;
@@ -27,6 +28,7 @@ public final class KeyBindings {
     public static final KeyMapping CONCEAL = key("conceal", GLFW.GLFW_KEY_G);
     public static final KeyMapping DETECT = key("detect", GLFW.GLFW_KEY_H);
     public static final KeyMapping JOURNAL = key("journal", GLFW.GLFW_KEY_J);
+    public static final KeyMapping COMMAND = key("command_puppets", GLFW.GLFW_KEY_Z);
 
     private KeyBindings() {}
 
@@ -43,6 +45,7 @@ public final class KeyBindings {
         event.register(CONCEAL);
         event.register(DETECT);
         event.register(JOURNAL);
+        event.register(COMMAND);
     }
 
     /** Called every client tick. Sends intents only; the server decides everything. */
@@ -87,6 +90,9 @@ public final class KeyBindings {
         }
         while (DETECT.consumeClick()) {
             FrierenNetwork.sendToServer(DetectManaPacket.INSTANCE);
+        }
+        while (COMMAND.consumeClick()) {
+            FrierenNetwork.sendToServer(CommandPuppetsPacket.INSTANCE);
         }
     }
 }

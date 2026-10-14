@@ -16,8 +16,9 @@ import net.minecraft.world.entity.player.Player;
 
 /**
  * Azeryuze, Aura's Scales of Obedience, as analysed by humans. Weighs the caster's mana against the target's
- * vitality: success makes the target fight for the caster for {@code duration} ticks, after which the
- * puppet crumbles; failure enthralls the caster briefly. Bosses and players are immune.
+ * vitality: success binds the target for {@code duration} ticks (longer with mastery), after which the puppet
+ * crumbles; failure enthralls the caster briefly. Bosses and players are immune. Puppets follow and defend their
+ * master and take orders from the Command Puppets key (see ObedienceTracker).
  * Params: {@code range}, {@code duration}, {@code ratio} (mana needed per point of target max health).
  */
 public class ObedienceBehavior implements SpellBehavior {
@@ -32,7 +33,8 @@ public class ObedienceBehavior implements SpellBehavior {
         double needed = mob.getMaxHealth() * ctx.param("ratio", 6.0D);
         double weight = ctx.data().maxMana() * ctx.power();
         if (weight >= needed) {
-            ObedienceTracker.enthrall(ctx.level(), mob, ctx.caster(), (int) ctx.param("duration", 1200.0D));
+            // a better-mastered scale holds its puppet longer
+            ObedienceTracker.enthrall(ctx.level(), mob, ctx.caster(), Math.round(ctx.scaled("duration", 1200.0D)));
             ctx.markHit();
             Messages.actionBar(ctx.caster(), Component.translatable("message.frieren.obedience_success", mob.getDisplayName()));
             SpellFx.sound(ctx.level(), mob.position(), ModSounds.AURA_SCALES.get(), 1.0F, 1.2F);

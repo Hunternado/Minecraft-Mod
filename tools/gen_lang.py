@@ -158,13 +158,13 @@ def registry_names():
 SPELLS = {
     "zoltraak": ("Zoltraak", "Fires a piercing beam of killing magic. Once a demon's spell; now the most studied spell on the continent."),
     "zoltraak_barrage": ("Zoltraak Barrage", "Hold to loose a stream of Zoltraak bolts. Each pulse costs mana while the key is held."),
-    "qual_zoltraak": ("Corruptor's Zoltraak", "The original demon version: a heavier beam that tears through barriers and pierces a target."),
+    "qual_zoltraak": ("Corruptor's Zoltraak", "The original demon version: a heavier beam that tears through barriers and pierces a target. Kills anything with up to 150 max health outright."),
     "vollzanbel": ("Vollzanbel", "Breathes a cone of hellfire that sets everything in front of you ablaze."),
     "judradjim": ("Judradjim", "Calls a lightning strike onto the point you are looking at, shocking all nearby."),
     "waldgose": ("Waldgose", "Summons a cutting whirlwind at a distance that drags in and shreds enemies."),
-    "catastravia": ("Catastravia", "Fills the sky with shafts of light that rain down on an area for several seconds."),
+    "catastravia": ("Catastravia", "Fills the sky with shafts of light that rain down on an area for several seconds. Each shaft kills anything with up to 100 max health."),
     "reelseiden": ("Reelseiden", "A close-range slashing spell that cleaves through barriers in a wide arc."),
-    "diagolze": ("Diagolze", "Forbidden. Curses a target into gold. Bosses resist; everyone else becomes a statue for a while."),
+    "diagolze": ("Diagolze", "Forbidden. Curses a target into gold. Anything with up to 200 max health dies a golden statue; bosses are only gilded for a moment."),
     "defensive_magic": ("Defensive Magic", "Toggle a personal barrier. Absorbs spell damage efficiently and blocks melee partially, draining mana while up."),
     "barrier_dome": ("Barrier Dome", "Raises a protective dome that shields allies inside from hostile magic."),
     "goddess_healing": ("Goddess Healing", "Priestly magic that heals the ally you look at, or yourself."),
@@ -178,10 +178,10 @@ SPELLS = {
     "frost_lance": ("Frost Lance", "Lawine-style ice magic: a fan of ice shards that chill and slow what they strike."),
     "earth_spikes": ("Earth Spikes", "The ground erupts in a line before you, battering and launching everything on it."),
     "water_whip": ("Water Whip", "A lash of water sweeps the area in front of you, knocking foes back and dousing flames."),
-    "zoltraak_full_power": ("Zoltraak: Full Power", "Ordinary offensive magic, poured into without restraint. A long wind-up, then a beam that pierces everything in its path."),
+    "zoltraak_full_power": ("Zoltraak: Full Power", "Ordinary offensive magic, poured into without restraint. A long wind-up, then a beam that pierces everything in its path and kills anything with up to 200 max health."),
     "mana_release": ("Mana Release", "Drop all restraint: half your remaining mana explodes outward. The more you have, the bigger the blast."),
-    "blood_blades": ("Lügner's Blood Blades", "Demon blood magic. A fan of crimson blades; each one feeds you part of the wound it opens. Costs health."),
-    "wire_snare": ("Draht's Wire Snare", "Demon thread magic. Invisible wires lash out from a point and bind every enemy around it."),
+    "blood_blades": ("Lügner's Blood Blades", "Demon blood magic. A fan of crimson blades; each one feeds you part of the wound it opens and kills anything with up to 60 max health. Costs health."),
+    "wire_snare": ("Draht's Wire Snare", "Demon thread magic. Invisible wires lash out from a point and bind every enemy around it, slicing apart anything with up to 60 max health."),
     "sorganeil": ("Sorganeil", "Whatever you hold in your gaze cannot move. Keep casting and keep looking; look away and it is free."),
     "reflection_barrier": ("Reflection Barrier", "For a few seconds, projectiles and spells that strike you are turned back at their source."),
     "goddess_sanctuary": ("Goddess's Sanctuary", "A circle of holy light that heals allies standing in it and puts out flames."),
@@ -193,7 +193,7 @@ SPELLS = {
     "clear_skies": ("The Spell to Clear the Skies", "Ends rain and thunder for a while. Perfect weather for a journey."),
     "light_orb": ("Light Orb", "Conjures a floating light where you look. It fades after a few minutes."),
     "gathering_magic": ("Gathering Magic", "Pulls nearby dropped items and experience toward you."),
-    "azeryuze": ("Azeryuze", "Demon magic. Weighs your mana against a creature's; if yours is far greater, it obeys you for a while."),
+    "azeryuze": ("Azeryuze", "Demon magic. Weighs your mana against a creature's; if yours is far greater, it obeys you for a while. Press the Command Puppets key (Z): look at a foe to send them all at it, at the ground to make them hold that spot, at nothing to call them to your side. Sneak and press it to release them."),
     "lands_doppelganger": ("Land's Doppelganger", "Leaves a mana decoy behind that draws enemy attention while you slip away."),
     "tree_felling": ("The Spell to Fell a Tree", "Look at a living tree and it comes down in one stroke, every log at once. Log cabins are spared."),
     "field_blessing": ("The Spell to Bless the Fields", "Crops, saplings and berry bushes around you grow as if a season had passed."),
@@ -238,7 +238,7 @@ STAGES = {
     "survival": ("Survival", "Hold the exam circle against three waves of Aura's soldiers and demons."),
     "retrieval": ("Grimoire Hunt", "Five chests appear. One is genuine, the rest are mimics. Open the real one. (Mimic Detection helps... mostly.)"),
     "labyrinth": ("Spiegel's Mirror", "Spiegel hides behind replicas of you. Break every reflection, then strike while it is exposed."),
-    "stille": ("Catch the Stille", "Tire out the Stille and catch it with your Stille Cage. Brute force will not work."),
+    "stille": ("Catch the Stille", "Hit the Stille three times (melee, arrows or spells) to exhaust it. It drops to the ground for 8 seconds: use your Stille Cage on it then. It cannot be killed."),
     "replica": ("Mirror of Frieren", "Defeat the mirror replica of Frieren. Her defence drops for a moment whenever she attacks."),
     "interview": ("Interview", "Serie is waiting. Detect her true mana in the instant her concealment flickers."),
 }
@@ -313,7 +313,7 @@ def tooltips():
     t("requires_rank", "Requires: %s")
     t("restores_mana", "Restores %s mana")
     t("spell_cost", "%s mana, %ss cooldown")
-    t("stille_cage", "Empty. Use on an exhausted Stille.")
+    t("stille_cage", "Empty. Hit a Stille three times to exhaust it, then use this on it while it rests.")
     t("stille_cage_full", "Holds a captured Stille.")
 
 
@@ -412,6 +412,11 @@ def messages():
     m("no_mana", "Not enough mana (needs %s)")
     m("obedience_fail", "%s resists your mana.")
     m("obedience_success", "%s obeys you.")
+    m("puppets_attack", "Your puppets turn on %s.")
+    m("puppets_follow", "Your puppets fall in behind you.")
+    m("puppets_guard", "Your puppets hold that ground.")
+    m("puppets_none", "Nothing obeys you. Cast Azeryuze on a creature first.")
+    m("puppets_release", "\"Die.\" Your puppets obey one last time.")
     m("quest_complete", "Quest complete: %s")
     m("seal_idle", "No exam in progress. Talk to an Association Examiner.")
     m("seal_objective", "Objective offset: X %s, Z %s (%s blocks away)")
@@ -423,7 +428,10 @@ def messages():
     m("sense_through", "You sense %s signature(s), and one of them is hiding its true mana.")
     m("stille_caught", "You caught the Stille!")
     m("stille_not_yours", "That cage belongs to someone else's exam.")
-    m("stille_too_fast", "It is still too lively. Tire it out first.")
+    m("stille_too_fast", "Still too lively. Hit it %s more time(s) to exhaust it, then use the cage.")
+    m("stille_tiring", "The Stille is tiring. Hit it %s more time(s).")
+    m("stille_exhausted", "The Stille is exhausted! Use your Stille Cage on it now (8 seconds).")
+    m("stille_recovered", "The Stille caught its breath and took off again. Hit it three more times.")
     m("summoned.aura", "Aura the Guillotine answers the summons.")
     m("summoned.qual", "Qual the Corruptor emerges from his seal.")
     m("summoned.spiegel", "The mirror shatters, and Spiegel steps out.")
@@ -579,6 +587,7 @@ def screens():
     s("spellbook.instant", "Instant")
     s("spellbook.casts", "%s casts")
     s("spellbook.mastery_level", "Mastery %s")
+    s("spellbook.power_tooltip", "Mastery multiplies this spell's damage, healing and duration by %s (up to %s). Cast it often; hitting something with it counts double.")
     s("trades", "Trades")
     s("trades.buy", "Buy")
     s("trades.frieren", "Frieren's Trades")
@@ -615,7 +624,8 @@ def commands():
 def keys():
     put(f"key.category.{NS}.magic", "Frieren: Magic")
     for k, v in {"cast": "Cast Spell (hold to channel)", "cycle_spell": "Next Spell Slot", "spellbook": "Open Spellbook",
-                 "conceal": "Toggle Mana Concealment", "detect": "Sense Mana", "journal": "Open Journey Journal"}.items():
+                 "conceal": "Toggle Mana Concealment", "detect": "Sense Mana", "journal": "Open Journey Journal",
+                 "command_puppets": "Command Puppets (Azeryuze)"}.items():
         put(f"key.{NS}.{k}", v)
 
 

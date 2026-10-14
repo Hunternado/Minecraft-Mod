@@ -30,7 +30,7 @@ public class BloodBladesBehavior implements SpellBehavior {
             ManaBoltEntity bolt = ManaBoltEntity.shoot(ctx.level(), ctx.caster(), eye.add(bladeDirection.scale(10.0D)), damage, speed,
                 ctx.color(), ModDamageTypes.DEMON_MAGIC, 1.5F);
             if (bolt != null) {
-                bolt.withLifesteal(lifesteal);
+                bolt.withLifesteal(lifesteal).withExecute((float) ctx.param("execute_max_health", 0.0D));
             }
         }
         SpellFx.wisps(ctx.level(), eye.add(direction.scale(1.0D)), ctx.color(), 0.8F);

@@ -11,6 +11,7 @@
     "range": 48.0,
     "pierce": 1,
     "barrier_cost": 2.5,
-    "width": 1.1
+    "width": 1.1,
+    "execute_max_health": 200.0
   }
 }

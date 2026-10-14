@@ -13,8 +13,11 @@ public class ArrowRainBehavior implements SpellBehavior {
     @Override
     public boolean cast(SpellContext ctx) {
         Vec3 at = SpellTargeting.aimPoint(ctx.caster(), ctx.param("range", 40.0D));
-        SpellAreaEntity.spawn(ctx.level(), ctx.caster(), at, SpellAreaEntity.Mode.LIGHT_RAIN,
+        SpellAreaEntity area = SpellAreaEntity.spawn(ctx.level(), ctx.caster(), at, SpellAreaEntity.Mode.LIGHT_RAIN,
             (float) ctx.param("radius", 6.0D), (int) ctx.param("duration", 60.0D), ctx.scaled("damage", 4.0D), ctx.color());
+        if (area != null) {
+            area.withExecute((float) ctx.param("execute_max_health", 0.0D));
+        }
         SpellFx.sound(ctx.level(), ctx.caster().position(), ModSounds.LIGHT_RAIN.get(), 1.0F, 1.6F);
         return true;
     }

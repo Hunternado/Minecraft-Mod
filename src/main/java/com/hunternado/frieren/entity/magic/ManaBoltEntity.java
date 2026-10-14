@@ -57,6 +57,7 @@ public class ManaBoltEntity extends Entity {
     private int life;
     private int slowTicks;
     private float lifesteal;
+    private float executeCap;
 
     public ManaBoltEntity(EntityType<? extends ManaBoltEntity> type, Level level) {
         super(type, level);
@@ -94,6 +95,12 @@ public class ManaBoltEntity extends Entity {
     public ManaBoltEntity withLifesteal(float fraction) {
         this.lifesteal = fraction;
         this.entityData.set(DATA_STYLE, STYLE_BLOOD);
+        return this;
+    }
+
+    /** Targets with at most this much maximum health die to the hit (see {@link SpellDamage#executes}). */
+    public ManaBoltEntity withExecute(float maxHealth) {
+        this.executeCap = maxHealth;
         return this;
     }
 
@@ -138,7 +145,7 @@ public class ManaBoltEntity extends Entity {
                 target -> target != owner && SpellDamage.canHarm(level, attacker, target));
             if (!hits.isEmpty()) {
                 LivingEntity target = hits.get(0).entity();
-                boolean damaged = SpellDamage.hurt(level, this, attacker, target, damage, damageType, barrierCost, false, null);
+                boolean damaged = SpellDamage.hurt(level, this, attacker, target, damage, damageType, barrierCost, false, null, executeCap);
                 if (damaged && slowTicks > 0) {
                     target.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, slowTicks, 2));
                     SpellFx.frost(level, hits.get(0).location(), color(), 0.8F);
@@ -181,6 +188,7 @@ public class ManaBoltEntity extends Entity {
         output.putFloat("Damage", damage);
         output.putInt("SlowTicks", slowTicks);
         output.putFloat("Lifesteal", lifesteal);
+        output.putFloat("ExecuteCap", executeCap);
         output.putFloat("BarrierCost", barrierCost);
         output.putInt("Life", life);
         output.putInt("Color", color());
@@ -193,6 +201,9 @@ public class ManaBoltEntity extends Entity {
     @Override
     protected void readAdditionalSaveData(ValueInput input) {
         damage = input.getFloatOr("Damage", 4.0F);
+        slowTicks = input.getIntOr("SlowTicks", 0);
+        lifesteal = input.getFloatOr("Lifesteal", 0.0F);
+        executeCap = input.getFloatOr("ExecuteCap", 0.0F);
         barrierCost = input.getFloatOr("BarrierCost", 1.0F);
         life = input.getIntOr("Life", 0);
         this.entityData.set(DATA_COLOR, input.getIntOr("Color", 0xC03A5A));

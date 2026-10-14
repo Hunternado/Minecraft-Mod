@@ -4,6 +4,7 @@ import com.hunternado.frieren.FrierenIds;
 import com.hunternado.frieren.client.ClientPacketHandlers;
 import com.hunternado.frieren.data.MagicData;
 import com.hunternado.frieren.network.packet.BindSpellPacket;
+import com.hunternado.frieren.network.packet.CommandPuppetsPacket;
 import com.hunternado.frieren.network.packet.CastSpellPacket;
 import com.hunternado.frieren.network.packet.DetectManaPacket;
 import com.hunternado.frieren.network.packet.ExaminerScreenPacket;
@@ -61,6 +62,7 @@ public final class FrierenNetwork {
                         .addMain(ToggleConcealmentPacket.class, ToggleConcealmentPacket.STREAM_CODEC, ToggleConcealmentPacket::handle)
                         .addMain(DetectManaPacket.class, DetectManaPacket.STREAM_CODEC, DetectManaPacket::handle)
                         .addMain(NpcActionPacket.class, NpcActionPacket.STREAM_CODEC, NpcActionPacket::handle)
+                        .addMain(CommandPuppetsPacket.class, CommandPuppetsPacket.STREAM_CODEC, CommandPuppetsPacket::handle)
                     .clientbound()
                         .addMain(SyncMagicDataPacket.class, SyncMagicDataPacket.STREAM_CODEC, (msg, ctx) -> ClientPacketHandlers.syncMagicData(msg))
                         .addMain(SyncManaPacket.class, SyncManaPacket.STREAM_CODEC, (msg, ctx) -> ClientPacketHandlers.syncMana(msg))

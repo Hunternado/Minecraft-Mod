@@ -37,7 +37,7 @@ public class StilleCageItem extends Item {
             return InteractionResult.SUCCESS;
         }
         if (!stille.isExhausted()) {
-            Messages.actionBar(player, Component.translatable("message.frieren.stille_too_fast"));
+            Messages.actionBar(player, Component.translatable("message.frieren.stille_too_fast", stille.hitsToExhaust()));
             return InteractionResult.FAIL;
         }
         if (!stille.mayBeCapturedBy(player)) {

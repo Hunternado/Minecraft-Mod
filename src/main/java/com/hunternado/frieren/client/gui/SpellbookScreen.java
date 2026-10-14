@@ -6,6 +6,7 @@ import com.hunternado.frieren.data.SpellProgress;
 import com.hunternado.frieren.magic.SpellSchool;
 import com.hunternado.frieren.network.FrierenNetwork;
 import com.hunternado.frieren.network.packet.BindSpellPacket;
+import com.hunternado.frieren.spell.SpellCaster;
 import com.hunternado.frieren.spell.SpellDefinition;
 import com.hunternado.frieren.spell.SpellManager;
 import net.minecraft.client.Minecraft;
@@ -100,7 +101,7 @@ public class SpellbookScreen extends Screen {
     public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTick) {
         super.extractRenderState(graphics, mouseX, mouseY, partialTick);
         drawLeftPage(graphics, mouseX, mouseY);
-        drawRightPage(graphics);
+        drawRightPage(graphics, mouseX, mouseY);
         drawSlots(graphics, mouseX, mouseY);
     }
 
@@ -175,7 +176,7 @@ public class SpellbookScreen extends Screen {
         return bookY + 31;
     }
 
-    private void drawRightPage(GuiGraphicsExtractor graphics) {
+    private void drawRightPage(GuiGraphicsExtractor graphics, int mouseX, int mouseY) {
         int left = bookX + bookW / 2 + 10;
         int width = bookW - bookW / 2 - 24;
         int cx = left + width / 2;
@@ -237,7 +238,15 @@ public class SpellbookScreen extends Screen {
         Component mastery = Component.translatable("screen.frieren.spellbook.mastery_level", progress.mastery());
         graphics.text(this.font, mastery, left + 2, y, GrimoireUi.INK_GOLD, false);
         int barX = left + 6 + this.font.width(mastery);
-        int barW = left + width - 2 - barX;
+        // What the practice is worth: mastery's multiplier on damage, healing and duration.
+        String power = String.format("\u00D7%.2f", SpellCaster.masteryPower(progress.masteryFraction()));
+        int powerX = left + width - 2 - this.font.width(power);
+        graphics.text(this.font, power, powerX, y, GrimoireUi.INK_GOLD, false);
+        if (GrimoireUi.inside(mouseX, mouseY, barX, y - 1, left + width - 2 - barX, 10)) {
+            graphics.setTooltipForNextFrame(this.font, Component.translatable("screen.frieren.spellbook.power_tooltip", power,
+                String.format("\u00D7%.2f", SpellCaster.masteryPower(1.0F))), mouseX, mouseY);
+        }
+        int barW = powerX - 4 - barX;
         graphics.fill(barX, y + 2, barX + barW, y + 7, 0xFF745A3A);
         graphics.fill(barX + 1, y + 3, barX + barW - 1, y + 6, 0xFFE9DDBA);
         graphics.fill(barX + 1, y + 3, barX + 1 + Math.round((barW - 2) * progress.masteryFraction()), y + 6, 0xFFD9A030);

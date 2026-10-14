@@ -35,7 +35,8 @@ SPELLS = {
     "zoltraak_barrage": dict(behavior="barrage", school="offensive", rarity="rare", mana_cost=8, cooldown=60, channel=40,
                              color="#A0D4FF", params=dict(damage=4.5, range=28.0, interval=4, pulse_cost=4.0, spread=5.0)),
     "qual_zoltraak": dict(behavior="beam", school="offensive", rarity="demon", mana_cost=22, cooldown=40, cast_time=8,
-                          color="#9B2D6F", params=dict(damage=11.0, range=40.0, pierce=1, barrier_cost=0.33, demon_magic=1)),
+                          color="#9B2D6F", params=dict(damage=11.0, range=40.0, pierce=1, barrier_cost=0.33, demon_magic=1,
+                                                    execute_max_health=150.0)),
     "vollzanbel": dict(behavior="flame_wave", school="offensive", rarity="rare", mana_cost=24, cooldown=80, cast_time=6,
                        color="#FF7A2A", params=dict(damage=8.0, range=8.0, angle=35.0, burn_seconds=5.0)),
     "judradjim": dict(behavior="lightning", school="offensive", rarity="rare", mana_cost=28, cooldown=100, cast_time=10,
@@ -43,11 +44,12 @@ SPELLS = {
     "waldgose": dict(behavior="vortex", school="offensive", rarity="rare", mana_cost=32, cooldown=200, cast_time=10,
                      color="#C8F0E0", params=dict(damage=2.0, range=24.0, radius=4.5, duration=80)),
     "catastravia": dict(behavior="arrow_rain", school="offensive", rarity="ancient", mana_cost=60, cooldown=400, cast_time=20,
-                        color="#FFFBE0", params=dict(damage=4.0, range=40.0, radius=6.0, duration=60)),
+                        color="#FFFBE0", params=dict(damage=4.0, range=40.0, radius=6.0, duration=60, execute_max_health=100.0)),
     "reelseiden": dict(behavior="slash", school="offensive", rarity="rare", mana_cost=18, cooldown=40,
                        color="#E8E8FF", params=dict(damage=9.0, range=5.0, angle=45.0, barrier_cost=3.0)),
     "diagolze": dict(behavior="gold_curse", school="offensive", rarity="forbidden", mana_cost=80, health_cost=4, cooldown=600,
-                     cast_time=20, color="#FFD24A", params=dict(range=16.0, duration=120, boss_duration=20, damage=4.0)),
+                     cast_time=20, color="#FFD24A", params=dict(range=16.0, duration=120, boss_duration=20, damage=4.0,
+                                                                  execute_max_health=200.0)),
     # ---- Defensive ----
     "defensive_magic": dict(behavior="barrier", school="defensive", rarity="common", mana_cost=6, cooldown=20,
                             color="#9FD8FF", params=dict(upkeep=0.6, efficiency=1.5, melee_block=0.7)),
@@ -87,15 +89,18 @@ SPELLS = {
     "water_whip": dict(behavior="water_whip", school="offensive", rarity="uncommon", mana_cost=12, cooldown=40,
                        color="#6FC3FF", params=dict(damage=3.0, range=7.0, angle=45.0, knockback=1.3)),
     "zoltraak_full_power": dict(behavior="beam", school="offensive", rarity="ancient", mana_cost=45, cooldown=200, cast_time=30,
-                                color="#DDF2FF", params=dict(damage=16.0, range=48.0, pierce=1, barrier_cost=2.5, width=1.1)),
+                                color="#DDF2FF", params=dict(damage=16.0, range=48.0, pierce=1, barrier_cost=2.5, width=1.1,
+                                                                  execute_max_health=200.0)),
     "mana_release": dict(behavior="mana_release", school="offensive", rarity="rare", mana_cost=5, cooldown=400,
                          color="#A8D8FF", params=dict(fraction=0.5, min_mana=15.0, base_damage=4.0, damage_per_mana=0.12,
                                                       base_radius=3.5, radius_per_mana=0.03, max_radius=9.0)),
     # ---- 2.0: demon magic (from demon grimoires) ----
     "blood_blades": dict(behavior="blood_blades", school="offensive", rarity="demon", mana_cost=18, health_cost=2, cooldown=60,
-                         color="#B0102A", params=dict(damage=4.0, count=5, spread=9.0, speed=1.6, lifesteal=0.3, range=28.0)),
+                         color="#B0102A", params=dict(damage=4.0, count=5, spread=9.0, speed=1.6, lifesteal=0.3, range=28.0,
+                                                      execute_max_health=60.0)),
     "wire_snare": dict(behavior="wire_snare", school="special", rarity="demon", mana_cost=24, cooldown=240,
-                       color="#E8E8F0", params=dict(range=20.0, radius=6.0, duration=60, damage=2.0, max_targets=6)),
+                       color="#E8E8F0", params=dict(range=20.0, radius=6.0, duration=60, damage=2.0, max_targets=6,
+                                                    execute_max_health=60.0)),
     # ---- 2.0: defensive and special ----
     "sorganeil": dict(behavior="bind", school="special", rarity="rare", mana_cost=20, cooldown=300, channel=100,
                       color="#C8D8FF", params=dict(range=24.0, pulse_cost=3.0, gaze_angle=15.0, boss_ticks=30)),
@@ -457,6 +462,9 @@ def gen_tags():
     tag("minecraft/tags/block/small_flowers", [f"{NS}:blue_moon_weed"])
     tag("minecraft/tags/item/small_flowers", [f"{NS}:blue_moon_weed"])
     tag(f"{NS}/tags/entity_type/demons", [f"{NS}:demon_soldier", f"{NS}:demon_mage", f"{NS}:aura", f"{NS}:qual"])
+    # Killing blows from top-tier magic (spell param execute_max_health) never apply to these.
+    tag(f"{NS}/tags/entity_type/execute_immune", ["minecraft:wither", "minecraft:ender_dragon", "minecraft:warden",
+                                                  "minecraft:elder_guardian"])
     tag("minecraft/tags/damage_type/bypasses_armor", [f"{NS}:demon_magic", f"{NS}:curse"])
     tag("minecraft/tags/damage_type/is_projectile", [f"{NS}:zoltraak"])
     tag("minecraft/tags/damage_type/witch_resistant_to", [f"{NS}:spell", f"{NS}:zoltraak"])

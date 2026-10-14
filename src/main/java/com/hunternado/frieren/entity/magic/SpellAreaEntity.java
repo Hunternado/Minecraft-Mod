@@ -58,6 +58,7 @@ public class SpellAreaEntity extends Entity {
     private @Nullable Entity cachedOwner;
     private int duration = 60;
     private float damage;
+    private float executeCap;
     private int age;
 
     public SpellAreaEntity(EntityType<? extends SpellAreaEntity> type, Level level) {
@@ -81,6 +82,12 @@ public class SpellAreaEntity extends Entity {
         area.entityData.set(DATA_COLOR, color);
         level.addFreshEntity(area);
         return area;
+    }
+
+    /** Targets with at most this much maximum health die to a hit (see {@link SpellDamage#executes}). */
+    public SpellAreaEntity withExecute(float maxHealth) {
+        this.executeCap = maxHealth;
+        return this;
     }
 
     @Override
@@ -146,7 +153,7 @@ public class SpellAreaEntity extends Entity {
                     target.needsSync = true;
                     target.fallDistance = 0.0F;
                     if (age % 10 == 0) {
-                        SpellDamage.hurt(level, this, attacker, target, damage, ModDamageTypes.SPELL, 1.0F, false, null);
+                        SpellDamage.hurt(level, this, attacker, target, damage, ModDamageTypes.SPELL, 1.0F, false, null, executeCap);
                     }
                 }
                 if (age % 20 == 0) {
@@ -162,7 +169,7 @@ public class SpellAreaEntity extends Entity {
                     SpellFx.beam(level, point.add(0.0D, 12.0D, 0.0D), point, color());
                     for (LivingEntity target : SpellTargeting.livingInRadius(level, owner, point, 1.6D,
                         candidate -> SpellDamage.canHarm(level, attacker, candidate))) {
-                        SpellDamage.hurt(level, this, attacker, target, damage, ModDamageTypes.SPELL, 1.0F, false, null);
+                        SpellDamage.hurt(level, this, attacker, target, damage, ModDamageTypes.SPELL, 1.0F, false, null, executeCap);
                     }
                 }
             }
@@ -294,6 +301,7 @@ public class SpellAreaEntity extends Entity {
         output.putInt("Duration", duration);
         output.putInt("Age", age);
         output.putFloat("Damage", damage);
+        output.putFloat("ExecuteCap", executeCap);
         if (ownerId != null) {
             output.putString("Owner", ownerId.toString());
         }
@@ -307,6 +315,7 @@ public class SpellAreaEntity extends Entity {
         duration = input.getIntOr("Duration", 60);
         age = input.getIntOr("Age", 0);
         damage = input.getFloatOr("Damage", 0.0F);
+        executeCap = input.getFloatOr("ExecuteCap", 0.0F);
         String owner = input.getStringOr("Owner", "");
         try {
             ownerId = owner.isEmpty() ? null : UUID.fromString(owner);

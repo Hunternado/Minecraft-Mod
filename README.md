@@ -155,6 +155,7 @@ current trial and time left.
 | G | Toggle mana concealment |
 | H | Sense mana around you |
 | J | Journey Journal |
+| Z | Command your Azeryuze puppets: look at a foe (attack), at the ground (guard), at nothing (follow); sneak + Z releases them |
 
 To summon a boss, use its sigil on a **Summoning Altar**. Altars appear in boss structures and can be crafted.
 * **Seal of the Golden Land** (Macht): found in the Golden Land, or crafted from cursed gold and demonic cores.

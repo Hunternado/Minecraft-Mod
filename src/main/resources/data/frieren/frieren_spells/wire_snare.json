@@ -10,6 +10,7 @@
     "radius": 6.0,
     "duration": 60,
     "damage": 2.0,
-    "max_targets": 6
+    "max_targets": 6,
+    "execute_max_health": 60.0
   }
 }

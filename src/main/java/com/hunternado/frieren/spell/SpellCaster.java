@@ -22,8 +22,8 @@ import org.jspecify.annotations.Nullable;
  * else (knowledge, cooldown, mana, effects) is decided here.
  */
 public final class SpellCaster {
-    private static final float BASE_MASTERY_GAIN = 0.8F;
-    private static final float HIT_MASTERY_BONUS = 0.6F;
+    private static final float BASE_MASTERY_GAIN = 1.0F;
+    private static final float HIT_MASTERY_BONUS = 1.0F;
 
     private SpellCaster() {}
 
@@ -54,7 +54,15 @@ public final class SpellCaster {
     }
 
     public static float effectivePower(float masteryFraction, StaffItem.Tier staff) {
-        return (float) ((1.0F + 0.5F * masteryFraction) * staff.powerMultiplier() * FrierenConfig.spellDamageMultiplier());
+        return (float) (masteryPower(masteryFraction) * staff.powerMultiplier() * FrierenConfig.spellDamageMultiplier());
+    }
+
+    /**
+     * What mastery alone multiplies a spell's damage, healing and duration by: x1 for a fresh spell, x2.25 at full
+     * mastery. Front-loaded (square root) so the first hours of practice are felt: x1.63 at 25, x1.88 at 50.
+     */
+    public static float masteryPower(float masteryFraction) {
+        return 1.0F + 1.25F * (float) Math.sqrt(Math.max(0.0F, Math.min(1.0F, masteryFraction)));
     }
 
     public static int effectiveCastTime(SpellDefinition spell, float masteryFraction) {

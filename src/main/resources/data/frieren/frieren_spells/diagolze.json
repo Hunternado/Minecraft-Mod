@@ -11,6 +11,7 @@
     "range": 16.0,
     "duration": 120,
     "boss_duration": 20,
-    "damage": 4.0
+    "damage": 4.0,
+    "execute_max_health": 200.0
   }
 }

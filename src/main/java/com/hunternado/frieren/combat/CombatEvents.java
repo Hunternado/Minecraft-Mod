@@ -21,6 +21,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
+import net.minecraftforge.event.entity.living.LivingChangeTargetEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 import java.util.UUID;
@@ -40,6 +41,7 @@ public final class CombatEvents {
 
     public static void register() {
         LivingHurtEvent.BUS.addListener(CombatEvents::onLivingHurt);
+        LivingChangeTargetEvent.BUS.addListener((Predicate<LivingChangeTargetEvent>) ObedienceTracker::vetoTarget);
         TickEvent.ServerTickEvent.Post.BUS.addListener(CombatEvents::onServerTick);
         EntityJoinLevelEvent.BUS.addListener((Predicate<EntityJoinLevelEvent>) event -> event.loadedFromDisk()
             && !event.getLevel().isClientSide() && SummonTracker.isExpired(event.getEntity(), event.getLevel().getGameTime()));

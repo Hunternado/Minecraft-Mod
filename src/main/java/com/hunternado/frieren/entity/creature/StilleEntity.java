@@ -1,6 +1,12 @@
 package com.hunternado.frieren.entity.creature;
 
+import com.hunternado.frieren.util.Messages;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
@@ -19,12 +25,14 @@ import java.util.UUID;
 
 /**
  * The Stille: a tiny bird with absurd reflexes and mana resistance (First-Class exam, stage one). It darts
- * away from anyone nearby; three hits exhaust it for a few seconds, which is the only time a Stille Cage
- * can catch it. It never dies to players.
+ * away from anyone nearby; three hits (melee, arrows or spells) exhaust it for eight seconds, which is the only
+ * time a Stille Cage can catch it. It never dies to players. Every step is spelled out to whoever is chasing it:
+ * a countdown of hits, a loud "exhausted" with sweat drops while it rests, and a notice when it takes off again.
  */
 public class StilleEntity extends PathfinderMob {
     private static final int LIFETIME = 6000;
     private static final int EXHAUST_TICKS = 160;
+    private static final int HITS_TO_EXHAUST = 3;
 
     private @Nullable UUID examinee;
     private int hits;
@@ -57,6 +65,11 @@ public class StilleEntity extends PathfinderMob {
         return exhaustedTicks > 0;
     }
 
+    /** Hits still needed before it tires out (shown to the player chasing it). */
+    public int hitsToExhaust() {
+        return Math.max(0, HITS_TO_EXHAUST - hits);
+    }
+
     @Override
     public void aiStep() {
         super.aiStep();
@@ -70,9 +83,16 @@ public class StilleEntity extends PathfinderMob {
         if (exhaustedTicks > 0) {
             exhaustedTicks--;
             this.setNoGravity(false);
+            if (exhaustedTicks % 10 == 0) {                    // sweat drops while it pants on the ground
+                level.sendParticles(ParticleTypes.SPLASH, this.getX(), this.getY() + 0.5D, this.getZ(), 4, 0.15D, 0.1D, 0.15D, 0.0D);
+            }
             if (exhaustedTicks == 0) {
                 hits = 0;
                 this.setNoGravity(true);
+                Player chaser = examinee != null ? level.getPlayerByUUID(examinee) : level.getNearestPlayer(this, 24.0D);
+                if (chaser != null) {
+                    Messages.actionBar(chaser, Component.translatable("message.frieren.stille_recovered").withStyle(ChatFormatting.YELLOW));
+                }
             }
             return;
         }
@@ -102,9 +122,17 @@ public class StilleEntity extends PathfinderMob {
 
     @Override
     public boolean hurtServer(ServerLevel level, DamageSource source, float amount) {
-        if (source.getEntity() instanceof Player) {
-            if (++hits >= 3) {
-                exhaustedTicks = EXHAUST_TICKS;
+        if (source.getEntity() instanceof Player player) {
+            if (!isExhausted()) {
+                if (++hits >= HITS_TO_EXHAUST) {
+                    exhaustedTicks = EXHAUST_TICKS;
+                    Messages.actionBar(player, Component.translatable("message.frieren.stille_exhausted")
+                        .withStyle(ChatFormatting.GOLD, ChatFormatting.BOLD));
+                    level.playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.PARROT_HURT, SoundSource.NEUTRAL, 1.0F, 1.6F);
+                    level.sendParticles(ParticleTypes.CLOUD, this.getX(), this.getY() + 0.3D, this.getZ(), 8, 0.2D, 0.2D, 0.2D, 0.02D);
+                } else {
+                    Messages.actionBar(player, Component.translatable("message.frieren.stille_tiring", hitsToExhaust()));
+                }
             }
             // Absurd mana resistance: players can tire it out, never kill it.
             return super.hurtServer(level, source, 0.0F);
