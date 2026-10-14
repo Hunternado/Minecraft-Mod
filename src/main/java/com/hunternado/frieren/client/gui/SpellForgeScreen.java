@@ -209,14 +209,18 @@ public class SpellForgeScreen extends Screen {
             int bx = left + (i % 3) * (bw + 2);
             int by = my + 12 + (i / 3) * 14;
             boolean on = r.has(1 << i);
+            boolean barred = (1 << i) == OriginalSpells.MOD_UNWAVERING && r.potency() >= OriginalSpells.ANNIHILATION;
+            if (barred) {
+                graphics.fill(bx + 3, by + 6, bx + bw - 3, by + 7, GrimoireUi.INK_RED);
+            }
             if (on) {
                 // a ribbon of the spell's colour under the chosen modifiers
                 graphics.fill(bx, by + 12, bx + bw, by + 13, 0xFF000000 | OriginalSpells.COLORS[r.color()]);
                 graphics.fill(bx - 1, by - 1, bx + bw + 1, by, GrimoireUi.INK_GOLD);
             }
             if (GrimoireUi.inside(mouseX, mouseY, bx, by, bw, 12)) {
-                graphics.setTooltipForNextFrame(this.font,
-                    Component.translatable("original.frieren.modifier." + OriginalSpells.MODIFIERS[i] + ".desc"), mouseX, mouseY);
+                graphics.setTooltipForNextFrame(this.font, Component.translatable(barred ? "original.frieren.modifier.unwavering.barred"
+                    : "original.frieren.modifier." + OriginalSpells.MODIFIERS[i] + ".desc"), mouseX, mouseY);
             }
         }
         int sy = my + 12 + 2 * 14 + 4;

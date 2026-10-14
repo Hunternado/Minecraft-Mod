@@ -246,9 +246,13 @@ public class UbelEntity extends PathfinderMob implements ManaSignature, Characte
         SpellFx.petals(level, this.position(), 0x3A8A6A, 1.5F);
         say(player, "yield");
         MagicData data = MagicData.get(player);
+        boolean firstWin = data == null || !data.ubelDefeated();   // her gifts come once, however many Übels you beat
         if (data != null) {
             data.setUbelDefeated(true);
             data.setUbelReturnAt(0L);
+        }
+        if (!firstWin) {
+            return;
         }
         SpellDefinition reelseiden = SpellManager.server(FrierenIds.id("ubel_reelseiden"));
         if (reelseiden != null) {

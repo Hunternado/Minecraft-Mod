@@ -27,7 +27,7 @@ import java.util.UUID;
  *   <li><b>reach</b> 1-3 (range, radius, number of bolts or arcs);</li>
  *   <li><b>casting</b>: instant (potency 1-2 only), incantation, or charge (required for Annihilation);</li>
  *   <li><b>modifiers</b>: piercing, swift (half the cooldown), silent (cast without breaking concealment),
- *   lifesteal, unwavering (cannot be interrupted).</li>
+ *   lifesteal, unwavering (cannot be interrupted; never on Annihilation).</li>
  * </ul>
  * A mage can hold {@link #MAX_SPELLS} original spells; asking again for a slot replaces what was there.
  */
@@ -100,8 +100,11 @@ public final class OriginalSpells {
             if (clean.length() > MAX_NAME) {
                 clean = clean.substring(0, MAX_NAME).strip();
             }
-            return new Recipe(f, clamp(element, 0, ELEMENTS.length - 1), p, clamp(reach, 1, 3), c,
-                modifiers & (MOD_PIERCE | MOD_SWIFT | MOD_SILENT | MOD_LIFESTEAL | MOD_UNWAVERING),
+            int mods = modifiers & (MOD_PIERCE | MOD_SWIFT | MOD_SILENT | MOD_LIFESTEAL | MOD_UNWAVERING);
+            if (p >= ANNIHILATION) {
+                mods &= ~MOD_UNWAVERING;                          // a spell that kills anything can always be broken
+            }
+            return new Recipe(f, clamp(element, 0, ELEMENTS.length - 1), p, clamp(reach, 1, 3), c, mods,
                 clamp(color, 0, COLORS.length - 1), clean);
         }
 

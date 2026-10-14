@@ -811,6 +811,7 @@ def original_magic():
     o("annihilation.desc", "Annihilation: anything that is not a boss dies outright, and even a boss loses up to 30% of its health.")
     o("execute.desc", "Kills anything with up to %s max health outright.")
     o("steady.desc", "Unwavering: no hit can break it.")
+    o("modifier.unwavering.barred", "Not for Annihilation. Serie: \"Something that kills anything should be something you can lose.\"")
     o("fragile.desc", "A solid hit while it is being cast can break your concentration.")
     o("signature", "Created for you by Serie.")
 
