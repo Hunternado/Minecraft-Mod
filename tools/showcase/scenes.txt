@@ -392,6 +392,19 @@
 /summon minecraft:item_frame -1 121 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:heros_sword",count:1}}
 /summon minecraft:item_frame 0 121 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:demon_kings_blade",count:1}}
 /summon minecraft:item_frame 1 121 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:scale_of_obedience",count:1}}
+# Bottom row: the Characters tab's spawn eggs (portraits of the cast).
+/summon minecraft:item_frame -8 120 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:frieren_spawn_egg",count:1}}
+/summon minecraft:item_frame -7 120 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:examiner_spawn_egg",count:1}}
+/summon minecraft:item_frame -6 120 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:wandering_mage_spawn_egg",count:1}}
+/summon minecraft:item_frame -5 120 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:priest_spawn_egg",count:1}}
+/summon minecraft:item_frame -4 120 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:demon_soldier_spawn_egg",count:1}}
+/summon minecraft:item_frame -3 120 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:demon_mage_spawn_egg",count:1}}
+/summon minecraft:item_frame -2 120 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:linie_spawn_egg",count:1}}
+/summon minecraft:item_frame -1 120 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:draht_spawn_egg",count:1}}
+/summon minecraft:item_frame 0 120 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:lugner_spawn_egg",count:1}}
+/summon minecraft:item_frame 1 120 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:mimic_spawn_egg",count:1}}
+/summon minecraft:item_frame 2 120 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:stille_spawn_egg",count:1}}
+/summon minecraft:item_frame 3 120 28 {Facing:2b,Fixed:1b,Item:{id:"frieren:aura_thrall_spawn_egg",count:1}}
 @wait 30
 @shot item_icons
 # Building set: a half-timbered town house with a terracotta roof, and a sampler wall of every material.
