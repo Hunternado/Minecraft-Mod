@@ -99,7 +99,7 @@ class Rig:
         self.post_paint = None
         self.variants = {}  # extra texture name -> post-paint applied to a fresh copy of the base painting
         self.held = (None, None)  # (main hand, off hand) item ids the character is drawn holding
-        self.back_carry = False   # main-hand weapon worn across the back out of combat
+        self.carry = "hand"   # where the main-hand weapon rides out of combat: "hand", "back" (axes) or "hip" (swords)
         self.slim = False
         self.arm_len = 12
         self.root = Part("root")

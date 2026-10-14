@@ -17,6 +17,8 @@ public class CharacterRenderState extends ArmedEntityRenderState {
     public int variant;
     /** The main-hand item is a staff: it aims further forward while casting than a weapon does. */
     public boolean holdingStaff;
-    /** A weapon worn across the back out of combat (BackItemLayer); empty when it is in hand. */
-    public final ItemStackRenderState backItemState = new ItemStackRenderState();
+    /** The signature weapon carried out of combat (CarriedItemLayer); empty when it is in hand. */
+    public final ItemStackRenderState carriedItemState = new ItemStackRenderState();
+    /** Where {@link #carriedItemState} rides. */
+    public CharacterKind.Carry carry = CharacterKind.Carry.HAND;
 }

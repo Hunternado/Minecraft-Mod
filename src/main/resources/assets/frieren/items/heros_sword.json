@@ -14,6 +14,13 @@
           "type": "minecraft:model",
           "model": "frieren:item/heros_sword"
         }
+      },
+      {
+        "when": "none",
+        "model": {
+          "type": "minecraft:model",
+          "model": "frieren:item/heros_sword_sheathed"
+        }
       }
     ],
     "fallback": {

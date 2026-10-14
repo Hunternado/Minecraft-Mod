@@ -113,7 +113,7 @@ def main():
         main_hand, off_hand = rig.held
         held = ", ".join(f"\"{i}\"" if i else "null" for i in (main_hand, off_hand))
         constants.append(f"    {name.upper()}(\"{name}\", {f(rig.render_scale)}, {str(long_robe).lower()}, "
-                         f"{str(rig.slim).lower()}, {f(rig.arm_len)}, {held}, {str(rig.back_carry).lower()})")
+                         f"{str(rig.slim).lower()}, {f(rig.arm_len)}, {held}, Carry.{rig.carry.upper()})")
         cases.append(f"            case {name.upper()} -> {camel(name)}();")
         methods.append(layer_method(name, model))
     constants_java = ",\n".join(constants)
@@ -143,6 +143,16 @@ import org.jspecify.annotations.Nullable;
 public enum CharacterKind {{
 {constants_java};
 
+    /** Where the main-hand signature weapon rides while the character is not fighting. */
+    public enum Carry {{
+        /** Always in the hand (staffs, the Demon King's blade). */
+        HAND,
+        /** Strapped flat on the back, head over the right shoulder (Stark's axe). */
+        BACK,
+        /** Sheathed on the left hip (Himmel's sword). */
+        HIP
+    }}
+
     private final String id;
     private final float scale;
     private final boolean longRobe;
@@ -150,14 +160,14 @@ public enum CharacterKind {{
     private final float armLength;
     private final @Nullable String mainHandItem;
     private final @Nullable String offHandItem;
-    private final boolean backCarry;
+    private final Carry carry;
     private final ModelLayerLocation layer;
     private final Identifier texture;
     private @Nullable ItemStack mainHandStack;
     private @Nullable ItemStack offHandStack;
 
     CharacterKind(String id, float scale, boolean longRobe, boolean slim, float armLength, @Nullable String mainHandItem,
-                  @Nullable String offHandItem, boolean backCarry) {{
+                  @Nullable String offHandItem, Carry carry) {{
         this.id = id;
         this.scale = scale;
         this.longRobe = longRobe;
@@ -165,14 +175,14 @@ public enum CharacterKind {{
         this.armLength = armLength;
         this.mainHandItem = mainHandItem;
         this.offHandItem = offHandItem;
-        this.backCarry = backCarry;
+        this.carry = carry;
         this.layer = new ModelLayerLocation(FrierenIds.id("character/" + id), "main");
         this.texture = FrierenIds.id("textures/entity/character/" + id + ".png");
     }}
 
-    /** The main-hand weapon is worn across the back until the character fights (Stark's axe). */
-    public boolean backCarry() {{
-        return backCarry;
+    /** Where the main-hand weapon rides out of combat; it comes to hand when the character fights. */
+    public Carry carry() {{
+        return carry;
     }}
 
     /** Slim (three pixel) arms: held items sit half a pixel closer to the body, as on slim player models. */

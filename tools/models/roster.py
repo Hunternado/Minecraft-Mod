@@ -931,7 +931,7 @@ def stark():
     rig.pose("skirt", offset=(0, 10.5, 0))
     rig.box("skirt", -4.5, 0, -2.5, 9, 3, 5, hem)
     rig.held = ("frieren:warriors_axe", None)
-    rig.back_carry = True
+    rig.carry = "back"
     return rig
 
 
@@ -1086,6 +1086,7 @@ def himmel():
     rig.box("cape", -7, 0, 0, 14, 12, 1, cloak_panel)
     rig.box("cape_2", -7, 0, 0, 14, 11, 1, cloak_panel)
     rig.held = ("frieren:heros_sword", None)
+    rig.carry = "hip"
     return rig
 
 
@@ -1118,7 +1119,7 @@ def eisen():
     rig.box("crown", -4, -1.2, -1.3, 3, 1, 1, beard)
     rig.box("crown", 1, -1.2, -1.3, 3, 1, 1, beard)
     rig.held = ("frieren:warriors_axe", None)
-    rig.back_carry = True
+    rig.carry = "back"
     return rig
 
 
@@ -1492,7 +1493,7 @@ def linie():
     add_braid(rig, "tail_right", hair_c, offset=(-3, -2, 3), length=12, rotation=(0.1, 0, 0.1), tie=trim_c, seed=210)
     add_braid(rig, "tail_left", hair_c, offset=(3, -2, 3), length=12, rotation=(0.1, 0, -0.1), tie=trim_c, seed=220)
     rig.held = ("frieren:warriors_axe", None)
-    rig.back_carry = True
+    rig.carry = "back"
     return rig
 
 
@@ -2020,6 +2021,7 @@ def hero_statue():
     rig = himmel()
     rig.name = "hero_statue"
     rig.held = (None, None)
+    rig.carry = "hand"   # the copper sword is baked into the statue
     himmel_sword(rig)
     rig.render_scale = 2.8
     rig.post_paint = copper_cast("hero_statue")

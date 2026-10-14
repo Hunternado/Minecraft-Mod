@@ -20,30 +20,40 @@ import org.jspecify.annotations.Nullable;
  * 2x-density skins in {@code textures/entity/character/}.
  */
 public enum CharacterKind {
-    FRIEREN("frieren", 0.9F, false, true, 12.0F, "frieren:sages_staff", null, false),
-    FERN("fern", 0.95F, true, true, 12.0F, "frieren:mage_staff", null, false),
-    STARK("stark", 1.0F, false, false, 12.0F, "frieren:warriors_axe", null, true),
-    SERIE("serie", 0.88F, true, true, 12.0F, null, null, false),
-    HIMMEL("himmel", 1.0F, false, false, 12.0F, "frieren:heros_sword", null, false),
-    EISEN("eisen", 0.95F, false, false, 10.0F, "frieren:warriors_axe", null, true),
-    EXAMINER("examiner", 1.0F, true, false, 12.0F, "frieren:mage_staff", null, false),
-    WANDERING_MAGE("wandering_mage", 1.0F, false, false, 12.0F, "frieren:apprentice_staff", null, false),
-    PRIEST("priest", 1.0F, true, false, 12.0F, null, null, false),
-    AURA("aura", 0.95F, true, true, 12.0F, null, "frieren:scale_of_obedience", false),
-    QUAL("qual", 1.05F, true, false, 12.0F, null, null, false),
-    DEMON_SOLDIER("demon_soldier", 1.0F, false, false, 12.0F, "minecraft:iron_sword", null, false),
-    DEMON_MAGE("demon_mage", 1.0F, false, false, 12.0F, "frieren:guillotine_staff", null, false),
-    AURA_THRALL("aura_thrall", 1.05F, false, false, 12.0F, "minecraft:iron_sword", null, false),
-    LINIE("linie", 0.92F, false, true, 12.0F, "frieren:warriors_axe", null, true),
-    DRAHT("draht", 1.0F, false, false, 12.0F, null, null, false),
-    LUGNER("lugner", 1.0F, false, false, 12.0F, null, null, false),
-    MACHT("macht", 1.12F, false, false, 12.0F, null, null, false),
-    DEMON_KING("demon_king", 1.45F, true, false, 12.0F, "frieren:demon_kings_blade", null, false),
-    MIRROR_FRIEREN("mirror_frieren", 0.9F, false, true, 12.0F, "frieren:sages_staff", null, false),
-    MIRROR_REPLICA("mirror_replica", 1.0F, false, false, 12.0F, null, null, false),
-    SPIEGEL("spiegel", 1.15F, true, true, 13.0F, null, null, false),
-    MANA_DECOY("mana_decoy", 1.0F, false, false, 12.0F, null, null, false),
-    HERO_STATUE("hero_statue", 2.8F, false, false, 12.0F, null, null, false);
+    FRIEREN("frieren", 0.9F, false, true, 12.0F, "frieren:sages_staff", null, Carry.HAND),
+    FERN("fern", 0.95F, true, true, 12.0F, "frieren:mage_staff", null, Carry.HAND),
+    STARK("stark", 1.0F, false, false, 12.0F, "frieren:warriors_axe", null, Carry.BACK),
+    SERIE("serie", 0.88F, true, true, 12.0F, null, null, Carry.HAND),
+    HIMMEL("himmel", 1.0F, false, false, 12.0F, "frieren:heros_sword", null, Carry.HIP),
+    EISEN("eisen", 0.95F, false, false, 10.0F, "frieren:warriors_axe", null, Carry.BACK),
+    EXAMINER("examiner", 1.0F, true, false, 12.0F, "frieren:mage_staff", null, Carry.HAND),
+    WANDERING_MAGE("wandering_mage", 1.0F, false, false, 12.0F, "frieren:apprentice_staff", null, Carry.HAND),
+    PRIEST("priest", 1.0F, true, false, 12.0F, null, null, Carry.HAND),
+    AURA("aura", 0.95F, true, true, 12.0F, null, "frieren:scale_of_obedience", Carry.HAND),
+    QUAL("qual", 1.05F, true, false, 12.0F, null, null, Carry.HAND),
+    DEMON_SOLDIER("demon_soldier", 1.0F, false, false, 12.0F, "minecraft:iron_sword", null, Carry.HAND),
+    DEMON_MAGE("demon_mage", 1.0F, false, false, 12.0F, "frieren:guillotine_staff", null, Carry.HAND),
+    AURA_THRALL("aura_thrall", 1.05F, false, false, 12.0F, "minecraft:iron_sword", null, Carry.HAND),
+    LINIE("linie", 0.92F, false, true, 12.0F, "frieren:warriors_axe", null, Carry.BACK),
+    DRAHT("draht", 1.0F, false, false, 12.0F, null, null, Carry.HAND),
+    LUGNER("lugner", 1.0F, false, false, 12.0F, null, null, Carry.HAND),
+    MACHT("macht", 1.12F, false, false, 12.0F, null, null, Carry.HAND),
+    DEMON_KING("demon_king", 1.45F, true, false, 12.0F, "frieren:demon_kings_blade", null, Carry.HAND),
+    MIRROR_FRIEREN("mirror_frieren", 0.9F, false, true, 12.0F, "frieren:sages_staff", null, Carry.HAND),
+    MIRROR_REPLICA("mirror_replica", 1.0F, false, false, 12.0F, null, null, Carry.HAND),
+    SPIEGEL("spiegel", 1.15F, true, true, 13.0F, null, null, Carry.HAND),
+    MANA_DECOY("mana_decoy", 1.0F, false, false, 12.0F, null, null, Carry.HAND),
+    HERO_STATUE("hero_statue", 2.8F, false, false, 12.0F, null, null, Carry.HAND);
+
+    /** Where the main-hand signature weapon rides while the character is not fighting. */
+    public enum Carry {
+        /** Always in the hand (staffs, the Demon King's blade). */
+        HAND,
+        /** Strapped flat on the back, head over the right shoulder (Stark's axe). */
+        BACK,
+        /** Sheathed on the left hip (Himmel's sword). */
+        HIP
+    }
 
     private final String id;
     private final float scale;
@@ -52,14 +62,14 @@ public enum CharacterKind {
     private final float armLength;
     private final @Nullable String mainHandItem;
     private final @Nullable String offHandItem;
-    private final boolean backCarry;
+    private final Carry carry;
     private final ModelLayerLocation layer;
     private final Identifier texture;
     private @Nullable ItemStack mainHandStack;
     private @Nullable ItemStack offHandStack;
 
     CharacterKind(String id, float scale, boolean longRobe, boolean slim, float armLength, @Nullable String mainHandItem,
-                  @Nullable String offHandItem, boolean backCarry) {
+                  @Nullable String offHandItem, Carry carry) {
         this.id = id;
         this.scale = scale;
         this.longRobe = longRobe;
@@ -67,14 +77,14 @@ public enum CharacterKind {
         this.armLength = armLength;
         this.mainHandItem = mainHandItem;
         this.offHandItem = offHandItem;
-        this.backCarry = backCarry;
+        this.carry = carry;
         this.layer = new ModelLayerLocation(FrierenIds.id("character/" + id), "main");
         this.texture = FrierenIds.id("textures/entity/character/" + id + ".png");
     }
 
-    /** The main-hand weapon is worn across the back until the character fights (Stark's axe). */
-    public boolean backCarry() {
-        return backCarry;
+    /** Where the main-hand weapon rides out of combat; it comes to hand when the character fights. */
+    public Carry carry() {
+        return carry;
     }
 
     /** Slim (three pixel) arms: held items sit half a pixel closer to the body, as on slim player models. */

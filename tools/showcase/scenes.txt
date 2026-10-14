@@ -246,6 +246,9 @@
 /tp @a 24.5 120.2 -2.30 0 10
 @wait 25
 @shot portrait_stark
+/tp @e[type=frieren:stark] 24.5 120 0.5 25 0
+@wait 10
+@shot portrait_stark_back
 /tp @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player] 24.5 -300 0.5
 /summon frieren:serie 24.5 120 0.5 {NoAI:1b,Rotation:[205f,0f]}
 /tp @a 24.5 120.2 -2.10 0 10
@@ -296,6 +299,9 @@
 /tp @a 24.5 120.2 -2.20 0 10
 @wait 25
 @shot portrait_linie
+/tp @e[type=frieren:linie] 24.5 120 0.5 25 0
+@wait 10
+@shot portrait_linie_back
 /tp @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player] 24.5 -300 0.5
 /summon frieren:draht 24.5 120 0.5 {NoAI:1b,Rotation:[205f,0f]}
 /tp @a 24.5 120.2 -2.30 0 10

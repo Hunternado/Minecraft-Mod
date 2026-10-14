@@ -100,16 +100,34 @@ def element_faces(elements, m, tex_size):
     return out
 
 
-def back_matrix(model, pose):
+# CarriedItemLayer constants, in model pixels and degrees (keep in sync with the Java layer).
+BACK = dict(y=8.0, z=3.6, tilt=165.0, scale=0.8, middle=7.0)
+HIP = dict(x=5.9, y=9.0, z=2.4, scale=0.62, mouth=3.25)
+
+
+def carry_matrix(model, pose, carry):
     """
-    Item-model coordinates to model pixels for a weapon worn across the back (BackItemLayer): body transform,
-    translate(0, 6, 3.6), rotZ(145), scale 0.85, translate(0, -7, 0), then the item's own -0.5 centring.
+    Item-model coordinates to model pixels for a weapon carried out of combat (CarriedItemLayer), drawn in the
+    NONE display context (no display transform):
+      back: an axe strapped flat on the back, nearly upright, its head over the right shoulder: translate(0, y, z),
+            rotZ(tilt), scale, translate(0, -middle, 0) so the middle of the weapon sits mid-back;
+      hip:  a sheathed sword hanging straight at the left hip, just behind the arm and in front of any cape, its
+            guard along the body so it never pokes through either: translate(x, y, z), scale, translate(0, -mouth, 0)
+            to put the scabbard's mouth at the belt.
+    Then the item's own -0.5 centring.
     """
     root = model.root
     m = part_matrix(mat_identity(), root, pose)
     m = part_matrix(m, root.find("body"), pose)
-    m = mat_mul(m, mat_translate(0, 6, 3.6))
-    m = mat_mul(m, mat_rot_z(math.radians(145)))
-    m = mat_mul(m, mat_scale(0.85, 0.85, 0.85))
-    m = mat_mul(m, mat_translate(0, -7, 0))
+    if carry == "back":
+        m = mat_mul(m, mat_translate(0, BACK["y"], BACK["z"]))
+        m = mat_mul(m, mat_rot_z(math.radians(BACK["tilt"])))
+        m = mat_mul(m, mat_scale(BACK["scale"], BACK["scale"], BACK["scale"]))
+        m = mat_mul(m, mat_translate(0, -BACK["middle"], 0))
+    elif carry == "hip":
+        m = mat_mul(m, mat_translate(HIP["x"], HIP["y"], HIP["z"]))
+        m = mat_mul(m, mat_scale(HIP["scale"], HIP["scale"], HIP["scale"]))
+        m = mat_mul(m, mat_translate(0, -HIP["mouth"], 0))
+    else:
+        raise ValueError(carry)
     return mat_mul(m, mat_translate(-8, -8, -8))

@@ -108,8 +108,12 @@ STAFF = display({"rotation": [80, 0, 0], **HAND, "scale": [1, 1, 1]},
                 {"rotation": [-20, 0, 8], "translation": [3, -5, 0], "scale": [0.55, 0.55, 0.55]})
 AXE = display({"rotation": [55, 0, 0], **HAND, "scale": [1, 1, 1]},
               {"rotation": [-10, 0, 10], "translation": [3, -5, 0], "scale": [0.6, 0.6, 0.6]})
-SWORD = display({"rotation": [45, 0, 0], **HAND, "scale": [0.95, 0.95, 0.95]},
+# A one-handed sword is held at about the size it is sheathed at (CarriedItemLayer draws the scabbard at 0.62);
+# the Demon King's greatsword stays big.
+SWORD = display({"rotation": [45, 0, 0], **HAND, "scale": [0.72, 0.72, 0.72]},
                 {"rotation": [-10, 0, 12], "translation": [3, -5, 0], "scale": [0.6, 0.6, 0.6]})
+GREATSWORD = display({"rotation": [45, 0, 0], **HAND, "scale": [0.95, 0.95, 0.95]},
+                     {"rotation": [-10, 0, 12], "translation": [3, -5, 0], "scale": [0.6, 0.6, 0.6]})
 SCALE = display({"rotation": [90, 0, 0], **HAND, "scale": [0.8, 0.8, 0.8]},
                 {"rotation": [0, 0, 5], "translation": [3, -4, 0], "scale": [0.55, 0.55, 0.55]})
 
@@ -247,6 +251,20 @@ def scale_of_obedience(a):
     return out
 
 
+def heros_sword_sheathed(a):
+    """The Hero's Sword in its scabbard, worn at the hip: the same hilt, the blade inside blue leather with a gold
+    throat and chape. Selected for the NONE display context, which CarriedItemLayer draws in."""
+    sheath, gold = "#2A3C72", "#D4AF37"
+    return heros_sword(a)[:4] + [
+        box(a, (6.6, 8.25, 7.35), (9.4, 27.0, 8.65), "sheath", sheath, "grain"),
+        box(a, (6.35, 8.25, 7.2), (9.65, 9.75, 8.8), "gold", gold, "metal"),         # throat
+        box(a, (6.85, 27.0, 7.45), (9.15, 29.0, 8.55), "gold", gold, "metal"),        # chape
+    ]
+
+
+# Out-of-combat models for weapons that are not carried bare (CarriedItemLayer, NONE display context).
+SHEATHED = {"heros_sword": heros_sword_sheathed}
+
 ITEMS = {
     # id: (elements, display transforms, shift along +Y that puts the grip on y = 8)
     "sages_staff": (sages_staff, STAFF, 4.75),
@@ -255,17 +273,17 @@ ITEMS = {
     "guillotine_staff": (guillotine_staff, STAFF, 5.0),
     "warriors_axe": (warriors_axe, AXE, 2.0),
     "heros_sword": (heros_sword, SWORD, 3.0),
-    "demon_kings_blade": (demon_kings_blade, SWORD, 4.0),
+    "demon_kings_blade": (demon_kings_blade, GREATSWORD, 4.0),
     "scale_of_obedience": (scale_of_obedience, SCALE, 2.0),
 }
 HELD_ITEMS = set(ITEMS)
 
 
-def build(item_id):
-    """(elements, display, atlas image) for one item."""
+def build(item_id, sheathed=False):
+    """(elements, display, atlas image) for one item, or for its sheathed form."""
     factory, disp, grip_shift = ITEMS[item_id]
     atlas = Atlas()
-    elements = shifted(factory(atlas), grip_shift)
+    elements = shifted((SHEATHED[item_id] if sheathed else factory)(atlas), grip_shift)
     return elements, disp, atlas.img
 
 
@@ -292,11 +310,19 @@ def main():
             "elements": elements,
             "display": disp,
         })
+        cases = [{"when": ["gui", "ground", "fixed", "on_shelf"],
+                  "model": {"type": "minecraft:model", "model": f"{NS}:item/{item_id}"}}]
+        if item_id in SHEATHED:
+            s_elements, _, s_img = build(item_id, sheathed=True)
+            s_tex = f"{NS}:item/held/{item_id}_sheathed"
+            s_img.save(os.path.join(ASSETS, f"textures/item/held/{item_id}_sheathed.png"))
+            write_json(f"models/item/{item_id}_sheathed.json", {
+                "textures": {"tex": s_tex, "particle": s_tex}, "elements": s_elements})
+            cases.append({"when": "none", "model": {"type": "minecraft:model", "model": f"{NS}:item/{item_id}_sheathed"}})
         write_json(f"items/{item_id}.json", {"model": {
             "type": "minecraft:select",
             "property": "minecraft:display_context",
-            "cases": [{"when": ["gui", "ground", "fixed", "on_shelf"],
-                       "model": {"type": "minecraft:model", "model": f"{NS}:item/{item_id}"}}],
+            "cases": cases,
             "fallback": {"type": "minecraft:model", "model": f"{NS}:item/{item_id}_in_hand"},
         }})
     print(f"generated {len(ITEMS)} held item models")

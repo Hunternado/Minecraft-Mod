@@ -199,7 +199,7 @@ public class CharacterModel extends EntityModel<CharacterRenderState> implements
         }
     }
 
-    /** The torso part; BackItemLayer hangs back-carried weapons from it. */
+    /** The torso part; CarriedItemLayer hangs carried weapons from it. */
     public ModelPart body() {
         return body;
     }
