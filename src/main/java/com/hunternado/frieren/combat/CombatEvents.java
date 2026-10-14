@@ -4,6 +4,7 @@ import com.hunternado.frieren.data.MagicData;
 import com.hunternado.frieren.data.SpellProgress;
 import com.hunternado.frieren.entity.boss.FrierenBoss;
 import com.hunternado.frieren.entity.demon.DemonEntity;
+import com.hunternado.frieren.entity.npc.AuraDuel;
 import com.hunternado.frieren.mana.ManaHelper;
 import com.hunternado.frieren.registry.ModEffects;
 import com.hunternado.frieren.registry.ModSounds;
@@ -54,6 +55,7 @@ public final class CombatEvents {
     }
 
     private static void onServerTick(TickEvent.ServerTickEvent.Post event) {
+        AuraDuel.tick(event.server());
         if (event.server().getTickCount() % 10 == 0) {
             ObedienceTracker.tick(event.server());
             SummonTracker.tick(event.server());

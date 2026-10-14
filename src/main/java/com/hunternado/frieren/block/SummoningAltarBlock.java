@@ -1,7 +1,9 @@
 package com.hunternado.frieren.block;
 
+import com.hunternado.frieren.data.MagicData;
 import com.hunternado.frieren.entity.boss.FrierenBoss;
 import com.hunternado.frieren.item.SummoningSigilItem;
+import com.hunternado.frieren.magic.MageRank;
 import com.hunternado.frieren.registry.ModEntities;
 import com.hunternado.frieren.registry.ModSounds;
 import com.hunternado.frieren.util.Messages;
@@ -43,6 +45,14 @@ public class SummoningAltarBlock extends Block {
         }
         if (!(level instanceof ServerLevel serverLevel)) {
             return InteractionResult.SUCCESS;
+        }
+        if (sigil.boss() == SummoningSigilItem.Boss.DEMON_KING && !player.getAbilities().instabuild) {
+            // Only a First-Class mage may even try; and without Frieren's party, trying is all it will be.
+            MagicData data = MagicData.get(player);
+            if (data == null || data.rank() != MageRank.FIRST_CLASS) {
+                Messages.chat(player, Component.translatable("message.frieren.demon_king_rank").withStyle(ChatFormatting.DARK_RED));
+                return InteractionResult.FAIL;
+            }
         }
         List<Entity> existing = serverLevel.getEntities((Entity) null, new AABB(pos).inflate(48.0D), entity -> entity instanceof FrierenBoss);
         if (!existing.isEmpty()) {

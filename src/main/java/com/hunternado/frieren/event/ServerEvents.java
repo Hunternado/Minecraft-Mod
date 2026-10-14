@@ -2,6 +2,7 @@ package com.hunternado.frieren.event;
 
 import com.hunternado.frieren.combat.ObedienceTracker;
 import com.hunternado.frieren.command.FrierenCommand;
+import com.hunternado.frieren.entity.npc.AuraDuel;
 import com.hunternado.frieren.entity.npc.FrierenEntity;
 import com.hunternado.frieren.entity.npc.UbelEntity;
 import com.hunternado.frieren.network.FrierenNetwork;
@@ -58,5 +59,7 @@ public final class ServerEvents {
 
     private static void onServerStopped(ServerStoppedEvent event) {
         ObedienceTracker.clear();
+        AuraDuel.clear();
+        SpellManager.clearServerOriginals();
     }
 }

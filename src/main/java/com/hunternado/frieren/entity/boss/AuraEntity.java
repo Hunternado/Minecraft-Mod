@@ -1,6 +1,7 @@
 package com.hunternado.frieren.entity.boss;
 
 import com.hunternado.frieren.FrierenIds;
+import com.hunternado.frieren.client.render.character.CharacterPoses;
 import com.hunternado.frieren.combat.ModDamageTypes;
 import com.hunternado.frieren.config.FrierenConfig;
 import com.hunternado.frieren.data.MagicData;
@@ -19,6 +20,9 @@ import com.hunternado.frieren.spell.SpellFx;
 import com.hunternado.frieren.util.Messages;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -56,7 +60,7 @@ import java.util.UUID;
  *   <li><b>Guillotine</b> (&lt;30%): blink strikes, telegraphed guillotine circles and endless thralls.</li>
  * </ol>
  */
-public class AuraEntity extends DemonEntity implements FrierenBoss, RangedSpellGoal.Caster {
+public class AuraEntity extends DemonEntity implements FrierenBoss, RangedSpellGoal.Caster, CharacterPoses {
     public enum Phase { COMMAND, SCALES, GUILLOTINE }
 
     private static final float BASE_HEALTH = 300.0F;
@@ -76,6 +80,11 @@ public class AuraEntity extends DemonEntity implements FrierenBoss, RangedSpellG
     private @Nullable UUID weighedPlayer;
     private int weighTicks;
     private boolean weighedWasConcealing;
+    /** While Frieren settles things (AuraDuel), Aura's own AI stands aside. */
+    private boolean scripted;
+
+    private static final EntityDataAccessor<Boolean> DATA_SCALES =
+        SynchedEntityData.defineId(AuraEntity.class, EntityDataSerializers.BOOLEAN);
 
     public AuraEntity(EntityType<? extends AuraEntity> type, Level level) {
         super(type, level);
@@ -133,8 +142,37 @@ public class AuraEntity extends DemonEntity implements FrierenBoss, RangedSpellG
     }
 
     @Override
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(DATA_SCALES, false);
+    }
+
+    /** She holds the Scale of Obedience up while weighing someone. */
+    @Override
+    public boolean isRaisedArmPose() {
+        return this.entityData.get(DATA_SCALES);
+    }
+
+    public void setScalesRaised(boolean raised) {
+        this.entityData.set(DATA_SCALES, raised);
+    }
+
+    public void setScripted(boolean scripted) {
+        this.scripted = scripted;
+        if (scripted) {
+            endWeighing();
+            this.setTarget(null);
+            this.getNavigation().stop();
+        }
+    }
+
+    public boolean isScripted() {
+        return scripted;
+    }
+
+    @Override
     public boolean canCastNow() {
-        return stunTicks <= 0 && weighedPlayer == null;
+        return stunTicks <= 0 && weighedPlayer == null && !scripted;
     }
 
     @Override
@@ -157,6 +195,11 @@ public class AuraEntity extends DemonEntity implements FrierenBoss, RangedSpellG
             applyDifficultyScaling(this, BASE_HEALTH, 12.0F);
         }
         BossBarHelper.update(bossBar, level, this);
+        if (scripted) {
+            this.setTarget(null);
+            this.getNavigation().stop();
+            return;
+        }
         updatePhase(level);
 
         if (stunTicks > 0) {
@@ -239,6 +282,7 @@ public class AuraEntity extends DemonEntity implements FrierenBoss, RangedSpellG
         weighedPlayer = player.getUUID();
         weighTicks = WEIGH_TICKS;
         weighedWasConcealing = data.concealing();
+        setScalesRaised(true);
         this.getNavigation().stop();
         bossBar.setName(Component.translatable("boss.frieren.aura.weighing", player.getDisplayName()));
         Messages.nearby(level, this.position(), BossBarHelper.RANGE,
@@ -293,6 +337,7 @@ public class AuraEntity extends DemonEntity implements FrierenBoss, RangedSpellG
     }
 
     private void endWeighing() {
+        setScalesRaised(false);
         weighedPlayer = null;
         weighTicks = 0;
         bossBar.setName(this.getDisplayName());

@@ -1,6 +1,7 @@
 package com.hunternado.frieren.entity.npc;
 
 import com.hunternado.frieren.FrierenIds;
+import com.hunternado.frieren.entity.boss.FrierenBoss;
 import com.hunternado.frieren.entity.ai.IdleLookGoal;
 import com.hunternado.frieren.entity.ai.WanderGoal;
 import com.hunternado.frieren.mana.ManaSignature;
@@ -10,6 +11,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.PathfinderMob;
@@ -98,6 +101,11 @@ public abstract class FrierenNpcBase extends PathfinderMob implements ManaSignat
     public boolean hurtServer(ServerLevel level, DamageSource source, float amount) {
         if (source.getEntity() instanceof Player) {
             return false;
+        }
+        if (source.getEntity() instanceof FrierenBoss && amount >= this.getHealth()) {
+            // Frieren's party does not fall to a boss: they are knocked down to their last breath and dig in.
+            amount = Math.max(0.0F, this.getHealth() - 1.0F);
+            this.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 60, 4));
         }
         return super.hurtServer(level, source, amount);
     }

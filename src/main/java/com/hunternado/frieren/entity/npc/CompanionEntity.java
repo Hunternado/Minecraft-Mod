@@ -27,8 +27,9 @@ import org.jspecify.annotations.Nullable;
 import java.util.UUID;
 
 /**
- * Frieren's companions. Fern snipes hostile mobs with rapid Zoltraak; Stark fights in melee (bravely,
- * despite the shaking knees). Neither ever attacks players.
+ * Frieren's companions. Fern snipes hostile mobs with rapid Zoltraak (twice as hard against demons); Stark fights in
+ * melee (bravely, despite the shaking knees). Neither ever attacks players. They follow Frieren, catching up by
+ * teleport when they fall far behind.
  */
 public class CompanionEntity extends FrierenNpcBase implements RangedSpellGoal.Caster {
     public enum Role { FERN, STARK }
@@ -60,6 +61,11 @@ public class CompanionEntity extends FrierenNpcBase implements RangedSpellGoal.C
     public void setLeader(LivingEntity leader) {
         this.leaderId = leader.getUUID();
         this.cachedLeader = leader;
+    }
+
+    /** True when this companion travels with {@code leader} (Fern and Stark follow Frieren). */
+    public boolean isFollowing(Entity leader) {
+        return leaderId != null && leaderId.equals(leader.getUUID());
     }
 
     private @Nullable LivingEntity leader() {
@@ -103,7 +109,8 @@ public class CompanionEntity extends FrierenNpcBase implements RangedSpellGoal.C
         if (!(this.level() instanceof ServerLevel level) || role() != Role.FERN) {
             return;
         }
-        SpellDamage.hurt(level, this, this, target, 7.0F, ModDamageTypes.ZOLTRAAK, 1.0F, false, null);
+        // Fern learned her Zoltraak from Frieren: it bites demons twice as hard.
+        SpellDamage.hurt(level, this, this, target, SpellDamage.isDemon(target) ? 14.0F : 7.0F, ModDamageTypes.ZOLTRAAK, 1.0F, false, null);
         SpellFx.beam(level, this.getEyePosition(), target.getEyePosition(), 0xB8E0FF);
         level.playSound(null, this.getX(), this.getY(), this.getZ(), ModSounds.ZOLTRAAK.get(), SoundSource.NEUTRAL, 0.8F, 1.4F);
     }
