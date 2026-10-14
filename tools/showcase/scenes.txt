@@ -565,6 +565,56 @@
 /tp @a -40 120 -34 180 12
 @wait 10
 @shot utility_light_bridge_walk
+# 3.0: carried weapons up close - Stark's and Linie's axes strapped flat in their loops - and Übel, the new
+# character, front and back.
+/tp @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player] 24.5 -300 0.5
+/summon frieren:stark 24.5 120 0.5 {NoAI:1b,Rotation:[0f,0f]}
+/tp @a 23.0 120.0 -1.8 -33 7
+@wait 25
+@shot carry_stark_back
+/tp @a 26.6 120.0 -0.9 56 9
+@wait 25
+@shot carry_stark_side
+/tp @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player] 24.5 -300 0.5
+/summon frieren:linie 24.5 120 0.5 {NoAI:1b,Rotation:[0f,0f]}
+/tp @a 23.1 120.0 -1.7 -32 9
+@wait 25
+@shot carry_linie_back
+/tp @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player] 24.5 -300 0.5
+/summon frieren:ubel 24.5 120 0.5 {NoAI:1b,Rotation:[180f,0f]}
+/tp @a 24.5 120.2 2.75 -180 11
+@wait 25
+@shot portrait_ubel
+/tp @a 26.0 120.1 2.4 142 10
+@wait 25
+@shot portrait_ubel_three_quarter
+/tp @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player] 24.5 -300 0.5
+/summon frieren:ubel 24.5 120 0.5 {NoAI:1b,Rotation:[0f,0f]}
+@wait 5
+/tp @a 24.5 120.2 -1.75 -0 13
+@wait 20
+@shot portrait_ubel_back
+/tp @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player] 24.5 -300 0.5
+# 3.0: Frieren meets Aura. Within four chunks of each other the scene plays itself out: the scales, the reveal,
+# "Aura, kill yourself." The chat shows the lines.
+/summon frieren:frieren 19.5 120 22.5 {NoAI:1b,Rotation:[-90f,0f]}
+/summon frieren:aura 27.5 120 22.5 {NoAI:1b,Rotation:[90f,0f]}
+@hud show
+/tp @a 23.5 120.5 15.0 -0 7
+# Frieren looks for Aura when her tickCount hits 40, so the scene's clock runs ~42 ticks behind the summon:
+# scales up at 140 (shot ~170), the limiter at 220 (shot ~228), the scales tip at 350 (shot ~358), the farewell
+# at 500 (shot ~505).
+@wait 212
+@shot duel_scales
+@wait 58
+@shot duel_reveal
+@wait 130
+@shot duel_reveal_after
+@wait 147
+@shot duel_end
+@hud
+/kill @e[type=frieren:frieren]
+/kill @e[type=frieren:aura]
 # The UI: the HUD with five bound spells (Zoltraak cooling down), the grimoire with and without a spell chosen, and
 # the Journey Journal. Screens are opened by the director, as the keybinds would.
 /frieren spell learnall @p
@@ -590,6 +640,23 @@
 @screen journey
 @wait 10
 @shot ui_journey
+@screen spellbook frieren:frieren_zoltraak
+@wait 10
+@shot ui_spellbook_legendary
+@screen spellbook frieren:annihilation
+@wait 10
+@shot ui_spellbook_mythic
+@screen forge
+@wait 10
+@shot ui_forge
 @screen close
+# The detection compass: demons and a mage around, one Sense Mana pulse.
+/summon frieren:demon_soldier 38 120 6 {NoAI:1b}
+/summon frieren:demon_mage 28 120 8 {NoAI:1b}
+/summon frieren:wandering_mage 33 120 9 {NoAI:1b}
+@wait 10
+@detect
+@wait 12
+@shot ui_detect
 @hud
 @quit

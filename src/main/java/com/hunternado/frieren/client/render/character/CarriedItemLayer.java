@@ -12,18 +12,20 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
  * The item renders in the NONE display context: the 3D held models fall back to an identity transform there, and
  * swords select their sheathed model. Designed with tools/models/held.py (carry_matrix), which mirrors this chain.
  * <ul>
- *   <li>BACK: an axe strapped flat on the back, nearly upright, its head over the right shoulder and the haft down
- *   to the left hip, so only the blade shows above the shoulder from the front;</li>
- *   <li>HIP: a sheathed sword hanging at the left hip, behind the arm and in front of any cape, guard along the
- *   body so it pokes through neither.</li>
+ *   <li>BACK: an axe strapped flat against the back, nearly upright, its head over the right shoulder and the haft
+ *   down to the left hip, through a leather loop the rig sews onto the back, so only the blade shows above the
+ *   shoulder from the front and nothing hangs in the air behind;</li>
+ *   <li>HIP: a sheathed sword hanging at the left hip from a belt frog (also part of the rig), just behind the arm
+ *   and in front of any cape, guard along the body so it pokes through neither.</li>
  * </ul>
  */
 public class CarriedItemLayer extends RenderLayer<CharacterRenderState, CharacterModel> {
     private static final float PX = 1.0F / 16.0F;
-    // BACK: weapon middle 8 px below the neck, 3.6 px behind the body's centre (half a pixel clear of the back plus
-    // half the axe's eye); 180 degrees turns the item model (y up) into model space (y down), 165 leans it 15.
+    // BACK: weapon middle 8 px below the neck, 2.95 px behind the body's centre: the haft (1.2 px thick at this
+    // scale) lies right on the jacket (2.25), no gap; 180 degrees turns the item model (y up) into model space
+    // (y down), 165 leans it 15.
     private static final float BACK_Y = 8.0F * PX;
-    private static final float BACK_Z = 3.6F * PX;
+    private static final float BACK_Z = 2.95F * PX;
     private static final float BACK_TILT = 165.0F;
     private static final float BACK_SCALE = 0.8F;
     /** Item-model pixels from the model centre to the weapon's middle. */
@@ -31,7 +33,7 @@ public class CarriedItemLayer extends RenderLayer<CharacterRenderState, Characte
     // HIP: the scabbard's mouth on the belt at the left side (+x), just behind the arm's back face.
     private static final float HIP_X = 5.9F * PX;
     private static final float HIP_Y = 9.0F * PX;
-    private static final float HIP_Z = 2.4F * PX;
+    private static final float HIP_Z = 2.55F * PX;
     private static final float HIP_SCALE = 0.62F;
     /** Item-model pixels from the model centre down to the scabbard's mouth. */
     private static final float HIP_MOUTH = 3.25F * PX;

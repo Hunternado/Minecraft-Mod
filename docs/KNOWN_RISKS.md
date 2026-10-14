@@ -10,7 +10,7 @@ playing together can judge: feel, balance and long sessions.
 
 | Check | Where | Result |
 |---|---|---|
-| Full Gradle build (`compileJava` reports every error in one pass) | CI `Build` | passes, produces `frieren-2.2.0.jar` |
+| Full Gradle build (`compileJava` reports every error in one pass) | CI `Build` | passes, produces `frieren-3.0.0.jar` |
 | Dedicated server boot: every registry, config, network channel and datapack file | CI `Server smoke test` | clean |
 | Client boot: model layers, renderers, HUD, every model / texture / item definition | CI `Client smoke test` | clean, no missing resources |
 | In-game behaviour driven by `tools/showcase/scenes.txt` (commit tag `[showcase]`), screenshots published to the `ci-artifacts` branch | CI `In-game showcase` | see below |
@@ -54,6 +54,16 @@ What the showcase has confirmed in a running client (with screenshots):
 * **Everyday spells not photographed:** tree felling, return home, the five blessings, smelting and the pocket
   of space are covered by code review and the server boot only.
 * **Examiner and trader screens** are restyled but not opened by the showcase (they need an NPC interaction).
+* **3.0, not photographed or played end-to-end:**
+  * holding a charge with the real key, and concentration breaking under real hits;
+  * Serie's appraisal and the forge round trip with a real player;
+  * the full Übel duel and companion life (only her model and spawn are in the showcase);
+  * the Demon King fight with Frieren's party;
+  * Original spells in combat.
+  These are covered by code review, the server boot and the client boot; the forge screen, the cast bar, the
+  detection compass, Übel and the Frieren vs Aura scene are in the showcase.
+* **3.0 balance** is a first pass, especially Fern's Zoltraak (hurt cooldowns ignored), Annihilation, the forge
+  prices, and the demon fear threshold (six times their mana).
 
 ## Bugs found by verification (for the record)
 

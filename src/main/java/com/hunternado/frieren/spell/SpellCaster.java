@@ -187,7 +187,7 @@ public final class SpellCaster {
         float mastery = progress != null ? progress.masteryFraction() : 0.0F;
         StaffItem.Tier staff = heldStaff(player);
         float cost = effectiveCost(spell, mastery, staff);
-        if (data.mana() < cost) {
+        if (!spell.isCharged() && data.mana() < cost) {             // a charge only needs its opening share (below)
             fail(player, Component.translatable("message.frieren.no_mana", String.format("%.0f", cost)));
             return;
         }

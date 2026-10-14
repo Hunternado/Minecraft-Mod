@@ -1,9 +1,11 @@
 # Frieren: Mage's Journey
 
-A Forge mod inspired by *Frieren: Beyond Journey's End*. You can train your mana, conceal it, and sense it in
-others. There are 52 data-driven spells (13 of them everyday magic that earns its keep in an ordinary world),
-a 45-block building set in the anime's style, Continental Magic Association exams that play out wherever you stand,
-demons who plead and lie, and multi-phase bosses up to the Demon King. Fan-made; all art and text are original.
+A Forge mod inspired by *Frieren: Beyond Journey's End*. You can train your mana, conceal it, release it, and sense
+it in others. There are 62 data-driven spells, from everyday magic to the legends' own and the Demon King's, plus
+the spells Serie creates for you alone. Casting works the way it does in the anime: incantations, charges, channels
+and concentration a solid hit can break. There's also a 45-block building set in the anime's style, Association exams
+that play out wherever you stand, demons who plead, lie and size you up by your mana, Übel, Frieren's party, and
+multi-phase bosses up to the Demon King. Fan-made; all art and text are original.
 
 | | |
 |---|---|
@@ -11,14 +13,103 @@ demons who plead and lie, and multi-phase bosses up to the Demon King. Fan-made;
 | Forge | **65.1.0** |
 | Java | **25** |
 | Side | Client + server (required on both) |
-| Version | **2.2.0** |
+| Version | **3.0.0**: the Magic Update |
 
 > **Status:** builds against Minecraft 26.2 / Forge 65.1.0 and boots cleanly as a dedicated server and as a
 > client. On every push, GitHub Actions also starts a real client. It plays a scripted showcase covering
 > characters, spells, trials, bosses, the statue and the dungeons, and saves screenshots to the `ci-artifacts`
 > branch. Balance and long multiplayer sessions still need human playtesting; see `docs/KNOWN_RISKS.md`.
 
-## What's new in 2.2
+## What's new in 3.0: the Magic Update
+
+**Casting.** There's more than one way to cast now:
+* **Instant** spells fire on the key press.
+* **Incantations** wind up first.
+* **Charged spells** fill while you hold the cast key and fire on release. The longer you hold, the stronger they
+  hit: `0.2 + 0.8 x charge`. Mana pours in as they charge, and a full charge is what makes them lethal. Frieren's
+  Zoltraak, Full-Power Zoltraak and Annihilation work this way.
+* **Channels** keep going while you hold the key. Fern's Zoltraak works this way.
+* **Toggles** are switched on and off: flight and defensive magic.
+
+A bar under the crosshair shows each of these.
+
+**Concentration.** A solid hit can break an incantation or a charge. Mastery, defensive magic and rank steady you.
+A broken charge loses all the mana poured into it.
+
+**Mastery** now really matters: a spell at full mastery hits 2.25 times as hard as a fresh one, and the grimoire
+shows the multiplier.
+
+**New rarity and school.**
+* **Mythic** spells come from the Age of Myths and are for First-Class mages only.
+* **Original Magic** is a new school (and a new ribbon in the grimoire) for spells made just for you.
+
+**The legends' magic** (the Legendary tier used to be empty):
+* **Frieren's Zoltraak**: a charged beam that pierces, cuts through barriers and hits demons half again as hard.
+  At full charge it kills anything with up to 300 max health.
+* **Fern's Zoltraak**: a ring of circles fires ever faster storms of beams. It does far more damage than the barrage.
+* **Flamme's Deception**: for 30 seconds ordinary demons cannot target you, and your magic hits them 2.5 times as
+  hard.
+* **Heiter's Miracle**: heals everyone friendly nearby to full, cleanses every curse, and blesses them. The blessing
+  refuses one death.
+* **Frieren's Analysis**: shatters a demon's barrier, strips its buffs, and leaves it taking 40% more spell damage.
+* **Übel's Reelseiden**: a cut that goes through armour and shields. Only Übel teaches it.
+
+**The Demon King's magic** (Mythic; his grimoires drop when he dies):
+* **Annihilation**: kills anything that isn't a boss and takes a quarter of a boss's health. It needs a fragile
+  five-second charge.
+* **The Black Sun**: three rings of telegraphed blasts.
+* **Dominion**: every monster around obeys you.
+* **Sovereign Ward**: you take a fifth of all damage, and half of every melee blow goes back to the attacker.
+
+**Serie creates spells.** First-Class mages receive her **letter**, which calls her once a day.
+1. Impress her: cast different spells near her. Rarer and better-mastered spells count for more, and releasing your
+   limiter in front of her counts too.
+2. Beat Übel.
+3. Serie opens her **spell forge**. Choose the form, element and potency (up to *Annihilation*), plus reach, casting
+   style, modifiers, colour and a name.
+
+The forge shows every cost and trade-off before you commit. Annihilation, for example, costs 450 mana and a
+five-second charge that a hit can break. You get three original spells, and asking again replaces one.
+
+**Übel.** She turns up near Second-Class mages. Hit her and it's a duel, but she can't die in it. At a fifth of her
+health she laughs, yields, and decides you're interesting:
+* she gives you her Reelseiden as a grimoire, and her spare staff;
+* she follows you everywhere, like a tamed wolf with opinions;
+* she fights whatever threatens you;
+* sneak and right-click to make her stay.
+
+If she's "killed", she retreats and comes back the next day.
+
+**Frieren and her party.**
+* Frieren finally fights. Her Zoltraak does three times the damage to demons.
+* A First-Class mage can sneak and talk to her to bring Frieren, Fern and Stark along.
+
+**The Demon King** can only be summoned by a First-Class mage. Without Frieren, Fern *and* Stark beside you, his
+Sovereign Barrier shrugs off 95% of every blow and his near-endless mana mends him. With them, the barrier breaks.
+He fights with Annihilation (deal him 80 damage mid-charge to shatter it), the Black Sun, Dominion and Sovereign Ward.
+
+**Frieren vs Aura.** If Frieren comes within four chunks of Aura, the anime scene plays out in full:
+1. Aura sneers at Frieren's tiny mana.
+2. She raises the scales.
+3. Frieren releases her limiter.
+4. "Aura, kill yourself."
+
+**Mana you can read.**
+* **Limiter release:** drop your concealment after hiding for 30 seconds or more and your mana floods out in a
+  pillar. Weaker demons flee, and you're *Unleashed*: +20 to 40% spell power.
+* **Demons judge you by your mana.** Ordinary demons run from a mage whose visible mana is six times their own, and
+  treat a concealed one as prey. Casting while concealed flares your true mana for a moment.
+* **Detection** draws a compass around the crosshair: markers by direction and strength ("weaker", "your equal",
+  "overwhelming") and distance. Hidden signatures you noticed but couldn't see through show as a flickering "?".
+  Trained mages also feel overwhelming mana nearby without asking.
+
+**Also:**
+* Azeryuze puppets take orders with the **Command Puppets** key (Z).
+* Top-tier spells one-shot ordinary mobs and regular demons.
+* The Stille tells you exactly how to tire it.
+* Carried axes are strapped flat in leather loops instead of floating behind their owners.
+
+## What's in 2.2
 
 * **The whole cast, rebuilt from the anime.** Hair is soft and layered instead of a helmet of blocks: a rounded
   crown, a fringe that frames the face, side locks and tails that bend link by link. Faces are calm and
@@ -149,7 +240,7 @@ current trial and time left.
 
 | Key (rebindable in Controls → Frieren: Magic) | Action |
 |---|---|
-| R | Cast the selected spell (hold to channel) |
+| R | Cast the selected spell (hold to charge or channel; release to fire a charge) |
 | V | Next spell slot |
 | B | Spellbook |
 | G | Toggle mana concealment |

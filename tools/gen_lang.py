@@ -817,7 +817,7 @@ def original_magic():
 
 def keys():
     put(f"key.category.{NS}.magic", "Frieren: Magic")
-    for k, v in {"cast": "Cast Spell (hold to channel)", "cycle_spell": "Next Spell Slot", "spellbook": "Open Spellbook",
+    for k, v in {"cast": "Cast Spell (hold to charge or channel)", "cycle_spell": "Next Spell Slot", "spellbook": "Open Spellbook",
                  "conceal": "Toggle Mana Concealment", "detect": "Sense Mana", "journal": "Open Journey Journal",
                  "command_puppets": "Command Puppets (Azeryuze)"}.items():
         put(f"key.{NS}.{k}", v)

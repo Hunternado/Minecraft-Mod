@@ -274,6 +274,25 @@ def arm_skin_painter(skin, sleeve=None, hand_rows=6, seed=41):
 # ---------------------------------------------------------------------------------------------
 # Rig helpers
 # ---------------------------------------------------------------------------------------------
+def back_loop(rig, color):
+    """
+    The leather loop a back-carried axe hangs in (CarriedItemLayer BACK): sewn onto the back where the haft crosses
+    mid-back (x -0.54 at y 6 for the 15-degree lean), deep enough to wrap the haft, so the weapon reads as strapped
+    on rather than floating. Keep in step with tools/models/held.py BACK.
+    """
+    loop = cloth_painter(color, trim=shade(color, 1.35))
+    rig.box("body", -2.05, 5.2, 2.0, 3, 1.6, 1.8, loop)
+    rig.box("body", -1.1, 9.8, 2.0, 3.5, 1.2, 1.4, loop)       # a second loop lower down (haft at x +0.64 there)
+
+
+def belt_frog(rig, color):
+    """
+    The belt frog a hip-carried sword hangs from (CarriedItemLayer HIP): from the back-left corner of the waist to the
+    scabbard's mouth, behind the arm and in front of any cape.
+    """
+    rig.box("body", 3.4, 8.4, 2.0, 3.5, 1.4, 0.95, cloth_painter(color, trim=shade(color, 0.8)))
+
+
 def add_long_hair(rig, hair_c, length=14, width=8, seed=70, painter=None):
     """Flat panel of long hair hanging from the back of the head; sways with movement in Java."""
     rig.pose("hair_back", offset=(0, -6.5, 4.0), rotation=(0.08, 0, 0))
@@ -930,6 +949,7 @@ def stark():
     # Jacket hem below the waist (open in front), and the axe rides on his back until he fights.
     rig.pose("skirt", offset=(0, 10.5, 0))
     rig.box("skirt", -4.5, 0, -2.5, 9, 3, 5, hem)
+    back_loop(rig, strap)
     rig.held = ("frieren:warriors_axe", None)
     rig.carry = "back"
     return rig
@@ -1207,6 +1227,7 @@ def himmel():
     chain(rig, ("cape", "cape_2"), ((0, 0.4, 3.0), (0, 12, 0)), ((0.06, 0, 0), (0.04, 0, 0)))
     rig.box("cape", -7, 0, 0, 14, 12, 1, cloak_panel)
     rig.box("cape_2", -7, 0, 0, 14, 11, 1, cloak_panel)
+    belt_frog(rig, hexc("#F2F0EA"))
     rig.held = ("frieren:heros_sword", None)
     rig.carry = "hip"
     return rig
@@ -1964,6 +1985,7 @@ def linie():
     rig.pose("skirt", offset=(0, 11, 0))
     rig.box("skirt", -4.75, 0, -2.75, 9.5, 5, 5.5, skirt)
     rig.box("skirt", -5.25, 5, -3.25, 10.5, 4, 6.5, skirt)
+    back_loop(rig, ribbon)
     rig.held = ("frieren:warriors_axe", None)
     rig.carry = "back"
     return rig

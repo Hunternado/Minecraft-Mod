@@ -2,9 +2,11 @@ package com.hunternado.frieren.client.dev;
 
 import com.hunternado.frieren.client.ClientMagicCache;
 import com.hunternado.frieren.client.gui.JourneyScreen;
+import com.hunternado.frieren.client.gui.SpellForgeScreen;
 import com.hunternado.frieren.client.gui.SpellbookScreen;
 import com.hunternado.frieren.network.FrierenNetwork;
 import com.hunternado.frieren.network.packet.BindSpellPacket;
+import com.hunternado.frieren.network.packet.DetectManaPacket;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.CameraType;
 import net.minecraft.client.Minecraft;
@@ -151,8 +153,14 @@ public final class ShowcaseDirector {
                 minecraft.gui.setScreen(switch (parts[0]) {
                     case "spellbook" -> new SpellbookScreen(parts.length > 1 ? Identifier.parse(parts[1]) : null);
                     case "journey" -> new JourneyScreen();
+                    case "forge" -> new SpellForgeScreen(0);
                     default -> null;
                 });
+                continue;
+            }
+            if (line.equals("@detect")) {
+                // a mana sense pulse, as the Sense Mana key sends it (the compass HUD needs the server's answer)
+                FrierenNetwork.sendToServer(DetectManaPacket.INSTANCE);
                 continue;
             }
             if (line.startsWith("@bind")) {

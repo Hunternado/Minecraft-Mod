@@ -101,8 +101,8 @@ def element_faces(elements, m, tex_size):
 
 
 # CarriedItemLayer constants, in model pixels and degrees (keep in sync with the Java layer).
-BACK = dict(y=8.0, z=3.6, tilt=165.0, scale=0.8, middle=7.0)
-HIP = dict(x=5.9, y=9.0, z=2.4, scale=0.62, mouth=3.25)
+BACK = dict(y=8.0, z=2.95, tilt=165.0, scale=0.8, middle=7.0)
+HIP = dict(x=5.9, y=9.0, z=2.55, scale=0.62, mouth=3.25)
 
 
 def carry_matrix(model, pose, carry):

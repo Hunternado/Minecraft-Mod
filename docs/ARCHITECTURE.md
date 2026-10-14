@@ -244,3 +244,52 @@ tools/                              Python generators for every resource file + 
   `tools/gen_gui.py`. `SpellIcons` (generated) says which spells have a drawn icon; others use a tinted rune.
 * Screens draw their book or sheet in `extractBackground`, so widgets such as `InkButton` land on top of it.
 * The showcase director gained `@screen` and `@bind` so CI can photograph the UI.
+
+## 3.0 additions: the Magic Update
+
+### Ways to cast (`spell/SpellCaster`, `spell/Concentration`)
+* A spell's casting mode follows from its data: instant; `cast_time` (incantation); param `charge` (charged);
+  `channel`; or a toggle behaviour. `SpellCaster` keeps the state in `MagicData` (pending cast, charge ticks and
+  poured mana, channel) and reports every change to the owning client with `CastStatePacket`, which the HUD's
+  cast bar animates locally.
+* Charges pour `cost / chargeTicks` mana per tick while the key is held; release (the existing
+  `ReleaseChannelPacket`) fires at power `0.2 + 0.8 * charge`. `SpellContext.charge()` and `executeCap()` let
+  behaviours read it (executions need `execute_charge`, default 95%).
+* `Concentration.onHurt` (from the hurt event) may break an incantation or charge; spells opt out with
+  `steady` or weigh in with `fragility`.
+* Power multipliers, in order: mastery (`masteryPower`: 1 + 1.25 * sqrt(f)), staff, config, charge, Unleashed.
+  Damage multipliers live in `SpellDamage.hurt`: insignia, `demon_bonus`, Exposed, Deceiving ambush, executions.
+
+### Rarities, schools and taught spells
+* `SpellRarity.MYTHIC` (First Class) and `SpellSchool.ORIGINAL`. Param `taught` keeps a spell out of loot rolls
+  and privileges (Übel's Reelseiden is given only by Übel). Unidentified grimoires prefer spells the reader lacks.
+
+### Original magic (`spell/OriginalSpells`, `spell/SpellForge`, `spell/behavior/OriginalBehavior`)
+* A recipe (form, element, potency, reach, casting, modifiers, colour, name) maps to `Stats` and to a
+  `SpellDefinition` (behaviour `frieren:original`, school ORIGINAL, rarity MYTHIC, `customName`). The same code
+  runs in the forge screen's preview and on the server, which recomputes everything from the sanitised recipe.
+* Recipes are saved in the owner's `MagicData` with an id unique to player and slot
+  (`frieren:original/<uuid>_<slot>`). The server registers them in `SpellManager`'s originals map at login and on
+  creation; the client rebuilds its own from synced data. Lookups (`server(id)`, `client(id)`) check data-pack spells
+  first, then originals; listings only ever contain data-pack spells.
+
+### Mana reading (`mana/ManaSensing`, `mana/ManaHelper`, `entity/demon/DemonEntity`)
+* Releasing concealment held 30+ s is a limiter release (Unleashed effect, frightened demons, pillar).
+  Casting while concealed sets a 3-second mana flare (no concealment) unless the spell is `silent`.
+* `DemonEntity.judgeMana` frightens ordinary demons facing six times their mana; Frightened demons drop their
+  target and run. Bosses (`FrierenBoss`) never judge.
+* `ManaSensePacket` carries per-entry flags (noticed, boss, seen through) and the detector's own mana; the HUD
+  compass draws it. `passiveSense` warns trained mages of overwhelming signatures every two seconds.
+
+### People (`entity/npc/`)
+* `UbelEntity`: wild/duel/companion states in one class; the duel clamps damage so she yields at 20%; companion AI
+  borrows the wolf's targeting (owner's attacker and target) and retreats instead of dying (`MagicData.ubelReturnAt`).
+* `SerieEntity`: the appraisal (scored from `SpellCaster` and `ManaSensing` hooks) and the forge gate;
+  `SerieLetterItem` summons her. `OpenSpellForgePacket` / `CreateSpellPacket` carry the forge round trip.
+* `FrierenEntity`: combat (`RangedSpellGoal`), party leadership (her companions follow her, she follows the
+  recruiting player), and `AuraDuel`, a server-ticked script that drives both entities through the scene.
+* `FrierenNpcBase` keeps Frieren's party alive against bosses (they drop to 1 health instead of dying).
+
+### The Demon King (`entity/boss/DemonKingEntity`)
+* The Sovereign Barrier checks for Frieren, Fern and Stark within 40 blocks once a second; without them damage is
+  cut to 5% and he regenerates. Annihilation tracks damage taken during its charge and breaks at 80.
