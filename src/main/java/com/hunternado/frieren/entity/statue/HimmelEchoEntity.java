@@ -1,5 +1,6 @@
 package com.hunternado.frieren.entity.statue;
 
+import com.hunternado.frieren.registry.ModEntities;
 import com.hunternado.frieren.spell.SpellFx;
 import com.hunternado.frieren.util.Ground;
 import com.hunternado.frieren.util.Messages;
@@ -16,10 +17,12 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
+import org.jspecify.annotations.Nullable;
 
 /**
- * A fleeting echo of Himmel that appears near his statue the moment someone polishes it to a full shine: he looks
- * at whoever did it, says a few words and fades away. Purely sentimental, untouchable, and never saved.
+ * A fleeting echo of the hero party that appears near Himmel's statue the moment someone polishes it to a full
+ * shine: Himmel, Eisen and Heiter look at whoever did it, Himmel says a few words, and they fade away. Purely
+ * sentimental, untouchable, and never saved. One class serves all three entity types.
  */
 public class HimmelEchoEntity extends Mob {
     public static final int LIFETIME = 160;
@@ -38,25 +41,44 @@ public class HimmelEchoEntity extends Mob {
     }
 
     /**
-     * Appears on open ground between {@code polisher} and the statue, just off their line of sight, facing them.
-     * Never inside the plinth: each candidate spot is checked for floor and headroom, nearest the polisher's height
-     * first.
+     * The hero party appears on open ground between {@code polisher} and the statue, just off their line of sight,
+     * facing them: Himmel in front, Eisen and Heiter a step behind at either side. Never inside the plinth: each
+     * candidate spot is checked for floor and headroom, nearest the polisher's height first. Only Himmel speaks.
      */
-    public static void appear(ServerLevel level, HeroStatueEntity statue, Player polisher, EntityType<HimmelEchoEntity> type) {
-        HimmelEchoEntity echo = type.create(level, net.minecraft.world.entity.EntitySpawnReason.TRIGGERED);
-        if (echo == null) {
+    public static void appearParty(ServerLevel level, HeroStatueEntity statue, Player polisher) {
+        Vec3 at = spotNear(level, statue, polisher);
+        if (spawn(level, ModEntities.HIMMEL_ECHO.get(), at, polisher) == null) {
             return;
         }
-        Vec3 at = spotNear(level, statue, polisher);
+        Vec3 toPolisher = polisher.position().subtract(at).multiply(1.0D, 0.0D, 1.0D);
+        Vec3 forward = toPolisher.lengthSqr() > 1.0E-4D ? toPolisher.normalize() : new Vec3(0.0D, 0.0D, 1.0D);
+        Vec3 side = new Vec3(-forward.z, 0.0D, forward.x);
+        spawnBeside(level, ModEntities.EISEN_ECHO.get(), at, forward, side.scale(-1.3D), polisher);
+        spawnBeside(level, ModEntities.HEITER_ECHO.get(), at, forward, side.scale(1.3D), polisher);
+        int line = level.getRandom().nextInt(LINES);
+        Messages.nearby(level, at, 16.0D, Component.translatable("message.frieren.himmel_echo." + line)
+            .withStyle(ChatFormatting.ITALIC, ChatFormatting.AQUA));
+    }
+
+    private static void spawnBeside(ServerLevel level, EntityType<HimmelEchoEntity> type, Vec3 leader, Vec3 forward, Vec3 offset,
+                                    Player polisher) {
+        Vec3 wanted = leader.add(offset).subtract(forward.scale(0.5D));
+        Vec3 ground = Ground.standable(level, wanted);
+        spawn(level, type, ground != null && Math.abs(ground.y - leader.y) <= 1.0D ? ground : wanted, polisher);
+    }
+
+    private static @Nullable HimmelEchoEntity spawn(ServerLevel level, EntityType<HimmelEchoEntity> type, Vec3 at, Player polisher) {
+        HimmelEchoEntity echo = type.create(level, net.minecraft.world.entity.EntitySpawnReason.TRIGGERED);
+        if (echo == null) {
+            return null;
+        }
         float yaw = (float) (Math.atan2(polisher.getZ() - at.z, polisher.getX() - at.x) * (180.0D / Math.PI)) - 90.0F;
         echo.snapTo(at.x, at.y, at.z, yaw, 0.0F);
         echo.setYHeadRot(yaw);
         echo.setYBodyRot(yaw);
         level.addFreshEntity(echo);
         SpellFx.petals(level, at, 0x8FB8FF, 1.5F);
-        int line = level.getRandom().nextInt(LINES);
-        Messages.nearby(level, at, 16.0D, Component.translatable("message.frieren.himmel_echo." + line)
-            .withStyle(ChatFormatting.ITALIC, ChatFormatting.AQUA));
+        return echo;
     }
 
     private static Vec3 spotNear(ServerLevel level, HeroStatueEntity statue, Player polisher) {

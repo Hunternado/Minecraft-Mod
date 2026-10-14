@@ -5,10 +5,13 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 
-/** Himmel's echo: his own model, translucent and pale blue, fading in and out. */
+/**
+ * An echo of the hero party (Himmel, Eisen or Heiter): their own model, translucent and faintly blue, fading in and
+ * out. Translucent enough to read as a memory, opaque enough that their colours still show.
+ */
 public class HimmelEchoRenderer extends CharacterRenderer<HimmelEchoEntity> {
-    public HimmelEchoRenderer(EntityRendererProvider.Context context) {
-        super(context, CharacterKind.HIMMEL, 0.0F);
+    public HimmelEchoRenderer(EntityRendererProvider.Context context, CharacterKind kind) {
+        super(context, kind, 0.0F);
     }
 
     @Override
@@ -30,7 +33,7 @@ public class HimmelEchoRenderer extends CharacterRenderer<HimmelEchoEntity> {
 
     @Override
     protected int getModelTint(CharacterRenderState state) {
-        int alpha = Math.max(0, Math.min(255, (int) (state.variant * 0.6F)));
-        return (alpha << 24) | 0xC8DCFF;
+        int alpha = Math.max(0, Math.min(255, (int) (state.variant * 0.78F)));
+        return (alpha << 24) | 0xDCE8FF;
     }
 }

@@ -107,6 +107,8 @@ ENTITIES = {
     "exam_construct": "Exam Construct",
     "hero_statue": "Statue of Himmel the Hero",
     "himmel_echo": "Himmel",
+    "eisen_echo": "Eisen",
+    "heiter_echo": "Heiter",
     "mirror_replica": "Mirror Replica",
     "mimic": "Mimic",
     "stille": "Stille",

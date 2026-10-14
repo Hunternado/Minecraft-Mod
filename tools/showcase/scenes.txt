@@ -206,6 +206,9 @@
 /frieren cast @p frieren:rust_removal
 @wait 30
 @shot statue_polished_echo
+/tp @a 8.5 120.4 24.5 180 4
+@wait 6
+@shot statue_party_echo
 /summon frieren:hero_statue 20 120 24 {Stage:0,Rotation:[0f,0f]}
 /summon frieren:hero_statue 24 120 24 {Stage:1,Rotation:[0f,0f]}
 /summon frieren:hero_statue 28 120 24 {Stage:2,Rotation:[0f,0f]}

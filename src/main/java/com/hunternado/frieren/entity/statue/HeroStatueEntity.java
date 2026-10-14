@@ -1,6 +1,5 @@
 package com.hunternado.frieren.entity.statue;
 
-import com.hunternado.frieren.registry.ModEntities;
 import com.hunternado.frieren.registry.ModSounds;
 import com.hunternado.frieren.spell.SpellFx;
 import com.hunternado.frieren.util.Messages;
@@ -86,7 +85,7 @@ public class HeroStatueEntity extends Mob {
             SpellFx.petals(level, this.position().add(0.0D, 0.2D, 0.0D), 0x8FB8FF, 3.5F);
             Messages.chat(caster, Component.translatable("message.frieren.statue_polished").withStyle(ChatFormatting.AQUA));
             if (level.getEntitiesOfClass(HimmelEchoEntity.class, this.getBoundingBox().inflate(8.0D)).isEmpty()) {
-                HimmelEchoEntity.appear(level, this, caster, ModEntities.HIMMEL_ECHO.get());
+                HimmelEchoEntity.appearParty(level, this, caster);
             }
         }
         return POLISH_VALUE;

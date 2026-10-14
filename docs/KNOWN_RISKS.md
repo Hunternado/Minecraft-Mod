@@ -83,3 +83,5 @@ What the showcase has confirmed in a running client (with screenshots):
 | A static `ItemStack` field in the tunnel spell | CI server smoke test | **the mod failed to load**: components are not bound at construction |
 | Portrait studio killing each sitter | showcase screenshot | death poofs and loot in every portrait; sitters now drop into the void |
 | The block sampler built where the mimic camera stands | showcase screenshot | the mimic close-up showed a wall of slate |
+| A 25 px axe leaned 35 degrees across an 8 px back; Himmel holding his sword out sideways at rest | player report (preview screenshot) | axe heads beside the face and hafts through the shins; carries redesigned |
+| Serie in an invented black-and-gold robe | player report with her character sheet | rebuilt from the sheet in her cream and mauve |

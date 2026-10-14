@@ -37,7 +37,9 @@ public final class ModRenderers {
         character(event, ModEntities.LUGNER.get(), CharacterKind.LUGNER, 0.5F);
         event.registerEntityRenderer(ModEntities.EXAM_CONSTRUCT.get(), ExamConstructRenderer::new);
         event.registerEntityRenderer(ModEntities.HERO_STATUE.get(), HeroStatueRenderer::new);
-        event.registerEntityRenderer(ModEntities.HIMMEL_ECHO.get(), HimmelEchoRenderer::new);
+        event.registerEntityRenderer(ModEntities.HIMMEL_ECHO.get(), context -> new HimmelEchoRenderer(context, CharacterKind.HIMMEL));
+        event.registerEntityRenderer(ModEntities.EISEN_ECHO.get(), context -> new HimmelEchoRenderer(context, CharacterKind.EISEN));
+        event.registerEntityRenderer(ModEntities.HEITER_ECHO.get(), context -> new HimmelEchoRenderer(context, CharacterKind.HEITER));
         character(event, ModEntities.WANDERING_MAGE.get(), CharacterKind.WANDERING_MAGE, 0.5F);
         character(event, ModEntities.EXAMINER.get(), CharacterKind.EXAMINER, 0.5F);
         character(event, ModEntities.PRIEST.get(), CharacterKind.PRIEST, 0.5F);

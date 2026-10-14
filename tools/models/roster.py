@@ -937,37 +937,159 @@ def stark():
 
 # ---------------------------------------------------------------------------------------------
 def serie():
-    skin = hexc("#F7E6D8")
-    hair_c = hexc("#E9C86E")
-    eye = hexc("#D79A2B")
-    robe = hexc("#1E2236")
-    gold = hexc("#D8B04A")
+    """
+    Serie, from her character sheet: golden hair falling straight to her knees with a light fringe, long side locks
+    and a thin ringed lock in front of each shoulder; long elf ears; calm amber eyes and the faintest smile. A cream
+    wrap top crossed at the chest, edged in dusty mauve, pinned with a teal brooch on a cord, ruffled below; an open
+    over-robe with wide hanging sleeves banded in mauve and side panels to mid-thigh; a mauve sash; cream shorts;
+    bare legs and feet with brown ankle bands.
+    """
+    skin = hexc("#F8D9C4")
+    hair_c = hexc("#F6CB58")
+    eye = hexc("#B9813A")
+    cream = hexc("#FAF6E8")
+    mauve = hexc("#AE8A84")
+    mauve_d = shade(mauve, 0.8)
+    teal = hexc("#2E9C8E")
+    gold = hexc("#C9A048")
+    band = hexc("#8A6438")
     rig = Rig("serie", render_scale=0.88)
 
+    # A light, slightly uneven fringe at the brows; side locks to the chest.
+    depth = [16, 15, 6, 7, 6, 5, 6, 5, 4, 5, 6, 5, 6, 7, 15, 16]
+    head, shell = soft_head(rig, skin, hair_c, eye,
+                            face=dict(style="calm", eye_y=8, depth=depth, locks=(2, 13), lash=hexc("#6A4A24"),
+                                      mouth="smile", brow=shade(hair_c, 0.78)),
+                            side_rows=16, side_tips=0, back_rows=16, back_tips=0, fringe_tips=4, fringe_period=3,
+                            fringe_rows=4, seed=91)
+
+    def body(cv, f):
+        for name, r in f.items():
+            fill(cv, r, cream, gradient=0.05)
+        r = f["front"]
+        w = r[2]
+        for y in range(10):                                    # the crossed V neckline, edged in mauve
+            half = max(0, 4 - (y * 4) // 10)
+            for x in range(w // 2 - half, w // 2 + half):
+                cv.px(r[0] + x, r[1] + y, skin)
+            for k in (1, 2):
+                cv.px(r[0] + w // 2 - half - k, r[1] + y, mauve if k == 1 else mauve_d)
+                cv.px(r[0] + w // 2 + half - 1 + k, r[1] + y, mauve if k == 1 else mauve_d)
+        for k in range(6):                                     # the cord from the brooch up to each side
+            cv.px(r[0] + w // 2 - 3 - k // 2, r[1] + 11 - k, gold)
+            cv.px(r[0] + w // 2 + 2 + k // 2, r[1] + 11 - k, gold)
+        cv.rect(r[0] + w // 2 - 2, r[1] + 10, 4, 3, gold)      # the teal brooch in a gold frame
+        cv.rect(r[0] + w // 2 - 1, r[1] + 10, 2, 3, teal)
+        cv.px(r[0] + w // 2 - 1, r[1] + 10, shade(teal, 1.5))
+        for x in (3, 6, 9, 12):                                # the ruffle below the brooch
+            vline(cv, r, x, shade(cream, 0.9), y_from=13, y_to=19)
+        for name in ("front", "back", "left", "right"):        # mauve sash and the shorts' waistband
+            fill(cv, sub(f[name], 0, 19, f[name][2], 3), mauve)
+            hline(cv, f[name], 21, mauve_d)
+            fill(cv, sub(f[name], 0, 22, f[name][2], 2), cream)
+
+    def robe(cv, f):
+        # the open over-robe on the jacket layer: cream sides edged in mauve, open down the front
+        for name, r in f.items():
+            if name in ("top", "bottom"):
+                continue
+            fill(cv, r, cream, gradient=0.06)
+        r = f["front"]
+        for y in range(r[3]):
+            for x in range(4, r[2] - 4):
+                cv.px(r[0] + x, r[1] + y, (0, 0, 0, 0))
+            for x, c in ((3, mauve), (2, mauve_d), (r[2] - 4, mauve), (r[2] - 3, mauve_d)):
+                cv.px(r[0] + x, r[1] + y, c)
+
+    def robe_panels(cv, f):
+        # the robe below the sash: side and back panels to mid-thigh, open in front, banded in mauve
+        for name, r in f.items():
+            if name == "bottom":
+                fill(cv, r, shade(cream, 0.75))
+                continue
+            fill(cv, r, cream, gradient=0.08)
+            if name != "top":
+                for y, c in ((r[3] - 4, mauve), (r[3] - 3, mauve), (r[3] - 2, mauve_d), (r[3] - 1, mauve)):
+                    hline(cv, r, y, c)
+        r = f["front"]
+        for y in range(r[3]):
+            for x in range(4, r[2] - 4):
+                cv.px(r[0] + x, r[1] + y, (0, 0, 0, 0))
+            for x in (3, r[2] - 4):
+                cv.px(r[0] + x, r[1] + y, mauve)
+        for face in ("top", "bottom"):
+            b = f[face]
+            for x in range(4, b[2] - 4):
+                for y in range(b[3]):
+                    cv.px(b[0] + x, b[1] + y, (0, 0, 0, 0))
+
+    def wide_sleeve(cv, f):
+        # a hanging kimono sleeve, open at the bottom so the hand shows; a broad mauve band at the hem
+        for name, r in f.items():
+            if name == "bottom":
+                fill(cv, r, (0, 0, 0, 0))
+                continue
+            fill(cv, r, cream, gradient=0.08)
+            if name != "top":
+                for y, c in ((r[3] - 6, mauve_d), (r[3] - 5, mauve), (r[3] - 4, mauve), (r[3] - 3, mauve),
+                             (r[3] - 2, mauve_d), (r[3] - 1, mauve)):
+                    hline(cv, r, y, c)
+
+    def legs(cv, f):
+        for name, r in f.items():
+            if name == "top":
+                fill(cv, r, cream)
+                continue
+            if name == "bottom":
+                fill(cv, r, shade(skin, 0.86))
+                continue
+            fill(cv, r, skin, gradient=0.06)
+            fill(cv, sub(r, 0, 0, r[2], 5), cream)                  # the shorts
+            hline(cv, r, 5, shade(cream, 0.85))
+            hline(cv, r, r[3] - 5, band)                            # ankle bands
+            hline(cv, r, r[3] - 4, shade(band, 1.2))
+            hline(cv, r, r[3] - 1, shade(skin, 0.86))               # toes
+
+    def lock_ringed(cv, f):
+        for name, r in f.items():
+            hair(cv, r, hair_c, seed=95, highlight_row=1, strands=False)
+            if name in ("top", "bottom"):
+                continue
+            for y in (2, 7):
+                if y < r[3]:
+                    hline(cv, r, y, band)
+
+    painters = {"head": head, "hat": shell, "body": body, "jacket": robe,
+                "right_arm": arm_skin_painter(skin, cream), "left_arm": arm_skin_painter(skin, cream),
+                "right_leg": legs, "left_leg": legs}
+    humanoid(rig, painters, slim=True)
+
+    # Long elf ears like Frieren's, swept slightly up.
     def ear(cv, f):
         for r in f.values():
-            fill(cv, r, skin, noise=0.02)
+            fill(cv, r, skin)
+        r = f["front"]
+        hline(cv, r, r[3] - 1, shade(skin, 0.84))
+    for part, sx in (("ear_right", -1), ("ear_left", 1)):
+        rig.pose(part, offset=(4 * sx, -3.0, 0.6), rotation=(0, -0.3 * sx, -0.25 * sx))
+        rig.box(part, -2 if sx < 0 else 0, -1, -0.5, 2, 2, 1, ear)
+        rig.box(part, -4 if sx < 0 else 2, -1.2, -0.5, 2, 1, 1, ear)
+        rig.box(part, -6 if sx < 0 else 4, -1.4, -0.5, 2, 1, 1, ear)
 
-    painters = {
-        "head": soft_head_compat(rig, skin, hair_c, eye, fringe=5, part=8, locks=(2, 11),
-                             face_kw=dict(sleepy=True, eye_y=7, gap=4, mouth="stern", brow_angle=1,
-                                          brow=shade(hair_c, 0.78), lash=hexc("#5A4320")), side_rows=13, back_rows=16),
-        "hat": rig.soft_shell,
-        "body": robe_body(robe, gold, collar=gold, emblem=gold, collar_rows=2),
-        "right_arm": arm_skin_painter(skin, sleeve=robe), "left_arm": arm_skin_painter(skin, sleeve=robe),
-        "right_sleeve": sleeve_painter(robe, gold, trim_c=gold), "left_sleeve": sleeve_painter(robe, gold, trim_c=gold),
-        "right_leg": legs_painter(robe, hexc("#2E2A24"), boot_top=14),
-        "left_leg": legs_painter(robe, hexc("#2E2A24"), boot_top=14),
-    }
-    humanoid(rig, painters, slim=True)
-    add_long_hair(rig, hair_c, length=15, width=8)
-    add_braid(rig, "tail_right", hair_c, offset=(0, -1, 4.5), length=15, rotation=(0.12, 0, 0), tie=gold)
-    add_elf_ears(rig, ear)
-    # gold circlet
-    rig.pose("crown", offset=(0, -6.6, 0))
-    rig.box("crown", -4.5, -0.5, -4.5, 9, 1, 9, p_metal(gold), inflate=0.0)
-    add_skirt(rig, skirt_painter(robe, gold), length=7, width=9, depth=5,
-              lower=(10, 6, 6, skirt_painter(robe, gold)))
+    # Hair to the knees in two links, a little wider than her back; ringed locks in front of the shoulders.
+    chain(rig, ("hair_back", "hair_back_2"), ((0, -6.8, 4.1), (0, 13, 0)), ((0.05, 0, 0), (0.03, 0, 0)))
+    rig.box("hair_back", -4.5, 0, -0.5, 9, 13, 1, hair_painter(hair_c, seed=96, highlight_row=2))
+    rig.box("hair_back_2", -4.5, 0, -0.5, 9, 12, 1, hair_painter(shade(hair_c, 0.96), seed=97, highlight_row=None, tips=5))
+    for part, sx in (("lock_right", -1), ("lock_left", 1)):
+        chain(rig, (part, part + "_2"), ((3.6 * sx, -4.4, -3.6), (0, 7, 0)), ((-0.06, 0, -0.04 * sx), (0.04, 0, 0.03 * sx)))
+        rig.box(part, -0.5, 0, -0.5, 1, 7, 1, lock_ringed)
+        rig.box(part + "_2", -0.5, 0, -0.5, 1, 6, 1, hair_painter(hair_c, seed=98, highlight_row=None, tips=2))
+
+    # Wide sleeves hanging from the shoulders to just above the wrist; the robe's panels below the sash.
+    for part, x0 in (("right_sleeve", -3.5), ("left_sleeve", -1.5)):
+        rig.box(part, x0, -2.4, -3, 5, 10, 6, wide_sleeve)
+    rig.pose("skirt", offset=(0, 11.5, 0))
+    rig.box("skirt", -4.75, 0, -2.75, 9.5, 5, 5.5, robe_panels)
     return rig
 
 
@@ -1092,34 +1214,126 @@ def himmel():
 
 # ---------------------------------------------------------------------------------------------
 def eisen():
-    skin = hexc("#E9C9AE")
-    hair_c = hexc("#B8B8BE")
-    eye = hexc("#6A5A3A")
-    tunic = hexc("#7A3A2A")
-    leather = hexc("#4E3424")
+    """
+    Eisen, from his character sheet: a dwarf wrapped from shoulders to ground in a rust-red cloak, round steel
+    pauldrons on his shoulders, a steel helmet with a nose guard and two pale horns curving up from its sides, tired
+    eyes peering out under the rim, and a straight, wheat-blond beard that hides his face and falls to his belly.
+    """
+    skin = hexc("#EBC3A6")
+    beard_c = hexc("#CDB57C")
+    steel = hexc("#C9C9C2")
+    horn = hexc("#ECE7DA")
+    cloak = hexc("#B0472E")
+    cloak_d = shade(cloak, 0.78)
     rig = Rig("eisen", render_scale=0.95)
 
-    def beard(cv, f):
-        for i, r in enumerate(f.values()):
-            hair(cv, r, hair_c, seed=150 + i, highlight_row=1)
+    pal = {"S": skin, "n": shade(skin, 0.85), "L": hexc("#3A2A20"), "W": hexc("#FFFFFF"), "p": hexc("#2A2420"),
+           "H": steel, "B": beard_c, "b": shade(beard_c, 0.85)}
 
-    painters = {
-        "head": soft_head_compat(rig, skin, hair_c, eye, fringe=4, part=None, locks=(1, 5),
-                             face_kw=dict(eye_y=7, gap=4, mouth="stern", brow_angle=1, brow=shade(hair_c, 0.7)), side_rows=9, back_rows=10),
-        "hat": rig.soft_shell,
-        "body": armor_painter(tunic, leather, hexc("#B48A3A"), belt=leather),
-        "right_arm": arm_skin_painter(skin, sleeve=tunic), "left_arm": arm_skin_painter(skin, sleeve=tunic),
-        "right_leg": legs_painter(leather, hexc("#3A2A1E"), boot_top=8),
-        "left_leg": legs_painter(leather, hexc("#3A2A1E"), boot_top=8),
-    }
+    def face_rows():
+        grid = [["S"] * 16 for _ in range(16)]
+        for y in range(9):                                     # under the helmet (the helmet box covers it)
+            for x in range(16):
+                grid[y][x] = "H"
+        for x0 in (3, 9):                                      # heavy-lidded eyes right under the rim
+            for i in range(4):
+                grid[9][x0 + i] = "L"
+            grid[10][x0], grid[10][x0 + 1], grid[10][x0 + 2], grid[10][x0 + 3] = "S", "W", "p", "S"
+        for y in (9, 10, 11):                                  # the big nose between them
+            grid[y][7] = grid[y][8] = "n" if y < 11 else "S"
+        for y in range(11, 16):                                # beard below (the beard box covers it)
+            for x in range(16):
+                grid[y][x] = "B" if (x + y) % 3 else "b"
+        return ["".join(r) for r in grid]
+
+    def head(cv, f):
+        pixel_art(cv, f["front"], face_rows(), pal)
+        for side in ("right", "left", "back"):
+            r = f[side]
+            fill(cv, r, beard_c)
+            fill(cv, sub(r, 0, 0, r[2], 9), steel)
+        fill(cv, f["top"], steel)
+        fill(cv, f["bottom"], shade(beard_c, 0.8))
+
+    def helmet(cv, f):
+        for name, r in f.items():
+            fill(cv, r, steel if name != "bottom" else shade(steel, 0.7), gradient=0.12)
+            if name in ("front", "back", "left", "right"):
+                hline(cv, r, r[3] - 1, shade(steel, 0.72))         # the rim
+                hline(cv, r, r[3] - 2, shade(steel, 1.12))
+            if name in ("front", "back"):
+                vline(cv, r, r[2] // 2, shade(steel, 0.8), y_from=0, y_to=r[3] - 2)   # the centre ridge
+        b = f["bottom"]
+        for x in range(1, b[2] - 1):                               # open underneath where the head goes in
+            for y in range(1, b[3] - 1):
+                cv.px(b[0] + x, b[1] + y, (0, 0, 0, 0))
+
+    def nose_guard(cv, f):
+        for r in f.values():
+            fill(cv, r, shade(steel, 0.95))
+
+    def beard(cv, f):
+        for name, r in f.items():
+            fill(cv, r, beard_c, gradient=0.06)
+            if name in ("front", "back"):
+                for x in range(0, r[2], 2):                         # long straight strands
+                    vline(cv, r, x, shade(beard_c, 0.88), y_from=2)
+                for x in (0, r[2] - 1):                             # rounded bottom corners
+                    cv.px(r[0] + x, r[1] + r[3] - 1, (0, 0, 0, 0))
+        r = f["front"]
+        for x in range(r[2]):                                       # the moustache sweeping out from under the nose
+            cv.px(r[0] + x, r[1] + 1, shade(beard_c, 0.8) if abs(x - r[2] / 2 + 0.5) > 1 else beard_c)
+        cv.rect(r[0] + r[2] // 2 - 1, r[1], 2, 1, shade(skin, 0.85))   # tip of the nose above it
+
+    def pauldron(cv, f):
+        for name, r in f.items():
+            fill(cv, r, steel if name != "bottom" else shade(steel, 0.65), gradient=0.18)
+            if name not in ("top", "bottom"):
+                hline(cv, r, r[3] - 1, shade(steel, 0.7))
+
+    def cloak_upper(cv, f):
+        for name, r in f.items():
+            if name in ("top", "bottom"):
+                fill(cv, r, cloak_d)
+                continue
+            fill(cv, r, cloak, gradient=0.08)
+            for x in range(2, r[2], 5):                             # folds
+                vline(cv, r, x, cloak_d, y_from=1)
+
+    def cloak_lower(cv, f):
+        for name, r in f.items():
+            if name == "bottom":
+                fill(cv, r, shade(cloak, 0.6))
+                continue
+            fill(cv, r, cloak, gradient=0.1)
+            if name != "top":
+                for x in range(1, r[2], 4):
+                    vline(cv, r, x, cloak_d)
+                hline(cv, r, r[3] - 1, shade(cloak, 0.66))
+
+    painters = {"head": head, "body": cloak_upper,
+                "right_arm": p_fill(cloak), "left_arm": p_fill(cloak),
+                "right_leg": p_fill(cloak_d), "left_leg": p_fill(cloak_d)}
     humanoid(rig, painters, slim=False, legs=8, body_h=10, arm_len=10)
-    rig.pose("crown", offset=(0, -2, -4.2))
-    rig.box("crown", -3.5, 0, -1, 7, 6, 1, beard)
-    rig.box("crown", -2.5, 6, -1, 5, 3, 1, beard)
-    rig.box("crown", -4, -1.2, -1.3, 3, 1, 1, beard)
-    rig.box("crown", 1, -1.2, -1.3, 3, 1, 1, beard)
-    rig.held = ("frieren:warriors_axe", None)
-    rig.carry = "back"
+
+    # Helmet over the top of the head down to the brow, a nose guard, and horns curving out and up from its sides.
+    rig.box("hair_top", -4.6, -8.8, -4.6, 9.2, 4.9, 9.2, helmet)
+    rig.box("hair_top", -3.6, -9.5, -3.6, 7.2, 0.8, 7.2, helmet)
+    rig.box("bangs", -0.5, -4.2, -4.95, 1, 2.2, 0.5, nose_guard)
+    for sx in (-1, 1):
+        horn_chain(rig, sx, (4.3, -6.8, 0.0),
+                   [(None, (0.0, 0.0, 1.15), (2, 2, 2)), ((0, -1.8, 0), (0.0, 0.0, -0.8), (2, 2, 2)),
+                    ((0, -1.8, 0), (0.0, 0.0, -0.55), (1, 2, 1))], horn, ribs=False)
+
+    # The beard hangs from under the eyes over the chest to the belly; the moustache sits on top of it.
+    rig.box("crown", -4.0, -2.7, -5.2, 8, 12.5, 1.2, beard)
+
+    # Round pauldrons on the shoulders, and the cloak from shoulders to ground, wide enough to swallow the arms.
+    rig.box("collar", -8.6, -1.6, -2.8, 4.4, 3.2, 5.6, pauldron)
+    rig.box("collar", 4.2, -1.6, -2.8, 4.4, 3.2, 5.6, pauldron)
+    rig.pose("skirt", offset=(0, 0, 0))
+    rig.box("skirt", -7.6, 0.4, -3.4, 15.2, 9, 6.8, cloak_upper)
+    rig.box("skirt", -8.6, 9.4, -3.9, 17.2, 8.6, 7.8, cloak_lower)
     return rig
 
 
@@ -1366,36 +1580,168 @@ def aura():
 
 
 def qual():
-    skin = hexc("#D9C3B8")
-    hair_c = hexc("#C9C6CC")
-    eye = hexc("#D23A3A")
-    robe = hexc("#2A1D33")
-    red = hexc("#8E2430")
-    rig = Rig("qual", render_scale=1.05)
+    """
+    Qual the Corrupt, from his character sheet: a dark horned mask for a face, slit eyes and a wide grin of white
+    teeth, two pale horns curling out from its brow; long pale-blond hair down his back and over his chest; a white
+    fur mantle on bare grey-brown shoulders; a scarred, stitched torso; dark bands on the upper arms, fur cuffs at
+    the wrists, clawed hands with red nails; a dark sash, a chain and a belt of fangs over wide, floor-length dark
+    hakama with a chain hanging at the hip.
+    """
+    skin = hexc("#6E6158")
+    skin_d = shade(skin, 0.8)
+    mask = hexc("#66564C")
+    hair_c = hexc("#EFE6C4")
+    horn = hexc("#D9CBAA")
+    fur = hexc("#F1ECDF")
+    cloth = hexc("#4A4A50")
+    cloth_d = shade(cloth, 0.78)
+    sash = hexc("#3A3A40")
+    chain_c = hexc("#8E8E96")
+    tooth = hexc("#EDE6D2")
+    nail = hexc("#B0303A")
+    rig = Rig("qual", render_scale=1.1)
 
-    def beard(cv, f):
-        for i, r in enumerate(f.values()):
-            hair(cv, r, hair_c, seed=200 + i, highlight_row=1)
+    def head(cv, f):
+        r = f["front"]
+        fill(cv, r, mask, gradient=0.12)
+        for x in range(16):                                    # pale hair above the mask
+            for y in range(0, 2 if 4 <= x <= 11 else 3):
+                cv.px(r[0] + x, r[1] + y, hair_c)
+        for x0, sgn in ((2, 1), (13, -1)):                     # heavy brow ridges sloping down to the slit eyes
+            for i in range(4):
+                cv.px(r[0] + x0 + sgn * i, r[1] + 5 + i // 2, shade(mask, 0.7))
+            for i in range(3):
+                cv.px(r[0] + x0 + sgn * (i + 1), r[1] + 7, (24, 18, 20, 255))
+            cv.px(r[0] + x0 + sgn * 2, r[1] + 7, hexc("#E8C860"))   # a glint in each slit
+        for x in (7, 8):                                       # nostrils
+            cv.px(r[0] + x, r[1] + 9, shade(mask, 0.6))
+        for x in range(2, 14):                                 # the grin: two rows of teeth
+            top = (x % 2 == 0)
+            cv.px(r[0] + x, r[1] + 11, (24, 18, 20, 255))
+            cv.px(r[0] + x, r[1] + 12, tooth if top else shade(tooth, 0.85))
+            cv.px(r[0] + x, r[1] + 13, shade(tooth, 0.85) if top else tooth)
+            cv.px(r[0] + x, r[1] + 14, (24, 18, 20, 255))
+        for x in (1, 14):
+            cv.px(r[0] + x, r[1] + 12, (24, 18, 20, 255))
+        for side in ("right", "left", "back"):
+            hair(cv, f[side], hair_c, seed=201, highlight_row=3)
+        hair(cv, f["top"], hair_c, seed=202, highlight_row=None)
+        fill(cv, f["bottom"], skin_d)
 
-    painters = {
-        "head": soft_head_compat(rig, skin, hair_c, eye, fringe=2, part=8, locks=(1, 9),
-                             face_kw=dict(eye_y=7, gap=4, mouth="stern", brow_angle=1, glow=True,
-                                          brow=shade(hair_c, 0.8), lash=hexc("#2A1A1A")), side_rows=14, back_rows=16),
-        "hat": rig.soft_shell,
-        "body": robe_body(robe, red, collar=red, sash=red),
-        "right_arm": arm_skin_painter(skin, sleeve=robe), "left_arm": arm_skin_painter(skin, sleeve=robe),
-        "right_sleeve": sleeve_painter(robe, red), "left_sleeve": sleeve_painter(robe, red),
-        "right_leg": legs_painter(robe, hexc("#1A1218"), boot_top=14),
-        "left_leg": legs_painter(robe, hexc("#1A1218"), boot_top=14),
-    }
+    def shell(cv, f):
+        hair(cv, f["back"], shade(hair_c, 1.02), seed=203, highlight_row=3)
+        zigzag(cv, f["back"], 3, seed=203)
+        for side in ("right", "left"):
+            r = sub(f[side], 0, 0, f[side][2], 13)
+            hair(cv, r, shade(hair_c, 1.02), seed=204, highlight_row=3)
+        hair(cv, sub(f["front"], 0, 0, f["front"][2], 2), shade(hair_c, 1.04), seed=205, highlight_row=None)
+
+    def torso(cv, f):
+        for name, r in f.items():
+            fill(cv, r, skin, gradient=0.1)
+        r = f["front"]
+        hline(cv, r, 7, skin_d, x_from=2, x_to=7)               # chest
+        hline(cv, r, 7, skin_d, x_from=9, x_to=14)
+        vline(cv, r, 8, skin_d, y_from=8, y_to=17)
+        for y in (11, 14):                                       # abdomen
+            hline(cv, r, y, skin_d, x_from=4, x_to=12)
+        for y in range(3, 16):                                   # a stitched scar down his left side
+            cv.px(r[0] + 11, r[1] + y, hexc("#2E2620"))
+            if y % 3 == 0:
+                cv.px(r[0] + 10, r[1] + y, hexc("#2E2620"))
+                cv.px(r[0] + 12, r[1] + y, hexc("#2E2620"))
+        for x in range(3, 8):                                     # and across his right ribs
+            cv.px(r[0] + x, r[1] + 13, hexc("#2E2620"))
+            if x % 2:
+                cv.px(r[0] + x, r[1] + 12, hexc("#2E2620"))
+        for name in ("front", "back", "left", "right"):           # the sash knotted at the waist
+            fill(cv, sub(f[name], 0, 18, f[name][2], 6), sash, gradient=0.1)
+            for x in range(0, f[name][2], 3):
+                cv.px(f[name][0] + x, f[name][1] + 20, shade(sash, 1.25))
+
+    def arm(cv, f):
+        for name, r in f.items():
+            fill(cv, r, skin, gradient=0.08)
+            if name in ("top", "bottom"):
+                if name == "bottom":
+                    fill(cv, r, skin_d)
+                continue
+            for y in (5, 7):                                      # dark bands around the upper arm
+                hline(cv, r, y, hexc("#2A2422"))
+            hline(cv, r, 9, hexc("#B49456"))                      # a braided band
+            fill(cv, sub(r, 0, 15, r[2], 3), fur)                 # fur cuffs
+            fill(cv, sub(r, 0, 18, r[2], 6), skin_d)              # clawed hands
+            for x in range(0, r[2], 2):
+                cv.px(r[0] + x, r[1] + r[3] - 1, nail)
+
+    def mantle(cv, f):
+        for name, r in f.items():
+            fill(cv, r, fur if name != "bottom" else shade(fur, 0.82), gradient=0.08)
+            if name not in ("top", "bottom"):
+                zigzag(cv, r, 2, seed=207, period=3)
+                for x in range(1, r[2], 3):
+                    vline(cv, r, x, shade(fur, 0.9), y_from=0, y_to=r[3] - 3)
+        r = f["front"]
+        for y in range(r[3]):                                     # open at the throat, wider toward the chest
+            half = 3 + y // 2
+            for x in range(r[2] // 2 - half, r[2] // 2 + half):
+                cv.px(r[0] + x, r[1] + y, (0, 0, 0, 0))
+        for face in ("top", "bottom"):
+            b = f[face]
+            for x in range(b[2] // 2 - 4, b[2] // 2 + 4):
+                for y in range(b[3] // 2 + 1):
+                    cv.px(b[0] + x, b[1] + y, (0, 0, 0, 0))
+
+    def hakama(cv, f):
+        for name, r in f.items():
+            if name == "bottom":
+                fill(cv, r, cloth_d)
+                continue
+            fill(cv, r, cloth, gradient=0.08)
+            if name != "top":
+                for x in range(2, r[2], 4):
+                    vline(cv, r, x, cloth_d, y_from=2)
+
+    def hakama_top(cv, f):
+        hakama(cv, f)
+        for name in ("front", "left", "right", "back"):
+            r = f[name]
+            for x in range(0, r[2], 3):                            # chain belt
+                cv.px(r[0] + x, r[1] + 0, chain_c)
+                cv.px(r[0] + x + 1, r[1] + 1, chain_c)
+        r = f["front"]
+        for x in range(1, r[2] - 1, 2):                            # the belt of fangs across the hips
+            cv.px(r[0] + x, r[1] + 3, tooth)
+            cv.px(r[0] + x, r[1] + 4, tooth)
+            cv.px(r[0] + x, r[1] + 5, shade(tooth, 0.85))
+        rr = f["left"]
+        for y in range(2, rr[3]):                                  # a chain hanging at his hip
+            cv.px(rr[0] + rr[2] // 2, rr[1] + y, chain_c if y % 2 else shade(chain_c, 0.7))
+
+    painters = {"head": head, "hat": shell, "body": torso, "right_arm": arm, "left_arm": arm,
+                "right_leg": p_fill(cloth_d), "left_leg": p_fill(cloth_d)}
     humanoid(rig, painters, slim=False)
-    add_long_hair(rig, hair_c, length=12, width=8)
-    add_horns(rig, hexc("#2E2626"), tip=hexc("#8A7A70"), size="large")
-    rig.pose("crown", offset=(0, -1.5, -4.2))
-    rig.box("crown", -2.5, 0, -0.5, 5, 6, 1, beard)
-    rig.box("crown", -1.5, 6, -0.5, 3, 3, 1, beard)
-    add_skirt(rig, skirt_painter(robe, red, pleats=False), length=7, width=9, depth=5,
-              lower=(10, 6, 6, skirt_painter(robe, red, pleats=False)))
+
+    # Horns curling out and up from the mask's brow.
+    for sx in (-1, 1):
+        horn_chain(rig, sx, (3.2, -6.4, -3.0),
+                   [(None, (0.2, 0.0, 1.05), (2, 2, 2)), ((0, -1.8, 0), (0.0, 0.0, -0.95), (2, 2, 2)),
+                    ((0, -1.8, 0), (0.0, 0.0, -0.75), (1, 2, 1))], horn, ribs=True)
+
+    # Long pale hair down his back and in two heavy locks over his chest.
+    chain(rig, ("hair_back", "hair_back_2"), ((0, -7.0, 4.1), (0, 11, 0)), ((0.06, 0, 0), (0.04, 0, 0)))
+    rig.box("hair_back", -4.5, 0, -0.5, 9, 11, 1, hair_painter(hair_c, seed=208, highlight_row=2))
+    rig.box("hair_back_2", -4.0, 0, -0.5, 8, 9, 1, hair_painter(shade(hair_c, 0.96), seed=209, highlight_row=None, tips=4))
+    for part, sx in (("lock_right", -1), ("lock_left", 1)):
+        chain(rig, (part, part + "_2"), ((4.6 * sx, -3.0, -2.6), (0, 7, 0)), ((-0.1, 0, -0.04 * sx), (0.08, 0, 0.03 * sx)))
+        rig.box(part, -1.5, 0, -0.5, 3, 7, 1, hair_painter(hair_c, seed=210, highlight_row=1))
+        rig.box(part + "_2", -1.25, 0, -0.5, 2.5, 6, 1, hair_painter(shade(hair_c, 0.95), seed=211, highlight_row=None, tips=3))
+
+    # The fur mantle, and wide hakama from the sash to the ground.
+    rig.box("collar", -7.5, -1.2, -3.2, 15, 4.5, 6.4, mantle)
+    rig.pose("skirt", offset=(0, 11, 0))
+    rig.box("skirt", -5.2, 0, -3.0, 10.4, 6, 6.0, hakama_top)
+    rig.box("skirt", -6.0, 6, -3.5, 12.0, 7, 7.0, hakama)
     return rig
 
 
@@ -1473,56 +1819,273 @@ def aura_thrall():
 
 
 def linie():
-    skin = hexc("#F2DCD0")
-    hair_c = hexc("#E06A6A")
-    eye = hexc("#F0A030")
-    cloth = hexc("#4A1E28")
-    trim_c = hexc("#C9A43A")
+    """
+    Linie, from her character sheet: peach-pink hair with a soft fringe, shoulder-length twin tails tied with dark
+    brown ribbons and flicking outward, small pale horns, violet eyes and no expression at all; a lilac-white blouse
+    with puffed shoulders, long bell cuffs and a frilled collar with a brown ribbon; a dark brown dress with a laced
+    red-brown corset over a front split showing white ruffled tiers; banded stockings and cross-laced brown boots.
+    She carries a great axe on her back, the way Eisen did.
+    """
+    skin = hexc("#FCE7DA")
+    hair_c = hexc("#F3A898")
+    eye = hexc("#6A64B4")
+    blouse = hexc("#ECE8F3")
+    blouse_d = shade(blouse, 0.86)
+    dress = hexc("#6E4A3C")
+    dress_d = shade(dress, 0.8)
+    corset = hexc("#8C3E30")
+    ribbon = hexc("#4A2E22")
+    frill = hexc("#F7F4EF")
+    stocking = hexc("#B99A92")
+    boot = hexc("#5A3A2A")
+    horn = hexc("#DDCB98")
     rig = Rig("linie", render_scale=0.92)
-    painters = {
-        "head": soft_head_compat(rig, skin, hair_c, eye, fringe=5, part=None, locks=(1, 6),
-                             face_kw=dict(eye_y=7, gap=4, mouth="smile", glow=True, brow=shade(hair_c, 0.7)), side_rows=9, back_rows=12),
-        "hat": rig.soft_shell,
-        "body": robe_body(cloth, trim_c, sash=hexc("#2A1418")),
-        "right_arm": arm_skin_painter(skin, sleeve=cloth), "left_arm": arm_skin_painter(skin, sleeve=cloth),
-        "right_leg": legs_painter(hexc("#2A1418"), hexc("#3A2420"), boot_top=10),
-        "left_leg": legs_painter(hexc("#2A1418"), hexc("#3A2420"), boot_top=10),
-    }
+
+    head, shell = soft_head(rig, skin, hair_c, eye,
+                            face=dict(style="soft", eye_y=8, fringe=6, part=None, locks=(2, 6), lash=hexc("#3A2A3A"),
+                                      mouth="small", brow=shade(hair_c, 0.72)),
+                            side_rows=12, side_tips=3, back_rows=12, back_tips=3, fringe_tips=4, fringe_period=3,
+                            fringe_rows=4, seed=131)
+
+    def body(cv, f):
+        for name, r in f.items():
+            fill(cv, r, dress, gradient=0.06)
+        r = f["front"]
+        w = r[2]
+        for y in range(7):                                     # blouse above the sweetheart neckline
+            for x in range(w):
+                dip = 1 if abs(x - w / 2 + 0.5) < 1.5 else 0
+                if y < 6 + dip:
+                    cv.px(r[0] + x, r[1] + y, blouse)
+        fill(cv, sub(r, w // 2 - 3, 0, 6, 2), frill)          # frilled collar
+        hline(cv, r, 2, blouse_d, x_from=w // 2 - 3, x_to=w // 2 + 3)
+        cv.rect(r[0] + w // 2 - 2, r[1] + 2, 4, 2, ribbon)     # the ribbon bow and its tails
+        cv.px(r[0] + w // 2 - 1, r[1] + 4, ribbon)
+        cv.px(r[0] + w // 2, r[1] + 4, ribbon)
+        cv.px(r[0] + w // 2 - 2, r[1] + 5, ribbon)
+        cv.px(r[0] + w // 2 + 1, r[1] + 5, ribbon)
+        for name in ("front", "back", "left", "right"):        # the laced corset at the waist
+            fill(cv, sub(f[name], 0, 13, f[name][2], 9), corset, gradient=0.08)
+        for y in range(14, 21, 2):                              # lacing
+            cv.px(r[0] + w // 2 - 1, r[1] + y, frill)
+            cv.px(r[0] + w // 2, r[1] + y + 1, frill)
+            cv.px(r[0] + w // 2, r[1] + y, shade(corset, 0.7))
+            cv.px(r[0] + w // 2 - 1, r[1] + y + 1, shade(corset, 0.7))
+        fill(cv, sub(r, 0, 22, w, 2), dress)
+
+    def sleeve(cv, f):
+        for name, r in f.items():
+            if name == "bottom":
+                continue
+            fill(cv, r, blouse, gradient=0.06)
+            if name != "top":
+                for x in range(0, r[2], 2):                     # gathered folds
+                    vline(cv, r, x, blouse_d, y_from=0, y_to=r[3] - 7)
+                for yy in range(r[3] - 6, r[3]):
+                    for xx in range(r[2]):
+                        cv.px(r[0] + xx, r[1] + yy, (0, 0, 0, 0))
+
+    def puff(cv, f):
+        for name, r in f.items():
+            fill(cv, r, blouse if name != "bottom" else blouse_d, gradient=0.12)
+            if name not in ("top", "bottom"):
+                hline(cv, r, r[3] - 1, blouse_d)
+
+    def bell(cv, f):
+        # the long bell cuff, flaring around the wrist and open at the bottom so the hand shows
+        for name, r in f.items():
+            if name == "bottom":
+                fill(cv, r, (0, 0, 0, 0))
+                continue
+            fill(cv, r, blouse, gradient=0.1)
+            if name != "top":
+                for x in range(1, r[2], 3):
+                    vline(cv, r, x, blouse_d, y_from=1)
+                hline(cv, r, r[3] - 1, frill)
+
+    def skirt(cv, f):
+        for name, r in f.items():
+            if name == "bottom":
+                fill(cv, r, dress_d)
+                continue
+            fill(cv, r, dress, gradient=0.08)
+            if name != "top":
+                for x in range(2, r[2], 4):
+                    vline(cv, r, x, dress_d, y_from=2)
+        r = f["front"]
+        for y in range(r[3]):                                    # the split widening toward the hem, white tiers inside
+            half = 2 + (y * 3) // r[3]
+            for x in range(r[2] // 2 - half, r[2] // 2 + half):
+                cv.px(r[0] + x, r[1] + y, frill if (y % 4) else shade(frill, 0.85))
+
+    def legs(cv, f):
+        for name, r in f.items():
+            if name == "top":
+                fill(cv, r, stocking)
+                continue
+            if name == "bottom":
+                fill(cv, r, shade(boot, 0.6))
+                continue
+            fill(cv, r, stocking, gradient=0.05)
+            for y in range(8, r[3] - 3):                         # straps crossing up the shin
+                x = (y * 2) % r[2]
+                cv.px(r[0] + x, r[1] + y, boot)
+                cv.px(r[0] + (r[2] - 1 - x), r[1] + y, boot)
+            fill(cv, sub(r, 0, r[3] - 3, r[2], 3), boot)
+            hline(cv, r, r[3] - 1, shade(boot, 0.6))
+
+    painters = {"head": head, "hat": shell, "body": body,
+                "right_arm": arm_skin_painter(skin, blouse), "left_arm": arm_skin_painter(skin, blouse),
+                "right_sleeve": sleeve, "left_sleeve": sleeve, "right_leg": legs, "left_leg": legs}
     humanoid(rig, painters, slim=True)
-    add_horns(rig, hexc("#3A2224"), size="small")
-    add_braid(rig, "tail_right", hair_c, offset=(-3, -2, 3), length=12, rotation=(0.1, 0, 0.1), tie=trim_c, seed=210)
-    add_braid(rig, "tail_left", hair_c, offset=(3, -2, 3), length=12, rotation=(0.1, 0, -0.1), tie=trim_c, seed=220)
+
+    # Puffed shoulders and bell cuffs on both arms (slim arms are 3 wide).
+    for part, x0 in (("right_sleeve", -2.75), ("left_sleeve", -1.25)):
+        rig.box(part, x0, -2.6, -2.5, 4, 4, 5, puff)
+        rig.box(part, x0 - 0.25, 5.0, -2.75, 4.5, 4.4, 5.5, bell)
+
+    # Twin tails tied high at the sides, flicking outward at shoulder height; dark ribbons at the ties.
+    tie = cloth_painter(ribbon)
+    for side, sx in (("tail_right", -1), ("tail_left", 1)):
+        chain(rig, (side, side + "_2"), ((4.6 * sx, -6.2, 0.2), (0, 5, 0)), ((0.06, 0, -0.32 * sx), (0.0, 0, -0.55 * sx)))
+        rig.box(side, -1.5, -0.5, -1.5, 3, 5.5, 3, hair_painter(hair_c, seed=132, highlight_row=2, soft=True))
+        rig.box(side + "_2", -1.25, 0, -1.25, 2.5, 3.5, 2.5,
+                hair_painter(shade(hair_c, 0.95), seed=133, highlight_row=None, tips=3, bottom=False, soft=True))
+        rig.box(side, -1.25, -1.6, -1.6, 2.5, 1.2, 3.2, tie)
+        rig.box(side, (-2.6 if sx < 0 else 0.6), -2.4, -0.4, 2.0, 1.4, 0.8, tie)      # ribbon loop
+
+    # Small pale horns rising from the crown and curving back.
+    for sx in (-1, 1):
+        horn_chain(rig, sx, (2.4, -8.2, 0.4),
+                   [(None, (-0.25, 0.0, 0.18), (1, 2, 1)), ((0, -1.9, 0), (-0.35, 0.0, 0.0), (1, 2, 1))],
+                   horn, ribs=False)
+
+    # The dress skirt to below the knee, split in front over the ruffles.
+    rig.pose("skirt", offset=(0, 11, 0))
+    rig.box("skirt", -4.75, 0, -2.75, 9.5, 5, 5.5, skirt)
+    rig.box("skirt", -5.25, 5, -3.25, 10.5, 4, 6.5, skirt)
     rig.held = ("frieren:warriors_axe", None)
     rig.carry = "back"
     return rig
 
 
 def draht():
-    skin = hexc("#F0DACC")
-    hair_c = hexc("#E8D27A")
-    eye = hexc("#6AC8D8")
-    cloth = hexc("#3A3A4E")
-    trim_c = hexc("#9A9AB8")
+    """
+    Draht, from his character sheet: ash-blond hair with a long side-swept fringe hiding his right eye, ram horns
+    curling at the crown, a calm dark-blue eye; a white ruffled shirt with puffed sleeves and wide cuffs, a striped
+    navy ribbon tie with long tails, brown braces with steel clips, slim dark-brown trousers, navy socks and brown
+    lace-up shoes. His weapon is wire, carried on two spools.
+    """
+    skin = hexc("#F9E4D6")
+    hair_c = hexc("#B9AC7E")
+    eye = hexc("#3E4268")
+    shirt = hexc("#EDEBF2")
+    shirt_d = shade(shirt, 0.86)
+    navy = hexc("#3A3E62")
+    brace = hexc("#7A5132")
+    steel = hexc("#A8ACB6")
+    trousers = hexc("#4A3E36")
+    sock = hexc("#4A4E72")
+    shoe = hexc("#8C5A30")
+    horn = hexc("#9E9890")
     rig = Rig("draht", render_scale=1.0)
+
+    # The fringe sweeps across from his left to hide his right eye (the viewer's left): long over columns 1-7.
+    depth = [16, 13, 12, 12, 12, 11, 11, 10, 6, 4, 4, 3, 3, 4, 9, 12]
+    face_head, shell = soft_head(rig, skin, hair_c, eye,
+                                 face=dict(style="sharp", eye_y=8, depth=depth, locks=(1, 9), lash=hexc("#2A2A3A"),
+                                           mouth="small", brow=shade(hair_c, 0.72)),
+                                 side_rows=12, side_tips=3, back_rows=12, back_tips=3, fringe_rows=0, seed=141)
+
+    def head(cv, f):
+        face_head(cv, f)
+        r = f["front"]
+        for x in range(0, 8):                                  # the hidden eye stays hidden between the fringe's tips
+            for y in range(6, 12):
+                cv.px(r[0] + x, r[1] + y, shade(hair_c, 0.9 if (x + y) % 3 else 0.8))
+
+    def fringe(cv, f):
+        for name, r in f.items():
+            hair(cv, r, shade(hair_c, 1.05), seed=142, highlight_row=1 if name == "front" else None,
+                 strands=name == "front")
+        zigzag(cv, f["front"], 2, seed=143, period=3)
+
+    def body(cv, f):
+        for name, r in f.items():
+            fill(cv, r, shirt, gradient=0.05)
+        r = f["front"]
+        w = r[2]
+        fill(cv, sub(r, w // 2 - 3, 0, 6, 2), shirt)           # collar
+        hline(cv, r, 2, shirt_d, x_from=w // 2 - 3, x_to=w // 2 + 3)
+        for y in range(4, 15):                                  # the ruffled jabot down the front
+            for x in (w // 2 - 2, w // 2 + 1):
+                cv.px(r[0] + x, r[1] + y, shirt_d if y % 2 else shirt)
+        cv.rect(r[0] + w // 2 - 2, r[1] + 2, 4, 2, navy)        # the ribbon tie, striped, with long tails
+        for k in range(6):
+            cv.px(r[0] + w // 2 - 2 - k // 3, r[1] + 4 + k, navy if k % 2 else shade(navy, 1.4))
+            cv.px(r[0] + w // 2 + 1 + k // 3, r[1] + 4 + k, navy if k % 2 else shade(navy, 1.4))
+        for name, cols in (("front", (2, w - 3)), ("back", (3, w - 4))):     # braces
+            rr = f[name]
+            for x in cols:
+                vline(cv, rr, x, brace, y_from=0, y_to=21)
+                vline(cv, rr, x + 1, brace, y_from=0, y_to=21)
+        for x in (2, w - 3):                                     # steel clips at the waistband
+            cv.rect(r[0] + x, r[1] + 19, 2, 2, steel)
+        for name in ("front", "back", "left", "right"):          # trousers' waistband
+            fill(cv, sub(f[name], 0, 21, f[name][2], 3), trousers)
+        cv.rect(r[0] + w // 2 - 1, r[1] + 21, 2, 2, steel)        # button
+
+    def sleeve(cv, f):
+        for name, r in f.items():
+            if name == "bottom":
+                continue
+            fill(cv, r, shirt, gradient=0.06)
+            if name != "top":
+                for x in range(0, r[2], 2):
+                    vline(cv, r, x, shirt_d, y_from=2, y_to=r[3] - 10)
+                fill(cv, sub(r, 0, r[3] - 10, r[2], 4), shirt)    # wide cuff
+                hline(cv, r, r[3] - 10, shirt_d)
+                hline(cv, r, r[3] - 7, shirt_d)
+                for yy in range(r[3] - 6, r[3]):
+                    for xx in range(r[2]):
+                        cv.px(r[0] + xx, r[1] + yy, (0, 0, 0, 0))
+
+    def legs(cv, f):
+        for name, r in f.items():
+            if name == "top":
+                fill(cv, r, trousers)
+                continue
+            if name == "bottom":
+                fill(cv, r, shade(shoe, 0.6))
+                continue
+            fill(cv, r, trousers, gradient=0.06)
+            fill(cv, sub(r, 0, r[3] - 6, r[2], 3), sock)
+            fill(cv, sub(r, 0, r[3] - 3, r[2], 3), shoe)
+            hline(cv, r, r[3] - 1, shade(shoe, 0.6))
 
     def spool(cv, f):
         for name, r in f.items():
-            fill(cv, r, hexc("#D8D8E8") if name in ("front", "back", "left", "right") else hexc("#6A4A3A"), noise=0.02)
+            fill(cv, r, shade(steel, 0.9))
             if name in ("front", "back", "left", "right"):
-                for row in range(0, r[3], 2):
-                    hline(cv, r, row, hexc("#BFC3D8"))
+                for y in range(1, r[3] - 1):
+                    hline(cv, r, y, hexc("#E6E6EE") if y % 2 else hexc("#C8C8D2"))
 
-    painters = {
-        "head": soft_head_compat(rig, skin, hair_c, eye, fringe=5, part=10, locks=(1, 6),
-                             face_kw=dict(eye_y=7, gap=4, mouth="smirk", glow=True), side_rows=9, back_rows=10),
-        "hat": rig.soft_shell,
-        "body": robe_body(cloth, trim_c, collar=trim_c),
-        "right_arm": arm_skin_painter(skin, sleeve=cloth), "left_arm": arm_skin_painter(skin, sleeve=cloth),
-        "right_leg": legs_painter(cloth, hexc("#22222E"), boot_top=12),
-        "left_leg": legs_painter(cloth, hexc("#22222E"), boot_top=12),
-    }
+    painters = {"head": head, "hat": shell, "body": body,
+                "right_arm": arm_skin_painter(skin, shirt), "left_arm": arm_skin_painter(skin, shirt),
+                "right_sleeve": sleeve, "left_sleeve": sleeve, "right_leg": legs, "left_leg": legs}
     humanoid(rig, painters, slim=False)
-    add_horns(rig, hexc("#2E2E3A"), size="medium")
+
+    # The long side-swept fringe plate, over his right eye only.
+    rig.box("bangs", -4.6, -8.3, -4.75, 5.6, 6.6, 1, fringe)
+    rig.box("bangs", 1.0, -8.3, -4.75, 3.6, 3.2, 1, fringe)
+
+    # Ram horns curling out of the crown: up, back, then down and forward around a tight spiral.
+    for sx in (-1, 1):
+        horn_chain(rig, sx, (2.9, -7.8, 0.4),
+                   [(None, (-0.2, 0.0, 0.95), (2, 3, 2)), ((0, -2.7, 0), (-1.1, 0.0, 0.55), (2, 2, 2)),
+                    ((0, -1.8, 0), (-1.4, 0.0, 0.35), (1, 2, 1))], horn, ribs=True)
+
+    # Wire spools in both hands.
     hand_prop_pivot(rig, slim=False)
     rig.box("prop", -1.5, -1, -1.5, 3, 3, 3, spool)
     rig.pose("prop_left", offset=(1.0, 9, 0))
@@ -1530,45 +2093,260 @@ def draht():
     return rig
 
 
-def lugner():
-    skin = hexc("#E8D2C6")
-    hair_c = hexc("#2A3458")
-    eye = hexc("#D8303A")
-    suit = hexc("#22263A")
-    red = hexc("#9A1E2A")
-    rig = Rig("lugner", render_scale=1.0)
+def heiter():
+    """
+    Heiter the priest, from his character sheet: sage-green hair combed back with a few loose curls at the temples,
+    thin glasses, a mild smile; a black priest's robe to the ankles, open down the front and edged in gold, a broad
+    gold-edged collar over the shoulders, a high black collar with gold bands over a white neckcloth with a gold
+    pendant strip, double gold bands at the cuffs, a woven tan belt, dark trousers and black boots.
+    """
+    skin = hexc("#F6DBC6")
+    hair_c = hexc("#7FA46A")
+    eye = hexc("#6C7A5A")
+    robe = hexc("#2E2E31")
+    robe_d = shade(robe, 0.8)
+    gold = hexc("#CDA95F")
+    white = hexc("#F2F0EA")
+    belt = hexc("#B88A52")
+    rim = hexc("#8C8476")
+    rig = Rig("heiter", render_scale=1.0)
 
-    def head_extra(cv, f):
-        r = f["front"]
-        # round-ish glasses framing the eyes (rows 8-11)
-        rim = hexc("#B8BCC8")
-        for x0, x1 in ((1, 6), (9, 14)):
-            for xx in range(x0, x1 + 1):
-                cv.px(r[0] + xx, r[1] + 7, rim)
-                cv.px(r[0] + xx, r[1] + 12, rim)
-            for yy in range(7, 13):
-                cv.px(r[0] + x0, r[1] + yy, rim)
-                cv.px(r[0] + x1, r[1] + yy, rim)
-        cv.px(r[0] + 7, r[1] + 8, rim)
-        cv.px(r[0] + 8, r[1] + 8, rim)
-
-    base_head = soft_head_compat(rig, skin, hair_c, eye, fringe=3, part=11, locks=(1, 5),
-                                 face_kw=dict(eye_y=7, gap=4, mouth="stern", glow=True), side_rows=8, back_rows=10)
+    # Combed back: a high hairline with a slight widow's peak, short sides.
+    depth = [7, 6, 4, 3, 3, 2, 2, 3, 3, 2, 2, 3, 3, 4, 6, 7]
+    base_head, shell = soft_head(rig, skin, hair_c, eye,
+                                 face=dict(style="sharp", eye_y=9, depth=depth, locks=(1, 3), lash=hexc("#3A3A2E"),
+                                           mouth="smile", brow=shade(hair_c, 0.72)),
+                                 side_rows=7, side_tips=2, back_rows=11, back_tips=2, fringe_rows=0, seed=121)
 
     def head(cv, f):
         base_head(cv, f)
-        head_extra(cv, f)
+        r = f["front"]
+        for x0, x1 in ((1, 6), (9, 14)):                       # thin rims around the eyes, the lower edge fainter
+            for xx in range(x0 + 1, x1):
+                cv.px(r[0] + xx, r[1] + 8, rim)
+                cv.px(r[0] + xx, r[1] + 12, mix(rim, skin, 0.5))
+            for yy in range(9, 12):
+                cv.px(r[0] + x0, r[1] + yy, rim)
+                cv.px(r[0] + x1, r[1] + yy, rim)
+        cv.px(r[0] + 7, r[1] + 9, rim)
+        cv.px(r[0] + 8, r[1] + 9, rim)
+        for x, y in ((2, 3), (13, 3), (1, 4), (14, 4)):          # loose curls at the temples
+            cv.px(r[0] + x, r[1] + y, shade(hair_c, 0.9))
 
-    painters = {
-        "head": head,
-        "hat": rig.soft_shell,
-        "body": robe_body(suit, red, collar=hexc("#E8E8EE"), collar_rows=3),
-        "right_arm": arm_skin_painter(skin, sleeve=suit), "left_arm": arm_skin_painter(skin, sleeve=suit),
-        "right_leg": legs_painter(suit, hexc("#15151E"), boot_top=14),
-        "left_leg": legs_painter(suit, hexc("#15151E"), boot_top=14),
-    }
+    def body(cv, f):
+        for name, r in f.items():
+            fill(cv, r, robe, gradient=0.06)
+        r = f["front"]
+        w = r[2]
+        fill(cv, sub(r, w // 2 - 3, 0, 6, 3), robe)            # high collar with gold bands
+        hline(cv, r, 0, gold, x_from=w // 2 - 3, x_to=w // 2 + 3)
+        hline(cv, r, 2, gold, x_from=w // 2 - 3, x_to=w // 2 + 3)
+        for y in range(3, 9):                                   # white neckcloth in a V, gold strip down it
+            half = max(1, 4 - (y - 3) // 2)
+            for x in range(w // 2 - half, w // 2 + half):
+                cv.px(r[0] + x, r[1] + y, white)
+            cv.px(r[0] + w // 2 - half - 1, r[1] + y, gold)
+            cv.px(r[0] + w // 2 + half, r[1] + y, gold)
+        vline(cv, r, w // 2 - 1, gold, y_from=3, y_to=10)
+        vline(cv, r, w // 2, gold, y_from=3, y_to=10)
+        for y in range(9, r[3]):                                 # the robe's front edges, gold, with the opening
+            vline(cv, r, w // 2 - 3, gold, y_from=y, y_to=y + 1)
+            vline(cv, r, w // 2 + 2, gold, y_from=y, y_to=y + 1)
+            for x in range(w // 2 - 2, w // 2 + 2):
+                cv.px(r[0] + x, r[1] + y, robe_d)
+        for k in range(3):                                       # the gold cord-loop clasp at the chest
+            cv.px(r[0] + w // 2 - 3 + k * 3, r[1] + 10, gold)
+        for name in ("front", "back", "left", "right"):          # woven tan belt
+            fill(cv, sub(f[name], 0, 19, f[name][2], 3), belt)
+            for x in range(0, f[name][2], 2):
+                cv.px(f[name][0] + x, f[name][1] + 20, shade(belt, 0.8))
+        for y in range(19, 22):                                   # the robe edges cross over the belt
+            cv.px(r[0] + w // 2 - 3, r[1] + y, gold)
+            cv.px(r[0] + w // 2 + 2, r[1] + y, gold)
+
+    def collar(cv, f):
+        # broad collar over the shoulders, gold along its edge, open at the front
+        for name, r in f.items():
+            fill(cv, r, robe if name != "bottom" else robe_d, gradient=0.06)
+            if name not in ("top", "bottom"):
+                hline(cv, r, r[3] - 1, gold)
+        r = f["front"]
+        for y in range(r[3]):
+            for x in range(r[2] // 2 - 4, r[2] // 2 + 4):
+                cv.px(r[0] + x, r[1] + y, (0, 0, 0, 0))
+            cv.px(r[0] + r[2] // 2 - 5, r[1] + y, gold)
+            cv.px(r[0] + r[2] // 2 + 4, r[1] + y, gold)
+        for face in ("top", "bottom"):
+            b = f[face]
+            for x in range(b[2] // 2 - 4, b[2] // 2 + 4):
+                for y in range(b[3] // 2 + 1):
+                    cv.px(b[0] + x, b[1] + y, (0, 0, 0, 0))
+
+    def sleeve(cv, f):
+        for name, r in f.items():
+            if name == "bottom":
+                continue
+            fill(cv, r, robe, gradient=0.06)
+            if name != "top":
+                for y in (r[3] - 9, r[3] - 7):                    # double gold bands at the cuff
+                    hline(cv, r, y, gold)
+                for x in range(0, r[2], 2):
+                    cv.px(r[0] + x, r[1] + r[3] - 8, gold)
+                for yy in range(r[3] - 6, r[3]):
+                    for xx in range(r[2]):
+                        cv.px(r[0] + xx, r[1] + yy, (0, 0, 0, 0))
+
+    def robe_skirt(cv, f):
+        for name, r in f.items():
+            if name == "bottom":
+                fill(cv, r, robe_d)
+                continue
+            fill(cv, r, robe, gradient=0.08)
+            if name != "top":
+                hline(cv, r, r[3] - 1, gold)
+                for x in range(3, r[2], 5):
+                    vline(cv, r, x, robe_d, y_from=2, y_to=r[3] - 1)
+        r = f["front"]
+        for y in range(r[3]):                                     # open down the front over the trousers
+            for x in range(r[2] // 2 - 2, r[2] // 2 + 2):
+                cv.px(r[0] + x, r[1] + y, (0, 0, 0, 0))
+            cv.px(r[0] + r[2] // 2 - 3, r[1] + y, gold)
+            cv.px(r[0] + r[2] // 2 + 2, r[1] + y, gold)
+
+    painters = {"head": head, "hat": shell, "body": body,
+                "right_arm": arm_skin_painter(skin, robe), "left_arm": arm_skin_painter(skin, robe),
+                "right_sleeve": sleeve, "left_sleeve": sleeve,
+                "right_leg": legs_painter(robe_d, hexc("#18181C"), boot_top=15, cuff=hexc("#26262C")),
+                "left_leg": legs_painter(robe_d, hexc("#18181C"), boot_top=15, cuff=hexc("#26262C"))}
     humanoid(rig, painters, slim=False)
-    add_horns(rig, hexc("#1E1E28"), size="medium")
+    rig.box("collar", -6.0, -0.6, -2.8, 12, 3, 5.6, collar)
+    rig.pose("skirt", offset=(0, 11, 0))
+    rig.box("skirt", -4.6, 0, -2.6, 9.2, 10.5, 5.2, robe_skirt)
+    return rig
+
+
+def lugner():
+    """
+    Lügner, as he came to Graf Granat's domain posing as an envoy of peace: shoulder-length ash-blond hair parted in
+    the middle with two long strands framing his face, medium horns rising from the crown, bent at the base and near
+    the tip, pointing up and forward; a long ruffled white cravat pinned with a gem over a dark doublet; a long dark
+    coat with gold trim; grey trousers and white knee boots.
+    """
+    skin = hexc("#F5E1D5")
+    hair_c = hexc("#C9C0A2")
+    eye = hexc("#B53242")
+    doublet = hexc("#2C2A38")
+    coat = hexc("#1F1F2A")
+    coat_d = shade(coat, 0.8)
+    gold = hexc("#C9A352")
+    white = hexc("#F4F2EE")
+    white_d = shade(white, 0.86)
+    gem = hexc("#B0182C")
+    trousers = hexc("#8E8E96")
+    boot = hexc("#ECE9E3")
+    horn = hexc("#3F3B46")
+    rig = Rig("lugner", render_scale=1.0)
+
+    # Parted in the middle; the fringe sweeps down to both sides; long locks framing the face.
+    depth = [16, 15, 9, 8, 7, 6, 4, 2, 2, 4, 6, 7, 8, 9, 15, 16]
+    head, shell = soft_head(rig, skin, hair_c, eye,
+                            face=dict(style="sharp", eye_y=8, depth=depth, locks=(2, 14), lash=hexc("#2A2430"),
+                                      mouth="small", brow=shade(hair_c, 0.7)),
+                            side_rows=16, side_tips=3, back_rows=16, back_tips=3, fringe_rows=0, seed=151)
+
+    def body(cv, f):
+        for name, r in f.items():
+            fill(cv, r, doublet, gradient=0.06)
+        r = f["front"]
+        w = r[2]
+        for y in range(0, 17):                                  # the long ruffled cravat: tiers of frills widening as it falls
+            half = 2 + min(2, y // 5)
+            tier_edge = y % 4 == 3
+            for x in range(w // 2 - half, w // 2 + half):
+                cv.px(r[0] + x, r[1] + y, white_d if tier_edge or x in (w // 2 - half, w // 2 + half - 1) else white)
+        cv.rect(r[0] + w // 2 - 1, r[1] + 3, 2, 2, gem)          # the gem pinning it
+        cv.px(r[0] + w // 2 - 1, r[1] + 3, shade(gem, 1.6))
+        for y in (8, 12, 16, 19):                                 # doublet buttons below
+            cv.px(r[0] + w // 2 - 4, r[1] + y, gold)
+            cv.px(r[0] + w // 2 + 3, r[1] + y, gold)
+
+    def coat_layer(cv, f):
+        for name, r in f.items():
+            if name in ("top", "bottom"):
+                continue
+            fill(cv, r, coat, gradient=0.06)
+        r = f["front"]
+        for y in range(r[3]):                                     # open down the front, edged in gold
+            for x in range(3, r[2] - 3):
+                cv.px(r[0] + x, r[1] + y, (0, 0, 0, 0))
+            cv.px(r[0] + 2, r[1] + y, gold)
+            cv.px(r[0] + r[2] - 3, r[1] + y, gold)
+
+    def sleeve(cv, f):
+        for name, r in f.items():
+            if name == "bottom":
+                continue
+            fill(cv, r, coat, gradient=0.06)
+            if name != "top":
+                fill(cv, sub(r, 0, r[3] - 9, r[2], 3), coat_d)
+                hline(cv, r, r[3] - 9, gold)
+                hline(cv, r, r[3] - 7, gold)
+                for yy in range(r[3] - 6, r[3]):
+                    for xx in range(r[2]):
+                        cv.px(r[0] + xx, r[1] + yy, (0, 0, 0, 0))
+
+    def coat_skirt(cv, f):
+        for name, r in f.items():
+            if name == "bottom":
+                fill(cv, r, coat_d)
+                continue
+            fill(cv, r, coat, gradient=0.08)
+            if name != "top":
+                hline(cv, r, r[3] - 1, gold)
+                for x in range(3, r[2], 5):
+                    vline(cv, r, x, coat_d, y_from=1, y_to=r[3] - 1)
+        r = f["front"]
+        for y in range(r[3]):
+            for x in range(r[2] // 2 - 3, r[2] // 2 + 3):
+                cv.px(r[0] + x, r[1] + y, (0, 0, 0, 0))
+            cv.px(r[0] + r[2] // 2 - 4, r[1] + y, gold)
+            cv.px(r[0] + r[2] // 2 + 3, r[1] + y, gold)
+
+    def collar(cv, f):
+        for name, r in f.items():
+            fill(cv, r, coat if name != "bottom" else coat_d)
+            if name not in ("top", "bottom"):
+                hline(cv, r, 0, gold)
+        r = f["front"]
+        for y in range(r[3]):
+            for x in range(3, r[2] - 3):
+                cv.px(r[0] + x, r[1] + y, (0, 0, 0, 0))
+
+    painters = {"head": head, "hat": shell, "body": body, "jacket": coat_layer,
+                "right_arm": arm_skin_painter(skin, coat), "left_arm": arm_skin_painter(skin, coat),
+                "right_sleeve": sleeve, "left_sleeve": sleeve,
+                "right_leg": legs_painter(trousers, boot, boot_top=11, cuff=shade(boot, 0.9)),
+                "left_leg": legs_painter(trousers, boot, boot_top=11, cuff=shade(boot, 0.9))}
+    humanoid(rig, painters, slim=False)
+
+    # Two long strands framing the face, and hair to the shoulders behind.
+    for part, sx in (("lock_right", -1), ("lock_left", 1)):
+        chain(rig, (part, part + "_2"), ((3.7 * sx, -5.0, -3.6), (0, 5, 0)), ((-0.04, 0, -0.03 * sx), (0.03, 0, 0.03 * sx)))
+        rig.box(part, -0.75, 0, -0.5, 1.5, 5, 1, hair_painter(hair_c, seed=152, highlight_row=1))
+        rig.box(part + "_2", -0.75, 0, -0.5, 1.5, 4, 1, hair_painter(shade(hair_c, 0.95), seed=153, highlight_row=None, tips=2))
+    chain(rig, ("hair_back",), ((0, -6.5, 4.1),), ((0.08, 0, 0),))
+    rig.box("hair_back", -4.5, 0, -0.5, 9, 9, 1, hair_painter(hair_c, seed=154, highlight_row=2, tips=4))
+
+    # Horns from the crown, bent at the base and again near the tip, up and forward.
+    for sx in (-1, 1):
+        horn_chain(rig, sx, (1.7, -8.2, -0.4),
+                   [(None, (0.05, 0.0, 0.25), (2, 2, 2)), ((0, -1.9, 0), (0.6, 0.0, -0.15), (2, 2, 2)),
+                    ((0, -1.9, 0), (0.55, 0.0, 0.0), (1, 2, 1))], horn, tip=shade(horn, 1.6), ribs=False)
+
+    # A stand collar behind the neck, and the coat's long skirts to the calf, open in front.
+    rig.box("collar", -4.5, -1.2, -2.6, 9, 2, 5.2, collar)
+    rig.pose("skirt", offset=(0, 11, 0))
+    rig.box("skirt", -4.75, 0, -2.75, 9.5, 8, 5.5, coat_skirt)
     return rig
 
 
@@ -2036,6 +2814,7 @@ ROSTER = {
     "serie": serie,
     "himmel": himmel,
     "eisen": eisen,
+    "heiter": heiter,
     "examiner": examiner,
     "wandering_mage": wandering_mage,
     "priest": priest,

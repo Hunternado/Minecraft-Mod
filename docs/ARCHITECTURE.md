@@ -211,8 +211,13 @@ tools/                              Python generators for every resource file + 
   skirt), so `CharacterModel` bends hair and cloth link by link. `gen_models.py` walks the tree to emit the layer.
 * **Soft hair.** `soft_head` builds a rounded crown, a fringe plate and an open-front shell on the hat layer with
   zigzag lock tips, instead of one inflated box. Every humanoid rig uses it.
-* **Back-carried items.** `CharacterKind.backCarry()` makes the renderer hang the signature weapon on the back
-  through `BackItemLayer` while the character is not fighting, and put it in the hand when it is.
+* **Carried items.** `CharacterKind.carry()` (HAND, BACK or HIP) tells the renderer where the signature weapon
+  rides while the character is not fighting; `CarriedItemLayer` draws it there in the NONE display context, and it
+  moves to the hand once the character fights. Axes are strapped nearly upright on the back. Swords hang at the
+  hip: their item definition selects a scabbard model for the NONE context, so no extra item exists.
+  `tools/models/held.py` (`carry_matrix`) mirrors the layer for the previews.
+* **Hero party echoes.** `HimmelEchoEntity` backs three entity types (Himmel, Eisen, Heiter);
+  `HimmelEchoRenderer` takes the CharacterKind, and the statue calls `appearParty`.
 
 ### Building set (`tools/gen_building.py`, `registry/ModBuildingBlocks`)
 * One table in `gen_building.py` describes all 45 blocks: family, shape, properties, texture painter and

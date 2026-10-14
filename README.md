@@ -21,13 +21,22 @@ demons who plead and lie, and multi-phase bosses up to the Demon King. Fan-made;
 ## What's new in 2.2
 
 * **The whole cast, rebuilt from the anime.** Hair is soft and layered instead of a helmet of blocks: a rounded
-  crown, a fringe that frames the face, side locks and tails that bend link by link. Frieren, Fern, Stark, Himmel,
-  Aura and Macht were redrawn from reference art, and everyone else got the same hair and face treatment. Faces
-  are calm and symmetric; the smirks are gone.
+  crown, a fringe that frames the face, side locks and tails that bend link by link. Faces are calm and
+  symmetric; the smirks are gone. Thirteen characters were redrawn from reference art:
+  * Frieren, Fern, Stark, Himmel, Aura and Macht;
+  * Serie in her cream wrap top, mauve-banded sleeves and teal brooch, with hair to her knees;
+  * Eisen the dwarf: horned helmet, a beard to his belly, round pauldrons and a rust-red cloak to the ground;
+  * Heiter, new: combed-back green hair, glasses and a gold-edged black priest's robe;
+  * Qual's grinning horned mask, fur mantle, stitched torso and hakama;
+  * Linie's twin tails, bell sleeves and laced corset dress;
+  * Draht's hidden eye, ram horns, ruffled shirt and braces;
+  * Lügner's parted ash-blond hair, gem-pinned cravat, gold-trimmed coat and white boots.
+* **The hero party at the statue.** Polish Himmel's statue to a shine and Eisen and Heiter appear beside his
+  echo, the party together again for a moment.
 * **A Demon King worth the name.** Tall and regal: long black hair, crimson-tipped horns sweeping back from a gold
   circlet, a high collar with pauldrons, a floor-length robe and a crimson-lined cape, and his own blade.
-* **Axes ride on backs.** Stark, Eisen and Linie carry their axes slung across the back and draw them only to
-  fight, instead of holding them at an angle that made no sense.
+* **Weapons are carried like weapons.** Stark and Linie wear their axes strapped flat on the back, head over the
+  shoulder. Himmel's sword hangs sheathed at his hip in a blue scabbard. Both are drawn only to fight.
 * **A Frieren building set: 45 blocks** for towns, Association halls, elven ruins and demon castles:
   * whitewashed plaster and four half-timber patterns over dark timber beams;
   * terracotta, slate and verdigris roof tiles;

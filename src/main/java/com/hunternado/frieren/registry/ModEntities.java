@@ -85,6 +85,13 @@ public final class ModEntities {
     public static final RegistryObject<EntityType<HimmelEchoEntity>> HIMMEL_ECHO = register("himmel_echo",
         EntityType.Builder.of(HimmelEchoEntity::new, MobCategory.MISC), b -> b.sized(0.6F, 1.8F).noSave().noSummon().fireImmune()
             .clientTrackingRange(10));
+    /** Eisen and Heiter, appearing beside Himmel's echo: the hero party, together again for a moment. */
+    public static final RegistryObject<EntityType<HimmelEchoEntity>> EISEN_ECHO = register("eisen_echo",
+        EntityType.Builder.of(HimmelEchoEntity::new, MobCategory.MISC), b -> b.sized(0.7F, 1.4F).noSave().noSummon().fireImmune()
+            .clientTrackingRange(10));
+    public static final RegistryObject<EntityType<HimmelEchoEntity>> HEITER_ECHO = register("heiter_echo",
+        EntityType.Builder.of(HimmelEchoEntity::new, MobCategory.MISC), b -> b.sized(0.6F, 1.8F).noSave().noSummon().fireImmune()
+            .clientTrackingRange(10));
 
     // ---- Exam trials ---------------------------------------------------------------------------
     public static final RegistryObject<EntityType<ExamConstructEntity>> EXAM_CONSTRUCT = register("exam_construct",
@@ -154,6 +161,8 @@ public final class ModEntities {
         event.put(EXAM_CONSTRUCT.get(), ExamConstructEntity.createAttributes().build());
         event.put(HERO_STATUE.get(), HeroStatueEntity.createAttributes().build());
         event.put(HIMMEL_ECHO.get(), HimmelEchoEntity.createAttributes().build());
+        event.put(EISEN_ECHO.get(), HimmelEchoEntity.createAttributes().build());
+        event.put(HEITER_ECHO.get(), HimmelEchoEntity.createAttributes().build());
         event.put(MIMIC.get(), MimicEntity.createAttributes().build());
         event.put(STILLE.get(), StilleEntity.createAttributes().build());
         event.put(WANDERING_MAGE.get(), WanderingMageEntity.createAttributes().build());
