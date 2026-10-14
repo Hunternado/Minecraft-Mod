@@ -158,7 +158,7 @@ public class DemonKingEntity extends DemonBoss {
                 partyAnnounced = false;
             }
             partyPresent = present;
-            if (!partyPresent && this.getHealth() < this.getMaxHealth()) {
+            if (!partyPresent && !this.isDeadOrDying() && this.getHealth() < this.getMaxHealth()) {
                 this.heal(4.0F);                                   // near-endless mana: alone, he simply mends
             }
         }

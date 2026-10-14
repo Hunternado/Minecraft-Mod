@@ -166,6 +166,9 @@ public abstract class DemonBoss extends Monster implements FrierenBoss, ManaSign
                 Component.translatable(messageKey() + ".spawn").withStyle(ChatFormatting.DARK_RED));
         }
         BossBarHelper.update(bossBar, level, this);
+        if (this.isDeadOrDying()) {
+            return;                                              // no phases, minions or attacks during the death fall
+        }
         tickBlasts(level);
         if (this.tickCount % 20 == 0) {
             minions.removeIf(id -> {

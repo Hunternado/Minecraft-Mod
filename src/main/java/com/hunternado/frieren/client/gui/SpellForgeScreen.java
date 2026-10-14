@@ -102,12 +102,10 @@ public class SpellForgeScreen extends Screen {
             this.addRenderableWidget(new InkButton(left + pageW - 11, ry, 11, 12, Component.literal(">"), () -> cycle(row, 1)));
         }
         int my = y + rows.length * ROW + 12;
-        int bw = (pageW - 4) / 3;
         for (int i = 0; i < OriginalSpells.MODIFIERS.length; i++) {
             final int bit = 1 << i;
-            int bx = left + (i % 3) * (bw + 2);
-            int by = my + (i / 3) * 14;
-            this.addRenderableWidget(new InkButton(bx, by, bw, 12,
+            int[] box = modifierBox(i, left, pageW, my);
+            this.addRenderableWidget(new InkButton(box[0], box[1], box[2], 12,
                 Component.translatable("original.frieren.modifier." + OriginalSpells.MODIFIERS[i]), () -> modifiers ^= bit));
         }
 
@@ -204,10 +202,11 @@ public class SpellForgeScreen extends Screen {
         }
         int my = y + rows.length * ROW;
         graphics.text(this.font, Component.translatable("screen.frieren.forge.modifiers"), left, my + 1, GrimoireUi.INK_SOFT, false);
-        int bw = (pageW - 4) / 3;
         for (int i = 0; i < OriginalSpells.MODIFIERS.length; i++) {
-            int bx = left + (i % 3) * (bw + 2);
-            int by = my + 12 + (i / 3) * 14;
+            int[] box = modifierBox(i, left, pageW, my + 12);
+            int bx = box[0];
+            int by = box[1];
+            int bw = box[2];
             boolean on = r.has(1 << i);
             boolean barred = (1 << i) == OriginalSpells.MOD_UNWAVERING && r.potency() >= OriginalSpells.ANNIHILATION;
             if (barred) {
@@ -234,6 +233,14 @@ public class SpellForgeScreen extends Screen {
                 graphics.fill(x - 1, sy + 10, x + swatch - 1, sy + 11, GrimoireUi.INK);
             }
         }
+    }
+
+    /** Modifier button {@code i} as {x, y, width}: three across the first row, the rest share the second. */
+    private static int[] modifierBox(int i, int left, int pageW, int top) {
+        int perRow = i < 3 ? 3 : OriginalSpells.MODIFIERS.length - 3;
+        int bw = (pageW - 2 * (perRow - 1)) / perRow;
+        int col = i < 3 ? i : i - 3;
+        return new int[] {left + col * (bw + 2), top + (i / 3) * 14, bw};
     }
 
     private void drawPreview(GuiGraphicsExtractor graphics, OriginalSpells.Recipe r, OriginalSpells.Stats s) {

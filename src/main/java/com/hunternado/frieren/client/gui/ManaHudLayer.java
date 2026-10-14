@@ -141,6 +141,7 @@ public final class ManaHudLayer implements ForgeLayer {
         labelled.sort(Comparator.comparingDouble((ManaSensePacket.Entry entry) -> -entry.apparentMana()));
         List<ManaSensePacket.Entry> top = labelled.subList(0, Math.min(4, labelled.size()));
         boolean flicker = (ClientMagicCache.gameTime() / 5L) % 2L == 0L;
+        List<int[]> placed = new ArrayList<>();                  // labels drawn so far, as {x, y, width}
         for (ManaSensePacket.Entry entry : entries) {
             Entity entity = minecraft.level.getEntity(entry.entityId());
             if (entity == null) {
@@ -175,9 +176,26 @@ public final class ManaHudLayer implements ForgeLayer {
                 String word = ratio < 0.25F ? "faint" : ratio < 0.75F ? "weaker" : ratio < 1.5F ? "comparable" : ratio < 3.0F ? "stronger" : "overwhelming";
                 Component label = Component.translatable("hud.frieren.sense." + word, Math.round(Math.sqrt(dx * dx + dz * dz)));
                 int labelColor = ratio >= 3.0F ? 0xFF6060 : ratio >= 1.5F ? 0xFFC060 : 0xE8E8F0;
-                graphics.text(font, label, mx - font.width(label) / 2, my + size + 2, alpha | labelColor, true);
+                int lw = font.width(label);
+                int lx = mx - lw / 2;
+                int ly = my + size + 2;
+                // signatures at nearly the same bearing would print over each other: each clash steps down a line
+                for (int tries = 0; tries < 4 && overlaps(placed, lx, ly, lw); tries++) {
+                    ly += 10;
+                }
+                placed.add(new int[] {lx, ly, lw});
+                graphics.text(font, label, lx, ly, alpha | labelColor, true);
             }
         }
+    }
+
+    private static boolean overlaps(List<int[]> placed, int x, int y, int width) {
+        for (int[] other : placed) {
+            if (x < other[0] + other[2] + 2 && other[0] < x + width + 2 && Math.abs(y - other[1]) < 10) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /** The bar under the crosshair: name above, progress below. Nothing is drawn while idle. */

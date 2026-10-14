@@ -3,6 +3,7 @@ package com.hunternado.frieren.client.gui;
 import com.hunternado.frieren.client.ClientMagicCache;
 import com.hunternado.frieren.data.MagicData;
 import com.hunternado.frieren.data.SpellProgress;
+import com.hunternado.frieren.magic.SpellRarity;
 import com.hunternado.frieren.magic.SpellSchool;
 import com.hunternado.frieren.network.FrierenNetwork;
 import com.hunternado.frieren.network.packet.BindSpellPacket;
@@ -200,9 +201,11 @@ public class SpellbookScreen extends Screen {
         GrimoireUi.circle(graphics, cx, y + 20, 44);
         GrimoireUi.spellIcon(graphics, selected, definition, cx - 16, y + 4, 32);
         y += 49;
-        Component name = definition.displayName();
+        // the name in its rarity's ink: the chat colours (yellow, aqua...) vanish on parchment
+        Component name = Component.literal(definition.displayName().getString());
+        int nameInk = definition.rarity() == SpellRarity.COMMON ? GrimoireUi.INK : GrimoireUi.rarityInk(definition.rarity());
         for (FormattedCharSequence line : this.font.split(name, width)) {
-            graphics.centeredText(this.font, line, cx, y, GrimoireUi.INK);
+            graphics.centeredText(this.font, line, cx, y, nameInk);
             y += 10;
         }
         Component kind = Component.literal(definition.rarity().displayName().getString() + "  ·  " + definition.school().displayName().getString());
@@ -214,12 +217,20 @@ public class SpellbookScreen extends Screen {
         y += 6;
 
         int statsTop = bookY + bookH - 52;
-        for (FormattedCharSequence line : this.font.split(definition.description(), width - 4)) {
-            if (y > statsTop - 10) {
-                break;
-            }
-            graphics.text(this.font, line, left + 2, y, GrimoireUi.INK_SOFT, false);
+        List<FormattedCharSequence> lines = this.font.split(definition.description(), width - 4);
+        int room = Math.max(1, (statsTop - 10 - y) / 10 + 1);
+        int descTop = y;
+        for (int i = 0; i < Math.min(room, lines.size()); i++) {
+            graphics.text(this.font, lines.get(i), left + 2, y, GrimoireUi.INK_SOFT, false);
             y += 10;
+        }
+        if (lines.size() > room) {
+            // the rest of a long description (the legends' spells have a lot to say) is a hover away
+            int lastW = this.font.width(lines.get(room - 1));
+            graphics.text(this.font, "\u2026", Math.min(left + 2 + lastW + 1, left + width - 6), y - 10, GrimoireUi.INK_GOLD, false);
+            if (GrimoireUi.inside(mouseX, mouseY, left, descTop - 1, width, y - descTop + 1)) {
+                graphics.setTooltipForNextFrame(this.font, this.font.split(definition.description(), 220), mouseX, mouseY);
+            }
         }
 
         y = statsTop;

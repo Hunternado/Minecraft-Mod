@@ -76,7 +76,7 @@ jobs:
           rm -rf run/saves/showcase && mkdir -p run/saves run/showcase
           cp -r run/gametestserver/gametestworld run/saves/showcase && rm -f run/saves/showcase/session.lock
           cp tools/showcase/scenes.txt run/showcase/scenes.txt
-          printf 'onboardAccessibility:false\nskipMultiplayerWarning:true\njoinedFirstServer:true\n' >> run/options.txt
+          printf 'onboardAccessibility:false\nskipMultiplayerWarning:true\njoinedFirstServer:true\ntutorialStep:none\n' >> run/options.txt
           set +e
           xvfb-run -a -s "-screen 0 1280x720x24" timeout 900 ./gradlew runClient --no-daemon --console=plain > showcase.log 2>&1
           echo "showcase exit code: $?"

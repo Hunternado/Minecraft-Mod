@@ -581,16 +581,13 @@
 @wait 25
 @shot carry_linie_back
 /tp @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player] 24.5 -300 0.5
-/summon frieren:ubel 24.5 120 0.5 {NoAI:1b,Rotation:[180f,0f]}
+/summon frieren:ubel 24.5 120 0.5 {NoAI:1b,Rotation:[0f,0f]}
 /tp @a 24.5 120.2 2.75 -180 11
 @wait 25
 @shot portrait_ubel
 /tp @a 26.0 120.1 2.4 142 10
 @wait 25
 @shot portrait_ubel_three_quarter
-/tp @e[x=20,y=118,z=-6,dx=9,dy=8,dz=12,type=!minecraft:player] 24.5 -300 0.5
-/summon frieren:ubel 24.5 120 0.5 {NoAI:1b,Rotation:[0f,0f]}
-@wait 5
 /tp @a 24.5 120.2 -1.75 -0 13
 @wait 20
 @shot portrait_ubel_back

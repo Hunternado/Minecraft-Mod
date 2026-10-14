@@ -200,6 +200,9 @@ public class AuraEntity extends DemonEntity implements FrierenBoss, RangedSpellG
             this.getNavigation().stop();
             return;
         }
+        if (this.isDeadOrDying()) {
+            return;                                              // no phase change (or blade) during the death fall
+        }
         updatePhase(level);
 
         if (stunTicks > 0) {
