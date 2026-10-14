@@ -30,7 +30,8 @@ import java.util.List;
  */
 public class SpellbookScreen extends Screen {
     private static final int ROW_HEIGHT = 18;
-    private static final SpellSchool[] TABS = {null, SpellSchool.OFFENSIVE, SpellSchool.DEFENSIVE, SpellSchool.UTILITY, SpellSchool.SPECIAL};
+    private static final SpellSchool[] TABS = {null, SpellSchool.OFFENSIVE, SpellSchool.DEFENSIVE, SpellSchool.UTILITY, SpellSchool.SPECIAL,
+        SpellSchool.ORIGINAL};
 
     private final List<Identifier> spells = new ArrayList<>();
     private @Nullable Identifier selected;
@@ -226,7 +227,9 @@ public class SpellbookScreen extends Screen {
         stat(graphics, "mana", Component.translatable("screen.frieren.spellbook.mana", Math.round(definition.manaCost())), left + 2, y);
         stat(graphics, "cooldown", Component.literal(String.format("%.1fs", definition.cooldown() / 20.0F)), col2, y);
         y += 12;
-        if (definition.castTime() > 0) {
+        if (definition.isCharged()) {
+            stat(graphics, "cast", Component.translatable("screen.frieren.spellbook.charged", String.format("%.1fs", definition.chargeTicks() / 20.0F)), left + 2, y);
+        } else if (definition.castTime() > 0) {
             stat(graphics, "cast", Component.translatable("screen.frieren.spellbook.incant", String.format("%.1fs", definition.castTime() / 20.0F)), left + 2, y);
         } else if (definition.isChannelled()) {
             stat(graphics, "cast", Component.translatable("screen.frieren.spellbook.channelled"), left + 2, y);

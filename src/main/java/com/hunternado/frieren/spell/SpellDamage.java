@@ -57,7 +57,7 @@ public final class SpellDamage {
     /** Full form, also used by mob casters ({@code ctx == null}). The execution threshold comes from the spell. */
     public static boolean hurt(ServerLevel level, @Nullable Entity direct, Entity caster, LivingEntity target, float amount,
                                ResourceKey<DamageType> type, float barrierCost, boolean demonBane, @Nullable SpellContext ctx) {
-        float executeCap = ctx != null ? (float) ctx.param("execute_max_health", 0.0D) : 0.0F;
+        float executeCap = ctx != null ? ctx.executeCap() : 0.0F;
         return hurt(level, direct, caster, target, amount, type, barrierCost, demonBane, ctx, executeCap);
     }
 

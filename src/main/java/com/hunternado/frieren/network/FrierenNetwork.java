@@ -6,6 +6,7 @@ import com.hunternado.frieren.data.MagicData;
 import com.hunternado.frieren.network.packet.BindSpellPacket;
 import com.hunternado.frieren.network.packet.CommandPuppetsPacket;
 import com.hunternado.frieren.network.packet.CastSpellPacket;
+import com.hunternado.frieren.network.packet.CastStatePacket;
 import com.hunternado.frieren.network.packet.DetectManaPacket;
 import com.hunternado.frieren.network.packet.ExaminerScreenPacket;
 import com.hunternado.frieren.network.packet.ManaSensePacket;
@@ -27,6 +28,7 @@ import net.minecraftforge.network.Channel;
 import net.minecraftforge.network.ChannelBuilder;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.SimpleChannel;
+import org.jspecify.annotations.Nullable;
 
 import java.util.List;
 
@@ -38,7 +40,7 @@ import java.util.List;
  */
 public final class FrierenNetwork {
     public static final Identifier NAME = FrierenIds.id("main");
-    public static final int PROTOCOL_VERSION = 1;
+    public static final int PROTOCOL_VERSION = 2;
 
     private static SimpleChannel channel;
 
@@ -71,6 +73,7 @@ public final class FrierenNetwork {
                         .addMain(SpellFxPacket.class, SpellFxPacket.STREAM_CODEC, (msg, ctx) -> ClientPacketHandlers.spellFx(msg))
                         .addMain(ExaminerScreenPacket.class, ExaminerScreenPacket.STREAM_CODEC, (msg, ctx) -> ClientPacketHandlers.openExaminer(msg))
                         .addMain(TradeScreenPacket.class, TradeScreenPacket.STREAM_CODEC, (msg, ctx) -> ClientPacketHandlers.openTrades(msg))
+                        .addMain(CastStatePacket.class, CastStatePacket.STREAM_CODEC, (msg, ctx) -> ClientPacketHandlers.castState(msg))
             .build();
     }
 
@@ -99,6 +102,10 @@ public final class FrierenNetwork {
     public static void syncMana(ServerPlayer player, MagicData data) {
         sendToPlayer(player, new SyncManaPacket(data.mana(), data.maxMana()));
         data.markManaSynced();
+    }
+
+    public static void sendCastState(ServerPlayer player, byte state, @Nullable Identifier spell, int totalTicks) {
+        sendToPlayer(player, new CastStatePacket(state, spell != null ? spell.toString() : "", player.level().getGameTime(), totalTicks));
     }
 
     public static void syncSpells(ServerPlayer player) {

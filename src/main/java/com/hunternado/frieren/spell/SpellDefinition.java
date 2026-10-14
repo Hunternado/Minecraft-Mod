@@ -16,6 +16,14 @@ import java.util.Map;
 /**
  * Data-driven spell metadata, loaded from {@code data/<namespace>/frieren_spells/<path>.json}.
  * The {@code behavior} names a code-backed {@link SpellBehavior}; {@code params} feed that behavior.
+ * <p>
+ * How a spell is cast follows from its fields: instant; an incantation ({@code cast_time} ticks of wind-up); a
+ * charge (param {@code charge}: hold the cast key to pour mana in, release to fire, power grows with the charge);
+ * a channel ({@code channel}: keeps going while the key is held); or a toggle (flight, defensive magic). Incantations
+ * and charges can be broken by a hit unless param {@code steady} is 1 (see {@link Concentration}).
+ * <p>
+ * {@code customName} is empty for data-pack spells (their names come from the language files); spells Serie creates
+ * for a player carry the name the player gave them.
  *
  * <pre>{@code
  * {
@@ -41,7 +49,8 @@ public record SpellDefinition(
     int castTime,
     int maxChannelTicks,
     int color,
-    Map<String, Double> params
+    Map<String, Double> params,
+    String customName
 ) {
     /** JSON shape (without the id, which comes from the file path). */
     private record Data(Identifier behavior, SpellSchool school, SpellRarity rarity, float manaCost, float healthCost,
@@ -63,17 +72,32 @@ public record SpellDefinition(
     /** Codec of the JSON file; the id is filled in by {@link SpellManager} from the file name. */
     public static final Codec<SpellDefinition> FILE_CODEC = DATA_CODEC.xmap(
         data -> new SpellDefinition(FrierenIds.id("unbound"), data.behavior(), data.school(), data.rarity(), data.manaCost(),
-            data.healthCost(), data.cooldown(), data.castTime(), data.maxChannelTicks(), parseColor(data.color()), Map.copyOf(data.params())),
+            data.healthCost(), data.cooldown(), data.castTime(), data.maxChannelTicks(), parseColor(data.color()), Map.copyOf(data.params()), ""),
         def -> new Data(def.behavior(), def.school(), def.rarity(), def.manaCost(), def.healthCost(), def.cooldown(), def.castTime(),
             def.maxChannelTicks(), String.format("#%06X", def.color() & 0xFFFFFF), def.params())
     );
 
     public SpellDefinition withId(Identifier newId) {
-        return new SpellDefinition(newId, behavior, school, rarity, manaCost, healthCost, cooldown, castTime, maxChannelTicks, color, params);
+        return new SpellDefinition(newId, behavior, school, rarity, manaCost, healthCost, cooldown, castTime, maxChannelTicks, color, params,
+            customName);
     }
 
     public boolean isChannelled() {
         return maxChannelTicks > 0;
+    }
+
+    /** Ticks to reach a full charge; 0 for spells that are not charged. */
+    public int chargeTicks() {
+        return Math.max(0, (int) param("charge", 0.0D));
+    }
+
+    public boolean isCharged() {
+        return chargeTicks() > 0;
+    }
+
+    /** Steady spells cannot have their incantation or charge broken by a hit. */
+    public boolean isSteady() {
+        return param("steady", 0.0D) > 0.5D;
     }
 
     public double param(String key, double fallback) {
@@ -90,10 +114,16 @@ public record SpellDefinition(
     }
 
     public Component displayName() {
+        if (!customName.isEmpty()) {
+            return Component.literal(customName).withStyle(rarity.color());
+        }
         return Component.translatable(translationKey()).withStyle(rarity.color());
     }
 
     public Component description() {
+        if (school == SpellSchool.ORIGINAL) {
+            return OriginalSpells.describe(this);
+        }
         return Component.translatable(translationKey() + ".desc");
     }
 
@@ -115,6 +145,7 @@ public record SpellDefinition(
             buf.writeUtf(key);
             buf.writeDouble(value);
         });
+        buf.writeUtf(customName);
     }
 
     public static SpellDefinition read(FriendlyByteBuf buf) {
@@ -133,7 +164,9 @@ public record SpellDefinition(
         for (int i = 0; i < count; i++) {
             params.put(buf.readUtf(), buf.readDouble());
         }
-        return new SpellDefinition(id, behavior, school, rarity, manaCost, healthCost, cooldown, castTime, channel, color, Map.copyOf(params));
+        String customName = buf.readUtf();
+        return new SpellDefinition(id, behavior, school, rarity, manaCost, healthCost, cooldown, castTime, channel, color, Map.copyOf(params),
+            customName);
     }
 
     private static int parseColor(String hex) {

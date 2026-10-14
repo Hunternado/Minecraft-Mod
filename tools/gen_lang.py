@@ -46,6 +46,7 @@ ITEMS = {
     "legendary_grimoire": "Legendary Grimoire",
     "demon_grimoire": "Demon Grimoire",
     "forbidden_grimoire": "Forbidden Grimoire",
+    "mythic_grimoire": "Mythic Grimoire",
     "sealed_demon_grimoire": "Sealed Demon Grimoire",
     "apprentice_staff": "Apprentice Staff",
     "mage_staff": "Mage Staff",
@@ -230,9 +231,10 @@ RANKS = {
 }
 RARITIES = {
     "common": "Common", "uncommon": "Uncommon", "rare": "Rare", "ancient": "Ancient",
-    "legendary": "Legendary", "demon": "Demon Magic", "forbidden": "Forbidden",
+    "legendary": "Legendary", "demon": "Demon Magic", "forbidden": "Forbidden", "mythic": "Mythic",
 }
-SCHOOLS = {"offensive": "Offensive", "defensive": "Defensive", "utility": "Utility", "special": "Special"}
+SCHOOLS = {"offensive": "Offensive", "defensive": "Defensive", "utility": "Utility", "special": "Special",
+           "original": "Original Magic"}
 STAGES = {
     "practical": ("Practical", "Six mana constructs drift around the exam circle. Break all of them with spells; nothing else counts."),
     "survival": ("Survival", "Hold the exam circle against three waves of Aura's soldiers and demons."),
@@ -327,8 +329,13 @@ def messages():
     m("barrier_broken", "Your barrier shattered!")
     m("barrier_off", "Defensive magic lowered")
     m("barrier_on", "Defensive magic raised")
-    m("cast_interrupted", "Your spell was interrupted!")
     m("casting", "Casting %s...")
+    m("charging", "Charging %s... hold the cast key, release to fire.")
+    m("charge_full", "%s is fully charged. Release to fire.")
+    m("charge_stalled", "Out of mana: %s holds at its current charge.")
+    m("charge_slipped", "You can't hold %s any longer!")
+    m("charge_fizzled", "%s fizzled: hold the cast key longer to charge it.")
+    m("concentration_broken", "Your concentration broke! %s slipped away.")
     m("conceal_off", "Mana released (%s%% concealed)")
     m("conceal_on", "Mana concealed (%s%% hidden)")
     m("cooldown", "%s is on cooldown (%ss)")
@@ -449,6 +456,9 @@ def messages():
     h("barrier", "Barrier")
     h("casting", "Casting")
     h("channeling", "Channeling")
+    h("charging", "charging %s%%")
+    h("charged", "fully charged: release!")
+    h("concentration_broken", "Concentration broken")
     h("concealed", "Concealed %s%%")
     h("flight", "Flight")
 
@@ -586,6 +596,7 @@ def screens():
     s("spellbook.channelled", "Channelled")
     s("spellbook.instant", "Instant")
     s("spellbook.casts", "%s casts")
+    s("spellbook.charged", "Charge %s")
     s("spellbook.mastery_level", "Mastery %s")
     s("spellbook.power_tooltip", "Mastery multiplies this spell's damage, healing and duration by %s (up to %s). Cast it often; hitting something with it counts double.")
     s("trades", "Trades")
@@ -619,6 +630,57 @@ def commands():
     c("spell.not_known", "%s does not know %s")
     c("spell.removed", "Removed %s from %s")
     c("spell.unknown", "Unknown spell %s")
+
+
+ORIGINAL_FORMS = {
+    "beam": ("Beam", "A beam of %1$s damage reaching %2$s blocks."),
+    "volley": ("Volley", "%4$s bolts of light, %1$s damage each, that seek different foes in front of you."),
+    "blast": ("Blast", "A blast of %1$s damage, %3$s blocks across, wherever you aim (up to %2$s blocks away)."),
+    "nova": ("Nova", "A burst of %1$s damage %3$s blocks around you that throws foes back."),
+    "ward": ("Ward", "Wraps you in a ward that absorbs %7$s damage for %5$s seconds."),
+    "mend": ("Mending", "Mends %6$s health of yourself and everyone friendly within %3$s blocks."),
+    "bind": ("Binding", "Binds every foe within %3$s blocks of where you aim for %5$s seconds and deals %1$s damage."),
+}
+ORIGINAL_ELEMENTS = {
+    # name, effect on attacks, effect on a ward, effect on mending
+    "mana": ("Mana", "Pure mana.", "The ward also hardens you (Resistance).", ""),
+    "flame": ("Flame", "Flame: sets what it hits ablaze.", "Flames cannot touch you while it holds.", ""),
+    "frost": ("Frost", "Frost: slows and freezes what it hits.", "Its frost hardens you (Resistance).", ""),
+    "storm": ("Storm", "Storm: leaps on to more foes, or strikes harder over an area.", "Lightning quickens your steps.", ""),
+    "curse": ("Curse", "Curse: withers and weakens what it hits.", "Dark mana lends you strength.", ""),
+    "holy": ("Holy", "Holy: double damage to demons and the undead.", "Goddess magic mends you while it holds.",
+             "Holy mending heals half again as much and washes away every curse and poison."),
+    "void": ("Void", "Void: cuts through barriers as if they were not there.", "Spells and arrows that strike you are turned back.", ""),
+}
+ORIGINAL_MODIFIERS = {
+    "pierce": ("Piercing", "Beams pass through every foe in the line."),
+    "swift": ("Swift", "Half the cooldown, at a higher cost."),
+    "silent": ("Silent", "Cast with no circle and no mana flare: demons never see it coming."),
+    "lifesteal": ("Lifesteal", "A quarter of the damage dealt mends you."),
+    "unwavering": ("Unwavering", "No hit can break the incantation or charge. Costs half again as much."),
+}
+
+
+def original_magic():
+    o = lambda k, v: put(f"original.{NS}.{k}", v)
+    for k, (name, desc) in ORIGINAL_FORMS.items():
+        o(f"form.{k}", name)
+        o(f"form.{k}.desc", desc)
+    for k, (name, attack, ward, mend) in ORIGINAL_ELEMENTS.items():
+        o(f"element.{k}", name)
+        o(f"element.{k}.desc", attack)
+        o(f"element.{k}.ward", ward)
+        o(f"element.{k}.mend", mend)
+    for k, (name, desc) in ORIGINAL_MODIFIERS.items():
+        o(f"modifier.{k}", name)
+        o(f"modifier.{k}.desc", desc)
+    for k, v in {"instant": "Instant", "incantation": "Incantation", "charge": "Charge"}.items():
+        o(f"casting.{k}", v)
+    o("annihilation.desc", "Annihilation: anything that is not a boss dies outright, and even a boss loses up to 30% of its health.")
+    o("execute.desc", "Kills anything with up to %s max health outright.")
+    o("steady.desc", "Unwavering: no hit can break it.")
+    o("fragile.desc", "A solid hit while it is being cast can break your concentration.")
+    o("signature", "Created for you by Serie.")
 
 
 def keys():
@@ -705,6 +767,10 @@ SUBTITLES = {
     "spell.utility": "Utility magic",
     "demon.bolt": "Demon magic fires",
     "boss.roar": "Boss roars",
+    "spell.charge": "Mana gathers",
+    "spell.charged": "Spell fully charged",
+    "mana.limiter": "A limiter is released",
+    "spell.annihilation": "Annihilation thunders",
 }
 
 
@@ -724,6 +790,7 @@ def main():
     screens()
     commands()
     keys()
+    original_magic()
     death_messages()
     advancements()
     subtitles()

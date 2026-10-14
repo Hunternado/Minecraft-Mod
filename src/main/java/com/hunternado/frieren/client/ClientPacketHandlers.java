@@ -3,6 +3,7 @@ package com.hunternado.frieren.client;
 import com.hunternado.frieren.client.fx.MagicFx;
 import com.hunternado.frieren.client.gui.ExaminerScreen;
 import com.hunternado.frieren.client.gui.TradeScreen;
+import com.hunternado.frieren.network.packet.CastStatePacket;
 import com.hunternado.frieren.network.packet.ExaminerScreenPacket;
 import com.hunternado.frieren.network.packet.ManaSensePacket;
 import com.hunternado.frieren.network.packet.SpellFxPacket;
@@ -32,6 +33,7 @@ public final class ClientPacketHandlers {
 
     public static void syncMagicData(SyncMagicDataPacket packet) {
         ClientMagicCache.data().load(packet.data());
+        SpellManager.setClientOriginals(ClientMagicCache.data().originalDefinitions());
     }
 
     public static void syncMana(SyncManaPacket packet) {
@@ -50,6 +52,10 @@ public final class ClientPacketHandlers {
             Messages.actionBar(minecraft.player, Component.translatable(packet.sawThroughSomething()
                 ? "message.frieren.sense_through" : "message.frieren.sense_count", packet.entries().size()));
         }
+    }
+
+    public static void castState(CastStatePacket packet) {
+        ClientMagicCache.setCastState(packet);
     }
 
     public static void openExaminer(ExaminerScreenPacket packet) {

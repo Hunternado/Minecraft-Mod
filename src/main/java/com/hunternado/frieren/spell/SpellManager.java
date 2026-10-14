@@ -19,11 +19,18 @@ import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Loads spell definitions from {@code data/<namespace>/frieren_spells/*.json} on the server and keeps the
  * client copy received over the network. The two copies are separate so an integrated server and its
  * client never share mutable state.
+ * <p>
+ * Original magic (spells Serie built for one player) lives beside the data-pack spells in separate maps: the
+ * server registers a player's originals when they log in or receive a new one, the client takes its own from the
+ * synced player data. {@link #server(Identifier)} and {@link #client(Identifier)} look in both; the listings
+ * ({@link #serverDefinitions()} and friends) only ever contain data-pack spells, so loot, privileges and creative
+ * tabs never hand out somebody's personal spell.
  */
 public final class SpellManager extends SimpleJsonResourceReloadListener<SpellDefinition> {
     public static final String FOLDER = "frieren_spells";
@@ -33,6 +40,8 @@ public final class SpellManager extends SimpleJsonResourceReloadListener<SpellDe
 
     private static volatile Map<Identifier, SpellDefinition> serverSpells = Map.of();
     private static volatile Map<Identifier, SpellDefinition> clientSpells = Map.of();
+    private static final Map<Identifier, SpellDefinition> SERVER_ORIGINALS = new ConcurrentHashMap<>();
+    private static volatile Map<Identifier, SpellDefinition> clientOriginals = Map.of();
 
     public SpellManager(HolderLookup.Provider registries) {
         super(registries.createSerializationContext(JsonOps.INSTANCE), SpellDefinition.FILE_CODEC, FileToIdConverter.json(FOLDER));
@@ -60,7 +69,19 @@ public final class SpellManager extends SimpleJsonResourceReloadListener<SpellDe
     // ---- Server side ------------------------------------------------------------------------
 
     public static @Nullable SpellDefinition server(Identifier id) {
-        return serverSpells.get(id);
+        SpellDefinition definition = serverSpells.get(id);
+        return definition != null ? definition : SERVER_ORIGINALS.get(id);
+    }
+
+    /** Registers (or replaces) a player's original spells on the server. */
+    public static void registerServerOriginals(Collection<SpellDefinition> originals) {
+        for (SpellDefinition definition : originals) {
+            SERVER_ORIGINALS.put(definition.id(), definition);
+        }
+    }
+
+    public static void clearServerOriginals() {
+        SERVER_ORIGINALS.clear();
     }
 
     public static Collection<SpellDefinition> serverDefinitions() {
@@ -90,7 +111,17 @@ public final class SpellManager extends SimpleJsonResourceReloadListener<SpellDe
     }
 
     public static @Nullable SpellDefinition client(Identifier id) {
-        return clientSpells.get(id);
+        SpellDefinition definition = clientSpells.get(id);
+        return definition != null ? definition : clientOriginals.get(id);
+    }
+
+    /** The local player's original spells, from their synced data. */
+    public static void setClientOriginals(Collection<SpellDefinition> originals) {
+        Map<Identifier, SpellDefinition> map = new LinkedHashMap<>();
+        for (SpellDefinition definition : originals) {
+            map.put(definition.id(), definition);
+        }
+        clientOriginals = java.util.Collections.unmodifiableMap(map);
     }
 
     public static Collection<SpellDefinition> clientDefinitions() {

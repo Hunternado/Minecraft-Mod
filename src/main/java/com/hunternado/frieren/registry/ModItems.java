@@ -50,6 +50,7 @@ public final class ModItems {
     public static final RegistryObject<Item> LEGENDARY_GRIMOIRE = grimoire("legendary_grimoire", SpellRarity.LEGENDARY, Rarity.EPIC, false);
     public static final RegistryObject<Item> DEMON_GRIMOIRE = grimoire("demon_grimoire", SpellRarity.DEMON, Rarity.EPIC, false);
     public static final RegistryObject<Item> FORBIDDEN_GRIMOIRE = grimoire("forbidden_grimoire", SpellRarity.FORBIDDEN, Rarity.EPIC, false);
+    public static final RegistryObject<Item> MYTHIC_GRIMOIRE = grimoire("mythic_grimoire", SpellRarity.MYTHIC, Rarity.EPIC, false);
     /** Dropped by demons; must be analysed at a Spell Research Desk before it can be read. */
     public static final RegistryObject<Item> SEALED_DEMON_GRIMOIRE = grimoire("sealed_demon_grimoire", SpellRarity.DEMON, Rarity.RARE, true);
 
@@ -132,6 +133,7 @@ public final class ModItems {
             case LEGENDARY -> LEGENDARY_GRIMOIRE.get();
             case DEMON -> DEMON_GRIMOIRE.get();
             case FORBIDDEN -> FORBIDDEN_GRIMOIRE.get();
+            case MYTHIC -> MYTHIC_GRIMOIRE.get();
         };
     }
 

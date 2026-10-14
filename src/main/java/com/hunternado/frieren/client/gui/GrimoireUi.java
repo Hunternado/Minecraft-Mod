@@ -129,6 +129,7 @@ public final class GrimoireUi {
             case DEFENSIVE -> 0xFF4A7ED0;
             case UTILITY -> 0xFF6AAE48;
             case SPECIAL -> 0xFF8A5AC8;
+            case ORIGINAL -> 0xFFE8A030;
         };
     }
 
@@ -142,6 +143,7 @@ public final class GrimoireUi {
             case LEGENDARY -> 0xFF8A2E8E;
             case DEMON -> INK_RED;
             case FORBIDDEN -> 0xFF4A1E6E;
+            case MYTHIC -> 0xFFB8641A;
         };
     }
 

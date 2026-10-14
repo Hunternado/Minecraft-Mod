@@ -71,7 +71,7 @@ public final class SpellFx {
     }
 
     public static byte circleStyle(SpellDefinition spell) {
-        if (spell.rarity() == SpellRarity.DEMON || spell.rarity() == SpellRarity.FORBIDDEN) {
+        if (spell.rarity() == SpellRarity.DEMON || spell.rarity() == SpellRarity.FORBIDDEN || spell.param("demonic", 0.0D) > 0.5D) {
             return MagicCircleEntity.STYLE_DEMON;
         }
         if (spell.id().getPath().contains("flower") || spell.id().getPath().contains("harvest")) {

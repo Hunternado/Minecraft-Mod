@@ -31,7 +31,7 @@ public final class ModCreativeTabs {
         .displayItems((parameters, output) -> {
             accept(output, List.of(ModItems.JOURNEY_JOURNAL, ModItems.COMMON_GRIMOIRE, ModItems.UNCOMMON_GRIMOIRE,
                 ModItems.RARE_GRIMOIRE, ModItems.ANCIENT_GRIMOIRE, ModItems.LEGENDARY_GRIMOIRE, ModItems.DEMON_GRIMOIRE,
-                ModItems.FORBIDDEN_GRIMOIRE, ModItems.SEALED_DEMON_GRIMOIRE, ModItems.SEALED_EXAM_GRIMOIRE,
+                ModItems.FORBIDDEN_GRIMOIRE, ModItems.MYTHIC_GRIMOIRE, ModItems.SEALED_DEMON_GRIMOIRE, ModItems.SEALED_EXAM_GRIMOIRE,
                 ModItems.MANA_POTION, ModItems.HEITER_FLASK, ModItems.SWEET_GRAPES, ModItems.MANA_CRYSTAL,
                 ModItems.DEMONIC_MANA_CORE, ModItems.EXAM_SEAL, ModItems.STILLE_CAGE));
             // One identified grimoire per known spell definition (client-side copy, so it reflects the server's datapacks).

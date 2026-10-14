@@ -9,7 +9,8 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * Spell rarity. Standard rarities form a ladder gated by {@link MageRank}; DEMON and FORBIDDEN are side
- * branches with their own unlock rules.
+ * branches with their own unlock rules. MYTHIC is magic from the Age of Myths, the grade of the Demon King's own
+ * spells and of the spells Serie creates: First-Class mages only.
  */
 public enum SpellRarity {
     COMMON("common", ChatFormatting.WHITE, 40, true),
@@ -18,7 +19,8 @@ public enum SpellRarity {
     ANCIENT("ancient", ChatFormatting.GOLD, 120, true),
     LEGENDARY("legendary", ChatFormatting.LIGHT_PURPLE, 160, true),
     DEMON("demon", ChatFormatting.DARK_RED, 100, false),
-    FORBIDDEN("forbidden", ChatFormatting.DARK_PURPLE, 200, false);
+    FORBIDDEN("forbidden", ChatFormatting.DARK_PURPLE, 200, false),
+    MYTHIC("mythic", ChatFormatting.YELLOW, 240, false);
 
     public static final Codec<SpellRarity> CODEC = EnumCodecs.byName(values(), SpellRarity::serializedName);
 

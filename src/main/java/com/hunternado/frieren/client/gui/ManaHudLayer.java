@@ -5,6 +5,7 @@ import com.hunternado.frieren.client.ClientMagicCache;
 import com.hunternado.frieren.config.FrierenClientConfig;
 import com.hunternado.frieren.data.MagicData;
 import com.hunternado.frieren.mana.ManaHelper;
+import com.hunternado.frieren.network.packet.CastStatePacket;
 import com.hunternado.frieren.spell.SpellDefinition;
 import com.hunternado.frieren.spell.SpellManager;
 import net.minecraft.client.DeltaTracker;
@@ -17,7 +18,9 @@ import net.minecraftforge.client.gui.overlay.ForgeLayer;
 
 /**
  * Compact HUD in the bottom-left corner: a gem-capped mana bar, the five quick slots (spell icons on dark glass,
- * shaded while cooling down), and status tags (concealment, barrier, flight, casting). Hidden until the first spell is learned (configurable).
+ * shaded while cooling down), and status tags (concealment, barrier, flight). Hidden until the first spell is learned
+ * (configurable). Under the crosshair, a cast bar shows an incantation filling, a charge growing (with its percentage
+ * and a pulse once full) or a channel draining, and flashes red when concentration breaks.
  */
 public final class ManaHudLayer implements ForgeLayer {
     private static final int SLOT_SIZE = 22;
@@ -104,11 +107,70 @@ public final class ManaHudLayer implements ForgeLayer {
         if (data.flightActive()) {
             tagX = tag(graphics, font, Component.translatable("hud.frieren.flight"), tagX, barTop - 10, 0xFFE8F6FF);
         }
-        if (data.pendingCast() != null) {
-            tag(graphics, font, Component.translatable("hud.frieren.casting"), tagX, barTop - 10, 0xFFFFE08A);
-        } else if (data.channelingSpell() != null) {
-            tag(graphics, font, Component.translatable("hud.frieren.channeling"), tagX, barTop - 10, 0xFFFFE08A);
+
+        drawCastBar(graphics, font, deltaTracker.getGameTimeDeltaPartialTick(false));
+    }
+
+    /** The bar under the crosshair: name above, progress below. Nothing is drawn while idle. */
+    private static void drawCastBar(GuiGraphicsExtractor graphics, Font font, float partialTick) {
+        int width = 82;
+        int x = (graphics.guiWidth() - width) / 2;
+        int y = graphics.guiHeight() / 2 + 14;
+        float broken = ClientMagicCache.brokenFlash();
+        byte state = ClientMagicCache.castState();
+        if (state == CastStatePacket.IDLE) {
+            if (broken > 0.0F) {
+                int alpha = (int) (broken * 255.0F) << 24;
+                graphics.fill(x - 1, y - 1, x + width + 1, y + 5, alpha | 0x200000);
+                graphics.fill(x, y, x + width, y + 4, alpha | 0xD83A30);
+                Component text = Component.translatable("hud.frieren.concentration_broken");
+                graphics.text(font, text, (graphics.guiWidth() - font.width(text)) / 2, y + 7, alpha | 0xFF8070, true);
+            }
+            return;
         }
+        Identifier spellId = ClientMagicCache.castSpell();
+        SpellDefinition definition = spellId != null ? SpellManager.client(spellId) : null;
+        int color = definition != null ? definition.color() : 0xFFE08A;
+        float elapsed = ClientMagicCache.castElapsed(partialTick);
+        float total = ClientMagicCache.castTotal();
+        float fraction;
+        Component label;
+        if (state == CastStatePacket.CHARGING) {
+            fraction = Math.min(1.0F, elapsed / total);
+            int percent = Math.round(fraction * 100.0F);
+            label = Component.translatable(fraction >= 1.0F ? "hud.frieren.charged" : "hud.frieren.charging", percent);
+            if (fraction >= 1.0F && (ClientMagicCache.gameTime() / 4L) % 2L == 0L) {
+                color = 0xFFFFFF;                                 // full: the bar pulses white
+            }
+        } else if (state == CastStatePacket.CHANNELING) {
+            fraction = Math.max(0.0F, 1.0F - elapsed / total);
+            label = Component.translatable("hud.frieren.channeling");
+        } else {
+            fraction = Math.min(1.0F, elapsed / total);
+            label = Component.translatable("hud.frieren.casting");
+        }
+        graphics.fill(x - 1, y - 1, x + width + 1, y + 5, 0xC0101018);
+        graphics.fill(x, y, x + width, y + 4, 0xFF2A2A38);
+        int filled = Math.round(width * fraction);
+        if (filled > 0) {
+            graphics.fill(x, y, x + filled, y + 4, 0xFF000000 | color);
+            graphics.fill(x, y, x + filled, y + 1, 0x60FFFFFF);
+        }
+        if (state == CastStatePacket.CHARGING) {
+            // Ticks at the minimum charge and at the execution threshold, where the spell turns lethal.
+            mark(graphics, x, y, width, definition != null ? (float) definition.param("min_charge", 0.25D) : 0.25F, 0xFFB0B0C0);
+            if (definition != null && definition.param("execute_max_health", 0.0D) > 0.0D) {
+                mark(graphics, x, y, width, (float) definition.param("execute_charge", 0.95D), 0xFFFF6040);
+            }
+        }
+        Component name = definition != null ? definition.displayName() : Component.empty();
+        Component line = Component.empty().append(name).append(" ").append(label);
+        graphics.text(font, line, (graphics.guiWidth() - font.width(line)) / 2, y + 7, 0xFFFFFFFF, true);
+    }
+
+    private static void mark(GuiGraphicsExtractor graphics, int x, int y, int width, float at, int color) {
+        int mx = x + Math.round(width * Math.max(0.0F, Math.min(1.0F, at)));
+        graphics.fill(mx, y - 2, mx + 1, y + 6, color);
     }
 
     private static int tag(GuiGraphicsExtractor graphics, Font font, Component text, int x, int y, int color) {

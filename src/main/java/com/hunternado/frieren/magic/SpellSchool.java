@@ -6,12 +6,16 @@ import com.mojang.serialization.Codec;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 
-/** Broad classification used for UI grouping, exam requirements and quest hooks. */
+/**
+ * Broad classification used for UI grouping, exam requirements and quest hooks. ORIGINAL holds the spells Serie
+ * created for one particular mage; they exist nowhere else.
+ */
 public enum SpellSchool {
     OFFENSIVE("offensive", ChatFormatting.RED),
     DEFENSIVE("defensive", ChatFormatting.BLUE),
     UTILITY("utility", ChatFormatting.YELLOW),
-    SPECIAL("special", ChatFormatting.DARK_AQUA);
+    SPECIAL("special", ChatFormatting.DARK_AQUA),
+    ORIGINAL("original", ChatFormatting.GOLD);
 
     public static final Codec<SpellSchool> CODEC = EnumCodecs.byName(values(), SpellSchool::serializedName);
 

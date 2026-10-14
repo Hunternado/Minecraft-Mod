@@ -232,5 +232,41 @@
       }
     ],
     "subtitle": "subtitles.frieren.boss.roar"
+  },
+  "spell.charge": {
+    "sounds": [
+      {
+        "name": "minecraft:block.respawn_anchor.charge",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.frieren.spell.charge"
+  },
+  "spell.charged": {
+    "sounds": [
+      {
+        "name": "minecraft:block.beacon.power_select",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.frieren.spell.charged"
+  },
+  "mana.limiter": {
+    "sounds": [
+      {
+        "name": "minecraft:block.end_portal.spawn",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.frieren.mana.limiter"
+  },
+  "spell.annihilation": {
+    "sounds": [
+      {
+        "name": "minecraft:entity.lightning_bolt.thunder",
+        "type": "event"
+      }
+    ],
+    "subtitle": "subtitles.frieren.spell.annihilation"
   }
 }

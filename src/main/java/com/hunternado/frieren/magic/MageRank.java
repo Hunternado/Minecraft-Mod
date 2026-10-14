@@ -61,7 +61,7 @@ public enum MageRank {
     public boolean canLearn(SpellRarity rarity) {
         return switch (rarity) {
             case DEMON -> this.ordinal() >= THIRD_CLASS.ordinal();
-            case FORBIDDEN -> this == FIRST_CLASS;
+            case FORBIDDEN, MYTHIC -> this == FIRST_CLASS;
             default -> rarity.ordinal() <= highestStandardRarity.ordinal();
         };
     }

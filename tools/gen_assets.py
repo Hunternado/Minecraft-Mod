@@ -372,6 +372,7 @@ ITEM_ICONS = {
     "legendary_grimoire": lambda: icons.grimoire("#6A2C70", "#F3D27A", "#FFB7F0"),
     "demon_grimoire": lambda: icons.grimoire("#5A1020", "#8E8E9A", "#E0405A"),
     "forbidden_grimoire": lambda: icons.grimoire("#1E1030", "#9B2D6F", "#C9A0FF"),
+    "mythic_grimoire": lambda: icons.grimoire("#2A1408", "#F3D27A", "#FFB040"),
     "sealed_demon_grimoire": lambda: icons.grimoire("#5A1020", "#8E8E9A", "#E0405A", chains=True),
     "sealed_exam_grimoire": lambda: icons.grimoire("#1F3A6B", "#D04050", "#F3D27A", chains=True),
     "apprentice_staff": icons.staff_apprentice,
@@ -805,6 +806,10 @@ SOUNDS = {
     "spell.utility": "minecraft:block.amethyst_block.chime",
     "demon.bolt": "minecraft:entity.shulker.shoot",
     "boss.roar": "minecraft:entity.ravager.roar",
+    "spell.charge": "minecraft:block.respawn_anchor.charge",
+    "spell.charged": "minecraft:block.beacon.power_select",
+    "mana.limiter": "minecraft:block.end_portal.spawn",
+    "spell.annihilation": "minecraft:entity.lightning_bolt.thunder",
 }
 
 

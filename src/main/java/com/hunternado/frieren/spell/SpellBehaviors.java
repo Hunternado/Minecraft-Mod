@@ -32,6 +32,7 @@ import com.hunternado.frieren.spell.behavior.MendBehavior;
 import com.hunternado.frieren.spell.behavior.MimicDetectionBehavior;
 import com.hunternado.frieren.spell.behavior.ObedienceBehavior;
 import com.hunternado.frieren.spell.behavior.OreSenseBehavior;
+import com.hunternado.frieren.spell.behavior.OriginalBehavior;
 import com.hunternado.frieren.spell.behavior.PocketSpaceBehavior;
 import com.hunternado.frieren.spell.behavior.PurifyBehavior;
 import com.hunternado.frieren.spell.behavior.RecallBehavior;
@@ -44,6 +45,7 @@ import com.hunternado.frieren.spell.behavior.SmeltBehavior;
 import com.hunternado.frieren.spell.behavior.SweetenBehavior;
 import com.hunternado.frieren.spell.behavior.TreeFellBehavior;
 import com.hunternado.frieren.spell.behavior.TunnelBehavior;
+import com.hunternado.frieren.spell.behavior.VolleyBehavior;
 import com.hunternado.frieren.spell.behavior.VortexBehavior;
 import com.hunternado.frieren.spell.behavior.WaterWhipBehavior;
 import com.hunternado.frieren.spell.behavior.WireSnareBehavior;
@@ -112,6 +114,8 @@ public final class SpellBehaviors {
         register(FrierenIds.id("buff"), new BuffBehavior());
         register(FrierenIds.id("smelt"), new SmeltBehavior());
         register(FrierenIds.id("pocket_space"), new PocketSpaceBehavior());
+        register(FrierenIds.id("volley"), new VolleyBehavior());
+        register(FrierenIds.id("original"), new OriginalBehavior());
     }
 
     public static synchronized void register(Identifier id, SpellBehavior behavior) {

@@ -70,5 +70,6 @@ public final class ClientSetup {
     public static void onLoggingOut(ClientPlayerNetworkEvent.LoggingOut event) {
         ClientMagicCache.reset();
         SpellManager.setClientDefinitions(List.of());
+        SpellManager.setClientOriginals(List.of());
     }
 }

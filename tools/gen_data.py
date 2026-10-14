@@ -447,7 +447,8 @@ STRUCTURES = ["mage_tower", "forgotten_library", "demon_camp", "association_outp
 
 def gen_tags():
     tag(f"{NS}/tags/item/repairs_mage_attire", [f"{NS}:mana_crystal"])
-    tag(f"{NS}/tags/item/grimoires", [f"{NS}:{r}_grimoire" for r in ("common", "uncommon", "rare", "ancient", "legendary", "demon", "forbidden")]
+    tag(f"{NS}/tags/item/grimoires", [f"{NS}:{r}_grimoire" for r in ("common", "uncommon", "rare", "ancient", "legendary", "demon", "forbidden",
+                                                                                 "mythic")]
         + [f"{NS}:sealed_demon_grimoire"])
     tag(f"{NS}/tags/item/staffs", [f"{NS}:apprentice_staff", f"{NS}:mage_staff", f"{NS}:sages_staff", f"{NS}:guillotine_staff"])
     tag("minecraft/tags/item/head_armor", [f"{NS}:mage_hat"])

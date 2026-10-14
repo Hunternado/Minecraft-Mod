@@ -1,8 +1,11 @@
 package com.hunternado.frieren.client;
 
 import com.hunternado.frieren.data.MagicData;
+import com.hunternado.frieren.network.packet.CastStatePacket;
 import com.hunternado.frieren.network.packet.ManaSensePacket;
 import net.minecraft.client.Minecraft;
+import net.minecraft.resources.Identifier;
+import org.jspecify.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +23,11 @@ public final class ClientMagicCache {
     private static long sensedAt;
     private static boolean sawThrough;
     private static boolean castKeyHeld;
+    private static byte castState = CastStatePacket.IDLE;
+    private static @Nullable Identifier castSpell;
+    private static long castStart;
+    private static int castTotal;
+    private static long brokenAtMs = -10000L;
 
     private ClientMagicCache() {}
 
@@ -30,6 +38,45 @@ public final class ClientMagicCache {
     public static void reset() {
         data = new MagicData();
         sensed.clear();
+        castState = CastStatePacket.IDLE;
+        castSpell = null;
+    }
+
+    public static void setCastState(CastStatePacket packet) {
+        if (packet.state() == CastStatePacket.BROKEN) {
+            brokenAtMs = System.currentTimeMillis();
+            castState = CastStatePacket.IDLE;
+            castSpell = null;
+            return;
+        }
+        castState = packet.state();
+        castSpell = packet.spell().isEmpty() ? null : Identifier.tryParse(packet.spell());
+        castStart = packet.startTime();
+        castTotal = Math.max(1, packet.totalTicks());
+    }
+
+    /** INCANTING, CHARGING, CHANNELING or IDLE (see {@link CastStatePacket}). */
+    public static byte castState() {
+        return castState;
+    }
+
+    public static @Nullable Identifier castSpell() {
+        return castSpell;
+    }
+
+    /** Ticks since the current incantation, charge or channel began. */
+    public static float castElapsed(float partialTick) {
+        return Math.max(0.0F, gameTime() - castStart + partialTick);
+    }
+
+    public static int castTotal() {
+        return castTotal;
+    }
+
+    /** 0..1 while the "concentration broken" flash is showing, fading out over 0.8 s. */
+    public static float brokenFlash() {
+        long age = System.currentTimeMillis() - brokenAtMs;
+        return age >= 800L ? 0.0F : 1.0F - age / 800.0F;
     }
 
     public static long gameTime() {

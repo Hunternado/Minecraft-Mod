@@ -5,6 +5,7 @@ import com.hunternado.frieren.mana.ManaHelper;
 import com.hunternado.frieren.network.FrierenNetwork;
 import com.hunternado.frieren.registry.ModItems;
 import com.hunternado.frieren.spell.SpellCaster;
+import com.hunternado.frieren.spell.SpellManager;
 import com.hunternado.frieren.spell.behavior.FlightBehavior;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
@@ -93,6 +94,7 @@ public final class MagicDataEvents {
                 player.drop(journal, false);
             }
         }
+        SpellManager.registerServerOriginals(data.originalDefinitions());
         FrierenNetwork.syncSpells(player);
         FrierenNetwork.syncFull(player, data);
     }
@@ -112,6 +114,7 @@ public final class MagicDataEvents {
             if (data != null) {
                 data.stopChannel();
                 data.clearPendingCast();
+                data.clearCharge();
                 data.markDirty();
             }
         }

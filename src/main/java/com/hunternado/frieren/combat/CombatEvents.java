@@ -5,14 +5,13 @@ import com.hunternado.frieren.data.SpellProgress;
 import com.hunternado.frieren.mana.ManaHelper;
 import com.hunternado.frieren.registry.ModEffects;
 import com.hunternado.frieren.registry.ModSounds;
+import com.hunternado.frieren.spell.Concentration;
 import com.hunternado.frieren.spell.SpellDamage;
 import com.hunternado.frieren.spell.SpellDefinition;
 import com.hunternado.frieren.spell.SpellFx;
 import com.hunternado.frieren.spell.SpellManager;
 import com.hunternado.frieren.spell.behavior.BarrierBehavior;
-import com.hunternado.frieren.util.Messages;
 import com.hunternado.frieren.util.WorldRules;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
@@ -32,8 +31,6 @@ import java.util.function.Predicate;
  * obedient attackers.
  */
 public final class CombatEvents {
-    private static final float INTERRUPT_THRESHOLD = 4.0F;
-
     private CombatEvents() {}
 
     /** Guards against reflection ping-pong between two reflecting combatants. */
@@ -105,10 +102,8 @@ public final class CombatEvents {
             if (data.barrierActive() && event.getAmount() > 0.0F && isBarrierBlockable(source)) {
                 event.setAmount(absorbWithBarrier(player, data, source, event.getAmount()));
             }
-            if (data.pendingCast() != null && event.getAmount() >= INTERRUPT_THRESHOLD) {
-                data.clearPendingCast();
-                Messages.actionBar(player, Component.translatable("message.frieren.cast_interrupted"));
-            }
+            // Incantations and charges need an unbroken image of the spell (see Concentration).
+            Concentration.onHurt(player, data, source, event.getAmount());
         }
     }
 

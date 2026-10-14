@@ -18,10 +18,16 @@ public final class SpellContext {
     private final SpellProgress progress;
     private final StaffItem.Tier staff;
     private final float power;
+    private final float charge;
     private int hits;
 
     public SpellContext(ServerPlayer caster, ServerLevel level, MagicData data, SpellDefinition spell, SpellProgress progress,
                         StaffItem.Tier staff, float power) {
+        this(caster, level, data, spell, progress, staff, power, 1.0F);
+    }
+
+    public SpellContext(ServerPlayer caster, ServerLevel level, MagicData data, SpellDefinition spell, SpellProgress progress,
+                        StaffItem.Tier staff, float power, float charge) {
         this.caster = caster;
         this.level = level;
         this.data = data;
@@ -29,6 +35,7 @@ public final class SpellContext {
         this.progress = progress;
         this.staff = staff;
         this.power = power;
+        this.charge = charge;
     }
 
     public ServerPlayer caster() { return caster; }
@@ -38,8 +45,23 @@ public final class SpellContext {
     public SpellProgress progress() { return progress; }
     public StaffItem.Tier staff() { return staff; }
 
-    /** Combined multiplier from mastery, staff and server config. */
+    /** Combined multiplier from mastery, staff, server config and (for charged spells) how full the charge was. */
     public float power() { return power; }
+
+    /** How full the charge was when released, 0..1; always 1 for spells that are not charged. */
+    public float charge() { return charge; }
+
+    /**
+     * The execution threshold this cast carries (spell param {@code execute_max_health}). Charged spells only execute
+     * when released at least {@code execute_charge} full (default 95%): a half-charged Annihilation is just a big beam.
+     */
+    public float executeCap() {
+        float cap = (float) spell.param("execute_max_health", 0.0D);
+        if (cap <= 0.0F || (spell.isCharged() && charge < spell.param("execute_charge", 0.95D))) {
+            return 0.0F;
+        }
+        return cap;
+    }
 
     public double param(String key, double fallback) {
         return spell.param(key, fallback);

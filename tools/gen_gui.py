@@ -342,7 +342,7 @@ def stat_icon(kind):
 
 
 RARITY_GEMS = {"common": "#D8D8D8", "uncommon": "#6FD86F", "rare": "#5FC8F0", "ancient": "#F0B040",
-               "legendary": "#E070F0", "demon": "#C02040", "forbidden": "#7A3AC0"}
+               "legendary": "#E070F0", "demon": "#C02040", "forbidden": "#7A3AC0", "mythic": "#FF9A20"}
 
 
 def gen_spell_icons():

@@ -1,6 +1,8 @@
 package com.hunternado.frieren.data;
 
 import com.hunternado.frieren.magic.MageRank;
+import com.hunternado.frieren.spell.OriginalSpells;
+import com.hunternado.frieren.spell.SpellDefinition;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.Identifier;
@@ -8,14 +10,17 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.capabilities.AutoRegisterCapability;
 import org.jspecify.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 /**
  * All magical progression of a single player.
@@ -55,6 +60,10 @@ public final class MagicData {
     private int channelTicks;
     private @Nullable Identifier pendingCast;
     private int castTicksRemaining;
+    private @Nullable Identifier chargingSpell;
+    private int chargeTicks;
+    private float chargeManaPaid;
+    private boolean chargeStalled;
     private long regenPausedUntil;
     private long lastDetectTime = -1000L;
     private long enthralledUntil;
@@ -75,6 +84,15 @@ public final class MagicData {
     private boolean seriePrivilegeAvailable;
     private @Nullable String lastDeathDimension;
     private @Nullable BlockPos lastDeathPos;
+
+    // ---- The magic update: Serie, Übel, Frieren's party, original magic ------------------------
+    /** A spell Serie created for this mage: its unique id and the recipe it was built from. */
+    public record OriginalEntry(Identifier id, OriginalSpells.Recipe recipe) {}
+    private final Map<Integer, OriginalEntry> originals = new TreeMap<>();
+    private boolean serieImpressed;
+    private boolean ubelDefeated;
+    private long serieLetterReadyAt;
+    private long concealedSince = -1L;
 
     // ---- Sync bookkeeping (transient) -------------------------------------------------------
     private boolean fullSyncNeeded = true;
@@ -305,6 +323,39 @@ public final class MagicData {
         this.castTicksRemaining = 0;
     }
 
+    /** The charged spell being held, if any (see SpellCaster: mana flows in while the key is held). */
+    public @Nullable Identifier chargingSpell() { return chargingSpell; }
+    public int chargeTicks() { return chargeTicks; }
+    public float chargeManaPaid() { return chargeManaPaid; }
+    public boolean chargeStalled() { return chargeStalled; }
+
+    public void beginCharge(Identifier spell) {
+        this.chargingSpell = spell;
+        this.chargeTicks = 0;
+        this.chargeManaPaid = 0.0F;
+        this.chargeStalled = false;
+    }
+
+    public void advanceCharge(float manaPaid) {
+        this.chargeTicks++;
+        this.chargeManaPaid += manaPaid;
+        this.chargeStalled = false;
+    }
+
+    public void setChargeStalled(boolean stalled) { this.chargeStalled = stalled; }
+
+    public void clearCharge() {
+        this.chargingSpell = null;
+        this.chargeTicks = 0;
+        this.chargeManaPaid = 0.0F;
+        this.chargeStalled = false;
+    }
+
+    /** True while an incantation, a charge or a channel is in progress. */
+    public boolean busyCasting() {
+        return pendingCast != null || chargingSpell != null || channelingSpell != null;
+    }
+
     public long enthralledUntil() { return enthralledUntil; }
     public void setEnthralledUntil(long time) { this.enthralledUntil = time; }
 
@@ -328,6 +379,7 @@ public final class MagicData {
         channelTicks = 0;
         pendingCast = null;
         castTicksRemaining = 0;
+        clearCharge();
         enthralledUntil = 0L;
         markDirty();
     }
@@ -394,6 +446,37 @@ public final class MagicData {
         this.lastDeathDimension = dimension;
         this.lastDeathPos = pos.immutable();
     }
+
+    // =========================================================================================
+    // Original magic and the people who grant it
+    // =========================================================================================
+
+    public Map<Integer, OriginalEntry> originals() { return Collections.unmodifiableMap(originals); }
+
+    public void setOriginal(int slot, Identifier id, OriginalSpells.Recipe recipe) {
+        originals.put(slot, new OriginalEntry(id, recipe.sanitized()));
+        markDirty();
+    }
+
+    /** The spells built from this mage's recipes (rebuilt on demand; both sides use the same formulas). */
+    public List<SpellDefinition> originalDefinitions() {
+        List<SpellDefinition> out = new ArrayList<>();
+        for (OriginalEntry entry : originals.values()) {
+            out.add(OriginalSpells.build(entry.id(), entry.recipe()));
+        }
+        return out;
+    }
+
+    public boolean serieImpressed() { return serieImpressed; }
+    public void setSerieImpressed(boolean value) { this.serieImpressed = value; markDirty(); }
+    public boolean ubelDefeated() { return ubelDefeated; }
+    public void setUbelDefeated(boolean value) { this.ubelDefeated = value; markDirty(); }
+    /** Game time after which Serie's letter can summon her again. */
+    public long serieLetterReadyAt() { return serieLetterReadyAt; }
+    public void setSerieLetterReadyAt(long time) { this.serieLetterReadyAt = time; }
+    /** Game time at which the current concealment began (-1 while not concealing); transient. */
+    public long concealedSince() { return concealedSince; }
+    public void setConcealedSince(long time) { this.concealedSince = time; }
 
     // =========================================================================================
     // Sync bookkeeping
@@ -474,6 +557,16 @@ public final class MagicData {
 
         tag.putBoolean("starterGiven", starterGiven);
         tag.putBoolean("seriePrivilege", seriePrivilegeAvailable);
+        CompoundTag originalTag = new CompoundTag();
+        originals.forEach((slot, entry) -> {
+            CompoundTag one = entry.recipe().save();
+            one.putString("id", entry.id().toString());
+            originalTag.put(Integer.toString(slot), one);
+        });
+        tag.put("originals", originalTag);
+        tag.putBoolean("serieImpressed", serieImpressed);
+        tag.putBoolean("ubelDefeated", ubelDefeated);
+        tag.putLong("serieLetterReadyAt", serieLetterReadyAt);
         if (lastDeathDimension != null && lastDeathPos != null) {
             tag.putString("deathDim", lastDeathDimension);
             tag.putLong("deathPos", lastDeathPos.asLong());
@@ -550,6 +643,23 @@ public final class MagicData {
 
         starterGiven = tag.getBooleanOr("starterGiven", false);
         seriePrivilegeAvailable = tag.getBooleanOr("seriePrivilege", false);
+        originals.clear();
+        CompoundTag originalTag = tag.getCompoundOrEmpty("originals");
+        for (String key : originalTag.keySet()) {
+            CompoundTag one = originalTag.getCompoundOrEmpty(key);
+            Identifier id = Identifier.tryParse(one.getStringOr("id", ""));
+            try {
+                int slot = Integer.parseInt(key);
+                if (id != null && slot >= 0 && slot < OriginalSpells.MAX_SPELLS) {
+                    originals.put(slot, new OriginalEntry(id, OriginalSpells.Recipe.load(one)));
+                }
+            } catch (NumberFormatException ignored) {
+                // a hand-edited save; skip the entry
+            }
+        }
+        serieImpressed = tag.getBooleanOr("serieImpressed", false);
+        ubelDefeated = tag.getBooleanOr("ubelDefeated", false);
+        serieLetterReadyAt = tag.getLongOr("serieLetterReadyAt", 0L);
         if (tag.contains("deathDim")) {
             lastDeathDimension = tag.getStringOr("deathDim", "");
             lastDeathPos = BlockPos.of(tag.getLongOr("deathPos", 0L));

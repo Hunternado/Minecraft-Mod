@@ -40,6 +40,10 @@ public final class ModSounds {
     public static final RegistryObject<SoundEvent> UTILITY = register("spell.utility");
     public static final RegistryObject<SoundEvent> DEMON_BOLT = register("demon.bolt");
     public static final RegistryObject<SoundEvent> BOSS_ROAR = register("boss.roar");
+    public static final RegistryObject<SoundEvent> CHARGE = register("spell.charge");
+    public static final RegistryObject<SoundEvent> CHARGED = register("spell.charged");
+    public static final RegistryObject<SoundEvent> LIMITER = register("mana.limiter");
+    public static final RegistryObject<SoundEvent> ANNIHILATION = register("spell.annihilation");
 
     private ModSounds() {}
 
