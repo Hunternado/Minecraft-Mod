@@ -67,10 +67,4 @@ public class AuraThrallEntity extends Monster implements ManaSignature {
     public int concealLevel() {
         return 0;
     }
-
-    /** A headless corpse has no fear left in it: Aura's thralls never flee. */
-    @Override
-    protected boolean judgesMana() {
-        return false;
-    }
 }
