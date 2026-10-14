@@ -2,10 +2,12 @@ package com.hunternado.frieren.client;
 
 import com.hunternado.frieren.client.fx.MagicFx;
 import com.hunternado.frieren.client.gui.ExaminerScreen;
+import com.hunternado.frieren.client.gui.SpellForgeScreen;
 import com.hunternado.frieren.client.gui.TradeScreen;
 import com.hunternado.frieren.network.packet.CastStatePacket;
 import com.hunternado.frieren.network.packet.ExaminerScreenPacket;
 import com.hunternado.frieren.network.packet.ManaSensePacket;
+import com.hunternado.frieren.network.packet.OpenSpellForgePacket;
 import com.hunternado.frieren.network.packet.SpellFxPacket;
 import com.hunternado.frieren.network.packet.SyncMagicDataPacket;
 import com.hunternado.frieren.network.packet.SyncManaPacket;
@@ -56,6 +58,10 @@ public final class ClientPacketHandlers {
 
     public static void castState(CastStatePacket packet) {
         ClientMagicCache.setCastState(packet);
+    }
+
+    public static void openSpellForge(OpenSpellForgePacket packet) {
+        Minecraft.getInstance().gui.setScreen(new SpellForgeScreen(packet.entityId()));
     }
 
     public static void openExaminer(ExaminerScreenPacket packet) {

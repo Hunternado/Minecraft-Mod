@@ -6,7 +6,6 @@ import com.hunternado.frieren.combat.ModDamageTypes;
 import com.hunternado.frieren.data.MagicData;
 import com.hunternado.frieren.entity.ai.IdleLookGoal;
 import com.hunternado.frieren.entity.ai.WanderGoal;
-import com.hunternado.frieren.entity.boss.BossBarHelper;
 import com.hunternado.frieren.entity.fx.SpellBeamEntity;
 import com.hunternado.frieren.item.GrimoireItem;
 import com.hunternado.frieren.magic.MageRank;
@@ -302,7 +301,7 @@ public class UbelEntity extends PathfinderMob implements ManaSignature, Characte
         }
         if (duelistId != null) {
             tickDuel(level);
-            BossBarHelper.update(bossBar, level, this);
+            bossBar.setProgress(Math.max(0.0F, Math.min(1.0F, this.getHealth() / this.getMaxHealth())));   // only the duelist sees it
             return;
         }
         if (isTamed()) {

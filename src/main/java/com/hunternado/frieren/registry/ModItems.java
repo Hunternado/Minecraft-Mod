@@ -8,6 +8,7 @@ import com.hunternado.frieren.item.GrimoireItem;
 import com.hunternado.frieren.item.JourneyJournalItem;
 import com.hunternado.frieren.item.ManaPotionItem;
 import com.hunternado.frieren.item.ModArmorMaterials;
+import com.hunternado.frieren.item.SerieLetterItem;
 import com.hunternado.frieren.item.StaffItem;
 import com.hunternado.frieren.item.StilleCageItem;
 import com.hunternado.frieren.item.SummoningSigilItem;
@@ -97,6 +98,7 @@ public final class ModItems {
     // ---- Exams, quests, summoning ------------------------------------------------------------
     public static final RegistryObject<Item> EXAM_SEAL = simple("exam_seal", p -> new ExamSealItem(p.stacksTo(1).rarity(Rarity.UNCOMMON)));
     public static final RegistryObject<Item> STILLE_CAGE = simple("stille_cage", p -> new StilleCageItem(p.stacksTo(1)));
+    public static final RegistryObject<Item> SERIE_LETTER = simple("serie_letter", p -> new SerieLetterItem(p.stacksTo(1).rarity(Rarity.EPIC)));
     public static final RegistryObject<Item> SEALED_EXAM_GRIMOIRE = simple("sealed_exam_grimoire", p -> new TooltipItem(p.stacksTo(1).rarity(Rarity.UNCOMMON), "sealed_exam_grimoire"));
     public static final RegistryObject<Item> JOURNEY_JOURNAL = simple("journey_journal", p -> new JourneyJournalItem(p.stacksTo(1)));
     public static final RegistryObject<Item> SIGIL_OF_THE_GUILLOTINE = simple("sigil_of_the_guillotine", p -> new SummoningSigilItem(p.stacksTo(1).rarity(Rarity.EPIC), SummoningSigilItem.Boss.AURA));

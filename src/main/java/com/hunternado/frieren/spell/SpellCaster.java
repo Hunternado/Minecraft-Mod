@@ -4,6 +4,7 @@ import com.hunternado.frieren.config.FrierenConfig;
 import com.hunternado.frieren.data.MagicData;
 import com.hunternado.frieren.data.SpellProgress;
 import com.hunternado.frieren.entity.fx.MagicCircleEntity;
+import com.hunternado.frieren.entity.npc.SerieEntity;
 import com.hunternado.frieren.item.StaffItem;
 import com.hunternado.frieren.mana.ManaHelper;
 import com.hunternado.frieren.network.FrierenNetwork;
@@ -321,6 +322,7 @@ public final class SpellCaster {
         }
         data.markDirty();
         QuestManager.onSpellCast(player, data, spell, ctx.hits());
+        SerieEntity.onSpellCast(player, spell, ctx.hits(), mastery);
     }
 
     // ---------------------------------------------------------------------------------------

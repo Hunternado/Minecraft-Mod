@@ -5,12 +5,14 @@ import com.hunternado.frieren.client.ClientPacketHandlers;
 import com.hunternado.frieren.data.MagicData;
 import com.hunternado.frieren.network.packet.BindSpellPacket;
 import com.hunternado.frieren.network.packet.CommandPuppetsPacket;
+import com.hunternado.frieren.network.packet.CreateSpellPacket;
 import com.hunternado.frieren.network.packet.CastSpellPacket;
 import com.hunternado.frieren.network.packet.CastStatePacket;
 import com.hunternado.frieren.network.packet.DetectManaPacket;
 import com.hunternado.frieren.network.packet.ExaminerScreenPacket;
 import com.hunternado.frieren.network.packet.ManaSensePacket;
 import com.hunternado.frieren.network.packet.NpcActionPacket;
+import com.hunternado.frieren.network.packet.OpenSpellForgePacket;
 import com.hunternado.frieren.network.packet.ReleaseChannelPacket;
 import com.hunternado.frieren.network.packet.SelectSlotPacket;
 import com.hunternado.frieren.network.packet.SpellFxPacket;
@@ -65,6 +67,7 @@ public final class FrierenNetwork {
                         .addMain(DetectManaPacket.class, DetectManaPacket.STREAM_CODEC, DetectManaPacket::handle)
                         .addMain(NpcActionPacket.class, NpcActionPacket.STREAM_CODEC, NpcActionPacket::handle)
                         .addMain(CommandPuppetsPacket.class, CommandPuppetsPacket.STREAM_CODEC, CommandPuppetsPacket::handle)
+                        .addMain(CreateSpellPacket.class, CreateSpellPacket.STREAM_CODEC, CreateSpellPacket::handle)
                     .clientbound()
                         .addMain(SyncMagicDataPacket.class, SyncMagicDataPacket.STREAM_CODEC, (msg, ctx) -> ClientPacketHandlers.syncMagicData(msg))
                         .addMain(SyncManaPacket.class, SyncManaPacket.STREAM_CODEC, (msg, ctx) -> ClientPacketHandlers.syncMana(msg))
@@ -74,6 +77,7 @@ public final class FrierenNetwork {
                         .addMain(ExaminerScreenPacket.class, ExaminerScreenPacket.STREAM_CODEC, (msg, ctx) -> ClientPacketHandlers.openExaminer(msg))
                         .addMain(TradeScreenPacket.class, TradeScreenPacket.STREAM_CODEC, (msg, ctx) -> ClientPacketHandlers.openTrades(msg))
                         .addMain(CastStatePacket.class, CastStatePacket.STREAM_CODEC, (msg, ctx) -> ClientPacketHandlers.castState(msg))
+                        .addMain(OpenSpellForgePacket.class, OpenSpellForgePacket.STREAM_CODEC, (msg, ctx) -> ClientPacketHandlers.openSpellForge(msg))
             .build();
     }
 

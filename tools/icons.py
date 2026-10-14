@@ -133,6 +133,27 @@ def staff_guillotine():
 # ---------------------------------------------------------------------------------------------
 # Weapons
 # ---------------------------------------------------------------------------------------------
+def serie_letter():
+    """Serie's letter: a cream envelope sealed with her golden wax and a sprig of blue moonweed."""
+    img = Image(16, 16)
+    paper, paper_d, fold = hex_color("#F4ECD6"), hex_color("#D8CBA8"), hex_color("#B8A880")
+    gold, gold_d = hex_color("#E8B840"), hex_color("#A87A1C")
+    img.rect(1, 4, 14, 12, paper)
+    img.rect(1, 12, 14, 12, paper_d)
+    for i in range(7):                                    # the flap folds down to a point
+        img.set(1 + i, 4 + i // 2 + (i // 2), fold)
+        img.set(14 - i, 4 + i // 2 + (i // 2), fold)
+    img.rect(6, 8, 9, 10, gold)
+    img.set(6, 10, gold_d)
+    img.set(9, 10, gold_d)
+    img.set(7, 9, hex_color("#FFF2B0"))
+    img.set(12, 3, hex_color("#5FA8FF"))
+    img.set(13, 2, hex_color("#5FA8FF"))
+    img.set(12, 2, hex_color("#3A7A28"))
+    img.outline_shape(OUTLINE)
+    return img
+
+
 def staff_ubel():
     """Übel's black spear-staff: twin curved blades and a lightning-bolt tip, drawn on the diagonal."""
     img = Image(16, 16)

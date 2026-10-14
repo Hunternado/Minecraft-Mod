@@ -7,6 +7,7 @@ import com.hunternado.frieren.data.MagicData;
 import com.hunternado.frieren.entity.creature.MimicEntity;
 import com.hunternado.frieren.entity.npc.SerieEntity;
 import com.hunternado.frieren.item.GrimoireItem;
+import com.hunternado.frieren.item.SerieLetterItem;
 import com.hunternado.frieren.magic.MageRank;
 import com.hunternado.frieren.magic.SpellRarity;
 import com.hunternado.frieren.mana.ManaHelper;
@@ -164,6 +165,7 @@ public final class ExamManager {
         if (rank == MageRank.FIRST_CLASS) {
             data.setSeriePrivilegeAvailable(true);
             Messages.chat(player, Component.translatable("exam.frieren.privilege").withStyle(ChatFormatting.LIGHT_PURPLE));
+            SerieLetterItem.grantOnce(player, data);
         }
         player.level().getServer().getPlayerList().broadcastSystemMessage(
             Component.translatable("exam.frieren.broadcast", player.getDisplayName(), rank.displayName()), false);

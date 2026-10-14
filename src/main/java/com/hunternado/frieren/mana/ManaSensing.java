@@ -4,6 +4,7 @@ import com.hunternado.frieren.data.MagicData;
 import com.hunternado.frieren.entity.boss.FrierenBoss;
 import com.hunternado.frieren.entity.demon.DemonEntity;
 import com.hunternado.frieren.entity.fx.SpellBeamEntity;
+import com.hunternado.frieren.entity.npc.SerieEntity;
 import com.hunternado.frieren.exam.ExamManager;
 import com.hunternado.frieren.magic.MageRank;
 import com.hunternado.frieren.network.FrierenNetwork;
@@ -113,6 +114,7 @@ public final class ManaSensing {
             }
         }
         ModTriggers.milestone(player, "limiter_release");
+        SerieEntity.onLimiterRelease(player);
     }
 
     /** How well a player hides their mana, on the same scale as {@link ManaSignature#concealLevel()}. */

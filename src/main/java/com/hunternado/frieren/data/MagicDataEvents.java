@@ -2,6 +2,7 @@ package com.hunternado.frieren.data;
 
 import com.hunternado.frieren.entity.npc.UbelEntity;
 import com.hunternado.frieren.exam.ExamManager;
+import com.hunternado.frieren.item.SerieLetterItem;
 import com.hunternado.frieren.mana.ManaHelper;
 import com.hunternado.frieren.network.FrierenNetwork;
 import com.hunternado.frieren.registry.ModItems;
@@ -99,6 +100,7 @@ public final class MagicDataEvents {
             }
         }
         SpellManager.registerServerOriginals(data.originalDefinitions());
+        SerieLetterItem.grantOnce(player, data);
         FrierenNetwork.syncSpells(player);
         FrierenNetwork.syncFull(player, data);
     }

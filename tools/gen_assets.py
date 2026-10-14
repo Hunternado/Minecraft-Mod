@@ -415,6 +415,7 @@ ITEM_ICONS = {
     "demon_grimoire": lambda: icons.grimoire("#5A1020", "#8E8E9A", "#E0405A"),
     "forbidden_grimoire": lambda: icons.grimoire("#1E1030", "#9B2D6F", "#C9A0FF"),
     "ubel_staff": icons.staff_ubel,
+    "serie_letter": icons.serie_letter,
     "mythic_grimoire": lambda: icons.grimoire("#2A1408", "#F3D27A", "#FFB040"),
     "sealed_demon_grimoire": lambda: icons.grimoire("#5A1020", "#8E8E9A", "#E0405A", chains=True),
     "sealed_exam_grimoire": lambda: icons.grimoire("#1F3A6B", "#D04050", "#F3D27A", chains=True),

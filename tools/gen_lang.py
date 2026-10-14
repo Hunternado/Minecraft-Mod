@@ -53,6 +53,7 @@ ITEMS = {
     "sages_staff": "Sage's Staff",
     "guillotine_staff": "Staff of the Guillotine",
     "ubel_staff": "Übel's Staff",
+    "serie_letter": "Letter from Serie",
     "warriors_axe": "Warrior's Axe",
     "heros_sword": "Replica of the Hero's Sword",
     "demon_kings_blade": "Blade of the Demon King",
@@ -315,6 +316,7 @@ def tooltips():
     t("staff_none", "No focus.")
     for tier in ("apprentice", "mage", "sage", "guillotine"):
         t(f"staff_{tier}", "A spellcasting focus. Hold it in either hand while casting.")
+    t("serie_letter", "\"Come and show me something interesting.\" Use it to call Serie to you (once a day).")
     t("staff_ubel", "Übel's spare: a black spear-staff with twin blades. \"It's sharp. That's the point.\"")
     t("staff_stats", "-%s%% mana cost, -%s%% cooldown, +%s%% spell power")
     t("sigil_aura", "Summons Aura the Guillotine.")
@@ -449,6 +451,11 @@ def messages():
     m("limiter_frightened", "%s demon(s) feel it and run.")
     m("limiter_witnessed", "%s releases a limiter. An enormous mana floods the area.")
     m("sense_overwhelming", "You feel an overwhelming mana to the %s, %s blocks away.")
+    m("original_learned", "You learned %s, an original spell made only for you.")
+    m("serie_letter_rank", "The letter is addressed to a First-Class mage.")
+    m("serie_letter_here", "Serie is already here.")
+    m("serie_letter_wait", "Serie won't answer again so soon. Try again in %s minute(s).")
+    m("serie_letter_received", "A letter from Serie arrives for the Association's newest First-Class mage.")
     m("puppets_attack", "Your puppets turn on %s.")
     m("puppets_follow", "Your puppets fall in behind you.")
     m("puppets_guard", "Your puppets hold that ground.")
@@ -560,6 +567,23 @@ def bosses_and_npcs():
             put(f"npc.{NS}.{npc_id}.line.{i}", v)
     put(f"npc.{NS}.priest.heal", "The Goddess's light washes over you.")
     put(f"npc.{NS}.serie.interview", "Serie studies you for a long time. Then she makes up her mind.")
+    se = lambda k, v: put(f"npc.{NS}.serie.{k}", v)
+    se("summoned", "You called? This had better not be boring.")
+    se("appraisal_start", "Show me your magic, then. Different spells, as many as you like, near me. You have %s seconds.")
+    se("appraisal_running", "I'm still watching. Keep going.")
+    se("appraisal_busy", "I'm busy judging someone else. Wait.")
+    se("appraisal_wait", "You again? Give me a minute to forget how boring that was.")
+    se("appraisal_1", "Hmph.")
+    se("appraisal_2", "...Not bad.")
+    se("appraisal_3", "Oh? Now that's interesting.")
+    se("appraisal_bored", "Boring. Come back when you have something worth showing me.")
+    se("noticed_limiter", "You were hiding that much? Ha. Flamme's tricks.")
+    se("impressed", "Fine. You're not entirely boring. I'll make you a spell... once you've dealt with that girl Übel. Beat her, then come back.")
+    se("impressed_ready", "Fine. You're not entirely boring. And you beat Übel too. Tell me what you want.")
+    se("needs_ubel", "Beat Übel first. That girl cuts anything she can imagine; show me you can handle her.")
+    se("forge_open", "Well? Tell me what you want. Anything at all; it's only magic.")
+    se("forge_price", "My time isn't free. That costs %s mana crystals and %s demonic mana cores.")
+    se("forge_done", "There. %s. Don't make me regret it.")
     u = lambda k, v: put(f"npc.{NS}.ubel.{k}", v)
     for i, v in enumerate(["Hm? You look like you'd be fun to cut.", "Don't stare. Or do; I don't mind.",
                            "Want to play? Hit me and we'll see who's sharper.",
@@ -582,6 +606,31 @@ def bosses_and_npcs():
     u("retreat", "Ugh, that hurt. I'm going to go lick my wounds. I'll find you again tomorrow.")
     u("returned", "Did you miss me? Of course you did.")
     u("caught_up", "Hey! Don't leave me behind.")
+
+
+def forge():
+    f = lambda k, v: put(f"screen.{NS}.forge{'.' + k if k else ''}", v)
+    f("", "Serie's Spell Forge")
+    f("form", "Form")
+    f("element", "Element")
+    f("potency", "Potency")
+    f("reach", "Reach")
+    f("casting", "Casting")
+    f("modifiers", "Modifiers")
+    f("color", "Colour")
+    f("name", "Name your spell")
+    f("annihilation", "ANNIHILATION")
+    f("slot_empty", "%s: empty")
+    f("ask", "Ask Serie")
+    f("price", "Serie's price: %s mana crystals")
+    f("price_cores", "Serie's price: %s mana crystals, %s demonic cores")
+    f("stat.mana", "Mana: %s")
+    f("stat.cooldown", "Cooldown: %s")
+    f("stat.charge", "Charge: %s (hold, release to fire)")
+    f("stat.incant", "Incantation: %s")
+    f("stat.instant", "Instant")
+    f("stat.fragile", "A hit can break it while it is cast")
+    put(f"boss.{NS}.serie.interest", "Serie's Interest")
 
 
 def exams():
@@ -860,6 +909,7 @@ def main():
     commands()
     keys()
     original_magic()
+    forge()
     death_messages()
     advancements()
     subtitles()
