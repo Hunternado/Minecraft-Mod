@@ -3,15 +3,18 @@ package com.hunternado.frieren.spell;
 import com.hunternado.frieren.FrierenIds;
 import com.hunternado.frieren.combat.ModDamageTypes;
 import com.hunternado.frieren.combat.SpellDamageSource;
+import com.hunternado.frieren.entity.boss.DemonBoss;
 import com.hunternado.frieren.entity.boss.FrierenBoss;
 import com.hunternado.frieren.entity.demon.DemonEntity;
 import com.hunternado.frieren.entity.magic.ManaDecoyEntity;
 import com.hunternado.frieren.entity.npc.FrierenNpcBase;
+import com.hunternado.frieren.registry.ModEffects;
 import com.hunternado.frieren.util.WorldRules;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageType;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -20,10 +23,17 @@ import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.player.Player;
 import org.jspecify.annotations.Nullable;
 
-/** Damage application for spells, including friendly-fire rules, demon bonuses and executions. */
+/**
+ * Damage application for spells: friendly-fire rules, then the multipliers in this order: the Demon Hunter insignia
+ * (x1.2 to demons), the spell's {@code demon_bonus} (to demons), an {@link ModEffects#EXPOSED} target (x1.4), a
+ * {@link ModEffects#DECEIVING} caster ambushing a demon (x2.5), and finally executions. Spells with
+ * {@code ignore_iframes} (Fern's storm of beams) are not stopped by the target's hurt cooldown.
+ */
 public final class SpellDamage {
     /** Creatures no execution can kill outright, whatever their health (the vanilla bosses). */
     public static final TagKey<EntityType<?>> EXECUTE_IMMUNE = TagKey.create(Registries.ENTITY_TYPE, FrierenIds.id("execute_immune"));
+    public static final float EXPOSED_BONUS = 1.4F;
+    public static final float DECEPTION_AMBUSH = 2.5F;
 
     private SpellDamage() {}
 
@@ -73,8 +83,27 @@ public final class SpellDamage {
             return false;
         }
         float finalAmount = amount;
+        boolean demon = isDemon(target);
         if (demonBane && target instanceof DemonEntity) {
             finalAmount *= 1.2F;
+        }
+        if (ctx != null && demon) {
+            finalAmount *= (float) ctx.param("demon_bonus", 1.0D);
+        }
+        if (target.hasEffect(ModEffects.holder(ModEffects.EXPOSED))) {
+            finalAmount *= EXPOSED_BONUS;
+        }
+        if (demon && caster instanceof LivingEntity living && living.hasEffect(ModEffects.holder(ModEffects.DECEIVING))) {
+            // The demon never saw it coming. The deception ends a second later: the first strike gives it away.
+            finalAmount *= DECEPTION_AMBUSH;
+            MobEffectInstance deceiving = living.getEffect(ModEffects.holder(ModEffects.DECEIVING));
+            if (deceiving != null && deceiving.getDuration() > 20) {
+                living.removeEffect(ModEffects.holder(ModEffects.DECEIVING));
+                living.addEffect(new MobEffectInstance(ModEffects.holder(ModEffects.DECEIVING), 20, 0));
+            }
+        }
+        if (ctx != null && ctx.param("ignore_iframes", 0.0D) > 0.5D) {
+            target.invulnerableTime = 0;
         }
         if (executes(target, executeCap)) {
             // Enough to go through any armour, Resistance V aside: five times what is left plus a margin.
@@ -86,6 +115,11 @@ public final class SpellDamage {
             ctx.markHit();
         }
         return damaged;
+    }
+
+    /** Demons in every form: ordinary demons, Aura, and the bosses built on DemonBoss. */
+    public static boolean isDemon(LivingEntity entity) {
+        return entity instanceof DemonEntity || entity instanceof DemonBoss;
     }
 
     public static boolean executes(LivingEntity target, float executeCap) {

@@ -1,0 +1,15 @@
+{
+  "behavior": "frieren:dominion",
+  "school": "special",
+  "rarity": "mythic",
+  "mana_cost": 250,
+  "cooldown": 3600,
+  "cast_time": 20,
+  "color": "#8A1020",
+  "params": {
+    "radius": 24.0,
+    "duration": 1200,
+    "max_puppets": 12,
+    "demonic": 1
+  }
+}

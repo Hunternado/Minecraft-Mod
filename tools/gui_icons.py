@@ -608,6 +608,152 @@ def pocket_space(c, l, d, dd):
     return ic
 
 
+# ---- 3.0: the legends' magic ----
+def frieren_zoltraak(c, l, d, dd):
+    ic = Icon()
+    ic.ring(4.0, 12.0, 3.8, 1.0, GOLD).ring(4.0, 12.0, 2.2, 0.7, GOLD_L)
+    ic.seg(4.5, 11.5, 15.4, 0.6, 4.6, d).seg(4.5, 11.5, 15.4, 0.6, 3.0, c).seg(4.8, 11.2, 15.4, 0.6, 1.4, WHITE)
+    ic.sparkle(12.8, 4.4, 1.6, GOLD_L)
+    return ic
+
+
+def fern_zoltraak(c, l, d, dd):
+    ic = Icon()
+    origins = ((1.8, 14.2), (1.4, 10.0), (4.4, 15.0), (2.6, 6.2), (7.6, 15.2))
+    for ox, oy in origins:
+        ic.ring(ox, oy, 1.4, 0.5, d)
+    for k, (ox, oy) in enumerate(origins):
+        tx, ty = 15.0 - k * 0.6, 1.0 + k * 1.2
+        ic.seg(ox, oy, tx, ty, 1.2, c).seg(ox + 0.3, oy - 0.3, tx, ty, 0.5, WHITE)
+    return ic
+
+
+def flamme_deception(c, l, d, dd):
+    ic = Icon()
+    ic.ellipse(8, 9.5, 6.4, 3.4, hex_color("#F8E4EE"))
+    ic.seg(1.8, 9.5, 14.2, 9.5, 1.0, hex_color("#6A3A52"))
+    for x in (4.0, 6.6, 9.4, 12.0):
+        ic.seg(x, 10.0, x - 0.4, 11.8, 0.7, hex_color("#6A3A52"))
+    for (x, y, r) in ((3.0, 3.4, 1.6), (8.0, 2.2, 1.5), (13.0, 3.6, 1.6), (14.0, 13.4, 1.2)):
+        ic.disc(x, y, r, c).disc(x - 0.4, y - 0.4, r * 0.4, WHITE)
+    return ic
+
+
+def heiter_miracle(c, l, d, dd):
+    ic = Icon()
+    ic.ring(8, 3.6, 3.4, 1.0, GOLD).ring(8, 3.6, 2.4, 0.5, GOLD_L)
+    ic.seg(8, 6.0, 8, 15.4, 2.2, c).seg(3.6, 10.0, 12.4, 10.0, 2.2, c)
+    ic.seg(8, 6.0, 8, 15.4, 0.8, WHITE).seg(3.6, 10.0, 12.4, 10.0, 0.8, WHITE)
+    return ic
+
+
+def frieren_analysis(c, l, d, dd):
+    ic = Icon()
+    hexagon(ic, 8, 8, 6.4, d)
+    hexagon(ic, 8, 8, 4.8, c)
+    ic.seg(8.0, 2.0, 6.4, 7.0, 0.9, INK).seg(6.4, 7.0, 10.2, 9.6, 0.9, INK).seg(10.2, 9.6, 8.6, 14.4, 0.9, INK)
+    ic.sparkle(13.6, 2.4, 1.4, WHITE)
+    return ic
+
+
+def ubel_reelseiden(c, l, d, dd):
+    ic = Icon()
+    ic.curve(lambda t: (1.5 + 13.0 * t, 13.5 - 11.0 * t - 3.0 * math.sin(t * math.pi)), 0, 1, 1.8, c)
+    ic.curve(lambda t: (1.5 + 13.0 * t, 13.5 - 11.0 * t - 3.0 * math.sin(t * math.pi)), 0, 1, 0.6, WHITE)
+    ic.curve(lambda t: (2.5 + 11.0 * t, 3.0 + 11.0 * t + 2.0 * math.sin(t * math.pi)), 0, 1, 1.4, d)
+    ic.curve(lambda t: (2.5 + 11.0 * t, 3.0 + 11.0 * t + 2.0 * math.sin(t * math.pi)), 0, 1, 0.5, l)
+    return ic
+
+
+# ---- 3.0: the Demon King's magic ----
+def annihilation(c, l, d, dd):
+    ic = Icon()
+    ic.disc(3.6, 12.4, 3.4, hex_color("#1A0810")).ring(3.6, 12.4, 3.4, 0.8, c)
+    ic.seg(4.0, 12.0, 15.6, 0.4, 6.4, d).seg(4.0, 12.0, 15.6, 0.4, 4.2, c).seg(4.4, 11.6, 15.6, 0.4, 1.8, hex_color("#FFE0E0"))
+    return ic
+
+
+def black_sun(c, l, d, dd):
+    ic = Icon()
+    for k in range(12):
+        a = math.radians(k * 30)
+        ic.seg(8 + 4.6 * math.cos(a), 8 + 4.6 * math.sin(a), 8 + 7.4 * math.cos(a), 8 + 7.4 * math.sin(a), 1.0, hex_color("#C02040"))
+    ic.disc(8, 8, 4.8, hex_color("#C02040")).disc(8, 8, 4.0, hex_color("#0C0408"))
+    return ic
+
+
+def dominion(c, l, d, dd):
+    ic = Icon()
+    ic.poly([(2.0, 7.0), (4.6, 3.0), (6.4, 6.0), (8.0, 1.6), (9.6, 6.0), (11.4, 3.0), (14.0, 7.0), (13.0, 10.0), (3.0, 10.0)],
+            hex_color("#D4AF37"))
+    ic.disc(8, 7.2, 1.0, c)
+    for x in (3.4, 8.0, 12.6):
+        ic.disc(x, 13.6, 1.6, hex_color("#6A2C70"))
+        ic.seg(x, 10.4, x, 12.0, 0.6, hex_color("#8E8E9A"))
+    return ic
+
+
+def sovereign_ward(c, l, d, dd):
+    ic = Icon()
+    shield(ic, 8, 4.0, 11.6, 11.6, d)
+    shield(ic, 8, 5.2, 9.2, 9.2, c)
+    ic.poly([(4.6, 4.0), (5.8, 1.4), (7.0, 3.2), (8.0, 0.8), (9.0, 3.2), (10.2, 1.4), (11.4, 4.0)], hex_color("#D4AF37"))
+    return ic
+
+
+# ---- 3.0: Original magic, one white picture per form (tinted with the spell's colour in game) ----
+def original_beam(c, l, d, dd):
+    ic = Icon()
+    ic.ring(4.0, 12.0, 3.2, 1.0, c)
+    ic.seg(4.5, 11.5, 15.0, 1.0, 3.0, c).seg(4.8, 11.2, 15.0, 1.0, 1.2, WHITE)
+    ic.sparkle(12.0, 12.0, 1.4, WHITE)
+    return ic
+
+
+def original_volley(c, l, d, dd):
+    ic = Icon()
+    for (x0, y0, x1, y1) in ((2, 14, 8, 8), (5, 15, 13, 9), (1.5, 10, 9, 3), (6, 11, 14.5, 2.5)):
+        ic.seg(x0, y0, x1, y1, 1.4, c).disc(x1, y1, 1.0, WHITE)
+    return ic
+
+
+def original_blast(c, l, d, dd):
+    ic = Icon()
+    ic.ellipse(8, 13.0, 6.6, 2.4, c).ellipse(8, 13.0, 4.2, 1.4, WHITE)
+    ic.seg(8, 0.8, 8, 12.4, 3.0, c).seg(8, 0.8, 8, 12.4, 1.2, WHITE)
+    return ic
+
+
+def original_nova(c, l, d, dd):
+    ic = Icon()
+    ic.ring(8, 8, 6.6, 1.2, c).ring(8, 8, 4.2, 0.9, c)
+    figure(ic, 8, 5.0, WHITE, 0.7)
+    return ic
+
+
+def original_ward(c, l, d, dd):
+    ic = Icon()
+    hexagon(ic, 8, 8, 7.0, c)
+    hexagon(ic, 8, 8, 5.2, WHITE)
+    hexagon(ic, 8, 8, 3.6, c)
+    return ic
+
+
+def original_mend(c, l, d, dd):
+    ic = Icon()
+    ic.seg(8, 2.0, 8, 14.0, 3.6, c).seg(2.0, 8.0, 14.0, 8.0, 3.6, c)
+    ic.seg(8, 3.0, 8, 13.0, 1.4, WHITE).seg(3.0, 8.0, 13.0, 8.0, 1.4, WHITE)
+    return ic
+
+
+def original_bind(c, l, d, dd):
+    ic = Icon()
+    ic.ring(8, 8, 6.2, 1.0, c)
+    ic.seg(2.0, 3.0, 14.0, 13.0, 1.0, WHITE).seg(2.0, 13.0, 14.0, 3.0, 1.0, WHITE)
+    ic.disc(8, 8, 2.0, c)
+    return ic
+
+
 def generic(c, l, d, dd):
     ic = Icon()
     ic.ring(8, 8, 6.2, 1.2, WHITE)

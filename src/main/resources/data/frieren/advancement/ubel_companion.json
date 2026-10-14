@@ -1,0 +1,28 @@
+{
+  "criteria": {
+    "m": {
+      "trigger": "frieren:milestone",
+      "conditions": {
+        "milestone": "ubel_companion"
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "minecraft:shears"
+    },
+    "title": {
+      "translate": "advancements.frieren.ubel_companion.title"
+    },
+    "description": {
+      "translate": "advancements.frieren.ubel_companion.description"
+    },
+    "frame": "goal"
+  },
+  "requirements": [
+    [
+      "m"
+    ]
+  ],
+  "parent": "frieren:rank_first_class"
+}

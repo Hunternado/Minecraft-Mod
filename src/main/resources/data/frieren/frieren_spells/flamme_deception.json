@@ -1,0 +1,12 @@
+{
+  "behavior": "frieren:deception",
+  "school": "special",
+  "rarity": "legendary",
+  "mana_cost": 40,
+  "cooldown": 900,
+  "color": "#FFC0DA",
+  "params": {
+    "duration": 600,
+    "ambush": 2.5
+  }
+}

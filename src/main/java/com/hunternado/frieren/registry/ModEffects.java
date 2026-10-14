@@ -43,6 +43,33 @@ public final class ModEffects {
     public static final RegistryObject<MobEffect> REFLECTING = MOB_EFFECTS.register("reflecting", () ->
         new FrierenMobEffect(MobEffectCategory.BENEFICIAL, 0xE6F4FF));
 
+    /** Flamme's Deception: demons cannot target the bearer; the bearer's magic strikes demons far harder. */
+    public static final RegistryObject<MobEffect> DECEIVING = MOB_EFFECTS.register("deceiving", () ->
+        new FrierenMobEffect(MobEffectCategory.BENEFICIAL, 0xFFC0DA));
+
+    /** Heiter's Miracle: the next blow that would kill the bearer leaves them at half health instead. */
+    public static final RegistryObject<MobEffect> BLESSED = MOB_EFFECTS.register("blessed", () ->
+        new FrierenMobEffect(MobEffectCategory.BENEFICIAL, 0xFFF2B0));
+
+    /** Frieren's Analysis: barrier gone, every spell against the bearer hits 40% harder. */
+    public static final RegistryObject<MobEffect> EXPOSED = MOB_EFFECTS.register("exposed", () ->
+        new FrierenMobEffect(MobEffectCategory.HARMFUL, 0xB8F0E0));
+
+    /** Sovereign Ward: a fifth of all damage, no knockback, half of melee damage returned. */
+    public static final RegistryObject<MobEffect> SOVEREIGN = MOB_EFFECTS.register("sovereign", () ->
+        new FrierenMobEffect(MobEffectCategory.BENEFICIAL, 0xC02040)
+            .addAttributeModifier(Attributes.KNOCKBACK_RESISTANCE, FrierenIds.id("effect.sovereign.knockback"), 1.0D, AttributeModifier.Operation.ADD_VALUE));
+
+    /** A released limiter: the mage's magic surges (spell power +amplifier*10%, see ManaReveal). */
+    public static final RegistryObject<MobEffect> UNLEASHED = MOB_EFFECTS.register("unleashed", () ->
+        new FrierenMobEffect(MobEffectCategory.BENEFICIAL, 0x9FD8FF));
+
+    /** A demon that felt overwhelming mana: it flees, and its guard is down (armour halved). */
+    public static final RegistryObject<MobEffect> FRIGHTENED = MOB_EFFECTS.register("frightened", () ->
+        new FrierenMobEffect(MobEffectCategory.HARMFUL, 0x6A2C70)
+            .addAttributeModifier(Attributes.ARMOR, FrierenIds.id("effect.frightened.armor"), -0.5D, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)
+            .addAttributeModifier(Attributes.ATTACK_DAMAGE, FrierenIds.id("effect.frightened.damage"), -0.3D, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+
     private ModEffects() {}
 
     public static Holder<MobEffect> holder(RegistryObject<MobEffect> effect) {

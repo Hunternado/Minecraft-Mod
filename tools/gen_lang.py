@@ -133,6 +133,12 @@ EFFECTS = {
     "warded": "Warded",
     "bound": "Bound",
     "reflecting": "Reflecting",
+    "deceiving": "Deceiving",
+    "blessed": "Goddess's Blessing",
+    "exposed": "Exposed",
+    "sovereign": "Sovereign",
+    "unleashed": "Unleashed",
+    "frightened": "Frightened",
 }
 
 
@@ -179,7 +185,7 @@ SPELLS = {
     "frost_lance": ("Frost Lance", "Lawine-style ice magic: a fan of ice shards that chill and slow what they strike."),
     "earth_spikes": ("Earth Spikes", "The ground erupts in a line before you, battering and launching everything on it."),
     "water_whip": ("Water Whip", "A lash of water sweeps the area in front of you, knocking foes back and dousing flames."),
-    "zoltraak_full_power": ("Zoltraak: Full Power", "Ordinary offensive magic, poured into without restraint. A long wind-up, then a beam that pierces everything in its path and kills anything with up to 200 max health."),
+    "zoltraak_full_power": ("Zoltraak: Full Power", "Ordinary offensive magic, poured into without restraint. Charged: hold the cast key to pour mana in and release to fire a beam that pierces everything in its path; released at full charge it kills anything with up to 200 max health."),
     "mana_release": ("Mana Release", "Drop all restraint: half your remaining mana explodes outward. The more you have, the bigger the blast."),
     "blood_blades": ("Lügner's Blood Blades", "Demon blood magic. A fan of crimson blades; each one feeds you part of the wound it opens and kills anything with up to 60 max health. Costs health."),
     "wire_snare": ("Draht's Wire Snare", "Demon thread magic. Invisible wires lash out from a point and bind every enemy around it, slicing apart anything with up to 60 max health."),
@@ -209,6 +215,18 @@ SPELLS = {
     "flame_ward": ("The Spell to Ward Off Flames", "Fire and lava cannot burn you or your companions for a minute and a half."),
     "smelting_magic": ("The Spell to Smelt Ore", "Fires the raw metal, sand, stone, clay and logs you carry as a furnace would."),
     "pocket_space": ("The Spell to Open a Pocket of Space", "Reach into your ender chest from anywhere."),
+    # 3.0: the legends
+    "frieren_zoltraak": ("Frieren's Zoltraak", "The Slayer's Zoltraak, refined over a thousand years of killing demons. Charged: hold to pour mana in, release to fire. A piercing beam that few barriers stop and that hits demons half again as hard; at full charge it kills anything with up to 300 max health."),
+    "fern_zoltraak": ("Fern's Zoltraak", "Not one Zoltraak but a storm of them. Hold the cast key: a ring of circles opens around you and fires ever faster, until your mana or your target runs out."),
+    "flamme_deception": ("Flamme's Deception", "Flamme's teaching: hide your mana so completely that demons look straight through you. For 30 seconds no demon can target you, and your magic hits demons two and a half times as hard. Your first hit ends the deception a moment later."),
+    "heiter_miracle": ("Heiter's Miracle", "A long prayer, and the goddess answers: everyone friendly within 8 blocks is healed completely and cleansed of every curse, and blessed for a minute: the next blow that would kill them leaves them standing at half health."),
+    "frieren_analysis": ("Frieren's Analysis", "Decades of study condensed into a single look. Shatters the barrier of the creature you look at, strips its protective magic and leaves it exposed: all spell damage against it is 40% higher for 10 seconds."),
+    "ubel_reelseiden": ("Übel's Reelseiden", "Übel's own cutting magic, taught by Übel herself: if she can imagine it cut, it is cut. A wide, long arc that goes through armour, shields and barriers alike, and kills anything with up to 80 max health."),
+    # 3.0: the Demon King's magic
+    "annihilation": ("Annihilation", "The Demon King's own magic. A five-second charge that a solid hit can shatter, then a beam that erases everything in its path: anything that is not a boss dies outright, and a boss loses a quarter of its health. Costs 400 mana."),
+    "black_sun": ("The Black Sun", "A black sun rises where you aim, and three rings of demonic blasts roll outward from it. Each blast kills anything with up to 300 max health."),
+    "dominion": ("Dominion", "The Demon King's command. Every monster within 24 blocks that is not a boss obeys you for a minute, no weighing required. Command them with the Command Puppets key."),
+    "sovereign_ward": ("Sovereign Ward", "For 15 seconds you take a fifth of all damage, cannot be knocked back, and half of every melee blow returns to whoever struck it. Cannot be interrupted."),
 }
 
 
@@ -254,7 +272,7 @@ QUESTS = {
     "aura_kill_yourself": ("Aura, Kill Yourself", "Defeat Aura the Guillotine.", "+60 mana growth and an unidentified Legendary grimoire"),
     "auras_generals": ("Aura's Generals", "Defeat Linie, Draht and Lügner.", "+30 mana growth and an unidentified Ancient grimoire"),
     "the_golden_land": ("The Golden Land", "Defeat Macht of the Golden Land.", "+60 mana growth and an unidentified Legendary grimoire"),
-    "journeys_end": ("Journey's End", "Defeat the Demon King, as Himmel's party once did.", "+120 mana growth and two unidentified Legendary grimoires"),
+    "journeys_end": ("Journey's End", "Defeat the Demon King, as Himmel's party once did.", "+120 mana growth, one of the Demon King's Mythic grimoires and a Legendary one"),
 }
 
 
@@ -419,6 +437,14 @@ def messages():
     m("no_mana", "Not enough mana (needs %s)")
     m("obedience_fail", "%s resists your mana.")
     m("obedience_success", "%s obeys you.")
+    m("blessing_saved", "The goddess's blessing refuses your death. You stand again.")
+    m("dominion", "%s creatures bow to your dominion.")
+    m("dominion_none", "There is nothing here to rule.")
+    m("demon_frightened", "%s feels your mana and flees in terror.")
+    m("limiter_release", "You release your limiter. Your true mana floods out: %s. Your magic surges (+%s%% power for %s seconds).")
+    m("limiter_frightened", "%s demon(s) feel it and run.")
+    m("limiter_witnessed", "%s releases a limiter. An enormous mana floods the area.")
+    m("sense_overwhelming", "You feel an overwhelming mana to the %s, %s blocks away.")
     m("puppets_attack", "Your puppets turn on %s.")
     m("puppets_follow", "Your puppets fall in behind you.")
     m("puppets_guard", "Your puppets hold that ground.")
@@ -457,6 +483,11 @@ def messages():
     h("casting", "Casting")
     h("channeling", "Channeling")
     h("charging", "charging %s%%")
+    h("sense.faint", "faint %sm")
+    h("sense.weaker", "weaker %sm")
+    h("sense.comparable", "your equal %sm")
+    h("sense.stronger", "stronger %sm")
+    h("sense.overwhelming", "OVERWHELMING %sm")
     h("charged", "fully charged: release!")
     h("concentration_broken", "Concentration broken")
     h("concealed", "Concealed %s%%")
@@ -705,6 +736,10 @@ def death_messages():
                   "%1$s was cursed by %2$s using %3$s"),
         "guillotine": ("%1$s was beheaded by %2$s", "%1$s lost their head while fighting %2$s",
                        "%1$s was beheaded by %2$s with %3$s"),
+        "cutting": ("%1$s was cut apart by %2$s", "%1$s was cut apart while fighting %2$s",
+                    "%1$s was cut apart by %2$s using %3$s"),
+        "annihilation": ("%1$s was annihilated by %2$s", "%1$s was annihilated while fighting %2$s",
+                         "%1$s was annihilated by %2$s using %3$s"),
     }
     for name, (base, player, item) in deaths.items():
         put(f"death.attack.{NS}.{name}", base)
@@ -722,6 +757,14 @@ ADVANCEMENTS = {
     "rank_first_class": ("First-Class Mage", "Pass Serie's interview and become a First-Class Mage"),
     "learned_demon": ("Know Your Enemy", "Learn a spell of demon magic"),
     "learned_forbidden": ("Forbidden Knowledge", "Learn a forbidden spell"),
+    "learned_legendary": ("The Legends' Own Magic", "Learn a Legendary spell"),
+    "learned_mythic": ("Magic of the Age of Myths", "Learn one of the Demon King's Mythic spells"),
+    "limiter_release": ("A Thousand Years of Hiding", "Release your limiter after concealing your mana for a long time"),
+    "serie_impressed": ("Not Entirely Boring", "Impress Serie with your magic"),
+    "ubel_companion": ("Clingy", "Defeat Übel in a duel; she has decided she likes you"),
+    "original_spell": ("Original Magic", "Have Serie create a spell just for you"),
+    "frieren_party": ("Journey's Companions", "Convince Frieren's party to travel with you"),
+    "witnessed_slayer": ("Frieren the Slayer", "Witness Frieren command Aura to kill herself"),
     "slay_demon": ("They Speak, But Do Not Understand", "Slay a demon"),
     "aura_obeyed": ("Aura, Kill Yourself", "Win the weighing of the Scales of Obedience"),
     "quest_aura_kill_yourself": ("The Guillotine Falls", "Defeat Aura the Guillotine"),

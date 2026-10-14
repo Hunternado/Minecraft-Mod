@@ -1,0 +1,28 @@
+{
+  "criteria": {
+    "m": {
+      "trigger": "frieren:milestone",
+      "conditions": {
+        "milestone": "learned_legendary"
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "frieren:legendary_grimoire"
+    },
+    "title": {
+      "translate": "advancements.frieren.learned_legendary.title"
+    },
+    "description": {
+      "translate": "advancements.frieren.learned_legendary.description"
+    },
+    "frame": "goal"
+  },
+  "requirements": [
+    [
+      "m"
+    ]
+  ],
+  "parent": "frieren:first_spell"
+}

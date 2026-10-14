@@ -93,6 +93,10 @@ public final class MagicData {
     private boolean ubelDefeated;
     private long serieLetterReadyAt;
     private long concealedSince = -1L;
+    private long flareUntil;
+    private boolean flaring;
+    private long lastPassiveSenseTime = -100000L;
+    private int lastPassiveSenseId = -1;
 
     // ---- Sync bookkeeping (transient) -------------------------------------------------------
     private boolean fullSyncNeeded = true;
@@ -477,6 +481,22 @@ public final class MagicData {
     /** Game time at which the current concealment began (-1 while not concealing); transient. */
     public long concealedSince() { return concealedSince; }
     public void setConcealedSince(long time) { this.concealedSince = time; }
+
+    /**
+     * A mana flare: casting a (non-silent) spell while concealed lets your true mana show for a moment. Transient;
+     * {@link #flaring()} is refreshed every tick by ManaHelper.
+     */
+    public void flareUntil(long time) { this.flareUntil = Math.max(flareUntil, time); }
+    public void updateFlare(long time) { this.flaring = time < flareUntil; }
+    public boolean flaring() { return flaring; }
+
+    /** When (and for which entity) passive mana sensing last warned this mage; transient. */
+    public long lastPassiveSenseTime() { return lastPassiveSenseTime; }
+    public int lastPassiveSenseId() { return lastPassiveSenseId; }
+    public void setLastPassiveSense(long time, int entityId) {
+        this.lastPassiveSenseTime = time;
+        this.lastPassiveSenseId = entityId;
+    }
 
     // =========================================================================================
     // Sync bookkeeping

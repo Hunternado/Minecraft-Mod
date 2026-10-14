@@ -1,0 +1,13 @@
+{
+  "behavior": "frieren:miracle",
+  "school": "defensive",
+  "rarity": "legendary",
+  "mana_cost": 120,
+  "cooldown": 1800,
+  "cast_time": 30,
+  "color": "#FFF2B0",
+  "params": {
+    "radius": 8.0,
+    "blessing": 1200
+  }
+}

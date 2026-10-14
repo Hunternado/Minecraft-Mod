@@ -1,0 +1,14 @@
+{
+  "behavior": "frieren:analysis",
+  "school": "special",
+  "rarity": "legendary",
+  "mana_cost": 50,
+  "cooldown": 400,
+  "cast_time": 20,
+  "color": "#B8F0E0",
+  "params": {
+    "range": 32.0,
+    "exposed": 200,
+    "exposed_bonus": 1.4
+  }
+}

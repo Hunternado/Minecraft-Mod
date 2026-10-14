@@ -1,0 +1,29 @@
+{
+  "criteria": {
+    "m": {
+      "trigger": "frieren:milestone",
+      "conditions": {
+        "milestone": "witnessed_slayer"
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "frieren:guillotine_blade"
+    },
+    "title": {
+      "translate": "advancements.frieren.witnessed_slayer.title"
+    },
+    "description": {
+      "translate": "advancements.frieren.witnessed_slayer.description"
+    },
+    "frame": "challenge",
+    "hidden": true
+  },
+  "requirements": [
+    [
+      "m"
+    ]
+  ],
+  "parent": "frieren:slay_demon"
+}

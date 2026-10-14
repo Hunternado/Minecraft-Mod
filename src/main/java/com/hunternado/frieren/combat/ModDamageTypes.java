@@ -14,6 +14,10 @@ public final class ModDamageTypes {
     public static final ResourceKey<DamageType> DEMON_MAGIC = key("demon_magic");
     public static final ResourceKey<DamageType> CURSE = key("curse");
     public static final ResourceKey<DamageType> GUILLOTINE = key("guillotine");
+    /** Übel's Reelseiden: goes through armour and shields. */
+    public static final ResourceKey<DamageType> CUTTING = key("cutting");
+    /** The Demon King's Annihilation: through armour, shields and enchantments. */
+    public static final ResourceKey<DamageType> ANNIHILATION = key("annihilation");
 
     private ModDamageTypes() {}
 

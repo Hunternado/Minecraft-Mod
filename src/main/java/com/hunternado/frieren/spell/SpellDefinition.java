@@ -95,6 +95,11 @@ public record SpellDefinition(
         return chargeTicks() > 0;
     }
 
+    /** Spells only a particular teacher can give (Übel's Reelseiden): never rolled by loot or offered as a privilege. */
+    public boolean isTaught() {
+        return param("taught", 0.0D) > 0.5D;
+    }
+
     /** Steady spells cannot have their incantation or charge broken by a hit. */
     public boolean isSteady() {
         return param("steady", 0.0D) > 0.5D;

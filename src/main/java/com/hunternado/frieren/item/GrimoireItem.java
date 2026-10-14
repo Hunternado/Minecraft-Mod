@@ -101,7 +101,7 @@ public class GrimoireItem extends Item {
         }
         Identifier spellId = spellOf(stack);
         if (spellId == null) {
-            SpellDefinition random = SpellManager.randomOfRarity(rarity, player.getRandom());
+            SpellDefinition random = SpellManager.randomOfRarity(rarity, player.getRandom(), candidate -> !data.knows(candidate.id()));
             if (random == null) {
                 Messages.chat(player, Component.translatable("message.frieren.grimoire_empty"));
                 return stack;

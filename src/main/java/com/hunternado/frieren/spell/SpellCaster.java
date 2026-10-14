@@ -18,6 +18,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.Nullable;
@@ -286,7 +287,7 @@ public final class SpellCaster {
             player.hurtServer(level, level.damageSources().magic(), spell.healthCost());
         }
 
-        float power = effectivePower(mastery, staff) * (spell.isCharged() ? chargeMultiplier(charge) : 1.0F);
+        float power = effectivePower(mastery, staff) * (spell.isCharged() ? chargeMultiplier(charge) : 1.0F) * unleashedBonus(player);
         SpellContext ctx = new SpellContext(player, level, data, spell, progress, staff, power, spell.isCharged() ? charge : 1.0F);
         boolean success = behavior.cast(ctx);
         if (!success) {
@@ -300,6 +301,9 @@ public final class SpellCaster {
         }
         if (prepaid < 0.0F) {
             ManaHelper.onManaSpent(player, data, cost);          // a charge already trained as it was poured
+        }
+        if (data.concealing() && !isSilent(spell)) {
+            data.flareUntil(time + 60L);                         // casting lets the true mana show for three seconds
         }
         data.pauseRegenUntil(time + 40L);
         data.setCooldown(spell.id(), time + effectiveCooldown(spell, mastery, staff));
@@ -397,6 +401,12 @@ public final class SpellCaster {
         execute(player, data, spell, behavior, fraction, paid);
     }
 
+    /** A released limiter (ManaSensing): +10% spell power per level of Unleashed. */
+    public static float unleashedBonus(ServerPlayer player) {
+        MobEffectInstance unleashed = player.getEffect(ModEffects.holder(ModEffects.UNLEASHED));
+        return unleashed == null ? 1.0F : 1.0F + 0.1F * (unleashed.getAmplifier() + 1);
+    }
+
     /** Silent spells (an Original-magic modifier) are cast without a visible circle and leave no mana flare. */
     public static boolean isSilent(SpellDefinition spell) {
         return spell.param("silent", 0.0D) > 0.5D;
@@ -443,7 +453,7 @@ public final class SpellCaster {
                 data.tickChannel();
                 StaffItem.Tier staff = heldStaff(player);
                 SpellContext ctx = new SpellContext(player, player.level(), data, spell, progress, staff,
-                    effectivePower(progress.masteryFraction(), staff));
+                    effectivePower(progress.masteryFraction(), staff) * unleashedBonus(player));
                 if (!behavior.tickChannel(ctx, data.channelTicks())) {
                     endChannel(player, data);
                 }

@@ -48,7 +48,7 @@ public enum Quest {
     JOURNEYS_END("journeys_end", QuestStats.DEMON_KING_SLAIN, 1,
         (player, data) -> {
             ManaHelper.grantBonusGrowth(player, data, 120);
-            give(player, GrimoireItem.unidentified(SpellRarity.LEGENDARY));
+            give(player, GrimoireItem.unidentified(SpellRarity.MYTHIC));
             give(player, GrimoireItem.unidentified(SpellRarity.LEGENDARY));
         });
 

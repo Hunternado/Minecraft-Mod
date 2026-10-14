@@ -199,6 +199,48 @@ def effect_icon(kind):
         img.circle(9, 9, 1.3, hex_color("#14213D"))
         img.line(1, 4, 17, 14, hex_color("#C8D8FF"))
         img.line(1, 14, 17, 4, hex_color("#C8D8FF"))
+    elif kind == "deceiving":     # Flamme's deception: a closed eye under a veil of petals
+        img.circle(9, 10, 5.5, hex_color("#F6D8E6"))
+        img.line(4, 10, 14, 10, hex_color("#6A3A52"))
+        for x in (5, 8, 11, 13):
+            img.set(x, 11, hex_color("#6A3A52"))
+        img.circle(4, 4, 1.6, hex_color("#FFC0DA"))
+        img.circle(14, 4, 1.6, hex_color("#FFC0DA"))
+        img.circle(9, 2.5, 1.6, hex_color("#FFFFFF"))
+    elif kind == "blessed":       # Heiter's blessing: a golden halo over a white wing
+        img.circle(9, 5, 4.5, hex_color("#F2C94C"), fill=False)
+        img.circle(9, 5, 3.5, hex_color("#FFF2B0"), fill=False)
+        for y in range(9, 16):
+            img.rect(4 + (y - 9) // 2, y, 14 - (y - 9), y, hex_color("#F4F4FF"))
+        img.line(5, 10, 12, 10, hex_color("#C8C8E0"))
+    elif kind == "exposed":       # Frieren's analysis: a cracked hexagon
+        for y in range(3, 15):
+            half = 6 - abs(y - 9) // 2
+            img.rect(9 - half, y, 9 + half - 1, y, hex_color("#7FC8B0"))
+        img.line(9, 3, 7, 8, hex_color("#1B1426"))
+        img.line(7, 8, 11, 11, hex_color("#1B1426"))
+        img.line(11, 11, 9, 15, hex_color("#1B1426"))
+    elif kind == "sovereign":     # Sovereign ward: a crimson crown over a shield
+        img.rect(4, 8, 13, 12, hex_color("#8A1020"))
+        for y in range(13, 16):
+            img.rect(4 + (y - 12), y, 13 - (y - 12), y, hex_color("#8A1020"))
+        img.rect(4, 4, 13, 6, hex_color("#D4AF37"))
+        for x in (4, 8, 13):
+            img.rect(x, 2, x, 3, hex_color("#D4AF37"))
+    elif kind == "unleashed":     # a released limiter: a column of mana bursting upward
+        img.rect(7, 2, 10, 16, hex_color("#9FD8FF"))
+        img.rect(8, 1, 9, 16, hex_color("#F0FBFF"))
+        img.line(2, 15, 6, 11, hex_color("#9FD8FF"))
+        img.line(15, 15, 11, 11, hex_color("#9FD8FF"))
+        img.line(3, 9, 6, 7, hex_color("#CDEBFF"))
+        img.line(14, 9, 11, 7, hex_color("#CDEBFF"))
+    elif kind == "frightened":    # a demon's horned head, trembling
+        img.circle(9, 10, 5, hex_color("#6A2C70"))
+        img.line(5, 6, 3, 2, hex_color("#D2C4A6"))
+        img.line(13, 6, 15, 2, hex_color("#D2C4A6"))
+        img.set(7, 9, (255, 255, 255, 255))
+        img.set(11, 9, (255, 255, 255, 255))
+        img.line(6, 13, 12, 13, hex_color("#F07A8A"))
     else:                         # reflecting: a mirror pane with a bouncing ray
         img.rect(6, 2, 11, 15, hex_color("#BFE6F0"))
         img.line(7, 3, 7, 14, hex_color("#F4FBFF"))
@@ -889,7 +931,8 @@ def gen_textures():
     save(side, "block/summoning_altar_side.png")
     save(bottom, "block/summoning_altar_bottom.png")
     save(flower_texture(), "block/blue_moon_weed.png")
-    for effect in ("enthralled", "gilded", "warded", "bound", "reflecting"):
+    for effect in ("enthralled", "gilded", "warded", "bound", "reflecting", "deceiving", "blessed", "exposed", "sovereign",
+                   "unleashed", "frightened"):
         save(effect_icon(effect), f"mob_effect/{effect}.png")
     save(light_texture(), "block/mana_light.png")
     save(bridge_texture(), "block/mana_bridge.png")

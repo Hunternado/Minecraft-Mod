@@ -1,0 +1,15 @@
+{
+  "behavior": "frieren:sovereign_ward",
+  "school": "defensive",
+  "rarity": "mythic",
+  "mana_cost": 200,
+  "cooldown": 1200,
+  "color": "#C02040",
+  "params": {
+    "duration": 300,
+    "reduction": 0.8,
+    "reflect": 0.5,
+    "steady": 1,
+    "demonic": 1
+  }
+}

@@ -11,7 +11,8 @@ import net.minecraft.world.entity.LivingEntity;
 
 /**
  * Reelseiden, Übel's "magic that cuts anything": a short arc that is very expensive for barriers to block.
- * Params: {@code damage}, {@code range}, {@code angle}, {@code barrier_cost}.
+ * Params: {@code damage}, {@code range}, {@code angle}, {@code barrier_cost}, {@code cutting} (1: Übel's own version,
+ * whose cuts go through armour and shields).
  */
 public class SlashBehavior implements SpellBehavior {
     @Override
@@ -22,7 +23,8 @@ public class SlashBehavior implements SpellBehavior {
         float barrierCost = (float) ctx.param("barrier_cost", 3.0D);
         for (LivingEntity target : SpellTargeting.livingInRadius(ctx.level(), ctx.caster(), ctx.caster().getEyePosition(), range,
             entity -> SpellDamage.canHarm(ctx.level(), ctx.caster(), entity) && SpellTargeting.inCone(ctx.caster(), entity, angle))) {
-            SpellDamage.hurt(ctx, target, damage, ModDamageTypes.SPELL, barrierCost);
+            SpellDamage.hurt(ctx, target, damage, ctx.param("cutting", 0.0D) > 0.5D ? ModDamageTypes.CUTTING : ModDamageTypes.SPELL,
+                barrierCost);
         }
         SpellFx.cone(ctx.level(), ctx.caster().getEyePosition(), ctx.caster().getLookAngle(), ctx.color(), (float) range, 1);
         SpellFx.sound(ctx.level(), ctx.caster().position(), ModSounds.SLASH.get(), 1.0F, 1.4F);

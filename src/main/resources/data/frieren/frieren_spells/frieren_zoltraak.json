@@ -1,0 +1,19 @@
+{
+  "behavior": "frieren:beam",
+  "school": "offensive",
+  "rarity": "legendary",
+  "mana_cost": 60,
+  "cooldown": 80,
+  "color": "#E8F4FF",
+  "params": {
+    "damage": 36.0,
+    "range": 64.0,
+    "pierce": 1,
+    "barrier_cost": 5.0,
+    "width": 1.4,
+    "charge": 50,
+    "min_charge": 0.25,
+    "execute_max_health": 300.0,
+    "demon_bonus": 1.5
+  }
+}

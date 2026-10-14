@@ -1,0 +1,16 @@
+{
+  "behavior": "frieren:black_sun",
+  "school": "offensive",
+  "rarity": "mythic",
+  "mana_cost": 220,
+  "cooldown": 1200,
+  "cast_time": 30,
+  "color": "#3A0A1A",
+  "params": {
+    "damage": 24.0,
+    "range": 40.0,
+    "radius": 10.0,
+    "execute_max_health": 300.0,
+    "demonic": 1
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "behavior": "frieren:slash",
+  "school": "offensive",
+  "rarity": "legendary",
+  "mana_cost": 30,
+  "cooldown": 30,
+  "color": "#3A8A6A",
+  "params": {
+    "damage": 22.0,
+    "range": 9.0,
+    "angle": 70.0,
+    "barrier_cost": 20.0,
+    "cutting": 1,
+    "execute_max_health": 80.0,
+    "taught": 1
+  }
+}

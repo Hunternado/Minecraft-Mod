@@ -1,0 +1,28 @@
+{
+  "criteria": {
+    "m": {
+      "trigger": "frieren:milestone",
+      "conditions": {
+        "milestone": "learned_mythic"
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "frieren:mythic_grimoire"
+    },
+    "title": {
+      "translate": "advancements.frieren.learned_mythic.title"
+    },
+    "description": {
+      "translate": "advancements.frieren.learned_mythic.description"
+    },
+    "frame": "challenge"
+  },
+  "requirements": [
+    [
+      "m"
+    ]
+  ],
+  "parent": "frieren:learned_legendary"
+}

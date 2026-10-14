@@ -126,7 +126,7 @@ public final class NpcInteractions {
     public static List<SpellDefinition> privilegeChoices(Iterable<SpellDefinition> definitions) {
         List<SpellDefinition> choices = new ArrayList<>();
         for (SpellDefinition definition : definitions) {
-            if (definition.rarity() == SpellRarity.LEGENDARY) {
+            if (definition.rarity() == SpellRarity.LEGENDARY && !definition.isTaught()) {
                 choices.add(definition);
             }
         }

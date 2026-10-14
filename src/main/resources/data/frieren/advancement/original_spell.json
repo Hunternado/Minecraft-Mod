@@ -1,0 +1,28 @@
+{
+  "criteria": {
+    "m": {
+      "trigger": "frieren:milestone",
+      "conditions": {
+        "milestone": "original_spell"
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "frieren:mythic_grimoire"
+    },
+    "title": {
+      "translate": "advancements.frieren.original_spell.title"
+    },
+    "description": {
+      "translate": "advancements.frieren.original_spell.description"
+    },
+    "frame": "challenge"
+  },
+  "requirements": [
+    [
+      "m"
+    ]
+  ],
+  "parent": "frieren:serie_impressed"
+}

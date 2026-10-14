@@ -6,6 +6,7 @@ import com.hunternado.frieren.config.FrierenClientConfig;
 import com.hunternado.frieren.data.MagicData;
 import com.hunternado.frieren.mana.ManaHelper;
 import com.hunternado.frieren.network.packet.CastStatePacket;
+import com.hunternado.frieren.network.packet.ManaSensePacket;
 import com.hunternado.frieren.spell.SpellDefinition;
 import com.hunternado.frieren.spell.SpellManager;
 import net.minecraft.client.DeltaTracker;
@@ -14,6 +15,13 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import net.minecraftforge.client.gui.overlay.ForgeLayer;
 
 /**
@@ -109,6 +117,67 @@ public final class ManaHudLayer implements ForgeLayer {
         }
 
         drawCastBar(graphics, font, deltaTracker.getGameTimeDeltaPartialTick(false));
+        drawSense(graphics, font, minecraft);
+    }
+
+    /**
+     * Detection results as a compass around the crosshair: one marker per signature in its direction, coloured by kind
+     * (blue mages, red demons, green NPCs), larger for stronger mana; concealment you noticed but could not see through
+     * flickers as a "?". The four strongest are labelled with how they compare to you and how far away they are.
+     */
+    private static void drawSense(GuiGraphicsExtractor graphics, Font font, Minecraft minecraft) {
+        List<ManaSensePacket.Entry> entries = ClientMagicCache.activeSense();
+        float remaining = ClientMagicCache.senseRemaining();
+        Player self = minecraft.player;
+        if (entries.isEmpty() || remaining <= 0.0F || self == null || minecraft.level == null) {
+            return;
+        }
+        int alpha = Math.max(40, Math.round(255.0F * Math.min(1.0F, remaining * 3.0F))) << 24;
+        int cx = graphics.guiWidth() / 2;
+        int cy = graphics.guiHeight() / 2;
+        int radius = Math.min(70, graphics.guiHeight() / 4);
+        float selfMana = ClientMagicCache.senseSelfMana();
+        List<ManaSensePacket.Entry> labelled = new ArrayList<>(entries);
+        labelled.sort(Comparator.comparingDouble((ManaSensePacket.Entry entry) -> -entry.apparentMana()));
+        List<ManaSensePacket.Entry> top = labelled.subList(0, Math.min(4, labelled.size()));
+        boolean flicker = (ClientMagicCache.gameTime() / 5L) % 2L == 0L;
+        for (ManaSensePacket.Entry entry : entries) {
+            Entity entity = minecraft.level.getEntity(entry.entityId());
+            if (entity == null) {
+                continue;
+            }
+            double dx = entity.getX() - self.getX();
+            double dz = entity.getZ() - self.getZ();
+            float yaw = (float) (Mth.atan2(dz, dx) * (180.0D / Math.PI)) - 90.0F;
+            float relative = Mth.wrapDegrees(yaw - self.getYRot()) * Mth.DEG_TO_RAD;
+            int mx = cx + Math.round(Mth.sin(relative) * radius);
+            int my = cy - Math.round(Mth.cos(relative) * radius);
+            int color = switch (entry.kind()) {
+                case 0 -> 0x7FD4FF;
+                case 1 -> 0xE0405A;
+                case 2 -> 0xB8F0A0;
+                default -> 0xC9A0FF;
+            };
+            if (entry.has(ManaSensePacket.FLAG_NOTICED)) {
+                if (flicker) {
+                    graphics.text(font, "?", mx - font.width("?") / 2, my - 4, alpha | 0xFFE08A, true);
+                }
+                continue;
+            }
+            int size = 1 + Math.min(4, (int) (Math.log10(Math.max(1.0F, entry.apparentMana())) * 1.4F));
+            graphics.fill(mx - size - 1, my - size - 1, mx + size + 1, my + size + 1, alpha | 0x101018);
+            graphics.fill(mx - size, my - size, mx + size, my + size, alpha | color);
+            if (entry.has(ManaSensePacket.FLAG_BOSS)) {
+                graphics.fill(mx - size - 2, my - size - 2, mx + size + 2, my - size - 1, alpha | 0xD4AF37);
+            }
+            if (top.contains(entry)) {
+                float ratio = entry.apparentMana() / selfMana;
+                String word = ratio < 0.25F ? "faint" : ratio < 0.75F ? "weaker" : ratio < 1.5F ? "comparable" : ratio < 3.0F ? "stronger" : "overwhelming";
+                Component label = Component.translatable("hud.frieren.sense." + word, Math.round(Math.sqrt(dx * dx + dz * dz)));
+                int labelColor = ratio >= 3.0F ? 0xFF6060 : ratio >= 1.5F ? 0xFFC060 : 0xE8E8F0;
+                graphics.text(font, label, mx - font.width(label) / 2, my + size + 2, alpha | labelColor, true);
+            }
+        }
     }
 
     /** The bar under the crosshair: name above, progress below. Nothing is drawn while idle. */

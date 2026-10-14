@@ -1,0 +1,28 @@
+{
+  "criteria": {
+    "m": {
+      "trigger": "frieren:milestone",
+      "conditions": {
+        "milestone": "serie_impressed"
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "frieren:exam_seal"
+    },
+    "title": {
+      "translate": "advancements.frieren.serie_impressed.title"
+    },
+    "description": {
+      "translate": "advancements.frieren.serie_impressed.description"
+    },
+    "frame": "goal"
+  },
+  "requirements": [
+    [
+      "m"
+    ]
+  ],
+  "parent": "frieren:rank_first_class"
+}

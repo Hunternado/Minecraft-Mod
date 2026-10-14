@@ -16,12 +16,13 @@ import java.util.List;
  */
 public final class ClientMagicCache {
     /** How long detection results stay visible. */
-    private static final long SENSE_DURATION_MS = 4000L;
+    public static final long SENSE_DURATION_MS = 8000L;
 
     private static MagicData data = new MagicData();
     private static final List<ManaSensePacket.Entry> sensed = new ArrayList<>();
     private static long sensedAt;
     private static boolean sawThrough;
+    private static float senseSelfMana = 1.0F;
     private static boolean castKeyHeld;
     private static byte castState = CastStatePacket.IDLE;
     private static @Nullable Identifier castSpell;
@@ -88,6 +89,7 @@ public final class ClientMagicCache {
         sensed.clear();
         sensed.addAll(packet.entries());
         sawThrough = packet.sawThroughSomething();
+        senseSelfMana = Math.max(1.0F, packet.selfMana());
         sensedAt = System.currentTimeMillis();
     }
 
@@ -100,6 +102,17 @@ public final class ClientMagicCache {
 
     public static boolean sawThrough() {
         return sawThrough;
+    }
+
+    /** The detector's own capacity at the time of the pulse (for "weaker"/"overwhelming"). */
+    public static float senseSelfMana() {
+        return senseSelfMana;
+    }
+
+    /** 0..1: how much of the sense display time is left (for fading). */
+    public static float senseRemaining() {
+        long age = System.currentTimeMillis() - sensedAt;
+        return age >= SENSE_DURATION_MS ? 0.0F : 1.0F - age / (float) SENSE_DURATION_MS;
     }
 
     public static boolean castKeyHeld() {

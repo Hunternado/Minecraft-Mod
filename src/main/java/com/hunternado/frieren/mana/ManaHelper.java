@@ -65,9 +65,9 @@ public final class ManaHelper {
     // Concealment & detection
     // ---------------------------------------------------------------------------------------
 
-    /** Fraction (0..0.97) of the true signature hidden while concealing. */
+    /** Fraction (0..0.97) of the true signature hidden while concealing (nothing during a mana flare). */
     public static float concealFraction(MagicData data) {
-        if (!data.concealing()) {
+        if (!data.concealing() || data.flaring()) {
             return 0.0F;
         }
         float fraction = 0.3F + 0.65F * (data.concealMastery() / 100.0F);
@@ -87,8 +87,9 @@ public final class ManaHelper {
         return data.rank().detectionPower() + (int) (data.detectionMastery() / 25.0F);
     }
 
+    /** 24 blocks, +4 per rank, +up to 16 with detection mastery. */
     public static double detectionRadius(MagicData data) {
-        return 24.0D + data.rank().ordinal() * 4.0D;
+        return 24.0D + data.rank().ordinal() * 4.0D + data.detectionMastery() * 0.16D;
     }
 
     // ---------------------------------------------------------------------------------------
@@ -98,6 +99,15 @@ public final class ManaHelper {
     /** Runs every server tick for each player. Cheap: heavy work happens once per second. */
     public static void serverTick(ServerPlayer player, MagicData data) {
         long time = player.level().getGameTime();
+        data.updateFlare(time);
+        if (data.concealing() && data.concealedSince() < 0L) {
+            data.setConcealedSince(time);                         // concealment restored from a save, or set by a spell
+        } else if (!data.concealing() && data.concealedSince() >= 0L) {
+            data.setConcealedSince(-1L);
+        }
+        if (time % 40L == 0L) {
+            ManaSensing.passiveSense(player, data, time);
+        }
 
         if (time % 20L == 0L) {
             refreshEquipment(player, data);

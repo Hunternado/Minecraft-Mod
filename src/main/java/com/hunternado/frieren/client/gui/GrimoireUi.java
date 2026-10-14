@@ -3,6 +3,7 @@ package com.hunternado.frieren.client.gui;
 import com.hunternado.frieren.FrierenIds;
 import com.hunternado.frieren.magic.SpellRarity;
 import com.hunternado.frieren.magic.SpellSchool;
+import com.hunternado.frieren.spell.OriginalSpells;
 import com.hunternado.frieren.spell.SpellDefinition;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
@@ -102,8 +103,13 @@ public final class GrimoireUi {
         graphics.text(font, text, cx - font.width(text) / 2, y, color, false);
     }
 
-    /** The spell's own icon, or the generic rune tinted with the spell's colour. */
+    /** The spell's own icon, its form's picture for Original magic, or the generic rune tinted with the spell's colour. */
     public static void spellIcon(GuiGraphicsExtractor graphics, Identifier spell, SpellDefinition definition, int x, int y, int size) {
+        if (definition != null && definition.school() == SpellSchool.ORIGINAL) {
+            int form = Math.max(0, Math.min(OriginalSpells.FORMS.length - 1, (int) definition.param("form", 0.0D)));
+            sprite(graphics, FrierenIds.id("spell/original_" + OriginalSpells.FORMS[form]), x, y, size, size, 0xFF000000 | definition.color());
+            return;
+        }
         if (SpellIcons.hasIcon(spell)) {
             sprite(graphics, SpellIcons.sprite(spell), x, y, size, size);
         } else {

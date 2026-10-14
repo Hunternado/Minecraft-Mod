@@ -1,0 +1,28 @@
+{
+  "criteria": {
+    "m": {
+      "trigger": "frieren:milestone",
+      "conditions": {
+        "milestone": "limiter_release"
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "frieren:concealment_charm"
+    },
+    "title": {
+      "translate": "advancements.frieren.limiter_release.title"
+    },
+    "description": {
+      "translate": "advancements.frieren.limiter_release.description"
+    },
+    "frame": "goal"
+  },
+  "requirements": [
+    [
+      "m"
+    ]
+  ],
+  "parent": "frieren:first_spell"
+}

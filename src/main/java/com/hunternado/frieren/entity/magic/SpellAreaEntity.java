@@ -2,6 +2,7 @@ package com.hunternado.frieren.entity.magic;
 
 import com.hunternado.frieren.combat.ModDamageTypes;
 import com.hunternado.frieren.entity.demon.AuraThrallEntity;
+import com.hunternado.frieren.entity.fx.MagicCircleEntity;
 import com.hunternado.frieren.registry.ModEffects;
 import com.hunternado.frieren.registry.ModEntities;
 import com.hunternado.frieren.spell.SpellDamage;
@@ -37,12 +38,13 @@ import java.util.UUID;
 
 /**
  * Stationary magic construct with a lifetime: Waldgose's tornado, Catastravia's light rain, the barrier
- * dome, the flower field's aura and Aura's guillotine telegraph. Server logic is throttled per mode;
+ * dome, the flower field's aura, Aura's guillotine telegraph and the Demon King's Black Sun (three rings of blasts
+ * rolling outward, each telegraphed by ground circles twelve ticks before it lands). Server logic is throttled per mode;
  * visuals are client-side particles.
  */
 public class SpellAreaEntity extends Entity {
     public enum Mode {
-        TORNADO, LIGHT_RAIN, DOME, FLOWER_FIELD, GUILLOTINE_MARK, SANCTUARY;
+        TORNADO, LIGHT_RAIN, DOME, FLOWER_FIELD, GUILLOTINE_MARK, SANCTUARY, BLACK_SUN;
 
         static Mode byId(int id) {
             Mode[] values = values();
@@ -215,6 +217,31 @@ public class SpellAreaEntity extends Entity {
                     }
                 }
             }
+            case BLACK_SUN -> {
+                int[] waves = {12, 26, 40};
+                for (int wave = 0; wave < waves.length; wave++) {
+                    double ring = Math.max(1.5D, radius * (wave + 1) / waves.length);
+                    int points = 6 + wave * 4;
+                    if (age == waves[wave] - 12 || age == waves[wave]) {
+                        for (int i = 0; i < points; i++) {
+                            double angle = i * Math.PI * 2.0D / points + wave * 0.3D;
+                            Vec3 point = center.add(Math.cos(angle) * ring, 0.0D, Math.sin(angle) * ring);
+                            if (age < waves[wave]) {
+                                MagicCircleEntity.onGround(level, point, MagicCircleEntity.STYLE_DEMON, color(), 2.0F, 16);
+                                continue;
+                            }
+                            for (LivingEntity target : SpellTargeting.livingInRadius(level, owner, point.add(0.0D, 0.6D, 0.0D), 2.4D,
+                                candidate -> SpellDamage.canHarm(level, attacker, candidate))) {
+                                SpellDamage.hurt(level, this, attacker, target, damage, ModDamageTypes.DEMON_MAGIC, 1.5F, false, null, executeCap);
+                            }
+                            SpellFx.burst(level, point.add(0.0D, 0.5D, 0.0D), color(), 2.2F);
+                        }
+                    }
+                }
+                if (age % 6 == 0) {
+                    SpellFx.wisps(level, center.add(0.0D, 3.0D, 0.0D), color(), 1.6F);
+                }
+            }
             case GUILLOTINE_MARK -> {
                 if (age == duration - 1) {
                     for (LivingEntity target : SpellTargeting.livingInRadius(level, owner, center, radius,
@@ -278,6 +305,15 @@ public class SpellAreaEntity extends Entity {
                     level.addParticle(ParticleTypes.END_ROD, center.x + Math.cos(angle) * distance, center.y + 0.1D,
                         center.z + Math.sin(angle) * distance, 0.0D, 0.04D, 0.0D);
                 }
+            }
+            case BLACK_SUN -> {
+                // The black sun itself: a dark sphere hanging three blocks up, shedding smoke.
+                for (int i = 0; i < 6; i++) {
+                    Vec3 dir = new Vec3(random.nextDouble() - 0.5D, random.nextDouble() - 0.5D, random.nextDouble() - 0.5D).normalize();
+                    level.addParticle(ParticleTypes.LARGE_SMOKE, center.x + dir.x * 1.2D, center.y + 3.0D + dir.y * 1.2D,
+                        center.z + dir.z * 1.2D, dir.x * 0.02D, dir.y * 0.02D, dir.z * 0.02D);
+                }
+                level.addParticle(tint, center.x, center.y + 3.0D, center.z, 0.0D, 0.0D, 0.0D);
             }
             case GUILLOTINE_MARK -> {
                 for (int i = 0; i < 8; i++) {

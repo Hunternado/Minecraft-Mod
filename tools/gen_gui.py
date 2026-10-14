@@ -351,6 +351,9 @@ def gen_spell_icons():
         save(gui_icons.icon(sid, spell["color"]), f"spell/{sid}")
         out.append(sid)
     save(gui_icons.icon("generic", "#FFFFFF"), "spell/generic")
+    # Original magic: one white picture per form, tinted with the spell's own colour by GrimoireUi.
+    for form in ("beam", "volley", "blast", "nova", "ward", "mend", "bind"):
+        save(gui_icons.icon(f"original_{form}", "#A8A8B0"), f"spell/original_{form}")
     return out
 
 

@@ -1,0 +1,20 @@
+{
+  "behavior": "frieren:annihilation",
+  "school": "offensive",
+  "rarity": "mythic",
+  "mana_cost": 400,
+  "cooldown": 1800,
+  "color": "#B01030",
+  "params": {
+    "damage": 120.0,
+    "range": 80.0,
+    "width": 2.4,
+    "charge": 100,
+    "min_charge": 0.4,
+    "fragility": 1.6,
+    "execute_max_health": 100000.0,
+    "boss_fraction": 0.25,
+    "barrier_cost": 10.0,
+    "demonic": 1
+  }
+}

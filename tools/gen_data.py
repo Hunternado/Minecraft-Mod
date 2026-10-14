@@ -88,9 +88,10 @@ SPELLS = {
                          color="#C9A66B", params=dict(damage=7.0, range=14.0, launch=0.7)),
     "water_whip": dict(behavior="water_whip", school="offensive", rarity="uncommon", mana_cost=12, cooldown=40,
                        color="#6FC3FF", params=dict(damage=3.0, range=7.0, angle=45.0, knockback=1.3)),
-    "zoltraak_full_power": dict(behavior="beam", school="offensive", rarity="ancient", mana_cost=45, cooldown=200, cast_time=30,
+    # Charged: hold the cast key to pour mana in (40 ticks to full), release to fire; lethal from 95%.
+    "zoltraak_full_power": dict(behavior="beam", school="offensive", rarity="ancient", mana_cost=45, cooldown=200,
                                 color="#DDF2FF", params=dict(damage=16.0, range=48.0, pierce=1, barrier_cost=2.5, width=1.1,
-                                                                  execute_max_health=200.0)),
+                                                             execute_max_health=200.0, charge=40, min_charge=0.3)),
     "mana_release": dict(behavior="mana_release", school="offensive", rarity="rare", mana_cost=5, cooldown=400,
                          color="#A8D8FF", params=dict(fraction=0.5, min_mana=15.0, base_damage=4.0, damage_per_mana=0.12,
                                                       base_radius=3.5, radius_per_mana=0.03, max_radius=9.0)),
@@ -148,6 +149,41 @@ SPELLS = {
                            color="#FF6A2A", params=dict(max_items=32)),
     "pocket_space": dict(behavior="pocket_space", school="utility", rarity="rare", mana_cost=10, cooldown=40,
                          color="#9A6AE0", params={}),
+    # ---- 3.0: the legends' own magic (Legendary: First Class) ----
+    # Frieren's Zoltraak: a charge that ends in a beam no demon walks away from (demon_bonus) and few barriers stop.
+    "frieren_zoltraak": dict(behavior="beam", school="offensive", rarity="legendary", mana_cost=60, cooldown=80,
+                             color="#E8F4FF", params=dict(damage=36.0, range=64.0, pierce=1, barrier_cost=5.0, width=1.4,
+                                                          charge=50, min_charge=0.25, execute_max_health=300.0,
+                                                          demon_bonus=1.5)),
+    # Fern's Zoltraak: a storm of beams from a ring of circles, faster the longer it is held.
+    "fern_zoltraak": dict(behavior="volley", school="offensive", rarity="legendary", mana_cost=20, cooldown=140, channel=120,
+                          color="#C8E4FF", params=dict(damage=4.5, range=40.0, per_pulse=2, interval_start=6, interval_min=2,
+                                                       ramp=40, pulse_cost=2.5, spread=2.5, circles=8, ignore_iframes=1,
+                                                       demon_bonus=1.25)),
+    # Flamme's teaching: hide everything, let the demons look straight through you, then strike.
+    "flamme_deception": dict(behavior="deception", school="special", rarity="legendary", mana_cost=40, cooldown=900,
+                             color="#FFC0DA", params=dict(duration=600, ambush=2.5)),
+    # Heiter's miracle: full healing, cleansing and a blessing that refuses one death.
+    "heiter_miracle": dict(behavior="miracle", school="defensive", rarity="legendary", mana_cost=120, cooldown=1800, cast_time=30,
+                           color="#FFF2B0", params=dict(radius=8.0, blessing=1200)),
+    # Frieren's analysis: decades of study in one look. Strips barriers and leaves the target exposed.
+    "frieren_analysis": dict(behavior="analysis", school="special", rarity="legendary", mana_cost=50, cooldown=400, cast_time=20,
+                             color="#B8F0E0", params=dict(range=32.0, exposed=200, exposed_bonus=1.4)),
+    # Übel's own Reelseiden, taught only by Übel: cuts anything she can imagine cutting.
+    "ubel_reelseiden": dict(behavior="slash", school="offensive", rarity="legendary", mana_cost=30, cooldown=30,
+                            color="#3A8A6A", params=dict(damage=22.0, range=9.0, angle=70.0, barrier_cost=20.0, cutting=1,
+                                                         execute_max_health=80.0, taught=1)),
+    # ---- 3.0: the Demon King's magic (Mythic: First Class, from his grimoires) ----
+    "annihilation": dict(behavior="annihilation", school="offensive", rarity="mythic", mana_cost=400, cooldown=1800,
+                         color="#B01030", params=dict(damage=120.0, range=80.0, width=2.4, charge=100, min_charge=0.4,
+                                                      fragility=1.6, execute_max_health=100000.0, boss_fraction=0.25,
+                                                      barrier_cost=10.0, demonic=1)),
+    "black_sun": dict(behavior="black_sun", school="offensive", rarity="mythic", mana_cost=220, cooldown=1200, cast_time=30,
+                      color="#3A0A1A", params=dict(damage=24.0, range=40.0, radius=10.0, execute_max_health=300.0, demonic=1)),
+    "dominion": dict(behavior="dominion", school="special", rarity="mythic", mana_cost=250, cooldown=3600, cast_time=20,
+                     color="#8A1020", params=dict(radius=24.0, duration=1200, max_puppets=12, demonic=1)),
+    "sovereign_ward": dict(behavior="sovereign_ward", school="defensive", rarity="mythic", mana_cost=200, cooldown=1200,
+                           color="#C02040", params=dict(duration=300, reduction=0.8, reflect=0.5, steady=1, demonic=1)),
 }
 
 
@@ -277,10 +313,12 @@ def gen_loot():
         pool([item(f"{NS}:mirror_shard", count=(3, 5))]),
         pool([item(f"{NS}:mana_crystal", count=(6, 10))]),
     ])
+    # The Demon King's own magic: two of his four Mythic spells (unidentified: rolled on reading), and a legend's.
     entity("demon_king", [
         pool([item(f"{NS}:demon_kings_blade")]),
+        pool([item(f"{NS}:mythic_grimoire")]),
+        pool([item(f"{NS}:mythic_grimoire")]),
         pool([item(f"{NS}:legendary_grimoire")]),
-        pool([item(f"{NS}:legendary_grimoire"), item(f"{NS}:ancient_grimoire", 2)]),
         pool([item(f"{NS}:demonic_mana_core", count=(6, 10))]),
         pool([item("minecraft:nether_star")]),
     ])
@@ -466,7 +504,9 @@ def gen_tags():
     # Killing blows from top-tier magic (spell param execute_max_health) never apply to these.
     tag(f"{NS}/tags/entity_type/execute_immune", ["minecraft:wither", "minecraft:ender_dragon", "minecraft:warden",
                                                   "minecraft:elder_guardian"])
-    tag("minecraft/tags/damage_type/bypasses_armor", [f"{NS}:demon_magic", f"{NS}:curse"])
+    tag("minecraft/tags/damage_type/bypasses_armor", [f"{NS}:demon_magic", f"{NS}:curse", f"{NS}:cutting", f"{NS}:annihilation"])
+    tag("minecraft/tags/damage_type/bypasses_shield", [f"{NS}:cutting", f"{NS}:annihilation"])
+    tag("minecraft/tags/damage_type/bypasses_enchantments", [f"{NS}:annihilation"])
     tag("minecraft/tags/damage_type/is_projectile", [f"{NS}:zoltraak"])
     tag("minecraft/tags/damage_type/witch_resistant_to", [f"{NS}:spell", f"{NS}:zoltraak"])
     for rel in gen_building.BLOCK_TAGS:           # building-set tags the lines above do not write
@@ -490,7 +530,8 @@ def gen_tags():
 
 
 def gen_damage_types():
-    for name, exhaustion in (("spell", 0.0), ("zoltraak", 0.1), ("demon_magic", 0.1), ("curse", 0.0), ("guillotine", 0.1)):
+    for name, exhaustion in (("spell", 0.0), ("zoltraak", 0.1), ("demon_magic", 0.1), ("curse", 0.0), ("guillotine", 0.1),
+                             ("cutting", 0.1), ("annihilation", 0.1)):
         write(f"{NS}/damage_type/{name}.json", {"exhaustion": exhaustion, "message_id": f"{NS}.{name}",
                                                 "scaling": "when_caused_by_living_non_player"})
 
@@ -536,6 +577,15 @@ def gen_advancements():
     adv("rank_first_class", f"{NS}:legendary_grimoire", milestone("rank_first_class"), parent="rank_second_class", frame="challenge")
     adv("learned_demon", f"{NS}:demon_grimoire", milestone("learned_demon"), parent="first_spell", frame="goal")
     adv("learned_forbidden", f"{NS}:forbidden_grimoire", milestone("learned_forbidden"), parent="learned_demon", frame="challenge", hidden=True)
+    # 3.0: the magic update
+    adv("learned_legendary", f"{NS}:legendary_grimoire", milestone("learned_legendary"), parent="first_spell", frame="goal")
+    adv("learned_mythic", f"{NS}:mythic_grimoire", milestone("learned_mythic"), parent="learned_legendary", frame="challenge")
+    adv("limiter_release", f"{NS}:concealment_charm", milestone("limiter_release"), parent="first_spell", frame="goal")
+    adv("serie_impressed", f"{NS}:exam_seal", milestone("serie_impressed"), parent="rank_first_class", frame="goal")
+    adv("ubel_companion", "minecraft:shears", milestone("ubel_companion"), parent="rank_first_class", frame="goal")
+    adv("original_spell", f"{NS}:mythic_grimoire", milestone("original_spell"), parent="serie_impressed", frame="challenge")
+    adv("frieren_party", f"{NS}:sages_staff", milestone("frieren_party"), parent="rank_first_class", frame="goal")
+    adv("witnessed_slayer", f"{NS}:guillotine_blade", milestone("witnessed_slayer"), parent="slay_demon", frame="challenge", hidden=True)
     adv("slay_demon", f"{NS}:demon_horn", {"kill": {"trigger": "minecraft:player_killed_entity", "conditions": {"entity": [
         {"condition": "minecraft:entity_properties", "entity": "this", "predicate": {"minecraft:entity_type": f"#{NS}:demons"}}]}}},
         parent="root")

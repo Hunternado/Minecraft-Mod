@@ -16,7 +16,17 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "frieren:legendary_grimoire"
+          "name": "frieren:mythic_grimoire"
+        }
+      ],
+      "bonus_rolls": 0.0
+    },
+    {
+      "rolls": 1.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "frieren:mythic_grimoire"
         }
       ],
       "bonus_rolls": 0.0
@@ -27,11 +37,6 @@
         {
           "type": "minecraft:item",
           "name": "frieren:legendary_grimoire"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "frieren:ancient_grimoire",
-          "weight": 2
         }
       ],
       "bonus_rolls": 0.0

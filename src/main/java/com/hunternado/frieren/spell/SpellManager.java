@@ -20,6 +20,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Predicate;
 
 /**
  * Loads spell definitions from {@code data/<namespace>/frieren_spells/*.json} on the server and keeps the
@@ -89,13 +90,27 @@ public final class SpellManager extends SimpleJsonResourceReloadListener<SpellDe
     }
 
     public static @Nullable SpellDefinition randomOfRarity(SpellRarity rarity, RandomSource random) {
+        return randomOfRarity(rarity, random, definition -> true);
+    }
+
+    /**
+     * A random loot-eligible spell of the rarity, chosen among those matching {@code prefer} when any do (an
+     * unidentified grimoire favours spells its reader does not know yet).
+     */
+    public static @Nullable SpellDefinition randomOfRarity(SpellRarity rarity, RandomSource random,
+                                                          Predicate<SpellDefinition> prefer) {
         List<SpellDefinition> candidates = new ArrayList<>();
+        List<SpellDefinition> preferred = new ArrayList<>();
         for (SpellDefinition definition : serverSpells.values()) {
-            if (definition.rarity() == rarity) {
+            if (definition.rarity() == rarity && !definition.isTaught()) {
                 candidates.add(definition);
+                if (prefer.test(definition)) {
+                    preferred.add(definition);
+                }
             }
         }
-        return candidates.isEmpty() ? null : candidates.get(random.nextInt(candidates.size()));
+        List<SpellDefinition> pool = preferred.isEmpty() ? candidates : preferred;
+        return pool.isEmpty() ? null : pool.get(random.nextInt(pool.size()));
     }
 
     // ---- Client side ------------------------------------------------------------------------

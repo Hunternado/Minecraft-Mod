@@ -1,0 +1,22 @@
+{
+  "behavior": "frieren:volley",
+  "school": "offensive",
+  "rarity": "legendary",
+  "mana_cost": 20,
+  "cooldown": 140,
+  "channel": 120,
+  "color": "#C8E4FF",
+  "params": {
+    "damage": 4.5,
+    "range": 40.0,
+    "per_pulse": 2,
+    "interval_start": 6,
+    "interval_min": 2,
+    "ramp": 40,
+    "pulse_cost": 2.5,
+    "spread": 2.5,
+    "circles": 8,
+    "ignore_iframes": 1,
+    "demon_bonus": 1.25
+  }
+}

@@ -1,19 +1,24 @@
 package com.hunternado.frieren.spell;
 
 import com.hunternado.frieren.FrierenIds;
+import com.hunternado.frieren.spell.behavior.AnalysisBehavior;
+import com.hunternado.frieren.spell.behavior.AnnihilationBehavior;
 import com.hunternado.frieren.spell.behavior.ArrowRainBehavior;
 import com.hunternado.frieren.spell.behavior.BarrageBehavior;
 import com.hunternado.frieren.spell.behavior.BarrierBehavior;
 import com.hunternado.frieren.spell.behavior.BeamBehavior;
 import com.hunternado.frieren.spell.behavior.BindBehavior;
+import com.hunternado.frieren.spell.behavior.BlackSunBehavior;
 import com.hunternado.frieren.spell.behavior.BloodBladesBehavior;
 import com.hunternado.frieren.spell.behavior.BridgeBehavior;
 import com.hunternado.frieren.spell.behavior.BuffBehavior;
 import com.hunternado.frieren.spell.behavior.ClearWeatherBehavior;
 import com.hunternado.frieren.spell.behavior.CookBehavior;
 import com.hunternado.frieren.spell.behavior.DashBehavior;
+import com.hunternado.frieren.spell.behavior.DeceptionBehavior;
 import com.hunternado.frieren.spell.behavior.DecoyBehavior;
 import com.hunternado.frieren.spell.behavior.DomeBehavior;
+import com.hunternado.frieren.spell.behavior.DominionBehavior;
 import com.hunternado.frieren.spell.behavior.EarthSpikesBehavior;
 import com.hunternado.frieren.spell.behavior.FlameWaveBehavior;
 import com.hunternado.frieren.spell.behavior.FlightBehavior;
@@ -30,6 +35,7 @@ import com.hunternado.frieren.spell.behavior.LightningBehavior;
 import com.hunternado.frieren.spell.behavior.ManaReleaseBehavior;
 import com.hunternado.frieren.spell.behavior.MendBehavior;
 import com.hunternado.frieren.spell.behavior.MimicDetectionBehavior;
+import com.hunternado.frieren.spell.behavior.MiracleBehavior;
 import com.hunternado.frieren.spell.behavior.ObedienceBehavior;
 import com.hunternado.frieren.spell.behavior.OreSenseBehavior;
 import com.hunternado.frieren.spell.behavior.OriginalBehavior;
@@ -42,6 +48,7 @@ import com.hunternado.frieren.spell.behavior.SanctuaryBehavior;
 import com.hunternado.frieren.spell.behavior.SeekBehavior;
 import com.hunternado.frieren.spell.behavior.SlashBehavior;
 import com.hunternado.frieren.spell.behavior.SmeltBehavior;
+import com.hunternado.frieren.spell.behavior.SovereignWardBehavior;
 import com.hunternado.frieren.spell.behavior.SweetenBehavior;
 import com.hunternado.frieren.spell.behavior.TreeFellBehavior;
 import com.hunternado.frieren.spell.behavior.TunnelBehavior;
@@ -116,6 +123,13 @@ public final class SpellBehaviors {
         register(FrierenIds.id("pocket_space"), new PocketSpaceBehavior());
         register(FrierenIds.id("volley"), new VolleyBehavior());
         register(FrierenIds.id("original"), new OriginalBehavior());
+        register(FrierenIds.id("deception"), new DeceptionBehavior());
+        register(FrierenIds.id("miracle"), new MiracleBehavior());
+        register(FrierenIds.id("analysis"), new AnalysisBehavior());
+        register(FrierenIds.id("annihilation"), new AnnihilationBehavior());
+        register(FrierenIds.id("black_sun"), new BlackSunBehavior());
+        register(FrierenIds.id("dominion"), new DominionBehavior());
+        register(FrierenIds.id("sovereign_ward"), new SovereignWardBehavior());
     }
 
     public static synchronized void register(Identifier id, SpellBehavior behavior) {

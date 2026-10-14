@@ -3,7 +3,11 @@ package com.hunternado.frieren.entity.demon;
 import com.hunternado.frieren.FrierenIds;
 import com.hunternado.frieren.combat.SpellDamageSource;
 import com.hunternado.frieren.config.FrierenConfig;
+import com.hunternado.frieren.data.MagicData;
+import com.hunternado.frieren.entity.boss.FrierenBoss;
+import com.hunternado.frieren.mana.ManaHelper;
 import com.hunternado.frieren.mana.ManaSignature;
+import com.hunternado.frieren.registry.ModEffects;
 import com.hunternado.frieren.registry.ModSounds;
 import com.hunternado.frieren.spell.SpellFx;
 import com.hunternado.frieren.util.Messages;
@@ -13,11 +17,14 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Monster;
@@ -26,6 +33,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.Nullable;
 
 /**
@@ -34,7 +42,10 @@ import org.jspecify.annotations.Nullable;
  *   <li>a mana signature they can conceal ({@link ManaSignature}),</li>
  *   <li>an optional regenerating mana barrier (absorbs damage; some spells cut through it),</li>
  *   <li><b>deception</b>: when badly hurt they may plead in human words; a player who stops attacking is
- *   punished with a treacherous strike — demons use language to deceive, not to communicate.</li>
+ *   punished with a treacherous strike — demons use language to deceive, not to communicate;</li>
+ *   <li><b>they judge strength by mana</b>: an ordinary demon that sees a mage whose visible mana is six times its
+ *   own (or that feels a limiter released nearby) is frightened and runs. A concealed mage looks like easy prey, which
+ *   is exactly how Frieren hunts them.</li>
  * </ul>
  */
 public abstract class DemonEntity extends Monster implements ManaSignature {
@@ -45,6 +56,7 @@ public abstract class DemonEntity extends Monster implements ManaSignature {
     private boolean hasPleaded;
     private boolean pleaInterrupted;
     private int lastHurtTick = -1000;
+    private @Nullable Vec3 scaredOf;
 
     protected DemonEntity(EntityType<? extends DemonEntity> type, Level level) {
         super(type, level);
@@ -73,6 +85,15 @@ public abstract class DemonEntity extends Monster implements ManaSignature {
 
     protected void setBarrier(float value) {
         this.entityData.set(DATA_BARRIER, Math.max(0.0F, Math.min(maxBarrier(), value)));
+    }
+
+    /** Frieren's Analysis: the barrier is simply gone (it regenerates as usual afterwards). */
+    public void shatterBarrier() {
+        if (barrier() > 0.0F && this.level() instanceof ServerLevel level) {
+            SpellFx.hexagon(level, this.position().add(0, this.getBbHeight() * 0.55D, 0), 0xB8F0E0, 1.4F);
+            level.playSound(null, this.getX(), this.getY(), this.getZ(), ModSounds.BARRIER_BREAK.get(), SoundSource.HOSTILE, 1.2F, 0.7F);
+        }
+        this.entityData.set(DATA_BARRIER, 0.0F);
     }
 
     public boolean isPleading() {
@@ -118,6 +139,37 @@ public abstract class DemonEntity extends Monster implements ManaSignature {
         return true;
     }
 
+    /** Whether this demon sizes up mages by their mana (Aura's mindless thralls and the bosses do not). */
+    protected boolean judgesMana() {
+        return !(this instanceof FrierenBoss);
+    }
+
+    /** Overwhelming mana: the demon drops its target and runs from {@code source} for {@code ticks}. */
+    public void frighten(LivingEntity source, int ticks) {
+        if (!judgesMana()) {
+            return;
+        }
+        this.addEffect(new MobEffectInstance(ModEffects.holder(ModEffects.FRIGHTENED), ticks, 0));
+        this.scaredOf = source.position();
+        this.setTarget(null);
+        if (this.level() instanceof ServerLevel level) {
+            SpellFx.burst(level, this.position().add(0, this.getBbHeight() + 0.3D, 0), 0x6A2C70, 0.5F);
+        }
+    }
+
+    private void judgeMana(ServerLevel level) {
+        Player nearest = level.getNearestPlayer(this, 16.0D);
+        if (!(nearest instanceof ServerPlayer player) || player.isCreative() || player.isSpectator()) {
+            return;
+        }
+        MagicData data = MagicData.get(player);
+        if (data != null && ManaHelper.apparentMana(data) >= this.trueMana() * 6.0F) {
+            frighten(player, 200);
+            Messages.actionBar(player, Component.translatable("message.frieren.demon_frightened", this.getDisplayName())
+                .withStyle(ChatFormatting.LIGHT_PURPLE));
+        }
+    }
+
     private void beginPlea(ServerLevel level) {
         hasPleaded = true;
         pleaInterrupted = false;
@@ -158,6 +210,17 @@ public abstract class DemonEntity extends Monster implements ManaSignature {
         }
         if (maxBarrier() > 0.0F && this.tickCount - lastHurtTick > 100 && barrier() < maxBarrier() && this.tickCount % 5 == 0) {
             setBarrier(barrier() + maxBarrier() * 0.05F);
+        }
+        if (this.hasEffect(ModEffects.holder(ModEffects.FRIGHTENED))) {
+            // Running for its life: no targets, and keep putting distance between itself and the source.
+            this.setTarget(null);
+            if (scaredOf != null && this.tickCount % 10 == 0) {
+                Vec3 away = this.position().subtract(scaredOf).multiply(1.0D, 0.0D, 1.0D);
+                Vec3 to = this.position().add(away.lengthSqr() < 1.0E-4D ? new Vec3(1.0D, 0.0D, 0.0D) : away.normalize().scale(10.0D));
+                this.getNavigation().moveTo(to.x, to.y, to.z, 1.4D);
+            }
+        } else if (judgesMana() && this.tickCount % 20 == 0) {
+            judgeMana(level);
         }
     }
 
